@@ -1,0 +1,33 @@
+<apex:page standardController="MktMidia__c" extensions="LinkMiniatura" showHeader="false" sideBar="false" showChat="false" standardStylesheets="false">
+    <html>
+        <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="stylesheet" href="{!$Resource.bootstrap_iso}" />
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"> </script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> </script>
+        </head>
+        <body style="margin-bottom:0px;">
+            <div class="bootstrap-iso">
+                <div class="container-fluid">
+                    
+                    <apex:form style="background-color:white;">
+                        <div class="form-group" style="margin:0px!important;">
+                            <div class="row">
+                                <div class="col-xs-12" style="">
+                                    <apex:outputText rendered="{!IF(and(midia.DownloadId__c != null, midia.Icone_url__c == null), true, false)}" >
+                                        <apex:commandLink value="Gerar Miniatura do Arquivo" styleClass="btn btn-xs btn-success" action="{!GerarMiniatura}" target="_parent"/>
+                                    </apex:outputText>
+                                    <apex:outputText rendered="{!IF(and(midia.DownloadId__c == null, midia.Icone_url__c != null), true, true)}" >
+                                        <a href="javascript:void(0)" onclick="location.reload();">Procurar anexo...</a>
+                                    </apex:outputText>
+                                </div>
+                            </div>
+                        </div>
+                    </apex:form>
+                    
+                </div>        
+            </div>        
+        </body>
+    </html>
+</apex:page>

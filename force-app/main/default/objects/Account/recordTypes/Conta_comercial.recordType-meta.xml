@@ -1,0 +1,983 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Conta_comercial</fullName>
+    <active>true</active>
+    <compactLayoutAssignment>Conta_comercial</compactLayoutAssignment>
+    <description>Parceiro de negócio pessoa jurídica (CNPJ)</description>
+    <label>Conta comercial</label>
+    <picklistValues>
+        <picklist>AccountSource</picklist>
+        <values>
+            <fullName>Anúncio</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boca a boca</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Evento</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Feira ou convenção</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Indicação de funcionário</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Indicação externa</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Outros</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Parceiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Relações públicas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seminário - Interno</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seminário - Parceiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Web</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Area_da_Saude__c</picklist>
+        <values>
+            <fullName>Não</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sim</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Categoria__c</picklist>
+        <values>
+            <fullName>CLINICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FARMACÊUTICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GOVERNO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HOSPITAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INDUSTRIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LABORATORIO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ORGANIZAÇÃO SOCIAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ORGÃO GESTOR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PLANO DE SAÚDE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNIVERSIDADE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VETERINÁRIA</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Especialidade__c</picklist>
+        <values>
+            <fullName>ACUPUNTURA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AGROPECUARIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ALERGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ALIMENTICIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ANESTESIOLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ANGIOLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CANCEROLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CARDIOLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CIRURGIA CARDIOVASCULAR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CIRURGIA DA MÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CIRURGIA DE CABEÇA E PESCOÇO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CIRURGIA DO APARELHO DIGESTIVO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CIRURGIA GERAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CIRURGIA PEDIATRICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CIRURGIA PLASTICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CIRURGIA TORACICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CIRURGIA VASCULAR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CLINICA DE ESTÉTICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CLINICA DIAGNÓSTICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CLINICA MEDICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>COLOPROCTOLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DERMATOLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EMERGENCIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ENDOCRINOLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ENDOSCOPIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ESTERILIZAÇÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FARMACEUTICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FARMACIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FUNDAÇÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GASTROENTEROLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GENETICA MEDICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GERIATRIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GINECOLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GOVERNO ESTADUAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GOVERNO FEDERAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GRAFICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HEMATOLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HEMOTERAPIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HOMEOPATIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IMAGEM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IMUNOLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INFECTOLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INSTITUIÇÃO DE ENSINO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MASTOLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MEDICINA DO TRABALHO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MEDICINA DO TRAFEDO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MEDICINA ESPORTIVA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MEDICINA FISICA E REABILITAÇÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MEDICINA INTENSIVA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MEDICINA LEGAL E PERICIA MÉDICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MEDICINA NUCLEAR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MEDICINA PREVENTIVA E SOCIAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MEDICINA VETERINARIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>METABOLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>METALURGICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MINÉRIO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NEFROLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NEUROCIRURGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NEUROLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NUTROLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OBSTETRICIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ODONTOLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OFTALMOLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ORGANIZAÇÃO SOCIAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ORTOPEDIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OTORRINOLARINGOLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PATALOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PEDIATRIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PLANO DE SAÚDE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PNEUMOLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PREFEITURA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PSIQUIATRIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RADIOLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RADIOTERAPIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RESGATE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>REUMATOLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SERVIÇOS POSTUMOS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TRAUMATOLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>URGENCIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UROLOGIA</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Grupo__c</picklist>
+        <values>
+            <fullName>ALTERAR GRUPO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Colaboradores</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contribuinte</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fornecedores</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Industria</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Não Contribuinte</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pessoa Física</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Revenda</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transportadoras</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Órgãos Públicos</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Industry</picklist>
+        <values>
+            <fullName>CLINICA ESTETICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CLINICA IMAGEM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DISTRIBUIDOR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FABRICANTE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FORNECEDOR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HOSPITALAR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INSDUSTRIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LABORATÓRIO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NEONATAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ODONTOLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OUTROS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RESGATE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>REVENDA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNIVERSIDADE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ÓRGÃO GESTOR DE SAÚDE</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Linhas_Clientes__c</picklist>
+        <values>
+            <fullName>CIRURGIA MINIMAMENTE INVASIVA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CIRURGIA ROBÓTICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ELETROCIRURGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ENDOSCOPIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HUAWEI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IMAGEM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IMAGEM RAIO-X</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IMAGEM ULTRASSOM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LOCAÇÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MONITORES DE GRAU MEDICO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NEONATOLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OPME</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PMLS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SURGICAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VETERINÁRIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VETERINÁRIA IVD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VETERINÁRIA MIS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VETERINÁRIA PMLS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VETQLAB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VIAS AÉREAS DIFÍCEIS</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Outros__c</picklist>
+        <values>
+            <fullName>CNPJ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Licença ambiental%2FCNPJ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Licença ambiental%2FFDS%28FISPQ%29 CNPJ</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Ownership</picklist>
+        <values>
+            <fullName>FILANTROPIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PRIVADO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PUBLICO</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Rating</picklist>
+        <values>
+            <fullName>Bronze</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gold</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Platinum</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Silver</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Regiao_Administrativa_DF__c</picklist>
+        <values>
+            <fullName>AGUAS CLARAS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ARNIQUEIRA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BRAZLANDIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CANDANGOLANDIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CEILANDIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CRUZEIRO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FERCAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GAMA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GUARA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ITAPOA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JARDIM BOTANICO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LAGO NORTE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LAGO SUL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NUCLEO BANDEIRANTE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PARANOA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PARK WAY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PLANALTINA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PLANO PILOTO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RECANTO DAS EMAS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RIACHO FUNDO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RIACHO FUNDO II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SAMAMBAIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SANTA MARIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SAO SEBASTIAO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SCIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SOBRADINHO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SOBRADINHO II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SOL NASCENTE%2F  POR DO SOL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SUDOESTE%2F OCTOGONAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TAGUATINGA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VARJAO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VICENTE PIRES</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Respons_vel_pela_Solicita_o_da_doc__c</picklist>
+        <values>
+            <fullName>Ass Adm%2E- Assistência Técnica</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ass%2E Adm%2E - Operações</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ass%2E Qualidade</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar Adm - logística</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Recepcionista</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Aguardando Aprovação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aprovado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rascunho</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Reprovado</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Subcategoria__c</picklist>
+        <values>
+            <fullName>Cardiologia</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Clinica de cirurgia plástica</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Subespecialidade__c</picklist>
+        <values>
+            <fullName>Ortopedia esportiva</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trauma</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vascular%2E</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>TIPO__c</picklist>
+        <values>
+            <fullName>Calibração%28analisador%2Fsimulador%2Ftermo higrômetro%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Climatizadores%2Fcondicionadores de ar%28Corretiva e preventiva%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Desinsetização%2C desratilização e limpeza caixa d%22agua - RDC 622</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Destinação de resíduos</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Embalagem primária%28Fábrica%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Esterilização%28Prestador serviço%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Laboratórios de  análise e validação%28Fábrica%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Manutenção Seladora%28Fabrica%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Manutenção fluxo lamiar%28Fábrica%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Matéria prima%2FComponentes Importado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Matéria prima%2FComponentes Nacional %28não é produto para a saúde%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Produto para saúde importado classe I e II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Produto para saúde importado classe III e IV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Produto para saúde nacional classe I e II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Produto para saúde nacional classe III e IV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Saneantes%28Fábrica%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transportadora</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type</picklist>
+        <values>
+            <fullName>CLIENTE FINAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>COLABORADOR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DISTRIBUIDOR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FORNECEDOR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PATROCINADO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TRANSPORTADORA</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

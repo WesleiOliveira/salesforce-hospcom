@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Data_de_prazo_corrido__c</fullName>
+    <externalId>false</externalId>
+    <formula>if((Data_de_aprova_o_da_cota_o__c  -  Data_de_emiss_o_da_NF__c) &gt; 0, (Data_de_aprova_o_da_cota_o__c  -  Data_de_emiss_o_da_NF__c), 0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Data de prazo corrido</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

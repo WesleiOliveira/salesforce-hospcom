@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>Administrador_do_sistema</submitter>
+        <type>role</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>Owner</field>
+        <field>Departamento__c</field>
+        <field>Data_de_In_cio_do_Contrato__c</field>
+        <field>Cliente__c</field>
+        <field>Valor_Total_do_Contrato__c</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <approvalActions>
+            <action>
+                <name>Ag_Apr_Juridica</name>
+                <type>FieldUpdate</type>
+            </action>
+        </approvalActions>
+        <assignedApprover>
+            <approver>
+                <name>luiz.peixoto@hospcom.net</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <formula>Documento_Assinado__c == null</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>ApproveRecord</ifCriteriaNotMet>
+        <label>Validação Financeira</label>
+        <name>Validacao_Financeira</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>luiz.peixoto@hospcom.net</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <formula>Documento_Assinado__c == null</formula>
+        </entryCriteria>
+        <label>Validação Jurídica</label>
+        <name>Validacao_Juridica</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <enableMobileDeviceAccess>true</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>OR(
+   TEXT(Status_da_Aprova_o__c) = &apos;Rascunho&apos;,
+   TEXT(Status_da_Aprova_o__c) = &apos;Pendente&apos;
+)</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Aprovado</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Doc_Assinado</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>true</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Reprovado</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <label>Aprovação de Contrato</label>
+    <processOrder>2</processOrder>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>false</showApprovalHistory>
+</ApprovalProcess>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Impede_edicao_de_documento_em_vigencia</fullName>
+    <active>false</active>
+    <errorConditionFormula>TEXT(Status__c) == &apos;Em vigência&apos; &amp;&amp; !(
+ISCHANGED(Objetivo__c)&amp;&amp;
+ISCHANGED(Defini_es__c)&amp;&amp;
+ISCHANGED(Equipamentos_e_Softwares__c)&amp;&amp;
+ISCHANGED(Condi_es_Gerais__c)&amp;&amp;
+ISCHANGED(Responsabilidade_e_Autoridade__c)&amp;&amp;
+ISCHANGED(Formul_rios_Anexos_e_Documentos__c)&amp;&amp;
+ISCHANGED(Refer_ncia__c)&amp;&amp;
+ISCHANGED(Registros__c)&amp;&amp;
+ISCHANGED(Aprovado_por__c)&amp;&amp;
+ISCHANGED(Aprovador__c)&amp;&amp;
+ISCHANGED(C_digo_do_Documento__c)&amp;&amp;
+ISCHANGED(Departamentos_que_Possuem_C_pias__c)&amp;&amp;
+ISCHANGED(Direitos_de_reprodu_o__c)&amp;&amp;
+ISCHANGED(Elaborador__c)&amp;&amp;
+ISCHANGED(Empresas__c)&amp;&amp;
+ISCHANGED(Empresas__c)&amp;&amp;
+ISCHANGED(Ger_ncia_Administrativa__c)&amp;&amp;
+ISCHANGED(L_M_D__c)&amp;&amp;
+ISCHANGED(LastModifiedById)&amp;&amp;
+ISCHANGED(Natureza_da_Altera_o__c)&amp;&amp;
+ISCHANGED(N_o_aplic_vel__c)&amp;&amp;
+ISCHANGED(Observa_o_Revis_o__c	)&amp;&amp;
+ISCHANGED(Qualidade__c)&amp;&amp;
+ISCHANGED(Recursos_Humanos__c)&amp;&amp;
+ISCHANGED(Revisor__c)&amp;&amp;
+ISCHANGED(Solicita_o_reprovada__c)&amp;&amp;
+ISCHANGED(T_tulo_do_Documento__c))</errorConditionFormula>
+    <errorMessage>O documento já está  em VIGÊNCIA, para edita-lo, desça a tela  e faça as alterações necessários. Após isso, um novo documento será gerando e enviado para revisão e após revisado, será enviado para a aprovação da diretoria administrativa,</errorMessage>
+</ValidationRule>

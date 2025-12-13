@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Informacao_a_autoridade_sanitaria</fullName>
+    <active>true</active>
+    <errorConditionFormula>(TEXT(Informa_o_autoridade_sanit_ria__c ) = &quot;Não&quot;  &amp;&amp; (TEXT(Origin) = &quot;WEB&quot;  || TEXT(Origin) = &quot;TELEFONE&quot; || TEXT(Origin) = &quot;E-MAIL&quot; || TEXT(Origin) = &quot;OUTROS&quot;)) ||
+
+(TEXT(Informa_o_autoridade_sanit_ria__c ) = &quot;SIM&quot; &amp;&amp; motivo_autoridade_sanitaria__c  &lt;&gt;  &quot;&quot; )</errorConditionFormula>
+    <errorDisplayField>Origin</errorDisplayField>
+    <errorMessage>CASO selecionado &quot;SIM&quot;. Você não deve preencher o campo &quot;Motivo&quot; e deve apagar o texto digitado
+
+CASO selecionado &quot;Não&quot;. Você não deve preencher o campo &quot;ORIGEM DO CASO&quot; e deve passar seu valor para &quot;Nenhum&quot;.</errorMessage>
+</ValidationRule>

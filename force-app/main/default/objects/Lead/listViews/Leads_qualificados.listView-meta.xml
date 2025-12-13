@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Leads_qualificados</fullName>
+    <columns>FULL_NAME</columns>
+    <columns>LEAD.COMPANY</columns>
+    <columns>LEAD.STATUS</columns>
+    <columns>Interesse__c</columns>
+    <columns>LEAD.STATE_CODE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>LEAD.STATUS</field>
+        <operation>equals</operation>
+        <value>Qualificado</value>
+    </filters>
+    <label>Leads qualificados</label>
+</ListView>

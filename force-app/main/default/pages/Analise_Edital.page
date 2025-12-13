@@ -1,0 +1,307 @@
+<apex:page controller="AnaliseItensEdital" renderAs="pdf" applyHtmlTag="false" showHeader="false">
+    <head>
+        <style>
+            @page {
+            size: A4;
+            }
+            
+            body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            }
+            
+            h1 {
+            font-size: 17px;
+            text-align: center;
+            color: #000000;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #000000;
+            }
+            
+            h2 {
+            font-size: 18px;
+            color: #000000;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            }
+            
+            h3 {
+            margin-left: 5px;
+            font-size: 15px;
+            color: #000000;
+            font-weight: bold;
+            padding: 7px;
+            line-height: 1.5;
+            }
+            
+            .content {
+            margin: 0 50px;
+            }
+            
+            .parent-item {
+            margin-bottom: 40px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            border-radius: 8px;
+            }
+            
+            table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            }
+            
+            table th {
+            background-color: #041E42;
+            color: #fff;
+            text-align: left;
+            padding: 12px;
+            font-size: 16px;
+            }
+            
+            table td {
+            padding: 12px;
+            font-size: 14px;
+            text-align: left;
+            }
+            
+            .item-details {
+            font-size: 14px;
+            color: #555;
+            margin-top: 15px;
+            border-top: 2px dashed #ddd;
+            padding-top: 15px;
+            }
+            
+            .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+            margin-top: 50px;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            }
+            
+            .footer p {
+            margin: 0;
+            }
+            
+            .item-details strong {
+            color: #041E42;
+            }
+            
+            /* Table Styles */
+            .tabela_itens {
+            -fs-table-paginate: paginate;
+            }
+            
+            .tabela_itens tr {
+            page-break-inside: avoid;
+            }
+            
+            .cab {
+            padding: 3px;
+            font-family: Arial, Verdana, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            vertical-align: top;
+            line-height: 120%;
+            }
+            
+            .cel {
+            padding: 3px;
+            font-family: Arial, Verdana, sans-serif;
+            font-size: 12px;
+            vertical-align: top;
+            line-height: 120%;
+            }
+            
+            .destaque {
+            font-weight: bold;
+            }
+            
+            .descr {
+            text-align: justify;
+            text-justify: inter-word;
+            }
+            
+            .img {
+            padding: 3px;
+            vertical-align: middle;
+            border-top: 1px solid #eef2f4;
+            border-right: 1px solid #eef2f4;
+            border-left: 1px solid #eef2f4;
+            border-bottom: 1px solid #eef2f4;
+            }
+            
+            /* Item Details Style */
+            .item_titulo {
+            font-family: Arial, Verdana, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            vertical-align: top;
+            padding: 4px;
+            background-color: #e2e3e3;
+            border-right: 1px solid #cacecf;
+            border-bottom: 1px solid #cacecf;
+            line-height: 120%;
+            }
+            
+            .item_imagem {
+            vertical-align: middle;
+            border-left: 1px solid #eef2f4;
+            border-right: 1px solid #eef2f4;
+            border-bottom: 1px solid #cacecf;
+            padding: 4px;
+            }
+            
+            .item_texto {
+            font-family: Arial, Verdana, sans-serif;
+            font-size: 10px;
+            vertical-align: top;
+            border-right: 1px solid #eef2f4;
+            border-bottom: 1px solid #eef2f4;
+            padding: 4px;
+            line-height: 120%;
+            }
+            
+            .item_descricao {
+            vertical-align: top;
+            border-right: 1px solid #eef2f4;
+            padding: 4px;
+            }
+            
+            .item_descricao_texto {
+            font-family: Arial, Verdana, sans-serif;
+            font-size: 10px;
+            text-align: left;
+            text-justify: inter-word;
+            line-height: 120%;
+            }
+        </style>
+    </head>
+    
+    <h1>RELATÓRIO DE ANÁLISE DE ITENS - OPORTUNIDADE {!oportunidade.Name}</h1>
+    <table class="tabela_itens">
+        <thead>
+            <tr>
+                <th class="cab">DADOS DA OPORTUNIDADE</th>
+            </tr>
+            <tr>
+                <td class="cel"><b>NÚMERO: </b>{!oportunidade.Numero_OP__c}</td>
+            </tr>
+            <tr>
+                <td class="cel"><b>CONTA: </b>{!oportunidade.Account.Name} - {!oportunidade.Account.BillingCity} - {!oportunidade.Account.BillingState}</td>
+            </tr>
+            <tr>
+                <td class="cel"><b>FATURAMENTO: </b>{!oportunidade.Faturamento_Feito2__r.Name}</td>
+            </tr>
+            <tr>
+                <td class="cel"><b>FASE:</b> {!oportunidade.StageName} - <b>SUBFASE:</b> {!oportunidade.Sub_Fase__c} - <b>DATA DE FECHAMENTO:</b> <apex:outputField value="{!oportunidade.CloseDate}"/></td>
+            </tr>
+        </thead>
+    </table>
+    <apex:repeat value="{!opportunityLineItems}" var="itemWrapper">
+        <div>
+            <div>
+                <h2><u>PRODUTO: {!itemWrapper.parentItem.Produto__c}</u></h2>
+                <h3>
+                    CÓDIGO: {!itemWrapper.parentItem.Codigo_fabricante__c}<br/> 
+                    MODELO: {!itemWrapper.parentItem.Product2.Modelo__c}<br/> 
+                    ITEM DO EDITAL: {!itemWrapper.parentItem.Item_do_edital__c}<br/> 
+                    PREÇO DA PROPOSTA:&nbsp;<apex:outputField value="{!itemWrapper.parentItem.Subtotal_Unit__c}"/>/un TOTAL: &nbsp;<apex:outputField value="{!itemWrapper.parentItem.Subtotal__c}"/><br/>
+                    QUANTIDADE:&nbsp;<apex:outputField value="{!itemWrapper.parentItem.Quantity}"/>
+                </h3>
+                                
+                <table class="tabela_itens">
+                    <thead>
+                        <tr>
+                            <th class="cab">ACESSÓRIOS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <apex:repeat value="{!itemWrapper.childItems}" var="childItem">
+                            <tr>
+                                <td class="cel"><apex:outputField value="{!childItem.Quantity}"/> - {!childItem.Produto__c} - CÓDIGO: {!childItem.Codigo_fabricante__c}</td>
+                            </tr>
+                        </apex:repeat>
+                    </tbody>
+                </table>
+                <table class="tabela_itens">
+                <tr>
+                        <th class="cab">ABREVIAÇÕES</th>
+                    </tr>
+                    <tr>
+                        <td class="cel">{!itemWrapper.parentItem.Abreviacoes__c}</td>
+                    </tr>
+                    <tr>
+                        <th class="cab">CUMPRIMENTO COM O EDITAL</th>
+                    </tr>
+                    <tr>
+                        <td class="cel">{!itemWrapper.parentItem.Cumprimento_com_o_edital__c}</td>
+                    </tr>
+                    <tr>
+                        <th class="cab">INTERPOSIÇÕES</th>
+                    </tr>
+                    <tr>
+                        <td class="cel">{!itemWrapper.parentItem.Interposicoes__c}</td>
+                    </tr>
+                    <tr>
+                        <th class="cab">ITENS QUE JUSTIFIQUEM A ESCOLHA DA MARCA E MODELO</th>
+                    </tr>
+                    <tr>
+                        <td class="cel">{!itemWrapper.parentItem.Itens_que_justificam__c}</td>
+                    </tr>
+                    <tr>
+                        <th class="cab">MARCAS QUE ATENDEM</th>
+                    </tr>
+                    <tr>
+                        <td class="cel">{!itemWrapper.parentItem.Marcas_que_atendem__c}</td>
+                    </tr>
+                    <tr>
+                        <th class="cab">MARCAS QUE NÃO ATENDEM</th>
+                    </tr>
+                    <tr>
+                        <td class="cel">{!itemWrapper.parentItem.Marcas_que_nao_atendem__c}</td>
+                    </tr>
+                    <tr>
+                        <th class="cab">ENVIADO QUESTIONAMENTO OU IMPUGNAÇÃO PARA MELHORIA DOS FILTROS?</th>
+                    </tr>
+                    <tr>
+                        <td class="cel">{!itemWrapper.parentItem.Enviado_questionameto_ou_impugna_o__c}</td>
+                    </tr>
+                    <tr>
+                        <th class="cab">RESPOSTA DO ÓRGÃO E NOVOS FILTROS, SE APLICÁVEL</th>
+                    </tr>
+                    <tr>
+                        <td class="cel">{!itemWrapper.parentItem.Resposta_doorgao_e_novos_filtros__c}</td>
+                    </tr>
+                    <tr>
+                        <th class="cab">DESCRITIVO PARA PROPOSTA</th>
+                    </tr>
+                    <tr>
+                        <td class="cel">{!itemWrapper.parentItem.Descricao_do_Especialista__c}</td>
+                    </tr>
+                    <tr>
+                        <th class="cab">ANÁLISE TÉCNICA</th>
+                    </tr>
+                    <tr>
+                        <td class="cel" style="padding:0px !important"><apex:outputField value="{!itemWrapper.parentItem.Analise_Tecnica__c}"/></td>
+                    </tr>
+                    <tr>
+                        <th class="cab">INSERIDO POR</th>
+                    </tr>
+                    <tr>
+                        <td class="cel" style="padding:0px !important"><apex:outputField value="{!itemWrapper.parentItem.CreatedBy.FirstName}"/>, em&nbsp;<apex:outputField value="{!itemWrapper.parentItem.CreatedDate}"/></td>
+                    </tr>
+                </table>
+            </div>
+            <hr/>
+        </div>
+    </apex:repeat>
+</apex:page>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo_do_Servi_o__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipo do Serviço</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>MANUTENÇÃO PREVENTIVA</fullName>
+                <default>false</default>
+                <label>MANUTENÇÃO PREVENTIVA</label>
+            </value>
+            <value>
+                <fullName>MANUTENÇÃO CORRETIVA</fullName>
+                <default>false</default>
+                <label>MANUTENÇÃO CORRETIVA</label>
+            </value>
+            <value>
+                <fullName>CALIBRAÇÃO</fullName>
+                <default>false</default>
+                <label>CALIBRAÇÃO</label>
+            </value>
+            <value>
+                <fullName>QUALIFICAÇÃO</fullName>
+                <default>false</default>
+                <label>QUALIFICAÇÃO</label>
+            </value>
+            <value>
+                <fullName>ENSAIO DE SEG. ELÉTRICA</fullName>
+                <default>false</default>
+                <label>ENSAIO DE SEG. ELÉTRICA</label>
+            </value>
+            <value>
+                <fullName>VERIFICAÇÃO FUNCIONAL</fullName>
+                <default>false</default>
+                <label>VERIFICAÇÃO FUNCIONAL</label>
+            </value>
+            <value>
+                <fullName>OUTROS</fullName>
+                <default>false</default>
+                <label>OUTROS</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

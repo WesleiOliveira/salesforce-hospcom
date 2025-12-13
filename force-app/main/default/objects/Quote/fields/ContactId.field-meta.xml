@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ContactId</fullName>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Contact.Id</field>
+            <operation>startsWith</operation>
+            <value>003</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

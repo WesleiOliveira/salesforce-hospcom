@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valor_zerado2</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+!ISNEW(),
+UnitPrice == 0,
+UnitPrice == null
+)</errorConditionFormula>
+    <errorMessage>Valor do item não pode ser 0.</errorMessage>
+</ValidationRule>

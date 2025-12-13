@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <customErrors>
+        <description>VocÊ não pode abrir uma não conformidade para sua propria equipe</description>
+        <name>Mensagem_de_erro_personalizada_1</name>
+        <label>VocÊ não pode abrir uma não conformidade para sua propria equipe</label>
+        <locationX>50</locationX>
+        <locationY>503</locationY>
+        <customErrorMessages>
+            <errorMessage>Você não pode abrir uma não conformidade para sua propria equipe</errorMessage>
+            <isFieldError>false</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <decisions>
+        <name>verifica_se_respos_vel_pelo_colaborador</name>
+        <label>verifica se é resposável pelo colaborador</label>
+        <locationX>182</locationX>
+        <locationY>395</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Resultado_1_de_verifica_se_respos_vel_pelo_colaborador</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>colaborador.Gestor__r.Id</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record.Owner:User.Id</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Mensagem_de_erro_personalizada_1</targetReference>
+            </connector>
+            <label>Resultado 1 de verifica se é resposável pelo colaborador</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <interviewLabel>ação corretiva — Trava(gerente) {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Não conformidade — Trava(gerente)</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>colaborador</name>
+        <label>colaborador</label>
+        <locationX>182</locationX>
+        <locationY>287</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>verifica_se_respos_vel_pelo_colaborador</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ContactId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Funcionario__r.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>User</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>colaborador</targetReference>
+        </connector>
+        <object>Nao_Conformidade__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Draft</status>
+</Flow>

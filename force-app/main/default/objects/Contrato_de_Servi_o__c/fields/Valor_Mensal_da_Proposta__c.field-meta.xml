@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valor_Mensal_da_Proposta__c</fullName>
+    <externalId>false</externalId>
+    <label>Valor Periódico da Proposta</label>
+    <summarizedField>Produto_da_Proposta_do_Contrato__c.Valor_Mensal_da_Proposta__c</summarizedField>
+    <summaryForeignKey>Produto_da_Proposta_do_Contrato__c.Contrato_de_Servi_o_Relacionado__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

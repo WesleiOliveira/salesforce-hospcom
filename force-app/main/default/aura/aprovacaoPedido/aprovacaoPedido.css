@@ -1,0 +1,94 @@
+.THIS .divMestre{
+    display: flex;
+    flex-direction: column;
+}
+
+.THIS .textAprovacao{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    width: 80%;
+    border-radius: 20px;
+    font-weight: 500;
+    font-family: sans-serif;
+    color: white;
+    background-color: #1a365f;
+}
+
+.THIS .percentualDesconto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    border: 1px solid #00345c;
+    border-radius: 20px;
+    color: #00345c;
+    font-family: sans-serif;
+    width: 30%;
+}
+
+.THIS #motivos{
+        margin-top: 10px;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.THIS .listAnalisesRelac{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.THIS .blockInListRel{
+    flex: 1;
+    border-right: 1px solid #c1c1c1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.THIS .lineInner{
+    width: 100%;
+    display: flex;
+}
+
+.THIS .innerListAnalisesRelac{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.THIS .justificativaInput{
+    height: 200px;
+    border-color: gray;
+    border-radius: 10px;
+    font-size: 1.2em;
+    border: 1px solid gray;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.THIS .buttonAction{
+    width: 100%;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    background-color: #3ea554;
+    height: 50px;
+    color: white;
+    font-size: 1.1rem;
+    transition: all .1s ease-in-out;
+    margin-top: 10px;
+    margin-left: 0px;
+}
+
+.THIS .buttonReprovar{
+    background-color: #cb3234!important;
+}
+
+.THIS .buttonRecall{
+    background-color: #1a365f!important
+}

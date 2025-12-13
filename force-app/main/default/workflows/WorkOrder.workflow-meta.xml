@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>ALERTA_DE_E_MAIL_DE_AUTORIZA_O_DE_SERVI_O</fullName>
+        <description>ALERTA DE E-MAIL DE AUTORIZAÇÃO DE SERVIÇO</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactId</field>
+            <type>contactLookup</type>
+        </recipients>
+        <senderAddress>tatiane.alves@hospcom.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Solicita_o_de_Aprova_o_de_Or_amento</template>
+    </alerts>
+    <alerts>
+        <fullName>ENVIAR_ALERTA_DE_AUTORIZA_O_DE_SERVI_O</fullName>
+        <ccEmails>emerson.cesar@hospcom.net</ccEmails>
+        <description>ENVIAR ALERTA DE AUTORIZAÇÃO DE SERVIÇO</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactId</field>
+            <type>contactLookup</type>
+        </recipients>
+        <senderAddress>tatiane.alves@hospcom.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Solicita_o_de_Aprova_o_de_Or_amento</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Ag_Apr_Juridica</fullName>
+        <field>Status_da_Aprovacao__c</field>
+        <literalValue>Aguardando Aprovação Jurídica</literalValue>
+        <name>Ag Apr Juridica</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Altera_data_email</fullName>
+        <field>Data_Email__c</field>
+        <formula>NOW()</formula>
+        <name>Altera data email</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Apaga_Data_Controle</fullName>
+        <field>Data_Controle_Atividades__c</field>
+        <name>Apaga Data Controle</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Aprovado</fullName>
+        <field>Status_da_Aprovacao__c</field>
+        <literalValue>Aprovado</literalValue>
+        <name>Aprovado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Ativa_flag_de_e_mail</fullName>
+        <field>Envia_Email__c</field>
+        <literalValue>1</literalValue>
+        <name>Ativa flag de e-mail</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Atualiza_Data_Controle</fullName>
+        <field>Data_Controle_Atividades__c</field>
+        <formula>NOW()</formula>
+        <name>Atualiza Data Controle</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Atualiza_Data_Controle_v1</fullName>
+        <field>Data_Controle_Atividades__c</field>
+        <formula>NOW()</formula>
+        <name>Atualiza Data Controle</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Atualiza_Data_Controle_v2</fullName>
+        <field>Data_Controle_Atividades__c</field>
+        <formula>NOW()</formula>
+        <name>Atualiza Data Controle</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Atualiza_Data_Controle_v3</fullName>
+        <field>Data_Controle_Atividades__c</field>
+        <formula>NOW()</formula>
+        <name>Atualiza Data Controle</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Atualiza_Data_Controle_v4</fullName>
+        <field>Data_Controle_Atividades__c</field>
+        <formula>NOW()</formula>
+        <name>Atualiza Data Controle</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Atualiza_Data_Controle_v5</fullName>
+        <field>Data_Controle_Atividades__c</field>
+        <formula>NOW()</formula>
+        <name>Atualiza Data Controle</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Atualiza_Data_Controle_v6</fullName>
+        <field>Data_Controle_Atividades__c</field>
+        <formula>NOW()</formula>
+        <name>Atualiza Data Controle</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Atualiza_data_de_Controle</fullName>
+        <field>Data_Controle_Atividades__c</field>
+        <formula>NOW()</formula>
+        <name>Atualiza data de Controle</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Desativa_flag_de_e_mail</fullName>
+        <field>Envia_Email__c</field>
+        <literalValue>0</literalValue>
+        <name>Desativa flag de e-mail</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Doc_Assinado</fullName>
+        <field>Documento_Assinado__c</field>
+        <formula>IF(PRIORVALUE(Documento_Assinado__c) == null, &apos;https://hospcomhospitalar.force.com/Sales/s/workorder/&apos; + Id, PRIORVALUE(Documento_Assinado__c))</formula>
+        <name>Doc Assinado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Reprovado</fullName>
+        <field>Status_da_Aprovacao__c</field>
+        <literalValue>Reprovado</literalValue>
+        <name>Reprovado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <tasks>
+        <fullName>OT_Aguardando_envio_da_proposta</fullName>
+        <assignedTo>desenvolvimento@hospcom.net</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>3</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Em andamento</status>
+        <subject>OT Aguardando envio da proposta</subject>
+    </tasks>
+</Workflow>

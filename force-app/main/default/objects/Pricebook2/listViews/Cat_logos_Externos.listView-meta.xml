@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cat_logos_Externos</fullName>
+    <booleanFilter>1 OR 2</booleanFilter>
+    <columns>PRICEBOOK2.NAME</columns>
+    <columns>PRICEBOOK2.DESCRIPTION</columns>
+    <columns>PRICEBOOK2.LAST_UPDATE</columns>
+    <columns>PRICEBOOK2.IS_ACTIVE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>PRICEBOOK2.NAME</field>
+        <operation>equals</operation>
+        <value>Produtos Conmed</value>
+    </filters>
+    <filters>
+        <field>PRICEBOOK2.NAME</field>
+        <operation>equals</operation>
+        <value>Produtos Mindray</value>
+    </filters>
+    <label>Catálogos Externos</label>
+</ListView>

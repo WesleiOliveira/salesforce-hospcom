@@ -1,0 +1,51 @@
+<aura:component controller="GlobalAprovacao" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId">
+	
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="force:refreshView" action="{!c.doInit}" />
+    <aura:handler event="force:navigateHome" action="{!c.doInit}" />
+    <aura:handler event="force:navigateToComponent" action="{!c.doInit}" />
+    <aura:handler event="force:navigateToList" action="{!c.doInit}" />
+    <aura:handler event="force:navigateToObjectHome" action="{!c.doInit}" />
+    <aura:handler event="force:navigateToRelatedList" action="{!c.doInit}" />
+    <aura:handler event="force:navigateToSObject" action="{!c.doInit}" />
+    <aura:handler event="force:navigateToURL" action="{!c.doInit}" />
+    
+	<aura:attribute name="exibir" type="Boolean" default="false"/>
+	<aura:attribute name="modal_pendencias" type="Boolean" default="false"/>
+	<aura:attribute name="colunas" type="List"/>
+	<aura:attribute name="pendencias" type="List"/>
+	
+	<aura:if isTrue="{!v.exibir}">
+		<div class="slds-m-top_none">
+			
+			<!-- botões --> 
+			<lightning:buttonGroup class="slds-button_stretch">
+				<lightning:button class="slds-button_stretch" label="Você tem solicitações de aprovações pendentes" title="Você tem solicitações de aprovações pendentes" variant="destructive" onclick="{!c.AbrirAprovacoes}" />
+			</lightning:buttonGroup>
+			
+			<!-- modal pendencia aprovação -->
+			<aura:if isTrue="{!v.modal_pendencias}">
+				<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+					<div class="slds-modal__container" style="max-width:70rem!important; width:80%!important;">
+						<!-- cabeçalho -->
+						<header class="modal-header slds-modal__header">
+							<lightning:buttonIcon iconName="utility:close" onclick="{!c.FecharAprovacoes}" alternativeText="close" variant="bare-inverse" class="slds-modal__close"/>
+							<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Solicitações de aprovações pendentes</h2>
+						</header>
+						<!-- corpo -->
+						<div class="slds-modal__content slds-p-around_none" id="modal-content-id-1" style="height:90vh !important;max-height:90vh!important;">
+							<lightning:datatable keyField="id" data="{!v.pendencias}" columns="{!v.colunas}" hideCheckboxColumn="true" onrowaction="{!c.Redireciona}"/>
+						</div>
+						<!-- rodape -->
+						<footer class="slds-modal__footer">
+							<lightning:button variant="neutral" label="Cancelar" title="Cancelar" onclick="{!c.FecharAprovacoes}"/>
+						</footer>
+					</div>
+				</section>
+				<div class="slds-backdrop slds-backdrop_open"></div>			
+			</aura:if>			
+			
+		</div>
+	</aura:if>
+	
+</aura:component>

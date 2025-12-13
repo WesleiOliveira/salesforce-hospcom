@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>bloqueia_campos</fullName>
+    <active>true</active>
+    <description>00ei0000000nKA9 - perfil System administrator
+00e31000001dwIY - perfil analista de qualidade
+00531000006UzZsAAK - user desenvolvimento</description>
+    <errorConditionFormula>AND(
+    NOT(
+        OR(
+            OwnerId = $User.Id,
+            $Profile.Id = &quot;00ei0000000nKA9&quot;, /* perfil System administrator */
+            $Profile.Id = &quot;00e31000001dwIY&quot;, /*  perfil analista de qualidade */
+            $User.Id   = &quot;00531000006UzZsAAK&quot; /* user desenvolvimento*/
+        )
+    ),
+    OR(
+        ISCHANGED(Prazo__c),
+        ISCHANGED(Obs__c),
+        ISCHANGED(Encerrado__c),
+        ISCHANGED(A_o_Corretiva_Detalhada__c),
+        ISCHANGED(Verifica_o_da_efic_cia__c),
+        ISCHANGED(Status__c)
+    )
+)</errorConditionFormula>
+    <errorMessage>Somente o proprietário pode editar esses campos.
+Preencha somente Justificativa e Ação corretiva tomada</errorMessage>
+</ValidationRule>

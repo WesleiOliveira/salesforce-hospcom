@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Acao_interna</fullName>
+        <field>Acao_interna__c</field>
+        <literalValue>1</literalValue>
+        <name>Ação interna</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Aprovado</fullName>
+        <field>Status__c</field>
+        <literalValue>Aprovado</literalValue>
+        <name>Status: Aprovado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Em_aprova_o</fullName>
+        <field>Status__c</field>
+        <literalValue>Em aprovação</literalValue>
+        <name>Status Em aprovação</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Rascunho</fullName>
+        <field>Status__c</field>
+        <literalValue>Rascunho</literalValue>
+        <name>Status = Rascunho</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Reprovado</fullName>
+        <field>Status__c</field>
+        <literalValue>Reprovado</literalValue>
+        <name>Status = Reprovado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+</Workflow>

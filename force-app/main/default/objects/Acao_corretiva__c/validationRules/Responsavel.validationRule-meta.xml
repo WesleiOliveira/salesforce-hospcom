@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Responsavel</fullName>
+    <active>false</active>
+    <description>Verifica se só foi selecionado um campo entre &quot;Responsável&quot; e (Responsável conta)</description>
+    <errorConditionFormula>if( Responsevel__c  != &quot;&quot; &amp;&amp;  Responsavel_CONTA__c != &quot;&quot;, true, false)</errorConditionFormula>
+    <errorMessage>Preencha apenas um campo entre &quot;Responsável&quot; e &quot;Responsável (CONTA)&quot;. Caso o responsável tenha conta na comunidade preencha apenas &quot;Responsável&quot;, caso contrario, preencha apenas o campo &quot;Responsável (CONTA&quot;</errorMessage>
+</ValidationRule>

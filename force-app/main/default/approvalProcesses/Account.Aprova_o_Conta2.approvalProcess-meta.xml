@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>Owner</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <approvalActions>
+            <action>
+                <name>StatusAprovado</name>
+                <type>FieldUpdate</type>
+            </action>
+        </approvalActions>
+        <assignedApprover>
+            <approver>
+                <name>willyan.arruda@hospcom.net</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <label>Etapa 1</label>
+        <name>Etapa_1</name>
+        <rejectionActions>
+            <action>
+                <name>Status_reprovado</name>
+                <type>FieldUpdate</type>
+            </action>
+        </rejectionActions>
+    </approvalStep>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>Account.Status__c</field>
+            <operation>equals</operation>
+            <value>Rascunho</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Status__c</field>
+            <operation>equals</operation>
+            <value>Reprovado</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Status</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Aprovação Conta</label>
+    <processOrder>2</processOrder>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

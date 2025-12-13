@@ -1,0 +1,106 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="setMeOnInit" type="String" default="default value" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="assuntoEmail" type="String" default="null"/>
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.popper,
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js')}"                  
+                  afterScriptsLoaded="{!c.doInit}" />
+    
+    <div style="width: 100%; height: 100%; display: flex; flex-direction: row">   
+        <div style="display:flex; justify-content: right; width: 100%; height: 100%; align-items: center" class="boxMobile">
+            <div class="boxMobile2" style="padding: 30px; width: 85%; height: auto; background-color: white; border-radius: 20px; box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;">
+                
+                <lightning:recordEditForm aura:id="recordEditForm" objectApiName="Case" onsuccess="{!c.showToast}">
+                    <lightning:messages />
+                    <div style="display: flex; width: 100%; height: 10%; font-size: 30px; align-items: center; justify-content: center;">
+                        <div style="
+                                    font-size:35px;
+                                    font-weight:600;
+                                    line-height: 1.6;
+                                    text-align:left;
+                                    color:#00345c;
+                                    padding-right:20px;" class="generated-text">SAC
+                        </div>
+                    </div>
+                    <div style="display: flex; width: 100%; column-gap: 10px; padding-bottom: 10px">
+                        <div style="display: flex; width: 50%; flex-direction: column">
+                            <div style="display: flex; flex-direction: row; align-items: center">
+                                <label for="AddressState">Primeiro Nome*</label>
+                                <lightning:helptext content="Insira aqui seu nome. Ex.: Marcos" />
+                            </div>
+                            <lightning:inputField variant="label-hidden" fieldName="primeiroNome__c" />
+                        </div>
+                        
+                        <div style="display: flex; width: 50%;  flex-direction: column">
+                            <div style="display: flex; flex-direction: row; align-items: center">
+                                <label for="AddressState">Sobrenome*</label>
+                                <lightning:helptext content="Insira aqui seu sobrenome. Ex.: Barbosa de Araújo" />
+                            </div>
+                            <lightning:inputField variant="label-hidden" fieldName="sobrenome__c" />
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; width: 100%; column-gap: 10px; padding-bottom: 10px">
+                        
+                        <div style="display: flex; width: 100%; flex-direction: column">
+                            <div style="display: flex; flex-direction: row; align-items: center">
+                                <label for="AddressState">Empresa*</label>
+                                <lightning:helptext content="Insira aqui sua empresa ou instituição" />
+                            </div>
+                            <lightning:inputField variant="label-hidden" fieldName="empresa__c" />
+                        </div>
+
+                    </div>
+                    
+                    <div style="display: flex; width: 100%; column-gap: 10px; padding-bottom: 10px">
+                        
+                        <div style="display: flex; width: 50%; flex-direction: column">
+                            <div style="display: flex; flex-direction: row; align-items: center">
+                                <label for="AddressState">Departamento*</label>
+                                <lightning:helptext content="Insira aqui o departamento" />
+                            </div>
+                            <lightning:inputField variant="label-hidden" fieldName="departamento__c" />
+                        </div>
+                        
+                        <div style="display: flex; width: 50%; flex-direction: column; ">
+                            <div style="display: flex; flex-direction: row; align-items: center">
+                                <label for="AddressState">Assunto*</label>
+                                <lightning:helptext content="Insira aqui sua o assunto" />
+                            </div>
+                            <lightning:inputField variant="label-hidden" fieldName="assunto__c"/>
+                        </div>
+                        
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: row; align-items: center">
+                        <label for="AddressState">E-mail*</label>
+                        <lightning:helptext content="Digite aqui seu e-mail. Ex.: marcos.barbosa@gmail.com" />
+                    </div>
+                    <lightning:inputField variant="label-hidden" fieldName="email__c" />
+                    
+                    <div style="display: flex; flex-direction: row; align-items: center; padding-top: 10px">
+                        <label for="AddressState">Mensagem*</label>
+                        <lightning:helptext content="Digite aqui sua mensagem" />
+                    </div>
+                    <lightning:inputField variant="label-hidden" fieldName="mensagem__c" />
+                                        
+                    <lightning:button class="slds-m-top_small" type="submit" label="Enviar" />
+                    
+                    
+                </lightning:recordEditForm>
+                
+            </div>
+        </div>
+    </div>
+    
+
+</aura:component>

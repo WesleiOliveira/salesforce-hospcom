@@ -1,0 +1,201 @@
+<apex:page standardController="L_M_D__c" extensions="listagem_lmd" renderAs="pdf" showChat="fale" showHeader="false" applyHtmlTag="false">
+    <head>
+        <style> 
+            thead { display: table-header-group; }  
+            tfoot { display: table-footer-group; } 
+           @page {  
+                     size: A4 landscape; /* ISO/JIS A4 (210mmx297mm) */  
+                     margin: 5mm; 
+                  } 
+            @page:first {  
+                     size: A4 landscape; /* ISO/JIS A4 (210mmx297mm) */ 
+                     margin: 5mm; 
+                     margin-top: 3mm; 
+
+                  } 
+        </style>
+    </head>
+    
+    
+    
+    <Body style="font-family:Calibri,sans-serif">
+        <table>
+            <thead>   
+                <tr>    
+                    <th width="250px"> <img src="https://hospcom--c.na25.content.force.com/servlet/servlet.FileDownload?file=01531000008Tjd8" width="175" height="75px"/> </th> 
+                    <th width="600px" align="center" style="font-family: Calibri,sans-serif; font-size:15pt"><b>LISTA MESTRE DE DOCUMENTOS</b></th> 
+                    <th width="135px" align="center" style="font-family: Calibri,sans-serif; font-size:15pt"><b>L.M.D</b></th>
+                </tr>
+            </thead> 
+        </table>
+        <br/>
+            <div style="border-bottom: 0.5px solid black"></div>
+            <br/>
+            <tbody>
+                <apex:outputlabel rendered="true">
+                
+                    <tr>    
+                        <td style="font-size:12pt">
+                        
+                            <b>1 - PSQ - PROCEDIMENTOS DO SISTEMA DE QUALIDADE</b>
+                        
+                        </td> 
+                    </tr>
+                    
+                    <table style="font-size:9pt;" width="100%">
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="50px"><b>Código do Documento</b></th>
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="75px"><b>Data de Criação</b></th>
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="60px"><b>Nº da Revisão</b></th>
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="75px"><b>Data da Última Revisão</b></th>
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="300px"><b>Título Documento</b></th>
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="100px"><b>Aprovado por:</b></th>
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="50px"><b>Dep. que possuem cópia</b></th>
+                
+                    <apex:repeat value="{!procedimentos}" var="PQS">
+                    
+                  <!--------  montar logica para mostrar apenas os procedimentos de uma emrpesas -------------->
+                  <apex:outputText rendered="{!if(CONTAINS(PQS.Empresas__c,L_M_D__c.empresa__c ),true, false)}"> 
+                            <tr>
+                                <td style="border:0.5px solid black; text-align:left;" cellspacing="2" cellpadding="0" >{!PQS.C_digo_do_Documento__c}</td>
+                                <td style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0"><apex:outputfield value="{!PQS.Data_de_Cria_o__c}"/></td>
+                                <td style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0">{!PQS.N_da_Revis_o__c}</td>
+                                <td style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0"><apex:outputfield value="{!PQS.Data_da_Ultima_Revis_o__c}"/></td>
+                                <td style="border:0.5px solid black; text-align:center; padding:3px" cellspacing="2" cellpadding="0">{!PQS.Name}</td>
+                                <td style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0">{!PQS.Aprovado_por__r.Name}</td>
+                                <td style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0">{!PQS.Departamentos_que_Possuem_C_pias__c}</td>
+                            </tr>
+                                     
+                                     
+                  </apex:outputText>     
+                   </apex:repeat>
+                   
+                  
+                         </table>
+                         <br/>
+                         <br/>
+                </apex:outputlabel>  
+                
+                     
+                <apex:outputlabel rendered="{!IF(L_M_D__c.N_de_IS__c = 0,false,true)}">
+                
+                    <tr>    
+                        <td style="font-size:12pt">
+                        
+                            <b>2 - IS - INSTRUÇÕES DE SERVIÇO</b>
+                        
+                        </td> 
+                    </tr>
+                
+                <table style="font-size:9pt;" width="100%">
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="50px"><b>Código do Documento</b></th>
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="75px"><b>Data de Criação</b></th>
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="60px"><b>Nº da Revisão</b></th>
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="75px"><b>Data da Última Revisão</b></th>
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="300px"><b>Título Documento</b></th>
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="100px"><b>Aprovado por:</b></th>
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="50px"><b>Dep. que possuem cópia</b></th>
+                
+                    <apex:repeat value="{!L_M_D__c.Instru_es_de_Servi_os__r}" var="IS">
+
+                            <tr>
+                                <td style="border:0.5px solid black; text-align:left;" cellspacing="2" cellpadding="0" >{!IS.C_digo_do_Documento__c}</td>
+                                <td style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0"><apex:outputfield value="{!IS.Data_de_Cria_o__c}"/></td>
+                                <td style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0">{!IS.N_da_Revis_o__c}</td>
+                                <td style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0"><apex:outputfield value="{!IS.Data_da_Ultima_Revis_o__c}"/></td>
+                                <td style="border:0.5px solid black; text-align:center; padding:3px" cellspacing="2" cellpadding="0">{!IS.Name}</td>
+                                <td style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0">{!IS.Aprovado_por__r.Name}</td>
+                                <td style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0">{!IS.Departamentos_que_Possuem_C_pias__c}</td>
+                            </tr>
+                                          
+                         </apex:repeat>
+                         </table>
+                <br/>
+                <br/>
+                </apex:outputlabel>
+                     
+                <apex:outputlabel rendered="{!IF(L_M_D__c.N_de_RSs__c= 0,false,true)}">
+                
+                    <tr>    
+                        <td style="font-size:12pt">
+                        
+                            <b>3 - RS - REGISTROS DE SERVIÇO</b>
+                        
+                        </td> 
+                    </tr>
+                
+                 <table style="font-size:9pt;" width="100%">
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="50px"><b>Código do Documento</b></th>
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="75px"><b>Data de Criação</b></th>
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="60px"><b>Nº da Revisão</b></th>
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="75px"><b>Data da Última Revisão</b></th>
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="300px"><b>Título Documento</b></th>
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="100px"><b>Aprovado por:</b></th>
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="50px"><b>Dep. que possuem cópia</b></th>
+                
+                    <apex:repeat value="{!L_M_D__c.Registros_de_Servi_os__r}" var="RS">
+
+                            <tr>
+                                <td style="border:0.5px solid black; text-align:left;" cellspacing="2" cellpadding="0" >{!RS.C_digo_do_Documento__c}</td>
+                                <td style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0"><apex:outputfield value="{!RS.Data_de_Cria_o__c}"/></td>
+                                <td style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0">{!RS.N_da_Revis_o__c}</td>
+                                <td style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0"><apex:outputfield value="{!RS.Data_da_Ultima_Revis_o__c}"/></td>
+                                <td style="border:0.5px solid black; text-align:center; padding:3px" cellspacing="2" cellpadding="0">{!RS.Name}</td>
+                                <td style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0">{!RS.Aprovado_por__r.Name}</td>
+                                <td style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0">{!RS.Departamentos_que_Possuem_C_pias__c}</td>
+                            </tr>
+                                          
+                         </apex:repeat>
+                         </table>
+                <br/>
+                <br/>
+                </apex:outputlabel>     
+                
+                <apex:outputlabel rendered="{!IF(L_M_D__c.N_de_DQs__c= 0,false,true)}">
+                
+                    <tr>    
+                        <td style="font-size:12pt">
+                        
+                            <b>4 - DQ - DOCUMENTOS DA QUALIDADE</b>
+                        
+                        </td> 
+                    </tr>
+                
+                 <table style="font-size:9pt;" width="100%">
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="50px"><b>Código do Documento</b></th>
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="75px"><b>Data de Criação</b></th>
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="60px"><b>Nº da Revisão</b></th>
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="75px"><b>Data da Última Revisão</b></th>
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="300px"><b>Título Documento</b></th>
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="100px"><b>Aprovado por:</b></th>
+                        <th style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0" width="50px"><b>Dep. que possuem cópia</b></th>
+                
+                    <apex:repeat value="{!L_M_D__c.Documentos_da_Qualidade__r}" var="DQ">
+
+                            <tr>
+                                <td style="border:0.5px solid black; text-align:left;" cellspacing="2" cellpadding="0" >{!DQ.C_digo_do_Documento__c}</td>
+                                <td style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0"><apex:outputfield value="{!DQ.Data_de_Cria_o__c}"/></td>
+                                <td style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0">{!DQ.N_da_Revis_o__c}</td>
+                                <td style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0"><apex:outputfield value="{!DQ.Data_da_Ultima_Revis_o__c}"/></td>
+                                <td style="border:0.5px solid black; text-align:center; padding:3px" cellspacing="2" cellpadding="0">{!DQ.Name}</td>
+                                <td style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0">{!DQ.Aprovado_por__r.Name}</td>
+                                <td style="border:0.5px solid black; text-align:center;" cellspacing="2" cellpadding="0">{!DQ.Departamentos_que_Possuem_C_pias__c}</td>
+                            </tr>
+                                          
+                         </apex:repeat>
+                         </table>
+                <br/>
+                <br/>
+                
+                </apex:outputlabel> 
+                     
+            </tbody> 
+          <tfoot >   
+                <tr width="*">   
+                    <td width="1000px" align="center" style="font-size:9pt"><b>Conferido e aprovado por: Daniel Alencar Coelho</b></td>  
+                </tr>
+                <tr>   
+                    <td align="center" style="font-size:9pt"><b>Emitida em: &nbsp; <apex:outputField value="{!L_M_D__c.Data_de_Emiss_o__c}"/></b></td>  
+                </tr>
+            </tfoot>
+     </Body>
+</apex:page>

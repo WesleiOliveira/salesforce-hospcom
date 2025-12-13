@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tempo_Ag_Aprov_Financeira__c</fullName>
+    <externalId>false</externalId>
+    <formula>( FinalAgAprovFinanceira__c - InicioAgAprovFinanceira__c )*24*60</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Tempo Ag Aprov Financeira</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

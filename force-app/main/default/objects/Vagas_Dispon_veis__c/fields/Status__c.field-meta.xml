@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Status</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Aguardando aprovação</fullName>
+                <default>true</default>
+                <label>Aguardando aprovação</label>
+            </value>
+            <value>
+                <fullName>Divulgação da Vaga</fullName>
+                <default>false</default>
+                <label>Divulgação da Vaga</label>
+            </value>
+            <value>
+                <fullName>Triagem de Candidatos</fullName>
+                <default>false</default>
+                <label>Triagem de Candidatos</label>
+            </value>
+            <value>
+                <fullName>Entrevista com RH</fullName>
+                <default>false</default>
+                <label>Entrevista com RH</label>
+            </value>
+            <value>
+                <fullName>Entrevista com Gestor</fullName>
+                <default>false</default>
+                <label>Entrevista com Gestor</label>
+            </value>
+            <value>
+                <fullName>Proposta e ASO</fullName>
+                <default>false</default>
+                <label>Proposta e ASO</label>
+            </value>
+            <value>
+                <fullName>Processo Admissional</fullName>
+                <default>false</default>
+                <label>Processo Admissional</label>
+            </value>
+            <value>
+                <fullName>Assinatura de Documentos</fullName>
+                <default>false</default>
+                <label>Assinatura de Documentos</label>
+            </value>
+            <value>
+                <fullName>Finalizada</fullName>
+                <default>false</default>
+                <label>Finalizada</label>
+            </value>
+            <value>
+                <fullName>Cancelada</fullName>
+                <default>false</default>
+                <label>Cancelada</label>
+            </value>
+            <value>
+                <fullName>Análise de Entrevistas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Análise de Entrevistas</label>
+            </value>
+            <value>
+                <fullName>Período de Contratação</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Período de Contratação</label>
+            </value>
+            <value>
+                <fullName>Período de Entrevistas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Período de Entrevistas</label>
+            </value>
+            <value>
+                <fullName>Seleção para Entrevistas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Seleção para Entrevistas</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

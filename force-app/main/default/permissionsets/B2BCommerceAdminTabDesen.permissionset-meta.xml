@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Manage global and storefront-specific settings from the B2B Commerce Admin tab.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Access B2B Commerce Admin Settings Desenvolvimento</label>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>CustomizeApplication</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ManageCustomPermissions</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ViewRoles</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ViewSetup</name>
+    </userPermissions>
+</PermissionSet>

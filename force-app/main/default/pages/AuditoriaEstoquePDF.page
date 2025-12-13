@@ -1,0 +1,434 @@
+<apex:page standardController="Auditoria_Estoque__c"  extensions="ListagemIMEs_PMP"  showHeader="false" applyHtmlTag="false" renderAs="pdf">
+    <html>
+        <head>
+            <style type="text/css" media="print">
+                @page {
+                    size: 21cm 29.7cm;
+                    margin: 100px 40px 40px 40px;
+                
+                    @top-center {
+                        content: element(header);
+                    }
+                
+                    @bottom-center {
+                        content: element(footer);
+                    }
+                }
+                
+                @page {
+                    size: A4;
+                    // background: url({!$Resource.Logo_Hospcom});
+                    margin: 50px 50px 120px 50px;
+                    
+                    @bottom-center {
+                        content: element(footer);
+                    }
+                }
+                
+                .pagenumber:before {
+                    content: counter(page);
+                }
+                
+                .pagecount:before {
+                    content: counter(pages);
+                }
+                
+                div.header {
+                    margin: 0px 0px 0px 0px;
+                    padding: 20px 0px 20px 0px;
+                    position: running(header);
+                    height: 60px;
+                }
+                
+                
+                div.footer {
+                    margin: 0px 0px 0px 0px;
+                    padding: 20px 0px 20px 0px;
+                    position: running(footer);
+                    height: 20px;
+                    text-align: right;
+                    font-family: arial, verdana, sans-serif;
+                    font-size: 10px;
+                    font-weight: normal;
+                }
+
+                td, tr {
+                    padding: 0;
+                    margin: 0;
+                }
+                
+                * {
+                    font-family: Arial, Helvetica, sans-serif;
+                    color: #222222;
+                }
+                
+                .titulo {
+                    font-family: arial, verdana, sans-serif;
+                    font-size: 15px;
+                    text-align: left;
+                    font-weight: bold;
+                    width: 100%;
+                }
+                
+                .tabela_geral {
+                    border-collapse: collapse;
+                    width: 100%;
+                }
+                
+                table.print-friendly tr td,
+                table.print-friendly tr th {
+                    page-break-inside: always;
+                }
+                
+                .titulo {
+                    text-align: left;
+                    padding: 5px 1px;
+                    margin-top: 20px;
+                }
+                
+                .maiuscula {
+                    text-transform: uppercase;
+                }
+                                
+                .questao {
+                    display: flex;
+                    flex-direction: row;
+                    padding: 5px;
+                    font-weight: 700;
+                }
+                
+                .valor {
+                    margin-bottom: -100px;
+                    border: #0c3557 1px solid;                
+                }
+                
+                .sessao-questao {
+                    font-size: 14px;
+                    padding: 50px 0 0 0px;
+                    page-break-inside: avoid;
+                }
+                                
+                .questao, p {
+                    padding: 0px !important;
+                    margin: 0;
+                    padding-right: 15px !important;
+                    font-size: 12px !important;                
+                }
+                
+                h1, h2 {
+                    padding: 10px 0;
+                    margin: 0;
+                    font-size: 14px !important;
+                }
+                
+                .resposta {
+                    font-weight: 500;
+                    font-size: 14px;
+                    padding-left: 5px;
+                }
+                
+                .t {
+                    text-align: center;
+                    padding: 1px 1px;
+                    font-size: 14px;
+                }
+                
+                span {
+                    font-size: 12px !important;
+                }
+                
+                .container_ass {
+                    bottom: 0;
+                }
+                
+                
+                .body {
+                    height: 100%;
+                }
+                
+                .corpo-do-doc {
+                    display: flex;
+                    justify-content: space-between;
+                    height: 100%;
+                }
+                
+                @page {
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                }
+                
+                .content222 {            
+                    page-break-before: always;
+                }
+                                
+                .historico_td, .historico_tr {
+                    border: 1px solid #777777
+                }
+            </style>
+        </head>
+
+        <body class="body">
+            <apex:pageBlock >
+                
+                <table style="width: 100%; border-collapse: collapse; margin:auto">
+                    <tr class="historico_td">
+                        <td rowspan="2" class="historico_td" style="font-weight: bold; font-size:12px; text-align: center;padding:2px 10px; width: 150px;">
+                            <img src="{!$Resource.Logo_Hospcom}" width="140"/>
+                        </td>
+                        <td rowspan="2" class="historico_td" style="font-weight: bold; font-size:16px; text-align: center;padding:2px 10px;">
+                            RELATÓRIO DE AUDITORIA DE <br/>
+                            ACURACIDADE
+                        </td>
+                        <td class="historico_td" style="font-weight: bold; font-size:12px; text-align: center;padding:2px 10px;">
+                            N°: {!Auditoria_Estoque__c.Name}
+                        </td>
+                    </tr>
+                    <tr class="historico_td">
+                        <td  class=" historico_td" style="font-weight: bold; font-size:12px; text-align: center;padding:2px 10px;">
+                            Data: &#160;
+                            <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                <apex:param value="{!Auditoria_Estoque__c.CreatedDate}" />
+                            </apex:outputText>
+                        </td>
+                    </tr>   
+                    
+                    <apex:repeat value="{!documentos}" var="doc">
+                        <apex:outputText rendered="{!if(doc.Documento__c = 'Auditoria de Acuracidade', true, false)}" >
+                            <apex:outputText rendered="{!if(doc.Empresa_pesquisa__c = Auditoria_Estoque__c.Conta__c, true, false)}" >
+                              <tr class="historico_td">
+                                  <td class=" historico_td" style="font-weight: bold; font-size:12px; text-align: center;padding:2px 10px;">
+                                       emissão: <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!doc.Data_de_criacao__c}" /></apex:outputText>
+                                    </td>
+                                    
+                                     <td colspan="2" class=" historico_td" style="font-weight: bold; font-size:12px; text-align: center;padding:2px 10px;">
+                                       revisão do documento: <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!doc.Revisao__c}" /></apex:outputText>
+                                    </td>
+                                </tr>
+                        </apex:outputText>
+                    </apex:outputText>
+             
+                </apex:repeat>                 
+                </table>
+                
+                <br/>
+                
+                <table style="width: 100%; border-collapse: collapse; margin:auto">
+                    <tr>
+                        <td colspan="2" class="historico_td" style="background-color: #777; color: #fff; font-weight: bold; font-size:14px; text-align: center;padding:2px 10px; width: 150px;">
+                            Dados da Empresa
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="historico_td" style="font-weight: bold; font-size:12px; padding:2px 2px; width: 100px;">
+                            Razão Social:
+                        </td>
+                        <td class="historico_td" style="font-size:12px; padding:2px 2px;">
+                            {!Auditoria_Estoque__c.Conta__r.Name}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="historico_td" style="font-weight: bold; font-size:12px; padding:2px 2px; width: 100px;">
+                            CNPJ:
+                        </td>
+                        <td class="historico_td" style="font-size:12px; padding:2px 2px;">
+                            {!Auditoria_Estoque__c.Conta__r.CNPJ__c}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="historico_td" style="font-weight: bold; font-size:12px; padding:2px 2px; width: 100px;">
+                            Endereço:
+                        </td>
+                        <td class="historico_td" style="font-size:12px; padding:2px 2px;">
+                            {!Auditoria_Estoque__c.Conta__r.BillingStreet},  {!Auditoria_Estoque__c.Conta__r.BillingState} - {!Auditoria_Estoque__c.Conta__r.BillingCity}
+                        </td>
+                    </tr>
+                </table>
+                
+                <br/>
+                <table style="width: 100%; border-collapse: collapse; margin:auto">
+                    <tr>
+                        <td colspan="4" class="historico_td" style="background-color: #777; color: #fff; font-weight: bold; font-size:14px; text-align: center;padding:2px 10px; width: 150px;">
+                            Auditoria
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="historico_td" style="font-weight: bold; font-size:12px; padding:2px 2px; width: 170px;">
+                            Equipamentos Verificados
+                        </td>
+                        <td class="historico_td" style="font-size:12px; padding:2px 2px; width: 100px;">
+                            <apex:outputText value="{0, number, ###}">
+                                <apex:param value="{!Auditoria_Estoque__c.Equipamentos_Verificados__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td class="historico_td" style="font-weight: bold; font-size:12px; padding:2px 2px; width: 170px;">
+                            Acuracidade(%)
+                        </td>
+                        <td class="historico_td" style="font-size:12px; padding:2px 2px; width: 100px;">
+                            {!Auditoria_Estoque__c.Acuracidade__c} %
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="historico_td" style="font-weight: bold; font-size:12px; padding:2px 2px; width: 170px;">
+                            Equipamentos Divergentes
+                        </td>
+                        <td class="historico_td" style="font-size:12px; padding:2px 2px; width: 100px;">
+                            <apex:outputText value="{0, number, ###}">
+                                <apex:param value="{!Auditoria_Estoque__c.Equipamentos_Divergentes__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td class="historico_td" style="font-weight: bold; font-size:12px; padding:2px 2px; width: 170px;">
+                            Não Conforme(%)
+                        </td>
+                        <td class="historico_td" style="font-size:12px; padding:2px 2px; width: 100px;">
+                            {!Auditoria_Estoque__c.Nao_Conforme__c} %
+                        </td>
+                    </tr>
+                </table>
+                
+                <br/>
+
+                <table style="width: 100%; border-collapse: collapse; margin:auto">
+                    <tr>
+                        <td class="historico_td" style="background-color: #777; color: #fff; font-weight: bold; font-size:14px; text-align: center;padding:2px 10px; width: 150px;">
+                            Objetivo, Escopo e Data da Auditoria
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="historico_td" style="font-size:12px; padding:2px 2px; width: 100px;">
+                            {!Auditoria_Estoque__c.Objetivo__c}
+                        </td>
+                    </tr>
+                </table>
+
+                <br/>
+                
+                <table style="width: 100%; border-collapse: collapse; margin:auto">
+                    <tr>
+                        <td class="historico_td" style="background-color: #777; color: #fff; font-weight: bold; font-size:14px; text-align: center;padding:2px 10px; width: 150px;">
+                            Características da Empresa Auditada
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="historico_td" style="font-size:12px; padding:2px 2px; width: 100px;">
+                            {!Auditoria_Estoque__c.Caracteristica__c}
+                        </td>
+                    </tr>
+                </table>
+
+                <br/>
+                
+                <table style="width: 100%; border-collapse: collapse; margin:auto">
+                    <tr>
+                        <td class="historico_td" style="background-color: #777; color: #fff; font-weight: bold; font-size:14px; text-align: center;padding:2px 10px; width: 150px;">
+                            Trilha da Auditoria
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="historico_td" style="font-size:12px; padding:2px 2px; width: 100px;">
+                            {!Auditoria_Estoque__c.Trilha__c}
+                        </td>
+                    </tr>
+                </table>
+
+                <br/>
+                
+                <table style="width: 100%; border-collapse: collapse; margin:auto">
+                    <tr>
+                        <td class="historico_td" style="background-color: #777; color: #fff; font-weight: bold; font-size:14px; text-align: center;padding:2px 10px; width: 150px;">
+                            Descrição das Não Conformidades Encontradas
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="historico_td" style="font-weight: bold; font-size:12px; padding:2px 2px; width: 100px;">
+                            {!Auditoria_Estoque__c.Descricao__c}
+                        </td>
+                    </tr>
+                </table>
+
+                <br/>
+                
+                <table style="width: 100%; border-collapse: collapse; margin:auto">
+                    <tr>
+                        <td class="historico_td" style="background-color: #777; color: #fff; font-weight: bold; font-size:14px; text-align: center;padding:2px 10px; width: 150px;">
+                            Conclusões
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="historico_td" style="font-size:12px; padding:2px 2px; width: 100px;">
+                            {!Auditoria_Estoque__c.Conclusao__c}
+                        </td>
+                    </tr>
+                </table>
+
+                <br/>
+                
+                <table style="width: 100%; border-collapse: collapse; margin:auto">
+                    <tr>
+                        <td class="historico_td" style="background-color: #777; color: #fff; font-weight: bold; font-size:14px; text-align: center;padding:2px 10px; width: 150px;">
+                            Auditor
+                        </td>
+                        <td class="historico_td" style="background-color: #777; color: #fff; font-weight: bold; font-size:14px; text-align: center;padding:2px 10px; width: 150px;">
+                            Representante da Gerência
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="historico_td" style="font-size:12px; padding:2px 2px; width: 100px;">
+                            {!Auditoria_Estoque__c.CreatedBy.Name}
+                        </td>
+                        <td class="historico_td" style="font-size:12px; padding:2px 2px; width: 100px;">
+                            {!Auditoria_Estoque__c.Representante__r.Name}
+                        </td>
+                    </tr>
+                </table>
+
+                <br/>
+                
+                <!--<div style="width: 100%; height: 150px; background-color: #abc">
+                </div>-->
+
+                <table class="ass" style="margin: auto; margin:20px 10px 10px 10px;">
+                    <tr style="margin-top:150px;">
+        
+                    <td style=" text-align:center; width: 375px; text-align: center;" colspan="2">
+                        <div style="padding:0; margin:0; text-align:center;">
+                            <div style="padding:0; margin: 0 0 -3px 0; text-align:center;">
+                                <apex:image style="padding:0; margin:0 auto -15px ; text-align:center;"
+                                  value="{! if(Auditoria_Estoque__c.CreatedById == '005i0000000JFXuAAO', 'https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BgFbi&oid=00Di0000000JVhH&lastMod=1672836269000', if(Auditoria_Estoque__c.CreatedById == '00531000007i4eWAAQ', 'https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfER1&oid=00Di0000000JVhH&lastMod=1672836269000', if(Auditoria_Estoque__c.CreatedById == '0056e00000Cr9bkAAB', 'https://hospcom.file.force.com/servlet/servlet.ImageServer?id=015U40000019BwX&oid=00Di0000000JVhH&lastMod=1672836269000', 'https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000Bf8Ui&oid=00Di0000000JVhH&lastMod=1672836269000')))}"
+                                  width="200" height="60px" />
+                            </div>
+        
+                            <div style="padding:0; margin:0; font-size: 12px;">
+                                <div class="underline" style="padding:0; margin:0 auto; width: 70%;border-bottom: 1px solid #0c3557;"></div>
+                                <br />
+                                {!Auditoria_Estoque__c.CreatedBy.Name} <br /> Auditor
+        
+                            </div>
+                        </div>
+                    </td>
+        
+                    <td style=" text-align:center; width: 375px; text-align: center;" colspan="2">
+                        <div style="padding:0; margin:0; text-align:center;">
+                            <div style="padding:0; margin: 0 0 -3px 0; text-align:center;">
+                                <apex:image style="padding:0; margin:0 auto -15px ; text-align:center;"
+                                  value="{! if(Auditoria_Estoque__c.Representante__c == '003i000000gkh1YAAQ', 'https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BgFbi&oid=00Di0000000JVhH&lastMod=1672836269000',  if(Auditoria_Estoque__c.Representante__c == '00331000036DSpSAAW', 'https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfER1&oid=00Di0000000JVhH&lastMod=1672836269000', if(Auditoria_Estoque__c.Representante__c == '0036e000044dB1mAAE', 'https://hospcom.file.force.com/servlet/servlet.ImageServer?id=015U40000019BwX&oid=00Di0000000JVhH&lastMod=1672836269000', 'https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000Bf8Ui&oid=00Di0000000JVhH&lastMod=1672836269000')))}"
+                                  width="200" height="60px" />
+                            </div>
+                            <div style="padding:0; margin:0; font-size: 12px;">
+                            <div class="underline" style="padding:0; margin:0 auto; width: 70%;border-bottom: 1px solid #0c3557;"></div>
+                            <br />
+                            {!Auditoria_Estoque__c.Representante__r.Name} <br /> Representante da Gerência
+                      </div>
+                    </div>
+                  </td>
+        
+                </tr>
+              </table>
+
+
+            </apex:pageBlock>
+
+        </body>
+    </html>
+</apex:page>

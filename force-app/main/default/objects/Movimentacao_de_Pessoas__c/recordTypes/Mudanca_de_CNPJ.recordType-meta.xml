@@ -1,0 +1,1828 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mudanca_de_CNPJ</fullName>
+    <active>true</active>
+    <label>Mudança de CNPJ</label>
+    <picklistValues>
+        <picklist>Avalia_o_sobre_a_equipe__c</picklist>
+        <values>
+            <fullName>Bom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Regular</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ruim</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ótimo</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Avalia_o_sobre_a_satisfa_o__c</picklist>
+        <values>
+            <fullName>Bom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Regular</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ruim</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ótimo</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Avalia_o_sobre_benef_cios__c</picklist>
+        <values>
+            <fullName>Bom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Regular</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ruim</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ótimo</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Avalia_o_sobre_o_ambiente__c</picklist>
+        <values>
+            <fullName>Bom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Regular</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ruim</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ótimo</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Avaliacao_sobre_a_lideran_a__c</picklist>
+        <values>
+            <fullName>Bom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Regular</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ruim</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ótimo</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Aviso_pr_vio__c</picklist>
+        <values>
+            <fullName>DESCONTADO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DISPENSA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INDENIZADO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TRABALHADO</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Departamento__c</picklist>
+        <values>
+            <fullName>Administrativo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comercial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Compras</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contabilidade</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Controladoria</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Desenvolvimento</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Diretoria de B%2EI e Growth</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Educação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financeiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Governo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Locação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Logística</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Marketing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Outros</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Serviço</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Diretor_responsavel__c</picklist>
+        <values>
+            <fullName>Daniel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gabriel</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Empresa__c</picklist>
+        <values>
+            <fullName>ABC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CNPJ ME</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GDB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GESTCOM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HEALTH SOLUTIONS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HOSPCOM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IZU</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IZU Eldorado</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Indicaria_a_empresa__c</picklist>
+        <values>
+            <fullName>Não</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sim</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Motivo1__c</picklist>
+        <values>
+            <fullName>Baixa Performance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mau Comportamento</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mérito %28há apenas mudança de salário%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Outra Oportunidade</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Outros%2FMudança na Estrutura</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Problemas Pessoais</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Promoção %28há mudança de cargo e salário%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Redução de Quadro</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Natureza_do_desligamento__c</picklist>
+        <values>
+            <fullName>Desligado pela empresa</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pedido de demissão</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Novo_CNPJ__c</picklist>
+        <values>
+            <fullName>CNPJ ME</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IZU Brasília</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IZU Cozinha Industrial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IZU Eldorado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IZU Jardim Goiás</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IZU Matriz</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Novo_Cargo__c</picklist>
+        <values>
+            <fullName>Analista Comercial I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista Comercial II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista Comercial III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista Contabil%2FFiscal I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista Contabil%2FFiscal II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista Contabil%2FFiscal III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista Financeiro I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista Financeiro II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista Financeiro III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Compras I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Compras II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Compras III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Controladoria I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Controladoria II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Controladoria III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Customer Service I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Customer Service II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Customer Service III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Desenvolvimento I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Desenvolvimento II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Desenvolvimento III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Dpto Pessoal I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Dpto Pessoal II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Dpto Pessoal III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Facilites I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Facilites II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Facilites III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Licitação I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Licitação II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Licitação III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Logistica I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Logistica II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Logistica III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Marketing I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Marketing II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Marketing III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Qualidade I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Qualidade II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de Qualidade III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de RH I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de RH II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Analista de RH III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente Administrativo I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente Administrativo II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente Administrativo III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente Contabil%2F Fiscal I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente Contabil%2F Fiscal II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente Contabil%2F Fiscal III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente Financeiro I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente Financeiro II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente Financeiro III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente Jurídico I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente Jurídico II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente Jurídico III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente de Compras I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente de Compras II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente de Compras III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente de Controladoria</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente de Desenvolvimento I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente de Desenvolvimento II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente de Desenvolvimento III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente de Licitação I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente de Licitação II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente de Licitação III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente de Locação I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente de Locação II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente de Locação III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente de Logística I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente de Logística II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente de Logística III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente de Marketing I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente de Marketing II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assistente de Marketing III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assitente de Operações I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assitente de Operações II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assitente de Operações III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assitente de RH I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assitente de RH II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assitente de RH III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assitente de Suporte Técnico de T%2EI I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assitente de Suporte Técnico de T%2EI II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assitente de Suporte Técnico de T%2EI III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Atendente I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Atendente II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Atendente III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Atendente Sac I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Atendente Sac II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Atendente Sac III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aux%2E de Limpeza I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aux%2E de Limpeza II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aux%2E de Limpeza III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar Técnico I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar Técnico II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar Técnico III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Atendimento I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Atendimento II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Atendimento III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Barman I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Barman II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Barman III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Compras I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Compras II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Compras III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Confeitaria I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Confeitaria II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Confeitaria III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Cozinha I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Cozinha II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Cozinha III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Estoque I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Estoque II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Estoque III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Limpeza I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Limpeza II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Limpeza III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Manutenção Predial I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Manutenção Predial II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Manutenção Predial III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Sushiman I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Sushiman II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Sushiman III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Sushiwoman I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Sushiwoman II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auxiliar de Sushiwoman III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Barman I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Barman II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Barman III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chefe de Cozinha I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chefe de Cozinha II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chefe de Cozinha III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Confeiteiro I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Confeiteiro II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Confeiteiro III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Controller I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Controller II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Controller III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Coordenador de Educação%2FProdutos I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Coordenador de Educação%2FProdutos II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Coordenador de Educação%2FProdutos III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Coordenador de Linha de Produto I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Coordenador de Linha de Produto II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Coordenador de Linha de Produto III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Coordenador de Locação I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Coordenador de Locação II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Coordenador de Locação III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Coordenador de Operações I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Coordenador de Operações II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Coordenador de Operações III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cozinheiro I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cozinheiro II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cozinheiro III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Desenvolvedor Salesforce Pleno</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Diretor I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Diretor II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Diretor III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Embalador I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Embalador II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Embalador III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Engenheiro Clínico %2F Especialista de Produtos I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Engenheiro Clínico %2F Especialista de Produtos II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Engenheiro Clínico %2F Especialista de Produtos III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Engenheiro Clínico I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Engenheiro Clínico II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Engenheiro Clínico III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Engenheiro de Instalação e Suporte I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Engenheiro de Instalação e Suporte II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Engenheiro de Instalação e Suporte III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista de Compras I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista de Compras II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista de Compras III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista de Produtos - PMLS I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista de Produtos - PMLS II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista de Produtos - PMLS III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista de Produtos - SURGICAL %2FCMI I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista de Produtos - SURGICAL %2FCMI II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista de Produtos - SURGICAL %2FCMI III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista de Produtos - UROLOGIA%2FGINECO%2FELETROCIRURGIA I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista de Produtos - UROLOGIA%2FGINECO%2FELETROCIRURGIA II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista de Produtos - UROLOGIA%2FGINECO%2FELETROCIRURGIA III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista de Produtos - US I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista de Produtos - US II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista de Produtos - US III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista de Produtos - VET I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista de Produtos - VET II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista de Produtos - VET III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista de Produtos I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista de Produtos II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista de Produtos III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista em Comércio Exterior I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista em Comércio Exterior II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista em Comércio Exterior III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista em Controladoria I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista em Controladoria II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista em Controladoria III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista em Soluções Técnicas I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista em Soluções Técnicas II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Especialista em Soluções Técnicas III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Estoquista I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Estoquista II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Estoquista III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Executivo de Contas - PMLS I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Executivo de Contas - PMLS II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Executivo de Contas - PMLS III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Executivo de Contas - SU%2FCMI I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Executivo de Contas - SU%2FCMI II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Executivo de Contas - SU%2FCMI III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Executivo de Contas - Sonoscape I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Executivo de Contas - Sonoscape II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Executivo de Contas - Sonoscape III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Executivo de Contas - US I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Executivo de Contas - US II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Executivo de Contas - US III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Executivo de Contas - VET I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Executivo de Contas - VET II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Executivo de Contas - VET III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Executivo de Contas Estratégicas I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Executivo de Contas Estratégicas II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Executivo de Contas Estratégicas III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Executivo de Contas I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Executivo de Contas II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Executivo de Contas III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Faturista I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Faturista II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Faturista III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Filetador I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Filetador II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Filetador III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente Adm Financeiro I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente Adm Financeiro II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente Adm Financeiro III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente Clínico I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente Clínico II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente Clínico III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente Contábil I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente Contábil II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente Contábil III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente Jurídico I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente Jurídico II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente Jurídico III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente Nacional de Vendas I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente Nacional de Vendas II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente Nacional de Vendas III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente Operacional I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente Operacional II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente Operacional III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente Regional de Vendas I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente Regional de Vendas II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente Regional de Vendas III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Assistência Técnica I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Assistência Técnica II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Assistência Técnica III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Compras I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Compras II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Compras III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Contas Estratégicas I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Contas Estratégicas II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Contas Estratégicas III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Contas Públicas I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Contas Públicas II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Contas Públicas III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Linha - OPME I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Linha - OPME II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Linha - OPME III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Linha - PMLS I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Linha - PMLS II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Linha - PMLS III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Linha - SU%2FCMI I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Linha - SU%2FCMI II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Linha - SU%2FCMI III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Linha - US I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Linha - US II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Linha - US III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Linha - VET I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Linha - VET II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Linha - VET III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Logística I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Logística II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Logística III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Loja I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Loja II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Loja III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Processos%2C Produtividade e Melhoria Contínua I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Processos%2C Produtividade e Melhoria Contínua II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Processos%2C Produtividade e Melhoria Contínua III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Produção I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Produção II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Produção III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Recursos Humanos I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Recursos Humanos II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gerente de Recursos Humanos III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Instrumentador cirúrgico I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Instrumentador cirúrgico II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Instrumentador cirúrgico III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Instrutor de Treinamento I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Instrutor de Treinamento II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Instrutor de Treinamento III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Motorista I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Motorista II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Motorista III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Operador de Caixa I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Operador de Caixa II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Operador de Caixa III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Recepcionista I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Recepcionista II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Recepcionista III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Representante Comercial I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Representante Comercial II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Representante Comercial III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sub Chefe de Atendimento I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sub Chefe de Atendimento II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sub Chefe de Atendimento III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sub Chefe de Cozinha I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sub Chefe de Cozinha II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sub Chefe de Cozinha III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor %28a%29 de Licitação I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor %28a%29 de Licitação II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor %28a%29 de Licitação III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor Comercial I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor Comercial II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor Comercial III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor Financeiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor de Assistência I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor de Assistência II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor de Assistência III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor de Assistência Técnica I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor de Assistência Técnica II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor de Assistência Técnica III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor de Desenvolvimento de Sistemas I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor de Desenvolvimento de Sistemas II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor de Desenvolvimento de Sistemas III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor de Faturamento I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor de Faturamento II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor de Faturamento III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor de Locação I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor de Locação II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor de Locação III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor de Marketing I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor de Marketing II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor de Marketing III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor de Operações I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor de Operações II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supervisor de Operações III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sushiman I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sushiman II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sushiman III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Técnico de Infraestrutura I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Técnico de Infraestrutura II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Técnico de Infraestrutura III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Técnico em Eletromecânica I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Técnico em Eletromecânica II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Técnico em Eletromecânica III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Técnico em Eletrônica I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Técnico em Eletrônica II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Técnico em Eletrônica III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Técnico em Equipamentos Hospitalares I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Técnico em Equipamentos Hospitalares II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Técnico em Equipamentos Hospitalares III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vendedor Técnico I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vendedor Técnico II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vendedor Técnico III</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vendedor Técnico OPME I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vendedor Técnico OPME II</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vendedor Técnico OPME III</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Recomenda_a_readmiss_o__c</picklist>
+        <values>
+            <fullName>Não</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sim</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Aguardando aprovação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aguardando registro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Novo</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Registrado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reprovado</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tipo_de_Contrato__c</picklist>
+        <values>
+            <fullName>CLT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PJ</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Voltaria_a_trabalhar__c</picklist>
+        <values>
+            <fullName>Não</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sim</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

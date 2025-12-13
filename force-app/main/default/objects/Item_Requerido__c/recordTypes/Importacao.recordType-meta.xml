@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Importacao</fullName>
+    <active>true</active>
+    <label>Importação</label>
+    <picklistValues>
+        <picklist>Categoria__c</picklist>
+        <values>
+            <fullName>COMPRA PRA ESTOQUE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CONSUMO ASSISTENCIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>COPA%2F COZINHA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INFORMÁTICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LIMPEZA%2F HIGIENE%2F EPI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MANUTENÇÃO DE FROTA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MANUTENÇÃO PREDIAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MOVEIS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PAPELARIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RESSARCIMENTO DE TERCEITOS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SERVIÇO</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status_do_Item__c</picklist>
+        <values>
+            <fullName>AGUARDANDO COMPRA FORNECEDOR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AGUARDANDO ENTREGA FORNECEDOR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CANCELADO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FINALIZADO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NOVO</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>RECEBIDO FORNECEDOR</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

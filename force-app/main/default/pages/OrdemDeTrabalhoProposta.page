@@ -1,0 +1,519 @@
+<apex:page renderAs="pdf" standardController="WorkOrder" extensions="OrdemDeTrabalhoProposta" standardStylesheets="false" cache="false" showHeader="false" sidebar="false" applyHtmlTag="true" applyBodyTag="false">
+    
+	
+	<!-- remover isso depois -->
+	<apex:outputText rendered="{!IF(OR(
+		ordem_de_trabalho.Condicao_de_pagamento__c==null,
+		ordem_de_trabalho.Forma_de_pagamento2__c==null,
+		ordem_de_trabalho.Frete2__c==null,
+		ordem_de_trabalho.Prazo_de_Entrega__c==null, 
+		ordem_de_trabalho.Prazo_de_garantia__c==null,
+		ordem_de_trabalho.Data_de_emissao__c==null,
+		ordem_de_trabalho.Data_de_validade__c==null,
+		ordem_de_trabalho.AccountId==null,
+		ordem_de_trabalho.ContactId==null,
+		ordem_de_trabalho.Faturamento_Feito2__c==null
+	),true,false)}">
+		Os campos Condição de pagamento, Forma de pagamento, Tipo de envio, Prazo de entrega, Prazo de garantia, Data de emissao
+		Data de validade, Conta, Contato e Faturamento feito devem ser preenchidos para gerar a proposta.
+	</apex:outputText>
+	
+	<apex:outputText rendered="{!IF(OR(
+		ordem_de_trabalho.Condicao_de_pagamento__c==null,
+		ordem_de_trabalho.Forma_de_pagamento2__c==null,
+		ordem_de_trabalho.Frete2__c==null,
+		ordem_de_trabalho.Prazo_de_Entrega__c==null, 
+		ordem_de_trabalho.Prazo_de_garantia__c==null,
+		ordem_de_trabalho.Data_de_emissao__c==null,
+		ordem_de_trabalho.Data_de_validade__c==null,
+		ordem_de_trabalho.AccountId==null,
+		ordem_de_trabalho.ContactId==null,
+		ordem_de_trabalho.Faturamento_Feito2__c==null
+	),false,true)}">
+
+	<head>
+        <style type="text/css" media="print">
+            
+			/* pdf */
+			@page:first{
+                size:A4;
+				background: url({!documento.sobre});
+                margin:150px 50px 120px 50px;
+				@bottom-center{content:element(paginacao);}
+            }
+			@page{
+                size:A4;
+				background: url({!documento.timbrado});
+                margin:150px 50px 120px 50px;
+				@bottom-center{content:element(paginacao);}
+            }
+			.pagina:before{content:counter(page);}
+			.paginas:before{content:counter(pages);}
+			
+			/* paginação */
+			.paginacao{
+				height:120px;
+				position:running(paginacao);
+			}.paginacao .valor{
+				position: absolute;
+				top: 74px;
+				left: 410px;
+				text-align:center;
+				background-color:white;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:600;
+                color:#697f9b;
+			}
+			
+			/* documento */
+			.documento{
+				padding:0px;
+				margin:0px;
+				font-family:arial, verdana, sans-serif;
+			}.bloco{
+				page-break-inside:avoid;
+			}.linha{
+				white-space: nowrap;
+			}
+			
+			/* capa */
+			.capa .titulo{
+				margin-top:505px;
+				width:100%;
+				text-align:center;
+				text-transform:uppercase;
+                font-weight:bold;
+                font-size:20px;
+				white-space:pre;
+			}.capa .numero{
+				margin-top:40px;
+				width:100%;
+				text-align:right;
+                font-size:14px;
+			}.capa .rotulo{
+				margin-top:35px;
+				font-size:15px;
+			}.capa .valor{
+				margin-top:5px;
+                margin-left:20px;
+                font-size:17px;
+                font-weight:bold;
+			}.capa .nota{
+				margin-top:5px;
+                margin-left:20px;
+                font-size:14px;
+			}
+			
+			/* conteudo */
+			.conteudo{
+				page-break-before:always;
+			}.conteudo .titulo{
+                font-size:14px;
+                font-weight:bold;
+                line-height:120%;
+			}.conteudo .paragrafo{
+                font-size:13px;
+                text-align:justify;
+                line-height:120%;
+                text-justify:inter-word;
+                text-indent:50px;
+			}.conteudo .obsimgs{
+                text-align:right;
+                font-size:11px;
+                font-weight:bold;
+                font-style:italic;
+			}.conteudo .assinatura{
+				width:100%;
+			}.conteudo .assinatura td{
+				width:50%;
+                font-size:13px;
+                line-height:130%;
+			}.conteudo .nota{
+                font-size:13px;
+                text-align:justify;
+                line-height:120%;
+				font-style:italic;
+			}
+			
+			/* listagem */
+			.listagem{ 
+				width:100%;
+			}.listagem table{ 
+				width:100%;
+				border-collapse:collapse;
+			}.listagem td{ 
+				padding:2px 5px;
+				line-height:120%;
+			}.listagem .pre-cabecalho{
+				height:10px;
+			}.listagem .cabecalho td{
+                font-size:12px;
+                font-weight:bold;
+				background-color:#e2e3e3;
+				white-space: nowrap;
+				border-color:#cacecf;
+				border-style:solid;
+				border-width:1px 0px 1px 0px;
+			}.listagem .item-dados .imagem{
+				vertical-align:middle;
+			}.listagem .item-dados.acessorio .imagem{
+				text-align:right;
+			}.listagem .item-dados.equipamento img{
+				width: 80px;
+				height: 80px; 
+			}.listagem .item-dados.acessorio img{
+				width: 55px;
+				height: 55px; 
+			}.listagem .item-dados .valor{
+				border-color:#eef2f4;
+				border-style:solid;
+				border-width:1px 0px 0px 0px;
+			}.listagem .item-dados td{
+                font-size:10px;
+				vertical-align:top;
+			}.listagem .item-descr td{
+                font-size:10px;
+                text-align:justify;
+				vertical-align:top;
+                text-justify:inter-word;
+				border-color:#eef2f4;
+				border-style:solid;
+				border-width:0px 0px 1px 0px;
+			}.listagem .subtotal{
+                font-weight: bold;
+				font-size:10px;
+				white-space: nowrap;
+			}.listagem .subtotal .valor{
+				border-color:#eef2f4;
+				border-style:solid;
+				border-width:0px 0px 1px 0px;
+			}
+        </style>
+    </head>
+	
+	<body class="documento">
+		
+		<!-- paginacao -->
+		<div class="paginacao">
+			<div class="valor">Página <span class="pagina"/> de <span class="paginas"/></div>
+		</div>
+		
+		<!-- capa -->
+		<div class="capa">
+			<div class="titulo">{!documento.titulo}</div>
+			<div class="numero">Nº: {!ordem_de_trabalho.WorkOrderNumber}</div>
+			
+			<div class="rotulo" style="margin-top:20px;">À</div>
+			<div class="valor">{!ordem_de_trabalho.Account.Name}</div>
+			<div class="nota">CNPJ: {!ordem_de_trabalho.Account.CNPJ__c}</div>			
+			
+			<div class="rotulo">Aos cuidados de</div>
+			<div class="valor">{!ordem_de_trabalho.Contact.Name}</div>
+			<apex:outputText rendered="{!IF(ordem_de_trabalho.Contact.CPF__c!=null,true,false)}">
+				<div class="nota">CPF: {!ordem_de_trabalho.Contact.CPF__c}</div>			
+			</apex:outputText>
+		</div>
+		
+		<!-- conteudo -->
+		<div class="conteudo">
+			
+			<div class="bloco">
+				<apex:variable var="n1" value="{!0}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+				<div class="titulo">Prezados Senhores,</div>
+				<br/>
+				<div class="paragrafo">A <b>{!documento.empresa_nome}</b>, {!documento.empresa_dados}, tem a satisfação de transmitir-lhes a seguinte proposta de fornecimento, condições de serviço.</div>
+				<br/>
+			</div>
+			
+			<div class="bloco">
+				<apex:variable var="n1" value="{!n1+1}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+				<div class="titulo">{!n1}. Objeto da proposta</div>
+				<br/>
+				<div class="paragrafo">Constitui objeto da presente proposta o fornecimento do(s) Serviço(s) médico-hospitalar(es), descrito(s) em detalhes no Anexo C (“Produtos (s)”), que será(ão) fornecido(s) pela Hospcom
+					<apex:outputText rendered="{!IF(ordem_de_trabalho.AssetId!=null,true,false)}" value="{!', referente ao ativo'}"/> 
+					<apex:outputText value="{!' '+ordem_de_trabalho.Asset.Name}"/> 
+					<apex:outputText rendered="{!IF(ordem_de_trabalho.Asset.Marca__c!=null,true,false)}" value="{!', Marca' + ordem_de_trabalho.Asset.Marca__c}"/> 
+					<apex:outputText rendered="{!IF(ordem_de_trabalho.Asset.Modelo__c!=null,true,false)}" value="{!', Modelo ' + ordem_de_trabalho.Asset.Modelo__c}"/> 
+					<apex:outputText rendered="{!IF(ordem_de_trabalho.Asset.SerialNumber!=null,true,false)}" value="{!', Número de série '+ordem_de_trabalho.Asset.SerialNumber}"/> 
+					<apex:outputText rendered="{!IF(ordem_de_trabalho.Asset.patrimonio__c!=null,true,false)}" value="{!', Patrimônio '+ordem_de_trabalho.Asset.patrimonio__c}"/>.
+				</div>
+				<br/>
+			</div>
+			
+			<div class="bloco">
+				<apex:variable var="n1" value="{!n1+1}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+				<div class="titulo">{!n1}. Condições gerais de venda</div>
+				<br/>
+				
+				<apex:variable var="n2" value="{!n2+1}"/><apex:variable var="n3" value="{!0}"/>
+				<div class="titulo">{!n1}.{!n2}. O objeto da presente proposta é(são) a(s) venda(s) do(s) serviço(s)</div>
+				<br/>
+			</div>
+			
+			<div class="listagem">
+				<apex:variable var="subtotal" value="{!0}"/>
+				
+				<table cellpadding="0px" cellspacing="0px" border="0">
+					<apex:repeat value="{!produtos}" var="produto">
+						<tbody class='bloco'>
+
+							<!-- cabeçalho -->
+							<apex:outputText rendered="{!IF(produto.cabecalho,true,false)}">
+								<tr class="pre-cabecalho"><tr cellspacing="7"></tr></tr>
+								<tr class="cabecalho">
+									<td style="visibility:hidden;border:0px;"></td>
+									<td>Imagem</td>
+									<td>Produto</td>
+									<td>Modelo</td>
+									<td>Fabricante</td>
+									<td>Valor Unit.</td>
+									<td>Qtd.</td>
+									<td>Valor Total</td>
+								</tr>
+							</apex:outputText>
+							
+							<!-- item -->
+							<apex:variable var="tipo" value="{!IF(produto.item.Item_Pai__c==null,'equipamento','acessorio')}"/>
+							<tr class="item-dados {!tipo}">
+								<td rowspan="2"><apex:outputText value="{!produto.item.Item__c}" rendered="{!IF(tipo=='equipamento',true,false)}"/></td>
+								<td rowspan="2" class="imagem"><img src="{!produto.item.Product2.URL_da_Imagem__c}"/></td>
+								<td class="valor">
+									COD: {!produto.item.Product2.StockKeepingUnit}
+									<br/>
+									{!produto.item.Product2.Name}
+								</td>
+								<td class="valor">{!produto.item.Product2.Modelo__c}</td>
+								<td class="valor">{!produto.item.Product2.Marca__c}</td>
+								<td class="linha valor"><apex:outputField value="{!produto.item.UnitPrice}"/></td>
+								<td class="linha valor"><apex:outputField value="{!produto.item.Quantity}"/></td>
+								<td class="linha valor"><apex:outputField value="{!produto.item.TotalPrice}"/></td>
+							</tr>
+							<tr class="item-descr">
+								<td colspan="6">{!produto.item.Description}</td>
+							</tr>
+							
+							<!-- subtotal -->
+							<apex:variable var="subtotal" value="{!subtotal+produto.item.TotalPrice}"/>
+							<apex:outputText rendered="{!IF(produto.subtotal!=null,true,false)}">
+								<tr class="subtotal">
+									<td colspan="2">&nbsp;</td>
+									<td colspan="5" class="valor">SUBTOTAL</td>
+									<td class="valor">{!produto.subtotal}</td>
+								</tr>
+								<apex:variable var="subtotal" value="{!0}"/>
+							</apex:outputText>
+						
+						</tbody>
+					</apex:repeat>
+				</table>
+			</div>
+			
+			<br/>
+			<div class="obsimgs">Imagens ilustrativas.</div>
+			<br/>
+			
+			<div class="bloco">
+				<div class="paragrafo"><b>Valor total: </b> <apex:outputField value="{!ordem_de_trabalho.GrandTotal}"/>.</div>
+				<br/>
+				<div class="paragrafo">O preço acima inclui o ICMS, II, IPI, PIS e COFINS às alíquotas vigentes na data de emissão desta proposta. Qualquer tributo que seja criado ou majorado no futuro correrá por conta exclusiva da COMPRADORA.</div>
+			</div>
+			<br/>
+			<div class="paragrafo">A menos que a COMPRADORA forneça a Hospcom o respectivo certificado de isenção, com antecedência razoável à data em que o(s) Equipamento(s) for(em) disponibilizado(s) para entrega, a Hospcom faturará a COMPRADORA com relação aos impostos relativos, e a COMPRADORA pagará os impostos de acordo com os termos da fatura.</div>
+			<br/>
+			
+			<apex:variable var="n2" value="{!n2+1}"/><apex:variable var="n3" value="{!0}"/>
+			<div class="titulo">{!n1}.{!n2}. Forma de pagamento</div>
+			<br/>
+			<div class="paragrafo">A condição de pagamento deverá ser assinalada conforme acordado.</div>
+			<br/>
+			<div class="paragrafo"><b>Condições de pagamento: </b><apex:outputField value="{!ordem_de_trabalho.Condicao_de_pagamento__c}"/>,&nbsp;<apex:outputField value="{!ordem_de_trabalho.Forma_de_pagamento2__c}"/>.</div>
+			<br/>
+			
+			<apex:variable var="n3" value="{!n3+1}"/>
+			<div class="paragrafo"><b>{!n1}.{!n2}.{!n3}.</b> Quando da liberação do(s) Equipamento(s) pela VENDEDORA, esta emitirá Nota Fiscal de Faturamento, nota esta que acompanhará o(s) Equipamento(s) no momento de entrega à COMPRADORA, na forma do presente. </div>
+			<br/>
+			
+			<apex:variable var="n3" value="{!n3+1}"/>
+			<div class="paragrafo"><b>{!n1}.{!n2}.{!n3}.</b> A forma de pagamento estabelecida acima, não poderá ser alterada sem que para isso exista uma prévia e expressa aprovação da VENDEDORA. A COMPRADORA, desde já, fica ciente e de acordo que qualquer alteração na forma de pagamento poderá ocasionar a revisão/reajuste do Preço de Compra do(s) Equipamento(s), quando o caso.</div>
+			<br/>
+			
+			<apex:variable var="n3" value="{!n3+1}"/>
+			<div class="paragrafo"><b>{!n1}.{!n2}.{!n3}.</b> O atraso de pagamento acarretará a aplicação de multa de 2% (dois) por cento do saldo devido, acrescida de juros de mora de 1% (um porcento) ao mês, pro rata dia, e correção monetária, calculados considerando a variação acumulada do IGPM/FGV entre a data de vencimento até o efetivo pagamento. Sujeito a protesto após 5 dias de vencimento.</div>
+			<br/>
+			
+			<apex:variable var="n3" value="{!n3+1}"/>
+			<div class="paragrafo"><b>{!n1}.{!n2}.{!n3}.</b> A VENDEDORA envidará seus melhores esforços para entregar o(s) Equipamento(s) dentro do prazo acordado na presente proposta.</div>
+			<br/>
+			
+			<div class="bloco">
+				<apex:variable var="n2" value="{!n2+1}"/><apex:variable var="n3" value="{!0}"/>
+				<div class="titulo">{!n1}.{!n2}. Condições de entrega</div>
+				<br/>
+				
+				<apex:variable var="n3" value="{!n3+1}"/>
+				<div class="paragrafo"><b>{!n1}.{!n2}.{!n3}.</b> É de responsabilidade exclusiva da COMPRADORA, a devida preparação de suas instalações, em especial do local onde o(s) Equipamento(s) será(ão) instalado(s), bem como assegurar a regularidade da documentação que venha a ser solicitada pela VENDEDORA.</div>
+				<br/>
+			</div>
+			
+			<apex:variable var="n3" value="{!n3+1}"/>
+			<div class="paragrafo"><b>{!n1}.{!n2}.{!n3}.</b> Caso a COMPRADORA tenha a necessidade de prorrogar a data de liberação do local de instalação do(s) Equipamento (s) acima informada, esta deverá comunicar à VENDEDORA seu interesse por escrito, sendo que referida prorrogação deverá ser regulada por meio de aditamento a este documento, sendo certo ainda que essa prorrogação poderá ser requerida uma única vez e o prazo de prorrogação em nenhuma hipótese poderá ser superior a 30 (trinta) dias corridos.</div>
+			<br/>
+			
+			<apex:variable var="n3" value="{!n3+1}"/>
+			<div class="paragrafo"><b>{!n1}.{!n2}.{!n3}.</b> Caso no momento da entrega a COMPRADORA não esteja com o Site pronto, as despesas de armazenagem passarão a correr por conta exclusiva dela, COMPRADORA. Se a COMPRADORA não assumir os custos de armazenagem, a VENDEDORA poderá efetuar os pagamentos devidos, repassando as despesas à COMPRADORA. para reembolso por esta no prazo de até 10 (dez) dias contados do recebimento de comunicado escrito da VENDEDORA nesse sentido. Fica desde já consignado que a presente proposta constitui título executivo para todos os fins de direito.</div>
+			<br/>
+			
+			<apex:variable var="n3" value="{!n3+1}"/>
+			<div class="paragrafo"><b>{!n1}.{!n2}.{!n3}.</b> É de responsabilidade exclusiva da COMPRADORA, a devida preparação de suas instalações, em especial do local onde o(s) Equipamento (s) será(ão) instalado(s), bem como assegurar a regularidade da documentação que venha a ser solicitada pela VENDEDORA.</div>
+			<br/>
+			
+			<div class="paragrafo">
+				<b>Prazo de entrega </b> de {!ordem_de_trabalho.Prazo_de_entrega__c}, 
+				<apex:variable var="frete" value="{!IF(ordem_de_trabalho.Frete2__c=='Sem frete','','frete')}"/>
+				<b>{!frete}</b> {!LOWER(ordem_de_trabalho.Frete2__c)}.
+			</div>
+			<br/>
+			<div class="paragrafo"><b>Endereço de Faturamento: </b>
+				<apex:outputText rendered="{!IF(ordem_de_trabalho.Account.BillingStreet != null,true,false)}" >, {!ordem_de_trabalho.Account.BillingStreet}</apex:outputText>
+				<apex:outputText rendered="{!IF(ordem_de_trabalho.Account.BillingCity != null,true,false)}" >, {!ordem_de_trabalho.Account.BillingCity}</apex:outputText>
+				<apex:outputText rendered="{!IF(ordem_de_trabalho.Account.BillingStateCode != null,true,false)}" >-{!ordem_de_trabalho.Account.BillingStateCode}</apex:outputText>
+				<apex:outputText rendered="{!IF(ordem_de_trabalho.Account.BillingPostalCode != null,true,false)}" >, CEP: {!ordem_de_trabalho.Account.BillingPostalCode}</apex:outputText>
+				<apex:outputText rendered="{!IF(ordem_de_trabalho.Account.BillingCountry != null,true,false)}" >, {!ordem_de_trabalho.Account.BillingCountry}</apex:outputText>.
+			</div>
+			<br/>
+			<div class="paragrafo"><b>Endereço de Entrega: </b>
+				<apex:outputText rendered="{!IF(ordem_de_trabalho.Account.ShippingStreet != null,true,false)}" >, {!ordem_de_trabalho.Account.ShippingStreet}</apex:outputText>
+				<apex:outputText rendered="{!IF(ordem_de_trabalho.Account.ShippingCity != null,true,false)}" >, {!ordem_de_trabalho.Account.ShippingCity}</apex:outputText>
+				<apex:outputText rendered="{!IF(ordem_de_trabalho.Account.ShippingStateCode != null,true,false)}" >-{!ordem_de_trabalho.Account.ShippingStateCode}</apex:outputText>
+				<apex:outputText rendered="{!IF(ordem_de_trabalho.Account.ShippingPostalCode != null,true,false)}" >, CEP: {!ordem_de_trabalho.Account.ShippingPostalCode}</apex:outputText>
+				<apex:outputText rendered="{!IF(ordem_de_trabalho.Account.ShippingCountry != null,true,false)}" >, {!ordem_de_trabalho.Account.ShippingCountry}</apex:outputText>.
+			</div>
+			<br/>
+			
+			<div class="bloco">
+				<apex:variable var="n1" value="{!n1+1}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+				<div class="titulo">{!n1}. Garantia</div>
+				<br/>
+				<div class="paragrafo">O(s) Equipamento (s) objeto desta proposta é(são) garantido(s) exclusivamente contra defeitos de fabricação pelo período de {!ordem_de_trabalho.Prazo_de_garantia__c} para partes e peças.</div>
+				<br/>
+			</div>
+			
+			<div class="paragrafo">Qualquer serviço relacionado à garantia do Equipamento que se faça necessário durante o período de garantia acima informado deverá ser solicitado pela COMPRADORA para o time de serviços da HOSPCOM. Solicitações de atendimento feitas através de qualquer outro canal não serão consideradas válidas, isentando-se a HOSPCOM de responsabilidade pelo não atendimento.</div>
+			<br/>
+
+			<div class="bloco">
+				<apex:variable var="n1" value="{!n1+1}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+				<div class="titulo">{!n1}. Assistência técnica</div>
+				<br/>
+				<div class="paragrafo">Com o objetivo de garantir a disponibilidade operacional e, conseqüentemente, manter a produtividade do(s) Equipamento (s), desde já fica facultado à COMPRADORA a opção de negociar e assinar com a INSTALADORA contrato de manutenção para o(s) Equipamento (s) após o término do período de garantia dada pelo fabricante.</div>
+				<br/>
+			</div>
+
+			<div class="bloco">
+				<apex:variable var="n1" value="{!n1+1}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+				<div class="titulo">{!n1}. Validade da proposta</div>
+				<br/>
+				<div class="paragrafo">A validade desta proposta abaixo, devendo ser assinada e devolvida à Hospcom dentro deste mesmo prazo. Após o termino do prazo a Hospcom não garantira a manutenção dos preços estabelecidos  bem como a disponibilidade do material e do serviço na forma descrita nesse documento.</div>
+				<br/>
+				<div class="paragrafo"><b>Data de emissão: </b><apex:outputField value="{!ordem_de_trabalho.Data_de_emissao__c}"/>.</div>
+				<br/>
+				<div class="paragrafo"><b>Data de validade: </b><apex:outputField value="{!ordem_de_trabalho.Data_de_validade__c}"/>.</div>
+				<br/>
+			</div>
+			
+			<div class="bloco">
+			<apex:variable var="n1" value="{!n1+1}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+				<apex:outputText rendered="{!IF(documento.empresa_bancario!=null,true,false)}">
+					<div class="titulo">{!n1}. Dados bancários</div>
+					<br/>
+					<div class="paragrafo">{!documento.empresa_bancario}.</div>
+					<br/>
+				</apex:outputText>
+				<apex:outputText rendered="{!IF(documento.empresa_bancario==null,true,false)}">
+					<div class="titulo">{!n1}. Informações financeiras</div>
+					<br/>
+					<div class="paragrafo">Faturamento feito por {!ordem_de_trabalho.Faturamento_Feito2__r.Raz_o_Social__c}, CNPJ: {!ordem_de_trabalho.Faturamento_Feito2__r.CNPJ__c}.</div>
+					<br/>
+				</apex:outputText>
+			</div>
+			
+			<apex:outputText rendered="{!IF(ordem_de_trabalho.Declara_es__c!=null,true,false)}">
+				<apex:variable var="n1" value="{!n1+1}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+				<div class="titulo">{!n1}. Declarações</div>
+				<br/>
+				<div class="paragrafo">{!ordem_de_trabalho.Declara_es__c}</div>
+				<br/>
+			</apex:outputText>	
+			
+			<div class="bloco">
+				<div class="titulo">Documento criado por </div>
+				<div class="paragrafo">
+					<b>{!$User.FirstName}&nbsp;{!$User.MiddleName}&nbsp;{!$User.LastName}</b>
+					<apex:outputText rendered="{!IF($User.Title!=null,true,false)}">
+						({!$User.Title})
+					</apex:outputText>
+				</div>
+				<apex:outputText rendered="{!IF($User.Email!=null,true,false)}">
+					<div class="paragrafo">Email:&nbsp;{!$User.Email}</div>
+				</apex:outputText>
+				<apex:outputText rendered="{!IF($User.Phone!=null,true,false)}">
+					<div class="paragrafo">Telefone:&nbsp;{!$User.Phone}</div>
+				</apex:outputText>
+				<br/>
+			</div>
+			
+			<div class="bloco">
+				<apex:variable var="n1" value="{!n1+1}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+				<div class="titulo">{!n1}. Termo de aceite</div>
+				<br/>
+				<div class="paragrafo">Caso a presente conte com a aprovação de V.Sas., solicitamos a gentileza de nos devolver a segunda via desta, devidamente assinada por seu(s) representante(s) legal(is), incluindo, mas não se limitando ao Item abaixo, rubricando todas as paginas.</div>
+				<br/>
+				
+				<table class="assinatura">
+					<tr>
+						<td>
+							<br/><br/>____________________________________
+							<br/>Nome legível: 
+							<br/>Cargo: 
+							<br/>Data da assinatura: 
+						</td>
+						<td>
+							<br/><br/>____________________________________
+							<br/>Testemunha 1
+							<br/>Nome: 
+							<br/>RG: 
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<br/><br/>____________________________________
+							<br/>Testemunha 2
+							<br/>Nome: 
+							<br/>RG: 
+						</td>
+						<td>
+							<br/><br/>____________________________________
+							<br/>Testemunha 3
+							<br/>Nome: 
+							<br/>RG: 
+						</td>
+					</tr>
+				</table>
+				<br/>
+				
+				<div class="titulo">Notas</div>
+				<br/>
+				<div class="nota"><i>1. Esta proposta foi emitida em duas vias iguais;</i></div>
+				<div class="nota"><i>2. Os signatários acima deverão rubricar todas as páginas da proposta;</i></div>
+				<div class="nota"><i>3. Todos os campos do quadro acima são de preenchimento obrigatório pela COMPRADORA, sob pena de invalidade da proposta;</i></div>
+				<div class="nota"><i>4. Não serão aceitas rasuras neste documento.</i></div>
+				<br/>
+			</div>
+
+				
+		</div>
+		
+	</body>
+	</apex:outputText>
+</apex:page>

@@ -1,0 +1,104 @@
+<apex:page standardController="Faturamento__c" extensions="FaturamentoAdicionarRecebimento" showHeader="false" showChat="false" standardStylesheets="false" showQuickActionVfHeader="false"> 
+    <html>
+        <head>
+            <title>Adicionar Recebimentos</title>
+
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+            <link rel="stylesheet" href="{!$Resource.bootstrap_iso}" />
+            <!-- link rel="stylesheet" href="{!$Resource.breadcrumb}" /--> 
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"> </script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> </script>
+
+            <style></style>
+            <script type="text/javascript">
+                function PesquisarEnter(ev){
+                    if(window.event && window.event.keyCode == 13 || ev.which == 13){
+                        Pesquisar();
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                 }
+            </script>
+        </head>
+
+        <body>
+            <div class="bootstrap-iso" style="margin-top:7px;">
+                <div class="container-fluid">
+
+                    <apex:outputText rendered="{!IF(qtd_recebimentos > 0, true, false)}" >
+                
+                        <apex:form >
+                            <!-- pesquisa -->
+                            <div class="row" >
+                                <div class="col-xs-12">
+                                    <div class="input-group">
+                                        <apex:inputText styleClass="form-control" value="{!pesquisa}" id="pesquisa" onkeypress="return PesquisarEnter(event);" html-placeholder="Pesquisar recebimentos..." />
+                                        <div class="input-group-btn">
+                                          <apex:commandLink styleClass="btn btn-default" value="Pesquisar" action="{!Pesquisar}"/>
+                                        </div>
+                                    </div>
+                                    <apex:actionFunction name="Pesquisar" action="{!Pesquisar}" />
+                                </div>
+                            </div>
+                            <br/>
+                        </apex:form>
+                            
+                        <apex:form >
+                            <!-- listagem -->
+                            <div class="row" >
+                                <div class="col-xs-12">
+                                    <apex:pageBlock >
+                                        <apex:pageBlockTable styleClass="table table-striped table-hover table-condensed" value="{!c_recebimentos}" var="c_recebimento" id="table">
+                                            <apex:column ><apex:inputCheckbox value="{!c_recebimento.caixa}"/></apex:column>
+                                            <apex:column value="{!c_recebimento.corpo.Nota_Fiscal1__r.Name}" />
+                                            <apex:column value="{!c_recebimento.corpo.Nota_Fiscal1__r.Nome_da_Conta2__r.Name}" />
+                                            <apex:column value="{!c_recebimento.corpo.Name}"/>
+                                            <apex:column value="{!c_recebimento.corpo.Data_do_Recebimento__c}" />
+                                            <apex:column value="{!c_recebimento.corpo.Valor_Recebido__c}"/>
+                                        </apex:pageBlockTable>
+                                    </apex:pageBlock>
+                                </div>
+                            </div>
+
+                            <!-- botões -->
+                            <div class="row" >
+                                <div class="col-xs-12" style="text-align:right;">
+                                    <apex:commandLink styleClass="btn btn-md btn-default btn-info" value="Adicionar" action="{!Adicionar}"/>
+                                </div>
+                            </div>
+                        </apex:form>
+                    
+                    </apex:outputText>
+                    
+                    <apex:outputText rendered="{!IF(mensagem != '', true, false)}" >
+                        <br/>
+                        <div class="row" >
+                            <div class="col-xs-12">
+                                <div class="alert alert-success" style="margin:0px; padding:6px 12px 6px 12px;">
+                                  <strong>{!mensagem}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </apex:outputText>
+                    
+                    <apex:outputText rendered="{!IF(qtd_recebimentos = 0, true, false)}" >
+                        <br/>
+                        <div class="row" >
+                            <div class="col-xs-12">
+                                <div class="alert alert-info" style="margin:0px; padding:6px 12px 6px 12px;">
+                                    <strong>Não há recebimentos compatíveis a serem adicionados.</strong>
+                                </div>
+                            </div>
+                        </div>                      
+                    </apex:outputText>
+                    
+                </div>
+            </div>
+        </body>
+    </html>
+</apex:page>

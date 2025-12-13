@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Audience xmlns="http://soap.sforce.com/2006/04/metadata">
+    <audienceName>Diretoria</audienceName>
+    <container>Hospcom</container>
+    <criteria>
+        <criterion>
+            <criteriaNumber>1</criteriaNumber>
+            <criterionValue>
+                <profile>admin</profile>
+            </criterionValue>
+            <operator>Equal</operator>
+            <type>Profile</type>
+        </criterion>
+    </criteria>
+    <formulaFilterType>AllCriteriaMatch</formulaFilterType>
+    <isDefaultAudience>false</isDefaultAudience>
+    <targets>
+        <target>
+            <groupName>c5ab3270-d7e9-498a-9653-1af89eb3fc1d</groupName>
+            <priority>1</priority>
+            <targetType>ExperienceVariation</targetType>
+            <targetValue>Tipo_de_remunerao_varivel_Tipo_de_remunerao_varivel_Page</targetValue>
+        </target>
+        <target>
+            <groupName>931e3774-0efb-4318-a861-8d644c1ac3e3$#$b52b5477-9b5a-4f53-839b-bc8e770dcef0</groupName>
+            <priority>1</priority>
+            <targetType>ExperienceVariation</targetType>
+            <targetValue>Gesto_de_Tarefas_Painel_do_CRM_Analytics_Component</targetValue>
+        </target>
+    </targets>
+</Audience>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prazo_para_o_vencimento__c</fullName>
+    <externalId>false</externalId>
+    <formula>DATE(
+  YEAR(Revisao__c) + FLOOR((MONTH(Revisao__c) + Meses_para_a_pr_xima_revis_o__c - 1) / 12),
+  MOD(MONTH(Revisao__c) + Meses_para_a_pr_xima_revis_o__c - 1, 12) + 1,
+  CASE(
+    MOD(MONTH(Revisao__c) + Meses_para_a_pr_xima_revis_o__c - 1, 12) + 1,
+    1, MIN(DAY(Revisao__c), 31),
+    2, MIN(DAY(Revisao__c), IF(MOD(YEAR(Revisao__c) + FLOOR((MONTH(Revisao__c) + Meses_para_a_pr_xima_revis_o__c - 1) / 12), 4) = 0, 29, 28)),
+    3, MIN(DAY(Revisao__c), 31),
+    4, MIN(DAY(Revisao__c), 30),
+    5, MIN(DAY(Revisao__c), 31),
+    6, MIN(DAY(Revisao__c), 30),
+    7, MIN(DAY(Revisao__c), 31),
+    8, MIN(DAY(Revisao__c), 31),
+    9, MIN(DAY(Revisao__c), 30),
+    10, MIN(DAY(Revisao__c), 31),
+    11, MIN(DAY(Revisao__c), 30),
+    12, MIN(DAY(Revisao__c), 31),
+    DAY(Revisao__c)
+  )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Prazo para o vencimento</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

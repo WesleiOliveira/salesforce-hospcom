@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <decisions>
+        <name>mais_que_7_dias</name>
+        <label>é mais que 7 dias</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Não</defaultConnectorLabel>
+        <rules>
+            <name>Sim</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>CalculoDias</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>atualiza_projeto</targetReference>
+            </connector>
+            <label>Sim</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>CalculoDias</name>
+        <dataType>Boolean</dataType>
+        <expression>( {!$Record.Tempo_de_Execucao__c} / 24 ) &gt;= 7</expression>
+    </formulas>
+    <interviewLabel>Backlog - Atualiza Projeto {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Backlog - Atualiza Projeto</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>atualiza_projeto</name>
+        <label>atualiza projeto</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <inputAssignments>
+            <field>Tipo__c</field>
+            <value>
+                <stringValue>Projeto</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>mais_que_7_dias</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Tempo_de_Execucao__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>Backlog__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

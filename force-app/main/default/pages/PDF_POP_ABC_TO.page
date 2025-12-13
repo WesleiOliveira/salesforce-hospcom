@@ -1,0 +1,636 @@
+<apex:page standardController="POP__c" extensions="listagem_hrPop" applyHtmlTag="false" showHeader="false" renderAs="pdf"
+  rendered="{! contains(POP__c.Empresas__c, 'ABC-TO')}">
+
+
+  <head>
+    <style type="text/css" media="print">
+      @page {
+        size: 21cm 29.7cm;
+        margin: 100px 40px 60px 40px;
+
+        @top-center {
+          content: element(header);
+        }
+
+        @bottom-center {
+          content: element(footer);
+        }
+      }
+      
+      *{
+          color:#000 !important;
+      }
+
+      @page {
+        size: A4;
+        background: url({!$Resource.TimbradoABC});
+        margin: 150px 50px 120px 50px;
+
+        @bottom-center {
+          content: element(footer);
+        }
+      }
+
+      .pagenumber:before {
+        content: counter(page);
+      }
+
+      .pagecount:before {
+        content: counter(pages);
+      }
+
+      div.header {
+        margin: 0px 0px 0px 0px;
+        padding: 20px 0px 20px 0px;
+        position: running(header);
+        height: 60px;
+      }
+
+      div.content {}
+
+      div.footer {
+        margin: 0px 0px 0px 0px;
+        padding: 20px 0px 20px 0px;
+        position: running(footer);
+        height: 20px;
+        text-align: right;
+        font-family: arial, verdana, sans-serif;
+        font-size: 10px;
+        font-weight: normal;
+      }
+    </style>
+    <style type="text/css" media="print">
+      /*
+        @page:first{
+            size:A4;
+            background: url($Resource.SobreHealth);
+            margin:150px 50px 120px 50px;
+            @bottom-center{content:element(footer);
+            }
+        }
+        
+        @page{
+            size:A4;
+            background: url($Resource.TimbradoHealth);
+            margin:150px 50px 120px 50px;
+            @bottom-center{content:element(footer);}
+        }
+*/
+      td,
+      tr {
+        padding: 0;
+        margin: 0;
+      }
+
+      * {
+        font-family: Arial, Helvetica, sans-serif;
+        color: #0c3557;
+      }
+
+      .titulo {
+        font-family: arial, verdana, sans-serif;
+        font-size: 15px;
+        text-align: left;
+        font-weight: bold;
+        width: 100%;
+      }
+
+      .tabela_geral {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      table.print-friendly tr td,
+      table.print-friendly tr th {
+        /*page-break-inside: always;*/
+      }
+
+      .titulo {
+        text-align: left;
+        padding: 5px 1px;
+        margin-top: 20px;
+      }
+
+      .maiuscula {
+        text-transform: uppercase;
+      }
+
+      .questoes {}
+
+      .questao {
+        display: flex;
+        flex-direction: row;
+        padding: 5px;
+        font-weight: 700;
+        /*page-break-inside: avoid;*/
+      }
+
+      .valor {
+        margin-bottom: -100px;
+        border: #0c3557 1px solid;
+
+      }
+
+      .sessao-questao {
+        font-size: 14px;
+        padding: 50px 0 0 0px;
+        
+        /*page-break-inside: avoid;*/
+      }
+
+
+      .questao,
+      p {
+        padding: 0px !important;
+        margin: 0;
+        padding-right: 15px !important;
+        font-size: 12px !important;
+        
+      }
+
+      h1,
+      h2 {
+        padding: 10px 0;
+        margin: 0;
+        font-size: 14px !important;
+      }
+
+      .resposta {
+
+        font-weight: 500;
+        font-size: 14px;
+        padding-left: 5px;
+
+        /*page-break-inside: avoid;*/
+      }
+
+      .t {
+        text-align: center;
+        padding: 1px 1px;
+        font-size: 14px;
+      }
+
+      span {
+        font-size: 12px !important;
+      }
+
+      .container_ass {
+        bottom: 0;
+      }
+
+
+      .body {
+        height: 100%;
+      }
+
+      .corpo-do-doc {
+        display: flex;
+        justify-content: space-between;
+        height: 100%;
+      }
+
+      @page {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .content222 {
+        /*page-break-before: always;*/
+      }
+
+      .footer2 {
+        /*background:#000;
+                position:fixed;
+                bottom:0;*/
+      }
+
+      .historico_td,
+      .historico_tr {
+        border: 1px solid #777777
+      }
+    </style>
+  </head>
+
+  <body class="body">
+  
+  
+    <apex:pageBlock >
+    
+ 
+          <div style=" display:flex; justify-content: space-between; align-items: center; margin:-100px 10px 10px; font-size:12px;      display: flex; flex-direction: row;"> 
+               <span style="display: inline-block;">
+                <apex:repeat value="{!historico}" var="hr" >
+                      <apex:outputText rendered="{!if(contains(hr.Empresa__c, 'ABC-TO') &&  hr.Natureza_da_Alteracao__c == 'Emissão Inicial', 'true', 'false')}">
+                          
+                          
+                          
+                        <apex:repeat value="{!historico}" var="hr" >
+                            
+                            
+                                 <apex:outputText rendered="{!if(contains(hr.Empresa__c, 'ABC-TO') &&  hr.Natureza_da_Alteracao__c == 'Emissão Inicial', 'true', 'false')}" >
+                                 Emissão: 
+                                  <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                        <apex:param value="{!hr.Data__c}" />
+                                  </apex:outputText>
+                                 </apex:outputText>
+                                    
+                            
+                        </apex:repeat>
+                          
+                      </apex:outputText>
+                 </apex:repeat>
+                 </span>
+                 
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 
+                 <span style="margin: 0 0 0 20px; display: inline-block; ">
+                            
+                                  Aprovação da alteração: 
+                                  <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                        <apex:param value="{!POP__c.Data_Aprovador__c}" />
+                                  </apex:outputText>
+                 </span>
+         </div>
+
+
+
+      <div class="footer" style="text-align:center !important"><br />
+        Página <span class="pagenumber"></span> de <span class="pagecount"></span>
+      </div>
+
+
+      <table style="border-collapse: collapse; margin:auto">
+
+        <tr>
+          <td class="" colspan="4" style="text-align: center; padding:20px;">
+            <h1 style="text-align: center;" class="">Procedimento Operacional Padrão</h1>
+            <h1 style="text-align: center;" class="top"> {!POP__c.NAME} - POP {!POP__c.C_digo_do_Documento__c}</h1>
+          </td>
+        </tr>
+
+
+        <tr class="historico_td">
+          <td class="historico_td" colspan="4" style="text-align: center;"> HISTÓRICO DE REVISÃO</td>
+        </tr>
+        
+        <tr>
+              <td colspan="" class=" historico_td"
+                style="font-weight: bold; font-size:12px; text-align: center;padding:2px 10px;">
+                Revisão
+              </td>
+    
+              <td colspan="" class=" historico_td"
+                style="font-weight: bold; font-size:12px; text-align: center;padding:2px 10px;">
+                Item
+              </td>
+    
+              <td colspan="" class=" historico_td"
+                style="font-weight: bold; font-size:12px; text-align: center;padding:2px 10px;">
+                Natureza da Alteração
+              </td>
+    
+              <td colspan="" class=" historico_td"
+                style="font-weight: bold; font-size:12px; text-align: center;padding:2px 10px;">
+                Data
+              </td>
+        </tr>
+        
+        <apex:variable var="cont" value="{!0}" /> <!-- Inicializa o contador -->
+
+        <apex:repeat value="{!historico}" var="hr" id="theRepeat">
+
+          <apex:outputText rendered="{!if(contains(hr.Empresa__c, 'ABC-TO'), 'true', 'false')}">
+            <tr class="historico_tr">
+              <td colspan="1" class=" historico_td sessao-questao2" style="text-align: center;">
+                <p class="" style="text-align: center;">
+                  <span class="resposta" style="text-align: center;">
+                    <apex:outputText value="{0,number,000}">
+                      <apex:param value="{!cont}" />
+                    </apex:outputText> <!-- Mostra o valor do contador -->
+                  </span>
+                </p>
+              </td>
+              <td colspan="1" class="historico_td sessao-questao2" style="text-align: center;">
+                <p class="" style="text-align: center;">
+                  <span class="resposta" style="text-align: center;">
+                    <apex:outputText >{!hr.Item__c}</apex:outputText>
+                  </span>
+                </p>
+              </td>
+              <td colspan="" class=" historico_td sessao-questao2">
+                <p class="" style="text-align: center;">
+                  <span class="resposta" style="text-align: center;">
+                    <apex:outputText >{!hr.Natureza_da_Alteracao__c}</apex:outputText>
+                  </span>
+                </p>
+              </td>
+              <td colspan="1" class="historico_td sessao-questao2" style="text-align: center;">
+                <p class="" style="text-align: center;">
+                  <span class="resposta" style="text-align: center;">
+                    <apex:outputText >
+                      <apex:outputText value="{0,date,dd/MM/yyyy}">
+                        <apex:param value="{!hr.Data__c}" />
+                      </apex:outputText>
+                    </apex:outputText>
+                  </span>
+                </p>
+              </td>
+            </tr>
+            <apex:variable var="cont" value="{!cont + 1}" /> <!-- Incrementa o contador -->
+          </apex:outputText>
+        </apex:repeat>
+      </table>
+
+
+      <table class="ass" style="margin: auto; margin:150px 10px 10px 10px;">
+        <tr style="margin-top:150px;  ">
+
+          <td style=" text-align:center; width: 250px; text-align: center;" colspan="2">
+            <div style="padding:0; margin:0; text-align:center;">
+              <div style="padding:0; margin: 0 0 -3px 0; text-align:center;">
+                <apex:image style="padding:0; margin:0 auto -15px ; text-align:center;"
+                  value="{! IF(POP__c.Elaborador__r.Contact.assinatura__c != "", POP__c.Elaborador__r.Contact.assinatura__c, "
+                  https://hospcom--c.na170.content.force.com/servlet/servlet.ImageServer?id=0156e00000Bf8Ui&oid=00Di0000000JVhH&lastMod=1667927109000")}"
+                  width="200" height="60px" />
+              </div>
+
+              <div style="padding:0; margin:0;">
+                <p style="padding:0; margin:0 auto;">
+                <div class="underline" style="padding:0; margin:0 auto; width: 70%;border-bottom: 1px solid #0c3557;">
+                </div><br />
+                {!POP__c.Elaborador__r.name} <br /> {!POP__c.Elaborador__r.Title}
+
+                </p>
+              </div>
+            </div>
+          </td>
+          <td style=" text-align:center; width: 250px; text-align: center;" colspan="2">
+            <div style="padding:0; margin:0; text-align:center;">
+              <div style="padding:0; margin: 0 0 -3px 0; text-align:center;">
+                <apex:image style="padding:0; margin:0 auto -15px ; text-align:center;"
+                  value="{! if(POP__C.Revisor__c == '005i0000000JFXuAAO', 'https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BgFbi&oid=00Di0000000JVhH&lastMod=1672836269000',  if(POP__C.Revisor__r.Contact.assinatura__c != "", POP__C.Revisor__r.Contact.assinatura__c, "
+                  https://hospcom--c.na170.content.force.com/servlet/servlet.ImageServer?id=0156e00000Bf8Ui&oid=00Di0000000JVhH&lastMod=1667927109000"
+                  ))}" width="250" height="60px" />
+              </div>
+
+              <div style="padding:0; margin:0;">
+                <p style="padding:0; margin:0 auto;">
+                <div class="underline" style="padding:0; margin:0 auto; width: 70%;border-bottom: 1px solid #0c3557;">
+                </div><br />
+                {!POP__c.Revisor__r.Name}<br /> {!POP__c.Revisor__r.Title}
+                </p>
+              </div>
+            </div>
+          </td>
+
+          <td style=" text-align:center; width: 250px; text-align: center;" colspan="2">
+            <div style="padding:0; margin:0; text-align:center;">
+              <div style="padding:0; margin: 0 0 -3px 0; text-align:center;">
+                <apex:image style="padding:0; margin:0 auto -15px ; text-align:center;"
+                  value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BgFbi&oid=00Di0000000JVhH&lastMod=1672836269000"
+                  width="200" height="60px" />
+              </div>
+
+              <div style="padding:0; margin:0;">
+                <p style="padding:0; margin:0 auto;">
+                <div class="underline" style="padding:0; margin:0 auto; width: 70%;border-bottom: 1px solid #0c3557;">
+                </div><br />
+                Daniel<br /> Diretor Administrativo
+
+                </p>
+              </div>
+            </div>
+          </td>
+
+        </tr>
+      </table>
+      
+      <table style=" margin:50px 0 0; border:1px solid #000; width:650px; border-collapse: collapse; " class="footer2">
+        <tr style="border:1px solid #000;">
+          
+          <td style="border:1px solid #0c3557; padding:1px 5px; "><span>Elaborador</span></td>
+          
+          <td style="border:1px solid #0c3557; padding:1px 5px; ">{!POP__c.Elaborador__r.name}</td>
+          
+          <td style="border:1px solid #0c3557; padding:1px 5px; "> 
+            <apex:outputText >
+              <apex:outputText value="{0,date,dd/MM/yyyy h:mm a}">
+                <apex:param value="{! POP__C.Data_Elaborador__c}" />
+              </apex:outputText>
+            </apex:outputText>
+          </td>
+        </tr>
+
+        <tr style="border:1px solid #0c3557;">
+          <td style="border:1px solid #0c3557; padding:1px 5px; "><span>Revisor</span></td>
+          <td style="border:1px solid #0c3557; width:400px; padding:1px 5px; font-weight:500; ">{!POP__c.Revisor__r.name}</td>
+           <td style="border:1px solid #0c3557; padding:1px 5px; "> 
+            <apex:outputText >
+              <apex:outputText value="{0,date,dd/MM/yyyy h:mm a}">
+                <apex:param value="{! POP__C.Data_Revisor__c}" />
+              </apex:outputText>
+            </apex:outputText>
+          </td>
+        </tr>
+
+        <tr style="border:1px solid #0c3557;">
+          <td style="border:1px solid #0c3557; padding:1px 5px; "><span>Aprovador</span></td>
+          <td style="border:1px solid #0c3557; padding:1px 5px; width:100px; font-weight:500;">Daniel Alencar</td>
+           <td style="border:1px solid #0c3557; padding:1px 5px; "> 
+            <apex:outputText >
+              <apex:outputText value="{0,date,dd/MM/yyyy h:mm a}">
+                <apex:param value="{! POP__C.Data_Aprovador__c}" />
+              </apex:outputText>
+            </apex:outputText>
+          </td>
+        </tr>
+        
+      </table>
+
+    </apex:pageBlock>
+
+    <apex:pageBlock >
+      <table style=" padding:20px 0 200px;">
+        <tr>
+          <td>
+            <p>
+              DIREITOS DE REPRODUÇÃO
+            </p>
+
+            <p>
+              Os direitos de reprodução deste documento pertencem à
+              ABC EQUIPAMENTOS HOSPITALARES LTDA.
+              É proibida a reprodução no todo ou em parte, sob qualquer motivo, sem a
+              aprovação por escrito.
+            </p>
+          </td>
+        </tr>
+      </table>
+
+
+      <table class="content222">
+
+        <tr>
+          <td colspan="4" class="questão  sessao-questao">
+            <p class="">
+              <span class="questao">1.Objetivo: </span>
+              <br />
+              <br />
+              
+              <span class="resposta"> 
+                  <apex:outputText >
+                      <apex:outputField value="{!POP__c.Objetivo__c}">
+                      </apex:outputField>
+                  </apex:outputText>
+              </span>
+            </p>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="4" class="questão  sessao-questao">
+            <p class="">
+              <span class="questao">2.Aplicação: </span>
+              <br />
+              <br />
+              
+              <span class="resposta"> 
+                  <apex:outputText >
+                      <apex:outputField value="{!POP__c.Aplica_o__c }">
+                      </apex:outputField>
+                  </apex:outputText>
+              </span>
+            </p>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="4" class="sessao-questao">
+            <p class="">
+              <span class="questao">
+                3.Responsabilidade e Autoridade:
+              </span>
+
+
+
+              <span class="resposta">
+                <br />
+                <br />
+                
+                <apex:outputText >
+                  <apex:outputField value="{!POP__c.Responsabilidade_e_Autoridade__c }">
+                  </apex:outputField>
+                </apex:outputText>
+              </span>
+            </p>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="4" class="questão  sessao-questao">
+            <p class="">
+              <span class="questao">4.Definições </span>
+              <br />
+
+              <span class="resposta">
+                <br />
+              <br />
+                <apex:outputText >
+                  <apex:outputField value="{!POP__c.Defini_es__c}">
+                  </apex:outputField>
+                </apex:outputText>
+              </span>
+            </p>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="4" class="questão  sessao-questao">
+            <p class="">
+              <span class="questao">5.Equipamentos e Softwares</span>
+              <br />
+              <br />
+              
+              <span class="resposta">
+                
+                <apex:outputText >
+                  <apex:outputField value="{!POP__c.Equipamentos_e_Softwares__c}">
+                  </apex:outputField>
+                </apex:outputText>
+              </span>
+            </p>
+          </td>
+        </tr>
+
+        <tr >
+          <td colspan="4" class="questão  sessao-questao">
+            <p class="">
+              <span class="questao">6.Condições Gerais: </span>
+              <br /> 
+              <br />
+              <span class="resposta">
+               
+                <apex:outputText >
+                  <apex:outputField value="{!POP__c.Condi_es_Gerais__c}">
+                  </apex:outputField>
+                </apex:outputText>
+              </span>
+
+
+            </p>
+          </td>
+        </tr>
+        <tr >
+            <td colspan="4" class="questão  sessao-questao">
+              <p class="">
+                <span class="questao">7.Condições Específicas: </span>
+                <br /> 
+                <br />
+                <span class="resposta">
+                 
+                  <apex:outputText >
+                    <apex:outputField value="{!POP__c.Condi_es_Espec_ficas__c}">
+                    </apex:outputField>
+                  </apex:outputText>
+                </span>
+  
+  
+              </p>
+            </td>
+          </tr>
+
+        <tr>
+          <td colspan="4" class="questão  sessao-questao">
+            <p class="">
+              <span class="questao">8.Formulários, Anexos e Documentos: </span>
+              <br />
+              <br />
+              
+              <span class="resposta"> 
+                  <apex:outputText >
+                      <apex:outputField value="{!POP__c.Formul_rios_Anexos_e_Documentos__c}">
+                      </apex:outputField>
+                  </apex:outputText>
+              </span>
+              
+            </p>
+          </td>
+        </tr>
+        <!--hr/-->
+        
+        <!--
+            ********************
+                ASSINATURAS
+            ********************
+        -->
+      </table>
+    </apex:pageBlock>
+  </body>
+  <apex:pageBlock >
+    <div class="container_ass">
+
+    </div>
+  </apex:pageBlock>
+</apex:page>

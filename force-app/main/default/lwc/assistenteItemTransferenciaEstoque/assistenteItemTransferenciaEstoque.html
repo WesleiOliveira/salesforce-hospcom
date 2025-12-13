@@ -1,0 +1,60 @@
+<template>
+
+    <div class="slds-p-bottom_large slds-p-left_large assTransfEstoque" style="width:500px">
+
+        <div style="display: flex; width: 100%">
+            <lightning-record-edit-form object-api-name="Entrada_de_Estoque__c">
+                <lightning-messages></lightning-messages>
+                <lightning-input-field 
+                    field-name="Produto__c" 
+                    onchange={handleProdutoChange}>
+                </lightning-input-field>
+            </lightning-record-edit-form>
+        </div>
+
+        <div class="divEstoques">
+            <lightning-input 
+                type="number"
+                required
+                label="Quantidade a transferir" 
+                value={quantidadeATransferir} 
+                onchange={handleQuantidadeChange}>
+            </lightning-input>
+
+            <!-- 
+            <lightning-combobox
+                name="staticOptions"
+                label="Selecione um estoque de origem"
+                placeholder="Escolha uma opção"
+                options={options}
+                value={selectedValue}
+                onchange={handleChange}>
+            </lightning-combobox>
+
+            <lightning-combobox
+                name="staticOptions"
+                label="Selecione um estoque de destino"
+                placeholder="Escolha uma opção"
+                options={options}
+                value={estoqueDestino}
+                onchange={handleChange2}>>
+            </lightning-combobox> -->
+        </div>
+
+
+        <div>Quantidade no estoque de origem: {quantidadeEstoque}</div>
+        <div>Quantidade no estoque de destino: {quantidadeEstoqueDestino}</div>
+
+
+        <lightning-button
+            type="submit"
+            name="submit"
+            label="Inserir na solicitação"
+            onclick={criaItemSolicitacao}>
+        >
+        </lightning-button>
+        
+        
+
+    </div>
+</template>

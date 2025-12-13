@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X6_Resist_ncia_de_Aterramento_del__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>1- EQUIPAMENTO NÃO DESCONECTÁVEL DA REDE
+FIGURA 2 (NBR IEC 62353) - MENOR IGUAL A 500 mΩ
+2-EQUIPAMENTO DESCONECTÁVEL DA REDE
+FIGURA 1 (NBR IEC 62353) - MENOR IGUAL A 300 mΩ</inlineHelpText>
+    <label>6 - Resistência de Aterramento</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>EQUIPAMENTO NÃO DESCONECTÁVEL DA REDE FIGURA 2 -  ≤ 500 mΩ</fullName>
+                <default>false</default>
+                <label>EQUIPAMENTO NÃO DESCONECTÁVEL DA REDE FIGURA 2 -  ≤ 500</label>
+            </value>
+            <value>
+                <fullName>TEST</fullName>
+                <default>false</default>
+                <label>TEST</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

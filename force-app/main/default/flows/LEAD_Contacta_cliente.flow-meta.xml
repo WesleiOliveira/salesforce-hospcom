@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Envia_email_lead</name>
+        <label>Envia email lead</label>
+        <locationX>50</locationX>
+        <locationY>539</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>Altera_status_lead</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>$Record.Email</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>Assuntoemail</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>Corpoemail</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>sendRichBody</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <apiVersion>58.0</apiVersion>
+    <decisions>
+        <name>C_pia_1_de_Verifica_Email_preenchido</name>
+        <label>Verifica Email preenchido</label>
+        <locationX>182</locationX>
+        <locationY>431</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>C_pia_1_de_email_preenchido</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Email</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Envia_email_lead</targetReference>
+            </connector>
+            <label>email preenchido</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Verifica_vinculo_com_evento</name>
+        <label>Verifica vinculo com evento</label>
+        <locationX>380</locationX>
+        <locationY>323</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Existe_evento</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Evento_relacionado__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>C_pia_1_de_Verifica_Email_preenchido</targetReference>
+            </connector>
+            <label>Existe evento</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <interviewLabel>(LEAD) - Contacta cliente {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>(LEAD) - Contacta cliente</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Altera_status_lead</name>
+        <label>Altera status lead</label>
+        <locationX>50</locationX>
+        <locationY>647</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Contatado</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>254</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Verifica_vinculo_com_evento</targetReference>
+        </connector>
+        <object>Lead</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>Assuntoemail</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Obrigado por nos visitar no evento {!$Record.Evento_relacionado__r.Name}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>Corpoemail</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;Caro(a) {!$Record.FirstName},&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Gostaríamos de expressar nossa sincera gratidão por ter nos honrado com sua visita no evento {!$Record.Evento_relacionado__r.Name}. Sua presença foi fundamental para tornar o evento um sucesso, e estamos muito felizes por termos tido a oportunidade de compartilhar esse momento especial com você. Esperamos continuar a fortalecer nosso relacionamento e a atendê-lo da melhor maneira possível.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Atenciosamente,&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>emaildestinatario</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;{!$Record.Email}&lt;/p&gt;</text>
+    </textTemplates>
+</Flow>

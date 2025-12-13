@@ -1,0 +1,194 @@
+<aura:component controller="AssistenteCompras" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="CurrentUser" type="Object"/>
+    <force:recordData recordId="{!$SObjectType.CurrentUser.Id}"
+                      fields="Profile.Name"
+                      targetFields="{!v.CurrentUser}"/>
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.jqueryui + '/jquery-ui.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.sortableJs + '/Sortable.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.bundle.js',
+                           $Resource.maskPlugin + '/jquery.mask.min.js',
+                           $Resource.jqueryui + '/jquery-ui.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js')}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    <div>
+    <div class="row fullwidth">
+        
+        <!-- SPINNER DE CARREGAMENTO -->
+        <div id='spinnerDiv' style="display: none">
+            <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+        </div>
+        
+        <div class="col-md-2">
+            <div class='containerSidebar'>
+                <div class='tituloCabecalho' id='tituloCabecalhoSidebar'>Filtros</div>
+                <div class='bodyContainer'>
+                    
+                    <div style='display: flex; width: 100%; height: 10%; flex-direction: column;'>
+                        <label for="exampleInputPassword1">Vendedor</label>
+                        <select class="form-select" aria-label="Default select example" id="vendedorFilter">
+							<option value="" selected="true" disabled='true'>Nenhum valor selecionado</option>
+                        </select>   
+                    </div>
+                    
+                    
+                    <div style='display: flex; width: 100%; height: 10%; flex-direction: column;'>
+                        <label for="dataInicialFilter">Período</label>
+                        <select class="form-select" aria-label="Default select example" id="periodoAnoFilter">
+                            <option value="default" selected="true" disabled='true'>Nenhum valor selecionado</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                        </select>
+                    </div>
+                    
+                    <div style='display: flex; width: 100%; height: 10%; flex-direction: column;'>
+                        <label for="dataInicialFilter">Mês de lançamento</label>
+                        <select class="form-select" aria-label="Default select example" id="periodoMesFilter">
+							<option value="default" selected="true">Nenhum valor selecionado</option>
+							<option value="1">Janeiro</option>
+							<option value="2">Fevereiro</option>
+							<option value="3">Março</option>
+							<option value="4">Abril</option>
+							<option value="5">Maio</option>
+							<option value="6">Junho</option>
+							<option value="7">Julho</option>
+							<option value="8">Agosto</option>
+							<option value="9">Setembro</option>
+							<option value="10">Outubro</option>
+							<option value="11">Novembro</option>
+							<option value="12">Dezembro</option>
+                        </select>
+                    </div>
+                    
+                    <div style='display: flex; width: 100%; height: 10%; flex-direction: column;'>
+                        <label for="dataInicialFilter">Mês de pagamento</label>
+                        <select class="form-select" aria-label="Default select example" id="periodoPagamentoFilter">
+                            <option value="default" selected="true">Nenhum valor selecionado</option>
+                            <option value="01">Janeiro</option>
+                            <option value="02">Fevereiro</option>
+                            <option value="03">Março</option>
+                            <option value="04">Abril</option>
+                            <option value="05">Maio</option>
+                            <option value="06">Junho</option>
+                            <option value="07">Julho</option>
+                            <option value="08">Agosto</option>
+                            <option value="09">Setembro</option>
+                            <option value="10">Outubro</option>
+                            <option value="11">Novembro</option>
+                            <option value="12">Dezembro</option>
+                        </select>
+                    </div>
+                  
+                    <div style='display: flex; width: 100%; height: 10%; flex-direction: column;'>
+                        <label for="exampleInputPassword1">Operação</label>
+                        <select class="form-select" aria-label="Default select example" id="operacaoFilter">
+							<option value="default" selected="true" disabled='true'>Nenhum valor selecionado</option>
+                            <option value="VENDA">Venda</option>
+                            <option value="SERVIÇO">Serviço</option>
+                            <option value="LOCAÇÃO">Locação</option>
+                        </select>   
+                    </div>
+                    
+                    
+                    <!-- DIV COM BUTTON OPTIONS -->
+                    <div style='display: none' id='divButtonsComissao' class='containerButtonsOptions'>
+                        <button type="button" style='width: 100%' class="btn btn-success" id='buttonPedidoCompra'>Marcar como pago</button>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div id='totalView' class='totalClass'>Total: </div>
+                
+                
+            </div>
+        </div>
+        
+        
+        
+        
+        <div class="col-md-6">
+            <div class='containerViewer'>
+                <div class='tituloCabecalho'>Comissões</div>
+                
+
+                
+                <div class='bodyContainer containerTabela'>
+                    <table class="table table-striped" id='tabelaComissoes'>
+                        
+                        <!-- CABEÇALHO DA TABELA -->
+                        <thead>
+                            <tr>
+                                <th scope="col" width="5%"><input class="form-check-input" type="checkbox" id="checkBoxComissoesHead"></input></th>
+                                <th id="orderColumn" style="cursor: pointer">Pedido Sales</th>
+                                <!-- <th id="tituloColumn" style="cursor: pointer">Título</th> -->
+                                <th id="recebimentoColumn">N.º REC.</th>
+                                <!--<th id="tituloColumn" style="cursor: pointer">Titulo</th>-->
+                                <th id="parcelaColumn" style="cursor: pointer">Parcela</th>
+                                <!--<th id="contaContabilColumn" style="cursor: pointer">Conta contábil</th> -->
+                                <th id="departamentoColumn" style="cursor: pointer">Natureza da operação</th>
+                                <!--<th id="operacaoColumn">Utilização</th>-->
+                                <th id="nomeColumn" style="cursor: pointer">Nome Cliente</th>
+                                <th id="valorVendidoColumn" style="cursor: pointer">Valor Vendido</th>
+                                <th id="valorRecebidoColumn" style="cursor: pointer">Valor Recebido</th>
+                                <th id="dataRecebimentoColumn" style="cursor: pointer">Data Recebimento</th>
+                                <th id="dataVencimentoColumn" style="cursor: pointer">Data do Vencimento</th>
+                                <th>%</th>
+                                <th id="comissaoColumn" style="cursor: pointer">Comissão Vendedor</th>
+                                <!--<th id="bancoColumn">Banco</th>-->
+                                
+                            </tr>
+                        </thead>
+                        <!-- CABEÇALHO DA TABELA -->
+                        
+                        <!-- CORPO DA TABELA -->
+                        <tbody id="tbodyComissoes">
+                            
+                        </tbody>
+                        <!-- CORPO DA TABELA -->
+                        
+                    </table>
+                    
+                    
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class='containerViewer'>
+                <div class='tituloCabecalho'>A receber</div>
+                
+                <div class='itemPendente' style='padding: 20px; font-weight: 600'>
+                    <div class='textItemPendente43'>pedido</div>
+                    <div class='textItemPendente43'>Parcela</div>
+                    <div class='textItemPendente43'>Valor</div>
+                    <div class='textItemPendente43'>Comissão</div>
+                    <div class='textItemPendente43'>Vencimento</div>
+                </div>
+                
+                <div class='containerPendentes' id='containerPendentes' style='overflow: auto; padding: 20px'>
+                    
+              
+                    
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        </div>
+        </div>
+    
+    
+    
+</aura:component>

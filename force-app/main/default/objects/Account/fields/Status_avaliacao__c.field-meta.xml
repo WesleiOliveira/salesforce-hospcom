@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_avaliacao__c</fullName>
+    <externalId>false</externalId>
+    <formula>if( VALUE(pontosTotalQualificacao__c)== 0, &quot;Em Qualificação&quot;, IF( VALUE(pontosTotalQualificacao__c)&gt; 0 &amp;&amp;  VALUE(pontosTotalQualificacao__c)&lt;70, &quot;Não Qualificado&quot;, &quot;Qualificado&quot;     ))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Status - Avaliação do Fornecedor</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

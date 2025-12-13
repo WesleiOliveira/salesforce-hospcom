@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Nova_data_de_termino</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+CONTAINS(TEXT(Tipo__c), &apos;prazo&apos;),
+Nova_data_de_termino_do_comodato__c = NULL
+)</errorConditionFormula>
+    <errorDisplayField>Nova_data_de_termino_do_comodato__c</errorDisplayField>
+    <errorMessage>Insira a nova data de término do comodato.</errorMessage>
+</ValidationRule>

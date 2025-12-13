@@ -1,0 +1,9 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global">
+    <h1 style="text-align:right">
+    <div style="width: 100%; display: flex; justify-content: flex-end; flex-direction: column; align-items: flex-end; padding-left: 15px; padding-right: 15px" id='divPrincipalWidget'>
+            <div class="boxItem">
+        <lightning:button iconName="utility:print" onclick="{! c.handleClick }" class="slds-button slds-button_outline-brand" title="PDF" />
+            </div>
+        </div>
+        </h1>
+</aura:component>

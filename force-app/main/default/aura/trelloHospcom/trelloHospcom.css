@@ -1,0 +1,801 @@
+.THIS .screenCards {
+    width: 100%;
+    height: 800px;
+    display: flex;
+    background-color: #f1f1f1;
+    border-radius: 30px;
+    flex-direction: column;
+    position: absolute;
+    background: url(https://hospcom.file.force.com/servlet/servlet.ImageServer?id=015U4000000GuRF&oid=00Di0000000JVhH&lastMod=1700663239000);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.THIS .label-option{
+    display: flex !important;
+    flex-direction: row;
+    gap: 5px;
+    margin: 5px 2px 3px;
+    border-bottom: 1px solid #e6e6e6;
+   
+}
+
+.THIS .itensChecklist{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.THIS .selectMulti{
+    width: 100%
+}
+
+.THIS .formSelect{
+    width: 100%;
+    padding-bottom: 15px;
+}
+
+.THIS .trashChecklistItem{
+    background-color: #e7e7e7;
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.THIS .trashChecklistItem:hover{
+    cursor: pointer;
+    transform: scale(1.08); 
+}
+
+.THIS .itemChecklist{
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+}
+
+.THIS .checkBoxChecklist{
+    margin-right: 10px;
+}
+
+.THIS .screenFrames {
+    padding: 50px;
+    z-index: 21;
+    width: 100%;
+    height: 800px;
+    display: flex;
+    background-color: #f1f1f1;
+    border-radius: 30px;
+    flex-direction: column;
+    position: absolute;
+    background: url(https://hospcom.file.force.com/servlet/servlet.ImageServer?id=015U4000000GuRF&oid=00Di0000000JVhH&lastMod=1700663239000);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.THIS .customSelectHosp{
+    width: 200px;
+    height: 40px;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.THIS .divFiltrosMetasEquipe{
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.THIS .tituloQuadrosTrello{
+    font-size: 1.3em;
+    color: white;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.THIS .quadroTrelloMiniatura {
+    column-gap: 10px;
+    display: flex;
+    align-items: center;
+    max-width: 250px;
+    background-color: rgb(211 211 211 / 26%);
+    height: 100px;
+    border-radius: 10px;
+    color: white;
+    padding: 10px;
+    font-size: 1.2em;
+    font-weight: 500;
+    text-transform: uppercase;
+    border: 1px solid rgb(255 255 255 / 25%);
+}
+
+.THIS .quadroTrelloMiniatura:hover {
+    cursor: pointer;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transform: scale(1.05); 
+}
+
+.THIS .linhasQuadros{
+    display: flex;
+    column-gap: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.THIS .headerCard{
+    width: 100%;
+    height: 10%;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    background-color: rgb(211 211 211 / 9%);
+}
+
+.THIS .tituloQuadro{
+    font-size: 1.4em!important;
+    width: 100%!important;
+    font-weight: 900!important;
+}
+
+.THIS .bodyCard{
+    width: 100%;
+    height: 95%;
+    padding: 20px;
+    display: flex;
+    column-gap: 20px;
+    overflow: auto;
+}
+
+.THIS input{
+    font-family: 'Lato';
+}
+
+.THIS .compartilhaQuadroText{
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+.THIS .column1Header{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.THIS .iconReturn{
+    color: white;
+    font-size: 2em;
+    display: flex;
+}
+
+.THIS .iconReturn:hover{
+    cursor: pointer;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transform: scale(1.05); 
+}
+
+.THIS .divUsersCompartilhados{
+    width: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.THIS .column2Header{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    column-gap: 10px;
+    justify-content: flex-end;
+}
+
+.THIS .userResultSearchShare{
+    color: black;
+    padding-bottom: 10px;
+    padding: 5px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+.THIS .userResultSearchShare:hover{
+    background-color: rgb(0 0 0 / 7%);
+    cursor: pointer;
+}
+
+.THIS .userSharedLine{
+    color: black;
+    padding-bottom: 10px;
+    padding: 5px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+.THIS .userSharedLine:hover{
+    background-color: rgb(0 0 0 / 7%);
+    cursor: pointer;
+}
+
+.THIS .divSearchResults{
+    height: 100px;
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 5px;
+    padding: 10px;
+    overflow: auto;
+    z-index: 200;
+    background: white;
+    display: none;
+}
+
+.THIS .actionCartao{
+    display: flex;
+    column-gap: 10px;
+}
+
+.THIS .popupTask{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0 0 0 / 53%);
+    border-radius: 25px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.THIS .header39282103{
+    display: flex;
+    column-gap: 20px;
+}
+
+.THIS .footer39282103{
+    display: flex;
+    padding-top: 30px;
+    column-gap: 20px;
+}
+
+.THIS .icon417805{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.THIS .popupCompartilhaQuadro{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0 0 0 / 53%);
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+.THIS .sectionShare{
+    display: flex;
+}
+
+.THIS .headerCompartilhaQuadro{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.THIS .divDescAtividade{
+	padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;  
+}
+
+.THIS .sectionUsersShared{
+    column-gap: 10px;
+    display: flex;
+}
+
+.THIS .buttonCompartilhaUser{
+    width: 20%;
+    background-color: #0F375C;
+    display: flex;
+    gap: 10px;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    transition-duration: .3s;
+    color: white;
+    font-size: 1.1em;
+}
+
+.THIS .body39282103{
+    display: flex;
+    padding-top: 30px;
+    column-gap: 20px;
+}
+
+.THIS .buttonCompartilhaUser:hover {
+    cursor: pointer;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transform: scale(1.05); 
+}
+
+.THIS .aditionals3424{
+    display: flex;
+    padding-top: 10px;
+}
+
+.THIS .buttonActionTask{
+    width: 90%;
+    background-color: #e7e7e7;
+    display: flex;
+    gap: 10px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    transition-duration: .3s;
+    margin-bottom: 10px;
+}
+
+.THIS .buttonActionTask:hover {
+    cursor: pointer;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transform: scale(1.05); 
+}
+
+.THIS .atividadeTask{
+    display: flex;
+}
+
+.THIS .blocoAtividadePopup{
+    background-color: #e7e7e7;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.THIS .buttonConfirmaEntrega{
+    border-radius: 10px;
+    border: 1px solid;
+    background-color: rgb(255 255 255 / 0%);
+}
+
+.THIS .buttonConfirmaEntrega:hover{
+    cursor: pointer;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transform: scale(1.05); 
+}
+
+.THIS .entregaAditionals{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.THIS .dataEntregaTextAditionals{
+    display: flex;
+    font-weight: 600;
+}
+
+.THIS .innerPopupTask{
+    background-color: #f1f1f1;
+    width: 800px;
+    height: 770px;
+    border-radius: 25px;
+    display: flex;
+    padding: 20px;
+}
+
+.THIS .innerPopupCompartilha{
+    background-color: white;
+    width: 700px;
+    height: 400px;
+    border-radius: 25px;
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+}
+
+.THIS .cartaoTrello{
+    width: 350px;
+    justify-content: space-between;
+    height: fit-content;
+    min-height: 200px;
+    max-height: 700px;
+    overflow: auto;
+    background-color: rgb(255 255 255 / 59%);
+    border-radius: 20px;
+    padding: 10px;
+    display: FLEX;
+    flex-direction: column;
+    row-gap: 10px;
+    min-width: 350px;
+    background-color: rgb(211 211 211 / 26%);
+}
+
+.THIS .inputTituloCartao{
+    border: 0;
+    font-weight: 700;
+    font-size: 1.2em;
+    padding-left: 0px;
+    background-color: rgb(0 0 0 / 0%);
+    color: white;
+    width: 300px;
+}
+
+.THIS .removeCartao{
+    color: white;
+    font-size: 1.4em;
+    transition-duration: .3s;
+}
+
+.THIS .removeCartao:hover{
+    cursor: pointer;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transform: scale(1.05);
+}
+
+.THIS .compartilhaCartao{
+    color: white;
+    font-size: 1.4em;
+    transition-duration: .3s;
+    
+}
+
+.THIS .compartilhaCartao:hover{
+    cursor: pointer;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transform: scale(1.05);
+}
+
+.THIS .editIcon{
+    width: 25px;
+    color: black;
+    height: 25px;
+    position: absolute;
+    display: none;
+    right: 0;
+    margin-right: 10px;
+    background-color: rgb(0 0 0 / 14%);
+    border-radius: 100%;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+}
+
+.THIS .cardTask:hover .editIcon {
+    display: flex;
+}
+
+.THIS .divSpinner{
+    width: 100%;
+    height: 800px;
+    display: none;
+    background-color: #f1f1f1;
+    border-radius: 30px;
+    flex-direction: column;
+    position: absolute;
+}
+
+.THIS .headerCartao{
+    height: 5%;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.THIS .bodyCartao{
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    min-height: 100px;
+    overflow: hidden;
+}
+
+.THIS .buttonCompartilharQuadro{
+    width: 25%;
+    background-color: white;
+    display: flex;
+    gap: 10px;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    transition-duration: .3s;
+    
+	width: max-content;
+}
+
+.THIS .buttonCompartilharQuadro:hover {
+    cursor: pointer;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transform: scale(1.05); 
+
+}
+
+.THIS .divNewCartao{
+    display: flex;
+    background-color: white;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    bottom: 35px;
+    right: 25px;
+    z-index: 20;
+    border-radius: 100%;
+    color: #0f375c;
+    font-size: 2em;
+    justify-content: center;
+    align-items: center;
+    transition: all .1s ease-in-out;
+    box-shadow: rgba(50, 50, 93, 0.25) 0 6px 12px -2px, rgba(0, 0, 0, 0.3) 0 3px 7px -3px;
+}
+
+.THIS .screenTabelaEquipe{
+    padding: 50px;
+    z-index: 21;
+    width: 100%;
+    height: 800px;
+    display: flex;
+    border-radius: 30px;
+    flex-direction: column;
+    position: absolute;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.THIS .innerScreenTabelaEquipe{
+    display: flex;
+    width: 80%;
+    overflow: auto;
+    height: 600px;
+    flex-direction: column;
+    border-radius: 30px;
+    padding: 20px;
+    background-color: white;
+}
+
+.THIS .tabelaEquipe{
+    width: 90%;
+    position: absolute;
+    height: 500px;
+    background-color: white;
+    z-index: 30;
+    top: 50%;
+    display: none;
+}
+
+.THIS .divNewQuadro{
+    display: flex;
+    background-color: white;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    bottom: 35px;
+    right: 25px;
+    z-index: 23;
+    border-radius: 100%;
+    color: #0f375c;
+    font-size: 2em;
+    justify-content: center;
+    align-items: center;
+    transition: all .1s ease-in-out;
+    box-shadow: rgba(50, 50, 93, 0.25) 0 6px 12px -2px, rgba(0, 0, 0, 0.3) 0 3px 7px -3px;
+}
+
+.THIS .divTarefasEquipe{
+    right: 100px!important;
+    width: 200px!important;
+    border-radius: 60px!important;
+    font-size: 1.3em!important;
+}
+
+.THIS .divNewQuadro:hover{
+    transform: scale(1.05); 
+    cursor: pointer;
+}
+
+.THIS .divNewCartao:hover{
+    transform: scale(1.05); 
+    cursor: pointer;
+}
+
+.THIS .colunaEsquerdaInnerPopupTask{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    padding-right: 10px;
+}
+
+.THIS .colunaDireitaInnerPopupTask{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.THIS .closePopup{
+    font-size: 1.5em;
+    margin-bottom: 50px;
+}
+
+.THIS .closePopup:hover{
+    font-size: 1.6em;
+    cursor: pointer;
+}
+
+.THIS .footerCartao{
+    height: 5%;
+    display: flex;
+    width: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+    align-items: center;
+    padding-left: 5px;
+    color: white;
+}
+
+.THIS .bodyCard::-webkit-scrollbar {
+    height: 6px;
+}
+
+.THIS .bodyCard::-webkit-scrollbar-track {
+    background-color: rgb(255 255 255 / 0%);
+}
+
+.THIS .imageTask{
+    border-radius: 100%;
+    height: 30px;
+    width: 30px;
+    background-position: center;
+    background-size: cover;
+}
+
+.THIS .bodyCard::-webkit-scrollbar-thumb {
+    background-color: #a0bb31;
+    border-radius: 38px;
+    border: 0px none #ffffff;
+}
+
+.THIS .colunaEsquerdaInnerPopupTask::-webkit-scrollbar {
+    width: 6px;
+}
+
+.THIS .colunaEsquerdaInnerPopupTask::-webkit-scrollbar-track {
+    background-color: rgb(255 255 255 / 0%);
+}
+
+.THIS .colunaEsquerdaInnerPopupTask::-webkit-scrollbar-thumb {
+    background-color: #a0bb31;
+    border-radius: 38px;
+    border: 0px none #ffffff;
+}
+
+
+.THIS .footerCartao:hover{
+    background-color: rgb(0 0 0 / 9%);
+}
+
+.THIS .footerTask{
+    color: black;
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    justify-content: space-between;
+}
+
+.THIS .addTaskIcon{
+    
+}
+
+.THIS .tituloTask{
+    color: black;
+    font-weight: 400;
+    padding-bottom: 10px;
+}
+
+.THIS .cardTask{
+    width: 100%;
+    height: auto;
+    background-color: lightgrey;
+    border-radius: 10px;
+    padding: 10px;
+    position: relative;
+    cursor: pointer;
+
+}
+
+.THIS .addTaskText{
+    margin-left: 10px;
+}
+
+.THIS .selectMulti{
+    height: 35px;
+    border-radius: 10px;
+}
+
+.THIS .multiselect {
+    width: 100%;
+    position: relative;
+}
+
+.THIS .selectBox {
+  position: relative;
+}
+
+.THIS .selectBox select {
+    width: 100%;
+    border: 1px solid #dadada;
+    color: #616a83;
+    font-weight: 500;
+}
+
+.THIS .overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.THIS #searchInput{
+    width: 100%;
+    border: 1px solid #dadada;
+    color: #616a83;
+    font-weight: 500;
+    padding: 4px;
+    border-radius: 5px;
+}
+
+.THIS .imageMembroPopup{
+    border-radius: 100%;
+    height: 30px;
+    width: 30px;
+    background-position: center;
+    background-size: cover;
+}
+
+.THIS #container-users{    
+    display: flex;
+    flex-direction: row;
+    margin: 5px 2px 20px;
+}
+
+.THIS #checkboxes {
+    display: none;
+    height: 300px;
+    overflow: auto;
+    width: calc(100% - 5px);
+    background-color: white;
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 10px;
+    flex-direction: column;
+    row-gap: 5px;
+    position: absolute;
+    z-index: 300;
+    border: 1px solid #dadada;
+}
+
+.THIS #checkboxes label {
+  display: block;
+}
+
+.THIS #checkboxes label:hover {
+  background-color: #1e90ff;
+}

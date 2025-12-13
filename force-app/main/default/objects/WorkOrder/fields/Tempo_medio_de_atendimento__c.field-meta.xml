@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tempo_medio_de_atendimento__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    (DATEVALUE(Inicio_Analise_Concluida__c) - DATEVALUE(Inicio_Em_Analise__c)) &lt;= 2,
+    &quot;1 — Até 2 dias&quot;,
+    IF(
+        (DATEVALUE(Inicio_Analise_Concluida__c) - DATEVALUE(Inicio_Em_Analise__c)) &gt;= 3 &amp;&amp; 
+        (DATEVALUE(Inicio_Analise_Concluida__c) - DATEVALUE(Inicio_Em_Analise__c)) &lt;= 7,
+        &quot;2 — 3 a 7 dias&quot;,
+        &quot;3 — Acima de 8 dias&quot;
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Tempo médio de atendimento</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

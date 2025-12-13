@@ -1,0 +1,80 @@
+<template>
+    <lightning-card icon-name="standard:kanban">
+        <div class="filters-wrapper">
+            <lightning-card>
+                <div class="filters-header">
+                    <lightning-combobox label="Filtrar por Atribuído" value={devSelecionado} options={devs}
+                        onchange={handleDev}>
+                    </lightning-combobox>
+
+                    <lightning-combobox label="Filtrar por Tipo" value={tipoSelecionado} options={tipos}
+                        onchange={handleTipo}>
+                    </lightning-combobox>
+
+                    <lightning-combobox label="Filtrar por Departamento" value={departamentoSelecionado}
+                        options={departamentos} onchange={handleDepartamento}>
+                    </lightning-combobox>
+
+                    <lightning-button variant="brand" label="Novo Ticket" onclick={navigateToNewCasePage}
+                        class="novo-ticket-button">
+                    </lightning-button>
+
+                    <lightning-button variant="neutral" icon-name="utility:refresh"
+                        onclick={handleRefresh} class="reload-button">
+                    </lightning-button>
+                </div>
+            </lightning-card>
+        </div>
+
+        <div class="kanban-board">
+            <div class="kanban-headers">
+                <template for:each={columns} for:item="column">
+                    <div key={column.status} class="kanban-header">
+                        {column.status} ({column.records.length})
+                    </div>
+                </template>
+            </div>
+
+            <div class="kanban-container">
+                <template for:each={columns} for:item="column">
+                    <div key={column.status} class="kanban-column" data-status={column.status}
+                        ondragover={handleDragOver} ondrop={handleDrop}>
+
+                        <div class="kanban-cards">
+                            <template for:each={column.records} for:item="record">
+                                <div key={record.Id} class={record.cssCard__c} draggable="true" data-id={record.Id}
+                                    ondragstart={handleDragStart}>
+
+                                    <!-- Cabeçalho condicional -->
+                                    <template if:true={record.isProjeto}>
+                                        <div class="card-header projeto-header">
+                                            <span class="record-name"><a onclick={navigateToRecord}>{record.Name}</a></span>
+                                            <span class="emoji">🚀 Projeto</span>
+                                        </div>
+                                    </template>
+                                    <template if:false={record.isProjeto}>
+                                        <div class="card-header">
+                                            <span class="record-name"><a onclick={navigateToRecord}>{record.Name}</a></span>
+                                            <span class="emoji">{record.Bandeira__c}</span>
+                                        </div>
+                                    </template>
+
+                                    <div class="card-body">
+                                        <div style="margin-bottom: 0.5rem;"><b>{record.Atividade__c}</b></div>
+                                        <div>{record.Atribuido__r.Name}</div>
+                                        <div>{record.Tipo__c}</div>
+                                        <br>
+                                        <div>TMA: <b>{record.Tempo_de_Atendimento__c}</b></div>
+                                        <div>Tempo Estimado: <b>{record.Tempo_de_Execucao__c} Horas</b></div>
+                                        <br>
+                                        <div>Departamento: <b>{record.Departamento__c}</b></div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </lightning-card>
+</template>

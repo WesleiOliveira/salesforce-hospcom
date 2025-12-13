@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valores_totais__c</fullName>
+    <externalId>false</externalId>
+    <label>Valores totais</label>
+    <summarizedField>OrderItem.Pre_o_Total2__c</summarizedField>
+    <summaryFilterItems>
+        <field>OrderItem.Status__c</field>
+        <operation>notEqual</operation>
+        <value>Cancelado</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>OrderItem.ListPrice</field>
+        <operation>notEqual</operation>
+        <value>0</value>
+    </summaryFilterItems>
+    <summaryForeignKey>OrderItem.OrderId</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

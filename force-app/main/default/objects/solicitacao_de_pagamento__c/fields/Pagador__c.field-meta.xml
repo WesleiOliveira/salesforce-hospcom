@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pagador__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Pagador</label>
+    <lookupFilter>
+        <active>true</active>
+        <booleanFilter>1</booleanFilter>
+        <filterItems>
+            <field>Account.Id</field>
+            <operation>equals</operation>
+            <value>0016e000039RTPX,001U40000010gmg,0016e00003JCYFt,001i00000085QYb,0015A00002GC6r6,0015A00001yGbVZ,0015A00002SZiBc,0015A00001tSrPa</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Solicitações de pagamentos (Pagador)</relationshipLabel>
+    <relationshipName>Solicita_es_de_pagamentos1</relationshipName>
+    <required>true</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

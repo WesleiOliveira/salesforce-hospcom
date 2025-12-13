@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Todos</fullName>
+    <columns>NAME</columns>
+    <columns>Documento__c</columns>
+    <columns>Status__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Revisao__c</columns>
+    <columns>SISTEMA__c</columns>
+    <columns>Empresa_pesquisa__c</columns>
+    <columns>Empresa__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Gest_o_de_Documentos__c.Padr_o</value>
+    </filters>
+    <label>Todos</label>
+</ListView>

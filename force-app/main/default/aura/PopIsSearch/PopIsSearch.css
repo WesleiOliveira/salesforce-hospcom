@@ -1,0 +1,86 @@
+.THIS * {
+    margin:0;
+    padding:0;
+}
+.THIS .slds-text-heading_medium {
+    display: none !important;
+}
+.THIS .tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    justify-content: flex-start; 
+    width: 100%; 
+    padding-left: 0; 
+}
+
+/* Estilo individual das tags */
+.THIS .tag-item {
+    background-color: #d15b97;
+    color: white;
+    border-radius: 15px;
+    padding: 0.3rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    margin-right: 0.5rem; 
+}
+
+.THIS .remove-tag {
+    cursor: pointer;
+    font-weight: bold;
+    padding-left: 0.5rem;
+}
+
+.THIS .remove-tag:hover {
+    color: #ff6666;
+}
+.THIS .principalDiv12345{
+    width: 100%;
+    display: flex;
+    border: 1px solid #e6e6e7;
+    border-radius: 10px;
+    height: fit-content;
+    justify-content: center;	
+    align-items: center;
+    margin-top: 10px;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #f2f4f4;
+}
+.THIS .button3243 {
+    padding: 1.5rem;
+    display: flex; /* Usar flexbox para alinhamento */
+    align-items: center; /* Centralizar verticalmente */
+    justify-content: center; /* Centralizar horizontalmente */
+    width: 50%; /* Largura da caixa */
+    height: 30px; /* Altura da caixa */
+    border-radius: 30px; /* Bordas arredondadas */
+    border: 0px; /* Sem borda */
+    color: white; /* Cor do texto */
+    background-color: #d15b97; /* Cor de fundo */
+    margin: 0 auto; /* Centralizar a caixa no componente */
+}
+.THIS .is12122 {
+    border-radius: 5px;
+    height: auto; /* Altura automática para acomodar o conteúdo */
+    display: flex; /* Usar flexbox para alinhamento */
+    align-items: center; /* Alinhar itens verticalmente ao centro */
+    justify-content: flex-start; /* Alinhar itens à esquerda */
+    width: 100%;
+    flex-direction: row; /* Direção do flexbox */
+    cursor: pointer;
+    border: 1.5px solid #85929e;
+    padding: 1.5rem; /* Espaçamento interno */
+    margin-bottom: 0.5rem; /* Espaçamento entre as caixas */
+    box-sizing: border-box; /* Incluir padding e borda na largura */
+    background-color: #fff7fb
+}
+.THIS .resultados12212{
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    cursor: pointer;
+}

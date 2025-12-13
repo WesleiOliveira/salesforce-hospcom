@@ -1,0 +1,101 @@
+.recent-item {
+    background: #ffffff;
+    border: 1px solid #d8dde6;
+    border-radius: 12px;
+    padding: 1rem;
+    margin: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.recentesBox {
+    display: flex;
+}
+
+.recentes{
+    width: 50%;
+    margin-right: 1%;
+    background: #ffffff;
+    border: 1px solid #d8dde6;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.finalizados{
+    margin-right: 1%;
+    width: 50%;
+    background: #ffffff;
+    border: 1px solid #d8dde6;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.date {
+    font-weight: bold;
+}
+
+canvas{
+    width: 400px;
+    height: 300px;
+}
+
+.containerCanvas{
+    height: 400px;
+    width: 49%;
+    display: flex;
+    justify-content: center;
+    background: #ffffff;
+    border: 1px solid #d8dde6;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-right: 1%;
+    margin-top: 1%;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+}
+
+
+ .card-box {
+    width: 24%;
+    background: #fff; /* fundo branco */
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between; /* texto à esquerda, ícone à direita */
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    min-width: 220px; /* tamanho mínimo */
+    margin-right: 1%;
+    margin-bottom: 1%;
+}
+
+.card-box .title {
+    font-size: 1.4em;
+    color: #666; /* cinza discreto */
+    margin: 0;
+}
+
+.card-box .value {
+    font-size: 3em;
+    font-weight: bold;
+    color: #000; /* preto */
+    margin: 4px 0 0 0;
+}
+
+.card-box .icone {
+    font-size: 5em; /* tamanho maior do ícone */
+    color: #f5b041;  /* cor amarela semelhante à segunda imagem */
+    margin-left: 10px;
+}
+
+.titulo{
+    font-size: 1.4em;
+}
+
+b{
+    font-size: 2em;
+}

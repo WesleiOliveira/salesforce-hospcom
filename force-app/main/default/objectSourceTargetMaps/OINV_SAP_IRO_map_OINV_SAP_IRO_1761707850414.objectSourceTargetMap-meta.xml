@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectSourceTargetMap xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <creationType>Custom</creationType>
+    <fieldSourceTargetMaps>
+        <creationType>System</creationType>
+        <filterApplied>false</filterApplied>
+        <isSourceFormula>false</isSourceFormula>
+        <sourceField>OINV_SAP_IRO.DataSource__c</sourceField>
+        <sourceFormula>DataSource</sourceFormula>
+        <targetField>OINV_SAP_IRO__dll.DataSource__c</targetField>
+    </fieldSourceTargetMaps>
+    <fieldSourceTargetMaps>
+        <creationType>Custom</creationType>
+        <filterApplied>false</filterApplied>
+        <isSourceFormula>false</isSourceFormula>
+        <sourceField>OINV_SAP_IRO.UpdateDate__c</sourceField>
+        <sourceFormula>UpdateDate</sourceFormula>
+        <targetField>OINV_SAP_IRO__dll.UpdateDate__c</targetField>
+    </fieldSourceTargetMaps>
+    <fieldSourceTargetMaps>
+        <creationType>System</creationType>
+        <filterApplied>false</filterApplied>
+        <isSourceFormula>true</isSourceFormula>
+        <sourceField xsi:nil="true"/>
+        <sourceFormula>&apos;SAPHana_SAP_IRO_OINV&apos;</sourceFormula>
+        <targetField>OINV_SAP_IRO__dll.DataSourceObject__c</targetField>
+    </fieldSourceTargetMaps>
+    <fieldSourceTargetMaps>
+        <creationType>System</creationType>
+        <filterApplied>false</filterApplied>
+        <isSourceFormula>true</isSourceFormula>
+        <sourceField xsi:nil="true"/>
+        <targetField>OINV_SAP_IRO__dll.InternalOrganization__c</targetField>
+    </fieldSourceTargetMaps>
+    <fieldSourceTargetMaps>
+        <creationType>Custom</creationType>
+        <filterApplied>false</filterApplied>
+        <isSourceFormula>false</isSourceFormula>
+        <sourceField>OINV_SAP_IRO.DocEntry__c</sourceField>
+        <sourceFormula>DocEntry</sourceFormula>
+        <targetField>OINV_SAP_IRO__dll.DocEntry__c</targetField>
+    </fieldSourceTargetMaps>
+    <masterLabel>OINV_SAP_IRO_map_OINV_SAP_IRO_1761707850414</masterLabel>
+    <sourceObjectName>OINV_SAP_IRO</sourceObjectName>
+    <targetObjectName>OINV_SAP_IRO__dll</targetObjectName>
+</ObjectSourceTargetMap>

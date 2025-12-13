@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cargo_antigo_indisponivel</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISNEW(),
+NOT(ISPICKVAL(Novo_Cargo__c, &quot;&quot;))
+)</errorConditionFormula>
+    <errorDisplayField>Novo_Cargo__c</errorDisplayField>
+    <errorMessage>Este campo não esta mais disponível. Selecione um cargo a partir do campo abaixo.</errorMessage>
+</ValidationRule>

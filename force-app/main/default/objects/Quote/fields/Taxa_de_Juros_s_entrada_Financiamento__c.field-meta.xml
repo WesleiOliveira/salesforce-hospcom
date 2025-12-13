@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Taxa_de_Juros_s_entrada_Financiamento__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    ISPICKVAL(Responsabilidade_pelos_Encargos__c, &quot;Cessão de Crédito – Hospcom&quot;),
+    
+    IF(
+        VALUE(Numero_de_prestacoes__c) = 1,
+        0,
+        IF(
+            AND(
+                TotalPrice &gt; 0,
+                VALUE(Numero_de_prestacoes__c) &gt; 0,
+                Juros_Base__r.Juros__c &gt; 0
+            ),
+            (
+                (
+                    (
+                        TotalPrice *
+                        (
+                            Juros_Base__r.Juros__c /
+                            (1 - EXP(-VALUE(Numero_de_prestacoes__c) * LN(1 + Juros_Base__r.Juros__c)))
+                        )
+                    ) * VALUE(Numero_de_prestacoes__c)
+                ) - TotalPrice
+            ) / TotalPrice,
+            0
+        )
+    ),
+
+    0
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Taxa de Juros s/ entrada (Financiamento)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <type>Percent</type>
+</CustomField>

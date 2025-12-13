@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ordem_de_trabalho_Relacionada__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <description>Ordem de Trabalho a qual essa Oportunidade pertence.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Ordem de Trabalho a qual essa Oportunidade pertence.</inlineHelpText>
+    <label>Ordem de trabalho (excluir)</label>
+    <referenceTo>WorkOrder</referenceTo>
+    <relationshipLabel>Oportunidades (desativado)</relationshipLabel>
+    <relationshipName>Oportunidades</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

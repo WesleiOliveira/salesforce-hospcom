@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RiscoMitigado</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+  ISCHANGED(Risco_Mitigado__c),
+  $User.Id &lt;&gt; OwnerId
+)</errorConditionFormula>
+    <errorDisplayField>Risco_Mitigado__c</errorDisplayField>
+    <errorMessage>Somente o proprietário pode definir o risco como mitigado.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <description>Fluxo destinado á atualizar o campo Numero de serie do Produto do Pedido relacionado.</description>
+    <environments>Default</environments>
+    <interviewLabel>Item da Solicitação de devolução — att numero de serie {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Item da Solicitação de devolução — att numero de serie</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Attr_OI</name>
+        <label>Attr OI relacionado</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Produto_do_pedido__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>$Record.numeroSerie__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>OrderItem</object>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Attr_OI</targetReference>
+        </connector>
+        <object>Item_da_Solicita_o_de_devolu_o__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

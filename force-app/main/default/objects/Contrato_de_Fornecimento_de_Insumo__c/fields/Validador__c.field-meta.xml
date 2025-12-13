@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validador__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <inlineHelpText>Pessoa referente AO CLIENTE. Deve ser preenchido apenas caso o cliente solicite que o contrato seja validado, exemplo: aprovação financeira ou jurídica DO CLIENTE.</inlineHelpText>
+    <label>Validador</label>
+    <referenceTo>Contact</referenceTo>
+    <relationshipLabel>Contratos de Fornecimento de Insumo (Validador)</relationshipLabel>
+    <relationshipName>Contratos_de_Fornecimento_de_Insumo3</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

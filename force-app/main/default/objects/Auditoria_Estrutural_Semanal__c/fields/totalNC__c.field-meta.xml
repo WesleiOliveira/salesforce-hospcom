@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>totalNC__c</fullName>
+    <externalId>false</externalId>
+    <formula>TEXT(
+IF(TEXT(pergunta1__c) = &quot;NC&quot;, 1, 0) +
+IF(TEXT(pergunta2__c) = &quot;NC&quot;, 1, 0) +
+IF(TEXT(pergunta3__c) = &quot;NC&quot;, 1, 0) +
+IF(TEXT(pergunta4__c) = &quot;NC&quot;, 1, 0) +
+IF(TEXT(pergunta5__c) = &quot;NC&quot;, 1, 0) +
+IF(TEXT(pergunta6__c) = &quot;NC&quot;, 1, 0) +
+IF(TEXT(pergunta7__c) = &quot;NC&quot;, 1, 0) +
+IF(TEXT(pergunta8__c) = &quot;NC&quot;, 1, 0) +
+IF(TEXT(pergunta9__c) = &quot;NC&quot;, 1, 0) +
+IF(TEXT(pergunta10__c) = &quot;NC&quot;, 1, 0) +
+IF(TEXT(pergunta11__c) = &quot;NC&quot;, 1, 0) +
+IF(TEXT(pergunta12__c) = &quot;NC&quot;, 1, 0) +
+IF(TEXT(pergunta13__c) = &quot;NC&quot;, 1, 0) +
+IF(TEXT(pergunta14__c) = &quot;NC&quot;, 1, 0) +
+IF(TEXT(pergunta15__c) = &quot;NC&quot;, 1, 0) +
+IF(TEXT(pergunta16__c) = &quot;NC&quot;, 1, 0) +
+IF(TEXT(pergunta17__c) = &quot;NC&quot;, 1, 0) +
+IF(TEXT(pergunta18__c) = &quot;NC&quot;, 1, 0) +
+IF(TEXT(pergunta19__c) = &quot;NC&quot;, 1, 0) +
+IF(TEXT(pergunta20__c) = &quot;NC&quot;, 1, 0) +
+IF(TEXT(pergunta21__c) = &quot;NC&quot;, 1, 0) +
+IF(TEXT(pergunta22__c) = &quot;NC&quot;, 1, 0) +
+IF(TEXT(pergunta23__c) = &quot;NC&quot;, 1, 0) +
+IF(TEXT(pergunta25__c) = &quot;NC&quot;, 1, 0) +
+IF(TEXT(pergunta26__c) = &quot;NC&quot;, 1, 0)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Total de Não Conformidades</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

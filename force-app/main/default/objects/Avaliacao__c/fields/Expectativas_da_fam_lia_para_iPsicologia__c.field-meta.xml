@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Expectativas_da_fam_lia_para_iPsicologia__c</fullName>
+    <externalId>false</externalId>
+    <label>Expectativas da família para internação</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Adequada</fullName>
+                <default>false</default>
+                <label>Adequada</label>
+            </value>
+            <value>
+                <fullName>Inadequada</fullName>
+                <default>false</default>
+                <label>Inadequada</label>
+            </value>
+            <value>
+                <fullName>Limitada</fullName>
+                <default>false</default>
+                <label>Limitada</label>
+            </value>
+            <value>
+                <fullName>Ausente</fullName>
+                <default>false</default>
+                <label>Ausente</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

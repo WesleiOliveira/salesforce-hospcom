@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Alteracao</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+!$User.Ignorar_erros__c,
+TEXT(Requisi_o_Interna_Relacionada__r.Status_da_Requisi_o__c)	!= &apos;Novo&apos;,
+TEXT(Requisi_o_Interna_Relacionada__r.Status_da_Requisi_o__c)	!= &apos;Reprovado&apos;,
+TEXT(Requisi_o_Interna_Relacionada__r.Status_da_Requisi_o__c)	!= &apos;Retornado ao solicitante&apos;,
+$User.ProfileId != &apos;00e6e000002FEQZ&apos;,
+$User.ProfileId != &apos;00eU40000008oAv&apos;,
+$User.ProfileId != &apos;00e5A000001uF6X&apos;
+)</errorConditionFormula>
+    <errorMessage>Não é mais possível alterar itens nesta requisição, pois ela já foi aprovada.</errorMessage>
+</ValidationRule>

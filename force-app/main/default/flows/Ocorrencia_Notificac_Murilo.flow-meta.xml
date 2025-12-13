@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Notifica_Murilo</name>
+        <label>Notifica Murilo</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>customNotificationAction</actionName>
+        <actionType>customNotificationAction</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>customNotifTypeId</name>
+            <value>
+                <stringValue>0ML6e000000sY0XGAU</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientIds</name>
+            <value>
+                <elementReference>ids</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>title</name>
+            <value>
+                <stringValue>NOVA OCORRÊNCIA</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>body</name>
+            <value>
+                <elementReference>body</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>targetId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>customNotificationAction</nameSegment>
+    </actionCalls>
+    <apiVersion>64.0</apiVersion>
+    <assignments>
+        <description>Gerente Qualidade atual: Murilo Junqueira. ID: 00531000007i4eW</description>
+        <name>attr_id</name>
+        <label>attr id</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>ids</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>00531000007i4eW</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Notifica_Murilo</targetReference>
+        </connector>
+    </assignments>
+    <environments>Default</environments>
+    <interviewLabel>Ocorrencia — Notificac Murilo {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Ocorrencia — Notificaca Gestor Qualidade</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>attr_id</targetReference>
+        </connector>
+        <object>Ocorrencia__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Draft</status>
+    <textTemplates>
+        <name>body</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Uma nova foi Ocorrência foi criada: {!$Record.Name}
+Urgência: {!$Record.Urgencia__c}</text>
+    </textTemplates>
+    <variables>
+        <name>ids</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

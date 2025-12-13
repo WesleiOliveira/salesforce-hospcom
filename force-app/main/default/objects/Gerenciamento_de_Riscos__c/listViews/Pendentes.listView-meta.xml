@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pendentes</fullName>
+    <columns>NAME</columns>
+    <columns>Status__c</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>Perigos__c</columns>
+    <columns>Severidade_Atual__c</columns>
+    <columns>Probabilidade_Atual__c</columns>
+    <columns>Capacidade_de_Detec_o__c</columns>
+    <columns>Risco_Potencial__c</columns>
+    <columns>Risco_Residual__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Pendente</value>
+    </filters>
+    <label>Pendentes</label>
+</ListView>

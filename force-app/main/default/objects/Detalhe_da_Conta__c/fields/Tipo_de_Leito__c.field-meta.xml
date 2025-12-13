@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo_de_Leito__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipo de Leito</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>UTI ADULTO</fullName>
+                <default>false</default>
+                <label>UTI ADULTO</label>
+            </value>
+            <value>
+                <fullName>UTI NEONATAL</fullName>
+                <default>false</default>
+                <label>UTI NEONATAL</label>
+            </value>
+            <value>
+                <fullName>EMERGÊNCIA</fullName>
+                <default>false</default>
+                <label>EMERGÊNCIA</label>
+            </value>
+            <value>
+                <fullName>SALA CIRURGICA</fullName>
+                <default>false</default>
+                <label>SALA CIRURGICA</label>
+            </value>
+            <value>
+                <fullName>RPA</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>RPA</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

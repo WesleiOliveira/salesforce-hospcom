@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_novo</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISNEW(),
+TEXT(Status_da_Requisi_o__c) != &apos;Novo&apos;
+)</errorConditionFormula>
+    <errorDisplayField>Status_da_Requisi_o__c</errorDisplayField>
+    <errorMessage>A requisição deve ser criada com Status &quot;Novo&quot;. Após inserir os itens, envie para aprovação.</errorMessage>
+</ValidationRule>

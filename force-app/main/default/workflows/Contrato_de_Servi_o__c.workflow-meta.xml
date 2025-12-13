@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Acao_interna</fullName>
+        <field>Acao_interna__c</field>
+        <literalValue>1</literalValue>
+        <name>Ação interna</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Aceita_Assinatura</fullName>
+        <field>Assinatura__c</field>
+        <literalValue>DANIEL ALENCAR COELHO</literalValue>
+        <name>Aceita Assinatura</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Adiciona_Assinatura_Daniel</fullName>
+        <field>Assinatura__c</field>
+        <literalValue>DANIEL ALENCAR COELHO</literalValue>
+        <name>Adiciona Assinatura Daniel</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Ag_Apr_Juridica</fullName>
+        <field>Status_da_Aprova_o__c</field>
+        <literalValue>Aguardando Validação Jurídica</literalValue>
+        <name>Ag Apr Juridica</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Aprovado</fullName>
+        <field>Status_da_Aprova_o__c</field>
+        <literalValue>Aprovado</literalValue>
+        <name>Aprovado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Atualiza_Assinatura</fullName>
+        <field>Assinatura__c</field>
+        <literalValue>DANIEL ALENCAR COELHO</literalValue>
+        <name>Atualiza Assinatura</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Doc_Assinado</fullName>
+        <field>Documento_Assinado__c</field>
+        <formula>IF(PRIORVALUE(Documento_Assinado__c) == null, &apos;https://hospcomhospitalar.force.com/Sales/s/contrato-de-servi-o&apos; + Id, PRIORVALUE(Documento_Assinado__c))</formula>
+        <name>Doc Assinado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Fase_null</fullName>
+        <field>Fase__c</field>
+        <formula>&apos;null&apos;</formula>
+        <name>Fase null</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Reprovado</fullName>
+        <field>Status_da_Aprova_o__c</field>
+        <literalValue>Reprovado</literalValue>
+        <name>Reprovado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Aguardando_Valida_o_Financeira</fullName>
+        <field>Status_da_Aprova_o__c</field>
+        <literalValue>Aguardando Validação Financeira</literalValue>
+        <name>Status = Aguardando Validação Financeira</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Aprovado</fullName>
+        <field>Status_da_Aprova_o__c</field>
+        <literalValue>Aprovado</literalValue>
+        <name>Status = Aprovado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+</Workflow>

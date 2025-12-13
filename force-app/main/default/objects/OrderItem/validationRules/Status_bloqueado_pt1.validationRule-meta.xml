@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_bloqueado_pt1</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+	!$User.Ignorar_erros__c,
+	Order.RecordType.DeveloperName  == &apos;Hospcom&apos;,
+	ISCHANGED(Status__c),
+	TEXT(Status__c) != &apos;Novo&apos;,
+	TEXT(Status__c) != &apos;Aberto&apos;,
+	TEXT(Status__c) != &apos;Cancelado&apos;,
+	OR(
+		TEXT(Order.Status) == &apos;Rascunho&apos;,
+		TEXT(Order.Status) == &apos;Aguardando Aprovação Comercial&apos;,
+		TEXT(Order.Status) == &apos;Aguardando Aprovação Financeira&apos;,
+		TEXT(Order.Status) == &apos;Reprovado&apos;,
+		TEXT(Order.Status) == &apos;Aprovado&apos;
+	)
+)</errorConditionFormula>
+    <errorDisplayField>Status__c</errorDisplayField>
+    <errorMessage>O status do item não deve ser alterado antes de ativar o pedido, exceto para cancelar.</errorMessage>
+</ValidationRule>

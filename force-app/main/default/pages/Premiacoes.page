@@ -1,0 +1,193 @@
+<apex:page id="page" controller="PremiacoesClass" title="Premiações" label="Comissões" showHeader="false" sidebar="false" docType="HTML-5.0" standardStylesheets="false">
+    <body style="background-color:#f1f4f6"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    	<link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css"/>
+    	<link href="metro-icons.css" rel="stylesheet"/>
+        <style>
+            .ct{
+            display:flex;
+            width:100%;
+            text-align:center;
+            }
+            .ctz{
+            display:flex;
+            width:100%;
+            margin:10px;
+            }
+            .right{
+            display:inline-block;
+            width:100%;
+            }
+        	.table tbody td{
+            padding: 0.5px;
+            text-align:center;
+            font-size:13px;
+            }
+            .table thead th{
+            text-align:center;
+            text-transform:upperCase;
+            font-size:12.5px;
+			}
+			.table tfoot th{
+            color:black;
+            text-align:center;
+            padding:3px;
+            }
+            select{
+            display:table;
+            text-align:center;
+            vertical-align:middle;
+            }
+            th, td{
+            vertical-align:middle;
+            }
+            .metro-input{
+            height:27px;
+            }
+        </style>
+        <apex:variable value="{!0.00}" var="pesototal"/>
+        <apex:variable value="{!0.00}" var="soma"/>
+        <apex:variable value="{!0.00}" var="valorpremiac"/> 
+        <apex:variable value="{!1.00}" var="valorunid"/>        
+        <apex:form ><apex:commandButton value="ABRIR FILTROS" rendered="{!showA}" styleClass="button success outline shadowed" action="{!abrir}" /></apex:form>
+        
+        <div style="background-color:#e8ebed"><table class="table table-border shadowed" style="text-align:center; width:100%">
+            <tr><td style="font-size:24px;">PREMIAÇÃO</td></tr>
+            <tr><td>POR DEPARTAMENTO</td></tr>
+        </table>
+        </div>
+        <div class="ctz">
+            <div>
+                <p>
+                <apex:form >
+                    <apex:commandButton value="FECHAR FILTROS" style="width:100%" rendered="{!showfiltros}" styleClass="button secondary shadowed" action="{!fechar}" />
+                </apex:form>
+                </p>
+        <apex:pageBlock rendered="{!showfiltros}"> 
+        <div style="width:50%; font-size:12px;">
+            <table width="50%">
+                <tr width="50%">
+                    <td>
+            <apex:form >
+                <apex:pageBlockSection >
+                    <apex:selectList label="Departamento " styleClass="metro-input" style="height:55px; font-size:13px;" id="chooseStatus" value="{!departamento}" required="true">
+                		<apex:selectOption itemValue="Serviço"   itemLabel="SERVIÇO"/>
+                		<apex:selectOption itemValue="Governo"   itemLabel="GOVERNO"/>
+                		<apex:selectOption itemValue="Comercial" itemLabel="COMERCIAL"/>
+                    </apex:selectList><br/><br/><br/>
+                <apex:input title="Data Inicial" id="startdate" style="width:148px" styleClass="metro-input" type="date" value="{!startDate}" label="Período inicial"></apex:input><br/><br/><br/><br/>
+                <apex:input style="width:148px" styleClass="metro-input" type="date" value="{!endDate}" label="Período final"/><br/>
+                </apex:pageBlockSection><br/>
+                <div><apex:commandButton style="width:100%" styleClass="button success tam shadowed " value="PROCURAR" action="{!search}"/></div><br/>
+                <div><apex:commandButton style="width:100%" styleClass="button alert tam shadowed " value="LIMPAR" onclick="clean();" action="{!clear}"/></div>
+                <apex:pageBlock rendered="{!show}">
+                    <br/>
+                <table class="table table-border striped shadowed" style="text-align:left; background-color:white">
+                    <tr>                    
+                        <td>Departamento</td>
+                        <td><b>{!departamento}</b></td>
+                    </tr>
+                    <tr>
+                        <td>Período Inicial</td>
+                        <td><b><apex:outputText rendered="{!IF(startDate !=null, true, false)}" value="{!startDate} "/></b></td>         
+                    </tr>
+					<tr>
+                        <td>Período Final</td>
+                        <td><b><apex:outputText rendered="{!IF(endDate !=null, true, false)}" value="{!endDate} "/></b></td>         
+                    </tr>                    
+      			    <tr>
+            			<td>Valor recebido</td>
+            			<td><span class="totalrecebido"></span></td>
+                    </tr>
+        			<tr>
+            			<td>Valor da Premiação</td>
+            			<td><span class="valorpremiacao"></span></td>
+        			</tr>
+       			    <tr>
+            			<td>Valor por unidade</td>
+            			<td><span class="unidade"></span></td>
+                	</tr>    
+                    </table>
+                </apex:pageBlock>
+                    </apex:form>
+                    </td></tr></table>
+            </div><br/>		
+        </apex:pageBlock>
+            </div>
+            <div class="ctz">
+		&nbsp;&nbsp;&nbsp;           
+        <apex:variable value="{!0.00}" var="total1"/>
+            <div class="right">
+        <apex:form id="recebt">
+        <apex:pageBlock rendered="{!show}">
+                <apex:pageBlockTable style="background-color:white" styleClass="table table-border striped shadowed" align="center" var="Registros" value="{!Records}">
+                <apex:column headerValue="Pedido">
+                    <apex:outputField value="{!Registros.Titulo__r.Faturamento__r.Pedido__c}"/>
+                    <apex:facet name="footer">TOTAL</apex:facet>
+                </apex:column>
+                <apex:column headerValue="Faturamento">
+                    <apex:outputField value="{!Registros.Titulo__r.Faturamento__c}"/>
+                </apex:column>
+                <apex:column headerValue="Título">
+                    <apex:outputField value="{!Registros.Titulo__c}"/>
+                </apex:column>
+                <apex:column headerValue="Recebimento">
+                    <apex:outputLink title="Abrir detalhes do recebimento" value="https://hospcom--developer.my.salesforce.com/{!Registros.Id}">{!Registros.Name}</apex:outputLink>
+                </apex:column>
+                <apex:column headerValue="Data do Recebimento">
+					<apex:outputField value="{!Registros.Data_do_Recebimento__c}"/>
+				</apex:column>
+                <apex:column headerValue="Valor Recebido">
+                    <apex:outputField value="{!Registros.Valor_Recebido__c}"/>
+                    <apex:variable var="total1" value="{!total1 + Registros.Valor_Recebido__c}" />
+                    <apex:facet name="footer">BRL <span class="t1"></span></apex:facet>
+                </apex:column>				
+                </apex:pageBlockTable>
+                </apex:pageBlock>                   
+                </apex:form>
+                </div>
+            </div>       
+        <apex:variable var="valorpremiac" value="{!IF(total1 >= metas[0].Valor__c && total1 < metas[1].Valor__c,total1 * metas[0].Premiacao__c/100,                                                                                                  
+                                                   IF(total1 >= metas[1].Valor__c && total1 < metas[2].Valor__c,total1 * metas[1].Premiacao__c/100,
+                                                   IF(total1 >= metas[2].Valor__c && total1 < metas[3].Valor__c,total1 * metas[2].Premiacao__c/100,
+                                                   IF(total1 >= metas[3].Valor__c && total1 < metas[4].Valor__c,total1 * metas[3].Premiacao__c/100, 
+                                                   IF(total1 >  metas[4].Valor__c,total1 * metas[4].Premiacao__c/100,                                                                                                  
+                                                   0)))))}"/>  
+		<div style="margin-left:20px; margin-right:20px; width:100%;">
+			<apex:pageBlock rendered="{!show}">
+            <apex:form id="nomes">
+                <apex:pageBlockTable rendered="{!IF(valorpremiac != 0, true, false)}" align="center" style="background-color:white" styleClass=" shadowed table table-border striped mt-4" var="premiados" value="{!users}">
+                    <apex:column headerValue="Nome" >
+                        <apex:outputText value="{!premiados.Name}"/>
+                        <apex:facet name="footer">TOTAL</apex:facet>
+                    </apex:column>
+                    <apex:column headerValue="Peso" >
+                        <apex:outputText value="{!premiados.Peso_Premiacao__c}"/><apex:variable var="pesototal" value="{!pesototal + premiados.Peso_Premiacao__c}" />        
+					<apex:facet name="footer"><span class="pt"></span></apex:facet>
+                    </apex:column>
+                    <apex:variable var="valorptotal" value="{!pesototal}"/>
+                    <apex:column headerValue="Valor" >
+                        <apex:outputText value="R$ {0, number, 0.00}"><apex:param value="{!premiados.Peso_Premiacao__c*(valorpremiac/valorptotal)}"/></apex:outputText>
+                        <apex:facet name="footer"><span class="vt"></span></apex:facet>
+                    </apex:column>               
+        		</apex:pageBlockTable>
+    	    </apex:form>
+        </apex:pageBlock>
+                </div></div>
+        <script>
+        var premi= parseFloat('{!valorpremiac}');
+        var x = '{!total1}';
+        var soma = parseFloat('{!soma}');
+        var pesototal ='{!pesototal}';
+        var unidade = premi/pesototal; 
+        if(pesototal != 0) {document.getElementsByClassName('pt')[0].innerHTML = pesototal;}
+        if(premi     != 0) {document.getElementsByClassName('vt')[0].innerHTML ='R$ ' + premi.toFixed(2).replace(".", ",").replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");}        
+        document.getElementsByClassName('t1')[0].innerHTML = x.replace(".", ",").replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+        document.getElementsByClassName('totalrecebido')[0].innerHTML = ' <b> R$ ' + x.replace(".", ",").replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + '</b>';
+        document.getElementsByClassName('valorpremiacao')[0].innerHTML ='<b> R$ ' + premi.toFixed(2).replace(".", ",").replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + '</b>';
+        if (unidade > 1){document.getElementsByClassName('unidade')[0].innerHTML = ' <b>R$ ' + unidade.toFixed(2).replace(".", ",").replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + '</b>';}
+
+        
+
+        </script>
+    </body>
+</apex:page>

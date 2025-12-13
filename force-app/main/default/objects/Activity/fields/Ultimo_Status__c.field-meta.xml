@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ultimo_Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Ultimo Status</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Não iniciado</fullName>
+                <default>false</default>
+                <label>Não iniciado</label>
+            </value>
+            <value>
+                <fullName>Em andamento</fullName>
+                <default>false</default>
+                <label>Em andamento</label>
+            </value>
+            <value>
+                <fullName>Aguardando outra pessoa</fullName>
+                <default>false</default>
+                <label>Aguardando outra pessoa</label>
+            </value>
+            <value>
+                <fullName>Adiado</fullName>
+                <default>false</default>
+                <label>Adiado</label>
+            </value>
+            <value>
+                <fullName>Concluído</fullName>
+                <default>false</default>
+                <label>Concluído</label>
+            </value>
+            <value>
+                <fullName>Cancelada</fullName>
+                <default>false</default>
+                <label>Cancelada</label>
+            </value>
+            <value>
+                <fullName>Imediato</fullName>
+                <default>false</default>
+                <label>Imediato</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

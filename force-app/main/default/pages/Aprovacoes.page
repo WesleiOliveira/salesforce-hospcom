@@ -1,0 +1,167 @@
+<apex:page showChat="False" title="Aprovações" controller="AprovacoesController" standardStylesheets="false" showHeader="false" sidebar="false"  docType="HTML-5.0" showQuickActionVfHeader="False">
+<head>
+<link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css"/>
+            <link href="metro-icons.css" rel="stylesheet"/>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <style>
+    body{
+        font-size:14px;
+        background-color: #f3f5f9;
+        }
+
+    .container-linha{
+
+        margin: auto;
+        background-color: #f3f5f9;
+        border-radius: 10px;
+        width: 95%;
+        border: none;
+        
+        padding: 10px;
+    }
+    .aprensentacao{
+        text-align: center;
+        color: #0b3353;
+        font-weight: bold;
+    }
+    .container-pai{
+      
+        
+        border: none;
+
+    }
+    .linha{
+        text-align: center;
+        margin-bottom: 3px;
+        color: #0b3353;
+
+    }
+   
+    tbody{
+        border-radius: 10px;
+        border: none;
+        width: 100%;
+        
+    }
+    a{
+        text-decoration: underline;
+    }
+    tbody{
+        margin-top: 10px !important;
+        background-color: #fdfdfd !important;
+        color: #0b3353;
+        border-radius: 10px;
+    }
+    thead{
+        padding: 10px;
+        color: #0b3353;
+    }
+    tr, td{
+       
+        background-color: #fdfdfd;
+        
+      
+        text-align: center;
+        margin: 5px;
+        padding: 10px 2px;
+    }
+    tr {
+        border: 5px solid #f3f5f9;
+        border-radius: 10px;
+        border-left-width: 0;
+        min-width: 120px;
+        height: 18px;
+        
+      }
+      td:first-child{
+        border-bottom-left-radius: 100px !important;
+        border-top-left-radius: 100px !important;
+
+      }
+      td:nth-child(6){
+        
+        border-bottom-right-radius: 100px !important;
+        border-top-right-radius: 100px !important;
+
+      }
+      .mif-checkmark,.mif-cross{
+        padding: 4px;
+        margin: 0;
+      }
+      .mif-checkmark:hover,.mif-cross:hover {
+        
+       padding: 5px;
+       margin: -1px;
+       background-color: #d2d2d2ca;
+       border-radius: 100px;
+      }
+      
+    
+    
+   /* .headerCenter{
+        text-align:center !important;
+        }
+        .individualPalette, .lookupHoverDetail, .lookupHoverDetailOverridable{
+        background-color:#522e25;
+        left: 0 !important;
+        top: 0 !important;
+       }*/
+    
+    </style>
+</head>
+<body>
+  
+
+    <h1 class="aprensentacao">Aprovações pendentes </h1>
+    <apex:form styleclass="container-pai">
+        
+        <apex:dataTable styleClass=" container-linha " value="{!aprovacoesPend}" var="apr">
+        
+            <!--tela de popup da aprovação-->>
+            <apex:column headerValue="Tipo" value="{!apr.TargetObject.Type}" />
+          
+            <apex:column headerValue="Referente a" value="{!apr.TargetObjectId}" />
+            
+            <apex:column headerValue="Enviado por" value="{!apr.CreatedById}" />
+        
+                
+                <apex:column headerValue="Atribuído a" >
+                    <apex:repeat value="{!apr.WorkItems}" var="wki" ><apex:outputField value="{!wki.ActorId}" /></apex:repeat>      
+                </apex:column>
+
+            <apex:column headerValue="Enviado em" value="{!apr.CreatedDate}" />  
+
+                <apex:column headerValue="Ação" >
+
+                    <apex:commandLink action="{!aprovarInd}"  > 
+                        
+                                <apex:param name="rowId" assignTo="{!aprovId}" value="{!apr.Id}"/>
+                                <b><span style=" " title="Aprovar" class="mif-checkmark mif-2x fg-green"></span></b>             
+                    </apex:commandLink>
+                    
+                    <apex:commandLink action="{!reprovarInd}" > 
+                         
+                        <apex:param name="rowId" assignTo="{!aprovId}" value="{!apr.Id}"/>
+                        <b><span title="Rejeitar" style=" " class="mif-cross mif-lg fg-red"></span></b>             
+                    </apex:commandLink>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                    
+                </apex:column>
+                <apex:inlineEditSupport /> 
+        </apex:dataTable>
+    </apex:form>
+         
+</body>
+
+<script type="text/javascript">
+    function codeAddress() {
+       $('a').each(function(){
+        $(this).attr('target','_blank')
+        console.log("deu bom")
+       })
+    }
+    window.onload = codeAddress;
+    
+</script>
+</apex:page>

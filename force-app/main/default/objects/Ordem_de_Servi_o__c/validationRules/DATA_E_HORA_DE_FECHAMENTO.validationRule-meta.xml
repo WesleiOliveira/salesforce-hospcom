@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DATA_E_HORA_DE_FECHAMENTO</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISBLANK( Data_e_Hora_do_Fechamento_da_O_S__c ) &amp;&amp; OR(ISPICKVAL( Status_da_O_S__c ,&quot;FECHADA E CONCLUÍDA&quot; ),ISPICKVAL( Status_da_O_S__c ,&quot;FECHADA E NÃO CONCLUÍDA&quot; ))</errorConditionFormula>
+    <errorDisplayField>Data_e_Hora_do_Fechamento_da_O_S__c</errorDisplayField>
+    <errorMessage>A DATA DE FECHAMENTO NÃO PODE ESTAR EM BRANCO SE O STATUS FOR IGUAL A FECHADO</errorMessage>
+</ValidationRule>

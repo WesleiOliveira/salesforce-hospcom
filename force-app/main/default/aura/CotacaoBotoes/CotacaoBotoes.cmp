@@ -1,0 +1,183 @@
+<aura:component controller="CotacaoBotoes" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId">
+
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+	<aura:attribute name="recordId" type="Id" />
+	<aura:attribute name="cotacao_valida" type="boolean" default="false" />
+	<aura:attribute name="valida_status" type="boolean" default="true" />
+	<aura:attribute name="mensagem_valida" type="String" default="" />
+	<aura:attribute name="cotacao_licitacao" type="boolean" default="false" />
+	<aura:attribute name="mensagem_licitacao" type="String" default="" />
+	<aura:attribute name="modal_pdf_proposta" type="boolean" default="false" />
+	<aura:attribute name="modal_pdf_detalhes" type="boolean" default="false" />
+	<aura:attribute name="modal_pdf_contratos" type="boolean" default="false" />
+
+	<div class="slds-m-around_x-small">
+
+<aura:if isTrue="{!v.valida_status}">
+		<!-- botões -->
+		<lightning:buttonGroup class="slds-button_stretch">
+			<lightning:button class="slds-button_stretch" label="PDF Proposta" title="PDF Proposta"
+				onclick="{!c.AbrirPdfProposta}" />
+
+			<aura:if isTrue="{!not(v.cotacao_licitacao)}">
+				<lightning:button class="slds-button_stretch" label="PDF Contrato" title="PDF Contrato"
+					onclick="{!c.AbrirPdfContratos}" />
+			</aura:if>
+
+			<aura:if isTrue="{!v.cotacao_licitacao}">
+				<lightning:button class="slds-button_stretch" label="PDF Detalhes" title="PDF Detalhes"
+					onclick="{!c.AbrirPdfDetalhes}" />
+			</aura:if>
+		</lightning:buttonGroup>
+		</aura:if>
+
+		<!-- modal pdf contrato -->
+		<aura:if isTrue="{!v.modal_pdf_contratos}">
+			<aura:if isTrue="{!v.cotacao_valida}">
+				<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+					aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+					<div class="slds-modal__container" style="max-width:70rem!important; width:80%!important;">
+						<!-- cabeçalho -->
+						<header class="modal-header slds-modal__header">
+							<lightning:buttonIcon iconName="utility:close" onclick="{!c.FecharPdfContratos}"
+								alternativeText="close" variant="bare-inverse" class="slds-modal__close" />
+							<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">PDF Contrato</h2>
+						</header>
+						<!-- corpo -->
+						<div class="slds-modal__content slds-p-around_none" id="modal-content-id-1"
+							style="height:90vh !important;max-height:90vh!important;">
+							<iframe src="{! '/Sales/apex/CotacaoContrato?Id='+v.recordId}" frameborder="0"
+								allow="geolocation *; microphone *; camera *" width="100%" height="100%" scrolling="yes"
+								allowfullscreen="true"></iframe>
+						</div>
+						<!-- rodape -->
+						<footer class="slds-modal__footer">
+							<lightning:button variant="brand" label="Salvar contrato" title="Salvar como anexo"
+								onclick="{!c.SalvarPdfCotacao1}" />
+							<lightning:button variant="neutral" label="Cancelar" title="Cancelar"
+								onclick="{!c.FecharPdfContratos}" />
+						</footer>
+					</div>
+				</section>
+			</aura:if>
+			<aura:if isTrue="{!not(v.cotacao_valida)}">
+				<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+					aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+					<div class="slds-modal__container">
+						<!-- cabeçalho -->
+						<header class="slds-modal__header slds-modal__header_empty">
+							<lightning:buttonIcon iconName="utility:close" onclick="{!c.FecharPdfProposta}"
+								alternativeText="close" variant="bare-inverse" class="slds-modal__close" />
+						</header>
+						<!-- corpo -->
+						<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+							<aura:unescapedHtml value="{!v.mensagem_valida}" />
+						</div>
+					</div>
+				</section>
+			</aura:if>
+			<div class="slds-backdrop slds-backdrop_open"></div>
+		</aura:if>
+
+
+
+
+		<!-- modal pdf proposta -->
+		<aura:if isTrue="{!v.modal_pdf_proposta}">
+			<aura:if isTrue="{!v.cotacao_valida}">
+				<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+					aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+					<div class="slds-modal__container" style="max-width:70rem!important; width:80%!important;">
+						<!-- cabeçalho -->
+						<header class="modal-header slds-modal__header">
+							<lightning:buttonIcon iconName="utility:close" onclick="{!c.FecharPdfProposta}"
+								alternativeText="close" variant="bare-inverse" class="slds-modal__close" />
+							<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">PDF Proposta</h2>
+						</header>
+						<!-- corpo -->
+						<div class="slds-modal__content slds-p-around_none" id="modal-content-id-1"
+							style="height:90vh !important;max-height:90vh!important;">
+							<iframe src="{! '/Sales/apex/CotacaoProposta?Id='+v.recordId}" frameborder="0"
+								allow="geolocation *; microphone *; camera *" width="100%" height="100%" scrolling="yes"
+								allowfullscreen="true"></iframe>
+						</div>
+						<!-- rodape -->
+						<footer class="slds-modal__footer">
+							<lightning:button variant="brand" label="Salvar proposta" title="Salvar como anexo"
+								onclick="{!c.SalvarPdfProposta1}" />
+							<lightning:button variant="neutral" label="Cancelar" title="Cancelar"
+								onclick="{!c.FecharPdfProposta}" />
+						</footer>
+					</div>
+				</section>
+			</aura:if>
+			<aura:if isTrue="{!not(v.cotacao_valida)}">
+				<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+					aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+					<div class="slds-modal__container">
+						<!-- cabeçalho -->
+						<header class="slds-modal__header slds-modal__header_empty">
+							<lightning:buttonIcon iconName="utility:close" onclick="{!c.FecharPdfProposta}"
+								alternativeText="close" variant="bare-inverse" class="slds-modal__close" />
+						</header>
+						<!-- corpo -->
+						<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+							<aura:unescapedHtml value="{!v.mensagem_valida}" />
+						</div>
+					</div>
+				</section>
+			</aura:if>
+			<div class="slds-backdrop slds-backdrop_open"></div>
+		</aura:if>
+
+
+
+		<!-- modal pdf detalhes -->
+		<aura:if isTrue="{!v.modal_pdf_detalhes}">
+			<aura:if isTrue="{!v.mensagem_licitacao==''}">
+				<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+					aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+					<div class="slds-modal__container" style="max-width:70rem!important; width:80%!important;">
+						<!-- cabeçalho -->
+						<header class="modal-header slds-modal__header">
+							<lightning:buttonIcon iconName="utility:close" onclick="{!c.FecharPdfDetalhes}"
+								alternativeText="close" variant="bare-inverse" class="slds-modal__close" />
+							<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">PDF Detalhes</h2>
+						</header>
+						<!-- corpo -->
+						<div class="slds-modal__content slds-p-around_none" id="modal-content-id-1"
+							style="height:90vh !important;max-height:90vh!important;">
+							<iframe src="{! '/Sales/apex/CotacaoDetalhes?Id='+v.recordId}" frameborder="0"
+								allow="geolocation *; microphone *; camera *" width="100%" height="100%" scrolling="yes"
+								allowfullscreen="true"></iframe>
+						</div>
+						<!-- rodape -->
+						<footer class="slds-modal__footer">
+							<lightning:button variant="neutral" label="Cancelar" title="Cancelar"
+								onclick="{!c.FecharPdfDetalhes}" />
+						</footer>
+					</div>
+				</section>
+			</aura:if>
+			<aura:if isTrue="{!v.mensagem_licitacao!=''}">
+				<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+					aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+					<div class="slds-modal__container">
+						<!-- cabeçalho -->
+						<header class="slds-modal__header slds-modal__header_empty">
+							<lightning:buttonIcon iconName="utility:close" onclick="{!c.FecharPdfDetalhes}"
+								alternativeText="close" variant="bare-inverse" class="slds-modal__close" />
+						</header>
+						<!-- corpo -->
+						<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+							<aura:unescapedHtml value="{!v.mensagem_licitacao}" />
+						</div>
+					</div>
+				</section>
+			</aura:if>
+			<div class="slds-backdrop slds-backdrop_open"></div>
+		</aura:if>
+	</div>
+
+</aura:component>

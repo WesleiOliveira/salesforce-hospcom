@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Status</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Em rascunho</fullName>
+                <default>true</default>
+                <label>Em rascunho</label>
+            </value>
+            <value>
+                <fullName>Em aprovação</fullName>
+                <default>false</default>
+                <label>Em aprovação</label>
+            </value>
+            <value>
+                <fullName>Reprovada</fullName>
+                <default>false</default>
+                <label>Reprovada</label>
+            </value>
+            <value>
+                <fullName>Aguardando adiantamento</fullName>
+                <default>false</default>
+                <label>Aguardando adiantamento</label>
+            </value>
+            <value>
+                <fullName>Aguardando agenda</fullName>
+                <default>false</default>
+                <label>Aguardando agenda</label>
+            </value>
+            <value>
+                <fullName>Em viagem</fullName>
+                <default>false</default>
+                <label>Em viagem</label>
+            </value>
+            <value>
+                <fullName>Em prestação de contas</fullName>
+                <default>false</default>
+                <label>Em prestação de contas</label>
+            </value>
+            <value>
+                <fullName>Análise do supervisor</fullName>
+                <default>false</default>
+                <label>Análise do supervisor</label>
+            </value>
+            <value>
+                <fullName>Em quitação de valores</fullName>
+                <default>false</default>
+                <label>Em quitação de valores</label>
+            </value>
+            <value>
+                <fullName>Concluída</fullName>
+                <default>false</default>
+                <label>Concluída</label>
+            </value>
+            <value>
+                <fullName>Cancelada</fullName>
+                <default>false</default>
+                <label>Cancelada</label>
+            </value>
+            <value>
+                <fullName>Aguardando reservas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Aguardando reservas</label>
+            </value>
+            <value>
+                <fullName>Em cotação</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Em cotação</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

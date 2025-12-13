@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valor</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISCHANGED(Valor_da_nota__c),
+    Valor_da_nota__c &gt; Pedido_de_Compra__r.Valor_total_comprado__c
+)</errorConditionFormula>
+    <errorDisplayField>Valor_da_nota__c</errorDisplayField>
+    <errorMessage>O valor da nota não pode ser superior ao do pedido.</errorMessage>
+</ValidationRule>

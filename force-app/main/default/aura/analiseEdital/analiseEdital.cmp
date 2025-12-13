@@ -1,0 +1,291 @@
+<!--
+@description       : 
+@author            : ChangeMeIn@UserSettingsUnder.SFDoc
+@group             : 
+@last modified on  : 04-29-2025
+@last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<aura:component controller="ApexHelperController" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId"
+    access="global">
+    <aura:attribute name="opportunityLineItems" type="List" />
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="selectedRecordId" type="Id" />
+    <aura:attribute name="showAnaliseModal" type="Boolean" default="false" />
+    <aura:attribute name="showConcorrenteModal" type="Boolean" default="false" />
+    <aura:attribute name="concorrenteRecordId" type="Id" />
+    <aura:attribute name="concorrentes" type="List" default="[]" />
+    <aura:attribute name="searchTerm" type="String" />
+    <aura:attribute name="searchResults" type="List" />
+    <aura:attribute name="selectedAccount" type="Account" />
+    <aura:attribute name="motivos" type="List" />
+    <aura:attribute name="marcas" type="List" />
+    <aura:attribute name="situacoes" type="List" />
+    <aura:attribute name="analisesExistentes" type="List" />
+    <aura:attribute name="analiseColumns" type="List"/>
+
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <lightning:card>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin:3px;">
+            <h2 class="slds-text-heading_small">Itens da Oportunidade</h2>
+            <div>
+            <lightning:button label="Abrir Proposta" onclick="{!c.openCotacao}" variant="brand" />
+            <lightning:button label="Abrir Análise em PDF" onclick="{!c.openAnaliseEdital}" variant="brand" />
+            </div>
+        </div><br />
+        <aura:if isTrue="{!not(empty(v.opportunityLineItems))}">
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer" width="100%">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Código Fabricante">Código Fabricante</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Produto">Produto</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Modelo">Modelo</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Marca">Marca</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" style="text-align:center" title="Quantidade">Quantidade</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" style="text-align:center" title="Analisado">Analisado</div>
+                        </th>
+                        <th scope="col" style="text-align:center">
+                            <div class="slds-truncate" title="Concorrentes">Análise de Mercado</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.opportunityLineItems}" var="item">
+                        <tr>
+                            <td data-label="Codigo">{!item.Codigo_fabricante__c}</td>
+                            <th scope="row" data-label="Name">
+                                <a href="javascript:void(0);" onclick="{!c.openRecordEditModal}"
+                                    data-id="{!item.Id}">{!item.Product2.Name}</a>
+                            </th>
+                            <td data-label="Modelo">{!item.Modelo_do_Produto__c}</td>
+                            <td data-label="Marca">{!item.Nome_do_Fabricante__c}</td>
+                            <td data-label="Quantity" style="text-align:center">{!item.Quantity}</td>
+                            <td data-label="Analisado" style="text-align:center">
+                                <aura:if isTrue="{!item.Analisado__c}">
+                                    <lightning:icon iconName="action:check" alternativeText="Analisado" size="small" />
+                                </aura:if>
+                                <aura:if isTrue="{!not(item.Analisado__c)}">
+                                    <lightning:icon iconName="action:close" alternativeText="Não Analisado"
+                                        size="small" />
+                                </aura:if>
+                            </td>
+                            <td style="text-align:center">
+                                <a href="javascript:void(0);" onclick="{!c.openConcorrenteModal}" data-id="{!item.Id}">
+                                    <lightning:icon iconName="action:map" alternativeText="Adicionar Concorrente" />
+                                </a>
+                            </td>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+        </aura:if>
+        <aura:if isTrue="{!empty(v.opportunityLineItems)}">
+            <p>Nenhum produto inserido.</p>
+        </aura:if>
+    </lightning:card>
+
+    <aura:if isTrue="{!v.showAnaliseModal}">
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick="{!c.closeRecordEditModal}">
+                        <lightning:icon iconName="utility:close" alternativeText="close" size="small" />
+                        <span class="slds-assistive-text">Fechar</span>
+                    </button>
+                    <h2 class="slds-text-heading_medium">Analisar Item de Oportunidade</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <lightning:recordEditForm recordId="{!v.selectedRecordId}" objectApiName="OpportunityLineItem"
+                        onsuccess="{!c.handleSuccess}">
+                        <lightning:messages />
+                        <lightning:outputField fieldName="Product2Id" />
+                        <lightning:outputField fieldName="Codigo_fabricante__c" />
+                        <lightning:outputField fieldName="Quantity" />
+                        <lightning:outputField fieldName="UnitPrice" />
+                        <lightning:inputField required="true" fieldName="Item_do_edital__c" />
+                        <lightning:inputField required="true" fieldName="Abreviacoes__c" />
+                        <lightning:inputField required="true" fieldName="Cumprimento_com_o_edital__c" />
+                        <lightning:inputField fieldName="Interposicoes__c" />
+                        <lightning:inputField required="true" fieldName="Itens_que_justificam__c" />
+                        <lightning:inputField required="true" fieldName="Marcas_que_atendem__c" />
+                        <lightning:inputField fieldName="Marcas_que_nao_atendem__c" />
+                        <lightning:inputField fieldName="Enviado_questionameto_ou_impugna_o__c" />
+                        <lightning:inputField fieldName="Resposta_doorgao_e_novos_filtros__c" />
+                        <lightning:inputField fieldName="Valor_estimado__c" />
+                        <lightning:inputField required="true" fieldName="Descricao_do_Especialista__c" />
+                        <lightning:inputField required="true" fieldName="Analise_Tecnica__c" />
+                        <div style="text-align:center">
+                            <lightning:button class="slds-m-top_small" variant="brand" type="submit" name="update"
+                                label="Salvar" />
+                        </div>
+                    </lightning:recordEditForm>
+                </div>
+                <footer class="slds-modal__footer">
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+    <aura:if isTrue="{!v.showConcorrenteModal}">
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Fechar" onclick="{!c.closeConcorrenteModal}">
+                        <lightning:icon iconName="utility:close" alternativeText="Fechar" size="small" />
+                        <span class="slds-assistive-text">Fechar</span>
+                    </button>
+                    <h2 class="slds-text-heading_medium">Análise de Mercado</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <lightning:recordViewForm recordId="{!v.concorrenteRecordId}" objectApiName="OpportunityLineItem">
+                        <lightning:outputField fieldName="Product2Id" />
+                        <lightning:outputField fieldName="Codigo_fabricante__c" />
+                        <lightning:outputField fieldName="Quantity" />
+                        <lightning:outputField fieldName="UnitPrice" />
+                    </lightning:recordViewForm>
+
+                    <aura:if isTrue="{!not(empty(v.analisesExistentes))}">
+                        <div class="slds-box slds-box_xx-small slds-m-top_medium">
+                            <lightning:datatable
+                                keyField="Id"
+                                data="{!v.analisesExistentes}"
+                                columns="{!v.analiseColumns}"
+                                hideCheckboxColumn="true"
+                            />
+                        </div>
+                    </aura:if>
+
+                    <div class="slds-m-top_medium">
+                        <aura:iteration items="{!v.concorrentes}" var="conc" indexVar="idx">
+                            <div class="slds-grid slds-gutters slds-m-bottom_x-small"
+                                style="margin-top: 2rem; border-top: 1px solid #DDDBDA; padding-top: 1rem;">
+                                <div><b>{!idx+1}</b></div><br />
+
+                                <div class="slds-col" style="position: relative;">
+                                    <lightning:input label="Pesquisar Concorrente" value="{!conc.searchTerm}"
+                                        name="{!idx}" oncommit="{!c.handleKeyUp}"
+                                        placeholder="Digite o nome, pressione Enter e selecione a conta no menu" style="width:590px" />
+                                
+                                    <!-- Aqui a lista de resultados -->
+                                    <aura:if isTrue="{!not(empty(conc.searchResults))}">
+                                        <div class="slds-box slds-theme_shade slds-m-top_xx-small slds-p-around_x-small slds-scrollable_y"
+                                            style="max-height:150px; position:absolute; width:100%; z-index:10;">
+                                            <ul class="slds-list_dotted">
+                                                <aura:iteration items="{!conc.searchResults}" var="acc">
+                                                    <li class="slds-p-xx-small">
+                                                        <a href="javascript:void(0);" onclick="{!c.selectAccount}"
+                                                            data-id="{!acc.Id}" data-index="{!idx}">
+                                                            {!acc.Name}
+                                                        </a>
+                                                    </li>
+                                                </aura:iteration>
+                                            </ul>
+                                        </div>
+                                    </aura:if>
+                                </div>
+                                
+
+
+                            </div>
+
+
+                            <div class="slds-grid slds-gutters slds-m-bottom_x-small">
+                                <div>&nbsp;</div><br />
+
+                                <div class="slds-col">
+                                    <lightning:select class="input-personalizado" name="{!idx}" label="Situação"
+                                        value="{!conc.selectedSituacao}" onchange="{!c.handleConcorrenteChange}">
+                                        <option value="">Selecione</option>
+                                        <aura:iteration items="{!v.situacoes}" var="situacao">
+                                            <option value="{!situacao}">{!situacao}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>                                
+
+                                <div class="slds-col">
+                                    <lightning:select class="input-personalizado" name="{!idx}" label="Motivo"
+                                        value="{!conc.selectedMotivo}" onchange="{!c.handleConcorrenteChange}">
+                                        <option value="">Selecione</option>
+                                        <aura:iteration items="{!v.motivos}" var="motivo">
+                                            <option value="{!motivo}">{!motivo}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                            </div>
+
+                            <div class="slds-grid slds-gutters slds-m-bottom_x-small">
+                                <div>&nbsp;</div><br />
+
+                                <div class="slds-col">
+                                    <lightning:input class="input-personalizado" label="Valor Unitário"
+                                        value="{!conc.valorUnit}" name="{!idx}"
+                                        onchange="{!c.handleConcorrenteChange}" />
+                                </div>
+
+                                <div class="slds-col">
+                                    <lightning:input class="input-personalizado" label="Valor Total"
+                                        value="{!conc.valorTotal}" name="{!idx}"
+                                        onchange="{!c.handleConcorrenteChange}" />
+                                </div>
+                            </div>
+
+                            <div class="slds-grid slds-gutters slds-m-bottom_x-small">
+                                <div>&nbsp;</div><br />
+
+                                <div class="slds-col">
+                                        <lightning:select class="input-personalizado" name="{!idx}" label="Marca"
+                                        value="{!conc.marca}" onchange="{!c.handleConcorrenteChange}">
+                                        <option value="">Selecione</option>
+                                        <aura:iteration items="{!v.marcas}" var="marca">
+                                            <option value="{!marca}">{!marca}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+
+                                </div>
+
+                                <div class="slds-col">
+                                    <lightning:input class="input-personalizado" label="Modelo" value="{!conc.modelo}"
+                                        name="{!idx}" onchange="{!c.handleConcorrenteChange}" />
+                                </div>
+                            </div>
+
+                            <div class="slds-grid slds-gutters slds-m-bottom_x-small">
+                                <div>&nbsp;</div><br />
+
+
+                                <div class="slds-col">
+                                    <lightning:input style="width:590px;" label="Observações" value="{!conc.obs}"
+                                        name="{!idx}" onchange="{!c.handleConcorrenteChange}" />
+                                </div>
+                            </div>
+
+                        </aura:iteration>
+
+
+                        <lightning:button label="Adicionar Concorrente" onclick="{!c.addConcorrente}"
+                            iconName="utility:add" class="slds-m-top_small" />
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="brand" label="Salvar Concorrentes" onclick="{!c.saveConcorrentes}" />
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+
+</aura:component>

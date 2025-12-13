@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tatiane</fullName>
+    <columns>NAME</columns>
+    <columns>Relativo_a__c</columns>
+    <columns>Situacao__c</columns>
+    <columns>Responsavel__c</columns>
+    <columns>Tipo__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Fechado</value>
+    </filters>
+    <filters>
+        <field>Responsavel__c</field>
+        <operation>contains</operation>
+        <value>Tatiane,Deny</value>
+    </filters>
+    <label>Tatiane</label>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bloqueia_previsao_para_gerar_PC_NOVO</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISNEW(),
+    !$User.Ignorar_erros__c,
+    $User.ProfileId != &apos;00eU40000008oAv&apos;,
+    $User.ProfileId != &apos;00e6e000002FEQZ&apos;,
+    $User.ProfileId != &apos;00e6e000002FEQZ&apos;,
+    NOT(ISBLANK(previsao_pc__c))
+)</errorConditionFormula>
+    <errorMessage>O campo Previsão Para Gerar Pedido de Compra só pode ser preenchido pelo time de Compras.</errorMessage>
+</ValidationRule>

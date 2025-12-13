@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>titular_da_ideia</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(TEXT(Esta_ideia_e_sua__c)  = &quot;Sim&quot;,  titular__c  &lt;&gt; &quot;&quot;)</errorConditionFormula>
+    <errorDisplayField>titular__c</errorDisplayField>
+    <errorMessage>Este campo só deve ser preenchido caso seja uma solicitação.</errorMessage>
+</ValidationRule>

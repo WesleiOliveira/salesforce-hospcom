@@ -1,0 +1,502 @@
+<apex:page standardController="WorkOrder" renderAs="pdf" applyHtmlTag="false" showHeader="false">
+
+    <head>
+        <style type="text/css" media="print">
+            @page {
+                size:21cm 29,7cm;
+                margin:126px 50px 60px 50px;
+                @top-center {
+                    content:element(header);
+                }
+                @bottom-center {
+                    content:element(footer);
+                }
+            }
+            .pagenumber:before {
+                content:counter(page);
+            }
+            .pagecount:before {
+                content:counter(pages);
+            }
+            div.header {
+                margin:0px 0px 0px 0px;
+                padding:50px 0px 30px 0px;
+                position:running(header);
+                height:70px;
+            }
+            div.content {
+            }
+            div.footer {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(footer);
+                height:20px;
+                text-align:right;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:normal;
+            }
+        </style>
+        <style type="text/css">
+            .rodape{
+                bottom:0;
+                padding:2px;
+                margin:0px;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                text-align:center;
+                vertical-align:top;
+            }
+            .titulo_1{ /* td */
+                padding:2px;
+                margin:0px;
+                border:1px solid #cacecf;
+                font-family:arial, verdana, sans-serif;
+                font-size:13px;
+                font-weight:bold;
+                text-align:center;
+                background-color:#e2e3e3;
+            }
+            .titulo_2{ /* td */
+                padding:2px;
+                margin:0px;
+                border-bottom:1px solid #cacecf;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:bold;
+                text-align:center;
+                background-color:#e2e3e3;
+
+            }
+            .titulo_3{ /* td */
+                padding:2px;
+                margin:0px;
+                border-bottom:1px solid #cacecf;
+                font-family:arial, verdana, sans-serif;
+                font-size:11px;
+                font-weight:bold;
+                text-align:center;
+                background-color:#f4f5f5;
+            }
+            .label{ /* td */
+                width:80px;
+                padding:2px;
+                margin:0px;
+                border-bottom:1px solid #eef2f4;
+                font-family:arial, verdana, sans-serif;
+                font-size:11px;
+                font-weight:bold;
+                text-align:left;
+                vertical-align:top;
+            }
+            .label2{ /* td */
+                padding:2px;
+                margin:0px;
+                border-bottom:1px solid #eef2f4;
+                font-family:arial, verdana, sans-serif;
+                font-size:11px;
+                font-weight:bold;
+                text-align:left;
+                vertical-align:top;
+            }
+            .label_inferior{ /* td */
+                width:80px;
+                padding:2px;
+                margin:0px;
+                font-family:arial, verdana, sans-serif;
+                font-size:11px;
+                font-weight:bold;
+                text-align:left;
+                vertical-align:top;
+            }
+            .valor{ /* td */
+                padding:2px;
+                margin:0px;
+                border-bottom:1px solid #eef2f4;
+                font-family:arial, verdana, sans-serif;
+                font-size:9px;
+                font-weight:normal;
+                text-align:left;
+                vertical-align:top;
+            }
+            .valor_inferior{ /* td */
+                padding:2px;
+                margin:0px;
+                font-family:arial, verdana, sans-serif;
+                font-size:11px;
+                font-weight:normal;
+                text-align:left;
+                vertical-align:top;
+            }
+            .linha{
+                width:100%;
+                padding:0px;
+                margin:0px;
+                border-bottom:1px solid #cacecf;
+            }
+            .special{
+                font-family:'Arial Unicode MS';
+                line-height:80%;
+            }
+            .tabela_conteudo{
+                width:100%;
+                border:1px #cacecf solid;
+            }
+            .cabecalho_servico{ /* div */
+                text-decoration:underline;
+                display:inline;
+            }
+            
+            <apex:variable var="count" value="{!1}"/>
+        </style>
+        
+       
+    </head>
+
+    <html>
+        <body style="font-family:Arial; padding:0px; margin:0px; border:0px solid #eef2f4; width:*;">
+
+            <!-- CABEÇALHO -->
+            <div class="header">
+                <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                    <tr>
+                        <td style="text-align:left;">
+                            <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=01531000008uM4U&oid=00Di0000000JVhH&lastMod=1487197865000" width="200" height="55px"/>
+                        </td>
+                        <td style="text-align:right;">
+                            <apex:outputText rendered="{!IF(OR(WorkOrder.Faturamento_Feito__c == 'HOSPCOM', WorkOrder.Faturamento_Feito__c == ''),true,false)}">
+                                <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009LW4E&oid=00Di0000000JVhH&lastMod=1520020389000" width="390" height="55px"/>
+                            </apex:outputText>
+                            <apex:outputText rendered="{!IF(WorkOrder.Faturamento_Feito__c == 'GDB',true,false)}">
+                                <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009LW4O&oid=00Di0000000JVhH&lastMod=1520020511000" width="390" height="55px"/>
+                            </apex:outputText>
+                            <apex:outputText rendered="{!IF(WorkOrder.Faturamento_Feito__c == 'HEALTH SOLUTION',true,false)}">
+                                <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009LW4J&oid=00Di0000000JVhH&lastMod=1520020485000" width="390" height="55px"/>
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- RODAPÉ -->
+            <div class="footer">
+                O.T: {!WorkOrder.WorkOrderNumber} &nbsp; &nbsp; &nbsp; &nbsp; Página <span class="pagenumber"/> de <span class="pagecount"/>
+            </div>
+            
+            <!-- CONTEÚDO -->
+            <div class="content">
+                <!-- TÍTULO -->
+                <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                    <tr>
+                        <td class="titulo_1" colspan="2" style="position:relative;">
+                        REGISTRO DE TREINAMENTO
+                            <div style="position:absolute; top:3; right:0; margin:0px 1px 0px 0px; border:1px solid #cacecf; background-color:white;">
+                            &nbsp;OT: {!WorkOrder.WorkOrderNumber}&nbsp;
+                            </div>
+                        </td>
+                    </tr>
+                    
+                </table>
+             <div style="margin:0px; padding:0px; border:0px; height:10px;"/>
+
+                <!-- CORPO -->
+
+                <!-- INFORMAÇÕES DO CLIENTE -->
+                <table  cellpadding="0px" cellspacing="0px" class="tabela_conteudo">
+                    <tr>
+                        <td class="titulo_2" colspan="2">
+                        INFORMAÇÕES DO CLIENTE
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:50%; vertical-align:top;">
+                            <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                                <tr>
+                                    <td class="label">Razão Social:</td>
+                                    <td class="valor">{!WorkOrder.Account.Name}</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">CNPJ:</td>
+                                    <td class="valor">{!WorkOrder.Account.CNPJ__c}</td>
+                                </tr>
+                                <tr>
+                                    <td class="label_inferior">Endereço:</td>
+                                    <td class="valor_inferior">{!WorkOrder.Endere_o__c}</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width:50%; vertical-align:top;">
+                            <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                                <tr>
+                                    <td class="label">Contato:</td>
+                                    <td class="valor">{!WorkOrder.Contact.Name}</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Fone / Cel:</td>          
+                                    <td class="valor">
+                                {!WorkOrder.Contact.Phone}
+                                        <apex:outputText rendered="{!IF(WorkOrder.Contact.MobilePhone != '',true,false)}">
+                                    &nbsp;/&nbsp;{!WorkOrder.Contact.MobilePhone}
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="label_inferior">E-mail:</td>
+                                    <td class="valor_inferior">{!WorkOrder.Contact.Email}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <div style="margin:0px; padding:0px; border:0px; height:10px;"/>
+
+                <!-- ORDEM DE TRABALHO -->
+                <table  cellpadding="0px" cellspacing="0px" class="tabela_conteudo">
+                    <tr>
+                        <td class="titulo_2" colspan="2">
+                        ORDEM DE TRABALHO
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:50%; vertical-align:top;">
+                            <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                                <tr>
+                                    <td class="label">Número:</td>
+                                    <td class="valor">{!WorkOrder.WorkOrderNumber}</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Serviço:</td>
+                                    <td class="valor">{!WorkOrder.Tipo_de_Servi_o__c}</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width:50%; vertical-align:top;">
+                            <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                                <tr>
+                                    <td class="label">Ministrante:</td>
+                                    <td class="valor">{!WorkOrder.tecnico_executor__r.Name}</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Agendado p/:</td>
+                                    <td class="valor">
+                                        <apex:outputField value="{!WorkOrder.Data_Agendada_para_Servi_o__c}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    
+                    <apex:outputText rendered="{!IF(WorkOrder.Description != '',true,false)}">
+                        <tr>
+                            <td style="width:100%; vertical-align:top;" colspan="2">
+                                <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                                    <tr>
+                                        <td class="label">Observações:</td>
+                                        <td class="valor"><apex:outputField value="{!WorkOrder.Description}" /></td>
+                                    </tr>
+                                 </table>
+                            </td>
+                        </tr>
+                    </apex:outputText>
+                    
+                    <tr>
+                        <td style="width:100%; vertical-align:top;" colspan="2">
+                            <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                                <tr>
+                                    <td class="label" style="border-bottom:none;">Avaliação:</td>
+                                    <td class="valor">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td class="label" style="border-bottom:none;">&nbsp;</td>
+                                    <td class="valor">&nbsp;</td>
+                                </tr>
+                             </table>
+                        </td>
+                    </tr>
+                </table>
+              
+                <div style="margin:0px; padding:0px; border:0px; height:10px;"/>
+
+
+                <!-- INFORMAÇÕES DOS ATIVOS -->
+                <table cellpadding="0px" cellspacing="0px" class="tabela_conteudo">
+                
+                    <tr style="display: table-header-group;">
+                        <td class="titulo_2" colspan="5">
+                        INFORMAÇÕES DOS ATIVOS
+                        </td>
+                    </tr>
+                    <tr style="display: table-header-group;">
+                        <td style="width:35%;" class="label">
+                        &nbsp;Ativo:                               
+                        </td>                                     
+                        <td style="width:20%;" class="label">
+                        &nbsp;Marca:    
+                        </td>                
+                        <td style="width:15%;" class="label">
+                        &nbsp;Modelo:   
+                        </td>                
+                        <td style="width:15%;" class="label">
+                        &nbsp;Nº de Série:                
+                        </td>                                  
+                        <td style="width:15%;" class="label">
+                        &nbsp;ID/Tag:
+                        </td>
+                    </tr>
+                    <apex:repeat value="{!WorkOrder.Itens_para_Demonstra_o_Treinamento__r}" var="PD" >
+                        <tr style="page-break-inside:avoid;">
+                            <td class="valor">
+                                <div style="width:100%; max-width:100%px;">
+                                &nbsp;{!PD.Ativo_Relacionado__r.Name} 
+                                </div>
+                            </td>
+                            <td class="valor">
+                                <div style="width:100%; max-width:100%px;">
+                                &nbsp;{!PD.Ativo_Relacionado__r.Marca__c}
+                                </div>
+                            </td>
+                            <td class="valor">
+                                <div style="width:100%; max-width:100%px;">
+                                &nbsp;{!PD.Ativo_Relacionado__r.Modelo__c}
+                                </div>
+                            </td>
+                            <td class="valor">
+                                <div style="width:100%; max-width:100%px;">
+                                &nbsp;{!PD.Ativo_Relacionado__r.SerialNumber} 
+                                </div>
+                            </td>
+                            <td class="valor">
+                                <div style="width:100%; max-width:100%px;">
+                                &nbsp;{!PD.Ativo_Relacionado__r.ID_Tag__c}
+                                </div>
+                            </td>
+                        </tr>                
+                    </apex:repeat>
+                </table>
+                <div style="margin:0px; padding:0px; border:0px; height:10px;"/>
+                
+                
+                
+                <!-- <=== aquiiiiiiiiiiiiiiiiiiiiii -->
+                <table cellpadding="0px" cellspacing="0px" class="tabela_conteudo" style="border-color:#9ea1a2;">
+                    <tr>
+                        <td class="titulo_2" colspan="3" style="border-color:#9ea1a2;">
+                        OBSERVAÇÕES
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border-color:#9ea1a2;" class="valor">
+                            <apex:outputfield value="{!WorkOrder.Observacoes_Tecnicas__c}"/>
+                        </td>
+                    </tr>
+                    
+                </table>
+                <div style="margin:0px; padding:0px; border:0px; height:15px;"/>
+
+                <!-- INFORMAÇÕES DOS PARTICIPANTES -->
+                <!-- <=== aquiiiiiiiiiiiiiiiiiiiiii -->
+                <table cellpadding="0px" cellspacing="0px" class="tabela_conteudo" style="border-color:#9ea1a2;">
+                    <tr>
+                        <td class="titulo_2" colspan="3" style="border-color:#9ea1a2;">
+                        INFORMAÇÕES DOS PARTICIPANTES
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="width:45%; text-align:center;  border-right:1px solid #9ea1a2; border-color:#9ea1a2;" class="titulo_3">
+                        NOME:
+                        </td>                                     
+                        <td style="width:35%; text-align:center;  border-right:1px solid #9ea1a2; border-color:#9ea1a2;" class="titulo_3">
+                        CARGO:    
+                        </td>                
+                        <td style="width:20%; text-align:center; border-color:#9ea1a2;" class="titulo_3" >
+                        FONE:    
+                        </td>                
+                    </tr>
+                    <!-- linhas em branco -->
+
+
+                <apex:repeat var="participante" value="{!WorkOrder.Participantes1__r}">
+                       <apex:outputPanel rendered="{!IF(WorkOrder.N_mero_de_Linhas_da_Lista__c >= 1 ,true, false)}">
+                            <tr>
+                                <td class="valor" rowspan="2" style="border-top:1px solid #9ea1a2; border-right:1px solid #9ea1a2;" width="315px">
+                                    <b>{!FLOOR(count)}.</b>  
+ 
+                                        
+                                    <apex:outputText style="font-size: 1.5em;" value="{! participante.Nome_do_Participante__c  }" />
+                                    
+                                    
+                                </td>
+                                <td class="valor" style="border-top:1px solid #9ea1a2; border-right:1px solid #9ea1a2; border-color:#9ea1a2;" width="243px">
+                                    <!-- cargo
+                                    <b>Cargo:</b>-->
+                                    &nbsp; <apex:outputText style="font-size: 1.3em;" value="{! participante.Cargo__c}" />
+                                </td>
+                                <td class="valor" style="border-top:1px solid #9ea1a2; border-color:#9ea1a2;" width="138px">
+                                    <!-- Telefone
+                                    <b>Telefone:</b>--> 
+                                    &nbsp;  <apex:outputText style="font-size: 1.3em;" value="{! participante.Telefone__c }" />
+                                </td>
+                            </tr>  
+                            <tr>
+                                <td class="valor" colspan="2">
+                                    <!-- email-->
+
+                                    <b>E-mail:</b> &nbsp; <apex:outputText style="font-size: 1.3em;"  value="{! participante.E_mail__c  }" />
+                                </td>
+                            </tr>
+                            
+                            <apex:variable var="count" value="{!count+ 1}"/>  
+                        </apex:outputPanel>
+                       
+                    </apex:repeat>
+                             
+                           
+                    <!-- fim das linhas em branco -->
+
+                </table>
+                
+                
+                <div class="valor" style="margin:0px; padding:0px; border:0px; height:40px; font-size:11px;">
+                <br/>
+                Os participantes neste ato autorizam a coleta de dados para fins de divulgação do treinamento realizado pela empresa, além do cadastro para recebimento do catálogo e preços de equipamentos, treinamentos a serem realizados e eventuais promoções ofertadas pela empresa.
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                
+                </div>
+
+
+
+
+
+
+                <!-- ASSINATURAS -->
+                 
+                <table class="rodape" cellpadding="0px" cellspacing="0px" style="width:100%;">
+                    <tr>
+                        <td style="width:*;">
+                         <div  style="padding:0; margin: 0 0 -40px 0;" > 
+                            <apex:image style="padding:0; margin:0 auto;" value="{!if(WorkOrder.Vendedor_respons_vel_pela_OT__c == true, if(WorkOrder.Vendedor_da_OT__r.Contact.assinatura__c != "",WorkOrder.Vendedor_da_OT__r.Contact.assinatura__c ,"https://hospcom--c.na170.content.force.com/servlet/servlet.ImageServer?id=0156e00000Bf8Ui&oid=00Di0000000JVhH&lastMod=1667927109000") ,if(WorkOrder.tecnico_executor__r.assinatura__c != "", WorkOrder.tecnico_executor__r.assinatura__c, "https://hospcom--c.na170.content.force.com/servlet/servlet.ImageServer?id=0156e00000Bf8Ui&oid=00Di0000000JVhH&lastMod=1667927109000"))}" width="200" height="50px"/>
+                        </div>      <br/>
+                        ____________________________
+                         <br/> <br/> 
+                        </td>
+                        <td style="width:*;">____________________________</td>
+                    </tr>
+                    <tr>
+                        <td style="width:*;">{!if(WorkOrder.Vendedor_respons_vel_pela_OT__c == true,WorkOrder.Vendedor_da_OT__r.name, WorkOrder.Tecnico_executor__r.Name)}</td>
+                        <td style="width:*;">Responsável</td>
+                    </tr>
+                </table>
+
+
+
+
+            </div>
+
+        </body>
+    </html>
+
+</apex:page>

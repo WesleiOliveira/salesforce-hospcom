@@ -1,0 +1,20 @@
+<aura:component controller="WorkOrderFileUploaderController" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	
+   <aura:attribute name="uploadedFiles" type="List" />
+    
+    <div style="background-color: #F5F5F5; border-radius: 20px; margin-bottom: 15px; padding: 10px">
+        
+        <!-- Input para múltiplos arquivos PDF -->
+        <lightning:fileUpload 
+                              label="Carregar arquivos em massa em OTs"
+                              accept=".pdf"
+                              multiple="true"
+                              onuploadfinished="{!c.handleUploadFinished}" 
+                              />
+        
+        <!-- Botão para processar os arquivos carregados -->
+        <lightning:button label="Carregar arquivos" onclick="{!c.processFiles}" />
+    
+    </div>
+    
+</aura:component>

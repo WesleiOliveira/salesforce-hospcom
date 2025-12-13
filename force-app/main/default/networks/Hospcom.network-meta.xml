@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Network xmlns="http://soap.sforce.com/2006/04/metadata">
+    <allowInternalUserLogin>true</allowInternalUserLogin>
+    <allowMembersToFlag>true</allowMembersToFlag>
+    <changePasswordTemplate>unfiled$public/CommunityChangePasswordEmailTemplate</changePasswordTemplate>
+    <communityRoles/>
+    <disableReputationRecordConversations>false</disableReputationRecordConversations>
+    <emailSenderAddress>desenvolvimento@hospcom.net</emailSenderAddress>
+    <emailSenderName>Sales</emailSenderName>
+    <enableApexCDNCaching>false</enableApexCDNCaching>
+    <enableCustomVFErrorPageOverrides>true</enableCustomVFErrorPageOverrides>
+    <enableDirectMessages>true</enableDirectMessages>
+    <enableExpFriendlyUrlsAsDefault>false</enableExpFriendlyUrlsAsDefault>
+    <enableExperienceBundleBasedSnaOverrideEnabled>true</enableExperienceBundleBasedSnaOverrideEnabled>
+    <enableGuestChatter>true</enableGuestChatter>
+    <enableGuestFileAccess>true</enableGuestFileAccess>
+    <enableGuestMemberVisibility>false</enableGuestMemberVisibility>
+    <enableImageOptimizationCDN>true</enableImageOptimizationCDN>
+    <enableInvitation>false</enableInvitation>
+    <enableKnowledgeable>true</enableKnowledgeable>
+    <enableLWRExperienceConnectedApp>false</enableLWRExperienceConnectedApp>
+    <enableMemberVisibility>true</enableMemberVisibility>
+    <enableNicknameDisplay>true</enableNicknameDisplay>
+    <enablePrivateMessages>true</enablePrivateMessages>
+    <enableReputation>true</enableReputation>
+    <enableShowAllNetworkSettings>true</enableShowAllNetworkSettings>
+    <enableSiteAsContainer>true</enableSiteAsContainer>
+    <enableTalkingAboutStats>true</enableTalkingAboutStats>
+    <enableTopicAssignmentRules>true</enableTopicAssignmentRules>
+    <enableTopicSuggestions>true</enableTopicSuggestions>
+    <enableUpDownVote>true</enableUpDownVote>
+    <forgotPasswordTemplate>unfiled$public/CommunityForgotPasswordEmailTemplate</forgotPasswordTemplate>
+    <gatherCustomerSentimentData>false</gatherCustomerSentimentData>
+    <headlessForgotPasswordTemplate>unfiled$public/CommunityHeadlessForgotPasswordTemplate</headlessForgotPasswordTemplate>
+    <headlessRegistrationTemplate>unfiled$public/CommunityHeadlessRegistrationTemplate</headlessRegistrationTemplate>
+    <logoutUrl>http://www.hospcom.net/</logoutUrl>
+    <networkMemberGroups>
+        <profile>admin</profile>
+        <profile>comunidade venda</profile>
+        <profile>comunidade governo</profile>
+        <profile>comunidade financeiro</profile>
+        <profile>especialista de produtos</profile>
+        <profile>comunidade logística</profile>
+        <profile>comunidade diretoria</profile>
+        <profile>comunidade planejamento</profile>
+        <profile>analista de qualidade</profile>
+        <profile>website hospcom</profile>
+        <profile>comunidade de serviços - coordenadores</profile>
+        <profile>comunidade de serviços - supervisor</profile>
+        <profile>temporário</profile>
+        <profile>standard</profile>
+        <profile>comunidade usuário em quarentena</profile>
+        <profile>marketingprofile</profile>
+        <profile>executivo de contas</profile>
+        <profile>técnico</profile>
+        <profile>gerente financeiro</profile>
+        <profile>supervisor de operações</profile>
+        <profile>analista comercial</profile>
+        <profile>jurídico</profile>
+        <profile>gerente de serviços</profile>
+        <profile>supervisor de locação</profile>
+        <profile>temporário parceiro</profile>
+        <profile>rh</profile>
+        <profile>gestor comercial e governo</profile>
+        <profile>locação</profile>
+        <profile>eventos</profile>
+        <profile>gerente de logística</profile>
+        <profile>analista de compras</profile>
+        <profile>gerente de linha</profile>
+        <profile>gerente regional</profile>
+        <profile>supervisor técnico</profile>
+        <profile>controladoria</profile>
+        <profile>assistente comercial opme</profile>
+        <profile>gerente clínico</profile>
+        <profile>assistente de compras</profile>
+        <profile>t.i</profile>
+        <profile>supervisora de marketing</profile>
+        <profile>coordenador comercial (backoffice)</profile>
+        <profile>gerente de governo</profile>
+        <profile>gerente nacional</profile>
+        <profile>gerente de rh</profile>
+        <profile>gerente de contas estratégicas</profile>
+        <profile>gerente de compras</profile>
+        <profile>gerente contábil</profile>
+        <profile>coordenador de produtos/educação</profile>
+        <profile>auxiliar técnico</profile>
+        <profile>coordenador de linha</profile>
+    </networkMemberGroups>
+    <networkPageOverrides>
+        <changePasswordPageOverrideSetting>Standard</changePasswordPageOverrideSetting>
+        <forgotPasswordPageOverrideSetting>Designer</forgotPasswordPageOverrideSetting>
+        <homePageOverrideSetting>Designer</homePageOverrideSetting>
+        <loginPageOverrideSetting>Designer</loginPageOverrideSetting>
+        <selfRegProfilePageOverrideSetting>Designer</selfRegProfilePageOverrideSetting>
+    </networkPageOverrides>
+    <picassoSite>Hospcom_C</picassoSite>
+    <reputationLevels>
+        <level>
+            <lowerThreshold>0.0</lowerThreshold>
+        </level>
+        <level>
+            <lowerThreshold>51.0</lowerThreshold>
+        </level>
+        <level>
+            <lowerThreshold>151.0</lowerThreshold>
+        </level>
+        <level>
+            <lowerThreshold>401.0</lowerThreshold>
+        </level>
+        <level>
+            <lowerThreshold>801.0</lowerThreshold>
+        </level>
+        <level>
+            <lowerThreshold>1501.0</lowerThreshold>
+        </level>
+        <level>
+            <lowerThreshold>2501.0</lowerThreshold>
+        </level>
+        <level>
+            <lowerThreshold>4001.0</lowerThreshold>
+        </level>
+        <level>
+            <lowerThreshold>6001.0</lowerThreshold>
+        </level>
+        <level>
+            <lowerThreshold>10001.0</lowerThreshold>
+        </level>
+        <level>
+            <lowerThreshold>20001.0</lowerThreshold>
+        </level>
+        <level>
+            <lowerThreshold>30001.0</lowerThreshold>
+        </level>
+        <level>
+            <lowerThreshold>40001.0</lowerThreshold>
+        </level>
+        <level>
+            <lowerThreshold>50001.0</lowerThreshold>
+        </level>
+        <level>
+            <lowerThreshold>60001.0</lowerThreshold>
+        </level>
+        <level>
+            <lowerThreshold>70001.0</lowerThreshold>
+        </level>
+        <level>
+            <lowerThreshold>80001.0</lowerThreshold>
+        </level>
+        <level>
+            <lowerThreshold>90001.0</lowerThreshold>
+        </level>
+        <level>
+            <lowerThreshold>100001.0</lowerThreshold>
+        </level>
+        <level>
+            <lowerThreshold>110001.0</lowerThreshold>
+        </level>
+    </reputationLevels>
+    <reputationPointsRules>
+        <pointsRule>
+            <eventType>FeedItemReceiveALike</eventType>
+            <points>5</points>
+        </pointsRule>
+        <pointsRule>
+            <eventType>FeedItemWriteAPost</eventType>
+            <points>1</points>
+        </pointsRule>
+        <pointsRule>
+            <eventType>FeedItemWriteAComment</eventType>
+            <points>1</points>
+        </pointsRule>
+        <pointsRule>
+            <eventType>FeedItemAnswerAQuestion</eventType>
+            <points>5</points>
+        </pointsRule>
+        <pointsRule>
+            <eventType>FeedItemReceiveAMention</eventType>
+            <points>5</points>
+        </pointsRule>
+        <pointsRule>
+            <eventType>EndorsedForKnowledgeOnATopic</eventType>
+            <points>20</points>
+        </pointsRule>
+        <pointsRule>
+            <eventType>FeedItemYourAnswerMarkedBest</eventType>
+            <points>20</points>
+        </pointsRule>
+        <pointsRule>
+            <eventType>FeedItemReceiveAnAnswer</eventType>
+            <points>5</points>
+        </pointsRule>
+        <pointsRule>
+            <eventType>EndorseSomeoneForKnowledgeOnATopic</eventType>
+            <points>5</points>
+        </pointsRule>
+        <pointsRule>
+            <eventType>FeedItemShareAPost</eventType>
+            <points>1</points>
+        </pointsRule>
+        <pointsRule>
+            <eventType>FeedItemLikeSomething</eventType>
+            <points>1</points>
+        </pointsRule>
+        <pointsRule>
+            <eventType>FeedItemSomeoneSharesYourPost</eventType>
+            <points>5</points>
+        </pointsRule>
+        <pointsRule>
+            <eventType>FeedItemPostQuestion</eventType>
+            <points>1</points>
+        </pointsRule>
+        <pointsRule>
+            <eventType>FeedItemMentionSomeone</eventType>
+            <points>1</points>
+        </pointsRule>
+        <pointsRule>
+            <eventType>FeedItemMarkAnswerAsBest</eventType>
+            <points>5</points>
+        </pointsRule>
+        <pointsRule>
+            <eventType>FeedItemReceiveAComment</eventType>
+            <points>5</points>
+        </pointsRule>
+    </reputationPointsRules>
+    <selfRegistration>false</selfRegistration>
+    <sendWelcomeEmail>false</sendWelcomeEmail>
+    <site>Hospcom1</site>
+    <siteArchiveStatus>NotArchived</siteArchiveStatus>
+    <status>Live</status>
+    <tabs>
+        <customTab>Documentos_Licita_ao__c</customTab>
+        <customTab>Calend_rio_Equipe</customTab>
+        <customTab>Checklist_Carro__c</customTab>
+        <defaultTab>Chatter</defaultTab>
+        <standardTab>Chatter</standardTab>
+        <standardTab>File</standardTab>
+        <standardTab>Workspace</standardTab>
+        <standardTab>ServiceContract</standardTab>
+        <standardTab>ChatterAnswers</standardTab>
+        <standardTab>report</standardTab>
+    </tabs>
+    <urlPathPrefix>Sales</urlPathPrefix>
+    <welcomeTemplate>unfiled$public/CommunityWelcomeEmailTemplate</welcomeTemplate>
+</Network>

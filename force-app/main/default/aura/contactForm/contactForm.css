@@ -1,0 +1,60 @@
+/* CSS APLICADO EM DISPOSITIVOS MÓVEIS */
+@media screen
+  and (max-device-width: 480px)
+  and (orientation: portrait){
+	.THIS .boxMobile{
+        justify-content: center!important;
+    }
+    
+    .THIS .boxMobile2{
+        width: 100%!important;
+    }
+}
+
+@media screen
+  and (max-device-width: 640px)
+  and (orientation: landscape){
+	.THIS .boxMobile{
+        justify-content: center!important;
+    }
+    
+    .THIS .boxMobile2{
+        width: 100%!important;
+    }
+}
+
+@media screen
+  and (max-device-width: 640px){
+	.THIS .boxMobile{
+        justify-content: center!important;
+    }
+    
+    .THIS .boxMobile2{
+        width: 100%!important;
+    }
+}
+/* -------------------------------------------- */
+
+.THIS .classLinha{
+	transition: all 0.2s 0s ease-out;
+	border: 1px solid white;
+    border-radius: 10px;
+}
+
+.THIS .classLinha:hover{
+    border: 1px solid #00345C;
+    border-radius: 10px;
+}
+
+.THIS .classeLink{
+    color: #00345C;
+    text-decoration: none;
+}
+
+.THIS .classeLink:hover{
+    color: #a0bb31;
+}
+
+.THIS.hideLabel label{
+    display:none;
+}

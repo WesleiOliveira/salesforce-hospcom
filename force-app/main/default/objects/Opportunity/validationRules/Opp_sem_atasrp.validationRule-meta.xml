@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Opp_sem_atasrp</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( 
+	!$User.Ignorar_erros__c,
+	RecordType.Name == &apos;Licitacao&apos;,
+	TEXT(Modalidade__c) != &apos;COTAÇÃO PREVIA&apos;,
+	Text(ATA_SRP__c) == &apos;&apos;
+)</errorConditionFormula>
+    <errorDisplayField>ATA_SRP__c</errorDisplayField>
+    <errorMessage>O campo ATA SRP deve ser preenchido.</errorMessage>
+</ValidationRule>

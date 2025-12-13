@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo_de_Faturamento__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Pedido__r.Ordem_de_trabalho__c &lt;&gt; NULL,&quot;Ordens de Trabalho&quot;,
+IF(OR(Pedido__r.Contrato_de_Servi_o__c &lt;&gt; NULL, Contrato_de_servico__c &lt;&gt; NULL),&quot;Contratos&quot;, 
+IF(OR(Pedido__r.Quote.Name &lt;&gt; NULL, Pedido__r.Opportunity.Name &lt;&gt; NULL), &quot;Cotações&quot;,
+IF(Pedido__r.Demonstracao__c &lt;&gt; NULL, &quot;Demonstração&quot;,&quot;Sem identificação&quot;
+))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Tipo de Faturamento</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

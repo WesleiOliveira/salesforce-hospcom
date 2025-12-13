@@ -1,0 +1,45 @@
+<aura:component controller="Trello" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.sortableJs + '/Sortable.js',
+                           $Resource.popper + '/popper.js')}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+        <aura:import library="lightning:alert" property="LightningAlert" />
+    
+    <aura:attribute name="valDescricao" type="String" />
+    <aura:attribute name="valInputShare" type="String" />
+    <aura:attribute name="valDataEntrega" type="Date" />
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    
+	<aura:attribute name="tempLabelAttr" type="String" />
+    
+    
+    
+    
+    <div id="containerMestre" style="position: relative; display: flex; flex-direction: column; width: 100vw!important; left: calc(-50vw + 50%); justify-content: center">
+        <div class="hospMenuMainDiv" id="containerItens">
+            
+            <div class="mobileMenu">
+            	<i class="fa fa-bars iconMobileMenu" aria-hidden="true" id="iconMobileMenu"></i>
+				
+                
+                <div class="containerMenuMobile" id="containerMenuMobile">
+                    <i class="fa fa-times iconeClose" id="iconeClose" aria-hidden="true"></i>
+
+                    <div class="innerContainerMobileMenu" id="innerContainerMobileMenu">
+                        
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+	
+</aura:component>

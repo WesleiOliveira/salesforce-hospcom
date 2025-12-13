@@ -1,0 +1,54 @@
+.THIS .boxItem {
+    position: fixed;
+    z-index: 4;
+    top: 300px;
+    width: 10%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    border-radius: 15px;
+    background-color: white;
+    height: 100px;
+    padding: 10px;
+    animation-duration: 1.5s;
+    animation-delay: 5s;
+    animation-name: boxItemAnimation;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    border: 3px solid red;
+}
+
+.THIS .textCount{
+    font-size: 50px;
+    color: #00345c;
+    font-weight: bold;
+}
+
+.THIS .tituloBloco{
+    font-size: 15px;
+}
+
+
+.THIS .iconClass{
+    font-size: 20px; 
+    color: #dd8f00;
+    animation-duration: 1.5s;
+    animation-name: changewidth;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes changewidth {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-30px);}
+    60% {transform: translateY(-15px);}
+}
+
+@keyframes boxItemAnimation {
+    30% { transform: scale(1.1); }
+    40%, 60% { transform: rotate(-10deg) scale(1.1); }
+    50% { transform: rotate(10deg) scale(1.1); }
+    70% { transform: rotate(0deg) scale(1.1); }
+    100% { transform: scale(1); }
+}

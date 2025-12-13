@@ -1,0 +1,165 @@
+/* .THIS .btn {
+    padding: 0.5rem;
+    color: #fff;
+    background: rgba(255, 255, 255, .5);
+    border-radius: 4px;
+} */
+
+/* .THIS .btn.btn-text i {
+    margin-right: 0.25rem;
+} */
+
+/* .THIS :root {
+    --app-col: #1976d2;
+} */
+   
+/* .THIS body {
+    font-family: Lato, sans-serif;
+    font-size: 16px;
+} */
+
+.THIS .app {
+    display: grid;
+    grid-template-rows: max-content auto;
+    min-height: 100vh;
+    background: #1976d2;
+    width: 100%;
+} 
+           
+.THIS .app-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    padding: 0.5rem;
+}
+           
+.THIS .app-header .left,.THIS .app-header .right {
+    display: grid;
+    grid-gap: 7px;
+}
+           
+.THIS .app-header .left {
+    grid-template-columns: repeat(3, max-content);
+}
+           
+.THIS .app-header .center {
+    text-align: center;
+}
+           
+/* .THIS .app-header .right {
+    justify-content: end;
+    grid-template-columns: repeat(5, max-content);
+} */
+           
+.THIS .app-header .logo {
+    font-style: italic;
+    font-size: 1.25em;
+    color: #fff;
+}
+           
+/* .THIS .app-header .logo i {
+    font-style: normal;
+} */
+           
+.THIS .app-header .search {
+    display: flex;
+    justify-content: space-between;
+    min-width: 200px;
+}
+           
+.THIS .app-board {
+    display: grid;
+    grid-template-rows: max-content auto;
+    background: rgba(255, 255, 255, .5);
+}
+           
+/* .THIS .app-board .board-header {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    padding: 0.5rem;
+} */
+           
+/* .THIS .app-board .board-header .left,.THIS .app-board .board-header .right {
+    display: grid;
+    grid-gap: 7px;
+    align-items: center;
+} */
+           
+/* .THIS .app-board .board-header .left .btn,.THIS .app-board .board-header .right .btn {
+    color: var(--app-col);
+} */
+                   
+/* .THIS .app-board .board-header .left {
+    grid-template-columns: repeat(4, max-content);
+} */
+                   
+/* .THIS .app-board .board-header .right {
+    justify-content: end;
+    grid-template-columns: repeat(2, max-content);
+} */
+                   
+/* .THIS .app-board .board-header .title {
+    font-weight: 700;
+    font-size: 1.25em;
+} */
+                   
+/* .THIS .app-board .board-body {
+    padding: 0 0.5rem;
+    overflow-y: hidden;
+} */
+                   
+/* .THIS .app-board .board-body .wrap-lists {
+    display: grid;
+    grid-auto-columns: 272px;
+    grid-auto-flow: column;
+    grid-gap: 7px;
+    height: calc(100% - 16px);
+    padding-bottom: 0.5rem;
+    overflow-y: auto;
+} */
+                   
+/* .THIS .app-board .board-body .list {
+    display: grid;
+    grid-auto-rows: max-content;
+    grid-gap: 10px;
+    padding: 0.5rem;
+    font-size: 0.875em;
+    background: rgba(255, 255, 255, .5);
+    border-radius: 4px;
+} */
+                   
+/* .THIS .app-board .board-body .list .list-title {
+    margin: 0;
+} */
+                   
+/* .THIS .app-board .board-body .list .card {
+    padding: 0.5rem;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, .2);
+} */
+                   
+/* .THIS .app-board .board-body .list .btn-list {
+    text-decoration: none;
+    color: rgba(0, 0, 0, .5);
+} */
+                   
+/* .THIS .app-tint {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+} */
+                   
+/* .THIS .app-tint input[type="color"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0;
+} */
+                    
+/*.THIS .app-tint label {
+	 font-size: 1.25em;
+	 color: var(--app-col);
+	 cursor: pointer;
+}*/

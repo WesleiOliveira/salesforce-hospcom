@@ -1,0 +1,582 @@
+<apex:page standardController="Contrato_de_Servi_o__c" renderAs="pdf" standardStylesheets="false" cache="false" showHeader="false" sidebar="false" applyHtmlTag="true" applyBodyTag="false">
+    
+    <head>
+        <style type="text/css" media="print">
+            @page:first{
+                size:A4;
+                background: url({!IF(Contrato_de_Servi_o__c.Timbre__c == 'HEALTH SOLUTION',$Resource.SobreHealth,IF(Contrato_de_Servi_o__c.Timbre__c == 'HOSPCOM',$Resource.SobreHospcom,IF(Contrato_de_Servi_o__c.Timbre__c == 'GDB',$Resource.SobreGDB,"-")))});
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);
+                }
+            }
+            @page{
+                size:A4;
+                background: url({!IF(Contrato_de_Servi_o__c.Timbre__c == 'HEALTH SOLUTION',$Resource.TimbradoHealth,IF(Contrato_de_Servi_o__c.Timbre__c == 'HOSPCOM',$Resource.TimbradoHospcom,IF(Contrato_de_Servi_o__c.Timbre__c == 'GDB',$Resource.TimbradoGDB,"-")))});
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);}
+            }
+            
+            .pagenumber:before {
+                content:counter(page);
+            }
+            .pagecount:before {
+                content:counter(pages);
+            }
+            
+            div.header {
+                margin:0px 0px 0px 0px;
+                padding:30px 0px 50px 0px;
+                position:running(header);
+                height:70px;
+            }
+            div.content {
+            }
+            div.footer1 {
+                margin:20px 0px 0px 260px;
+                padding:0px 0px 0px 0px;
+                position:running(footer);
+                text-align:center;
+                height:10px;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:normal;
+    
+                font-family:arial, verdana, sans-serif;
+                color:#697f9b;
+                width:350px;
+            }
+           
+        </style>
+        <style type="text/css">
+            .titulo_proposta{
+                font-family:arial, verdana, sans-serif;
+                font-size:20px;
+                font-weight:bold;
+                text-align:center;
+            }
+            .subtitulo_proposta{ /* remover */
+                font-family:arial, verdana, sans-serif;
+                font-size:16px;
+                font-weight:normal;
+                text-decoration:underline;
+                text-align:center;
+                width:100%;
+            }
+            .titulo_numeracao{
+                font-family:arial, verdana, sans-serif;
+                font-size:14px;
+                font-weight:normal;
+                width:100%;
+                padding-right:20px;
+            }
+            .destaque_label{
+                font-family:arial, verdana, sans-serif;
+                font-size:15px;
+                line-height:150%;
+            }
+            .destaque_dado{
+                font-family:arial, verdana, sans-serif;
+                font-size:17px;
+                line-height:150%;
+                font-weight:bold;
+                padding-left:20px;
+            }
+            .destaque_dado2{
+                font-family:arial, verdana, sans-serif;
+                font-size:14px;
+                line-height:150%;
+                padding-left:20px;:
+            }
+            .clausula_cabecalho{
+                font-family:arial, verdana, sans-serif;
+                font-size:14px;
+                font-weight:bold;
+                line-height:120%;
+            }
+            .clausula_texto{
+                font-family:arial, verdana, sans-serif;
+                font-size:13px;
+                text-align:justify;
+                text-justify:inter-word;
+                line-height:120%;
+                text-indent:50px;
+            }
+            .clausula_texto_declaracao{
+                font-family:arial, verdana, sans-serif;
+                font-size:13px;
+                line-height:120%;
+            }
+            .clausula_obs{
+                font-family:arial, verdana, sans-serif;
+                font-size:11px;
+                font-weight:bold;
+                text-decoration:underline;
+                font-style:italic;
+                line-height:120%;
+                text-align:right;
+            }            
+            .assinatura{
+                font-family:arial, verdana, sans-serif;
+                font-size:13px;
+                line-height:120%;
+            }
+            .notas{
+                font-family:arial, verdana, sans-serif;
+                font-size:13px;
+                font-style:italic;
+            }
+            
+            
+            .tab1 tr{
+                //-fs-table-paginate:paginate;
+                page-break-inside:avoid;
+            }
+            .tab2{
+                table-layout: fixed;
+                page-break-inside:avoid;
+                border-collapse: collapse;
+            }
+            .tab2 tr{
+                table-layout: fixed;
+            }
+            .inv{
+                padding-right: 10px;
+                padding-top: 10px;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                vertical-align:top;
+                text-align:right;
+            }
+            .nul{
+                padding: 0;
+            }
+            .cab2{
+                padding: 3px;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:bold; 
+                vertical-align:top;            
+                background-color: #e2e3e3;
+                border-right: 1px solid #cacecf;
+                border-bottom: 1px solid #cacecf;
+                border-top: 1px solid #cacecf;
+                border-left: 1px solid #cacecf
+            }
+            .cab{
+                padding: 3px;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:bold; 
+                vertical-align:top;            
+                background-color: #e2e3e3;
+                border-right: 1px solid #cacecf;
+                border-bottom: 1px solid #cacecf;
+                border-top: 1px solid #cacecf;
+                line-height:120%;
+            }
+            .cel{
+                padding: 3px;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                vertical-align:middle;
+                border-top: 1px solid #eef2f4;
+                border-right: 1px solid #eef2f4;
+                border-bottom: 1px solid #eef2f4;
+                line-height:120%;
+                //word-wrap: break-word;
+                overflow: hidden;
+                text-transform: uppercase;
+            }
+           
+            .total{
+                border-left: 1px solid #eef2f4;
+            }
+            .destaque{
+                font-weight: bold;
+            }
+            .descr{
+                text-align:justify;
+                text-justify:inter-word;
+            }
+            .img{
+                padding: 3px;
+                vertical-align:middle;
+                border-top: 1px solid #eef2f4;
+                border-right: 1px solid #eef2f4;
+                border-left: 1px solid #eef2f4;
+                border-bottom: 1px solid #eef2f4;
+            }     
+                
+            .tabela_itens{
+                border-top:1px solid #cacecf;
+                -fs-table-paginate:paginate;
+            }.tabela_itens tr{
+                page-break-inside:avoid;
+            }
+            .item_titulo_imagem{
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:bold;
+                vertical-align:top;
+                padding:4px 4px 4px 4px;
+                background-color:#e2e3e3;
+                border-left:1px solid #cacecf;
+                border-right:1px solid #cacecf;
+                border-bottom:1px solid #cacecf;
+            }
+            .item_titulo{
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:bold;
+                vertical-align:top;
+                padding:4px 4px 4px 4px;
+                background-color:#e2e3e3;
+                border-right:1px solid #cacecf;
+                border-bottom:1px solid #cacecf;
+                line-height:120%;
+            }
+            .item_imagem{
+                vertical-align:middle;
+                border-left:1px solid #eef2f4;
+                border-right:1px solid #eef2f4;
+                border-bottom:1px solid #cacecf;
+                padding:4px 4px 4px 4px;
+            }
+            .item_texto{
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                vertical-align:top;
+                border-right:1px solid #eef2f4;
+                border-bottom:1px solid #eef2f4;
+                padding:4px 4px 4px 4px;
+                line-height:120%;
+            }
+            .item_descricao{
+                vertical-align:top;
+                border-right:1px solid #eef2f4;
+                border-bottom:1px solid #cacecf;
+                padding:2px 2px 3px 2px;
+            }
+            .item_descricao_texto{
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                text-align:left;
+                text-justify:inter-word;
+                line-height:120%;
+            }            
+            .item_descricao_texto_esquerda{
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                line-height:120%;
+            }            
+        </style>
+        
+        <apex:variable var="empresa_logo"       value="{!' '}"/>
+        
+        <apex:variable var="empresa_banco"       value="{!' '}"/>
+        <apex:variable var="empresa_ag"          value="{!' '}"/>
+        <apex:variable var="empresa_cc"          value="{!' '}"/>
+        <apex:variable var="empresa_cnpj"        value="{!' '}"/>
+    </head>
+    
+    <body style="font-family:Arial; padding:0px; margin:0px; border:0px solid #eef2f4; width:*;">
+        <header>
+            <apex:outputText rendered="{!IF(Contrato_de_Servi_o__c.Timbre__c == 'HEALTH SOLUTION',true,false)}" >
+                
+                <apex:variable var="empresa_banco"       value="{!'Banco do Brasil'}"/>
+                <apex:variable var="empresa_ag"       value="{!'1242-4'}"/>
+                <apex:variable var="empresa_cc"       value="{!'47391-X'}"/>
+                <apex:variable var="empresa_cnpj"       value="{!'27.476.124/0001-02'}"/>
+            </apex:outputText>
+            
+            <apex:outputText rendered="{!IF(Contrato_de_Servi_o__c.Timbre__c == 'GDB',true,false)}" >
+                <apex:variable var="empresa_banco"       value="{!'Banco do Brasil'}"/>
+                <apex:variable var="empresa_ag"       value="{!'1610-1'}"/>
+                <apex:variable var="empresa_cc"       value="{!'128057-0'}"/>
+                <apex:variable var="empresa_cnpj"       value="{!'23.813.388/0001-56'}"/>
+            </apex:outputText>
+            
+            <apex:outputText rendered="{!IF(Contrato_de_Servi_o__c.Timbre__c == 'HOSPCOM',true,false)}" >
+                <apex:variable var="empresa_banco"       value="{!'Banco do Brasil'}"/>
+                <apex:variable var="empresa_ag"       value="{!'1242-4'}"/>
+                <apex:variable var="empresa_cc"       value="{!'69869-5'}"/>
+                <apex:variable var="empresa_cnpj"       value="{!'05.743.288/0001-08'}"/>
+            </apex:outputText>
+        </header>
+        
+        <div class="header">
+            
+            </div>
+
+            <!-- RODAPÉ -->
+            <div class="footer1">                 
+                 <span style="text-align:center;">Página</span> <span class="pagenumber"/> de <span class="pagecount"/>
+                 <br/><br/><span style="text-align:center;">Proposta n° </span> <apex:outputField value="{!Contrato_de_Servi_o__c.N_mero_da_Proposta_Contrato__c}"/> -
+                 <span style="text-align:center;">Emitida: </span> <apex:outputField value="{!Contrato_de_Servi_o__c.Data_de_Emiss_o_da_Proposta__c}"/> -
+                 <span style="text-align:center;">Validade: </span> <apex:outputField value="{!Contrato_de_Servi_o__c.Validade_da_Proposta_dias__c}"/> dia(s)
+                 <br/>
+            </div>
+            
+            <div class="content">
+
+            <!-- PÁGINA 1 -->
+            <div style="width:100%; height:45px;"/>
+                
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                
+                <div class="titulo_proposta" style="width:100%;">
+                    P&nbsp;&nbsp;R&nbsp;&nbsp;O&nbsp;&nbsp;P&nbsp;&nbsp;O&nbsp;&nbsp;S&nbsp;&nbsp;T&nbsp;&nbsp;A
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; D&nbsp;&nbsp;E &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; S&nbsp;&nbsp;E&nbsp;&nbsp;R&nbsp;&nbsp;V&nbsp;&nbsp;I&nbsp;&nbsp;Ç&nbsp;&nbsp;O
+                </div>
+                <br/>
+                <div style="text-align:center">
+                    <b>Proposta n°&nbsp; <apex:outputField value="{!Contrato_de_Servi_o__c.N_mero_da_Proposta_Contrato__c}"/></b><br/>
+                    <apex:outputField rendered="{!IF(Contrato_de_Servi_o__c.N_da_Cota_o_do_Bionexo__c != null,true, false)}" > Bionexo: {!Contrato_de_Servi_o__c.N_da_Cota_o_do_Bionexo__c} </apex:outputField>
+                </div>
+                <div style="width:100%; height:80px;"/>
+                <div class="destaque_label">À</div>
+                <div class="destaque_dado">{!Contrato_de_Servi_o__c.Cliente__r.Raz_o_Social__c}</div>
+                <div class="destaque_dado2"><b>CNPJ: &nbsp;</b> {!Contrato_de_Servi_o__c.Cliente__r.CNPJ__c}</div>
+                <br/>
+                <div style="width:100%; height:35px;"/>
+                <div style="width:100%; height:30px;"/>
+                <div class="destaque_label">Aos cuidados de:</div>
+                <div class="destaque_dado">{!Contrato_de_Servi_o__c.Contato_do_Locat_rio__r.Name}</div> 
+  
+                <div style="page-break-before:always" />
+                <p>Prezado(s), segue na tabela abaixo os serviços solicitados com seus respectivos valores:</p>
+                <table class="tabela_itens" cellpadding="0px" cellspacing="0px" style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <td class="item_titulo_imagem" style="width:100px; text-align:center">Imagem</td>
+                                    <td class="cab" style="width:*; text-align:center">Equipamento</td>
+                                    <td class="cab" style="width:100px; text-align:center">Cód. do Produto</td>
+                                    <td class="cab" style="width:23px; text-align:center">Qtd</td>   
+                                    <td class="cab" style="width:100px; text-align:center">Val. Unit/{!IF(Contrato_de_Servi_o__c.Tipo_da_Dura_o__c = "mes(es)","Mês",IF(Contrato_de_Servi_o__c.Tipo_da_Dura_o__c = "dia(s)","Dia",IF(Contrato_de_Servi_o__c.Tipo_da_Dura_o__c = "procedimento(s)","Proc.","Serv.")))} </td>
+                                    <td class="cab" style="width:100px; text-align:center">Val. Total/{!IF(Contrato_de_Servi_o__c.Tipo_da_Dura_o__c = "mes(es)","Mês",IF(Contrato_de_Servi_o__c.Tipo_da_Dura_o__c = "dia(s)","Dia",IF(Contrato_de_Servi_o__c.Tipo_da_Dura_o__c = "procedimento(s)","Proc.","Serv.")))}</td>
+                                </tr>
+                            </thead>
+                <apex:repeat var="ap" value="{!Contrato_de_Servi_o__c.Produtos_da_Proposta_do_Contrato__r}">
+                <tr>
+                <td colspan="6" style="padding:0px; border:0px;">
+                <apex:outputPanel rendered="{!IF(ap.Descri_o_Observa_o__c != null,true,false)}">
+                <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                    <tr style="page-break-inside: avoid;">
+                        <td style="text-align: center; width: 100px" rowspan="2" class="item_imagem" >    
+                               <apex:outputField value="{!ap.Produto_Ofertado__r.Imagem_do_Produto__c}"/>                               
+                        </td>
+                        <td class="cel" style="width:*; min-width:233px; vertical-align: middle; text-align:center">
+                            Equipamento: {!ap.Produto_Ofertado__r.Name}<br/>
+                            Fabricante: {!ap.Produto_Ofertado__r.Marca__c}<br/>
+                            Modelo: {!ap.Produto_Ofertado__r.Modelo__c}
+                        </td>
+                        <td class="cel" style="width:100px; vertical-align: middle; text-align:center">
+                            <apex:outputField value="{!ap.Produto_Ofertado__r.StockKeepingUnit}"/>
+                        </td>
+                        <td class="cel" style="width:23px; vertical-align: middle; text-align:center">
+                            <apex:outputField value="{!ap.Quantidade__c}"/>
+                        </td>
+                 
+                        <td class="cel" style="width:100px; vertical-align: middle; text-align:center">
+                            <apex:outputField value="{!ap.Valor_Mensal__c}"/>
+                        </td>
+                        <td class="cel" style="width:100px; vertical-align: middle; text-align:center">
+                            <apex:outputField value="{!ap.Valor_Mensal_da_Proposta__c}" />
+                        </td>
+                    </tr>
+                        <tr> 
+                            <td colspan="6" class="item_descricao descr">
+                                <apex:outputText rendered="{!IF(ap.Descri_o_Observa_o__c != '',true,false)}" >
+                                    <div class="item_descricao_texto" style="padding:2px 0px 0px 0px;"><apex:outputfield value="{!ap.Descri_o_Observa_o__c}" /></div> 
+                                </apex:outputText>
+                            </td> 
+                        </tr>
+                    
+                    </table>
+                    </apex:outputPanel>
+                    
+                    
+                    
+                <apex:outputPanel rendered="{!IF(ap.Descri_o_Observa_o__c == '',true,false)}">
+                <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                    <tr style="page-break-inside: avoid;">
+                        <td style="text-align: center; width: 100px" class="item_imagem" >    
+                               <apex:outputField value="{!ap.Produto_Ofertado__r.Imagem_do_Produto__c}"/>                               
+                        </td>
+                        <td class="cel" style="width:*; min-width:233px; vertical-align: middle; text-align:center">
+                            Equipamento: {!ap.Produto_Ofertado__r.Name}<br/>
+                            Fabricante: {!ap.Produto_Ofertado__r.Marca__c}<br/>
+                            Modelo: {!ap.Produto_Ofertado__r.Modelo__c}
+                        </td>
+                        <td class="cel" style="width:100px; vertical-align: middle; text-align:center">
+                            <apex:outputField value="{!ap.Produto_Ofertado__r.StockKeepingUnit}"/>
+                        </td>
+                        <td class="cel" style="width:23px; vertical-align: middle; text-align:center">
+                            <apex:outputField value="{!ap.Quantidade__c}"/>
+                        </td>
+                 
+                        <td class="cel" style="width:100px; vertical-align: middle; text-align:center">
+                            <apex:outputField value="{!ap.Valor_Mensal__c}"/>
+                        </td>
+                        <td class="cel" style="width:100px; vertical-align: middle; text-align:center">
+                             <apex:outputField value="{!ap.Valor_Mensal_da_Proposta__c}" />
+                        </td>
+                    </tr>
+
+                    </table>
+                    </apex:outputPanel>
+                    
+                    </td></tr>
+                    </apex:repeat>
+                    </table>
+                    <br/>
+                 <table width="100%">
+                        <tr>
+                            <td>
+                             <table class="tabela_itens" cellpadding="0px" cellspacing="0px">
+                             <tr>
+                                 <td style="text-align:center" class="item_titulo" colspan="2">
+                                     <b>Informações do Orçamento</b>
+                                 </td>
+                             </tr>
+                                 <tr>
+                                     <td class="item_titulo" width="145px">
+                                         <b>Valor total por {!IF(Contrato_de_Servi_o__c.Tipo_da_Dura_o__c = "mes(es)","mês",IF(Contrato_de_Servi_o__c.Tipo_da_Dura_o__c = "dia(s)","dia",IF(Contrato_de_Servi_o__c.Tipo_da_Dura_o__c = "procedimento(s)","prodecimento","Serviço(s)")))}:</b>
+                                     </td>
+                                     <td class="cel" width="150px"><apex:outputField value="{!Contrato_de_Servi_o__c.Valor_Mensal_da_Proposta__c}" /></td>
+                                 </tr>
+                             
+                                 <tr>
+                                     <td class="item_titulo">
+                                         <b>Vigência do Contrato:</b>
+                                     </td>
+                                     <td class="cel">
+                                         <apex:outputField value="{!Contrato_de_Servi_o__c.Dura_o_do_Contrato_meses__c}"/> {!IF(Contrato_de_Servi_o__c.Tipo_da_Dura_o__c = "mes(es)","Mes(es)",IF(Contrato_de_Servi_o__c.Tipo_da_Dura_o__c = "dia(s)","Dia(s)",IF(Contrato_de_Servi_o__c.Tipo_da_Dura_o__c = "procedimento(s)","Prodecimento(s)","Serviço(s)")))}
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td class="item_titulo">
+                                         <b>Valor Total (<apex:outputField value="{!Contrato_de_Servi_o__c.Dura_o_do_Contrato_meses__c}"/> {!IF(Contrato_de_Servi_o__c.Tipo_da_Dura_o__c = "mes(es)","Mes(es)",IF(Contrato_de_Servi_o__c.Tipo_da_Dura_o__c = "dia(s)","Dia(s)",IF(Contrato_de_Servi_o__c.Tipo_da_Dura_o__c = "procedimento(s)","Prodecimento(s)","Serviço(s)")))})</b>
+                                     </td>
+                                     <td class="cel"><apex:outputField value="{!Contrato_de_Servi_o__c.Valor_Total_da_Proposta__c}" /></td>
+                                 </tr>
+                                 <tr>
+                                     <td class="item_titulo">
+                                         Forma de Pagamento:
+                                     </td>
+                                     <td class="cel">
+                                         <apex:outputField value="{!Contrato_de_Servi_o__c.Forma_de_Pagamento__c}"/>
+                                     </td>
+                                 </tr>
+                                 </table>
+                             </td>
+                             <td>
+                                 <table class="tabela_itens" cellpadding="0px" cellspacing="0px" align="right">
+                                     <tr>
+                                         <td style="text-align:center" class="item_titulo" colspan="2">
+                                             <b>Informações Bancárias</b>
+                                         </td>
+                                     </tr>
+                                         <tr>
+                                             <td class="item_titulo" width="100px">
+                                                 <b>Banco:</b>
+                                             </td>
+                                             <td class="cel" width="150px"><apex:outputText > {!empresa_banco} </apex:outputText></td>
+                                         </tr>
+                                     
+                                         <tr>
+                                             <td class="item_titulo">
+                                                 <b>Agência:</b>
+                                             </td>
+                                             <td class="cel">
+                                                <apex:outputText > {!empresa_ag} </apex:outputText>
+                                             </td>
+                                         </tr>
+                                         <tr>
+                                             <td class="item_titulo">
+                                                 <b>Conta Corrente:</b>
+                                             </td>
+                                             <td class="cel"><apex:outputText > {!empresa_cc} </apex:outputText></td>
+                                         </tr>
+                                         <tr>
+                                             <td class="item_titulo">
+                                                 <b>CNPJ:</b>
+                                             </td>
+                                             <td class="cel"><apex:outputText > {!empresa_cnpj} </apex:outputText></td>
+                                         </tr>
+                                         </table>
+                                     </td>
+                                 </tr>
+                             </table>
+                     <br/><br/>
+                     <apex:outputPanel rendered="{!IF(Contrato_de_Servi_o__c.Observa_es_da_Proposta__c != '', true,false)}">
+                     <table width="100%" style="text-align:center">
+                     <tr>
+                         <td class="item_titulo" colspan="2">
+                             <b>Informações Adicionais:</b>
+                         </td>
+                     </tr>
+                     <tr>    
+                         <td class="cel">
+                             <apex:outputField value="{!Contrato_de_Servi_o__c.Observa_es_da_Proposta__c}" />
+                         </td>
+                     </tr>
+                 </table>
+                 </apex:outputPanel>
+                
+                <apex:outputPanel rendered="{!IF(Contrato_de_Servi_o__c.Cl_usulas_na_Proposta__c, true, false)}">
+                <p><b style="text-transform: underline">CLÁUSULA PRIMEIRA - DO OBJETO DO CONTRATO</b></p>
+                <p>1.1. Constitui objeto do presente contrato, a locação de equipamentos que ficarão sob a guarda e disposição da
+                LOCATÁRIA ininterruptamente, durante o prazo contratual. Os equipamentos cujo modelo e quantidade
+                fazem parte deste contrato serão os dispostos na tabela acima.</p>
+                <apex:outputField value="{!Contrato_de_Servi_o__c.Cl_usula_Segunda__c}"/>
+                <apex:outputField value="{!Contrato_de_Servi_o__c.Cl_usula_Terceira__c}"/>
+                <apex:outputField value="{!Contrato_de_Servi_o__c.Cl_usula_Quarta__c}"/>
+                <apex:outputField value="{!Contrato_de_Servi_o__c.Cl_usula_Quinta__c}"/>
+                <apex:outputField value="{!Contrato_de_Servi_o__c.Cl_usula_Sexta__c}"/>            
+                <apex:outputField value="{!Contrato_de_Servi_o__c.Cl_usula_S_tima__c}" />
+                <apex:outputField value="{!Contrato_de_Servi_o__c.Cl_usula_Oitava__c}"/>
+                <apex:outputField value="{!Contrato_de_Servi_o__c.Cl_usula_Nona__c}"/>
+                <apex:outputField value="{!Contrato_de_Servi_o__c.Cl_usula_D_cima__c}"/>
+                </apex:outputPanel>
+
+        </div>
+        <br/><br/><br/>
+        <table style="width:100%;page-break-inside: avoid;" >
+            <tr>
+                <td class="assinatura" style="text-indent:0px; width:50%;">_____________________________________________</td>
+            </tr>
+            <tr>
+                <td class="assinatura" style="text-indent:0px;">
+                    {!Contrato_de_Servi_o__c.Locador_a__r.Raz_o_Social__c}
+                    <br/>Nome:
+                    <br/>Cargo:
+                    <br/>Data da Assinatura:
+                </td>
+            </tr>                                
+        </table>
+    </body>
+</apex:page>

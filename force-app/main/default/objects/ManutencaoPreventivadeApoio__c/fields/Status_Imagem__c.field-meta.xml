@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_Imagem__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+Conta_Dias__c &gt; 6,
+&quot;https://hospcom.my.site.com/servlet/servlet.ImageServer?id=01531000008stOs&amp;oid=00Di0000000JVhH&amp;lastMod=1502730159000&quot;,
+IF(
+Conta_Dias__c &gt; 2,
+&quot;https://hospcom.my.site.com/servlet/servlet.ImageServer?id=01531000008stS6&amp;oid=00Di0000000JVhH&amp;lastMod=1502730193000&quot;,
+&quot;https://hospcom.my.site.com/servlet/servlet.ImageServer?id=01531000008stX6&amp;oid=00Di0000000JVhH&amp;lastMod=1502729868000&quot;
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Status Imagem</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

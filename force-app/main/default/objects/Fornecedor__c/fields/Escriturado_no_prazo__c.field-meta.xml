@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Escriturado_no_prazo__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Notas_escrituradas__c = Notas_lancadas__c,
+IF(Notas_lancadas__c &gt; 0 &amp;&amp; Notas_lancadas__c =  Notas_no_prazo__c, &apos;Sim&apos;,&apos;Não&apos;),
+&apos;&apos;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Escriturado no prazo</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

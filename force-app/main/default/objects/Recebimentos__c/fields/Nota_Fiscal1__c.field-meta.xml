@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Nota_Fiscal1__c</fullName>
+    <externalId>false</externalId>
+    <label>Número do Faturamento</label>
+    <lookupFilter>
+        <active>true</active>
+        <booleanFilter>(3 AND 6) OR (4 AND 6) OR (1 AND 6) OR (5 AND 7) OR (2 AND 6)</booleanFilter>
+        <filterItems>
+            <field>Faturamento__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Serviços (Mão de Obra)</value>
+        </filterItems>
+        <filterItems>
+            <field>Faturamento__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Vendas (Hospcom)</value>
+        </filterItems>
+        <filterItems>
+            <field>Faturamento__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Representação</value>
+        </filterItems>
+        <filterItems>
+            <field>Faturamento__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Serviços (Fábrica)</value>
+        </filterItems>
+        <filterItems>
+            <field>Faturamento__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Vendas (Fábrica)</value>
+        </filterItems>
+        <filterItems>
+            <field>$Source.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Hospcom</value>
+        </filterItems>
+        <filterItems>
+            <field>$Source.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Parceiro</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Faturamento__c</referenceTo>
+    <relationshipLabel>Recebimentos</relationshipLabel>
+    <relationshipName>Recebimentos</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pendentes</fullName>
+    <columns>NAME</columns>
+    <columns>Responsevel__c</columns>
+    <columns>Data_da_abertura_do_RCA__c</columns>
+    <columns>Descricao_da_NRC__c</columns>
+    <columns>A_o_corretiva_tomada__c</columns>
+    <columns>Prazo__c</columns>
+    <columns>Status__c</columns>
+    <columns>Responsavel_CONTATO__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Encerrado__c</field>
+        <operation>notEqual</operation>
+        <value>Satisfatório</value>
+    </filters>
+    <label>Pendentes</label>
+</ListView>

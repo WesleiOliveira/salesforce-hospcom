@@ -1,0 +1,166 @@
+<apex:page showChat="False" showHeader="true" sidebar="false" showQuickActionVfHeader="False" controller="ReclameAqui">
+    <html>
+    <head>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+        <style>
+            body{margin:0px!important;border:0px!important;}
+            #contentWrapper > div.bodyDiv.brdPalette.brandPrimaryBrd{margin:0px!important;border:0px!important;}
+            #contentWrapper > div.bPageFooter.noTableFooter{display:none!important;}
+            #contentWrapper > div.bPageFooter.noTableFooter > div{display:none!important;}
+            #contentWrapper > div.bPageFooter.noTableFooter > div{display:none!important;}
+            #AppBodyHeader{display:none!important;}
+            #globalHeaderBar{display:none!important;}
+            .sfdcBody{
+                background: transparent!important;
+            }
+            #contentWrapper > div.bodyDiv.brdPalette.brandPrimaryBrd{
+                box-shadow:none!important;
+                background-color: transparent!important;
+            }
+            .form-control {
+                background: transparent!important;
+                color: #163757!important;
+                border: 2px solid #163757!important;
+            }
+            .botao{
+                color: #163757!important;
+                background-color: #86D0F3!important;
+                border-color: #86D0F3!important;
+                font-size: 16px!important;
+                display: block!important;
+                width: 100%!important;
+                display: inline-block!important;
+                margin-bottom: 0!important;
+                font-weight: normal!important;
+                text-align: center;
+                vertical-align: middle!important;
+                -ms-touch-action: manipulation!important;
+                touch-action: manipulation!important;
+                cursor: pointer!important;
+                background-image: none!important;
+                border: 1px solid transparent!important;
+                white-space: nowrap!important;
+                padding: 6px 12px!important;
+                font-size: 14px!important;
+                line-height: 1.42857143!important;
+                border-radius: 4px!important;
+                -webkit-user-select: none!important;
+                -moz-user-select: none!important;
+                -ms-user-select: none!important;
+                user-select: none!important;
+                font-family: inherit!important;
+                font-size: inherit!important;
+                line-height: inherit!important;
+                -webkit-appearance: button!important;
+                cursor: pointer!important;
+                text-transform: none!important;
+                overflow: visible!important;
+                color: inherit!important;
+                font: inherit!important;
+                margin: 0!important;            
+            }
+            .botao:hover{
+                color: #fff!important;
+                background-color: #286090!important;
+                border-color: #204d74!important;
+                text-decoration: none!important;
+            }
+        </style>
+        
+    </head>
+
+    <body>    
+        
+        <div class="row">
+            <div class="col-sm-12 text-center">        
+                <div style="width:100%; height:10px;"></div>
+                <h3>Deixe aqui seu comentário, sugestão, reclamação ou elogio sobre nós.
+                    <small>
+                        <br/>
+                        <br/>Buscamos contínua evolução em nossos processos.
+                        <br/>Seu feedback é de grande importância para melhor atendê-lo.
+                    </small>
+                </h3>
+                
+            </div>
+        </div>
+        <br/><br/>
+        
+        <apex:outputText rendered="{!IF(Mensagem == '',true,false)}" >
+            <apex:form >
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 ">
+                            <apex:inputText styleClass="form-control" html-placeholder="Seu nome..." value="{!Nome}"/>
+                        </div>
+                        <div class="col-sm-4 ">
+                            <apex:inputText styleClass="form-control" html-placeholder="Empresa..." value="{!Empresa}"/>
+                        </div>
+                    </div>
+                    <br/>
+                    
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 ">
+                            <apex:inputText styleClass="form-control" html-placeholder="Email p/ contato..." value="{!Email}"/>
+                        </div>
+                        <div class="col-sm-4 ">
+                            <apex:inputText styleClass="form-control" html-placeholder="Telefone p/ contato..." value="{!Telefone}"/>
+                        </div>
+                    </div>
+                    <br/>
+    
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 ">
+                            <apex:inputText styleClass="form-control" html-placeholder="Assunto..." value="{!Assunto}"/>
+                        </div>
+                        <div class="col-sm-4 ">
+                            <apex:selectList styleClass="form-control" multiselect="false" value="{!Categoria}" size="1" >
+                                <apex:selectOption itemValue="Produto" itemLabel="Produto"/>
+                                <apex:selectOption itemValue="Serviço" itemLabel="Serviço"/>    
+                                <apex:selectOption itemValue="Processo" itemLabel="Processo"/>
+                                <apex:selectOption itemValue="Atendimento" itemLabel="Atendimento"/>
+                                <apex:selectOption itemValue="Sugestão" itemLabel="Sugestão"/>
+                                <apex:selectOption itemValue="Outro" itemLabel="Outro"/>
+                            </apex:selectList>  
+                        </div>
+                    </div>
+                    <br/>                
+    
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-8 " >
+                            <apex:inputTextarea rows="7" style="resize:none;" styleClass="form-control" html-placeholder="Descrição..." value="{!Descricao}"/>
+                        </div>
+                    </div>
+                    <br/>
+                    
+                    <div class="row">
+                        <div class="col-sm-offset-4 col-sm-4 text-center" style="font-weight:bold;">
+                            <apex:commandLink styleClass="botao"  value="Enviar!" action="{!Salvar}"/>
+                        </div>
+                    </div>
+                    
+                </div>
+            </apex:form>
+        </apex:outputText>
+        
+
+        <apex:outputText rendered="{!IF(Mensagem != '',true,false)}" >
+            <div class="row">
+                <div class="col-sm-offset-3 col-sm-6">
+                    <div class="alert alert-{!Cor} text-center" role="alert" style="font-weight:bold;">
+                        {!Mensagem}
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-sm-offset-3 col-sm-6 text-center">
+                    <a href='#' onclick="location.href=location.href" >Retornar ao formulário</a>
+                </div>
+            </div>
+        </apex:outputText>
+
+    </body>
+    </html>
+</apex:page>

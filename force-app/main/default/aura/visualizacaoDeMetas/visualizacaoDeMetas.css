@@ -1,0 +1,147 @@
+.THIS .divPrincipal{
+    display: flex;
+    width: 100%;
+    height: auto;
+    min-height: 500px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.THIS .divPrincipal2{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+}
+
+.THIS .divFiltros{
+    display: flex;
+    width: 100%;
+    height: 10%;
+    justify-content: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.THIS .divContent{
+    display: flex;
+    width: 100%;
+    height: 90%;
+    background-color: green;
+}
+
+.THIS .divContentchart{
+    display: flex;
+    width: 70%;
+    height: 100%;
+    background-color: rgb(84, 5, 81);
+}
+
+.THIS .divContentImageAndUser{
+    display: flex;
+    width: 30%;
+    height: 100%;
+    background-color: rgb(22, 36, 22);
+}
+
+.THIS .itemChart{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: #f1f1f1;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.THIS .valorMeta{
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: #301344;
+    text-align: center;
+}
+
+.THIS .tituloMeta{
+    font-size: 15px;
+    color: #a0bb31;
+    font-weight: 600;
+}
+
+.THIS .divImagem{
+    width: 250px;
+    height: 250px;
+    border-radius: 180px;
+    background-color: #f1f1f1;
+    
+}
+
+.THIS .dropzieToggle{
+    padding-left: 5px!important;
+    border-radius: 14px!important;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #301344;
+    color: white;
+    font-size: 12px;
+}
+
+.THIS .dropzie{
+    height: 100%;
+    width: 100%;
+}
+
+.THIS .dropzieMenu {
+    border: 1px solid #301344;
+    height: 160px!important;
+}
+
+.THIS .imgUserClass{
+   height: 100%;
+   border-radius: 100%;
+}
+
+.THIS .classSelecioneFiltro{
+    color: #301344
+}
+
+.THIS .class1277{
+    background-color: #f1f1f1;
+    width: 100%;
+    overflow: auto;
+    height: 30%;
+    margin-top: 12px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0px;
+    margin-left: 0px;
+    padding-right: 0px;
+    display: none;
+}
+
+.THIS .class1278{
+    overflow: auto;
+    height: 120px;
+}
+
+.THIS .class1278::-webkit-scrollbar {
+    width: 5px;
+}
+
+.THIS .class1278::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.THIS .chartClass{
+	width: 93% !important;
+    max-width: 598px!important;    
+}
+.THIS .class1278::-webkit-scrollbar-thumb {
+    background-color: #a0bb31;
+    border-radius: 38px;
+    border: 0px none #ffffff;
+}

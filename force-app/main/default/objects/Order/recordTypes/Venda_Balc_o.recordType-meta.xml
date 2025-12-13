@@ -1,0 +1,912 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Venda_Balc_o</fullName>
+    <active>true</active>
+    <label>Venda Balcão</label>
+    <picklistValues>
+        <picklist>Canal_de_venda_opme__c</picklist>
+        <values>
+            <fullName>Convênio</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Particular</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Público</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Condicao_de_pagamento__c</picklist>
+        <values>
+            <fullName>10x 30%2F60%2F90%2F120%2F150%2F180%2F210%2F240%2F270%2F300 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>11x 30%2F60%2F90%2F120%2F150%2F180%2F210%2F240%2F270%2F300%2F330 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>12x 30%2F60%2F90%2F120%2F150%2F180%2F210%2F240%2F270%2F300%2F330%2F360 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>15 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>15%2F30 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>21 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2x 30%2F60 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>30 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3x 30%2F60%2F90 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>45 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4x 30%2F60%2F90%2F120 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5x 30%2F60%2F90%2F120%2F150 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>6x 30%2F60%2F90%2F120%2F150%2F180 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>7x 30%2F60%2F90%2F120%2F150%2F180%2F210 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>8x 30%2F60%2F90%2F120%2F150%2F180%2F210%2F240 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>9x 30%2F60%2F90%2F120%2F150%2F180%2F210%2F240%2F270 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cruzamento de Saldos %28Permuta%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financiamento Bancário</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Renegociação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sem Mov%2E Financeiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>À Vista</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Confirmado__c</picklist>
+        <values>
+            <fullName>Não</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sim</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Departamento3__c</picklist>
+        <values>
+            <fullName>Comercial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Controladoria</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Diretoria de B%2EI e Growth</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Educação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Governo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Locação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Logística</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Serviço</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Departamento__c</picklist>
+        <values>
+            <fullName>Comercial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Governo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Serviço</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Entrega_Parcial_Autorizada__c</picklist>
+        <values>
+            <fullName>Autorizada</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Não Autorizada</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Entrega_liberada_pelo_financeiro__c</picklist>
+        <values>
+            <fullName>NÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Entrega_parcial__c</picklist>
+        <values>
+            <fullName>Autorizada</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Não Autorizada</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Forma_de_Faturamento__c</picklist>
+        <values>
+            <fullName>Faturamento p%2F Recebimento</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nota Futura</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Padrão</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Forma_de_pagamento2__c</picklist>
+        <values>
+            <fullName>Boleto Banco Itaú CC 98357-1 Contas  a Receber - HOSPCOM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boleto Banco Itaú Contas  a Receber - GDB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boleto Banco Safra CC 585288-2 Contas  a Receber - HOSPCOM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boleto Banco Santander Contas a Receber - GDB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boleto Bancário</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cartao Credito %2F Debito</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cob%2E Boleto - Banco Sicoob - Ag%3A 5004-0 Cc%3A 107431-8 - Hospcom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cob%2E Boleto - Banco do Brasil - Ag%3A 1242-4 Cc%3A 47391-X - Health</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cob%2E Boleto - Banco do Brasil - Ag%3A 1242-4 Cc%3A 48068-1 - ABC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cob%2E Boleto - Banco do Brasil - Ag%3A 1242-4 Cc%3A 69869-5 - Hospcom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cob%2E Boleto - Banco do Brasil - Ag%3A 1610-1 Cc%3A 128057-0 - GDB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cruzamento de Saldos %28Permuta%29 Recebido</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dinheiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>E-commerce</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pix</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>R- Banco Caixa Econômica Federal Ag%2E2512 C%2FC 4001-4 - Hospcom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sem Mov%2E Financeiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transferência Bancária</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Forma_de_pagamento_3__c</picklist>
+        <values>
+            <fullName>Boleto Bancário</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cartão de Crédito</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cartão de Débito</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dinheiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>E-commerce</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Permuta</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pix</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transferência Bancária</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Forma_de_pagamento__c</picklist>
+        <values>
+            <fullName>A VISTA CONTRA EMBARQUE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>A VISTA NO PEDIDO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FINANCIAMENTO BANCÁRIO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OPEN ACCOUNT</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Frete__c</picklist>
+        <values>
+            <fullName>Contratação do Frete por conta de Terceiros</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contratação do Frete por conta do Destinatário %28FOB%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contratação do Frete por conta do Remetente %28CIF%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sem Ocorrência de Transporte%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transporte Próprio por conta do Destinatário</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transporte Próprio por conta do Remetente</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>IRF__c</picklist>
+        <values>
+            <fullName>Não</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sim</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Motivo__c</picklist>
+        <values>
+            <fullName>Comercial - Acessórios sem destaque de valor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comercial - Desconto acima de 5%25 sem informação de liberação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comercial - Divergências de quantidade entre equipamentos e acessórios</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comercial - Endereço de entrega divergente</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comercial - Endereços de cobrança e entrega sem preenchimento</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comercial - Natureza de operação invalida para esse pedido</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comercial - Ordem de compra ou contrato diferente do pedido de venda</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comercial - Pedido em duplicidade</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comercial - Prazo de entrega anterior à data de criação do pedido</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comercial - Sem destaque do pedido anterior de referência para validação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comercial - Sem destaque na obs de qual ot de cobrança por mal uso</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comercial - Sem observações da orientação da troca%2Fbonificação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comercial - Sem preenchimento de forma ou condição de pagamento</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comercial - Venda de produtos em locação ou demonstração sem informação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financeiro - CNPJ Divergente</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financeiro - Cancelado %28Solicitação do Comercial%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financeiro - Comprovante de pagamento</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financeiro - Condição de Pagamento Divergente</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financeiro - Contato Financeiro %28telefone%2Fe-mail%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financeiro - Contrato ou Aditivo de Locação assinado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financeiro - Contrato ou Pedido de Compra assinado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financeiro - Dados Bancários %28cliente público%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financeiro - Empenho ou Ordem de Fornecimento assinada</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financeiro - Endereço Divergente do Cadastro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financeiro - Filial%C2%A0Correta</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financeiro - Fora da política de crédito</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financeiro - Inadimplente</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financeiro - Judicializado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financeiro - Pendência de documento%28s%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financeiro - Razão Social Divergente</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financeiro - Reprovado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financeiro - Sem Análise de Crédito</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financeiro - Valor Divergente</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Locação - Dados incorretos</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Locação - Falta de logística para entrega</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Locação - Prazo inviável para atendimento</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Locação - configuração de equipamento incorreto</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Locação - informações insuficientes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Locação - não disponibilidade do equipamento</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Natureza_de_Opera_o__c</picklist>
+        <values>
+            <fullName>BONIFICAÇÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DEMONSTRAÇÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EXPORTAÇÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LOCAÇÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>REMESSA DE TROCA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>REMESSA EM CONSIGNAÇÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SERVIÇO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VENDA</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Necess_rio_Treinamento__c</picklist>
+        <values>
+            <fullName>NÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Pedido_Convertido_em_Venda__c</picklist>
+        <values>
+            <fullName>NÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Pedido_da_Linha_de_OPME__c</picklist>
+        <values>
+            <fullName>NÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Pedido_de_Representacao__c</picklist>
+        <values>
+            <fullName>Não</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sim</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Plano_de_sa_de__c</picklist>
+        <values>
+            <fullName>AFFEGO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AMIL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ASSEFAZ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BRADESCO SAÚDE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CAESAN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CASSEMS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CASSI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GEAP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HAPVIDA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IMAS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IPASGO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MAIS SAÚDE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MEDSENIOR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NOTREDAME INTERMÉDICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PLANMED</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>POSTAL SAÚDE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SAMEL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNIMED</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNIMED CERRADO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNIMED GOIANIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNIMED GURUPI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNIMED ITUMBIARA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNIMED NACIONAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNIMED PALMAS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNIMED RIO VERDE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VIVACOM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Prioridade__c</picklist>
+        <values>
+            <fullName>ALTO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BAIXO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NORMAL</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Referente_a_Demonstra_o_loca_o__c</picklist>
+        <values>
+            <fullName>NÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>RegionalServico__c</picklist>
+        <values>
+            <fullName>DF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GO%2FMT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NORTE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SP%2FMS E DEMAIS REGIÕES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TO</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status</picklist>
+        <values>
+            <fullName>Aguardando Aprovação Comercial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aguardando Aprovação Financeira</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aprovado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Atendido Parcial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Atendido Total</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ativo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cancelado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Desativado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Em Andamento</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Entregue Parcial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Entregue Total</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pendente</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rascunho</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reprovado</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status_Commerce__c</picklist>
+        <values>
+            <fullName>Canceled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Malsucedido</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>On hold</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending payment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Processing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Refunded</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tipo_de_Frete__c</picklist>
+        <values>
+            <fullName>CIF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FOB</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tipo_de_Layout__c</picklist>
+        <values>
+            <fullName>FATURA DE LOCAÇÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NOTA DE DÉBITO LOCAÇÃO</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tipo_de_Transa_o__c</picklist>
+        <values>
+            <fullName>Crédito</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Débito</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Treinamento_via_Hospcom__c</picklist>
+        <values>
+            <fullName>NÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

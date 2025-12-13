@@ -1,0 +1,95 @@
+<aura:component controller="AprovacaoPedido" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css'
+                          )}"     
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery
+                           )}"                    
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    <div style="display: flex; justify-content: center; align-items: center; width: 100%;height: 100%">
+        <!-- SPINNER DE CARREGAMENTO -->
+        <div id='spinnerDivAprovacao' style="display: none">
+            <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+        </div>
+        
+        <div class="divMestre">
+            <div style="display: flex; column-gap: 10px;">
+                <div class="textAprovacao">Desconto total do pedido</div>
+                <div class="percentualDesconto"></div>
+            </div>
+            
+            
+            <select name="motivos" id="motivos">
+                <option value="" selected="selected" disabled="true">Motivo da reprovação</option>
+                <option value="Comercial - Acessórios sem destaque de valor">Comercial - Acessórios sem destaque de valor</option>
+                <option value="Comercial - Desconto acima de 5% sem informação de liberação">Comercial - Desconto acima de 5% sem informação de liberação</option>
+                <option value="Comercial - Divergências de quantidade entre equipamentos e acessórios">Comercial - Divergências de quantidade entre equipamentos e acessórios</option>
+                <option value="Comercial - Endereço de entrega divergente">Comercial - Endereço de entrega divergente</option>
+                <option value="Comercial - Endereços de cobrança e entrega sem preenchimento">Comercial - Endereços de cobrança e entrega sem preenchimento</option>
+                <option value="Comercial - Natureza de operação invalida para esse pedido">Comercial - Natureza de operação invalida para esse pedido</option>
+                <option value="Comercial - Ordem de compra ou contrato diferente do pedido de venda">Comercial - Ordem de compra ou contrato diferente do pedido de venda</option>
+                <option value="Comercial - Pedido em duplicidade">Comercial - Pedido em duplicidade</option>
+                <option value="Comercial - Prazo de entrega anterior à data de criação do pedido">Comercial - Prazo de entrega anterior à data de criação do pedido</option>
+                <option value="Comercial - Sem destaque do pedido anterior de referência para validação">Comercial - Sem destaque do pedido anterior de referência para validação</option>
+    <option value="Comercial - Sem destaque na obs de qual ot de cobrança por mal uso">Comercial - Sem destaque na obs de qual ot de cobrança por mal uso</option>
+    <option value="Comercial - Sem observações da orientação da troca/bonificação">Comercial - Sem observações da orientação da troca/bonificação</option>
+    <option value="Comercial - Sem preenchimento de forma ou condição de pagamento">Comercial - Sem preenchimento de forma ou condição de pagamento</option>
+    <option value="Comercial - Venda de produtos em locação ou demonstração sem informação">Comercial - Venda de produtos em locação ou demonstração sem informação</option>
+    <option value="Financeiro - CNPJ Divergente">Financeiro - CNPJ Divergente</option>
+    <option value="Financeiro - Condição de Pagamento Divergente">Financeiro - Condição de Pagamento Divergente</option>
+    <option value="Financeiro - Contato Financeiro (telefone/e-mail)">Financeiro - Contato Financeiro (telefone/e-mail)</option>
+    <option value="Financeiro - Contrato ou Aditivo de Locação assinado">Financeiro - Contrato ou Aditivo de Locação assinado</option>
+    <option value="Financeiro - Contrato ou Pedido de Compra assinado">Financeiro - Contrato ou Pedido de Compra assinado</option>
+    <option value="Financeiro - Dados Bancários (cliente público)">Financeiro - Dados Bancários (cliente público)</option>
+    <option value="Financeiro - Empenho ou Ordem de Fornecimento assinada">Financeiro - Empenho ou Ordem de Fornecimento assinada</option>
+    <option value="Financeiro - Endereço Divergente do Cadastro">Financeiro - Endereço Divergente do Cadastro</option>
+    <option value="Financeiro - Filial Correta">Financeiro - Filial Correta</option>
+    <option value="Financeiro - Inadimplente">Financeiro - Inadimplente</option>
+    <option value="Financeiro - Judicializado">Financeiro - Judicializado</option>
+    <option value="Financeiro - Pendência de documento(s)">Financeiro - Pendência de documento(s)</option>
+    <option value="Financeiro - Razão Social Divergente">Financeiro - Razão Social Divergente</option>
+    <option value="Financeiro - Reprovado">Financeiro - Reprovado</option>
+    <option value="Financeiro - Valor Divergente">Financeiro - Valor Divergente</option>
+    <option value="Locação - Dados incorretos">Locação - Dados incorretos</option>
+    <option value="Locação - Informações insuficientes">Locação - Informações insuficientes</option>
+    <option value="Locação - Configuração de equipamento incorreto">Locação - Configuração de equipamento incorreto</option>
+    <option value="Locação - Não disponibilidade do equipamento">Locação - Não disponibilidade do equipamento</option>
+    <option value="Locação - Prazo inviável para atendimento">Locação - Prazo inviável para atendimento</option>
+    <option value="Locação - Falta de logística para entrega">Locação - Falta de logística para entrega</option>
+</select>
+
+            
+            
+            <textarea 
+                      placeholder="Comentários"
+                      type="text" 
+                      id="comentarioInput" 
+                      class="justificativaInput"
+                      />
+            
+            <div class='listAnalisesRelac'>
+                Análises de crédito vinculadas ao cliente deste pedido
+                
+                <div class='innerListAnalisesRelac' id='innerListAnalisesRelac'>
+                    
+                    
+                    
+                </div>
+            </div>
+            
+            <lightning:button label="Aprovar"
+                              class="buttonAction"
+                              onclick="{! c.aprovaRegistro }"/>
+            
+            <lightning:button label="Reprovar"
+                              class="buttonAction buttonReprovar"
+                              onclick="{! c.reprovaRegistro }"/>
+            
+        </div>
+        
+    </div>
+</aura:component>

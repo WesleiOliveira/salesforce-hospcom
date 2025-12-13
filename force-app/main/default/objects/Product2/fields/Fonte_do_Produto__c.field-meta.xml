@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fonte_do_Produto__c</fullName>
+    <externalId>false</externalId>
+    <label>Fonte do Produto</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>0 - NACIONAL</fullName>
+                <default>false</default>
+                <label>0 - NACIONAL</label>
+            </value>
+            <value>
+                <fullName>1 - EXTRANGEIRA IMPORTAÇÃO DIRETA</fullName>
+                <default>false</default>
+                <label>1 - EXTRANGEIRA IMPORTAÇÃO DIRETA</label>
+            </value>
+            <value>
+                <fullName>2 - EXTRANGEIRA COM COMPRA NACIONAL</fullName>
+                <default>false</default>
+                <label>2 - EXTRANGEIRA COM COMPRA NACIONAL</label>
+            </value>
+            <value>
+                <fullName>6 - EXTRANGEIRA IMPORTAÇÃO DIRETA SEM SIMILAR NACIONAL</fullName>
+                <default>false</default>
+                <label>6 - EXTRANGEIRA IMPORTAÇÃO DIRETA SEM SIMILAR NACIONAL</label>
+            </value>
+            <value>
+                <fullName>7 - EXTRANGEIRA COMPRA NACIONAL SEM SIMILAR</fullName>
+                <default>false</default>
+                <label>7 - EXTRANGEIRA COMPRA NACIONAL SEM SIMILAR</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

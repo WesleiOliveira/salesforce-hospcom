@@ -1,0 +1,45 @@
+<aura:component controller="TarefasControlador" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery)}"                     
+                  afterScriptsLoaded="{!c.mainFunction}" />
+    
+    <div>
+        <!-- SPINNER DE CARREGAMENTO -->
+        <div id='spinnerDiv' style="display: none">
+            <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+        </div>
+        
+        <div class='class453454'>
+            <h1>
+                <span  style='font-weight: 600; font-size: 15px; font-family: system-ui'>Período de fechamento: </span>
+                <select id="periodoAtual">
+                    <option value="janeiro">Janeiro</option>
+                    <option value="fevereiro">Fevereiro</option>
+                    <option value="março">Março</option>
+                    <option value="abril">Abril</option>
+                    <option value="maio">Maio</option>
+                    <option value="junho">Junho</option>
+                    <option value="julho">Julho</option>
+                    <option value="agosto">Agosto</option>
+                    <option value="setembro">Setembro</option>
+                    <option value="outubro">Outubro</option>
+                    <option value="novembro">Novembro</option>
+                    <option value="dezembro">Dezembro</option>
+                </select>
+            </h1>
+            
+        	<button id='fecharButton' class='class5687948564'><i class="fa fa-sign-in"></i>
+            	Fechar metas do período
+            </button>
+            
+        </div>
+    
+    
+    </div>
+	
+</aura:component>

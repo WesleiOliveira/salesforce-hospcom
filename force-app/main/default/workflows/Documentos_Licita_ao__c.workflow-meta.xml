@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Email_de_Alerta_de_Vencimento_de_Documento</fullName>
+        <ccEmails>douglas.molina@hospcom.net</ccEmails>
+        <description>Email de Alerta de Vencimento de Documento</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>desenvolvimento@hospcom.net</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>gabriel@hospcom.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Alerta_Vencimento_Documento</template>
+    </alerts>
+    <alerts>
+        <fullName>e_mail_de_teste</fullName>
+        <ccEmails>douglas.molina@hospcom.net</ccEmails>
+        <description>e-mail de teste</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>desenvolvimento@hospcom.net</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>gabriel@hospcom.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Alerta_Vencimento_Documento</template>
+    </alerts>
+    <alerts>
+        <fullName>teste_imediato</fullName>
+        <ccEmails>douglas.molina@hospcom.net</ccEmails>
+        <description>teste imediato</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>desenvolvimento@hospcom.net</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>gabriel@hospcom.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Alerta_Vencimento_Documento</template>
+    </alerts>
+</Workflow>

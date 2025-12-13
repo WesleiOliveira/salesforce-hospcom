@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ativo__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Ativo</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Asset.AccountId</field>
+            <operation>equals</operation>
+            <valueField>$Source.AccountId</valueField>
+        </filterItems>
+        <filterItems>
+            <field>Asset.Contrato_de_Servi_o__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.ContratodeServico__c</valueField>
+        </filterItems>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>Asset</referenceTo>
+    <relationshipLabel>Casos</relationshipLabel>
+    <relationshipName>Casos</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reserva_recorrente__c</fullName>
+    <defaultValue>&apos;Não Recorrente&apos;</defaultValue>
+    <externalId>false</externalId>
+    <inlineHelpText>Exemplo: Suponha que façamos uma reserva da sala de reunião da sede da rua 89, do dia 04/03/2024 - 13:30 às 14:30 e essa reserva seja recorrente no &quot;Mês atual&quot;. Logo, todas as segundas-feiras do mês de Março no horario 13:30 às 14:30, serão reservados. Mas isso não se aplicará para o mês seguinte que Abriu.</inlineHelpText>
+    <label>Reserva recorrente</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Não Recorrente</fullName>
+                <default>true</default>
+                <label>Não Recorrente</label>
+            </value>
+            <value>
+                <fullName>Semanal</fullName>
+                <default>false</default>
+                <label>Semanal</label>
+            </value>
+            <value>
+                <fullName>Quinzenal</fullName>
+                <default>false</default>
+                <label>Quinzenal</label>
+            </value>
+            <value>
+                <fullName>Mensal</fullName>
+                <default>false</default>
+                <label>Mensal</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

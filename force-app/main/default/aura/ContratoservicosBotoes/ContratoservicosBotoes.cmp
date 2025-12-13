@@ -1,0 +1,56 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,force:hasRecordId">
+    <div class="slds-clearfix">
+      <div class="slds-float_right">
+        <lightning:buttonMenu class="slds-m-right_x-small" menuAlignment="auto" aura:id="menu" onselect="{! c.handleSelect }" alternativeText="Impressão" iconName="utility:print">
+            <lightning:menuItem value="Checklist de Equipamentos" label="Checklist de Equipamentos"/>
+        </lightning:buttonMenu>
+      </div>
+    </div>
+    
+   
+    
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="modal" type="boolean" default="false"/>
+    <aura:attribute name="pdf_CKL" type="boolean" default="false"/>
+
+	
+	<div class="slds-m-around_x-medium">
+        
+		<!-- modal pdf OT -->
+		<aura:if isTrue="{!v.modal}">
+			
+				<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+					<div class="slds-modal__container" style="max-width:70rem!important; width:80%!important;">
+						   <!-- cabeçalho -->
+						<header class="modal-header slds-modal__header">
+							<lightning:buttonIcon iconName="utility:close" onclick="{!c.FecharPdf}" alternativeText="close" variant="bare-inverse" class="slds-modal__close"/>
+							<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">PDF Checklist</h2>
+						</header>
+						<!-- corpo -->            
+						<div class="slds-modal__content slds-p-around_none" id="modal-content-id-1" style="height:90vh !important;max-height:90vh!important;">
+							<aura:if isTrue="{!v.pdf_CKL}">
+                            	<iframe src="{! '/Sales/apex/Checklist_de_Equipamentos?Id='+v.recordId}" frameborder="0" allow="geolocation *; microphone *; camera *" width="100%" height="100%" scrolling="yes" allowfullscreen="true"></iframe>
+                            </aura:if>
+                            
+						<!-- rodape -->
+						<footer class="slds-modal__footer">
+							<table style="width:100%!important;">
+								<tr>
+									<td style="text-align:right!important;vertical-align:bottom!important;">
+										<lightning:button variant="neutral" label="Cancelar" title="Cancelar" onclick="{!c.FecharPdf}"/>
+										<!-- <lightning:button variant="brand" label="Salvar checklist" title="Salvar checklist" onclick="{!c.SalvarPdfChecklist1}"/> -->
+									</td>
+								</tr>
+							</table>
+						</footer>
+                            
+                        </div>
+						
+					</div>
+				</section>						
+			
+			<div class="slds-backdrop slds-backdrop_open"></div>			
+        </aura:if>
+        
+    </div>
+</aura:component>

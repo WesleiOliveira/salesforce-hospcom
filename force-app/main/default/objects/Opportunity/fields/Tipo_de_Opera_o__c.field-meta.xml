@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo_de_Opera_o__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipo de Oportunidade</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>OPORTUNIDADE REGULAR</fullName>
+                <default>true</default>
+                <label>OPORTUNIDADE REGULAR</label>
+            </value>
+            <value>
+                <fullName>OPORTUNIDADE PAI</fullName>
+                <default>false</default>
+                <label>OPORTUNIDADE PAI</label>
+            </value>
+            <value>
+                <fullName>OPORTUNIDADE FILHA</fullName>
+                <default>false</default>
+                <label>OPORTUNIDADE FILHA</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

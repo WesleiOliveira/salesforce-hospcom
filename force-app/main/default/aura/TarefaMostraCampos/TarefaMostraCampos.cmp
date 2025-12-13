@@ -1,0 +1,160 @@
+<aura:component
+  extends="c.ApexHelper"
+  controller="taskJuridicoControler"
+  implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+  access="global"
+>
+  <ltng:require
+    scripts="{!$Resource.JQuery}"
+  />
+  <aura:attribute name="assunto" type="String" />
+  <aura:attribute name="show" type="Boolean" default="false" />
+  <aura:attribute name="showFields" type="Boolean" default="false" />
+    
+  <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+  <aura:attribute name="mostrarBotao" type="String" default="false" />
+
+<aura:attribute name="selectedAssunto" type="String" />
+<aura:attribute name="showEditModal" type="Boolean" default="false" />
+<!--Valores precisam ser iguais aos nome de APIs do AssuntoJuridco__c -->
+  <aura:attribute
+    name="assuntosJuridicos"
+    type="List"
+    default="[												 'Análise de aditivo',
+                                                                  'Confecção de contrato',
+                                                                  'Contrarrazões',
+                                                                  'Defesa de processo administrativo',
+                                                                  'Denúncia',
+                                                                  'Enviar carta',
+                                                                  'Esclarecimento',
+                                                                  'Impugnação',
+                                                                  'Notificação extrajudicial',
+                                                                  'Processo judicial',
+                                                                  'Prorrogação de entrega',
+                                                                  'Reconsideração',
+                                                                  'Recurso',
+                                                                  'Revisão de contrato',
+                                                                  'Defesa processo judicial',
+                                                                  'Termo de acordo',
+                                                                  'NDA',
+                                                                  'Documentação estratégica',
+                                                                  'Resposta a notificação',
+                                                                  'Audiência',
+                                                                  'Reunião',
+                                                                  'Admissão PJ',
+                                                                  'Desligamento PJ',
+                                                                  'Alteração Contratual PJ',
+                                                                  'Alteração de CNPJ']"
+  />
+    
+<!-- Modal para edição -->
+<aura:if isTrue="{!v.showEditModal}">
+    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <h2 class="slds-modal__title">Editar Assunto Jurídico</h2>
+            </header>
+            <div class="slds-modal__content">
+                
+                <div class="field54">
+                <label>Escolha o novo assunto relacionado à tarefa que está sendo
+                  registrada.</label>                    
+                   
+                <select onchange="{!c.handleChange}" data-field="AssuntoJuridco__c" class="data-field3101">
+                  <option value="{!v.selectedAssunto}"
+                    >Selecione um assunto</option>
+                  <aura:iteration items="{!v.assuntosJuridicos}" var="assunto">
+                    <option value="{!assunto}">{!assunto}</option>
+                  </aura:iteration>
+                </select>
+              </div>                
+            </div>
+            <footer class="slds-modal__footer">
+                <lightning:button variant="neutral" label="Cancelar" onclick="{!c.closeEditModal}" />
+                <lightning:button variant="brand" label="Salvar" onclick="{!c.saveAssunto}" />
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</aura:if>
+
+  <aura:if isTrue="{!v.show}">
+    <div
+      class="mainMainMain4534"
+      style="background: #f5f5f5;
+    border-radius: 15px;
+    margin-top: 29px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"
+    >
+      <div class="divContainer543">
+          
+        <div class="head4334"> {!v.assunto} </div>
+          
+        <div class="helpText">Departamento Juridico</div>
+        <div class="body89831">
+          <aura:if isTrue="{!v.showFields}">
+              
+            <div class="fieldContainer446375">
+              <div class="tituloField2453"
+                >Data de recebimento do primeiro pedido/empenho/contrato:</div
+              >
+              <div
+                class="field434"
+                id="Qual_a_data_de_recebimento_do_primei__c"
+              ></div>
+            </div>
+
+            <div class="fieldContainer446375">
+              <div class="tituloField2453"
+                >Motivo do envio da ocorrência pelo cliente:</div
+              >
+              <div
+                class="field434"
+                id="Qual_o_motivo_do_envio_da_ocorr_nc__c"
+              ></div>
+            </div>
+
+            <div class="fieldContainer446375">
+              <div class="tituloField2453"
+                >Data prevista para resolução da ocorrência:</div
+              >
+              <div
+                class="field434"
+                id="Qual_a_data_prevista_para_a_resol__c"
+              ></div>
+            </div>
+
+            <div class="fieldContainer446375">
+              <div class="tituloField2453"
+                >Haverá troca de modelo ou entrega parcial:</div
+              >
+              <div
+                class="field434"
+                id="Acontecer_alguma_troca_de_modelo_ou__c"
+              ></div>
+            </div>
+
+            <div class="fieldContainer446375">
+              <div class="tituloField2453">Outras informações:</div>
+              <div
+                class="field434"
+                id="Inclua_as_demais_informa_es_necess__c"
+              ></div>
+            </div>
+          </aura:if>
+        </div>
+
+          
+          
+        <div class="footer3456"> 
+          <!-- Botão para editar assunto -->
+            
+            <aura:if isTrue="{!v.mostrarBotao}">            
+            <lightning:button class="button3101" label="Editar" onclick="{!c.openEditModal}" variant="brand" />
+           </aura:if>  
+            
+          </div> 
+      </div>
+    </div>
+  </aura:if>
+</aura:component>

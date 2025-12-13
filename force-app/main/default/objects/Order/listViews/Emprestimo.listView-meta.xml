@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Emprestimo</fullName>
+    <columns>ORDERS.ORDER_NUMBER</columns>
+    <columns>SALES.ACCOUNT.NAME</columns>
+    <columns>Vendedor__c</columns>
+    <columns>Situacao2__c</columns>
+    <columns>ORDERS.TOTAL_AMOUNT</columns>
+    <columns>ORDERS.EFFECTIVE_DATE</columns>
+    <columns>CONTRACT.CONTRACT_NUMBER</columns>
+    <columns>ORDERS.STATUS</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Natureza_de_Opera_o__c</field>
+        <operation>equals</operation>
+        <value>EMPRÉSTIMO</value>
+    </filters>
+    <filters>
+        <field>ORDER.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Order.Demonstracao</value>
+    </filters>
+    <filters>
+        <field>ORDERS.STATUS</field>
+        <operation>notEqual</operation>
+        <value>Finalizado,Finalizado_,Cancelado,Reprovado,Desativado</value>
+    </filters>
+    <label>Empréstimo</label>
+</ListView>

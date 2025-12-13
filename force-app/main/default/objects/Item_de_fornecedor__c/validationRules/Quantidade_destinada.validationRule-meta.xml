@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Quantidade_destinada</fullName>
+    <active>true</active>
+    <errorConditionFormula>Quantidade_destinada__c &lt; 0</errorConditionFormula>
+    <errorMessage>Quantidade destinada não pode ser negativa.</errorMessage>
+</ValidationRule>

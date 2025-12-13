@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pedido_ja_aprovado_2</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+!$User.Ignorar_erros__c,
+Acao_interna__c == false,
+$User.Id != &apos;0055A000008lqdW&apos;,
+$User.Id != &apos;0056e00000CoF2L&apos;,
+$User.Id != &apos;0056e00000CqjCK&apos;,
+$User.Id != &apos;0056e00000Co1I0&apos;,
+$User.Id != &apos;0056e00000Cr9bk&apos;,
+$User.Id != &apos;0056e00000EJYMx&apos;,
+     OR (
+TEXT(Order.Status) == &apos;Aprovado&apos;,
+TEXT(Order.Status) == &apos;Ativo&apos;,
+TEXT(Order.Status) == &apos;Em Andamento&apos;,
+TEXT(Order.Status) == &apos;Em calibração / Separação&apos;,
+TEXT(Order.Status) == &apos;Agendado&apos;,
+TEXT(Order.Status) == &apos;Em demonstração&apos;,
+TEXT(Order.Status) == &apos;Retorno da demo&apos;,
+TEXT(Order.Status) == &apos;Em Verificação Funcional&apos;,
+TEXT(Order.Status) == &apos;Finalizado&apos;,
+TEXT(Order.Status) == &apos;Entregue Parcial&apos;,
+TEXT(Order.Status) == &apos;Entregue Total&apos;,
+TEXT(Order.Status) == &apos;Atendido Total&apos;,
+TEXT(Order.Status) == &apos;Atendido Parcial&apos;
+),
+ OR(
+    AND(ISCHANGED(UnitPrice), 
+								TEXT(ROUND(UnitPrice, 2)) != TEXT(ROUND(PRIORVALUE(UnitPrice), 2)), 
+								UnitPrice != 0),
+    ISCHANGED(Quantity)
+    )
+)</errorConditionFormula>
+    <errorMessage>Não é possível alterar valores em um pedido já aprovado ou em aprovação.</errorMessage>
+</ValidationRule>

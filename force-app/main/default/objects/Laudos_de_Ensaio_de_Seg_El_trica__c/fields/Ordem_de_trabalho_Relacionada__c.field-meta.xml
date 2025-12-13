@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ordem_de_trabalho_Relacionada__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Ordem de trabalho Relacionada</label>
+    <lookupFilter>
+        <active>true</active>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <filterItems>
+            <field>WorkOrder.AssetId</field>
+            <operation>equals</operation>
+            <valueField>$Source.Equipamento__c</valueField>
+        </filterItems>
+        <filterItems>
+            <field>$Source.Equipamento__c</field>
+            <operation>equals</operation>
+            <value>02i31000006fPv1</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>WorkOrder</referenceTo>
+    <relationshipLabel>Ensaios de Segurança Elétrica (E.S.E)</relationshipLabel>
+    <relationshipName>Ensaios_de_Seguran_a_El_trica_E_S_E</relationshipName>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

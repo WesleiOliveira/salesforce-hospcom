@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <description>Define se a pergunta está habilitada ou desativada.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Defina se a pergunta está habilitada ou desabilitada.</inlineHelpText>
+    <label>Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Ativo</fullName>
+                <default>true</default>
+                <label>Ativo</label>
+            </value>
+            <value>
+                <fullName>Inativo</fullName>
+                <default>false</default>
+                <label>Inativo</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

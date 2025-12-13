@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>status_daniel</fullName>
+    <active>false</active>
+    <errorConditionFormula>TEXT(Aprovado__c)  != &quot;&quot; &amp;&amp;  TEXT(Parecer__c) = &quot;&quot;</errorConditionFormula>
+    <errorMessage>Você precisa atualizar o campos de parecer</errorMessage>
+</ValidationRule>

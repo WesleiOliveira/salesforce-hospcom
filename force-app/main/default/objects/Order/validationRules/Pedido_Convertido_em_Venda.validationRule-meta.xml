@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pedido_Convertido_em_Venda</fullName>
+    <active>true</active>
+    <description>Demonstração: 0126e000001pMEkAAM
+Demonstração Rápida: 012U4000000QqxRIAS
+Remessa de Locação: 012U4000009MeCvIAK</description>
+    <errorConditionFormula>AND(
+    OR(
+      RecordTypeId == &apos;0126e000001pMEkAAM&apos;,
+      RecordTypeId == &apos;012U4000000QqxRIAS&apos;,
+      ISPICKVAL(Natureza_de_Opera_o__c, &apos;DEMONSTRAÇÃO&apos;)
+    ),
+  Acao_interna__c == false,
+  ISCHANGED(Status),
+  ISPICKVAL(Status, &quot;Finalizado&quot;),
+  ISBLANK(TEXT(Pedido_Convertido_em_Venda__c))
+)</errorConditionFormula>
+    <errorDisplayField>Pedido_Convertido_em_Venda__c</errorDisplayField>
+    <errorMessage>Favor Informe se o Pedido de Demo / locação resultou em algum pedido de venda.</errorMessage>
+</ValidationRule>

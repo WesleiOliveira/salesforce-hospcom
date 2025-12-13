@@ -1,0 +1,47 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" controller="FileUploadController">
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="fileNames" type="String[]" />
+    <aura:attribute name="isModalOpen" type="Boolean" default="false" />
+
+    <button class="btn-anexo" style="width: 100%;
+    background: #00345c;
+    color: #fff;
+    margin-bottom: 10px;
+    border-radius:3px;"  label="Anexar Documentos" onclick="{!c.openFileUploadModal}">
+        Anexar Contrato Externo
+    </button>
+
+    <aura:if isTrue="{!v.isModalOpen}">
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Header -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.closeFileUploadModal}">
+                        <lightning:icon iconName="utility:close" alternativeText="close" size="small"/>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 class="slds-text-heading_medium">Upload de Arquivos</h2>
+                </header>
+
+                <!-- Modal/Popup Body -->
+                <div class="slds-modal__content slds-p-around_medium">
+                    <lightning:fileUpload
+                        label="Upload File"
+                        recordId="{!v.recordId}"
+                        onuploadfinished="{!c.handleUploadFinished}"
+                        accept=".pdf" />
+                </div>
+
+                <!-- Modal/Popup Footer -->
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral" label="Cancelar" onclick="{!c.closeFileUploadModal}" />
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+
+    <aura:iteration items="{!v.fileNames}" var="fileName">
+        <p>{!fileName}</p>
+    </aura:iteration>
+</aura:component>

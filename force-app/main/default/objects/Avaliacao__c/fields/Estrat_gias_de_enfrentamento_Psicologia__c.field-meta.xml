@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Estrat_gias_de_enfrentamento_Psicologia__c</fullName>
+    <externalId>false</externalId>
+    <label>Estratégias de enfrentamento</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Funcional</fullName>
+                <default>false</default>
+                <label>Funcional</label>
+            </value>
+            <value>
+                <fullName>Disfuncional</fullName>
+                <default>false</default>
+                <label>Disfuncional</label>
+            </value>
+            <value>
+                <fullName>Não se aplica</fullName>
+                <default>false</default>
+                <label>Não se aplica</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

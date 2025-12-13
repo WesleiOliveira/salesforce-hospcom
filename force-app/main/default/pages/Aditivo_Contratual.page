@@ -1,0 +1,486 @@
+<apex:page standardController="Aditivos_Contratuais__c"  applyHtmlTag="false" showHeader="false" renderAs="pdf">
+      
+    <head>
+        <style type="text/css" media="print">
+             @page:first{
+                size:A4;
+                background: url({!IF(Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Timbre__c == 'HEALTH SOLUTION',$Resource.SobreHealth,IF(Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Timbre__c == 'HOSPCOM',$Resource.SobreHospcom,IF(Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Timbre__c == 'GDB',$Resource.SobreGDB,"-")))});
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);
+                }
+            }
+            @page{
+                size:A4;
+                background: url({!IF(Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Timbre__c == 'HEALTH SOLUTION',$Resource.TimbradoHealth,IF(Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Timbre__c == 'HOSPCOM',$Resource.TimbradoHospcom,IF(Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Timbre__c == 'GDB',$Resource.TimbradoGDB,"-")))});
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);}
+            }
+            .pagenumber:before {
+                content:counter(page);
+            }
+            .pagecount:before {
+                content:counter(pages);
+            }
+            div.header {
+                margin:0px 0px 0px 0px;
+                padding:30px 0px 50px 0px;
+                position:running(header);
+                height:70px;
+            }
+            div.content {
+            }
+            div.footer1 {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(footer);
+                text-align:right;
+                height:20px;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:normal;
+            }
+           
+        </style>
+        <style type="text/css">
+            .titulo_proposta{
+                font-family:arial, verdana, sans-serif;
+                font-size:20px;
+                font-weight:bold;
+                text-align:center;
+            }
+            .subtitulo_proposta{ /* remover */
+                font-family:arial, verdana, sans-serif;
+                font-size:16px;
+                font-weight:normal;
+                text-decoration:underline;
+                text-align:center;
+                width:100%;
+            }
+            .titulo_numeracao{
+                font-family:arial, verdana, sans-serif;
+                font-size:14px;
+                font-weight:normal;
+                width:100%;
+                padding-right:20px;
+            }
+            .destaque_label{
+                font-family:arial, verdana, sans-serif;
+                font-size:15px;
+                line-height:150%;
+            }
+            .destaque_dado{
+                font-family:arial, verdana, sans-serif;
+                font-size:17px;
+                line-height:150%;
+                font-weight:bold;
+                padding-left:20px;
+            }
+            .destaque_dado2{
+                font-family:arial, verdana, sans-serif;
+                font-size:14px;
+                line-height:150%;
+                padding-left:20px;:
+            }
+            .clausula_cabecalho{
+                font-family:arial, verdana, sans-serif;
+                font-size:14px;
+                font-weight:bold;
+                line-height:120%;
+            }
+            .clausula_texto{
+                font-family:arial, verdana, sans-serif;
+                font-size:13px;
+                text-align:justify;
+                text-justify:inter-word;
+                line-height:120%;
+                text-indent:50px;
+            }
+            .clausula_texto_declaracao{
+                font-family:arial, verdana, sans-serif;
+                font-size:13px;
+                line-height:120%;
+            }
+            .clausula_obs{
+                font-family:arial, verdana, sans-serif;
+                font-size:11px;
+                font-weight:bold;
+                text-decoration:underline;
+                font-style:italic;
+                line-height:120%;
+                text-align:right;
+            }            
+            .assinatura{
+                font-family:arial, verdana, sans-serif;
+                font-size:13px;
+                line-height:120%;
+            }
+            .notas{
+                font-family:arial, verdana, sans-serif;
+                font-size:13px;
+                font-style:italic;
+            }
+            
+            
+            .tab1 tr{
+                //-fs-table-paginate:paginate;
+                page-break-inside:avoid;
+            }
+            .tab2{
+                table-layout: fixed;
+                page-break-inside:avoid;
+                border-collapse: collapse;
+            }
+            .tab2 tr{
+                table-layout: fixed;
+            }
+            .inv{
+                padding-right: 10px;
+                padding-top: 10px;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                vertical-align:top;
+                text-align:right;
+            }
+            .nul{
+                padding: 0;
+            }
+            .cab2{
+                padding: 3px;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:bold; 
+                vertical-align:top;            
+                background-color: #e2e3e3;
+                border-right: 1px solid #cacecf;
+                border-bottom: 1px solid #cacecf;
+                border-top: 1px solid #cacecf;
+                border-left: 1px solid #cacecf
+            }
+            .cab{
+                padding: 3px;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:bold; 
+                vertical-align:top;            
+                background-color: #e2e3e3;
+                border-right: 1px solid #cacecf;
+                border-bottom: 1px solid #cacecf;
+                border-top: 1px solid #cacecf;
+                line-height:120%;
+            }
+            .cel{
+                padding: 3px;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                vertical-align:top;
+                border-top: 1px solid #eef2f4;
+                border-right: 1px solid #eef2f4;
+                border-bottom: 1px solid #eef2f4;
+                line-height:120%;
+                //word-wrap: break-word;
+                overflow: hidden;
+                text-transform: uppercase;
+            }
+           
+            .total{
+                border-left: 1px solid #eef2f4;
+            }
+            .destaque{
+                font-weight: bold;
+            }
+            .descr{
+                text-align:justify;
+                text-justify:inter-word;
+            }
+            .img{
+                padding: 3px;
+                vertical-align:middle;
+                border-top: 1px solid #eef2f4;
+                border-right: 1px solid #eef2f4;
+                border-left: 1px solid #eef2f4;
+                border-bottom: 1px solid #eef2f4;
+            }     
+                
+            .tabela_itens{
+                border-top:1px solid #cacecf;
+                -fs-table-paginate:paginate;
+            }.tabela_itens tr{
+                page-break-inside:avoid;
+            }
+            .item_titulo_imagem{
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:bold;
+                vertical-align:top;
+                padding:4px 4px 4px 4px;
+                background-color:#e2e3e3;
+                border-left:1px solid #cacecf;
+                border-right:1px solid #cacecf;
+                border-bottom:1px solid #cacecf;
+            }
+            .item_titulo{
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:bold;
+                vertical-align:top;
+                padding:4px 4px 4px 4px;
+                background-color:#e2e3e3;
+                border-right:1px solid #cacecf;
+                border-bottom:1px solid #cacecf;
+                line-height:120%;
+            }
+            .item_imagem{
+                vertical-align:middle;
+                border-left:1px solid #eef2f4;
+                border-right:1px solid #eef2f4;
+                border-bottom:1px solid #cacecf;
+                padding:4px 4px 4px 4px;
+            }
+            .item_texto{
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                vertical-align:top;
+                border-right:1px solid #eef2f4;
+                border-bottom:1px solid #eef2f4;
+                padding:4px 4px 4px 4px;
+                line-height:120%;
+            }
+            .item_descricao{
+                vertical-align:top;
+                border-right:1px solid #eef2f4;
+                border-bottom:1px solid #cacecf;
+                padding:4px 4px 6px 4px;
+            }
+            .item_descricao_texto{
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                text-align:justify;
+                text-justify:inter-word;
+                line-height:120%;
+            }            
+            .item_descricao_texto_esquerda{
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                line-height:120%;
+            }            
+        </style>
+        
+        <apex:variable var="empresa_logo"        value="{!' '}"/>       
+        <apex:variable var="empresa_banco"       value="{!' '}"/>
+        <apex:variable var="empresa_ag"          value="{!' '}"/>
+        <apex:variable var="empresa_cc"          value="{!' '}"/>
+        <apex:variable var="empresa_cnpj"        value="{!' '}"/>
+        <apex:variable var="cont"                value="{!0}"/>
+        
+        
+        <apex:repeat var="ac" value="{!Aditivos_Contratuais__c.Aditivos_Relacionados__r}">
+         <apex:variable var="cont"        value="{!cont +1}"/>
+        </apex:repeat>
+        
+    </head>
+  
+    <body style="font-family:Arial; padding:0px; margin:0px; border:0px solid #eef2f4; width:*;">
+        <header>
+            <apex:outputText rendered="{!IF(Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Timbre__c == 'HEALTH SOLUTION',true,false)}" >
+                <apex:variable var="empresa_banco"       value="{!'Banco do Brasil'}"/>
+                <apex:variable var="empresa_ag"       value="{!'1242-4'}"/>
+                <apex:variable var="empresa_cc"       value="{!'47391-X'}"/>
+                <apex:variable var="empresa_cnpj"       value="{!'27.476.124/0001-02'}"/>
+            </apex:outputText>
+            
+            <apex:outputText rendered="{!IF(Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Timbre__c == 'GDB',true,false)}" >
+                <apex:variable var="empresa_banco"       value="{!'Banco do Brasil'}"/>
+                <apex:variable var="empresa_ag"       value="{!'1610-1'}"/>
+                <apex:variable var="empresa_cc"       value="{!'128057-0'}"/>
+                <apex:variable var="empresa_cnpj"       value="{!'23.813.388/0001-56'}"/>
+            </apex:outputText>
+            
+            <apex:outputText rendered="{!IF(Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Timbre__c == 'HOSPCOM',true,false)}" >
+                <apex:variable var="empresa_banco"       value="{!'Banco do Brasil'}"/>
+                <apex:variable var="empresa_ag"       value="{!'1242-4'}"/>
+                <apex:variable var="empresa_cc"       value="{!'69869-5'}"/>
+                <apex:variable var="empresa_cnpj"       value="{!'05.743.288/0001-08'}"/>
+            </apex:outputText>
+        </header>
+        <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div style="font-size: 14pt; text-align:center"><b>TERMO ADITIVO AO CONTRATO PARTICULAR DE {!IF(Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.RecordTypeId == "0125A000001QydfQAC","LOCAÇÃO DE EQUIPAMENTO(S)", "PRESTAÇÃO DE SERVIÇO(S)")}</b></div>
+            <br/>
+            <div style="text-align: center"><b>{!Aditivos_Contratuais__c.N_do_Aditivo__c}° TERMO ADITIVO AO CONTRATO DE N°&nbsp;<apex:outputField value="{!Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.N_mero_da_Proposta_Contrato__c}"/></b></div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+        <div class="header">
+
+            </div>
+            
+            <p style="text-align: justify">Pelo presente instrumento particular de Termo Aditivo ao Contrato de {!IF(Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.RecordTypeId == "0125A000001QydfQAC","Locação de Equipamento(s) Hospitalar(es)", "Prestação de Serviço(s)")} de n°&nbsp;<apex:outputField value="{!Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.N_mero_da_Proposta_Contrato__c}"/>, ora celebrado entre as partes abaixo denominadas:</p>
+            <p style="text-align:justify"><b>{!Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Locador_a__r.Raz_o_Social__c}</b>, inscrita no {!IF(Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Locador_a__r.Tipo_de_registro__c = "Conta comercial","CNPJ/MF",0)} sob o nº {!Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Locador_a__r.CNPJ__c} com sede na {!Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Locador_a__r.BillingStreet}, {!Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Locador_a__r.BillingCity} - {!Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Locador_a__r.BillingState}, CEP {!Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Locador_a__r.BillingPostalCode} por seu representante legal abaixo assinado, doravante denominada {!IF(Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.RecordTypeId == '0125A000001QydfQAC',"LOCADORA", "CONTRATADA")} e</p>
+            <p style="text-align:justify"><b>{!IF(Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Locat_rio_a__r.Tipo_de_registro__c = "Conta comercial", Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Locat_rio_a__r.Raz_o_Social__c,Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Locat_rio_a__r.FirstName + ' ' + Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Locat_rio_a__r.LastName)}</b>, inscrita no {!IF(Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Locat_rio_a__r.Tipo_de_registro__c = "Conta comercial","CNPJ/MF","CPF")} sob o nº {!IF(Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Locat_rio_a__r.Tipo_de_registro__c = "Conta comercial",Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Locat_rio_a__r.CNPJ__c,Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Locat_rio_a__r.CPF__pc)} {!IF(Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Locat_rio_a__r.Tipo_de_registro__c = "Conta comercial","com sede na","residente na")} {!Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Locat_rio_a__r.BillingStreet}, {!Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Locat_rio_a__r.BillingCity} - {!Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Locat_rio_a__r.BillingState}, CEP: {!Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Locat_rio_a__r.BillingPostalCode}, {!IF(Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Locat_rio_a__r.Tipo_de_registro__c = "Conta comercial", "", "abaixo assinado,")} doravante denominada {!IF(Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.RecordTypeId == '0125A000001QydfQAC',"LOCATÁRIO(A)", "CONTRATANTE")}.</p>
+            
+            <p style="text-align: justify">Têm entre si justo e acertado o {!Aditivos_Contratuais__c.N_do_Aditivo__c}º Termo Aditivo ao Contrato de {!IF(Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.RecordTypeId == "0125A000001QydfQAC","Locação de Equipamento(s) Hospitalar(es)", "Prestação de Serviço(s)")} de n°&nbsp;<apex:outputField value="{!Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.N_mero_da_Proposta_Contrato__c}"/>, que se regerá mediante as cláusulas e condições estipuladas a seguir. As partes aceitam mutuamente e comprometem-se, por si e por seus sucessores, a cumprir e respeitar integralmente os termos ora ajustados.</p>
+
+           
+            <apex:outputPanel rendered="{!IF(Aditivos_Contratuais__c.Quantidade_de_produtos_na_proposta__c > 0, true, false)}"><b>CLAUSULA PRIMEIRA - DO OBJETO DO CONTRATO</b>
+             <br/>
+             <br/>
+             <b>1.1.</b>  O presente termo aditivo tem como objetivo a adição e/ou exclusão de determinados equipamentos no âmbito do contrato de locação, conforme especificado na tabela abaixo:
+             <br/>
+             <br/>
+            <table class="tabela_itens" cellpadding="0px" cellspacing="0px" style="width:100%;">
+                
+
+                        <table class="tabela_itens" cellpadding="0px" cellspacing="0px" style="width:100%;">
+                
+                    <thead>
+                        <tr>
+                            <td class="item_titulo_imagem" style="width:100px; text-align:center; vertical-align: middle">Imagem</td>
+                            <td class="cab" style="width:*; text-align:center; vertical-align: middle">Equipamento</td>
+                            <td class="cab" style="width:27px; text-align:center; vertical-align: middle">Qtd</td>                           
+                            <td class="cab" style="width:100px; text-align:center; vertical-align: middle">Tipo de Aditivo</td>
+                            <td class="cab" style="width:100px; text-align:center; vertical-align: middle">Valor Unitário</td>
+                            <td class="cab" style="width:100px; text-align:center; vertical-align: middle">Valor Total/{!IF(Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Dura_o_do_Contrato_meses__c>=1,"Mes","dia")}.</td>
+                        </tr>
+                    </thead>
+                    
+                <apex:repeat var="ap" value="{!Aditivos_Contratuais__c.Ativos_do_Aditivo_Contratual__r}">
+                        <apex:outputText rendered="{!IF(ap.Tipo_do_Aditivo__c == 'ADIÇÃO',TRUE, FALSE)}">
+                        <tr style="page-break-inside: avoid;">
+                            <td colspan="6" style="padding:0px; border: 0px;">
+                            
+                            <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                            
+                                <tr>
+                                    <td style="text-align: center; width: 100px" class="item_imagem" >
+                                       
+                                            <apex:outputField value="{!ap.Imagem__c}"/>
+                                             
+                                    </td> 
+                                    <td class="cel" style="width:*; vertical-align: middle; text-align:center">
+                                        Equipamento: {!ap.Produto_Relacionado__r.Name}<br/>
+                                        Fabricante: {!ap.Marca__c}<br/>
+                                        Modelo: {!ap.Modelo__c}
+                                    </td>
+
+                                    <td class="cel" style="width:27px; vertical-align: middle; text-align:center">
+                                        <apex:outputField value="{!ap.Quantidade__c}"/> 
+                                    </td>
+                             
+                                    <td class="cel" style="width:100px; vertical-align: middle; text-align:center">
+                                        <apex:outputText value="{!ap.Tipo_do_Aditivo__c}"/>
+                                    </td>
+                                    <td class="cel" style="width:100px; vertical-align: middle; text-align:center">
+                                        <apex:outputField value="{!ap.Valor_Unit_rio__c}" />
+                                    </td>
+                                    <td class="cel" style="width:100px; vertical-align: middle; text-align:center">
+                                        <apex:outputField value="{!ap.Valor_total__c}" />
+                                    </td>
+                                </tr>
+                                                      
+                        </table>
+                        
+                        </td>
+                    </tr>
+                    </apex:outputText>
+                </apex:repeat>
+                
+                
+                <apex:repeat var="ac" value="{!Aditivos_Contratuais__c.Ativos_do_Aditivo_Contratual__r}">
+                <apex:outputText rendered="{!IF(ac.Tipo_do_Aditivo__c == 'SUPRESSÃO',TRUE, FALSE)}">
+                        <tr style="page-break-inside: avoid;">
+                            <td colspan="6" style="padding:0px; border: 0px;">
+                            
+                            <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                            
+                                <tr>
+                                    <td style="text-align: center; width: 100px" class="item_imagem" >
+                                        
+                                          <apex:outputField value="{!ac.Imagem__c}"/>
+                                            
+                                    </td>
+                                    <td class="cel" style="width:*; vertical-align: middle; text-align:center">
+                                        Equipamento: {!ac.Produto_Relacionado__r.Name}<br/>
+                                        Fabricante: {!ac.Marca__c}<br/>
+                                        Modelo: {!ac.Modelo__c}
+                                    </td>
+
+                                    <td class="cel" style="width:27px; vertical-align: middle; text-align:center">
+                                        {!ac.Quantidade__c}
+                                    </td>
+                             
+                                    <td class="cel" style="width:100px; vertical-align: middle; text-align:center">
+                                        <apex:outputText value="{!ac.Tipo_do_Aditivo__c}"/>
+                                    </td>
+                                    <td class="cel" style="width:100px; vertical-align: middle; text-align:center">
+                                        <apex:outputField value="{!ac.Valor_Unit_rio__c}" />
+                                    </td>
+                                    <td class="cel" style="width:100px; vertical-align: middle; text-align:center">
+                                        <apex:outputField value="{!ac.Valor_total__c}" />
+                                    </td>
+                                </tr>
+                                                      
+                        </table>
+                        
+                        </td>
+                    </tr>
+                    </apex:outputText>
+                 </apex:repeat>
+                 </table>
+                
+                
+                <br/>
+            </table>
+             <!--p> Em razão da adição e/ou supressão dos equipamentos ora mencionados, fica alterado o valor do contrato de locação de &nbsp; <apex:outputfield value="{!Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Valor_Mensal_do_Contrato__c}"/>&nbsp; para &nbsp; <apex:outputText rendered="{!IF(Aditivos_Contratuais__c.N_do_Aditivo__c == '1',true, false )}"> <apex:outputfield value="{!Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Valor_Final_do_1_Aditivo__c}"/> </apex:outputText> <apex:outputText rendered="{!IF(Aditivos_Contratuais__c.N_do_Aditivo__c == '2',true, false )}"> <apex:outputfield value="{!Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Valor_Final_do_2_Aditivo__c}"/> </apex:outputText> <apex:outputText rendered="{!IF(Aditivos_Contratuais__c.N_do_Aditivo__c == '3',true, false )}"> <apex:outputfield value="{!Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Valor_Final_do_3_Aditivo__c}"/> </apex:outputText> <apex:outputText rendered="{!IF(Aditivos_Contratuais__c.N_do_Aditivo__c == '4',true, false )}"> <apex:outputfield value="{!Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Valor_Final_do_4_Aditivo__c}"/> </apex:outputText></p><-->
+                
+            </apex:outputPanel>
+                   <apex:outputField value="{!Aditivos_Contratuais__c.Cl_usula_s_Alterada_s__c}"/>     
+        <div style="page-break-inside:avoid">    
+        
+            <p style="text-align: justify"> 
+            As Partes e as testemunhas aceitam e declaram que o presente Contrato poderá ser assinado na forma eletrônica, com fundamento no Artigo 10, parágrafo 2º da MP 2200-2/2001, sendo as assinaturas consideradas válidas, vinculantes e executáveis. As Partes declaram, ainda, que o(s) e-mail(s) fornecido(s) pertence(m) ao seu(s) representantes(s) legal(is), sendo de uso único e exclusivo deste(s).</p>
+
+
+
+            <br/>
+            <br/>
+             <p style="text-align: justify">Esta é a última página do {!Aditivos_Contratuais__c.N_do_Aditivo__c}º Termo Aditivo ao Contrato de Locação de Equipamentos Hospitalares de nº <apex:outputField value="{!Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.N_mero_da_Proposta_Contrato__c}"/> da {!Aditivos_Contratuais__c.Contrato_de_Servi_o_Relacionado__r.Locador_a__r.Raz_o_Social__c}.</p>   
+    </div>
+    </body>
+  
+</apex:page>

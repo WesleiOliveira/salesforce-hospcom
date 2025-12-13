@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Motivo__c</fullName>
+    <externalId>false</externalId>
+    <label>Motivo</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Pendencia de Documentos</fullName>
+                <default>false</default>
+                <label>Pendencia de Documentos</label>
+            </value>
+            <value>
+                <fullName>Falta Informações</fullName>
+                <default>false</default>
+                <label>Falta Informações</label>
+            </value>
+            <value>
+                <fullName>Inadimplência</fullName>
+                <default>false</default>
+                <label>Inadimplência</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

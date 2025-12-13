@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Despesa_Financeira__c</fullName>
+    <description>Esse campo representa quantos de juros está sendo aplicado no valor parcelado da cotação.
+Se a responsabilidade pelos encargos não for da hospcom, retorna 0
+
+Usado para calcular o máximo de desconto disponível.</description>
+    <externalId>false</externalId>
+    <formula>IF(
+    ISPICKVAL(Responsabilidade_pelos_Encargos__c, &quot;Cessão de Crédito – Hospcom&quot;),
+
+    IF(
+        TotalPrice &gt; 0,
+        (Saldo_parcelado__c * Tx_juros_s_entrada__c) / TotalPrice,
+        0
+    ),
+
+    0
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Despesa Financeira</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <type>Percent</type>
+</CustomField>

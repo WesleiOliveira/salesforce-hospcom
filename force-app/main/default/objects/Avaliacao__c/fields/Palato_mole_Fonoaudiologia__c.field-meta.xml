@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Palato_mole_Fonoaudiologia__c</fullName>
+    <externalId>false</externalId>
+    <label>Palato mole</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Simétrico em repouso</fullName>
+                <default>false</default>
+                <label>Simétrico em repouso</label>
+            </value>
+            <value>
+                <fullName>Assimétrico em repouso</fullName>
+                <default>false</default>
+                <label>Assimétrico em repouso</label>
+            </value>
+            <value>
+                <fullName>Mobilidade adequada</fullName>
+                <default>false</default>
+                <label>Mobilidade adequada</label>
+            </value>
+            <value>
+                <fullName>Mobilidade alterada</fullName>
+                <default>false</default>
+                <label>Mobilidade alterada</label>
+            </value>
+            <value>
+                <fullName>Mobilidade ausente</fullName>
+                <default>false</default>
+                <label>Mobilidade ausente</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prazo_de_garantia__c</fullName>
+    <defaultValue>&quot;Equipamentos &quot; + TEXT(12) + &quot; meses, acessórios &quot; + TEXT(3) + &quot; meses&quot;</defaultValue>
+    <externalId>false</externalId>
+    <inlineHelpText>Ex: Equipamentos 12 meses, acessórios 3 meses, etc...</inlineHelpText>
+    <label>Prazo de garantia</label>
+    <length>255</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

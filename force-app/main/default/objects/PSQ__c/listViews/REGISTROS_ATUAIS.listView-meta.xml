@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>REGISTROS_ATUAIS</fullName>
+    <columns>NAME</columns>
+    <columns>Aprovador__c</columns>
+    <columns>Data_da_Ultima_Revis_o__c</columns>
+    <columns>Objetivo__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>greaterThan</operation>
+        <value>3/20/2023 12:00 AM</value>
+    </filters>
+    <label>REGISTROS ATUAIS</label>
+</ListView>

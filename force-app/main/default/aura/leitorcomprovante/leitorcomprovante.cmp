@@ -1,0 +1,29 @@
+<aura:component controller="integracaoSAP" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <ltng:require
+        styles="{!join(',', $Resource.fontAwesome + '/css/font-awesome.min.css', $Resource.bootstrap5 + '/css/bootstrap.min.css', $Resource.bootstrapSelect14 + '/docs/docs/dist/css/bootstrap-select.min.css')}"
+        scripts="{!join(',', $Resource.JQuery, $Resource.popper + '/popper.js', $Resource.bootstrap5 + '/js/bootstrap.min.js', $Resource.bootstrapSelect14 + '/docs/docs/dist/js/bootstrap-select.min.js')}"
+        afterScriptsLoaded="{!c.doInit}" />
+<aura:attribute name="fileContents" type="String" />
+<aura:attribute name="fileName" type="String" />
+<aura:attribute name="recordId" type="String" />
+    <aura:attribute name="message" type="String" />
+    <aura:attribute name="file" type="Object" />
+
+   <div class="container">
+        <h1>Enviar Comprovante</h1>
+
+        <!-- Seção de Upload -->
+        <div class="upload-section">
+            <label class="custom-file-upload">
+                <input type="file" onchange="{!c.onFileChange}" />
+                Escolher Arquivo
+            </label>
+            <div class="file-name" id="fileNameDisplay"></div>
+            <lightning:button label="Enviar Arquivo" onclick="{!c.uploadFile}" class="btn-upload" />
+        </div>   
+       <div id="errorMessage" class="slds-text-color_error"></div>
+       <div class="message">
+    {!v.message}
+</div>
+    </div>
+</aura:component>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Hospcom</fullName>
+    <active>true</active>
+    <errorConditionFormula>Empresa__c  = &quot;001i00000085QYb&quot; &amp;&amp;
+
+!(TEXT(Local_instalado__c) = &quot;Estoque 01&quot; ||
+TEXT(Local_instalado__c) = &quot;Estoque 02&quot; ||
+TEXT(Local_instalado__c) = &quot;Estoque 03&quot; ||
+TEXT(Local_instalado__c) = &quot;Estoque 04&quot; ||
+TEXT(Local_instalado__c) = &quot;Estoque 05&quot; ||
+TEXT(Local_instalado__c) = &quot;Estoque 06&quot; ||
+TEXT(Local_instalado__c) = &quot;Estoque 07&quot; ||
+TEXT(Local_instalado__c) = &quot;Assistência Técnica&quot; ||
+TEXT(Local_instalado__c) = &quot;Depósito&quot;)</errorConditionFormula>
+    <errorDisplayField>Local_instalado__c</errorDisplayField>
+    <errorMessage>Verifique se o local instalado existe na Hospcom</errorMessage>
+</ValidationRule>

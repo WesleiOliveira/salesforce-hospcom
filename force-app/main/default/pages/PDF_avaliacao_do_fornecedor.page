@@ -1,0 +1,439 @@
+<apex:page standardController="Account" extensions="ListagemIMEs_PMP" applyHtmlTag="false" showHeader="false" renderAs="pdf">
+         
+<head>
+   
+<style type="text/css" media="print">
+            @page {
+               size:21cm 29.7cm;
+               margin:100px 40px 60px 40px;
+               @top-center {
+                  content:element(header);
+               }
+               @bottom-center {
+                  content:element(footer);
+               }
+            }
+            @page{
+               size:A4;
+               background: url({!$Resource.TimbradoHospcom});
+               margin:150px 50px 120px 50px;
+               @bottom-center{content:element(footer);}
+            }
+            .pagenumber:before {
+               content:counter(page);
+            }
+            .pagecount:before {
+               content:counter(pages);
+            }
+            div.header {
+               margin:0px 0px 0px 0px;
+               padding:20px 0px 20px 0px;
+               position:running(header);
+               height:60px;
+            }
+            div.content {
+            }
+            div.footer {
+               margin:0px 0px 0px 0px;
+               padding:20px 0px 20px 0px;
+               position:running(footer);
+               height:20px;
+               text-align:right;
+               font-family:arial, verdana, sans-serif;
+               font-size:10px;
+               font-weight:normal;
+            }
+      </style>
+      <style type="text/css" media="print">
+      /*
+            @page:first{
+               size:A4;
+               background: url($Resource.SobreHealth);
+               margin:150px 50px 120px 50px;
+               @bottom-center{content:element(footer);
+               }
+            }
+            
+            @page{
+               size:A4;
+               background: url($Resource.TimbradoHealth);
+               margin:150px 50px 120px 50px;
+               @bottom-center{content:element(footer);}
+            }
+*/ tr{
+               
+               
+}
+*{
+   font-family:arial, verdana, sans-serif !important;
+}
+            .titulo-secao{
+               font-family:arial, verdana, sans-serif;
+               font-size:15px;
+               text-align:left !important;
+               
+               width:100%;
+               padding:10px 0;
+               background-color:#fff;
+               color:#0b3353;
+               margin-top:10px;
+            }
+            .titulo{
+               font-family:arial, verdana, sans-serif;
+               font-size:15px;
+               text-align:center;
+               
+               
+               padding:10px;
+               background-color:;
+               color:#0b3353;
+            }
+            table{
+               border-collapse: collapse;
+               /*border:none !important ;*/
+               width: 100%;
+               margin-bottom:0px;
+            }
+            .cabecalho-tabela{
+               background:#fff;
+               border: 1px solid #000 ;
+               text-align:center;
+               font-weight: 900;
+            }
+            .corpo-tabela{
+               background:#fff;
+            }
+            
+            tr{
+               width:100%;      
+            }
+            h3{
+               color:#0b3353;
+               margin:0;
+               padding:0;   
+               text-align:center !important; 
+               font-size: 14px;  
+            }
+            h2{
+               font-size: 14px;
+               color:#0b3353;
+               font-family:arial, verdana, sans-serif;
+            }
+            td{
+            /* border: 1px solid black !important;*/
+               text-align:center;
+               padding: 5px;
+               font-family:arial, verdana, sans-serif;
+               font-size:11.5px;
+               }
+            tr,td{
+            
+               }
+            table tr.cabecalho-tabela td {           
+               border: 1px solid #000 ;
+               margin:0;
+            }
+            
+            
+            .tabela_geral{
+               border-collapse:collapse;
+               width:100%;
+            }
+            table.print-friendly tr td, table.print-friendly tr th {
+               page-break-inside: avoid;
+            }
+            .cabecalho{
+               font-family:arial, verdana, sans-serif;
+               font-size:11px;
+               
+               vertical-align:top;
+               background-color: #c3c3c3;
+               padding: 3px;
+            }
+            .celula{
+               font-family:arial, verdana, sans-serif;
+               font-size:13px;
+               vertical-align:top;
+               line-height:120%;
+               padding: 3px;
+               border: 1px solid #c3c3c3;
+            }
+            .clausula_texto{
+               font-family:arial, verdana, sans-serif;
+               font-size:11.5px;
+               text-align:justify;
+               text-justify:inter-word;
+               line-height:120%;
+               text-indent:50px;
+               vertical-align:top;
+            }
+            .infos_texto{
+               font-family:arial, verdana, sans-serif;
+               font-size:11.5px;
+               text-align:justify;
+               text-justify:inter-word;
+               line-height:120%;
+               vertical-align:top;
+               border: none;
+            }
+            .pre_texto{
+               white-space: pre;
+            }
+            .maiuscula{
+               text-transform: uppercase;
+            }
+            .zebra{
+               background-color: #f3f3f3;
+            }
+            
+            .assinaturas{
+            display:flex;
+         
+            flex-direction:row;
+            padding:0;
+               margin:0;
+            }
+            .assinatura{
+               width:100%;
+               padding:0;
+               margin:0;
+            }
+            .underline{
+               padding:0;
+               margin:0 auto;
+               width:55%;
+               height:1px;
+               border-top:1px solid #000;
+            }
+      </style>
+         <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"/>  
+</head>
+<body>
+<apex:pageBlock >
+            
+            <div class="footer" style="text-align:center !important"><br/>
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               Página <span class="pagenumber"/> de <span class="pagecount"/> - Emissão em:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{! TODAY() }" /></apex:outputText>
+            </div>
+            <div>
+                           
+                           
+            <table width="100%" >              
+               <apex:repeat value="{!documentos}" var="doc">
+                  <apex:outputText rendered="{!if(doc.Documento__c = 'Ata de Reunião', true, false)}" >
+                        <apex:outputText rendered="{!if(doc.Empresa__c = Account.Empresa_do_Grupo__c, true, false)}" >
+                        
+                           <tr  colspan="2" width="100%" >
+                              <td width="50%" style='font-size:13px; font-weight:bold;' >
+                                    emissão:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{! doc.Data_de_criacao__c }" /></apex:outputText>
+                              </td>
+                              
+                              <td style="text-align: right;
+                                    font-size:13px;
+                                    font-weight:bold; ">
+                                    última rev. doc.:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!doc.Revisao__c}" /></apex:outputText>
+                              </td>
+                           </tr>
+                        
+                        </apex:outputText>
+                  </apex:outputText>
+               </apex:repeat>
+            </table>
+            
+            
+                           
+            <table style="page-break-inside:avoid;width:100%;">
+                  
+                  <h3 class="titulo-secao"> Dados do Contratante</h3>
+                  <tr>
+                     <td class="infos_texto" colspan="0" style="text-indent:0px;">Razão Social:</td>
+                     <td colspan="4" class="infos_texto" style="text-indent:0px;">{!if(Account.Raz_o_Social__c != "", Account.Raz_o_Social__c, "Dado não encontrato. Atualize os dados cadastrais no salesforce")}</td>    
+                  </tr>
+                  
+                  <tr>
+                     <td class="infos_texto" colspan="0" style="text-indent:0px;">CPF/CNPJ: </td>
+                     <td colspan="4" class="infos_texto" style="text-indent:0px;">{!if(Account.CNPJ__c != "", Account.CNPJ__c, IF(Account.CPF__pc != "", Account.CPF__pc , "Dados não encontrados." ) )}</td>
+                  </tr>
+                  
+                  
+                  
+                  
+                  
+                  <tr>
+                     <td class="infos_texto" colspan="0" style="text-indent:0px;">Endereço: </td>
+                     <td colspan="4" class="infos_texto" style="text-indent:0px;"><apex:outputText value="{!Account.BillingStreet}" /></td>
+
+                     
+                     
+                  </tr>
+
+                  <tr>
+                     <td class="infos_texto" colspan="0" style="text-indent:0px;">Cidade:</td>
+                     <td colspan="" class="infos_texto" style="text-indent:0px;"><apex:outputText value="{!Account.BillingCity}" />&nbsp;</td>
+                     
+                     <td class="infos_texto" style="text-indent:0px;">UF:&nbsp; <apex:outputText value="{!Account.BillingState}" /></td>
+                     
+
+                     <td class="infos_texto"  style="text-indent:0px;">CEP:&nbsp; <apex:outputText value="{!Account.BillingPostalCode}" /></td>
+                     <td colspan="" class="infos_texto" style="text-indent:0px;"></td>
+                  </tr>
+
+                  <tr>
+                        <td class="infos_texto"  colspan="0" style="text-indent:0px;">Telefone:</td>
+                        <td colspan="0" class="infos_texto" style="text-indent:0px;">{!Account.Phone}</td>
+                        
+                        <td class="infos_texto" style="text-indent:0px;">Site/Email: &nbsp; {!Account.PersonEmail}</td>
+            
+
+                  </tr>
+
+                  <tr>
+                        <td class="infos_texto" colspan="0" style="text-indent:0px;">Inscrição estadual:</td>
+                        <td colspan="" class="infos_texto" style="text-indent:0px;">{!Account.Inscri_o_Estadual__c}</td>
+                  </tr>
+               </table>
+         
+         </div>
+
+         <div>  
+            <h2 >Pré-Avaliação(Documentos) </h2>
+               <p style="font-size: 12px; ">Documentos a serem  enviados pelos Fornecedores - Pessoa Jurídica</p>
+   
+               <table>
+                  <tr>
+                        <td class="infos_texto" colspan="3" style="text-indent:0px; padding-right:10px;"><strong>a.</strong> Cartão do CNPJ:</td>
+                        <td colspan="2" class="infos_texto" style="text-indent:0px; width:100px; letter-spacing: -1px; text-align:right;">{!if(Account.Cartao_CNPJ__c== true, "S","N")}</td>
+                     </tr>
+
+                  
+      
+                     <tr>
+                        <td class="infos_texto" colspan="2" style="text-indent:0px; padding-right:10px;"><strong>b.</strong> Cartão de inscrição Estadual e/ou Incrição Municipal, ou comunicado de Isenção: </td>
+                        <td colspan="2" class="infos_texto" style="text-indent:0px; letter-spacing: -1px; text-align:right; ">{!if(Account.cartaoInscricaoEstadual__c == true, "S","N")}</td>                 
+                     </tr>
+
+                     <tr>
+                        <td class="infos_texto" colspan="3" style="text-indent:0px; padding-right:10px;"><strong>c.</strong> AFE:</td>
+                        <td colspan="2" class="infos_texto" style="text-indent:0px; width:100px; letter-spacing: -1px; text-align:right;">{!if(Account.AFE__c== true, "S","N")}</td>
+                     </tr>
+
+
+                     <tr>
+                        <td class="infos_texto" colspan="3" style="text-indent:0px; padding-right:10px"><strong>d.</strong> Alvará sanitário emitido pela VISA Municipal:</td>
+                        <td colspan="2" class="infos_texto" style="text-indent:0px; width:100px; letter-spacing: -1px; text-align:right;">{!if(Account.Alvara_Sanitario_Fornecedor__c == true, "S","N")}</td>
+                        
+                     </tr>
+
+
+                     <tr>
+                        <td class="infos_texto" colspan="3" style="text-indent:0px; padding-right:10px"><strong>e.</strong> Contrato Social e última alteração contratual:</td>
+                        <td colspan="2" class="infos_texto" style="text-indent:0px; width:100px; letter-spacing: -1px; text-align:right;">{!if(Account.Contrato_Social__c == true, "S","N")}</td>
+               
+                     </tr>
+
+
+                     <tr>
+                        <td class="infos_texto" colspan="3" style="text-indent:0px; padding-right:10px"><strong>f.</strong> Certificados como ISO 9001, ISO 13485, Certificado de Boas Práticas</td>
+                        <td colspan="2" class="infos_texto" style="text-indent:0px; width:100px; letter-spacing: -1px; text-align:right;">{!if(Account.Certificados__c == true, "S","N")}</td>
+                     </tr>
+
+
+                     <tr>
+                        <td class="infos_texto" colspan="3" style="text-indent:0px; padding-right:20px"><strong>g.</strong> Centificado dos Padrões de Calibração rastreados pela Rede Brasileira de Calibração(Aplicável para empresas relacionadas a Calibração)</td>
+                        <td colspan="2" class="infos_texto" style="text-indent:0px; width:100px; letter-spacing: -1px; text-align:right;">{!if(Account.certificadosCalibracao__c == true, "S","N")}</td>
+               
+                     </tr>
+               
+                     <tr>
+                        <td class="infos_texto" colspan="3" style="text-indent:0px; padding-right:10px"><strong>h.</strong> Registro da Empresa no Conselho Reginal responsavel.(Se Aplicável. Ex.: CREA, CREFITO, etc)</td>
+                        <td colspan="2" class="infos_texto" style="text-indent:0px; width:100px; letter-spacing: -1px; text-align:right;">{!if(Account.registroEmpresaConselho__c == true, "S","N")}</td>
+
+                     </tr>
+
+
+
+               </table>
+
+               
+         </div>
+
+         <div>
+            <table>
+               <h2>Qualificação:</h2>
+               <tr>
+                     <td class="infos_texto" colspan="3" style="text-indent:0px; width:100px; letter-spacing: -1px;word-spacing: 0px; ">
+                        Qualidade de Produto/Serviço(45pts) - {!if(Account.qualificacaoProduto__c == true, "S","N")}  
+                  </td>
+               </tr>
+               <tr>    
+                     <td class="infos_texto" colspan="3" style="text-indent:0px; width:100px; letter-spacing: -1px; ">
+                        Prazo Entrega(20pts) - {!if(Account.qualificaPrazo__c == true, "S","N")} 
+                  </td>
+               </tr>
+               <tr>    
+                     <td class="infos_texto" colspan="3" style="text-indent:0px; width:100px; letter-spacing: -1px; ">
+                        Atendimento(15pts) - {!if(Account.qualificaAtendimento__c == true, "S","N")} 
+                  </td>
+               </tr>
+               <tr>    
+                     <td class="infos_texto" colspan="3" style="text-indent:0px; width:100px; letter-spacing: -1px; ">
+                        Serviço de garantia de fabricante(20pts)- {!if(Account.Servi_o_de_garantia_do_fabricante__c == true, "S","N")} 
+                  </td>
+               </tr>
+               <tr>
+                     <td class="infos_texto" colspan="3" style="text-indent:0px; width:100px; font-weight: bold; letter-spacing: -1px; ">
+                        Pontos Totais: {!Account.pontosTotalQualificacao__c}
+                  </td>
+               </tr>
+
+               
+               
+            </table>
+      </div>
+
+
+      <div>
+      <table>
+            <h2>Parecer do Avaliador:</h2>
+         
+            <tr>
+               <td class="infos_texto" colspan="3" style="text-indent:0px;">
+                  Status do fornecedor: {!account.Status_avaliacao__c}; 
+               </td>
+               
+               
+            </tr>
+            <tr>
+               <td class="infos_texto" colspan="3" style="text-indent:0px;">
+                     Observações:{!Account.Observa_es__c}
+               </td>
+            </tr>
+
+            <br/>
+            <tr>
+                     
+               <td style="border:none; page-break-inside:avoid;width: 100%;" >
+                  <div style="padding:0; margin:0;">
+                        <div  style="padding:0; margin: 0 0 -18px -20px;" > 
+                              <apex:image style="padding:0; margin:0 auto;" value="https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=015U400000HiCGg&oid=00Di0000000JVhH&lastMod=1743021174000" width="200" height="50px"
+                              />
+                        </div>            
+                        <div class="assinatura" style="padding:0; margin:0;">
+                              <p style="padding:0; margin:0 auto;">
+                                 <div class="underline" style="padding:0; margin:0 auto;"></div><br/>
+                                 <br/>
+                                 Dpto. de Compras                                                    
+                              </p>
+                        </div>
+                     </div>                                      
+               </td>
+            </tr>
+      </table>
+   </div>
+
+</apex:pageBlock>
+
+</body>
+
+</apex:page>

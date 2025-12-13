@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Express_o_Fonoaudiologia__c</fullName>
+    <externalId>false</externalId>
+    <label>Expressão</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Alternativa</fullName>
+                <default>false</default>
+                <label>Alternativa</label>
+            </value>
+            <value>
+                <fullName>Articulação áfona</fullName>
+                <default>false</default>
+                <label>Articulação áfona</label>
+            </value>
+            <value>
+                <fullName>Ausente</fullName>
+                <default>false</default>
+                <label>Ausente</label>
+            </value>
+            <value>
+                <fullName>Escrita</fullName>
+                <default>false</default>
+                <label>Escrita</label>
+            </value>
+            <value>
+                <fullName>Gestual</fullName>
+                <default>false</default>
+                <label>Gestual</label>
+            </value>
+            <value>
+                <fullName>Verbal</fullName>
+                <default>false</default>
+                <label>Verbal</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Assunto</fullName>
+    <active>false</active>
+    <errorConditionFormula>!OR( 
+Subject == &apos;Demonstração&apos;,
+Subject == &apos;Reunião&apos;,
+Subject == &apos;Curso&apos;,
+Subject == &apos;Treinamento&apos;,
+Subject == &apos;Visita&apos;,
+Subject == &apos;Ligação&apos;,
+Subject == &apos;Interno&apos;
+)</errorConditionFormula>
+    <errorDisplayField>Subject</errorDisplayField>
+    <errorMessage>Por gentileza selecione alguma das opções listadas.</errorMessage>
+</ValidationRule>

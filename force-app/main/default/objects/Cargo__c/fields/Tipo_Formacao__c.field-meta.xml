@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo_Formacao__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipo de Formação</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Ensino Médio</fullName>
+                <default>false</default>
+                <label>Ensino Médio</label>
+            </value>
+            <value>
+                <fullName>Superior Cursando</fullName>
+                <default>false</default>
+                <label>Superior Cursando</label>
+            </value>
+            <value>
+                <fullName>Superior Completo</fullName>
+                <default>false</default>
+                <label>Superior Completo</label>
+            </value>
+            <value>
+                <fullName>Pós Graduado</fullName>
+                <default>false</default>
+                <label>Pós Graduado</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

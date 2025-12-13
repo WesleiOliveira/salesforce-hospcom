@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Periodo_da_Locacao</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(!$User.Ignorar_erros__c,
+OR(AND(OR (Periodo_do_contrato_inicio__c == null ,  Per_odo_do_contrato_Fim__c == null),  Contrato_de_Servi_o__c != null)
+
+,
+AND(OR (Periodo_do_contrato_inicio__c != null ,  Per_odo_do_contrato_Fim__c != null),  Contrato_de_Servi_o__c == null)
+))</errorConditionFormula>
+    <errorMessage>O campo de Período do contrato só deverá ser preenchido caso Haja um contrato associado.</errorMessage>
+</ValidationRule>

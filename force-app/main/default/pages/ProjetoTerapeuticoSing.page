@@ -1,0 +1,544 @@
+<apex:page showChat="False" title="Projeto Terapêutico Singular" showHeader="true" sidebar="false" docType="HTML-5.0" showQuickActionVfHeader="False" controller="ProjetoTerapController">
+    <html>
+    <head>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+        <style>
+            body{margin:0px!important;border:0px!important;}
+            #contentWrapper > div.bodyDiv.brdPalette.brandPrimaryBrd{margin:0px!important;border:0px!important;}
+            #contentWrapper > div.bPageFooter.noTableFooter{display:none!important;}
+            #contentWrapper > div.bPageFooter.noTableFooter > div{display:none!important;}
+            #contentWrapper > div.bPageFooter.noTableFooter > div{display:none!important;}
+            #AppBodyHeader{display:none!important;}
+            #globalHeaderBar{display:none!important;}
+            .sfdcBody{
+                background: transparent!important;
+            }
+            #contentWrapper > div.bodyDiv.brdPalette.brandPrimaryBrd{
+                box-shadow:none!important;
+                background-color: transparent!important;
+            }
+            .form-control {
+                background: transparent!important;
+                color: #163757!important;
+                border: 2px solid #163757!important;
+            }
+            .botao{
+                color: #163757!important;
+                background-color: #86D0F3!important;
+                border-color: #86D0F3!important;
+                font-size: 16px!important;
+                display: block!important;
+                width: 100%!important;
+                display: inline-block!important;
+                margin-bottom: 0!important;
+                font-weight: normal!important;
+                text-align: center;
+                vertical-align: middle!important;
+                -ms-touch-action: manipulation!important;
+                touch-action: manipulation!important;
+                cursor: pointer!important;
+                background-image: none!important;
+                border: 1px solid transparent!important;
+                white-space: nowrap!important;
+                padding: 6px 12px!important;
+                font-size: 14px!important;
+                line-height: 1.42857143!important;
+                border-radius: 4px!important;
+                -webkit-user-select: none!important;
+                -moz-user-select: none!important;
+                -ms-user-select: none!important;
+                user-select: none!important;
+                font-family: inherit!important;
+                font-size: inherit!important;
+                line-height: inherit!important;
+                -webkit-appearance: button!important;
+                cursor: pointer!important;
+                text-transform: none!important;
+                overflow: visible!important;
+                color: inherit!important;
+                font: inherit!important;
+                margin: 0!important;            
+            }
+            .botao:hover{
+                color: #fff!important;
+                background-color: #286090!important;
+                border-color: #204d74!important;
+                text-decoration: none!important;
+            }
+            .customPopup{
+        		background-color: lightgrey;
+    			border-style: solid;
+   	    		border-width: 1px;
+    			left: 55%;
+    			position: fixed;
+    			padding: 5px;
+    			box-shadow: 0px 3px 7px rgba(1, 1, 1, 5);
+        		background: #fff;
+    			width: 600px;
+        		margin-top: 200px;
+   	   		    margin-left: -200px;
+    			top: 10px;
+    			max-width: 700px;
+				}
+				.customPopup .close{
+    			position: absolute;
+    			top: 10px;
+    			right: 10px;
+    			transition: all 200ms;
+       		    font-size: 20px;
+    			text-decoration: none;
+    			color: #333;
+				}
+				.customPopup .close:hover{
+    			color: red;
+				}
+        </style>
+        
+    </head>
+
+    <body>    
+        
+        <div class="row">
+            <div class="col-sm-12 text-center">        
+                <div style="width:100%; height:10px;"></div>
+                <apex:outputPanel rendered="{!panel}">
+
+                <h2>
+                    Projeto Terapêutico Singular
+                </h2><br/><br/>
+                      <h3>
+                          <apex:form >
+                          <apex:commandLink action="{!adm}" value="Admissão"/><br/><br/>
+                          <apex:commandLink value="Acompanhamento"/><br/><br/>
+                          <apex:commandLink action="{!desf}" value="Desfecho"/><br/><br/>
+                          </apex:form>
+                </h3><br/>
+                </apex:outputPanel>
+            </div>
+        </div>
+        <apex:outputPanel rendered="{!valid}">
+            <div class="col-sm-12 text-center"> 
+            <h2 style="text-align:center">
+                Cadastro de PTS HomeCare Hospcom
+                </h2><br/><br/><br/><br/>
+            </div><br/>
+        <apex:form >
+        	<div class="row">
+                <div class="col-sm-offset-2 col-sm-4 ">
+                   <apex:input type="email" style="resize:none;" styleClass="form-control" html-placeholder="Insira seu e-mail..." value="{!email}" /> 
+                </div>
+                <div class=" col-sm-4 ">
+                    <apex:inputSecret html-placeholder="Insira a senha..." styleClass="form-control" value="{!senha}"/>
+                    <apex:outputText rendered="{!senhaincorreta}">
+                        <p style="color:red">
+                        Senha incorreta
+                        </p>
+                    </apex:outputText>
+                    <br/>
+                    <br/>                    
+                </div><br/>               
+            </div>
+            <div class="row">
+                <div class="col-sm-offset-4 col-sm-4 text-center" style="font-weight:bold;">
+                    <apex:commandButton styleClass="botao" style="width:50% !important;" action="{!validar}" value="Acessar" />
+					
+                </div>
+            </div>
+        </apex:form>
+        </apex:outputPanel>
+                   
+        <apex:outputText rendered="{!ADM}">
+			<div class="col-sm-12 text-center">  
+    				<h2>
+                        PTS de Admissão
+                </h2>
+            </div><br/><br/>
+        <apex:form id="form" >
+                <div class="form-group">
+                    <br/>   
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 ">&nbsp;
+                            <apex:inputText style="resize:none;" styleClass="form-control" html-placeholder="Prontuário..." value="{!prontuarioADM}"/>
+                        </div>
+                        <div class="col-sm-4 "> Origem
+                            <apex:selectList size="1" style="resize:none;" styleClass="form-control"  value="{!origem}">
+                                <apex:selectOption itemValue="" itemLabel="Selecione" />
+                                <apex:selectOption itemValue="Hospital" itemLabel="Hospital" />
+                                <apex:selectOption itemValue="Domicílio" itemLabel="Domicílio" />
+                            </apex:selectList>
+                        </div>
+                </div><br/>
+                    <br/>
+    				<div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 "> Clínica de Base	
+                            <apex:selectList multiselect="true" size="4" style="resize:none;" styleClass="form-control"  value="{!clinicaBase}">
+                                <apex:selectOption itemValue="Acidente Vascular Encefálico" itemLabel="Acidente Vascular Encefálico" />
+                                <apex:selectOption itemValue="Traumatismo Crânio Encefálico" itemLabel="Traumatismo Crânio Encefálico" />
+                                <apex:selectOption itemValue="Lesão Medular" itemLabel="Lesão Medular" />
+                                <apex:selectOption itemValue="Paralisia Cerebral" itemLabel="Paralisia Cerebral" />
+                                <apex:selectOption itemValue="COVID-19" itemLabel="COVID-19" />                                
+                                <apex:selectOption itemValue="Ortopedia" itemLabel="Ortopedia" />                                
+                                <apex:selectOption itemValue="Doença Neuro Muscular" itemLabel="Doença Neuro Muscular" />                                
+                                <apex:selectOption itemValue="Demência" itemLabel="Demência" />                                
+                                <apex:selectOption itemValue="Doença Cardíaca" itemLabel="Doença Cardíaca" />                                
+                                <apex:selectOption itemValue="Doença Pulmonar" itemLabel="Doença Pulmonar" />                                
+                                <apex:selectOption itemValue="Esclerose Múltipla" itemLabel="Esclerose Múltipla" />                                
+                                <apex:selectOption itemValue="CA" itemLabel="CA" />                                
+                            </apex:selectList>
+                        </div>
+                        <div class="col-sm-4 ">Comorbidades
+							<apex:selectList multiselect="true" size="4" style="resize:none;" styleClass="form-control"  value="{!comorbidades}">
+                                <apex:selectOption itemValue="Hipertensão Arterial Sistêmica" itemLabel="Hipertensão Arterial Sistêmica" />
+                                <apex:selectOption itemValue="Diabetes" itemLabel="Diabetes" />
+                                <apex:selectOption itemValue="Cardiopatia" itemLabel="Cardiopatia" />
+                                <apex:selectOption itemValue="Pneumopatia" itemLabel="Pneumopatia" />
+                                <apex:selectOption itemValue="Hematopatia" itemLabel="Hematopatia" />                                
+                            </apex:selectList>                        
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 "> Outras — Clínica
+                            <apex:inputText size="1" style="resize:none;" styleClass="form-control" value="{!outrosClinica}"/>
+                        </div>
+                        <div class="col-sm-4 ">Outras — Comorbidades
+                            <apex:inputText size="1" style="resize:none;" styleClass="form-control" value="{!outrosComorbidades}"/>                        
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 "> Motivo do Atendimento	
+							<apex:selectList multiselect="true" size="4" style="resize:none;" styleClass="form-control" value="{!motivoAtend}">
+                                <apex:selectOption itemValue="Pós Cirúrgico" itemLabel="Pós Cirúrgico" />
+                                <apex:selectOption itemValue="Cardiopata" itemLabel="Cardiopata" />
+                                <apex:selectOption itemValue="Lesão Por Pressão" itemLabel="Lesão Por Pressão" />
+                                <apex:selectOption itemValue="Infecção Respiratória" itemLabel="Infecção Respiratória" />
+                                <apex:selectOption itemValue="Infecção do Trato Urinário" itemLabel="Infecção do Trato Urinário" />                                
+                                <apex:selectOption itemValue="Outras Infecções" itemLabel="Outras Infecções" />                                
+                                <apex:selectOption itemValue="Sepse" itemLabel="Sepse" />                                
+                                <apex:selectOption itemValue="Suporte Ventilatório" itemLabel="Suporte Ventilatório" />                                
+                                <apex:selectOption itemValue="Manejo de Traqueostomia" itemLabel="Manejo de Traqueostomia" />                                
+                                <apex:selectOption itemValue="Manejo de Sintomas" itemLabel="Manejo de Sintomas" />                                
+                                <apex:selectOption itemValue="Alterações Comportamentais" itemLabel="Alterações Comportamentais" />                                
+                                <apex:selectOption itemValue="Tromboembolismo Pulmonar" itemLabel="Tromboembolismo Pulmonar" />                                
+                            </apex:selectList>
+                        </div>
+                        <div class="col-sm-4 ">Riscos / Precauções
+							<apex:selectList multiselect="true" size="4" style="resize:none;" styleClass="form-control" value="{!riscos}">
+                                <apex:selectOption itemValue="TEV — TVP/TEP" itemLabel="TEV — TVP/TEP" />
+                                <apex:selectOption itemValue="Queda" itemLabel="Queda" />
+                                <apex:selectOption itemValue="Broncoaspiração" itemLabel="Broncoaspiração" />
+                                <apex:selectOption itemValue="Lesão por Pressão" itemLabel="Lesão por Pressão" />
+                                <apex:selectOption itemValue="Alergia Medicamentosa" itemLabel="Alergia Medicamentosa" />                                
+                                <apex:selectOption itemValue="Precaução Por Contato" itemLabel="Precaução Por Contato" />                                
+                                <apex:selectOption itemValue="Precaução Por Vigilância" itemLabel="Precaução Por Vigilância" />                                
+                                <apex:selectOption itemValue="Precaução Por Aerossóis" itemLabel="Precaução Por Aerossóis" />                                
+                                <apex:selectOption itemValue="Saturação Alvo 88% - 92%" itemLabel="Saturação Alvo 88% - 92%" />                                
+                                <apex:selectOption itemValue="Saturação Alvo 93% - 94%" itemLabel="Saturação Alvo 93% - 94%" />                                
+                                <apex:selectOption itemValue="Saturação Alvo 95% - 96%" itemLabel="Saturação Alvo 95% - 96%" />                                
+                            </apex:selectList>
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 "> Outros Motivos	
+                            <apex:inputText size="1" style="resize:none;" styleClass="form-control" value="{!outrosMotivos}"/>                        
+                        </div>
+                        <div class="col-sm-4 ">Outros riscos
+                            <apex:inputText size="1" style="resize:none;" styleClass="form-control" value="{!outrosRiscos}"/>                        
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 "> Dispositivos em uso		
+							<apex:selectList multiselect="true" size="4" style="resize:none;" styleClass="form-control" value="{!disposit}">
+                                <apex:selectOption itemValue="Sonda de Alimentação" itemLabel="Sonda de Alimentação" />
+                                <apex:selectOption itemValue="Sonda Vesical" itemLabel="Sonda Vesical" />
+                                <apex:selectOption itemValue="Cânula de Traqueostomia Metálica" itemLabel="Cânula de Traqueostomia Metálica" />
+                                <apex:selectOption itemValue="Cânula de Traqueostomia Plástica" itemLabel="Cânula de Traqueostomia Plástica" />
+                                <apex:selectOption itemValue="Bomba de Infusão" itemLabel="Bomba de Infusão" />                                
+                                <apex:selectOption itemValue="Suporte de Oxigênio" itemLabel="Suporte de Oxigênio" />                                
+                                <apex:selectOption itemValue="Ventilação Mecânica Não Invasiva" itemLabel="Ventilação Mecânica Não Invasiva" />                                
+                                <apex:selectOption itemValue="Ventilação Mecânica Invasiva" itemLabel="Ventilação Mecânica Invasiva" />                                
+                            </apex:selectList>
+                        </div>
+                        <div class="col-sm-4 ">História Biopsicossocial	
+                            <apex:inputTextarea rows="4" style="resize:none;" styleClass="form-control" value="{!historiaBioPsico}"/>            
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 "> Outros Dispositivos	
+                            <apex:inputText size="1" style="resize:none;" styleClass="form-control" value="{!outrosDisposit}"/>                        
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                    <div class="col-sm-offset-2 col-sm-4 "> Projeto Terapêutico Singular		
+							<apex:selectList multiselect="true" size="4" style="resize:none;" styleClass="form-control" value="{!PTS}">
+                                <apex:selectOption itemValue="Orientação / Capacitação Paciente/Familiar" itemLabel="Orientação / Capacitação Paciente/Familiar" />
+                                <apex:selectOption itemValue="Suporte Ventilatório / Respiratório" itemLabel="Suporte Ventilatório / Respiratório" />
+                                <apex:selectOption itemValue="Suporte Nutricional" itemLabel="Suporte Nutricional" />
+                                <apex:selectOption itemValue="Desmame Ventilatório" itemLabel="Desmame Ventilatório" />
+                                <apex:selectOption itemValue="Vigilância Infecciosa" itemLabel="Vigilância Infecciosa" />
+                                <apex:selectOption itemValue="Vigilância Hemodinâmica" itemLabel="Vigilância Hemodinâmica" />
+                                <apex:selectOption itemValue="Gerenciamento dos Riscos" itemLabel="Gerenciamento dos Riscos" />
+                                <apex:selectOption itemValue="Gerenciamento de Dor" itemLabel="Gerenciamento de Dor" />
+                                <apex:selectOption itemValue="Manejo de Sintomas" itemLabel="Manejo de Sintomas" />
+                            </apex:selectList>
+                        </div>
+                        <div class="col-sm-4 ">Grau de Parentesco Cuidador Principal	
+							<apex:selectList size="1" style="resize:none;" styleClass="form-control"  value="{!grauParent}">
+                                <apex:selectOption itemValue="" itemLabel="Selecione" />
+                                <apex:selectOption itemValue="Cônjuge" itemLabel="Cônjuge" />
+                                <apex:selectOption itemValue="Filho (a)" itemLabel="Filho (a)" />
+                                <apex:selectOption itemValue="Pais" itemLabel="Pais" />
+                                <apex:selectOption itemValue="Irmã(o)" itemLabel="Irmã(o)" />
+                                <apex:selectOption itemValue="Cuidador Particular" itemLabel="Cuidador Particular" />                               
+                            </apex:selectList>
+                    </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 "> Outros — PTS	
+                            <apex:inputText size="1" style="resize:none;" styleClass="form-control" value="{!outrosPTS}"/>                        
+                        </div>
+                        <div class="col-sm-4 ">Outros — Grau de Parentesco
+                            <apex:inputText size="1" style="resize:none;" styleClass="form-control" value="{!outrosGrauParent}"/>                        
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 "> Prazo/Meta	
+                            <apex:selectList size="1" style="resize:none;" styleClass="form-control"  value="{!prazo}">
+                                <apex:selectOption itemValue="" itemLabel="Selecione" />
+                                <apex:selectOption itemValue="Curto - 10 dias" itemLabel="Curto - 10 dias" />
+                                <apex:selectOption itemValue="Curto - 20 dias" itemLabel="Curto - 20 dias" />
+                                <apex:selectOption itemValue="Curto - 30 dias" itemLabel="Curto - 30 dias" />
+                                <apex:selectOption itemValue="Médio - 60 dias" itemLabel="Médio - 60 dias" />
+                                <apex:selectOption itemValue="Médio - 80 dias" itemLabel="Médio - 80 dias" />
+                                <apex:selectOption itemValue="Médio - 100 dias" itemLabel="Médio - 100 dias" />
+                                <apex:selectOption itemValue="Longo - 120 dias" itemLabel="Longo - 120 dias" />
+                                <apex:selectOption itemValue="Longo - 210 dias" itemLabel="Longo - 210 dias" />
+                                <apex:selectOption itemValue="Longo - 300 dias" itemLabel="Longo - 300 dias" />
+                                <apex:selectOption itemValue="Longo - 360 dias" itemLabel="Longo - 360 dias" />
+                                <apex:selectOption itemValue="Longo - 450 dias" itemLabel="Longo - 450 dias" />
+                                <apex:selectOption itemValue="Longo - 540 dias" itemLabel="Longo - 540 dias" />
+                                <apex:selectOption itemValue="Longo - Mais de 550 dias" itemLabel="Longo - Mais de 550 dias" />
+                            </apex:selectList>
+                        </div>
+                        <div class="col-sm-4 "> Data de Reavaliação / Análise do Projeto
+                            <apex:input type="date" size="1" style="resize:none;" styleClass="form-control" value="{!dataReavaliacao}"/>                        
+                        </div>
+                    </div><br/>
+                    
+                    <br/>                
+                    <div class="row">
+                        <div class="col-sm-offset-4 col-sm-4 text-center" style="font-weight:bold;">
+                            <apex:commandLink styleClass="botao" action="{!createADM}"  value="Enviar!" />
+                        </div>
+                    </div>                  
+                </div>
+            </apex:form>
+        </apex:outputText>
+        
+        <apex:outputText rendered="{!Desfecho}">
+            <div class="col-sm-12 text-center">  
+    				<h2>
+                        PTS de Desfecho
+                </h2>
+            </div><br/><br/>
+        <apex:form id="desf" >
+                <div class="form-group">
+                    <br/>   
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 ">&nbsp;
+                            <apex:inputText style="resize:none;" styleClass="form-control" html-placeholder="Prontuário..." value="{!prontuarioDesf}"/>
+                        </div>
+                        <div class="col-sm-4 "> Situação do Desfecho
+                            <apex:selectList id="sitDesfecho" onchange="sitDesfecho();" size="1" style="resize:none;" styleClass="form-control"  value="{!situacaoDesfecho}">
+                                <apex:selectOption itemValue="" itemLabel="Selecione" />
+                                <apex:selectOption itemValue="Alta" itemLabel="Alta" />
+                                <apex:selectOption itemValue="Reavaliação do Projeto" itemLabel="Reavaliação do Projeto" />
+                                <apex:selectOption itemValue="Encaminhamento para outro serviço" itemLabel="Encaminhamento para outro serviço" />
+                                <apex:selectOption itemValue="Óbito" itemLabel="Óbito" />
+                                <apex:selectOption itemValue="" itemLabel="Outros" />
+                            </apex:selectList>
+                        </div>
+                </div><br/>
+    				<div id="outrasSit" style="display:none;" class="row">
+                        <div class="col-sm-offset-2 col-sm-4">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-4 "> Outras situações
+                            <apex:inputText size="1" style="resize:none;" styleClass="form-control"  value="{!outraSituacao}"/>
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 "> Projeto Terapêutico Concluído	
+							<apex:selectList id="ptsConc" onchange="ptsConcluido();" size="1" style="resize:none;" styleClass="form-control" value="{!ptsConcluido}">
+                                <apex:selectOption itemValue="" itemLabel="Selecione" />
+                                <apex:selectOption itemValue="Sim" itemLabel="Sim" />
+                                <apex:selectOption itemValue="Não" itemLabel="Não" />                                
+                            </apex:selectList>
+                        </div>
+                        <div class="col-sm-4 ">Encaminhamento para continuidade	
+							<apex:selectList id="enc" onchange="encam();" size="1" style="resize:none;" styleClass="form-control" value="{!encaminhamento}">
+                                <apex:selectOption itemValue="" itemLabel="Selecione" />
+                                <apex:selectOption itemValue="Não há necessidade" itemLabel="Não há necessidade" />
+                                <apex:selectOption itemValue="Encaminhado para unidade hospitalar" itemLabel="Encaminhado para unidade hospitalar" />
+                                <apex:selectOption itemValue="Encaminhado para continuidade em domicílio — familiar" itemLabel="Encaminhado para continuidade em domicílio — familiar" />
+                                <apex:selectOption itemValue="Encaminhado para continuidade em domicílio — outro serviço" itemLabel="Encaminhado para continuidade em domicílio — outro serviço" />
+                                <apex:selectOption itemValue="" itemLabel="Outros" />
+                            </apex:selectList>
+                        </div>
+                    </div><br/>
+                    <div id="outrosEncam" style="display:none" class="row">
+                        <div class="col-sm-offset-2 col-sm-4 ">		
+							&nbsp;
+                        </div>
+                        <div class="col-sm-4 ">Outros encaminhamentos
+                            <apex:inputText style="resize:none;" styleClass="form-control" value="{!outrosEncam}"/>            
+                        </div>
+                    </div><br/>
+                    <div id="seSim" style="display:none;" class="row">
+                        <div class="col-sm-offset-2 col-sm-4 "> Ocorreu alguma intercorrência?		
+							<apex:selectList multiselect="true" size="5" style="resize:none;" styleClass="form-control" value="{!seSimPTSconc}">
+                                <apex:selectOption itemValue="Não ocorreu" itemLabel="Não ocorreu" />
+                                <apex:selectOption itemValue="Lesão por pressão" itemLabel="Lesão por pressão" />
+                                <apex:selectOption itemValue="Queda" itemLabel="Queda" />
+                                <apex:selectOption itemValue="Broncoaspiração" itemLabel="Broncoaspiração" />
+                                <apex:selectOption itemValue="Não adesão do cuidador/paciente" itemLabel="Não adesão do cuidador/paciente" />
+                                <apex:selectOption itemValue="Infecção da Gastronomia" itemLabel="Infecção da Gastronomia" />
+                                <apex:selectOption itemValue="Insucesso da Decanulação" itemLabel="Insucesso da Decanulação" />
+                                <apex:selectOption itemValue="Desmame Difícil" itemLabel="Desmame Difícil" />
+                                <apex:selectOption itemValue="Infecção de corrente sanguínea" itemLabel="Infecção de corrente sanguínea" />
+                                <apex:selectOption itemValue="Infecção de sítio cirúrgico" itemLabel="Infecção de sítio cirúrgico" />
+                                <apex:selectOption itemValue="Alteração cognitiva emocional" itemLabel="Alteração cognitiva emocional" />
+                                <apex:selectOption itemValue="TEV — TVP/TEP" itemLabel="TEV — TVP/TEP" />
+                                <apex:selectOption itemValue="Pneumonia" itemLabel="Pneumonia" />
+                                <apex:selectOption itemValue="Sepse" itemLabel="Sepse" />
+                                <apex:selectOption itemValue="Flebite" itemLabel="Flebite" />
+                                <apex:selectOption itemValue="Insuficiência Respiratória" itemLabel="Insuficiência Respiratória" />
+                                <apex:selectOption itemValue="Infecção do Trato Urinário" itemLabel="Infecção do Trato Urinário" />
+                                <apex:selectOption itemValue="Tranqueobronquite" itemLabel="Tranqueobronquite" />
+                            </apex:selectList>
+                        </div>
+                        <div class="col-sm-4 ">Outras intercorrências
+                            <apex:inputText style="resize:none;" styleClass="form-control" value="{!outrasInterc}"/>            
+                        </div>
+                    </div><br/>
+                    <div id="seNao" style="display:none;" class="row">
+                        <div class="col-sm-offset-2 col-sm-4 "> Quais foram os motivos?		
+							<apex:selectList multiselect="true" size="5" style="resize:none;" styleClass="form-control" value="{!seNaoPTSconc}">
+                                <apex:selectOption itemValue="Lesão por pressão" itemLabel="Lesão por pressão" />
+                                <apex:selectOption itemValue="Queda" itemLabel="Queda" />
+                                <apex:selectOption itemValue="Broncoaspiração" itemLabel="Broncoaspiração" />
+                                <apex:selectOption itemValue="Não adesão do cuidador" itemLabel="Não adesão do cuidador" />
+                                <apex:selectOption itemValue="Não adesão do paciente" itemLabel="Não adesão do paciente" />
+                                <apex:selectOption itemValue="Alta a pedido" itemLabel="Alta a pedido" />
+                                <apex:selectOption itemValue="Óbito inesperado" itemLabel="Óbito inesperado" />
+                                <apex:selectOption itemValue="Óbito sem conforto (cuidados paliativos)" itemLabel="Óbito sem conforto (cuidados paliativos)" />
+                                <apex:selectOption itemValue="Família não preparada para o óbito (cuidados paliativos)" itemLabel="Família não preparada para o óbito (cuidados paliativos)" />
+                                <apex:selectOption itemValue="Disfunção metabólica / eletrolítica" itemLabel="Disfunção metabólica / eletrolítica" />
+                                <apex:selectOption itemValue="Disfunção respiratória" itemLabel="Disfunção respiratória" />
+                                <apex:selectOption itemValue="Disfunção renal" itemLabel="Disfunção renal" />
+                                <apex:selectOption itemValue="Disfunção hemodinâmica" itemLabel="Disfunção hemodinâmica" />
+                                <apex:selectOption itemValue="Infecção da gastronomia" itemLabel="Infecção da gastronomia" />
+                                <apex:selectOption itemValue="Insucesso da decanulação" itemLabel="Insucesso da decanulação" />
+                                <apex:selectOption itemValue="Desmame difícil" itemLabel="Desmame difícil" />
+                                <apex:selectOption itemValue="Infecção de corrente sanguínea" itemLabel="Infecção de corrente sanguínea" />
+                                <apex:selectOption itemValue="Infecção de sítio cirúrgico" itemLabel="Infecção de sítio cirúrgico" />
+                                <apex:selectOption itemValue="Alteração cognitiva emocional" itemLabel="Alteração cognitiva emocional" />
+                                <apex:selectOption itemValue="TEV — TVP/TEP" itemLabel="TEV — TVP/TEP" />
+                                <apex:selectOption itemValue="Pneumonia" itemLabel="Pneumonia" />
+                                <apex:selectOption itemValue="Sepse" itemLabel="Sepse" />
+                                <apex:selectOption itemValue="Flebite" itemLabel="Flebite" />
+                                <apex:selectOption itemValue="Insuficiência respiratória" itemLabel="Insuficiência respiratória" />
+                                <apex:selectOption itemValue="Infecção no trato urinário" itemLabel="Infecção no trato urinário" />
+                                <apex:selectOption itemValue="Traqueobronquite" itemLabel="Traqueobronquite" />
+                            </apex:selectList>
+                        </div>
+                        <div class="col-sm-4 ">Outros motivos
+                            <apex:inputText style="resize:none;" styleClass="form-control" value="{!outrosMotivosDesf}"/>            
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 "> Em uso	
+							<apex:selectList multiselect="true" size="2" style="resize:none;" styleClass="form-control" value="{!emUso}">
+                                <apex:selectOption itemValue="Gastrostomia" itemLabel="Gastrostomia" />
+                                <apex:selectOption itemValue="Traqueotomia" itemLabel="Traqueotomia" />                              
+                            </apex:selectList>
+                        </div>
+                        <div class="col-sm-4 ">Outros em uso
+                            <apex:inputText style="resize:none;" styleClass="form-control" value="{!outrosEmUso}"/>            
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-8 "> Riscos
+							<apex:selectList multiselect="true" size="5" style="resize:none;" styleClass="form-control" value="{!riscosDes}">
+                                <apex:selectOption itemValue="Queda" itemLabel="Queda" />
+                                <apex:selectOption itemValue="Broncoaspiração" itemLabel="Broncoaspiração" />                              
+                                <apex:selectOption itemValue="Lesão por pressão" itemLabel="Lesão por pressão" />                              
+                                <apex:selectOption itemValue="Precaução por vigilância" itemLabel="Precaução por vigilância" />                              
+                                <apex:selectOption itemValue="Precaução por contato" itemLabel="Precaução por contato" />                              
+                                <apex:selectOption itemValue="Precaução por aerossóis" itemLabel="Precaução por aerossóis" />                              
+                                <apex:selectOption itemValue="Alergia medicamentosa" itemLabel="Alergia medicamentosa" />                              
+                            </apex:selectList>
+                        </div>
+                    </div><br/>
+                    <br/>                
+                    <div class="row">
+                        <div class="col-sm-offset-4 col-sm-4 text-center" style="font-weight:bold;">
+                            <apex:commandLink styleClass="botao" action="{!createDesf}"  value="Enviar!" />
+                        </div>
+                    </div>                  
+                </div>
+            </apex:form>
+        </apex:outputText>
+        
+        <apex:outputPanel styleClass="customPopup" layout="block" rendered="{!displayPopUp}" id="firstpopup">
+                <p style="color:green; font-size:20px;">
+                    Projeto Terapêutico Singular cadastrado com sucesso!
+                </p>
+                <p style="font-size:20px;">
+                    Id de registro:  <b><apex:outputText value="{!nameEv}" /></b>
+                </p>
+        	</apex:outputPanel>
+        </body>
+        <script>
+        function ptsConcluido(){
+             var pts = document.getElementById('{!$Component.desf.ptsConc}').value;
+             console.log(pts)
+             
+            	if(pts == 'Sim'){
+            		document.getElementById('seSim').style = ('display:block');
+            		document.getElementById('seNao').style = ('display:none');                    
+            		}
+            	else if(pts == 'Não'){
+            		document.getElementById('seNao').style = ('display:block');
+            		document.getElementById('seSim').style = ('display:none');                    
+                    }
+            	else{
+            		document.getElementById('seSim').style = ('display:none;');
+            		document.getElementById('seNao').style = ('display:none;');                                        
+                    }
+            }
+        
+        function sitDesfecho(){
+            var sit = document.getElementById('{!$Component.desf.sitDesfecho}').value;
+            console.log(sit);
+            	if (sit == ''){
+            		document.getElementById('outrasSit').style = ('display:block;');
+                    }
+            	else{
+            		document.getElementById('outrasSit').style = ('display:none;');
+					}                    
+            }
+        function encam(){
+            var enc = document.getElementById('{!$Component.desf.enc}').value;
+            console.log(enc);
+            	if (enc == ''){
+            		document.getElementById('outrosEncam').style = ('display:block;');
+                    }
+            	else{
+            		document.getElementById('outrosEncam').style = ('display:none;');
+					}                    
+            }
+
+        </script>
+    </html>        
+</apex:page>

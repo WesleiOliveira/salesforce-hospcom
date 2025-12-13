@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Filho_dele_mesmo</fullName>
+    <active>true</active>
+    <errorConditionFormula>Produto_Filho__c =  Produto_Pai__c</errorConditionFormula>
+    <errorMessage>Um produto não pode ser filho dele mesmo.</errorMessage>
+</ValidationRule>

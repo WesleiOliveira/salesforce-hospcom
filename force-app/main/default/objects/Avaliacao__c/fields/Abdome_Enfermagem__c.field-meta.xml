@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Abdome_Enfermagem__c</fullName>
+    <externalId>false</externalId>
+    <label>Abdome</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Normotenso</fullName>
+                <default>false</default>
+                <label>Normotenso</label>
+            </value>
+            <value>
+                <fullName>Rígido/tenso</fullName>
+                <default>false</default>
+                <label>Rígido/tenso</label>
+            </value>
+            <value>
+                <fullName>Flácido</fullName>
+                <default>false</default>
+                <label>Flácido</label>
+            </value>
+            <value>
+                <fullName>Plano</fullName>
+                <default>false</default>
+                <label>Plano</label>
+            </value>
+            <value>
+                <fullName>Escavado</fullName>
+                <default>false</default>
+                <label>Escavado</label>
+            </value>
+            <value>
+                <fullName>Globoso/ ascítico</fullName>
+                <default>false</default>
+                <label>Globoso/ ascítico</label>
+            </value>
+            <value>
+                <fullName>Distendido (timpânico)</fullName>
+                <default>false</default>
+                <label>Distendido (timpânico)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

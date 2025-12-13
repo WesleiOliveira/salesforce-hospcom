@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Alerta_de_ferias_aprovadas</fullName>
+        <description>Alerta de férias aprovadas CLT</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>departamentopessoal@gestcombpo.com.br</recipient>
+            <type>partnerUser</type>
+        </recipients>
+        <senderAddress>desenvolvimento@hospcom.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Registro_de_Ferias</template>
+    </alerts>
+    <alerts>
+        <fullName>Alerta_de_ferias_aprovadaspj</fullName>
+        <description>Alerta de férias aprovadas PJ</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>nayara.moco@gestcombpo.com.br</recipient>
+            <type>partnerUser</type>
+        </recipients>
+        <senderAddress>desenvolvimento@hospcom.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Registro_de_Ferias</template>
+    </alerts>
+    <alerts>
+        <fullName>Solicitacao_de_F_rias</fullName>
+        <description>Solicitação de Férias</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Gestor__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Solicitacao_de_Ferias</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Status_Ag</fullName>
+        <field>Status__c</field>
+        <literalValue>Aguardando aprovação</literalValue>
+        <name>Status: Ag Aprovação</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Ag_Registro</fullName>
+        <field>Status__c</field>
+        <literalValue>Aguardando registro</literalValue>
+        <name>Status: Ag Registro</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Rejeitada</fullName>
+        <field>Status__c</field>
+        <literalValue>Rejeitada</literalValue>
+        <name>Status: Rejeitada</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+</Workflow>

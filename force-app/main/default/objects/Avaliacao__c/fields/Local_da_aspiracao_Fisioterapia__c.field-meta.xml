@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Local_da_aspiracao_Fisioterapia__c</fullName>
+    <externalId>false</externalId>
+    <label>Local da aspiração</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Nasal</fullName>
+                <default>false</default>
+                <label>Nasal</label>
+            </value>
+            <value>
+                <fullName>TQT</fullName>
+                <default>false</default>
+                <label>TQT</label>
+            </value>
+            <value>
+                <fullName>Nasotraqueal</fullName>
+                <default>false</default>
+                <label>Nasotraqueal</label>
+            </value>
+            <value>
+                <fullName>Oral</fullName>
+                <default>false</default>
+                <label>Oral</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

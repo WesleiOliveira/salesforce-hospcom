@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Motivo_perda__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(PICKLISTCOUNT(Motivo_da_Perda__c) == 0, &quot;MOTIVO NÃO INFORMADO&quot;,
+IF ( INCLUDES ( Motivo_da_Perda__c , &quot;ACOMPANHAMENTO&quot; ), &quot;ACOMPANHAMENTO; &quot;,null ) &amp;
+IF ( INCLUDES ( Motivo_da_Perda__c , &quot;CRÉDITO&quot; ), &quot;CRÉDITO; &quot;,null ) &amp;
+IF ( INCLUDES ( Motivo_da_Perda__c , &quot;DECISÃO DO CLIENTE&quot; ), &quot;DECISÃO DO CLIENTE; &quot;,null ) &amp;
+IF ( INCLUDES ( Motivo_da_Perda__c , &quot;ERRO DE DOCUMENTAÇÃO&quot; ), &quot;ERRO DE DOCUMENTAÇÃO; &quot;,null ) &amp;
+IF ( INCLUDES ( Motivo_da_Perda__c , &quot;ESPECIFICAÇÃO&quot; ), &quot;ESPECIFICAÇÃO; &quot;,null ) &amp;
+IF ( INCLUDES ( Motivo_da_Perda__c , &quot;ESTOQUE&quot; ), &quot;ESTOQUE; &quot;,null ) &amp;
+IF ( INCLUDES ( Motivo_da_Perda__c , &quot;FALTA DE ANÁLISE TÉCNICA&quot; ), &quot;FALTA DE ANÁLISE TÉCNICA; &quot;,null ) &amp;
+IF ( INCLUDES ( Motivo_da_Perda__c , &quot;FALTA DE DOCUMENTAÇÃO&quot; ), &quot;FALTA DE DOCUMENTAÇÃO; &quot;,null ) &amp;
+IF ( INCLUDES ( Motivo_da_Perda__c , &quot;FALTA DE REPRESENTANTE&quot; ), &quot;FALTA DE REPRESENTANTE; &quot;,null ) &amp;
+IF ( INCLUDES ( Motivo_da_Perda__c , &quot;NÃO AUTORIZADO&quot; ), &quot;NÃO AUTORIZADO; &quot;,null ) &amp;
+IF ( INCLUDES ( Motivo_da_Perda__c , &quot;PERDA DE PRAZO PARA CADASTRO&quot; ), &quot;PERDA DE PRAZO PARA CADASTRO; &quot;,null ) &amp;
+IF ( INCLUDES ( Motivo_da_Perda__c , &quot;PREÇO&quot; ), &quot;PREÇO; &quot;,null ) &amp;
+IF ( INCLUDES ( Motivo_da_Perda__c , &quot;PREFERÊNCIA DE MARCA&quot; ), &quot;PREFERÊNCIA DE MARCA; &quot;,null ) &amp;
+IF ( INCLUDES ( Motivo_da_Perda__c , &quot;PRODUTO&quot; ), &quot;PRODUTO; &quot;,null ) &amp;
+IF ( INCLUDES ( Motivo_da_Perda__c , &quot;SERVIÇO&quot; ), &quot;SERVIÇO; &quot;,null ) &amp;
+IF ( INCLUDES ( Motivo_da_Perda__c , &quot;TIME&quot; ), &quot;TIME; &quot;,null )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Motivo perda</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

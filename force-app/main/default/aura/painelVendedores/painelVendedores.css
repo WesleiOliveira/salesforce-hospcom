@@ -1,0 +1,312 @@
+.THIS .divPrincipal{
+    display: flex;
+    width: 100%;
+    height: auto;
+    min-height: 500px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.THIS .containerGraficos::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.THIS .containerGraficos::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+.THIS .containerGraficos::-webkit-scrollbar-thumb {
+    background-color: #a0bb31;
+    border-radius: 38px;
+    border: 0px none #ffffff;
+}
+
+.THIS .topoTabela{
+    background-color: #00345c;
+    color: white;
+}
+
+.THIS .fiexedTopo{
+    color: white;
+    font-size: 0.8rem;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.THIS .graficoItem{
+    height: 180px;
+    width: 250px;
+    min-width: 250px;
+    background-color: #f1f1f1;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.THIS .item{
+    display: flex;
+    width: 100%;
+    height: 190px;
+    background-color: white;
+    border-radius: 25px;
+    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+}
+
+.THIS .containerImage{
+    width: 100%;
+    display: flex;
+    height: 50%;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #d1d1d1;
+}
+
+.THIS .containerNomes{
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+}
+
+.THIS .containerGraficos{
+    height: 100%;
+    width: 80%;
+    display: flex;
+    overflow-x: auto;
+}
+
+.THIS .containerEsquerda{
+    border-right: 1px solid #d1d1d1;
+    padding: 10px;
+    width: 20%;
+}
+
+ .THIS .clsFieldset {    
+    margin-left: 2px;
+    margin-right: 2px;
+    padding-top: 0.35em;
+    padding-bottom: 0.625em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    border: 2px groove;
+    display: block;    
+ }
+ 
+ .THIS .clsLegend {    
+    padding-left: 2px;
+    padding-right: 2px;
+    border: none;
+    display: block;
+ }
+
+.THIS .tituloComponente{
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    /* width: 100%; */
+    /* height: 100%; */
+    font-size: 20px;
+    color: #00345c;
+    /* padding-bottom: 30px; */
+    font-weight: bold;
+    text-align: center;
+}
+
+.THIS .tituloTabela{
+    font-weight: bold;
+    text-align: center;
+}
+
+.THIS td{
+    white-space: nowrap;
+    text-align: center;
+}
+
+.THIS .divPrincipal2{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+}
+
+.THIS .divFiltros{
+    display: flex;
+    justify-content: center;
+    height: 10%;
+    margin-bottom: 10px;
+    column-gap: 15px;
+}
+
+.THIS .divContent{
+    display: flex;
+    width: 100%;
+    height: 90%;
+    background-color: green;
+}
+
+.THIS .divContentchart{
+    display: flex;
+    width: 70%;
+    height: 100%;
+    background-color: rgb(84, 5, 81);
+}
+
+.THIS .divContentImageAndUser{
+    display: flex;
+    width: 30%;
+    height: 100%;
+    background-color: rgb(22, 36, 22);
+}
+
+.THIS .itemChart{
+    width: 100%;
+    height: 100%;
+    background-color: #f1f1f1;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.THIS .valorMeta{
+    font-size: 1rem;
+    font-weight: 500;
+    color: #301344;
+}
+
+.THIS .tituloMeta{
+    font-size: 15px;
+    color: #a0bb31;
+    font-weight: 600;
+}
+
+.THIS .divImagem{
+    height: 80px;
+    width: 50%;
+    border-radius: 180px;
+    
+}
+
+.THIS .dropzieToggle{
+    padding-left: 5px!important;
+    border-radius : 14px!important;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #301344;
+    color: white;
+    font-size: 12px;
+}
+
+.THIS .dropzie{
+    height: 100%;
+    width: 100%;
+}
+
+.THIS .dropzieMenu {
+    border: 1px solid #301344;
+    height: 160px!important;
+}
+
+.THIS .imgUserClass{
+   height: 100%;
+   border-radius: 100%;
+}
+
+.THIS .classSelecioneFiltro{
+    color: #301344
+}
+
+.THIS .class1277{
+    background-color: #f1f1f1;
+    width: 100%;
+    overflow: auto;
+    height: 30%;
+    margin-top: 12px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0px;
+    margin-left: 0px;
+    padding-right: 0px;
+    display: none;
+}
+
+.THIS .class1278{
+    overflow: auto;
+    height: 120px;
+}
+
+.THIS .class1278::-webkit-scrollbar {
+    width: 5px;
+}
+
+.THIS .class1278::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.THIS .chartClass{
+    width:95% !important;
+}
+.THIS .class1278::-webkit-scrollbar-thumb {
+    background-color: #a0bb31;
+    border-radius: 38px;
+    border: 0px none #ffffff;
+}
+
+
+
+
+
+.THIS .itemChart::-webkit-scrollbar {
+    width: 6px;
+}
+
+.THIS .itemChart::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+.THIS .itemChart::-webkit-scrollbar-thumb {
+    background-color: #a0bb31;
+    border-radius: 38px;
+    border: 0px none #ffffff;
+}
+
+
+
+
+
+
+/*container popup dos graficos*/
+
+
+.THIS .container-graficos{
+    background-color: white;
+    color:white;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    height: 0;
+    top: 0;
+    z-index: 1;
+    border-radius: 25px;
+    box-shadow: rgb(0 0 0 / 24%) 0 3px 8px;
+}
+.THIS .container-item{
+    position: relative;
+        margin-bottom: 20px;
+}
+.THIS .item{
+    position: relative;
+    height: 250px;
+    top: 0;
+    z-index: 20;
+}
+
+.THIS  div:has(> #selectVendedor),
+.THIS div:has(> #selectLinha),
+.THIS div:has(> #selectDepartamento){
+	display: none;
+}

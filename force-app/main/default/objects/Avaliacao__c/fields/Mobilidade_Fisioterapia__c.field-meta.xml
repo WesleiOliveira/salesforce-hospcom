@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mobilidade_Fisioterapia__c</fullName>
+    <externalId>false</externalId>
+    <label>Mobilidade</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Deambula sem ajuda</fullName>
+                <default>false</default>
+                <label>Deambula sem ajuda</label>
+            </value>
+            <value>
+                <fullName>Deambula com ajuda</fullName>
+                <default>false</default>
+                <label>Deambula com ajuda</label>
+            </value>
+            <value>
+                <fullName>Cadeirante</fullName>
+                <default>false</default>
+                <label>Cadeirante</label>
+            </value>
+            <value>
+                <fullName>Acamado</fullName>
+                <default>false</default>
+                <label>Acamado</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sub_Status__c</fullName>
+    <description>Parecer final da OT.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Parecer final da OT.</inlineHelpText>
+    <label>Sub-Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Status</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>FINALIZADO</fullName>
+                <default>false</default>
+                <label>FINALIZADO</label>
+            </value>
+            <value>
+                <fullName>NÃO AUTORIZADO</fullName>
+                <default>false</default>
+                <label>NÃO AUTORIZADO</label>
+            </value>
+            <value>
+                <fullName>SEM CONSERTO</fullName>
+                <default>false</default>
+                <label>SEM CONSERTO</label>
+            </value>
+            <value>
+                <fullName>NÃO APRESENTOU DEFEITO</fullName>
+                <default>false</default>
+                <label>NÃO APRESENTOU DEFEITO</label>
+            </value>
+            <value>
+                <fullName>GARANTIA DE SERVIÇO</fullName>
+                <default>false</default>
+                <label>GARANTIA DE SERVIÇO</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>AGUARDANDO AUTORIZAÇÃO</controllingFieldValue>
+            <controllingFieldValue>DISPONIVEL PARA ENTREGA</controllingFieldValue>
+            <controllingFieldValue>FECHADO CONCLUÍDO</controllingFieldValue>
+            <controllingFieldValue>AGUARDANDO ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>AGUARDANDO PEÇA</controllingFieldValue>
+            <controllingFieldValue>AUTORIZADO</controllingFieldValue>
+            <controllingFieldValue>AGUARDANDO ENVIO DA PROPOSTA</controllingFieldValue>
+            <controllingFieldValue>AGUARDANDO FATURAMENTO</controllingFieldValue>
+            <valueName>FINALIZADO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AGUARDANDO AUTORIZAÇÃO</controllingFieldValue>
+            <controllingFieldValue>DISPONIVEL PARA ENTREGA</controllingFieldValue>
+            <controllingFieldValue>FECHADO CONCLUÍDO</controllingFieldValue>
+            <controllingFieldValue>AGUARDANDO ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>AGUARDANDO PEÇA</controllingFieldValue>
+            <controllingFieldValue>AUTORIZADO</controllingFieldValue>
+            <controllingFieldValue>AGUARDANDO ENVIO DA PROPOSTA</controllingFieldValue>
+            <controllingFieldValue>AGUARDANDO FATURAMENTO</controllingFieldValue>
+            <valueName>NÃO AUTORIZADO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AGUARDANDO AUTORIZAÇÃO</controllingFieldValue>
+            <controllingFieldValue>DISPONIVEL PARA ENTREGA</controllingFieldValue>
+            <controllingFieldValue>FECHADO CONCLUÍDO</controllingFieldValue>
+            <controllingFieldValue>AGUARDANDO ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>AGUARDANDO PEÇA</controllingFieldValue>
+            <controllingFieldValue>AUTORIZADO</controllingFieldValue>
+            <controllingFieldValue>AGUARDANDO ENVIO DA PROPOSTA</controllingFieldValue>
+            <controllingFieldValue>AGUARDANDO FATURAMENTO</controllingFieldValue>
+            <valueName>SEM CONSERTO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AGUARDANDO AUTORIZAÇÃO</controllingFieldValue>
+            <controllingFieldValue>DISPONIVEL PARA ENTREGA</controllingFieldValue>
+            <controllingFieldValue>FECHADO CONCLUÍDO</controllingFieldValue>
+            <controllingFieldValue>AGUARDANDO ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>AGUARDANDO PEÇA</controllingFieldValue>
+            <controllingFieldValue>AUTORIZADO</controllingFieldValue>
+            <controllingFieldValue>AGUARDANDO ENVIO DA PROPOSTA</controllingFieldValue>
+            <controllingFieldValue>AGUARDANDO FATURAMENTO</controllingFieldValue>
+            <valueName>NÃO APRESENTOU DEFEITO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AGUARDANDO AUTORIZAÇÃO</controllingFieldValue>
+            <controllingFieldValue>DISPONIVEL PARA ENTREGA</controllingFieldValue>
+            <controllingFieldValue>FECHADO CONCLUÍDO</controllingFieldValue>
+            <controllingFieldValue>AGUARDANDO ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>AGUARDANDO PEÇA</controllingFieldValue>
+            <controllingFieldValue>AUTORIZADO</controllingFieldValue>
+            <controllingFieldValue>AGUARDANDO ENVIO DA PROPOSTA</controllingFieldValue>
+            <controllingFieldValue>AGUARDANDO FATURAMENTO</controllingFieldValue>
+            <valueName>GARANTIA DE SERVIÇO</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

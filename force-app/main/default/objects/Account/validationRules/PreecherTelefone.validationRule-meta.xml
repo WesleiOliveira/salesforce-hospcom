@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PreecherTelefone</fullName>
+    <active>false</active>
+    <description>preencher campo telefone</description>
+    <errorConditionFormula>AND(
+    ISNEW(),
+    OR(
+        ISBLANK(Phone),
+        ISBLANK(Email_cliente__c)
+    )
+)</errorConditionFormula>
+    <errorMessage>O Campo telefone ou email está vázio, é Obrigatório para as novas contas</errorMessage>
+</ValidationRule>

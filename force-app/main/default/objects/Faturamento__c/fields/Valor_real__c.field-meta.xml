@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valor_real__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+	OR(
+		Nome_da_Conta2__r.CNPJ__c == &apos;05.743.288/0001-08&apos;,
+		Nome_da_Conta2__r.CNPJ__c == &apos;27.476.124/0001-02&apos;,
+		Nome_da_Conta2__r.CNPJ__c == &apos;23.813.386/0001-56&apos;,
+		Nome_da_Conta2__r.CNPJ__c == &apos;40.014.621/0002-20&apos;,
+		Nome_da_Conta2__r.CNPJ__c == &apos;40.014.621/0001-49&apos;,
+		Nome_da_Conta2__r.CNPJ__c == &apos;40.014.621/0004-91&apos;,
+		Nome_da_Conta2__r.CNPJ__c == &apos;40.014.621/0003-00&apos;,
+		TEXT(Pedido__r.Natureza_de_Opera_o__c) == &apos;REMESSA DE COMODATO&apos;,
+		TEXT(Pedido__r.Status) == &apos;Cancelado&apos;,
+		TEXT(Tipo__c) == &apos;Entrega&apos;,		
+		TEXT(Tipo__c) == &apos;Devolução&apos;,		
+		TEXT(Status__c) == &apos;Cancelado&apos;,
+		TEXT(Tipo__c) == &apos;NF de Cancelamento&apos;
+
+	),
+	0,
+IF(
+		TEXT(Tipo__c) == &apos;Dev da NF de Saída&apos;		
+, -(Valor_Faturado__c),
+	Valor_Faturado__c
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Valor real</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

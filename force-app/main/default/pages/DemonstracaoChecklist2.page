@@ -1,0 +1,440 @@
+<apex:page renderAs="pdf" standardController="Order" extensions="DemonstracaoChecklist2" standardStylesheets="false" cache="false" showHeader="false" sidebar="false" applyHtmlTag="true" applyBodyTag="false">
+    <head>
+        <style type="text/css" media="print">
+            
+            /* pdf */
+            @page{
+                size:A4;
+                background: url({!documento.timbrado});
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(paginacao);}
+            }
+            .pagina:before{content:counter(page);}
+            .paginas:before{content:counter(pages);}
+            
+            /* paginação */
+            .paginacao{
+                height:120px;
+                position:running(paginacao);
+            }.paginacao .valor{
+                position: absolute;
+                top: 74px;
+                left: 410px;
+                text-align:center;
+                background-color:white;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:600;
+                color:#697f9b;
+            }.paginacao .valor-2{
+                position: absolute;
+                top: 95px;
+                left: -3px;
+                text-align:left;
+                background-color:white;
+                font-family:arial, verdana, sans-serif;
+                font-size:9px;
+                font-weight:600;
+                color:#697f9b;
+            }
+            
+            /* documento */
+            .documento{
+                padding:0px;
+                margin:0px;
+                font-family:arial, verdana, sans-serif;
+            }.bloco{
+                page-break-inside:avoid;
+            }.linha{
+                white-space: nowrap;
+            }
+            
+            /* conteudo */
+            .conteudo .titulo{
+                font-size:14px;
+                font-weight:bold;
+                line-height:120%;
+            }.conteudo .paragrafo{
+                font-size:13px;
+                text-align:justify;
+                line-height:120%;
+                text-justify:inter-word;
+                text-indent:50px;
+            }
+            
+            .conteudo .manuscrito{
+                height:25px;
+                border-color:#cacecf!important;
+            }.conteudo .destaque{
+                border-color:#cacecf;
+                border-style:solid;
+                border-width:2px 0px 0px 0px;
+                padding-top:4px;
+                padding-bottom:10px;
+            }.conteudo .sessao{
+                width:100%;
+                border-collapse:collapse;
+            }.conteudo .sessao .rotulo, 
+             .conteudo .sessao .valor, 
+             .conteudo .rotulo_doc, 
+             .conteudo .valor_doc{
+                font-size:11px;
+                vertical-align:top;
+                border-color:#eef2f4;
+                border-style:solid;
+                border-width:1px 0px 1px 0px;
+                padding:2px;
+            }.conteudo .sessao .rotulo{
+                width:20%;
+                font-weight:bold;
+                white-space: nowrap;
+                text-align:right;
+                padding-right:6px;
+            }.conteudo .sessao .valor{
+                width:30%;
+            }.conteudo .sessao .rotulo_doc{
+                width:33.33%;
+                font-weight:bold;
+                white-space: nowrap;
+                text-align:center;
+            }.conteudo .sessao .valor_doc{
+                width:100%;
+                white-space: nowrap;
+            }
+            
+            .conteudo .obsimgs{
+                text-align:right;
+                font-size:11px;
+                font-weight:bold;
+                font-style:italic;
+            }.conteudo .assinatura{
+                width:100%;
+            }.conteudo .assinatura td{
+                width:50%;
+                font-size:13px;
+                line-height:130%;
+            }
+            
+            /* listagem */
+            .listagem{ 
+                width:100%;
+            }.listagem table{ 
+                width:100%;
+                border-collapse:collapse;
+            }.listagem td{ 
+                padding:2px 5px;
+                line-height:120%;
+            }.listagem .pre-cabecalho{
+                height:10px;
+            }.listagem .cabecalho td{
+                font-size:12px;
+                font-weight:bold;
+                background-color:#e2e3e3;
+                white-space: nowrap;
+                border-color:#cacecf;
+                border-style:solid;
+                border-width:1px 0px 1px 0px;
+            }.listagem .item-dados .imagem{
+                vertical-align:middle;
+            }.listagem .item-dados.acessorio .imagem{
+                text-align:right;
+            }.listagem .item-dados.equipamento img{
+                width: 80px;
+                height: 80px; 
+            }.listagem .item-dados.acessorio img{
+                width: 55px;
+                height: 55px; 
+            }.listagem .item-dados .valor{
+                border-color:#eef2f4;
+                border-style:solid;
+                border-width:1px 0px 1px 0px;
+            }.listagem .item-dados td{
+                font-size:10px;
+                vertical-align:top;
+            }.listagem .item-dados .checkbox{
+                border-color:#eef2f4;
+                border-style:solid;
+                border-width:1px 0px 1px 0px;
+                padding: 2px 6px 0px 2px!important;
+            }.listagem .item-dados .checkbox{
+                border-color:#eef2f4;
+                border-style:solid;
+                border-width:1px 0px 1px 0px;
+            }.listagem .item-dados .checkbox span{
+                border: 1px solid black;
+            }.listagem .item-descr td{
+                font-size:10px;
+                text-align:justify;
+                vertical-align:top;
+                text-justify:inter-word;
+                border-color:#eef2f4;
+                border-style:solid;
+                border-width:0px 0px 1px 0px;
+            }.listagem .subtotal{
+                font-weight: bold;
+                font-size:10px;
+                white-space: nowrap;
+            }.listagem .subtotal .valor{
+                border-color:#eef2f4;
+                border-style:solid;
+                border-width:0px 0px 1px 0px;
+            }
+        </style>
+    </head>
+                    
+
+    
+    <body class="documento">
+        
+        <!-- paginacao -->
+        <div class="paginacao">
+            <div class="valor">Página <span class="pagina"/> de <span class="paginas"/></div>
+            <div class="valor-2">Rev: 001 | Data Rev: 28/11/2019</div>
+        </div>
+        
+        <!-- conteudo -->
+        <div class="conteudo">
+            
+            <div class="titulo" style="text-align:center;">
+                CHECKLIST DE ENVIO E RETORNO DE DEMONSTRAÇÃO/COMODATO: Nº.
+<!--                <apex:outputText value="{!IF(tipo_check=='entrega','DE ENTREGA','DE RECEBIMENTO')}"/>&nbsp;
+                <apex:outputText value="{!if(Order.Natureza_de_Opera_o__c =='DEMONSTRAÇÃO','DA DEMONSTRAÇÃO','DO EMPRÉSTIMO') }"/>&nbsp;Nº.
+-->                <apex:outputText value="{!Order.OrderNumber}"/>
+            </div>
+            <br/>
+            
+            <!-- Geral -->
+            <div class="bloco">
+                <div class="titulo destaque">Informações gerais</div>
+                <table class="sessao" cellpadding="0px" cellspacing="0px" border="0">
+                    <tr>
+                        <td class="rotulo">&nbsp;<apex:outputText value="{!Order.Natureza_de_Opera_o__c}"/></td>
+                        <td class="valor"><apex:outputField value="{!demonstracao.OrderNumber}"/></td>
+                        
+                        <td class="rotulo">Cliente</td>
+                        <td class="valor"><apex:outputText value="{!if(demonstracao.Account.RecordType.Name == 'Conta comercial', demonstracao.Account.Raz_o_Social__c, demonstracao.Account.Name)}"/></td>
+                    </tr>
+                    <tr>
+                        <td class="rotulo"></td>
+                        <td class="valor"></td>
+                        
+                        <td class="rotulo"><apex:outputText value="{!if(demonstracao.Account.RecordType.Name == 'Conta comercial', 'CNPJ', 'CPF')}"/></td>
+                        <td class="valor"><apex:outputText value="{!if(demonstracao.Account.RecordType.Name == 'Conta comercial', demonstracao.Account.CNPJ__c, demonstracao.Account.CPF__pc)}"/></td>
+                    </tr>
+                </table>
+            </div>
+            <br/>
+            
+            <!-- Produtos (TABELA ANTIGA) -->
+            <div style="display:none;" >
+            <div class="titulo destaque" style="padding-bottom:0px;">Ativos e acessórios</div>
+            <div class="listagem">
+                <apex:variable var="subtotal" value="{!0}"/>
+                
+                <table cellpadding="0px" cellspacing="0px" border="0">
+                    <apex:repeat value="{!produtos}" var="produto">
+                        <tbody class='bloco'>
+
+                            <!-- cabeçalho -->
+                            <apex:outputText rendered="{!IF(produto.cabecalho,true,false)}">
+                                <tr class="pre-cabecalho"><tr cellspacing="7"></tr></tr>
+                                <tr class="cabecalho">
+                                    <td style="visibility:hidden;border:0px;"></td>
+                                    <td>Imagem</td>
+                                    <td>Produto</td>
+                                    <td>Modelo</td>
+                                    <td>Fabricante</td>
+                                    <td>Nº de série</td>
+                                    <td>Estado do bem</td>
+                                </tr>
+                            </apex:outputText>
+                            
+                            <!-- item -->
+                            <apex:variable var="tipo" value="{!IF(produto.item.Item_Pai__c==null,'equipamento','acessorio')}"/>
+                            <tr class="item-dados {!tipo}">
+                                <td rowspan="2"><apex:outputText value="{!produto.item.Item__c}" rendered="{!IF(tipo=='equipamento',true,false)}"/></td>
+                                <td rowspan="2" class="imagem"><img src="{!produto.item.Product2.URL_da_Imagem__c}"/></td>
+                                <td class="valor">
+                                    COD: {!produto.item.Product2.StockKeepingUnit}
+                                    <br/>{!produto.item.Product2.Name}
+                                </td>
+                                <td class="valor">{!produto.item.Product2.Modelo__c}</td>
+                                <td class="valor">{!produto.item.Product2.Marca__c}</td>
+                                <!--<td class="valor"><apex:outputText value="{!IF(produto.item.Ativo__r.SerialNumber!=null,produto.item.Ativo__r.SerialNumber,'')}" /></td>-->
+                                <td rowspan="2" class="valor linha checkbox">
+                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span> OK &nbsp;&nbsp; <span>&nbsp;&nbsp;&nbsp;&nbsp;</span> Não OK
+                                </td>
+                            </tr>
+                            <tr class="item-descr">
+                                <td colspan="4">{!produto.item.Descricao_da_linha__c}</td>
+                            </tr>
+                        </tbody>
+                    </apex:repeat>
+                </table>
+            </div>
+    </div>
+    <!-- Nova -->
+    <div >
+            <br/>
+    <div class="titulo destaque" style="padding-bottom:0px;">Ativos e acessórios</div>
+            <div class="listagem">
+                <table cellpadding="0px" cellspacing="0px" border="0">
+                    <apex:repeat value="{!produtos}" var="produto">
+                        <tbody class='bloco'>
+
+                            <!-- cabeçalho -->
+                            <apex:outputText rendered="{!IF(produto.cabecalho,true,false)}">
+                                <tr class="pre-cabecalho"><tr cellspacing="7"></tr></tr>
+                                <tr class="cabecalho">
+                                    <td style="visibility:hidden;border:0px;"></td>
+                                    <td>Imagem</td>
+                                    <td>Produto</td>
+                                    <td>Modelo</td>
+                                    <td>Fabricante</td>
+                                    <td>Nº de Série.</td>
+                                    <td>Envio</td>
+                                    <td>Retorno</td>
+                                </tr>
+                            </apex:outputText>
+                            
+                            <!-- item -->
+                            <apex:variable var="tipo" value="{!IF(produto.item.Item_Pai__c==null,'equipamento','acessorio')}"/>
+                            <tr class="item-dados {!tipo}">
+                                <td rowspan="2"><apex:outputText value="{!produto.item.Item__c}" rendered="{!IF(tipo=='equipamento',true,false)}"/></td>
+                                <td rowspan="2" class="imagem"><img src="{!produto.item.Product2.URL_da_Imagem__c}"/></td>
+                                <td class="valor">
+                                    COD: {!produto.item.Product2.StockKeepingUnit}
+                                    <br/>{!produto.item.Product2.Name}
+                                    <br/>&nbsp;
+                                    <br/>&nbsp;
+                                </td>
+                                <td class="valor">{!produto.item.Product2.Modelo__c}</td>
+                                <td class="valor">{!produto.item.Product2.Marca__c}</td>
+                                <td class="valor"><apex:outputField value="{!produto.item.Description}"/></td>
+                                <td width="50px" rowspan="2" class="valor linha checkbox" style="border-width: 1px 0px 0px 0px; border-color:#cacecf !important;">
+                                     <span>&nbsp;&nbsp;&nbsp;&nbsp;</span> OK <br/><br/> <span>&nbsp;&nbsp;&nbsp;&nbsp;</span> Não OK
+                                </td>
+                                <td width="50px" rowspan="2" class="valor linha checkbox" style="border-width: 1px 0px 0px 0px; border-color:#cacecf !important;">
+                                     <span>&nbsp;&nbsp;&nbsp;&nbsp;</span> OK <br/><br/> <span>&nbsp;&nbsp;&nbsp;&nbsp;</span> Não OK
+                                </td>
+                            </tr>
+                            <tr class="item-descr">
+                                <td colspan="5">{!produto.item.Descricao_da_linha__c}</td>
+                            </tr>
+                                                    
+                        </tbody>
+                    </apex:repeat>
+                </table>
+<!--            <table>
+
+                <table cellpadding="0px" cellspacing="0px" border="0">
+                <tbody class='bloco'>
+                    <tr class="pre-cabecalho"><tr cellspacing="7"></tr></tr>
+                                <tr class="cabecalho">
+                                    <td style="visibility:hidden;border:0px;"></td>
+                                    <td>Imagem</td>
+                                    <td>Produto</td>
+                                    <td>Modelo</td>
+                                    <td>Fabricante</td>
+                                    <td>Nº de série</td>
+                                    <td>Estado do bem</td>
+-->                                   <!-- <td>DEMONSTRAÇÃO/COMODATO</td> -->
+<!--                                </tr>
+        <apex:variable var="rowNum" value="{!0}" />
+        <apex:repeat value="{!Ativos}" var="atv">
+            <apex:variable var="count" value="{!0}" />           
+               <apex:variable var="tipo" value="equipamento"/>
+                <tr class="item-dados {!tipo}">
+                    <td rowspan="2">  <apex:variable var="rowNum" value="{!rowNum + 1}"/>{!rowNum}</td>
+                    <td rowspan="2" class="imagem" style="border-width: 1px 0px 1px 0px; border-color:#cacecf !important;"><img src="{!atv.Product2.URL_da_Imagem__c}"/></td>
+                    <td width="150px" class="valor" style="border-width: 1px 0px 0px 0px; border-color:#cacecf !important;">
+                        COD: {!atv.Product2.StockKeepingUnit}<br/>
+                        {!atv.Product2.Name}<br/><br/>
+                        {!atv.Description}
+                    </td>
+                    <td width="100px" class="valor" style="border-width: 1px 0px 0px 0px; border-color:#cacecf !important;">{!atv.Product2.Modelo__c}</td>
+                    <td width="100px" class="valor" style="border-width: 1px 0px 0px 0px; border-color:#cacecf !important;">{!atv.Product2.Marca__c}</td>
+                    <td width="100px" class="valor" style="border-width: 1px 0px 0px 0px; border-color:#cacecf !important;">{!atv.Description}</td>
+                    <td width="100px" rowspan="2" class="valor linha checkbox" style="border-width: 1px 0px 0px 0px; border-color:#cacecf !important;">
+                         <span>&nbsp;&nbsp;&nbsp;&nbsp;</span> OK &nbsp;&nbsp; <span>&nbsp;&nbsp;&nbsp;&nbsp;</span> Não OK
+                    </td>
+-->                  <!--  <td width="150px" rowspan="2" class="valor linha checkbox" style="border-width: 1px 0px 0px 0px; border-color:#cacecf !important;">
+                        <span style="margin-left: 40px;">&nbsp;&nbsp;&nbsp;&nbsp;</span> OK &nbsp;&nbsp; <span>&nbsp;&nbsp;&nbsp;&nbsp;</span> Não OK                            
+                    </td> -->
+<!--                </tr>
+-->            <!--<apex:repeat var="countAT" value="{!atv.Itens_de_Checklist_do_Ativo__r}">
+                <apex:variable value="{!count + 1}" var="count" />
+            </apex:repeat>-->
+<!--            <tr class="item-dados" >
+                        <table>
+                            <apex:outputText rendered="{!IF(count >= 1, true, false)}">
+                            <tr class="cabecalho">
+                                <td style="visibility:hidden;border:0px;"></td>
+                                <td style="background-color:white; width:100px; border-bottom:0px;"></td>
+                                <td class="valor">Acessório</td>
+                                <td class="valor" style="text-align:center;">Quantidade</td>
+                                <td class="valor">Estado</td>
+                            </tr>
+                            </apex:outputText>
+-->                           <!--<apex:repeat value="{!atv.Itens_de_Checklist_do_Ativo__r}" var="checkList">
+                               
+                            <tr class="item-dados">
+                                <td >&nbsp;</td>
+                                <td >&nbsp;</td>
+                                <td class="valor" style="width:320px;">{!checkList.Nome_do_Item__c} </td>
+                                <td class="valor" style="width:122px; text-align:center;">{!checkList.Quantidade__c}</td>
+                                <td class="valor linha checkbox">
+                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span> OK &nbsp;&nbsp; <span>&nbsp;&nbsp;&nbsp;&nbsp;</span> Não OK
+                                </td>
+                            </tr>
+                            </apex:repeat>-->
+<!--                </table><br/>
+                </tr>
+                
+                
+        </apex:repeat>
+    </tbody></table>
+    </table>   
+--></div>
+</div>
+        <!-- Observações -->
+            <div class="bloco">
+                <div class="titulo destaque">Observações </div>
+                <table class="sessao" cellpadding="0px" cellspacing="0px" border="0">
+                    <tr><td class="valor manuscrito" style="border-top:0px;"></td></tr>
+                    <tr><td class="valor manuscrito"></td></tr>
+                    <tr><td class="valor manuscrito"></td></tr>
+                    <tr><td class="valor manuscrito"></td></tr>
+                    <tr><td class="valor manuscrito"></td></tr>
+                    <tr><td class="valor manuscrito"></td></tr>
+                </table>
+            </div>
+            <br/>
+            
+            <!-- Declarações -->
+            <div class="bloco">
+                <div class="titulo destaque">Responsáveis </div>
+                <br/>
+                <table class="assinatura">
+                    <tr>
+                        <td>
+                            <br/><br/>____________________________________
+                            <br/>Responsável Cliente
+                            <br/>Nome: 
+                            <br/>Data: 
+                        </td>
+                        <td>
+                            <br/><br/>____________________________________
+                            <br/>Responsável Hospcom
+                            <br/>Nome:
+                            <br/>Data:
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+            </div>
+            
+        </div>
+        
+    </body>
+</apex:page>

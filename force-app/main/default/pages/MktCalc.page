@@ -1,0 +1,164 @@
+<apex:page controller="MktFluxo" showHeader="false" showChat="false" standardStylesheets="false"> 
+    <html>
+        <head>
+            <meta content='IE=Edge' http-equiv='X-UA-Compatible'> </meta>
+            <meta http-equiv='Content-Type' content='text/html;charset=UTF-8' />
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'> </meta>
+            <meta name='GENERATOR' content='S' />
+            <title>CalculadoraNew</title>
+            <link rel="stylesheet" href="{!$Resource.app_min_css}" />
+            <style>
+                 @font-face{
+                    font-family:'Glyphicons Halflings';
+                    src:url(../fonts/glyphicons-halflings-regular.eot);
+                    src:url(../fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'),
+                    url({!urlBase}/resource/1523097320000/glyphicons_halflings_regular_woff2) format('woff2'),
+                    url({!urlBase}/resource/1523097320000/glyphicons_halflings_regular_woff) format('woff'),
+                    url({!urlBase}/resource/1523097320000/glyphicons_halflings_regular_ttf) format('truetype'),
+                    url(../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg')}
+            </style>
+        </head>
+        
+        <body onload="LoadFromQueryString();recalc_onclick('');" onunload='' browserstorage="false" style="width:100%;">
+            <noscript style='color:#F15623;'>
+                    This web page contains a live and functional spreadsheet.Please enable JavaScript in your web browser for the live calculations to work properly.
+            </noscript>
+
+            <form id='formc' name='formc' method='post' action='' target='_self'>
+                <input type='hidden' id='xl_spreadsheet' name='xl_spreadsheet' value='CalculadoraNew' />
+                <input type='hidden' id='xl_client' name='xl_client' value='x9.2.7125.0' />
+                <input type='hidden' id='XLEW_1_14_1' name='XLEW_1_14_1' value='0' />
+                <div id="tab" class='tab-content'>
+
+                    <div id='sheet-1' style='padding: 1em 1.4em;' class='active'>
+                        <div class='container-fluid  '>
+                            <section class=''>
+                                <table cellspacing='0' cellpadding='0' style='border-spacing:0;width:100%;' onkeydown='javascript:navigate(event);'>
+                                    <col width='192'/>
+                                    <col width='86'/>
+                                    <col width='72'/>
+                                    <col width='71'/>
+                                    <tr style='height:20pt'>
+                                        <td class='ee100' style='height:20pt;' colspan = '4'>
+                                    Calculadora de Litro Diluído
+                                        </td>
+                                    </tr>
+                                    <tr style='height:20pt'>
+                                        <td class='ee106' style='height:20pt;' colspan = '4'>&nbsp;</td>
+                                    </tr>
+                                    <tr style='height:15pt'>
+                                        <td class='ee111' style='height:15pt;'>
+                                    Valor do Detergente
+                                        </td>
+                                        <td class='ee114' style='height:15pt;'>
+                                            <input id='XLEW_1_3_2' type='text' value='' class='ee116 form-control' style='width:100%' onchange="this.value=eedisplayFloat(eeparseFloat(this.value));recalc_onclick('XLEW_1_3_2')" name='XLEW_1_3_2' placeholder='' tabindex='1' data-sheet='1' data-row='3' data-col='2'/>
+                                        </td>
+                                        <td class='ee117' style='height:15pt;'>
+                                    Reais
+                                        </td>
+                                        <td class='ee117' style='height:15pt;'>&nbsp;</td>
+                                    </tr>
+                                    <tr style='height:15pt'>
+                                        <td class='ee111' style='height:15pt;'>
+                                    Diluição recomendada
+                                        </td>
+                                        <td class='ee114' style='height:15pt;'>
+                                            <input id='XLEW_1_4_2' type='text' value='' class='ee116 form-control' style='width:100%' onchange="this.value=eedisplayFloat(eeparseFloat(this.value));recalc_onclick('XLEW_1_4_2')" name='XLEW_1_4_2' placeholder='' tabindex='2' data-sheet='1' data-row='4' data-col='2'/>
+                                        </td>
+                                        <td class='ee117' style='height:15pt;'>
+                                    ML
+                                        </td>
+                                        <td class='ee117' style='height:15pt;'>&nbsp;</td>
+                                    </tr>
+                                    <tr style='height:15pt'>
+                                        <td class='ee111' style='height:15pt;'>
+                                    Volume da embalagem
+                                        </td>
+                                        <td class='ee114' style='height:15pt;'>
+                                            <input id='XLEW_1_5_2' type='text' value='' class='ee116 form-control' style='width:100%' onchange="this.value=eedisplayFloat(eeparseFloat(this.value));recalc_onclick('XLEW_1_5_2')" name='XLEW_1_5_2' placeholder='' tabindex='3' data-sheet='1' data-row='5' data-col='2'/>
+                                        </td>
+                                        <td class='ee117' style='height:15pt;'>
+                                    L
+                                        </td>
+                                        <td class='ee117' style='height:15pt;'>&nbsp;</td>
+                                    </tr>
+                                    <tr style='height:15pt'>
+                                        <td class='ee111' style='height:15pt;'>
+                                    Preço do Litro Concentrado
+                                        </td>
+                                        <td class='ee119' style='height:15pt;'>
+                                            <input id='XLEW_1_6_2' type='text' readonly='readonly' value='' class='ee119' style='overflow:hidden; border:0px solid #000000; width:100% ' name='XLEW_1_6_2' tabindex='-1' />
+                                        </td>
+                                        <td class='ee117' style='height:15pt;'>
+                                    Reais
+                                        </td>
+                                        <td class='ee117' style='height:15pt;'>&nbsp;</td>
+                                    </tr>
+                                    <tr style='height:15pt'>
+                                        <td class='ee111' style='height:15pt;'>&nbsp;</td>
+                                        <td class='ee117' style='height:15pt;' colspan = '3'>&nbsp;</td>
+                                    </tr>
+                                    <tr style='height:15pt'>
+                                        <td class='ee111' style='height:15pt;'>
+                                    Rendimento da embalagem:
+                                        </td>
+                                        <td class='ee119' style='height:15pt;'>
+                                            <input id='XLEW_1_8_2' type='text' readonly='readonly' value='' class='ee119' style='overflow:hidden; border:0px solid #000000; width:100% ' name='XLEW_1_8_2' tabindex='-1' />
+                                        </td>
+                                        <td class='ee117' style='height:15pt;'>
+                                    Litros
+                                        </td>
+                                        <td class='ee117' style='height:15pt;'>&nbsp;</td>
+                                    </tr>
+                                    <tr style='height:15pt'>
+                                        <td class='ee111' style='height:15pt;'>&nbsp;</td>
+                                        <td class='ee117' style='height:15pt;' colspan = '3'>&nbsp;</td>
+                                    </tr>
+                                    <tr style='height:15pt'>
+                                        <td class='ee111' style='height:15pt;'>
+                                    Preço do Litro Diluído
+                                        </td>
+                                        <td class='ee119' style='height:15pt;'>
+                                            <input id='XLEW_1_10_2' type='text' readonly='readonly' value='' class='ee119' style='overflow:hidden; border:0px solid #000000; width:100% ' name='XLEW_1_10_2' tabindex='-1' />
+                                        </td>
+                                        <td class='ee117' style='height:15pt;' colspan = '2'>&nbsp;</td>
+                                    </tr>
+                                    <tr style='height:15pt'>
+                                        <td class='ee108' style='height:15pt;' colspan = '4'>&nbsp;</td>
+                                    </tr>
+                                    <tr style='height:15pt'>
+                                        <td class='ee118' style='height:15pt;' colspan = '4'>
+                                            <button type="button" class="btn btn-primary btn-sm spin-button" data-style="spin-right" style="font:inherit">
+                                                <span class="" style="margin-right:.6em"/>
+                                                <span class="btn-label btn-label-right">Calcular</span>
+                                                <span class="spin"/>
+                                            </button>
+                                            <button type="button" class="btn btn-primary btn-sm spin-button button-reset" data-style="spin-right" style="font:inherit">
+                                                <span class="glyphicon glyphicon-refresh" style="margin-right:.6em"/>
+                                                <span class="btn-label btn-label-right">Reset</span>
+                                                <span class="spin"/>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr style='height:15pt'>
+                                        <td class='ee108' style='height:15pt;' colspan = '4'>&nbsp;</td>
+                                    </tr>
+                                    <tr style='height:15pt'>
+                                        <td class='ee123' style='height:15pt;'>&nbsp;</td>
+                                        <td class='ee108' style='height:15pt;' colspan = '3'>&nbsp;</td>
+                                    </tr>
+                                </table>
+
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div style='width:100%'>
+                <a/>
+            </div>
+        </body>
+        <script type="text/javascript" src="{!$Resource.app_min_js}" ></script>
+    </html>
+</apex:page>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ABC_TO</fullName>
+    <active>true</active>
+    <errorConditionFormula>Empresa__c = &quot;0015A00002SZiBc&quot; &amp;&amp;
+(TEXT(Local_instalado__c) = &quot;Estoque OPME&quot; &amp;&amp;
+TEXT(Local_instalado__c) = &quot;Assistência Técnica	&quot; &amp;&amp;
+TEXT(Local_instalado__c) = &quot;Estoque 01&quot;)</errorConditionFormula>
+    <errorMessage>Verifique se o local instalado existe na ABC_TO</errorMessage>
+</ValidationRule>

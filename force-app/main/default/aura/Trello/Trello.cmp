@@ -1,0 +1,50 @@
+<aura:component extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <ltng:require
+                styles="{!join(',',
+                        $Resource.fontAwesome + '/css/font-awesome.min.css',
+                        $Resource.bootstrap5 + '/css/bootstrap.min.css')}"  
+                
+                afterScriptsLoaded="{!c.onRender}" />   
+    
+    <!-- Trello Clone -->
+    <div>
+        <div class="app">
+            <header class="app-header">
+                <div class="left">
+                    <div class="btn"><i class="fa-home"></i></div>
+                    <div class="btn btn-text"><i class="fa-trello"></i> Boards</div>
+                    <div class="btn search"> Search <i class="fa-search"></i></div>
+                </div>
+                <div class="center">
+                    <div class="logo"><i class="fab fa-trello"></i> Trello Clone</div>
+                </div>
+                <div class="right">
+                    <div class="btn"><i class="fa-plus"></i></div>
+                    <div class="btn"><i class="fa-info-circle"></i></div>
+                    <div class="btn"><i class="fa-bell"></i></div>
+                    <div class="btn"><i class="fa-cog"></i></div>
+                    <div class="btn"><i class="fa-user-tie"></i></div>
+                </div>
+                
+                <button id="testeee">
+                	do not click here
+                </button>
+                
+            </header>
+
+
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    </div>	
+    
+</aura:component>

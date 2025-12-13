@@ -1,0 +1,18 @@
+<apex:page standardController="WorkOrder" sidebar="false" showChat="false" showHeader="false">
+<html>
+
+<tr>
+<br/>
+<td><b>Descrição do Caso: </b></td><td><apex:outputField value="{!WorkOrder.Case.Description}" /> </td>
+</tr>
+<br/>
+<br/>
+<br/>
+<tr>
+<td><b>Observações do Caso: </b></td><td><apex:outputField value="{!WorkOrder.Case.Observa_es__c}" /> </td>
+</tr>
+<br/>
+<br/>
+
+</html>
+</apex:page>

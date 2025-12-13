@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Trava_Pedido_de_compra</fullName>
+    <active>true</active>
+    <errorConditionFormula>RecordType.DeveloperName == &quot;Pedido de Compra Solicitação de Pagamento&quot; &amp;&amp;  Pedido_de_Compra__c == null</errorConditionFormula>
+    <errorDisplayField>Pedido_de_Compra__c</errorDisplayField>
+    <errorMessage>Insira um Pedido de Compra</errorMessage>
+</ValidationRule>

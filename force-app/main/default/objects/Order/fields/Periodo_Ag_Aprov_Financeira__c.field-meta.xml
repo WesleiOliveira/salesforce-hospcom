@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Periodo_Ag_Aprov_Financeira__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    ISBLANK(InicioAgAprovFinanceira__c ) || ISBLANK( FinalAgAprovFinanceira__c ),
+    null,
+    IF(
+        (FinalAgAprovFinanceira__c - InicioAgAprovFinanceira__c ) &gt;= 1,
+        TEXT(FLOOR(FinalAgAprovFinanceira__c - InicioAgAprovFinanceira__c )) &amp; &quot; dia(s) e &quot; &amp;
+        TEXT(FLOOR(MOD((FinalAgAprovFinanceira__c - InicioAgAprovFinanceira__c ) * 24, 24))) &amp; &quot;:&quot; &amp;
+        RIGHT(&quot;0&quot; &amp; TEXT(FLOOR(MOD((FinalAgAprovFinanceira__c - InicioAgAprovFinanceira__c ) * 60, 60))), 2) &amp; &quot; horas&quot;,
+        IF(
+            (FinalAgAprovFinanceira__c - InicioAgAprovFinanceira__c ) * 24 &gt;= 1,
+            TEXT(FLOOR((FinalAgAprovFinanceira__c - InicioAgAprovFinanceira__c ) * 24)) &amp; &quot;:&quot; &amp;
+            RIGHT(&quot;0&quot; &amp; TEXT(FLOOR(MOD((FinalAgAprovFinanceira__c - InicioAgAprovFinanceira__c ) * 60, 60))), 2) &amp; &quot; horas&quot;,
+            TEXT(FLOOR((FinalAgAprovFinanceira__c - InicioAgAprovFinanceira__c ) * 24 * 60)) &amp; &quot; minutos&quot;
+        )
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Período Ag Aprov Financeira</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

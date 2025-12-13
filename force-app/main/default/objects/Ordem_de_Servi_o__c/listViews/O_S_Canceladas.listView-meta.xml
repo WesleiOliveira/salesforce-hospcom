@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>O_S_Canceladas</fullName>
+    <columns>NAME</columns>
+    <columns>Assunto__c</columns>
+    <columns>Equipamento__c</columns>
+    <columns>Marca__c</columns>
+    <columns>Modelo__c</columns>
+    <columns>N_de_S_rie__c</columns>
+    <columns>ID_TAG__c</columns>
+    <columns>Status_da_O_S__c</columns>
+    <columns>Prioridade__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status_da_O_S__c</field>
+        <operation>equals</operation>
+        <value>CANCELADA</value>
+    </filters>
+    <label>O.S&apos;s Canceladas</label>
+    <sharedTo></sharedTo>
+</ListView>

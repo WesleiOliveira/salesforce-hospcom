@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tempo_til_Ag_Faturamento__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    NOT(ISBLANK(Inicio_Faturado__c)),
+    TEXT(
+        FLOOR(
+            (Inicio_Faturado__c - Inicio_Ag_Faturamento__c) -
+            (FLOOR((Inicio_Faturado__c - Inicio_Ag_Faturamento__c) / 7) * 2) -
+            IF(
+                MOD(DATEVALUE(Inicio_Ag_Faturamento__c) - DATE(1900, 1, 7), 7) &gt; 
+                MOD(DATEVALUE(Inicio_Faturado__c) - DATE(1900, 1, 7), 7), 
+                2, 
+                0
+            )
+        )
+    ) &amp; &apos; dias e &apos; &amp; 
+    TEXT(
+        FLOOR(
+            (
+                (Inicio_Faturado__c - Inicio_Ag_Faturamento__c - 
+                FLOOR(Inicio_Faturado__c - Inicio_Ag_Faturamento__c)) * 24
+            )
+        )
+    ) &amp; &apos; horas&apos;,
+    TEXT(
+        FLOOR(
+            (NOW() - Inicio_Ag_Faturamento__c) -
+            (FLOOR((NOW() - Inicio_Ag_Faturamento__c) / 7) * 2) -
+            IF(
+                MOD(DATEVALUE(Inicio_Ag_Faturamento__c) - DATE(1900, 1, 7), 7) &gt; 
+                MOD(TODAY() - DATE(1900, 1, 7), 7), 
+                2, 
+                0
+            )
+        )
+    ) &amp; &apos; dias e &apos; &amp; 
+    TEXT(
+        FLOOR(
+            (
+                (NOW() - Inicio_Ag_Faturamento__c - 
+                FLOOR(NOW() - Inicio_Ag_Faturamento__c)) * 24
+            )
+        )
+    ) &amp; &apos; horas&apos;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Tempo útil Ag. Faturamento</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

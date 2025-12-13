@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Email_para_avisar_de_novo_lead</fullName>
+        <description>Email para avisar de novo lead</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderAddress>gabriel@hospcom.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Aviso_de_novo_lead</template>
+    </alerts>
+</Workflow>

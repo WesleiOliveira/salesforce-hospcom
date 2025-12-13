@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Forma_de_Pagamento__c</fullName>
+    <externalId>false</externalId>
+    <label>Forma de Pagamento</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>A VISTA</fullName>
+                <default>false</default>
+                <label>A VISTA</label>
+            </value>
+            <value>
+                <fullName>BOLETO</fullName>
+                <default>false</default>
+                <label>BOLETO</label>
+            </value>
+            <value>
+                <fullName>DEPÓSITO BANCÁRIO</fullName>
+                <default>false</default>
+                <label>DEPÓSITO BANCÁRIO</label>
+            </value>
+            <value>
+                <fullName>DEPÓSITO BANCÁRIO ANTECIPADO</fullName>
+                <default>false</default>
+                <label>DEPÓSITO BANCÁRIO ANTECIPADO</label>
+            </value>
+            <value>
+                <fullName>CARTÃO CRÉDITO/DÉBITO 1X</fullName>
+                <default>false</default>
+                <label>CARTÃO CRÉDITO/DÉBITO 1X</label>
+            </value>
+            <value>
+                <fullName>CARTÃO CRÉDITO/DÉBITO 2X</fullName>
+                <default>false</default>
+                <label>CARTÃO CRÉDITO/DÉBITO 2X</label>
+            </value>
+            <value>
+                <fullName>CARTÃO CRÉDITO/DÉBITO 3X</fullName>
+                <default>false</default>
+                <label>CARTÃO CRÉDITO/DÉBITO 3X</label>
+            </value>
+            <value>
+                <fullName>CARTÃO CRÉDITO/DÉBITO 4X</fullName>
+                <default>false</default>
+                <label>CARTÃO CRÉDITO/DÉBITO 4X</label>
+            </value>
+            <value>
+                <fullName>CARTÃO CRÉDITO/DÉBITO 5X</fullName>
+                <default>false</default>
+                <label>CARTÃO CRÉDITO/DÉBITO 5X</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

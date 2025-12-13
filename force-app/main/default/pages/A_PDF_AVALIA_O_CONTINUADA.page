@@ -1,0 +1,309 @@
+<apex:page standardController="Avalia_o_Continuada__c" renderAs="pdf" showHeader="false" showChat="false" applyHtmlTag="t">
+
+    <head>
+        <style> 
+            thead { display: table-header-group; }  
+            tfoot { display: table-footer-group; } 
+           @page {  
+                     size: A4 portrait; /* ISO/JIS A4 (210mmx297mm) */  
+                     margin: 5mm; 
+                  } 
+            @page:first {  
+                     size: A4 portrait; /* ISO/JIS A4 (210mmx297mm) */ 
+                     margin: 5mm; 
+                     margin-top: 3mm; 
+
+                  } 
+                 .titulo_2{ /* td */
+                padding:2px;
+                margin:0px;
+                border-bottom:1px solid #cacecf;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:bold;
+                text-align:center;
+                background-color:#e2e3e3;
+            }
+            .tabela_conteudo{
+                width:100%;
+                border:1px #cacecf solid;
+            }
+            .label{ /* td */
+          
+                padding:2px;
+                margin:0px;
+                border-bottom:1px solid #eef2f4;
+                font-family:arial, verdana, sans-serif;
+                font-size:9pt;
+                font-weight:bold;
+                text-align:left;
+                vertical-align:top;
+            }
+             .valor{ /* td */
+                padding:2px;
+                margin:0px;
+                border-bottom:1px solid #eef2f4;
+                font-family:arial, verdana, sans-serif;
+                font-size:11px;
+                font-weight:normal;
+                text-align:left;
+                vertical-align:top;
+            }
+        </style>
+    </head>
+    
+    
+    
+    <Body style="font-family:verdana,sans-serif; font-size: 9pt">
+   
+        <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+            <thead>   
+                <tr>    
+                    <th style="border:1px solid #cacecf" align="center" width="190px"> <img src="https://hospcom--c.na25.content.force.com/servlet/servlet.FileDownload?file=01531000008Tjd8" width="175" height="75px"/> </th> 
+                    <th width="400px" align="center" style="border-top:1px solid #cacecf; font-family: verdana,sans-serif; font-size:15pt"><b>AVALIAÇÃO CONTINUADA DE FORNECEDOR</b></th> 
+                    <th width="120px" align="center" style="border:1px solid #cacecf; font-family: verdana,sans-serif; font-size:10pt"><b><apex:outputField value="{!Avalia_o_Continuada__c.Name}"/></b></th>
+                </tr>
+                <tr>    
+                    <th style="border-bottom:1px solid #cacecf;border-left:1px solid #cacecf;border-right:1px solid #cacecf;font-family: verdana,sans-serif; font-size:10pt" align="center" width="190px"> Emissão:&nbsp;<apex:outputfield value="{!Avalia_o_Continuada__c.Registro_de_Servi_o_Relacionado__r.Tipo_do_Documento__r.Data_de_Cria_o__c}"/></th> 
+                    <th width="400px" align="center" style="border-bottom:1px solid #cacecf; font-family: verdana,sans-serif; font-size:10pt"></th> 
+                    <th width="120px" align="center" style="border-bottom:1px solid #cacecf;border-left:1px solid #cacecf;border-right:1px solid #cacecf; font-family: verdana,sans-serif; font-size:10pt"><b>Página: 1 de 1</b></th>
+                </tr>
+            </thead> 
+        </table>
+        <br/>
+     <table cellpadding="0px" cellspacing="0px" style="width:100%; border: 1px solid #cacecf ;">
+                <tr>
+                    <td class="titulo_2" colspan="2">
+                        AVALIAÇÃO DE FORNECEDOR
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:100%; vertical-align:top; padding:4px 2px 0px 4px;">
+                        <table cellpadding="0px" cellspacing="0px">              
+                            <tr>
+                            <td class="label" width="165px">Responsável pela Avaliação:</td>        
+                            <td class="valor" width="335px">{!UPPER(Avalia_o_Continuada__c.Respons_vel_pela_Avalia_o__r.Name)}</td>
+                            
+                            <td class="label" width="110px">Data da Avaliação:</td>        
+                            <td class="valor" width="100px"><apex:outputField value="{!Avalia_o_Continuada__c.Data_de_Avalia_o__c}"/> </td>
+                            </tr>                                          
+                        </table>
+                    </td>
+
+                </tr>    
+                <tr>
+                    <td style="width:100%; vertical-align:top; padding:4px 2px 0px 4px;">
+                        <table cellpadding="0px" cellspacing="0px">              
+                            <tr><td class="label" width="45px">Fornecedor:</td>        
+                            <td class="valor" width="431px">{!UPPER(Avalia_o_Continuada__c.Registro_de_Servi_o_Relacionado__r.Fornecedor__r.Name)}</td>
+                            
+                            <td class="label" width="45px">Avaliado:</td>        
+                            <td class="valor" width="100px"><apex:outputField value="{!Avalia_o_Continuada__c.RecordType.Name}"/> </td>
+                            </tr>                                          
+                        </table>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td style="width:100%; vertical-align:top; padding:4px 2px 0px 4px;">
+                        <table cellpadding="0px" cellspacing="0px">              
+                            <tr><td class="label" width="200px">Quantidade de Produtos/Serviços:</td>        
+                            <td class="valor" width="431px">{!ROUND(Avalia_o_Continuada__c.Qtd_de_Produto_s_Servi_o_s__c,0)}</td>
+                            </tr>                                          
+                        </table>
+                    </td>
+                </tr>
+       </table>
+       <br/>
+       
+       <table cellpadding="0px" cellspacing="0px" style="width:100%; border: 1px solid #cacecf ;">
+                    <tr>
+                        <td class="titulo_2" colspan="6">
+                            FORNECEDOR DE &nbsp; <apex:outputField value="{!Avalia_o_Continuada__c.RecordType.Name}"/>
+                        </td>
+                    </tr>
+                             
+                     <tr>
+    
+                        <th style="width:10px; text-align:center; padding:4px 2px 0px 4px; border: 0.5px solid #cacecf">
+                             <b>Item</b>
+                        </th>
+                        
+                        <th style="width:500px; text-align:center; padding:4px 2px 0px 4px;  border: 0.5px solid #cacecf">
+                             <b>Descrição</b>
+                        </th>
+                        
+                        <th style="width:45px; text-align:center; padding:4px 2px 0px 4px;  border: 0.5px solid #cacecf">
+                             <b>Sim</b>
+                        </th>
+                        
+                        <th style="width:45px; text-align:center; padding:4px 2px 0px 4px;  border: 0.5px solid #cacecf">
+                             <b>Não</b>
+                        </th>
+                        
+                        <th style="45px; text-align:center; padding:4px 2px 0px 4px;  border: 0.5px solid #cacecf">
+                             <b>Quantidade</b>
+                        </th>
+                        
+                        
+    
+                    </tr>
+                    
+                    
+                    <tr>
+    
+                        <td style="width:10px; text-align:center; padding:4px 2px 0px 4px; border: 0.5px solid #cacecf">
+                             <b>1</b>
+                        </td>
+                        
+                        <td style="width:500px; text-align:center; padding:4px 2px 0px 4px; border: 0.5px solid #cacecf">
+                             Índice de Entrega no Prazo
+                        </td>
+                        
+                        <td style="width:45px; text-align:center; padding:4px 2px 0px 4px; border: 0.5px solid #cacecf">
+                        </td>
+                        
+                        <td style="45px; text-align:center; padding:4px 2px 0px 4px; border: 0.5px solid #cacecf">
+                        </td>
+                        
+                        <td style="45px; text-align:center; padding:4px 2px 0px 4px; border: 0.5px solid #cacecf">
+                        </td>
+                          
+                    </tr>
+                    
+                    <tr>
+    
+                        <td style="width:10px; text-align:center; padding:4px 2px 0px 4px; border: 0.5px solid #cacecf">
+                             <b>2</b>
+                        </td>
+                        
+                        <td style="width:500px; text-align:center; padding:4px 2px 0px 4px; border: 0.5px solid #cacecf">
+                             Índice de Entrega em Conformidade
+                        </td>
+                        
+                        <td style="width:45px; text-align:center; padding:4px 2px 0px 4px; border: 0.5px solid #cacecf">
+                        </td>
+                        
+                        <td style="45px; text-align:center; padding:4px 2px 0px 4px; border: 0.5px solid #cacecf">
+                        </td>
+                        
+                        <td style="45px; text-align:center; padding:4px 2px 0px 4px; border: 0.5px solid #cacecf">
+                        </td>
+                        
+                    </tr>
+                    
+                    <tr>
+    
+                        <td style="width:10px; text-align:center; padding:4px 2px 0px 4px; border: 0.5px solid #cacecf">
+                             <b>3</b>
+                        </td>
+                        
+                        <td style="width:500px; text-align:center; padding:4px 2px 0px 4px; border: 0.5px solid #cacecf">
+                             Índice de Serviços em Garantia
+                        </td>
+                        
+                        <td style="width:45px; text-align:center; padding:4px 2px 0px 4px; border: 0.5px solid #cacecf">
+                        </td>
+                        
+                        <td style="45px; text-align:center; padding:4px 2px 0px 4px; border: 0.5px solid #cacecf">
+                        </td>
+                        
+                        <td style="45px; text-align:center; padding:4px 2px 0px 4px; border: 0.5px solid #cacecf">
+                        </td>
+                       
+                    </tr>
+                    
+                    
+                    
+                     
+                    
+           </table>
+           
+           <table cellpadding="0px" cellspacing="0px" style="width:100%; border: 1px solid #cacecf ;">
+                    <tr>
+                        <td class="titulo_2" colspan="6">
+                            OBSERVAÇÕES
+                        </td>
+                    </tr>
+                             
+                     <tr>
+    
+                        <td style="width=100%; text-align:left; padding:4px 2px 0px 4px;">
+                            
+                        </td>
+    
+                    </tr>
+                    
+                    <tr>
+    
+                        <td style="width=100%; text-align:left; padding:4px 2px 0px 4px;">
+                        <apex:outputText value="* 80% > Índice de Entrega no Prazo > 70% Emitir Alerta ao Fornecedor;"></apex:outputText> 
+                        </td>
+    
+                    </tr>
+                    <tr>
+    
+                        <td style="width=100%; text-align:left; padding:4px 2px 0px 4px;">
+                         <apex:outputText value="* Índice de Entrega no Prazo < 70% Emitir Alerta ao Fornecedor; Emitir Aviso da Possibilidade de Desqualificação. Exigir um Plano de Ação junto ao Fornecedor para sanar as NCs;"> </apex:outputText> 
+                        </td>
+    
+                    </tr>
+                    
+                    <tr>
+                    <td height="15px"></td>
+                    </tr>
+                    
+                    <tr>
+    
+                        <td style="width=100%; text-align:left; padding:4px 2px 0px 4px;">
+                        <apex:outputText value="* 80% > Índice de Entrega em Conformidade > 70% Emitir Alerta ao Fornecedor;"></apex:outputText> 
+                        </td>
+    
+                    </tr>
+                    <tr>
+    
+                        <td style="width=100%; text-align:left; padding:4px 2px 0px 4px;">
+                         <apex:outputText value="* Índice de Entrega em Conformidade < 70% Emitir Alerta ao Fornecedor; Emitir Aviso da Possibilidade de Desqualificação. Exigir um Plano de Ação junto ao Fornecedor para sanar as NCs;"> </apex:outputText> 
+                        </td>
+    
+                    </tr>
+                    
+                    <tr>
+                    <td height="15px"></td>
+                    </tr>
+                    
+                    <tr>
+    
+                        <td style="width=100%; text-align:left; padding:4px 2px 0px 4px;">
+                        <apex:outputText value="* 20% < Índice de Produtos/Serviços em Garantia >30% Emitir Alerta ao Fornecedor;"></apex:outputText> 
+                        </td>
+    
+                    </tr>
+                    <tr>
+    
+                        <td style="width=100%; text-align:left; padding:4px 2px 0px 4px;">
+                         <apex:outputText value="* Índice de Produtos/Serviços em Garantia > 30% Emitir Alerta ao Fornecedor; Emitir Aviso da Possibilidade de Desqualificação. Exigir um Plano de Ação junto ao Fornecedor para sanar as NCs;"> </apex:outputText> 
+                        </td>
+    
+                    </tr>
+                    
+                     
+                    
+                    
+                    
+           </table>
+
+</body>
+<foot>
+    <table style="font-family:Verdana, sans-serif; font-size:9pt; position:fixed; right:5px;bottom:0px">
+        <tr>
+            <td>
+                <b>Revisão:&nbsp;<apex:outputfield value="{!Avalia_o_Continuada__c.Registro_de_Servi_o_Relacionado__r.Tipo_do_Documento__r.N_da_Revis_o__c}"/></b>
+            &nbsp;-&nbsp;
+                <b>Data da Revisão:&nbsp;<apex:outputfield value="{!Avalia_o_Continuada__c.Registro_de_Servi_o_Relacionado__r.Tipo_do_Documento__r.Data_da_Ultima_Revis_o__c}"/></b>
+            </td>
+        </tr>
+    </table>
+</foot>
+
+</apex:page>

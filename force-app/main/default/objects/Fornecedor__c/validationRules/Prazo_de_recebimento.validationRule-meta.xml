@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prazo_de_recebimento</fullName>
+    <active>false</active>
+    <description>Impede a alteração do prazo de recebimento</description>
+    <errorConditionFormula>AND(
+    NOT(ISNEW()),  /* Garante que não seja um novo registro */
+    ISCHANGED(Prazo_de_recebimento__c) /* Verifica se o campo foi alterado */
+)</errorConditionFormula>
+    <errorMessage>Para definir um novo prazo de recebimento utilize o campo Nova Data de Entrega</errorMessage>
+</ValidationRule>

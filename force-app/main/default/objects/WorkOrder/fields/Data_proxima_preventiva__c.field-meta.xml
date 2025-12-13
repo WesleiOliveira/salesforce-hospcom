@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Data_proxima_preventiva__c</fullName>
+    <externalId>false</externalId>
+    <formula>DATETIMEVALUE(
+    TEXT(ADDMONTHS(DATEVALUE(NOW()), VALUE(TEXT(Asset.Product2.validade_preventiva__c)))) 
+    + &quot; 00:00:00&quot;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Campo gerado com base na validade da preventiva inserida no produto.</inlineHelpText>
+    <label>Data proxima preventiva</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>DateTime</type>
+</CustomField>

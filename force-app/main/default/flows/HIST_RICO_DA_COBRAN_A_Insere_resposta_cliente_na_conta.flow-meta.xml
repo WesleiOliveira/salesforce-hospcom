@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>59.0</apiVersion>
+    <decisions>
+        <name>Decide_tipo</name>
+        <label>Decide tipo</label>
+        <locationX>182</locationX>
+        <locationY>323</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>comum</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>012U400000019kPIAQ</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Insere_ultima_cobran_a_conta</targetReference>
+            </connector>
+            <label>comum</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <interviewLabel>HISTÓRICO DA COBRANÇA - Insere resposta cliente na conta {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>HISTÓRICO DA COBRANÇA - Insere resposta cliente na conta</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Insere_ultima_cobran_a_conta</name>
+        <label>Insere ultima cobrança conta</label>
+        <locationX>50</locationX>
+        <locationY>431</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>0016e00002qow0xAAA</stringValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Data_do_pr_ximo_contato__c</field>
+            <value>
+                <dateValue>2025-09-24</dateValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Ultima_cobran_a__c</field>
+            <value>
+                <stringValue>teste</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Account</object>
+    </recordUpdates>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Decide_tipo</targetReference>
+        </connector>
+        <object>Hist_rico_da_cobran_a__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Draft</status>
+</Flow>

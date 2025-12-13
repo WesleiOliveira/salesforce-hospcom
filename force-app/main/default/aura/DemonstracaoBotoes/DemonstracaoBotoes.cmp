@@ -1,0 +1,202 @@
+<aura:component controller="DemonstracaoBotoes" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId">
+	
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+	
+    <aura:attribute name="recordId" type="Id"/>
+	<aura:attribute name="demonstracao_valida" type="boolean" default="false"/>
+	<aura:attribute name="mensagem_valida" type="String" default=""/>
+	<aura:attribute name="modal_pdf_contrato" type="boolean" default="false"/>
+	<aura:attribute name="modal_pdf_checklist" type="boolean" default="false"/>
+	<aura:attribute name="modal_pdf_registro" type="boolean" default="false"/>
+	<aura:attribute name="modal_pdf_proposta" type="boolean" default="false"/>
+	<aura:attribute name="tipos" type="List"/>
+	<aura:attribute name="tipo" type="String"/>
+	<aura:attribute name="qtd" type="Integer" default="10"/>
+
+	
+	<div class="slds-m-around_x-small">
+        
+        <!-- botões -->
+		<lightning:buttonGroup class="slds-button_stretch">
+			<lightning:button iconName="utility:print" class="slds-button_stretch" label="PDF Proposta" title="PDF Proposta" onclick="{!c.AbrirPdfProposta}" />
+			<lightning:button iconName="utility:print" class="slds-button_stretch" label="PDF Contrato" title="PDF Contrato" onclick="{!c.AbrirPdfContrato}" />
+			<lightning:button iconName="utility:print" class="slds-button_stretch" label="PDF Checklist" title="PDF Checklist" onclick="{!c.AbrirPdfChecklist}" />			
+			<!-- lightning:button iconName="utility:print" class="slds-button_stretch" label="PDF Registro" title="PDF Registro" onclick="{!c.AbrirPdfRegistro}" /-->
+		</lightning:buttonGroup>
+		
+		<!-- modal pdf contrato -->
+		<aura:if isTrue="{!v.modal_pdf_contrato}">
+			<aura:if isTrue="{!v.demonstracao_valida}">
+				<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+					<div class="slds-modal__container" style="max-width:70rem!important; width:80%!important;">
+						<!-- cabeçalho -->
+						<header class="modal-header slds-modal__header">
+							<lightning:buttonIcon iconName="utility:close" onclick="{!c.FecharPdfContrato}" alternativeText="close" variant="bare-inverse" class="slds-modal__close"/>
+							<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">PDF Contrato</h2>
+						</header>
+						<!-- corpo -->
+						<div class="slds-modal__content slds-p-around_none" id="modal-content-id-1" style="height:90vh !important;max-height:90vh!important;">
+							<iframe src="{! '/Sales/apex/ContratoComodato?Id='+v.recordId}" frameborder="0" allow="geolocation *; microphone *; camera *" width="100%" height="100%" scrolling="yes" allowfullscreen="true"></iframe>
+						</div>
+						<!-- rodape -->
+						<footer class="slds-modal__footer">
+							<lightning:button variant="neutral" label="Cancelar" title="Cancelar" onclick="{!c.FecharPdfContrato}"/>
+							<!-- <lightning:button variant="brand" label="Salvar contrato" title="Salvar contrato" onclick="{!c.SalvarPdfContrato1}"/> -->
+						</footer>
+					</div>
+				</section>
+			</aura:if>			
+			<aura:if isTrue="{!not(v.demonstracao_valida)}">
+				<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+					<div class="slds-modal__container">
+						<!-- cabeçalho -->
+						<header class="slds-modal__header slds-modal__header_empty">
+							<lightning:buttonIcon iconName="utility:close" onclick="{!c.FecharPdfContrato}" alternativeText="close" variant="bare-inverse" class="slds-modal__close"/>
+						</header>
+						<!-- corpo -->
+						<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+							<aura:unescapedHtml value="{!v.mensagem_valida}"/>
+						</div>
+					</div>
+				</section>
+			</aura:if>
+			<div class="slds-backdrop slds-backdrop_open"></div>			
+        </aura:if>
+        
+        <!-- modal pdf proposta -->
+		<aura:if isTrue="{!v.modal_pdf_proposta}">
+			<aura:if isTrue="{!v.demonstracao_valida}">
+				<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+					<div class="slds-modal__container" style="max-width:70rem!important; width:80%!important;">
+						<!-- cabeçalho -->
+						<header class="modal-header slds-modal__header">
+							<lightning:buttonIcon iconName="utility:close" onclick="{!c.FecharPdfProposta}" alternativeText="close" variant="bare-inverse" class="slds-modal__close"/>
+							<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">PDF Proposta</h2>
+						</header>
+						<!-- corpo -->
+						<div class="slds-modal__content slds-p-around_none" id="modal-content-id-1" style="height:90vh !important;max-height:90vh!important;">
+							<iframe src="{! '/Sales/apex/PropostaComodato?Id='+v.recordId}" frameborder="0" allow="geolocation *; microphone *; camera *" width="100%" height="100%" scrolling="yes" allowfullscreen="true"></iframe>
+						</div>
+						<!-- rodape -->
+						<footer class="slds-modal__footer">
+							<lightning:button variant="neutral" label="Cancelar" title="Cancelar" onclick="{!c.FecharPdfProposta}"/>
+							<!-- <lightning:button variant="brand" label="Salvar contrato" title="Salvar contrato" onclick="{!c.SalvarPdfContrato1}"/> -->
+						</footer>
+					</div>
+				</section>
+			</aura:if>			
+			<aura:if isTrue="{!not(v.demonstracao_valida)}">
+				<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+					<div class="slds-modal__container">
+						<!-- cabeçalho -->
+						<header class="slds-modal__header slds-modal__header_empty">
+							<lightning:buttonIcon iconName="utility:close" onclick="{!c.FecharPdfProposta}" alternativeText="close" variant="bare-inverse" class="slds-modal__close"/>
+						</header>
+						<!-- corpo -->
+						<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+							<aura:unescapedHtml value="{!v.mensagem_valida}"/>
+						</div>
+					</div>
+				</section>
+			</aura:if>
+			<div class="slds-backdrop slds-backdrop_open"></div>			
+        </aura:if>		
+		
+		<!-- modal pdf checklist -->
+		<aura:if isTrue="{!v.modal_pdf_checklist}">
+			<aura:if isTrue="{!v.demonstracao_valida}">
+				<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+					<div class="slds-modal__container" style="max-width:70rem!important; width:80%!important;">
+						<!-- cabeçalho -->
+						<header class="modal-header slds-modal__header">
+							<lightning:buttonIcon iconName="utility:close" onclick="{!c.FecharPdfChecklist}" alternativeText="close" variant="bare-inverse" class="slds-modal__close"/>
+							<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">PDF Checklist</h2>
+						</header>
+						<!-- corpo -->
+						<div class="slds-modal__content slds-p-around_none" id="modal-content-id-1" style="height:90vh !important;max-height:90vh!important;">
+							<aura:if isTrue="{!v.tipo == 'entrega'}">
+								<iframe src="{! '/Sales/apex/DemonstracaoChecklist?Id='+v.recordId+'&amp;tipo=entrega'}" frameborder="0" allow="geolocation *; microphone *; camera *" width="100%" height="100%" scrolling="yes" allowfullscreen="true"></iframe>
+							</aura:if>
+							<aura:if isTrue="{!v.tipo == 'recebimento'}">
+								<iframe src="{! '/Sales/apex/DemonstracaoChecklist?Id='+v.recordId+'&amp;tipo=recebimento'}" frameborder="0" allow="geolocation *; microphone *; camera *" width="100%" height="100%" scrolling="yes" allowfullscreen="true"></iframe>
+							</aura:if>
+						</div>
+						<!-- rodape -->
+						<footer class="slds-modal__footer">
+							<table style="width:100%!important;">
+								<tr>
+									<td>
+										<lightning:radioGroup name="tipo" label="Tipo" options="{!v.tipos}" value="{!v.tipo}" type="button" required="true"/>
+									</td>
+									<td style="text-align:right!important;vertical-align:bottom!important;">
+										<lightning:button variant="neutral" label="Cancelar" title="Cancelar" onclick="{!c.FecharPdfChecklist}"/>
+										<!-- <lightning:button variant="brand" label="Salvar checklist" title="Salvar checklist" onclick="{!c.SalvarPdfChecklist1}"/> -->
+									</td>
+								</tr>
+							</table>
+						</footer>
+					</div>
+				</section>
+			</aura:if>			
+			<aura:if isTrue="{!not(v.demonstracao_valida)}">
+				<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+					<div class="slds-modal__container">
+						<!-- cabeçalho -->
+						<header class="slds-modal__header slds-modal__header_empty">
+							<lightning:buttonIcon iconName="utility:close" onclick="{!c.FecharPdfChecklist}" alternativeText="close" variant="bare-inverse" class="slds-modal__close"/>
+						</header>
+						<!-- corpo -->
+						<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+							<aura:unescapedHtml value="{!v.mensagem_valida}"/>
+						</div>
+					</div>
+				</section>
+			</aura:if>
+			<div class="slds-backdrop slds-backdrop_open"></div>			
+        </aura:if>
+		
+		<!-- modal pdf registro
+		<aura:if isTrue="{!v.modal_pdf_registro}">
+			<aura:if isTrue="{!v.demonstracao_valida}">
+				<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+					<div class="slds-modal__container" style="max-width:70rem!important; width:80%!important;">
+						<header class="modal-header slds-modal__header">
+							<lightning:buttonIcon iconName="utility:close" onclick="{!c.FecharPdfRegistro}" alternativeText="close" variant="bare-inverse" class="slds-modal__close"/>
+							<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">PDF Registro</h2>
+						</header>
+						<div class="slds-modal__content slds-p-around_none" id="modal-content-id-1" style="height:90vh !important;max-height:90vh!important;">
+							<iframe src="{! '/Sales/apex/DemonstracaoRegistro?Id='+v.recordId +'&amp;qtd='+v.qtd}" frameborder="0" allow="geolocation *; microphone *; camera *" width="100%" height="100%" scrolling="yes" allowfullscreen="true"></iframe>
+						</div>
+						<footer class="slds-modal__footer">
+							<table style="width:100%!important;">
+								<tr>
+									<td style="width:330px!important">
+										<lightning:input type="number" label="Quantidade participantes" min="3" max="50" value="{!v.qtd}" />
+									</td>
+									<td style="text-align:right!important;vertical-align:bottom!important;">
+										<lightning:button variant="neutral" label="Cancelar" title="Cancelar" onclick="{!c.FecharPdfRegistro}"/>
+									</td>
+								</tr>
+							</table>
+						</footer>
+					</div>
+				</section> 
+			</aura:if>			
+			<aura:if isTrue="{!not(v.demonstracao_valida)}">
+				<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+					<div class="slds-modal__container">
+						<header class="slds-modal__header slds-modal__header_empty">
+							<lightning:buttonIcon iconName="utility:close" onclick="{!c.FecharPdfRegistro}" alternativeText="close" variant="bare-inverse" class="slds-modal__close"/>
+						</header>
+						<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+							<aura:unescapedHtml value="{!v.mensagem_valida}"/>
+						</div>
+					</div>
+				</section>
+			</aura:if>
+			<div class="slds-backdrop slds-backdrop_open"></div>			
+        </aura:if><-->
+		
+    </div>
+	
+</aura:component>

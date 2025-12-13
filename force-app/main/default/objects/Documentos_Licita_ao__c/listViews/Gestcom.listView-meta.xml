@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gestcom</fullName>
+    <booleanFilter>1 OR 2 OR 3</booleanFilter>
+    <columns>NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Empresa2__c</field>
+        <operation>contains</operation>
+        <value>Gestcom</value>
+    </filters>
+    <filters>
+        <field>Empresa2__c</field>
+        <operation>contains</operation>
+        <value>gestcom</value>
+    </filters>
+    <filters>
+        <field>Empresa2__c</field>
+        <operation>contains</operation>
+        <value>GESTCOM</value>
+    </filters>
+    <label>Empresa Gestcom</label>
+    <sharedTo>
+        <group>Qualidade</group>
+    </sharedTo>
+</ListView>

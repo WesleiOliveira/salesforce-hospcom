@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Representacao</fullName>
+    <active>true</active>
+    <description>NF para recebimento de comissão de vendas feitas por parceiros.</description>
+    <label>Representação</label>
+    <picklistValues>
+        <picklist>Departamento2__c</picklist>
+        <values>
+            <fullName>Comercial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Governo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Serviço</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Departamento3__c</picklist>
+        <values>
+            <fullName>Comercial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Controladoria</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Diretoria de B%2EI e Growth</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Educação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Governo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Locação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Logística</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Serviço</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Faturamento_Feito__c</picklist>
+        <values>
+            <fullName>Fabricas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hospcom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Parceiros</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Procedencia__c</picklist>
+        <values>
+            <fullName>Comercial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contrato de Locação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contrato de Serviço</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Governo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Serviço Avulso</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Serviço Avulso %28Contrato de Locação%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Serviço Avulso %28Contrato de Serviço%29</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Aberto</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cancelado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fechado</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tipo__c</picklist>
+        <values>
+            <fullName>Dev da NF de Saída</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Devolução</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Entrega</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NF de Cancelamento</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NF de Entrega Futura</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NF de Saída</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

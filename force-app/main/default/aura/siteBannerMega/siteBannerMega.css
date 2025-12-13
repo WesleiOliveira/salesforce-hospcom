@@ -1,0 +1,18 @@
+.THIS .img-parallax {
+  width: 100vmax;
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%,0);
+  pointer-events: none
+}
+
+.THIS .btn-primary{
+    transition: all .2s ease-in-out;
+}
+
+.THIS .btn-primary:hover{
+    animation-duration: 5s;
+    transform: scale(1.11);
+}

@@ -1,0 +1,428 @@
+/* Botão Iniciar Auditoria */
+.iniciar-auditoria-btn {
+    color: white;
+    font-weight: 600;
+    background: #066afe;
+    padding: 1rem;
+    font-size: clamp(1.25rem, 4vw, 1.5rem);
+    text-align: center;
+    border-radius: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.iniciar-auditoria-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 99999;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(90vw, 900px);
+    max-height: 90vh;
+    background: white;
+    border-radius: clamp(0px, 2vw, 12px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    z-index: 100000;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Botão de toggle do header */
+.toggle-header-btn {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 2px solid #00a2e1;
+    color: #00a2e1;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.toggle-header-btn:hover {
+    background: #00a2e1;
+    color: white;
+}
+
+.arrow-icon {
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.modal-header.collapsed .arrow-icon {
+    transform: rotate(180deg);
+}
+
+/* Header colapsado */
+.modal-header {
+    background: linear-gradient(40deg, #006fe1 0%, #41e197 100%);
+
+    color: white;
+    padding: clamp(1rem, 3vw, 1.5rem);
+    border-radius: clamp(0px, 2vw, 12px) clamp(0px, 2vw, 12px) 0 0;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.modal-header.collapsed {
+    padding: 0.75rem clamp(1rem, 3vw, 1.5rem) 1.5rem;
+}
+
+.collapsible-content {
+    max-height: 500px;
+    opacity: 1;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-header.collapsed .collapsible-content {
+    max-height: 0;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.modal-header.collapsed .audit-meta {
+    margin-bottom: 0;
+}
+
+.header-content {
+    padding-right: 2.5rem;
+}
+
+.audit-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: clamp(0.85rem, 2vw, 0.9rem);
+    opacity: 0.9;
+}
+
+
+.audit-separator {
+    opacity: 0.6;
+}
+
+.audit-number {
+    font-weight: 700;
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
+}
+
+.audit-info {
+    margin-bottom: 1rem;
+}
+
+.info-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.3rem;
+    font-size: clamp(0.9rem, 2vw, 0.95rem);
+}
+
+.info-label {
+    font-weight: 600;
+    opacity: 0.9;
+}
+
+.info-value {
+    font-weight: 400;
+}
+
+.audit-plan {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.obs {
+    font-size: clamp(0.85rem, 2vw, 0.9rem);
+    opacity: 0.9;
+    font-style: italic;
+}
+
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: clamp(32px, 8vw, 36px);
+    height: clamp(32px, 8vw, 36px);
+    border-radius: 50%;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Body do Modal */
+.modal-body {
+    padding: clamp(1rem, 3vw, 1.5rem);
+    overflow-y: auto;
+    flex: 1;
+}
+
+/* Seção */
+.secao {
+    background-color: #e8f4f8;
+    color: #00a2e1;
+    padding: clamp(0.65rem, 2vw, 0.75rem) clamp(0.85rem, 2.5vw, 1rem);
+    font-weight: 600;
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
+    margin-bottom: 1rem;
+    border-radius: 6px;
+    border-left: 4px solid #00a2e1;
+}
+
+/* Card de Pergunta */
+.card-pergunta {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: clamp(1rem, 3vw, 1.25rem);
+    margin-bottom: 1rem;
+    transition: box-shadow 0.3s ease;
+    position: relative;
+    transition: all 0.3s ease;
+}
+/* Transição suave quando remover o destaque */
+.card-pergunta:not(.nao-respondida) {
+    border-color: #ddd;
+    background-color: white;
+}
+/* Card de pergunta não respondida */
+.card-pergunta.nao-respondida {
+    border: 2px solid #c23934 !important;
+    background-color: #fef5f5;
+    box-shadow: 0 0 10px rgba(194, 57, 52, 0.3);
+    animation: pulse-red 1.5s ease-in-out;
+}
+
+/* Animação de pulsar vermelho */
+@keyframes pulse-red {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(194, 57, 52, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(194, 57, 52, 0.6);
+    }
+}
+
+/* Animação de shake (tremer) */
+.card-pergunta.shake {
+    animation: shake 0.6s;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+    }
+}
+
+/* Destaque adicional no texto da pergunta não respondida */
+.card-pergunta.nao-respondida .pergunta-texto {
+    color: #c23934;
+    font-weight: 500;
+}
+
+.card-pergunta:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pergunta-texto {
+    display: flex;
+    color: #333;
+    font-size: clamp(0.95rem, 2vw, 1rem);
+    line-height: 1.6;
+    justify-content: space-between;
+}
+
+.pergunta-resposta {
+    display: flex;
+    gap: clamp(0.75rem, 2vw, 1rem);
+    margin-bottom: 0.75rem;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.radio-option input[type="radio"] {
+    display: none;
+}
+
+.radio-label {
+    padding: 0.5rem clamp(1.25rem, 3vw, 1.5rem);
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: clamp(0.9rem, 2vw, 0.95rem);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.conforme {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border-color: #c8e6c9;
+}
+
+.nao-conforme {
+    background-color: #ffebee;
+    color: #c62828;
+    border-color: #ffcdd2;
+}
+
+.radio-option input[type="radio"]:checked+.conforme {
+    background-color: #2e7d32;
+    color: white;
+    border-color: #2e7d32;
+}
+
+.radio-option input[type="radio"]:checked+.nao-conforme {
+    background-color: #c62828;
+    color: white;
+    border-color: #c62828;
+}
+
+.pergunta-id {
+    font-size: clamp(0.75rem, 1.8vw, 0.8rem);
+    color: #99999991;
+    font-family: monospace;
+}
+
+/* Footer do Modal */
+.modal-footer {
+    padding: clamp(1rem, 3vw, 1.25rem) clamp(1rem, 3vw, 1.5rem);
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    background: #f8f9fa;
+    border-radius: 0 0 clamp(0px, 2vw, 12px) clamp(0px, 2vw, 12px);
+}
+
+.modal-footer button {
+    padding: clamp(0.65rem, 2vw, 0.75rem) clamp(1.5rem, 4vw, 2rem);
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: clamp(0.95rem, 2vw, 1rem);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary {
+    background: white;
+    color: #666;
+    border: 2px solid #ddd;
+}
+
+.btn-secondary:hover {
+    background: #f5f5f5;
+    border-color: #bbb;
+}
+
+.btn-primary {
+    background: #00a2e1;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #0088c7;
+    box-shadow: 0 4px 12px rgba(0, 162, 225, 0.3);
+}
+
+/* Ajustes específicos para telas pequenas */
+@media (max-width: 480px) {
+    .modal {
+        width: 100vw;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+        top: 0;
+        left: 0;
+        transform: none;
+    }
+
+    .modal-header {
+        border-radius: 0;
+    }
+
+    .audit-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+    }
+
+    .audit-separator {
+        display: none;
+    }
+
+    .info-row {
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+
+    .modal-footer {
+        flex-direction: column;
+        border-radius: 0;
+    }
+
+    .modal-footer button {
+        width: 100%;
+    }
+}
+
+
+
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

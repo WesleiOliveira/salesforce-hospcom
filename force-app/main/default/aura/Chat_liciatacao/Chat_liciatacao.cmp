@@ -1,0 +1,381 @@
+<aura:component controller="integracaoSAP" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css',
+                          $Resource.bootstrapSelect14 + '/docs/docs/dist/css/bootstrap-select.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.popper + '/popper.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js',
+                           $Resource.bootstrapSelect14 + '/docs/docs/dist/js/bootstrap-select.min.js')}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    
+    
+    
+    <body>
+        
+        
+        <div class = "popup_doc" style="padding:20px; ">
+            <!--iframe src="https://www.ufsm.br/app/uploads/sites/413/2018/11/12_mecanica_fluidos.pdf" style='border: 0; height: 464px; max-width: 600px; width: 100%;' type="application/pdf" width="100%" height="400px"/-->
+        </div>
+        
+        
+        <div class="chat_container" id="chat_container" style='display: flex !important; margin: 0 auto; background-color: #fff; border-radius: 15px; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); overflow: auto; '>
+            <div class="chat-sidebar" id="chat-sidebar">
+                <div class="nova_conversa" id="nova_conversa">
+                    <button id="novo_chat_btn"> + Novo Chat</button>
+                    <div id="btn_notShow">
+                        #
+                    </div>
+                </div>
+                <div class ="containe_historicos">
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div>
+                    
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div>
+                    
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div> 
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div>
+                    
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div> 
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div>
+                    
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div> 
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div>
+                    
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div> 
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div>
+                    
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div> 
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div>
+                    
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div> 
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div>
+                    
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div> 
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div>
+                    
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div> 
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div>
+                    
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div> 
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div>
+                    
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div> 
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div>
+                    
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div> 
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div>
+                    
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div> 
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div>
+                    
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div> 
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div>
+                    
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div>
+                    
+                    <div class="conversa_antiga">
+                        <div class="icon">
+                            #
+                        </div>
+                        <div class="titulo_conversa_antiga">
+                            Título da conversa antiga
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="flex: 2; background: #1a365f;">
+                
+                <div class="icons_container ">
+                    
+                    <div class="icone licitacao">
+                        <i class="fa fa-list-ul fa-4x" aria-hidden="true"></i>
+                    </div>     
+                    
+                    <div class="icone manual">
+						<i class="fa fa-file-text fa-4x" aria-hidden="true"></i>
+                    </div>
+                
+                </div>
+            </div>
+            
+            
+            
+            <div class="chat-main">
+                <div class="chat-header">Chat</div>
+                <div class="chat-messages" id="chat-messages">
+                    <!-- Mensagens do chat serão exibidas aqui -->
+                    
+                    
+                    <div class="message system">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                    </div>                    
+                    <div class="message user">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                    </div>
+                    
+                    
+                    
+                     <div class="message system">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                    </div>                    
+                    <div class="message user">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                    </div>
+                    
+                    
+                     <div class="message system">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                    </div>                    
+                    <div class="message user">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                        
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                        
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                    </div>
+                    
+                    
+                     <div class="message system">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                          Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                          Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                          Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                    </div>  
+                    <div class="message user">
+                        Lorem Ipsum 
+                    </div>
+
+                </div>
+                <div class = 'message_container'>
+                    
+                    <input type="text" id="message-input" placeholder="Digite sua mensagem"/>
+                    <button id="send-button">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</aura:component>

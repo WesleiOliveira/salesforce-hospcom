@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Todos</fullName>
+    <columns>NAME</columns>
+    <columns>Conta__c</columns>
+    <columns>Solicitante__c</columns>
+    <columns>Situacao__c</columns>
+    <columns>Status__c</columns>
+    <columns>Cidade__c</columns>
+    <columns>Estado__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Reprovado,Finalizado,Cancelado</value>
+    </filters>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>greaterThan</operation>
+        <value>6/1/2023 12:00 AM</value>
+    </filters>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Demonstracao__c.Comodato</value>
+    </filters>
+    <label>Todos</label>
+</ListView>

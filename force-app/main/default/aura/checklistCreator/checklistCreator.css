@@ -1,0 +1,519 @@
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes slideDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.THIS #voltarToppo5432 {
+  display: flex;
+  margin-top: 5px;
+  margin-left: 25px;
+  gap: 6px;
+  color: #305a7c;
+}
+.THIS .slds-button slds-button_neutral custom-add-section-button {
+  margin-left: 480px;
+  margin-top: 20px;
+}
+
+.THIS .secao223 {
+  border: none;
+  padding: 10px;
+  background: #ffffff;
+}
+.THIS .custom-backdrop {
+      position: absolute;
+    top: 38px;
+    left: -1px;
+    width: 57.6vw;
+    height: 64vh;
+    background: rgb(0 0 0 / 6%);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 19px;
+}
+
+.THIS .custom-spinner {
+    width: 60px;
+    height: 60px;
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.THIS .mainDiv9632 {
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 25px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: slideDown 1.5s ease forwards;
+}
+.THIS .head1235 {
+  display: flex;
+}
+.THIS .btn-criar2134 {
+  display: none;
+  background-color: #165c95;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+  width: fit-content;
+  padding: 10px;
+  margin-left: 21px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.THIS .btn-criar2134:hover {
+  background-color: #005fb2;
+  cursor: pointer;
+}
+
+/* Lista */
+.THIS .body43425 {
+     max-height: 770px;
+    padding: 0;
+    overflow-y: auto;
+}
+
+/* Estilização da barra de rolagem */
+.THIS .body43425::-webkit-scrollbar {
+  width: 10px;
+}
+
+.THIS .body43425::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.THIS .body43425::-webkit-scrollbar-thumb {
+  background-color: #003366; /* Azul escuro */
+  border-radius: 5px;
+  border: 2px solid #f1f1f1;
+}
+
+.THIS .body43425::-webkit-scrollbar-thumb:hover {
+  background-color: #002244; /* Azul ainda mais escuro no hover */
+}
+
+
+.THIS .listContainer234 {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  padding: 20px;
+}
+
+.THIS .itemList52 {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: slideDown 1.5s ease forwards;
+  padding: 1rem;
+  background-color: #f0f6ff;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  color: #3C4A4B;
+}
+
+.THIS .itemList52:hover {
+  background-color: #e5eaf1;
+  cursor: pointer;
+}
+.THIS .pop-up624 {
+  width: 1090px;
+  max-height: 1079px;
+  display: block;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  z-index: 20000;
+  overflow: auto;
+}
+.THIS .overlayPopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  display: flex;
+}
+.THIS .close-button {
+  cursor: pointer;
+  font-weight: 600;
+  color: #183c63;
+  margin-bottom: 16px;
+  z-index: 200000; 
+  font-size: 23px;
+  margin-left: 1020px;
+  
+}
+
+.THIS .custom-sidebar {
+  position: sticky;
+  top: 20px; /* distância do topo ao começar a "grudar" */
+  align-self: flex-start;
+  height: fit-content;
+  background-color: #f9f9f9;
+  padding: 16px;
+  border-radius: 8px;
+}
+.THIS .custom-container {
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+}
+.THIS .campoLabelInput {
+  width: 54% !important;
+}
+
+.THIS .custom-sidebar {
+  width: 30%;
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 8px;
+}
+.THIS .custom-add-section-button {
+    justify-self: center !important;
+    align-self: center !important;
+    margin-top: 20px;
+    animation: slideDown 1.5s ease forwards;
+    display: block;
+
+}
+
+.THIS .custom-builder {
+  width: 280%;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+.THIS .fieldBox {
+  margin-bottom: 25px;
+  background: #f5f5f5;
+  padding: 19px;
+  display: block;
+  border-radius: 11px;
+  width: 460px;
+  cursor: grab;
+}
+
+.THIS .fieldBox:hover {
+  transform: translateY(-4px);
+}
+
+.THIS .custom-title-input {
+  width: 100%;
+  font-size: 18px;
+  margin-bottom: 10px;
+  padding: 8px;
+}
+.THIS .removerCampoBtn {
+  color: #999999;
+  font: inherit;
+  margin: 0;
+  border: none;
+  background: none;
+}
+.THIS .removerCampoBtn:hover {
+  color: red;
+}
+
+.THIS .custom-description-textarea {
+  width: 100%;
+  height: 80px;
+  font-size: 14px;
+  padding: 8px;
+}
+
+.THIS .custom-field-type-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  border-radius: 10px;
+  cursor: grab;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+  animation: pulse 3s ease-in-out infinite;
+  
+}
+.THIS .custom-field-type-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Mais destaque no hover */
+}
+
+.THIS .custom-field-type-item i	 {
+  font-size: 28px;
+  color: #333;
+}
+
+.THIS .legendabloco52 {
+  font-size: 12px;
+  margin-top: 8px;
+  color: #666;
+}
+
+.THIS .custom-field-type-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+  
+}
+.THIS .custom-sidebar {
+  position: sticky;
+  top: 142px;
+  align-self: flex-start;
+  height: fit-content;
+  background-color: #f9f9f9;
+  padding: 16px;
+  border-radius: 8px;
+}
+.THIS .campo-sombra {
+  opacity: 0.6;
+  background-color: #f0f4ff; /* azul claro suave */
+  border: none;
+  transition: all 0.2s ease-in-out;
+  border-radius: 6px;
+}
+.THIS .campo-ativo {
+  transform: scale(1.03);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+.THIS .custom-sidebar-title {
+  text-align: center;
+  padding: 10px;
+
+  font-size: 12px;
+}
+
+.THIS #sourceList li {
+  cursor: grab;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  border-radius: 6px;
+}
+
+.THIS #sourceList li:hover {
+  background-color: #e3e8f0; /* tom suave de cinza-azulado */
+  transform: scale(1.02);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+.THIS .footer3542 {
+  display: flex;
+  padding: 16px;
+  gap: 25px;
+  justify-content: center;
+}
+.THIS .btn-voltar {
+  display: none;
+  background-color: #dc0009;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.THIS .btn-salvar {
+  display: none;
+  background-color: #0c375a;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+.THIS .btn-salvar:hover {
+  background-color: #2f6693;
+}
+
+.THIS .head1235 {
+  justify-content: center;
+  /* padding: 34px; */
+  background: #0c375a;
+  color: azure;
+  border-radius: 20px;
+  margin-bottom: 30px;
+}
+
+.THIS .mainTitle {
+  font-weight: bold;
+  font-size: x-large;
+  padding: 10px;
+}
+/* Estilo do cabeçalho da seção */
+.THIS .secao-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f9f9f9;
+  padding: 0.5rem;
+  border-radius: 6px 6px 0 0;
+}
+
+/* Input do título da seção */
+.THIS .secaoTituloInput {
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 4px 8px;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+  outline: none;
+}
+
+/* Hover para indicar que o título é editável */
+.THIS .secaoTituloInput:hover {
+  background-color: #e6f0ff;
+  border: 1px solid #0070d2;
+  cursor: text;
+}
+
+/* Quando o usuário estiver digitando */
+.THIS .secaoTituloInput:focus {
+  background-color: #e6f0ff;
+  border: 1px solid #0070d2;
+}
+
+/* Botão de remover seção */
+.THIS .removerSecaoBtn {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.2s ease;
+}
+
+/* Hover do botão de remover */
+.THIS .removerSecaoBtn:hover {
+  color: #d9534f; /* vermelho sutil */
+  transform: scale(1.1);
+}
+.THIS .custom-section-canvas {
+  background: #f9f9f9;
+}
+
+/* Scrollbar para Webkit (Chrome, Edge, Safari) */
+.THIS .pop-up624::-webkit-scrollbar {
+  width: 8px;
+}
+.THIS .pop-up624::-webkit-scrollbar-track {
+  background: #e0e0e0;
+  border-radius: 4px;
+}
+.THIS .pop-up624::-webkit-scrollbar-thumb {
+  background-color: #183c63;
+  border-radius: 4px;
+  border: 2px solid #e0e0e0;
+}
+
+.THIS .close-button {
+  cursor: pointer;
+  font-weight: 600;
+  color: #183c63;
+  margin-bottom: 16px;
+  user-select: none;
+}
+
+.THIS .custom-checklist-card {
+  margin-top: 0;
+}
+
+/* Esconde o título padrão do lightning:card */
+.THIS .titulodomodelo .slds-card__header {
+  display: none;
+}
+
+/* Título customizado acima do card */
+.THIS .custom-checklist-card > .custom-title {
+  font-weight: 900;
+  font-size: 22px;
+  color: #183c63;
+  margin-bottom: 20px;
+  user-select: none;
+}
+
+/* Headers das seções */
+.THIS h3 {
+  font-weight: 700;
+  color: #183c63;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+/* Container dos campos */
+.THIS .custom-field-container {
+  margin-bottom: 12px;
+}
+
+/* Select habilitado, básico */
+.THIS .custom-select {
+  width: 100%;
+  font-size: 14px;
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  color: #183c63;
+  cursor: pointer;
+}
+
+/* Inputs desabilitados com aparência minimalista */
+.THIS .custom-input {
+  opacity: 0.5;
+  pointer-events: none; /* bloqueia interação */
+  background-color: #f9f9f9;
+  border: 1px solid #ddd !important;
+  color: #999 !important;
+}
+.THIS .slds-card {
+  border-style: none !important;
+}
+.THIS .slds-backdrop slds-backdrop_open{
+     background-color: rgba(0, 0, 0, 0.05) !important;
+}

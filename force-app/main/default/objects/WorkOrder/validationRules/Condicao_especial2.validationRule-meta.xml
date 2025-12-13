@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Condicao_especial2</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+TEXT(Condicao_de_pagamento__c) = &apos;Condição Especial - Aprovado pela Diretoria&apos;,
+ISNULL( Valor_da_entrada__c )
+)</errorConditionFormula>
+    <errorDisplayField>Valor_da_entrada__c</errorDisplayField>
+    <errorMessage>Para condição especial, preencha o valor da entrada</errorMessage>
+</ValidationRule>

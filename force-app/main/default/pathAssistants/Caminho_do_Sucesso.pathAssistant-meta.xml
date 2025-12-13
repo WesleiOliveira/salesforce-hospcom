@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Opportunity</entityName>
+    <fieldName>StageName</fieldName>
+    <masterLabel>Caminho do Sucesso</masterLabel>
+    <pathAssistantSteps>
+        <fieldNames>Motivo_da_Perda__c</fieldNames>
+        <fieldNames>NextStep</fieldNames>
+        <info>&lt;ol&gt;&lt;li&gt;Selecionar o motivo.&lt;/li&gt;&lt;li&gt;Preencher a justificativa&lt;/li&gt;&lt;/ol&gt;</info>
+        <picklistValueName>LOSS</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>__MASTER__</recordTypeName>
+</PathAssistant>

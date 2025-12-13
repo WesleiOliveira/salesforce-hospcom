@@ -1,0 +1,119 @@
+<aura:component extends="c.ApexHelper"
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+                access="global">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css',
+                          $Resource.bootstrapSelect14 + '/docs/docs/dist/css/bootstrap-select.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.sortableJs + '/Sortable.js',
+                           $Resource.popper + '/popper.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js',
+                           $Resource.bootstrapSelect14 + '/docs/docs/dist/js/bootstrap-select.min.js')}"                     
+                  afterScriptsLoaded="{!c.afterScriptsLoad}" />
+    
+    
+    <div>
+        <!-- SPINNER DE CARREGAMENTO -->
+        <div id='spinnerDiv' style="display: none">
+            <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+        </div>
+        
+        <div class="divPrincipal">
+            <div class="divPrincipal2">
+                
+                
+                <!-- DIV COM FILTROS -->
+                <fieldset class="border p-2" style="border-radius: 10px; margin: 0.7rem!important;">
+                    <legend  class="float-none w-auto tituloComponente">Painel de metas avançado</legend>
+                    
+                    <div class='divFiltros'>
+                        
+                        <!-- FILTRO COM ANO -->
+                        <select class='selectpicker' id='selectAno' data-live-search="true">
+                            <option disabled='true' value='default' selected='selected'>Ano</option>
+                            <option  value='2021' >2021</option>
+                            <option  value='2022' >2022</option>
+                            <option  value='2023' >2023</option>
+                        </select>
+                        
+                        <!-- FILTRO COM TIPO -->
+                        <select class='selectpicker' id='selectTipo' data-live-search="true">
+                            <option disabled='true' value='' selected='selected'>Tipo de filtro</option>
+                            <option value='vendedor' >Vendedor</option>
+                            <option value='linha' >Linha</option>
+                            <option value='departamento' >Departamento</option>
+                        </select>
+
+                        <!-- FILTRO COM VENDEDOR -->
+                        <select class='selectpicker' id='selectVendedor' data-live-search="true">
+                            <option disabled='true' value='default' selected='selected'>Vendedor</option>
+                            <option  value='' >Nenhum</option>
+                        </select>
+                        
+                        <!-- FILTRO COM LINHA -->
+                        <select class='selectpicker' id='selectLinha' data-live-search="true">
+                            <option disabled='true' value='default' selected='selected'>Linha</option>
+                            <option  value='' >Nenhum</option>
+                            <option  value='cmiImagemLaparo' >CMI (IMG + LAPARO)</option>
+                            <option  value='cmiUroGineco' >CMI (URO + GINECO)</option>
+                            <option  value='eletrocirurgia' >Eletrocirurgia</option>
+                            <option  value='pmls' >PMLS</option>
+                            <option  value='surgical' >Surgical</option>
+                            <option  value='ultrassom' >Ultrassom</option>
+                            <option  value='ultrassomPoc' >Ultrassom POC</option>
+                            <option  value='ultrassomFixo' >Ultrassom Fixo</option>
+                        </select>
+                        
+                        <!-- FILTRO COM DEPARTAMENTO -->
+                        <select class='selectpicker' id='selectDepartamento' data-live-search="true">
+                            <option disabled='true' value='default' selected='selected'>Departamento</option>
+                            <option  value='' >Nenhum</option>
+                        </select>
+                        
+                        
+                    </div>
+                </fieldset>
+                <!-- FIM DIV COM FILTROS -->
+                
+                
+                <!-- DIV COM CONTEÚDO-->
+                <div class="row" style='height: 90%; width: 100%; justify-content: center; margin: 0px;'>
+                    
+                    <!-- DIV COM GRÁFICO-->
+                    <div class="col-md-12" style='height: 100%; '>
+                        
+                        
+                        <div class="row" style="height: 50%;">
+                            
+                            <div class="col-12">
+                                
+                                
+                                <div class="itemChart" id="itemChart" style='height: 700px; padding: 20px; overflow-y: auto'>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </div>
+    
+</aura:component>

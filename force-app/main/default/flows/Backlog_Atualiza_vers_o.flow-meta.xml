@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <environments>Default</environments>
+    <formulas>
+        <name>incremento</name>
+        <dataType>Number</dataType>
+        <expression>{!Count} + 1</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <name>versao</name>
+        <dataType>String</dataType>
+        <expression>&quot;V&quot; &amp; TEXT(FLOOR({!Count}/10) + 1) &amp; &quot;.&quot; &amp; TEXT(MOD({!Count}, 10))</expression>
+    </formulas>
+    <interviewLabel>Backlog — Atuali {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Backlog — Atualiza versão</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>v1_0</name>
+        <label>v1.0</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <inputAssignments>
+            <field>Versao__c</field>
+            <value>
+                <stringValue>V1.0</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>v1_0</targetReference>
+        </connector>
+        <object>Backlog__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>Count</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
+    </variables>
+</Flow>

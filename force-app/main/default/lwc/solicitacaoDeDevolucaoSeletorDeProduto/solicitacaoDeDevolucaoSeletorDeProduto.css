@@ -1,0 +1,480 @@
+.btn-container {
+    display: flex;
+    justify-content: center;
+    /* Corrigido de justify-self */
+    align-items: center;
+    width: 100%;
+}
+
+.selecionar-btn {
+    background: linear-gradient(174deg, #1a6de7, #428cf9);
+    width: 100%;
+    color: white;
+    font-weight: 500;
+    padding: 0.8rem;
+    border-radius: 5px;
+    text-align: center;
+    transition: 0.4s ease;
+    cursor: pointer;
+    border: none;
+    margin: 4px;
+}
+
+.selecionar-btn:hover {
+    transform: scale(1.03);
+}
+
+/* Container do popup - inicialmente oculto */
+.popup-container {
+    display: none;
+}
+
+.popup-container.show {
+    display: block;
+}
+
+/* Overlay - corrigido o conflito de display */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Popup - removido position fixed conflitante */
+.pop-up {
+    background: #ffffff;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 1300px;
+    padding: 0;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    border-top: 6px solid #0070d2;
+    animation: fadeInScale 0.3s ease-out;
+    transition: 0.3s;
+    transform: scale(0.8);
+    opacity: 0;
+}
+
+.pop-up.show {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Estilos do conteúdo do popup */
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px 10px 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.head h2 {
+    margin: 0;
+    color: #0070d2;
+    font-size: 1.2rem;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #999;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    color: #333;
+    background-color: #f0f0f0;
+    border-radius: 50%;
+}
+
+.body {
+    padding: 20px;
+    min-height: 400px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+/* Layout das colunas */
+.columns-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    height: 100%;
+}
+
+.column {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.column-header {
+    background: #f8f9fa;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.column-header h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.return-header {
+    background: #e8f4fd;
+}
+
+.item-count {
+    background: #0070d2;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    min-width: 20px;
+    text-align: center;
+}
+
+.return-header .item-count {
+    background: #d73527;
+}
+
+/* Container dos itens */
+.items-container {
+    flex: 1;
+    padding: 8px;
+    overflow-y: auto;
+    max-height: 320px;
+}
+
+/* Card do item */
+.item-card {
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.item-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-color: #0070d2;
+}
+
+.return-item {
+    border-color: #d73527;
+    background: #fef7f7;
+}
+
+.return-item:hover {
+    border-color: #d73527;
+    box-shadow: 0 2px 8px rgba(215, 53, 39, 0.15);
+}
+
+/* Conteúdo do item */
+.item-content {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    padding: 12px;
+    gap: 12px;
+}
+
+.item-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.no-image {
+    color: #999;
+}
+
+.item-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.product-name {
+    margin: 0 0 4px 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.2;
+}
+
+
+.quantity {
+    font-size: 0.75rem;
+    color: #666;
+    background: #f0f0f0;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.price {
+    font-size: 0.75rem;
+    color: #0070d2;
+    font-weight: 600;
+}
+
+.total-price {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #333;
+}
+
+/* Botão da seta */
+.arrow-container {
+    padding: 12px 8px;
+}
+
+.arrow-btn {
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.arrow-btn:hover:not(:disabled) {
+    transform: scale(1.1);
+}
+
+.quantity-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 8px 0;
+}
+
+.quantity-label {
+    font-size: 0.75rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.quantity-input-container {
+    display: flex;
+    align-items: self-end;
+    gap: 4px;
+}
+
+.quantity-btn {
+    background: #f3f3f3;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.quantity-btn:hover:not(:disabled) {
+    background: #e3e3e3;
+    border-color: #bfbfbf;
+}
+
+.quantity-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.quantity-input {
+    width: 100px;
+}
+
+.pdf-button-container {
+    background: #efefef;
+    display: flex;
+    padding: 13px;
+    border-radius: 5px;
+    color: #656565;
+    transition: 0.3s;
+}
+.pdf:hover{
+    transform: scale(1.03);
+    color: #282828;
+}
+
+.quantity-input lightning-input {
+    --slds-c-input-text-align: center;
+}
+
+.max-quantity {
+    font-size: 0.75rem;
+    color: #666;
+    white-space: nowrap;
+}
+
+/* Ajustes no layout do item-info para acomodar o controle de quantidade */
+.item-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+
+/* Estado vazio */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+    color: #666;
+    height: 200px;
+}
+
+.empty-state p {
+    margin: 8px 0 0 0;
+    font-size: 0.875rem;
+}
+
+/* Resumo da devolução */
+.summary {
+    margin-top: 16px;
+    padding: 16px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+}
+
+.summary-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.summary-label {
+    font-weight: 600;
+    color: #333;
+}
+
+.summary-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #d73527;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+    .columns-container {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .item-content {
+        padding: 8px;
+        gap: 8px;
+    }
+
+    .item-image {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 10px 20px 20px 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.cancel-btn,
+.confirm-btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.cancel-btn {
+    background: #f4f4f4;
+    border: 1px solid #ccc;
+    color: #333;
+}
+
+.cancel-btn:hover {
+    background: #e0e0e0;
+}
+
+.confirm-btn {
+    background: #0070d2;
+    border: 1px solid #0070d2;
+    color: white;
+}
+
+.confirm-btn:hover {
+    background: #005bb5;
+}
+
+.confirm-btn.disabled {
+    background: #ccc;
+    border-color: #ccc;
+    cursor: not-allowed;
+}
+
+.confirm-btn.disabled:hover {
+    background: #ccc;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

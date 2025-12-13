@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Aprova_o_Diretoria_Comercial__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Meta_de_Vendas__c  == null || Meta_de_Vendas__c  == 0, false, Meta_de_Vendas__c  &lt;=  (Custo_estimado_de_conta_de_participa_o__c * 1/10))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Aprovação Diretoria Comercial</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

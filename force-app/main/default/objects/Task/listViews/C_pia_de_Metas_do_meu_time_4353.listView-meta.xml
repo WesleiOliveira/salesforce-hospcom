@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>C_pia_de_Metas_do_meu_time_4353</fullName>
+    <booleanFilter>1 AND 3 AND 5 AND (2 OR 4)</booleanFilter>
+    <columns>SUBJECT</columns>
+    <columns>CORE.USERS.FULL_NAME</columns>
+    <columns>Contato__c</columns>
+    <columns>DUE_DATE</columns>
+    <columns>PRIORITY</columns>
+    <columns>STATUS</columns>
+    <columns>Meta__c</columns>
+    <columns>Peso_Meta__c</columns>
+    <columns>Status_do_gestor__c</columns>
+    <columns>Conclu_do__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Meta__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>Gestor_atual__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>DUE_DATE</field>
+        <operation>lessOrEqual</operation>
+        <value>TODAY</value>
+    </filters>
+    <filters>
+        <field>Usuario_Atual__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>STATUS</field>
+        <operation>notEqual</operation>
+        <value>Concluído</value>
+    </filters>
+    <label>Metas atrasadas do meu time</label>
+</ListView>

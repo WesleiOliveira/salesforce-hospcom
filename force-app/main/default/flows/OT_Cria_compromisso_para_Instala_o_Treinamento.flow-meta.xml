@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <environments>Default</environments>
+    <formulas>
+        <name>formula_5_myRule_1_A1_4243549308</name>
+        <dataType>String</dataType>
+        <expression>TEXT({!$Record.Tipo_de_Servi_o__c}) + &quot; &quot; + &quot;refente a ordem de trabalho&quot; + &quot; &quot;  + {!$Record.WorkOrderNumber}  + &quot; &quot; + &quot;do cliente&quot; + &quot; &quot; + {!$Record.Account.Name}</expression>
+    </formulas>
+    <formulas>
+        <name>formula_6_myRule_1_A1_6177245984</name>
+        <dataType>DateTime</dataType>
+        <expression>{!$Record.Data_Prevista_para_o_Fim_do_Servi_o__c}</expression>
+    </formulas>
+    <formulas>
+        <name>formula_7_myRule_1_A1_2214071542</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.Owner:User.Id}</expression>
+    </formulas>
+    <formulas>
+        <name>formula_8_myRule_1_A1_6481429234</name>
+        <dataType>String</dataType>
+        <expression>IF(ISPICKVAL({!$Record.Tipo_de_Servi_o__c} ,&quot;INSTALAÇÃO&quot;),&quot;Instalação&quot;,
+
+IF(ISPICKVAL({!$Record.Tipo_de_Servi_o__c} ,&quot;DEMONSTRAÇÃO&quot;),&quot;Demonstração&quot;,
+
+IF(AND(ISPICKVAL({!$Record.Tipo_de_Servi_o__c} ,&quot;TREINAMENTO DE ATIVOS&quot;),ISPICKVAL({!$Record.Local_de_Atendimento__c}, &quot;EXTERNO&quot;)),&quot;Treinamento Externo (Clientes)&quot;,
+
+IF(AND(ISPICKVAL({!$Record.Tipo_de_Servi_o__c} ,&quot;TREINAMENTO DE ATIVOS&quot;),ISPICKVAL({!$Record.Local_de_Atendimento__c}, &quot;INTERNO&quot;)),&quot;Treinamento Interno (Clientes)&quot;,&quot;&quot;
+))))</expression>
+    </formulas>
+    <interviewLabel>OT {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>OT — Cria compromisso para Instalação/Treinamento</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>myRule_1_A1</name>
+        <label>COMPROMISSO</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>formula_5_myRule_1_A1_4243549308</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>EndDateTime</field>
+            <value>
+                <elementReference>formula_6_myRule_1_A1_6177245984</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Location</field>
+            <value>
+                <elementReference>$Record.Local_de_Atendimento__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>formula_7_myRule_1_A1_2214071542</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>RecordTypeId</field>
+            <value>
+                <stringValue>01231000000tb28AAA</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>StartDateTime</field>
+            <value>
+                <elementReference>$Record.Data_Agendada_para_Servi_o__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>$Record.Tipo_de_Servi_o__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Type</field>
+            <value>
+                <elementReference>formula_8_myRule_1_A1_6481429234</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Event</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>myRule_1_A1</targetReference>
+        </connector>
+        <filterFormula>OR(
+	{!$Record.RecordType.Name}  = &quot;Demonstração de Produto&quot;,
+	{!$Record.RecordType.Name}  = &quot;Serviço de Instalação&quot;,
+	{!$Record.RecordType.Name}  = &quot;Treinamento de Ativos&quot;
+)</filterFormula>
+        <object>WorkOrder</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

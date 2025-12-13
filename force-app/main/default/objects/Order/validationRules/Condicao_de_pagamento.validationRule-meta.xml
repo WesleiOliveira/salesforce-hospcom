@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Condicao_de_pagamento</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    DATEVALUE(CreatedDate) &gt;= DATE(2025, 06, 10),
+    QuoteId != &apos;&apos;,
+    TEXT(Natureza_de_Opera_o__c) != &apos;BONIFICAÇÃO&apos;,
+				TEXT(Natureza_de_Opera_o__c) != &apos;DEMONSTRAÇÃO&apos;,
+				TEXT(Natureza_de_Opera_o__c) != &apos;REMESSA DE TROCA&apos;,
+				TEXT(Condicao_de_pagamento__c)!= &apos;&apos;,
+    TEXT(Quote.Condicao_de_pagamento__c) !=  TEXT(Condicao_de_pagamento__c)
+)</errorConditionFormula>
+    <errorMessage>Condição de pagamento divergente do selecionado na cotação.</errorMessage>
+</ValidationRule>

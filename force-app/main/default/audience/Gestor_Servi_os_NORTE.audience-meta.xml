@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Audience xmlns="http://soap.sforce.com/2006/04/metadata">
+    <audienceName>Gestor Serviços NORTE</audienceName>
+    <container>Hospcom</container>
+    <criteria>
+        <criterion>
+            <criteriaNumber>1</criteriaNumber>
+            <criterionValue>
+                <entityField>Username</entityField>
+                <entityType>User</entityType>
+                <fieldValue>david.queiroz@hospcom.net</fieldValue>
+            </criterionValue>
+            <operator>Equal</operator>
+            <type>FieldBased</type>
+        </criterion>
+    </criteria>
+    <formulaFilterType>AllCriteriaMatch</formulaFilterType>
+    <isDefaultAudience>false</isDefaultAudience>
+    <targets>
+        <target>
+            <groupName>20fd31df-c7ee-47cc-ab4e-f0681be4e232$#$40f6509d-8ecf-499a-afc1-4522ed3682e0</groupName>
+            <priority>1</priority>
+            <targetType>ExperienceVariation</targetType>
+            <targetValue>Servio_Indicadores_Painel_do_CRM_Analytics_3_Component</targetValue>
+        </target>
+    </targets>
+</Audience>

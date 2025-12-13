@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_do_prazo__c</fullName>
+    <externalId>false</externalId>
+    <formula>if(  Data_de_prazo_corrido__c = 0, 0, 
+if( Tipo__c == &apos;Compra para consumo&apos;, if( Data_de_prazo_corrido__c &lt;=	10 &amp;&amp; Data_de_prazo_corrido__c &gt; 0, 1, 0), 
+if( Origem__c == &apos;Nacional&apos;, if(Data_de_prazo_corrido__c &lt;= 30, 1, 0), 
+if( Tipo_de__c == &apos;Aéreo&apos;, if(Data_de_prazo_corrido__c &lt;= 90, 1, 0),
+if( Tipo_de__c == &apos;Marítimo&apos;, if(Data_de_prazo_corrido__c &lt;= 120, 1, 0),0
+)))))</formula>
+    <label>Status do prazo</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>C_pia_de_NC_Externa</fullName>
+    <columns>NAME</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>Data_de_Abertura_do_RNC__c</columns>
+    <columns>Gravidade__c</columns>
+    <columns>Gravidade_Imagem__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>notEqual</operation>
+        <value>Nao_Conformidade__c.Externa</value>
+    </filters>
+    <label>NC BPQ</label>
+</ListView>

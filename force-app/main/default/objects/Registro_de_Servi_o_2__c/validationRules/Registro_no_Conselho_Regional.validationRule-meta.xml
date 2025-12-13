@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Registro_no_Conselho_Regional</fullName>
+    <active>true</active>
+    <description>Validação da marcação do campo registro no conselho regional</description>
+    <errorConditionFormula>AND( Registro_no_Conselho_Regional__c = TRUE, ISBLANK(Data_de_Vencimento3__c))</errorConditionFormula>
+    <errorDisplayField>Data_de_Vencimento3__c</errorDisplayField>
+    <errorMessage>Preencha a data de validade do registro.</errorMessage>
+</ValidationRule>

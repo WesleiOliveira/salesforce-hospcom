@@ -1,0 +1,323 @@
+<apex:page standardController="Contrato_de_Servi_o__c" extensions="ContratoChecklist" renderAs="pdf" applyHtmlTag="false" showHeader="false">
+    <head>
+        <style type="text/css" media="print">
+                @page{
+                background: url({!IF(Contrato_de_Servi_o__c.Timbre__c == 'HEALTH SOLUTION',$Resource.TimbradoHealth,IF(Contrato_de_Servi_o__c.Timbre__c == 'HOSPCOM',$Resource.TimbradoHospcom,IF(Contrato_de_Servi_o__c.Timbre__c == 'GDB',$Resource.TimbradoGDB,IF(Contrato_de_Servi_o__c.Timbre__c == 'ABC TO',$Resource.TimbradoABC,"-"))))});
+                margin:150px 50px 150px 50px;
+                size: A4;}
+                .special{
+                font-family:'Arial Unicode MS';
+            }
+                
+       </style>
+      
+    </head>
+    <table width="100%">
+        <tr style="border: 1px solid black; text-align: center">
+            <td style="border: 1px solid black; background-color:#f4f5f5;" >
+            <b>CHECKLIST DE ENTREGA DE EQUIPAMENTO DE LOCAÇÃO - CONTRATO N° {!Contrato_de_Servi_o__c.N_mero_da_Proposta_Contrato__c}</b>
+            </td>
+        </tr>
+    </table><br/>
+    <table width="100%" cellspacing="0" style="font-size: 12px">
+        <tr>
+            <td width="50%">
+                <table width="100%" cellspacing="0" style="font-size: 12px">
+                    <tr>
+                        <td style="border: 1px solid black;text-align: center;font-size: 12px" width="100%" colspan="2">
+                            <b>DADOS DO LOCADOR(A)</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black; padding: 5px" width="350px">
+                            <b>LOCADOR(A):</b>
+                        </td>
+                        <td style="border: 1px solid black; padding: 5px" width="1000px">
+                        {!UPPER(Contrato_de_Servi_o__c.Locador_a__r.Name)}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black; padding: 5px" width="350px" height="36pt">
+                            <b>RAZÃO SOCIAL:</b>
+                        </td>
+                        <td style="border: 1px solid black; padding: 5px" width="1000px">
+                        {!UPPER(Contrato_de_Servi_o__c.Locador_a__r.Raz_o_Social__c)}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black; padding: 5px" width="350px" height="100px">
+                            <b>ENDEREÇO:</b>
+                        </td>
+                        <td style="border: 1px solid black; padding: 5px" width="1000px">
+                        {!UPPER(Contrato_de_Servi_o__c.Locador_a__r.ShippingStreet + " " + Contrato_de_Servi_o__c.Locador_a__r.ShippingCity + " " + Contrato_de_Servi_o__c.Locador_a__r.ShippingState+ " " + "CEP: " + Contrato_de_Servi_o__c.Locador_a__r.ShippingPostalCode)}
+                        
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black; padding: 5px" width="350px">
+                            <b>CNPJ:</b>
+                        </td>
+                        <td style="border: 1px solid black; padding: 5px" width="1000px">
+                        {!UPPER(IF(Contrato_de_Servi_o__c.Locador_a__r.CNPJ__c == "", Contrato_de_Servi_o__c.Locador_a__r.CPF__pc, Contrato_de_Servi_o__c.Locador_a__r.CNPJ__c) )}
+                        </td>
+                    </tr>                   
+                    <tr>
+                        <td style="border: 1px solid black; padding: 5px" width="350px" height="20px">
+                            <b>E-MAIL:</b>
+                        </td>
+                        <td style="border: 1px solid black; padding: 5px" width="1000px" height="20px">
+                        tatiane.alves@hospcom.net
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+            
+            <td width="50%">
+                <table width="100%" cellspacing="0" style="font-size: 12px">
+                    <tr>
+                        <td style="border: 1px solid black;text-align: center;font-size: 12px" width="100%" colspan="2">
+                            <b>DADOS DO LOCATÁRIO(A)</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black; padding: 5px" width="350px">
+                            <b>LOCATÁRIO(A):</b>
+                        </td>
+                        <td style="border: 1px solid black; padding: 5px" width="1000px">
+                        {!UPPER(Contrato_de_Servi_o__c.Locat_rio_a__r.Name)}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black; padding: 5px" width="350px" height="36pt">
+                            <b>{!if(Contrato_de_Servi_o__c.Locat_rio_a__r.CNPJ__c==NULL, "", "RAZÃO SOCIAL:")}</b>
+                        </td>
+                        <td style="border: 1px solid black; padding: 5px" width="1000px">
+                        {!UPPER(Contrato_de_Servi_o__c.Locat_rio_a__r.Raz_o_Social__c)}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black; padding: 5px" width="350px" height="100px">
+                            <b>ENDEREÇO:</b>
+                        </td>
+                        <td style="border: 1px solid black; padding: 5px" width="1000px">
+                        {!UPPER(Contrato_de_Servi_o__c.Endere_o__c)}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black; padding: 5px" width="350px">
+                            <b>CPF/CNPJ:</b>
+                        </td>
+                        <td style="border: 1px solid black; padding: 5px" width="1000px">
+                        {!UPPER(IF(Contrato_de_Servi_o__c.Locat_rio_a__r.CNPJ__c==NULL,Contrato_de_Servi_o__c.Locat_rio_a__r.CPF__pc ,Contrato_de_Servi_o__c.Locat_rio_a__r.CNPJ__c ))}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black; padding: 5px" width="350px" height="20px">
+                            
+                        </td>
+                        <td style="border: 1px solid black; padding: 5px" width="1000px"  height="20px">
+                        &nbsp;
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+        <tr><td height="25px"></td></tr>
+    </table>
+ <apex:variable var="cont" value="{!0}" />
+ <apex:variable var="contagem" value="{!1}"/>
+  <apex:repeat var="cs" value="{!Contrato_de_Servi_o__c.Ativos_do_Contrato__r}">
+  
+    <apex:outputText rendered="{!IF(cs.Equipamento_no_Cliente__c == true, true, false)}">
+  <apex:outputText rendered="{!IF(cont>1, true, false )}">
+  <!--div style="page-break-after:always"></div -->
+  
+  </apex:outputText>
+  
+  
+    <body style="font-family:Arial; padding:0px; margin:0px; border:0px solid #eef2f4; width:*;">
+    
+    
+    
+    
+    
+    <table width="100%">
+
+    
+        <tr>
+            <td style="border: 1px solid black; background-color:#f4f5f5; text-align:center; font-size:14px;">
+               <b>{!contagem}:</b> {!cs.Ativo_Locado__r.Name}, &nbsp; <b>MARCA:</b> {!cs.Ativo_Locado__r.Marca__c}, &nbsp; <b>MODELO:</b> {!cs.Ativo_Locado__r.Modelo__c}, &nbsp; <b>N° DE SÉRIE:</b> {!cs.Ativo_Locado__r.SerialNumber} 
+            </td>
+        </tr>
+
+    </table>
+    
+    <table width="100%" >
+
+        <apex:variable var="contagem" value="{!contagem+1}"/>
+
+
+    </table>
+  <div style="position:relative; margin: auto; text-align:center; align-itens: center" width="100%">  
+    <table width="100%">
+        <tr>
+            <td width="30%">
+                <table cellspacing ="0" width="100%">
+                    <tr>
+                        <td style="border: 1px solid black; background-color:#f4f5f5; font-size: 11px; text-align: center" align="center">
+                        <b>ITEM</b>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+            
+            <td width="30%">
+                <table cellspacing ="0" width="100%">
+                    <tr>
+                        <td style="border: 1px solid black; background-color:#f4f5f5; font-size: 11px; text-align: center" >
+                        <b>ESTADO DO ITEM NA ENTREGA</b>
+                        </td>
+                    </tr>            
+                </table>
+            </td>      
+            
+        </tr>
+ 
+        
+  <apex:repeat var="ac" value="{!Ativos}">
+  <apex:variable var="ativoid" value="{!ac.Id}"/>
+  <apex:repeat var="cl" value="{!ac.Itens_de_Checklist_do_Ativo__r}">
+
+  <apex:outputText rendered="{!IF(cs.Ativo_Locado__c = cl.Ativo_Relacionado__c, true, false)}"> 
+
+        <tr>
+            <td width="30%">
+                <table cellspacing ="0" width="100%">
+                    <tr>
+                        <td style="border: 1px solid black; font-size: 11px; text-align: center" class="special" height="15pt">
+                       {!UPPER(cl.Nome_do_Item__c)}
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+            
+            <td width="30%">
+                <table cellspacing ="0" width="100%">
+                    <tr>
+                        <td colspan="2" style="border: 1px solid black; font-size: 11px; text-align: center" class="special" height="15pt">
+                        
+                       <span style="font-size: 11px">{!IF(cl.Conforme__c == TRUE, "✔", "☐")}</span> &nbsp; CONFORME  &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="font-size: 11px">{!IF(cl.N_o_Conforme__c == TRUE, "✔", "☐")}</span> &nbsp; NÃO CONFORME 
+                        </td>
+                    </tr>            
+                </table>
+            </td>           
+        </tr>
+            
+   </apex:outputText>
+   
+   
+   <apex:outputText rendered="{!IF(cl.Ativo_Relacionado__c != ac.Id, true, false)}">        
+   </apex:outputText>
+       
+        </apex:repeat>
+         
+        <apex:variable var="cont" value="{!cont+1}"/>
+          
+
+
+  </apex:repeat>
+ 
+  <tr>
+    <td colspan="2" style="border: 1px solid black; font-size: 11px; text-align: center; padding: 10px;" class="special" height="15pt">
+        Obs:__________________________________________________________________________________________________________________
+        ______________________________________________________________________________________________________________________  </td>
+   </tr>
+    </table>
+    </div>
+  
+    
+    
+    
+
+    </body>
+   <br/>
+   </apex:outputText>
+   
+</apex:repeat>
+
+    <br/>
+    Observações:__________________________________________________________________________________________________________________
+    ______________________________________________________________________________________________________________________________
+    ______________________________________________________________________________________________________________________________
+    ______________________________________________________________________________________________________________________________
+    ______________________________________________________________________________________________________________________________
+    ______________________________________________________________________________________________________________________________
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+  <div style="text-align: right; font-size: 12px;">_____________________, ______ de _______________________________ de __________</div>  
+    
+    
+    
+    
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <table style="text-align:center; border-spacing: 20px;" width="100%">
+        <tr>
+            <td style="text-align:center">
+            _____________________________________
+            </td>
+           
+            
+            <td style="text-align:center">
+            _____________________________________
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:center; font-size: 12px" width="50%">
+                {!Contrato_de_Servi_o__c.Locador_a__r.Name} 
+            </td>
+            <td style="text-align:center; font-size: 12px" width="50%">
+                {!Contrato_de_Servi_o__c.Locat_rio_a__r.Raz_o_Social__c}
+            </td>
+        </tr>
+    </table>
+<div style="page-break-before: always">
+<br/><br/>
+      <div style="font-size: 14px; text-align: center;"> <b>ANEXO I - DA CIÊNCIA E RESPONSABILIDADE QUANTO AO USO E OBRIGAÇÃO DE PAGAR</b> </div>
+      <br/>
+      <div style="font-size: 14px; text-align:justify;">
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Diante do aceite do checklist de entrega e retirada dos equipamentos, a LOCATÁRIA manifesta plena ciência da necessidade de guarda e conservação dos equipamentos ora locados, sendo certa sua responsabilidade, ao final da locação <b><u>em efetuar a entrega dos bens de propriedade da LOCADORA em seu estado inicial de conservação</u></b>, sob pena de incorrer nas penalidades por descumprimento contratual, além de ser cobrada judicialmente de todo e qualquer dano nos equipamentos objeto do contrato, nos termos do art. 566, I e 569, I¹  do Código Civil Brasileiro.</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Declara ainda a ciência da obrigação de arcar com os custos acordados para a locação até a data da efetiva entrega dos equipamentos locados, conforme preconiza o art. 574² do Código Civil Brasileiro, dando seu aceite através da assinatura do contrato de locação e do checklist de entrega e devolução dos equipamentos.</p>
+      </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+      ____________________________________________________________________________________________________________
+      <br/><br/>
+      <div style="font-size: 14px;">
+      ¹Art. 566. O locador é obrigado:<br/>
+      I - a entregar ao locatário a coisa alugada, com suas pertenças, em estado de servir ao uso a que se destina, e a mantê-la nesse estado, pelo tempo do contrato, salvo cláusula expressa em contrário;
+      <br/>
+      <br/>
+      Art. 569. O locatário é obrigado:
+      <br/>
+      I - a servir-se da coisa alugada para os usos convencionados ou presumidos, conforme a natureza dela e as circunstâncias, bem como tratá-la com o mesmo cuidado como se sua fosse;
+      <br/>
+      <br/>
+      <p>²Art. 574. Se, findo o prazo, o locatário continuar na posse da coisa alugada, sem oposição do locador, presumirse-á prorrogada a locação pelo mesmo aluguel, mas sem prazo determinado.</p>
+    </div>
+</div>
+</apex:page>

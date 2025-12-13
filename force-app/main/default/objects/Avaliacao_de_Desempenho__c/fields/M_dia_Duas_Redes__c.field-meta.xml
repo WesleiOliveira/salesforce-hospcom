@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>M_dia_Duas_Redes__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    AND(Media_Rede__c &gt; 0, M_dia_Rede_2__c &gt; 0),
+    (Media_Rede__c + M_dia_Rede_2__c) / 2,  /* Ambos maiores que zero: média */
+    IF(
+        Media_Rede__c &gt; 0,
+        Media_Rede__c,                         /* Apenas Media_Rede__c &gt; 0 */
+        IF(
+            M_dia_Rede_2__c &gt; 0,
+            M_dia_Rede_2__c,                    /* Apenas M_dia_Rede_2__c &gt; 0 */
+            0                                    /* Ambos zero */
+        )
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Média Duas Redes</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>1</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

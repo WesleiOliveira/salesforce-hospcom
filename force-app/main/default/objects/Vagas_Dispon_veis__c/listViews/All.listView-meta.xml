@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>Data_de_admiss_o__c</columns>
+    <columns>Empresa__c</columns>
+    <columns>CargoFormula__c</columns>
+    <columns>Departamento__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>greaterThan</operation>
+        <value>6/1/2022 12:00 AM</value>
+    </filters>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Finalizada,Cancelada</value>
+    </filters>
+    <label>Vagas Disponíveis</label>
+</ListView>

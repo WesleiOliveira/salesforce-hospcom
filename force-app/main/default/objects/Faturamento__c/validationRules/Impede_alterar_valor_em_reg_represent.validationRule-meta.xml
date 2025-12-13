@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Impede_alterar_valor_em_reg_represent</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+	RecordType.Name = &apos;Representação&apos;,
+	ISCHANGED(Valor_Faturado__c),
+	Valor_faturado_permissao__c == false
+)</errorConditionFormula>
+    <errorDisplayField>Valor_Faturado__c</errorDisplayField>
+    <errorMessage>Para faturamentos de tipo de registro &quot;Representação&quot;, este valor é calculado com base nos faturamentos relacionados. Não é permitido sua alteração de forma manual.</errorMessage>
+</ValidationRule>

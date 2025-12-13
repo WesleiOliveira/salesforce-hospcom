@@ -1,0 +1,14 @@
+<apex:page standardController="Faturamento__c" extensions="FaturamentoDeleta" showHeader="true" sideBar="true" showChat="false">
+    <head>
+        <base target="_parent"/>    
+    </head>
+    
+    <body style="background-color:white; margin:0px 0px 20px 0px; padding:0px;">
+        <apex:form style="background-color:white;">
+            <apex:outputText rendered="true" >
+                <apex:commandLink value="Exterminar" action="{!Exterminar}" />
+            </apex:outputText>                                
+        </apex:form>
+    </body>
+    
+</apex:page>

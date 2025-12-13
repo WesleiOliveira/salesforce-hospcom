@@ -1,0 +1,723 @@
+<apex:page standardController="WorkOrder" renderAs="advanced_pdf" applyHtmlTag="false" showHeader="false">
+
+    <head>
+        <style type="text/css">
+        @page{
+                size:A4;
+                background: url({!IF(WorkOrder.Faturamento_Feito__c == 'HEALTH SOLUTION',$Resource.TimbradoHealth,IF(OR(WorkOrder.Faturamento_Feito__c == 'HOSPCOM', WorkOrder.Faturamento_Feito__c == ''),$Resource.TimbradoHospcom,IF(WorkOrder.Faturamento_Feito__c == 'GDB',$Resource.TimbradoGDB,"-")))});
+                margin:135px 50px 120px 50px;
+                @bottom-center{content:element(footer);}
+            }
+            .rodape{
+             
+                bottom:0;
+                padding:2px;
+                margin:0px;
+                margin-top:0px;
+                padding-bottom:0;
+                font-family:arial, verdana, sans-serif;
+                font-size:7.5pt;
+                text-align:center;
+                vertical-align:bottom;
+            }
+            .titulo_1{ /* td */
+                padding:2px;
+                margin:0px;
+                border:1px solid #cacecf;
+                font-family:arial, verdana, sans-serif;
+                font-size:13px;
+                font-weight:bold;
+                text-align:center;
+                background-color:#e2e3e3;
+            }
+            .titulo_2{ /* td */
+                padding:2px;
+                margin:0px;
+                border-bottom:1px solid #cacecf;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:bold;
+                text-align:center;
+                background-color:#e2e3e3;
+
+            }
+            .titulo_3{ /* td */
+                padding:2px;
+                margin:0px;
+                border-bottom:1px solid #cacecf;
+                font-family:arial, verdana, sans-serif;
+                font-size:11px;
+                font-weight:bold;
+                text-align:center;
+                background-color:#f4f5f5;
+            }
+            .label{ /* td */
+                width:90px;
+                padding:2px;
+                margin:0px;
+                border-bottom:1px solid #eef2f4;
+                font-family:arial, verdana, sans-serif;
+                font-size:7pt;
+                font-weight:bold;
+                text-align:left;
+                vertical-align:middle;
+            }
+            .label2{ /* td */
+                padding:2px;
+                margin:0px;
+                border-bottom:1px solid #eef2f4;
+                font-family:arial, verdana, sans-serif;
+                font-size:11px;
+                font-weight:bold;
+                text-align:left;
+                vertical-align:middle;
+            }
+            .label_inferior{ /* td */
+                width:80px;
+                padding:2px;
+                margin:0px;
+                font-family:arial, verdana, sans-serif;
+                font-size:7.5pt;
+                font-weight:bold;
+                text-align:left;
+                vertical-align: middle;
+            }
+            .valor{ /* td */
+                padding:2px;
+                margin:0px;
+                border-bottom:1px solid #eef2f4;
+                font-family:arial, verdana, sans-serif;
+                font-size:7.5pt;
+                font-weight:normal;
+                text-align:left;
+                vertical-align:middle;
+            }
+            
+            .valor_inferior{ /* td */
+                padding:2px;
+                margin:0px;
+                font-family:arial, verdana, sans-serif;
+                font-size:7pt;
+                font-weight:normal;
+                text-align:left;
+                vertical-align:middle;
+            }
+            .linha{
+                width:100%;
+                padding:0px;
+                margin:0px;
+                border-bottom:1px solid #cacecf;
+            }
+            .special{
+                font-family:'Arial Unicode MS';
+                line-height:80%;
+            }
+            .tabela_conteudo{
+                width:100%;
+                border:1px #cacecf solid;
+            }
+            .cabecalho_servico{ /* div */
+                text-decoration:underline;
+                display:inline;
+            }
+            .check{
+                width: 20px;
+                margin: 0;
+                /*margin-left: 15px;*/
+                margin-top: -5px;
+                
+            
+            }
+        </style>
+        
+        <apex:variable value="{!0}" var="count"/>
+    </head>
+
+    <html>
+        <body style="font-family:Arial; padding:0px; margin:0px; border:0px solid #eef2f4; width:*;text-transform: uppercase">
+
+
+            <!-- cabeçalho -->
+            <table cellpadding="0px" cellspacing="0px" style="width:100%;">              
+                <!-- título -->
+                <tr>
+                    <td class="titulo_1" colspan="2" style="position:relative;">
+                        DETALHES DA ORDEM DE TRABALHO -
+                        <div class="cabecalho_servico">
+                            <apex:outputText rendered="{!IF(OR(WorkOrder.RecordTypeId == '01231000000tb6AAAQ',WorkOrder.RecordTypeId == '01231000000tb6FAAQ'),true,false)}">
+                                MANUTENÇÃO CORRETIVA
+                            </apex:outputText>
+                            <apex:outputText rendered="{!IF(OR(WorkOrder.RecordTypeId == '01231000000tb5bAAA',WorkOrder.RecordTypeId == '01231000000tb5WAAQ'),true,false)}">
+                                MANUTENÇÃO PREVENTIVA
+                            </apex:outputText>
+                            <apex:outputText rendered="{!IF(OR(WorkOrder.RecordTypeId == '01231000000tb5gAAA',WorkOrder.RecordTypeId == '01231000000tb5lAAA'),true,false)}">
+                                CALIBRAÇÃO
+                            </apex:outputText>
+                            <apex:outputText rendered="{!IF(OR(WorkOrder.RecordTypeId == '01231000000tb60AAA',WorkOrder.RecordTypeId == '01231000000tb65AAA'),true,false)}">
+                                ENSAIO DE SEGURANÇA ELÉTRICA
+                            </apex:outputText>
+                            <apex:outputText rendered="{!IF(OR(WorkOrder.RecordTypeId == '01231000000tb6tAAA',WorkOrder.RecordTypeId == '01231000000tb6yAAA'),true,false)}">
+                                QUALIFICAÇÃO
+                            </apex:outputText>
+                        </div>
+                        <div style="position:absolute; top:3; right:0; margin:0px 1px 0px 0px; border:1px solid #cacecf; background-color:white;">
+                            &nbsp;OT: {!WorkOrder.WorkOrderNumber}&nbsp;
+                        </div>
+                    </td>
+                </tr>
+                <!-- espaço -->
+                <tr><td colspan="2" style="height:15px;"></td></tr>
+            </table>
+
+
+            <!-- corpo -->
+
+            <!-- DADOS DO CLIENTE -->
+            <table cellpadding="0px" cellspacing="0px" style="width:100%; border:1px solid #cacecf ;">
+                <tr>
+                    <td class="titulo_2" colspan="2">
+                        DADOS DO CLIENTE
+                    </td>
+                </tr>
+                <tr>
+
+                    <!-- CONTA -->
+                    <td style="width:100%; vertical-align:top; padding:4px 2px 0px 4px;">
+                        <table cellpadding="0px" cellspacing="0px" class="tabela_conteudo">                            
+                            <tr><td colspan="2" class="label">Razão Social:</td>        <td class="valor">{!WorkOrder.Account.Name}</td></tr>
+                            <tr><td colspan="2" class="label">CNPJ:</td>                <td class="valor">{!WorkOrder.Account.CNPJ__c}</td></tr>
+                            <tr><td colspan="2" class="label">Endereço:</td>   <td class="valor">{!WorkOrder.Endere_o__c}</td></tr>
+                            <!-- CONTATO -->                                                      
+                            <tr><td colspan="2" class="label">Contato:</td>             <td class="valor">{!WorkOrder.Contact.Name}</td></tr>
+                            <tr><td colspan="2" class="label">Fone / Cel:</td>          <td class="valor">
+                                {!WorkOrder.Contact.Phone}
+                                <apex:outputText rendered="{!IF(WorkOrder.Contact.MobilePhone != '',true,false)}">
+                                    &nbsp;/&nbsp;{!WorkOrder.Contact.MobilePhone}
+                                </apex:outputText>
+                            </td></tr>
+                            <tr><td colspan="2" class="label">E-mail:</td>   <td class="valor">{!WorkOrder.Contact.Email}</td></tr>
+                            <tr><td colspan="2" class="label">Pertece ao::</td>   <td class="valor">{!UPPER(WorkOrder.Equipamento_Pertence_ao__c)}</td></tr>
+                       
+                        </table>
+                    </td>
+
+                    
+                </tr>
+
+                <!-- EQUIPAMENTO -->
+                <tr>
+                    <td colspan="2" style="width:50%; vertical-align:top; padding:4px 4px 4px 4px;">
+                        <table  cellpadding="0px" cellspacing="0px" class="tabela_conteudo">
+                            <tr>
+                                <td class="titulo_3" colspan="2">
+                                    EQUIPAMENTO
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:50%; vertical-align:top;">
+                                    <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                                        <tr><td class="label">Ativo:</td>               <td class="valor">{!WorkOrder.Asset.Name}</td></tr>
+                                        <tr><td class="label">Marca:</td>               <td class="valor">{!WorkOrder.Asset.Marca__c}</td></tr>
+                                        <tr><td class="label">Modelo:</td>              <td class="valor">{!WorkOrder.Asset.Modelo__c}</td></tr>
+                                    </table>
+                                </td>
+                                <td style="width:50%; vertical-align:top;">
+                                    <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                                        <tr><td class="label">Nº Série:</td>            <td class="valor">{!WorkOrder.Asset.SerialNumber}</td></tr>
+                                        <tr><td class="label">ID / Tag:</td>            <td class="valor">{!WorkOrder.Asset.ID_Tag__c}</td></tr>
+                                        <tr><td class="label">Patrimônio:</td>          <td class="valor">{!WorkOrder.Asset.patrimonio__c}</td></tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <!-- excessão:se ativo tem acessórios -->
+                            <apex:outputText rendered="{!IF(WorkOrder.Acess_rios_que_Acompanham_o_Equipamento__c != '',true,false)}">
+                            <tr>
+                                <td colspan="2">
+                                    <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                                        <tr>
+                                            <td class="label_inferior">Acessórios:</td>    <td class="valor_inferior">&nbsp;&nbsp;&nbsp;{!WorkOrder.Acess_rios_que_Acompanham_o_Equipamento__c}</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            </apex:outputText>
+
+                            <!-- excessão:se ativo tem localização -->
+                            <apex:outputText rendered="{!IF(WorkOrder.Asset.Local_do_Equipamentolocacao__r.Name != '',true,false)}">
+                            <tr>
+                                <td colspan="2">
+                                    <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                                        <tr>
+                                            <td class="label_inferior">Localização:</td>    <td class="valor_inferior">{!WorkOrder.Asset.Local_do_Equipamentolocacao__r.Name}</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            </apex:outputText>
+                        </table>
+                    </td>
+                </tr>
+
+            </table>
+            <div style="margin:0px; padding:0px; border:0px; height:10px;"></div>
+
+
+            <!-- DADOS INTERNOS -->
+            <table cellpadding="0px" cellspacing="0px" style="width:100%; border:1px solid #cacecf ;">
+                <tr>
+                    <td class="titulo_2" colspan="2">
+                        DADOS INTERNOS
+                    </td>
+                </tr>
+                <tr>
+
+                    <!-- AVULSO ... -->
+                    <apex:outputText rendered="{!IF(OR(WorkOrder.RecordTypeId == '01231000000tb5gAAA', WorkOrder.RecordTypeId == '01231000000tb60AAA',
+                                                       WorkOrder.RecordTypeId == '01231000000tb6tAAA', WorkOrder.RecordTypeId == '01231000000tb6AAAQ',
+                                                       WorkOrder.RecordTypeId == '01231000000tb5WAAQ'),true,false)}">
+                        <!-- ... CASO -->
+                        <apex:outputText rendered="{!IF(WorkOrder.Case != '',true,false)}">
+                            <td style="width:50%; vertical-align:top; padding:4px 2px 0px 4px;">
+                                <table cellpadding="0px" cellspacing="0px" class="tabela_conteudo">
+                                    <tr>
+                                        <td class="titulo_3" colspan="2">
+                                            CASO
+                                        </td>
+                                    </tr>
+                                    <tr><td class="label">Número:</td>                  <td class="valor">{!WorkOrder.Case.CaseNumber}</td></tr>
+                                    <tr><td class="label">Assunto:</td>                 <td class="valor">{!WorkOrder.Case.Subject}</td></tr>
+                                    <tr><td class="label">Data Abertura:</td>           <td class="valor"><apex:outputField value="{!WorkOrder.Case.CreatedDate}"/></td></tr>
+                                    <apex:outputText rendered="{!IF(TEXT(WorkOrder.Case.ClosedDate) != '',true,false)}">
+                                        <tr><td class="label">Data Fecham.:</td>            <td class="valor_inferior"><apex:outputField value="{!WorkOrder.Case.ClosedDate}"/></td></tr>
+                                    </apex:outputText>
+                                </table>
+                            </td>
+                        </apex:outputText>
+                    </apex:outputText>
+
+                    <!-- CONTRATO ... -->
+                    <apex:outputText rendered="{!IF(OR(WorkOrder.RecordTypeId == '01231000000tb5lAAA', WorkOrder.RecordTypeId == '01231000000tb65AAA',
+                                                       WorkOrder.RecordTypeId == '01231000000tb6yAAA', WorkOrder.RecordTypeId == '01231000000tb5bAAA',
+                                                       WorkOrder.RecordTypeId == '01231000000tb6FAAQ'),true,false)}">
+                        <td style="width:50%; vertical-align:top; padding:4px 2px 0px 4px;">
+                            <table cellpadding="0px" cellspacing="0px" class="tabela_conteudo">
+                                <tr>
+                                    <td class="titulo_3" colspan="5">
+                                        CONTRATO DE
+                                        <apex:outputText rendered="{!IF(WorkOrder.ServiceContract.RecordTypeId == '01231000001Ajg2AAC',true,false)}">
+                                            SERVIÇO
+                                        </apex:outputText>
+                                        <apex:outputText rendered="{!IF(WorkOrder.ServiceContract.RecordTypeId == '01231000001Ajg7AAC',true,false)}">
+                                            LOCAÇÃO
+                                        </apex:outputText>
+                                        <apex:outputText rendered="{!IF(AND(WorkOrder.ServiceContract.RecordTypeId != '01231000001Ajg7AAC', WorkOrder.ServiceContract.RecordTypeId != '01231000001Ajg2AAC'),true,false)}">
+                                            SERVIÇO
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                                <tr><td class="label">Número:</td>                  <td colspan="3" class="valor">{!IF(ISBLANK(WorkOrder.ServiceContract.ContractNumber),WorkOrder.Contrato_de_Servi_o_Relacionado_v2__r.N_mero_da_Proposta_Contrato__c,WorkOrder.ServiceContract.ContractNumber)}</td></tr>
+                                <tr><td class="label">Nome:</td>                    <td colspan="3" class="valor">{!IF(ISBLANK(WorkOrder.ServiceContract.Name),WorkOrder.Contrato_de_Servi_o_Relacionado_v2__r.Name,WorkOrder.ServiceContract.Name)}</td></tr>
+                                <tr>
+                                    <td class="label">Peças:</td>                   <td class="valor special">{!IF(WorkOrder.ServiceContract.Pe_as__c == true, "✔", "✖")}</td>
+                                    <td class="label">Calibração:</td>              <td class="valor special">{!IF(WorkOrder.ServiceContract.Calibra_o__c == true, "✔", "✖")}</td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Acessórios:</td>              <td class="valor special">{!IF(WorkOrder.ServiceContract.Acess_rios__c == true, "✔", "✖")}</td>
+                                    <td class="label">Qualificação:</td>            <td class="valor special">{!IF(WorkOrder.ServiceContract.Qualifica_o__c == true, "✔", "✖")}</td>
+                                </tr>
+                                <tr>
+                                    <td class="label_inferior">Mão de Obra:</td>    <td class="valor_inferior special">{!IF(WorkOrder.ServiceContract.M_o_de_Obra__c == true, "✔", "✖")}</td>
+                                    <td class="label_inferior">E.S.E.:</td>         <td class="valor_inferior special">{!IF(WorkOrder.ServiceContract.Ensaio_de_Seg_El_trica__c == true, "✔", "✖")}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </apex:outputText>
+
+                    <!-- ORDEM DE TRABALHO AVULSO-->
+                    
+                    <td style="width:100%; vertical-align:top; padding:4px 4px 0px 2px;">
+                        <table cellpadding="0px" cellspacing="0px" class="tabela_conteudo">
+                            <tr>
+                                <td class="titulo_3" colspan="4">
+                                    ORDEM DE TRABALHO
+                                </td>
+                            </tr>
+                            <tr><td class="label">Número:</td>                  <td class="valor">{!WorkOrder.WorkOrderNumber}</td><td class="label">Data Início:</td>             
+                            <td class="valor"><apex:outputField value="{!WorkOrder.Data_Agendada_para_Servi_o__c}"/></td></tr>
+                            <tr><td class="label">Assunto:</td>                 <td class="valor">{!WorkOrder.Subject}</td> 
+                            <td class="label">Técnico  Resp. </td>  <td class="valor" style="text-decoration: none !important;color:black!important"><apex:outputField value="{!WorkOrder.tecnico_executor__r.Name}"/></td>
+                            </tr>
+                            <tr><td class="label">Categoria:</td>               <td class="valor">{!WorkOrder.Categoria__c}</td> 
+                            <apex:outputText rendered="{!IF(TEXT(WorkOrder.EndDate) != '',true,false)}">
+                                <td class="label">Data Término:</td>        <td class="valor"><apex:outputField value="{!WorkOrder.EndDate}"/></td>
+                            </apex:outputText></tr>
+                            
+                            <!-- <tr><td class="label">Data Início:</td>             <td class="valor"><apex:outputField value="{!WorkOrder.Data_Agendada_para_Servi_o__c}"/></td></tr> -->
+                            
+                        </table>
+                    </td>
+                </tr>
+
+                <!-- DESCRIÇÕES -->
+                <tr>
+                    <td colspan="2" style="width:50%; vertical-align:top; padding:4px 4px 0px 4px;">
+                        <table cellpadding="0px" cellspacing="0px" class="tabela_conteudo">
+                            <tr>
+                                <td class="titulo_3" colspan="2">
+                                    DESCRIÇÕES
+                                </td>
+                            </tr>
+                            <tr><td class="label">Descrição:</td>                   <td class="valor"><apex:outputfield value="{!WorkOrder.Description}" /></td></tr>
+                            <apex:outputText rendered="{!IF(WorkOrder.Observacoes_Tecnicas__c != '',true,false)}">
+                                <tr><td class="label">OBS Técnicas:</td>            <td class="valor"><apex:outputfield value="{!WorkOrder.Observacoes_Tecnicas__c}"/></td></tr>
+                            </apex:outputText>
+                            <apex:outputText rendered="{!IF(WorkOrder.Observacoes_Tecnicas__c == '',true,false)}">
+                                <apex:outputText rendered="{!IF(AND(WorkOrder.Status != 'FECHADO_CONCLUIDO', WorkOrder.Status != 'FECHADO / NÃO AUTORIZADO'),true,false)}">
+                                    <tr><td class="label_inferior">OBS Técnicas:</td>   <td class="valor">&nbsp;</td></tr>
+                                    <tr><td class="label_inferior">&nbsp;</td>          <td class="valor">&nbsp;</td></tr>
+                                    <tr><td class="label_inferior">&nbsp;</td>          <td class="valor">&nbsp;</td></tr>
+                                    <tr><td class="label_inferior">&nbsp;</td>          <td class="valor">&nbsp;</td></tr>
+                                    <tr><td class="label_inferior">&nbsp;</td>          <td class="valor_inferior">&nbsp;</td></tr>
+                                </apex:outputText>
+                            </apex:outputText>
+                            <apex:outputText rendered="{!IF(OR(WorkOrder.RecordTypeId == '01231000000tb6AAAQ',WorkOrder.RecordTypeId == '01231000000tb6FAAQ',
+                                                               WorkOrder.RecordTypeId == '01231000000tb5WAAQ',WorkOrder.RecordTypeId == '01231000000tb5bAAA'),true,false)}">
+                                <apex:outputText rendered="{!IF(WorkOrder.N_da_Autor_do_Org_o_Metrol_gico__c != '',true,false)}">
+                                     <tr><td class="label">Local de Exec:</td>         <td class="valor">{!WorkOrder.tmp_Local_da_Execucao__c}</td></tr>
+                                </apex:outputText>
+                            </apex:outputText>
+
+                        </table>
+                    </td>
+                </tr>
+
+                <!-- SERVIÇOS -->
+                <tr>
+                    <td colspan="2" style="width:50%; vertical-align:top; padding:4px 4px 0px 4px;">
+                    <table cellpadding="0px" cellspacing="0px" class="tabela_conteudo">
+                        <tr>
+                            <td class="titulo_3" colspan="3">
+                                SERVIÇOS
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label" style="width:40%;">Serviço Realizado:</td>
+                            <td class="label" style="width:30%; text-align:center">Data e Hora Inicial:</td>
+                            <td class="label" style="width:30%; text-align:center">Data e Hora Final:</td>
+                        </tr>
+                        <apex:repeat value="{!WorkOrder.Servi_os_Executados__r}" var="SE1">
+                        <apex:variable value="{!count+1}" var="count"/>
+                        </apex:repeat>
+                        <apex:outputText rendered="{!IF(count>0,true,false)}">
+                            <apex:repeat value="{!WorkOrder.Servi_os_Executados__r}" var="SE">
+                            <tr>
+                                <td class="valor" style="width:40%">
+                                {!SE.Servi_o_Executado__c}
+                                </td>
+                                <td class="valor" style="width:30%; text-align:center">
+                                <apex:outputfield value="{!SE.Data_da_Realiza_o_do_Servi_o__c}" /> &nbsp; <apex:outputfield value="{!SE.In_cio__c}" />
+                                </td>
+                                <td class="valor" style="width:30%; text-align:center">
+                                <apex:outputfield value="{!SE.Data_da_Realiza_o_do_Servi_o__c}" /> &nbsp; <apex:outputfield value="{!SE.Fim__c}" />
+                                </td>
+                            </tr>
+
+                            </apex:repeat>
+                        </apex:outputText>
+                        <apex:outputText rendered="{!IF(count==0,true,false)}">
+                                <tr>
+                                    <td class="valor" style="width:40%">
+                                        _______________________________________________________________
+                                    </td>
+                                    
+                                    <td class="valor" style="width:30%; text-align:center">
+                                    ____/____/________&nbsp;&nbsp;___:___
+                                    </td>
+                                    
+                                    <td class="valor" style="width:30%; text-align:center">
+                                     ____/____/________&nbsp;&nbsp;___:___
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="valor" style="width:40%">
+                                        _______________________________________________________________
+                                    </td>
+                                    
+                                    <td class="valor" style="width:30%; text-align:center">
+                                    ____/____/________&nbsp;&nbsp;___:___
+                                    </td>
+                                    
+                                    <td class="valor" style="width:30%; text-align:center">
+                                     ____/____/________&nbsp;&nbsp;___:___
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="valor" style="width:40%">
+                                        _______________________________________________________________
+                                    </td>
+                                    
+                                    <td class="valor" style="width:30%; text-align:center">
+                                    ____/____/________&nbsp;&nbsp;___:___
+                                    </td>
+                                    
+                                    <td class="valor" style="width:30%; text-align:center">
+                                     ____/____/________&nbsp;&nbsp;___:___
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="valor" style="width:40%">
+                                        _______________________________________________________________
+                                    </td>
+                                    
+                                    <td class="valor" style="width:30%; text-align:center">
+                                    ____/____/________&nbsp;&nbsp;___:___
+                                    </td>
+                                    
+                                    <td class="valor" style="width:30%; text-align:center">
+                                     ____/____/________&nbsp;&nbsp;___:___
+                                    </td>
+                                </tr> 
+                                
+                              
+                            </apex:outputtext>
+                    </table>
+                    </td>
+                </tr>
+
+                <!-- DADOS INMETRO -->
+                <tr>
+                    <td colspan="2" style="width:50%; vertical-align:top; padding:4px 4px 0px 4px;">
+
+                        <!-- dados inmetro:(serv. manut. / excessões) -->
+                        <apex:outputText rendered="{!IF(OR(WorkOrder.RecordTypeId == '01231000000tb6AAAQ',WorkOrder.RecordTypeId == '01231000000tb6FAAQ',
+                                                           WorkOrder.RecordTypeId == '01231000000tb5WAAQ',WorkOrder.RecordTypeId == '01231000000tb5bAAA'),true,false)}">
+                            <apex:outputText rendered="{!IF(WorkOrder.N_da_Autor_do_Org_o_Metrol_gico__c != '',true,false)}">
+                                <table cellpadding="0px" cellspacing="0px" class="tabela_conteudo">
+                                    <tr>
+                                        <td class="titulo_3" colspan="3">
+                                            INMETRO
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                                                <tr>
+                                                    <td style="width:50%; vertical-align:top;">
+                                                        <table cellpadding="0px" cellspacing="0px" style="width:100%; vertical-align:top;">
+                                                            <tr><td class="label" style="width:100px;" >        Autor. Org. Metr.:</td>     <td class="valor">{!WorkOrder.N_da_Autor_do_Org_o_Metrol_gico__c}</td></tr>
+                                                            <tr><td class="label" style="width:100px;" >        Nº Etiq. Retirada:</td>     <td class="valor">{!WorkOrder.Numera_o_Etiqueta_Inmetro__c}</td></tr>
+                                                            <tr><td class="label" style="width:100px;">Instrum. Medição:          </td>     <td class="valor">{!WorkOrder.Instrumento_de_Medi_o__r.Name}</td></tr>
+                                                            <tr><td class="label_inferior" style="width:100px;">Instrum. Nº PAM:</td>     <td class="valor_inferior">{!WorkOrder.tmp_PAM_do_Instrumento__c}</td></tr>
+                                                        </table>
+                                                    </td>
+                                                    <td style="width:50%; vertical-align:top;">
+                                                        <table cellpadding="0px" cellspacing="0px" style="width:100%; vertical-align:top;">
+                                                            <tr><td class="label" style="width:100px;">         Nº Lacre Retirado:</td>     <td class="valor">{!WorkOrder.N_Lacre_Retirado__c}</td></tr>
+                                                            <tr><td class="label" style="width:100px;">         Nº Etiq. Colocada:</td>     <td class="valor">{!WorkOrder.N_Etiqueta_Colocada__c}</td></tr>
+                                                            <tr><td class="label_inferior" style="width:100px;">Instrum. Nº Série:</td>     <td class="valor_inferior">{!WorkOrder.Instrumento_de_Medi_o__r.SerialNumber}</td></tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                               
+                                            </table>
+                                            
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table cellpadding="0px" cellspacing="0px" class="tabela_conteudo">
+                                    <tr>
+                                        <td class="titulo_3" colspan="3">
+                                            AVALIAÇÃO DO CONTRATANTE
+                                        </td>
+                                    </tr>
+                                   
+                                    
+                                </table>
+                            </apex:outputText>
+                        </apex:outputText>
+                    </td>
+                </tr>
+
+                <!-- ITENS DE COTAÇÃO -->
+                <apex:outputText rendered="{!IF(AND(WorkOrder.Contagem_de_Itens_de_Cota_o__c > 0,WorkOrder.Contagem_de_Itens_de_Linha__c=0),true,false)}">
+                    <tr>
+                        <td colspan="2" style="width:50%; vertical-align:top; padding:4px 4px 0px 4px;">
+                            <table cellpadding="0px" cellspacing="0px" class="tabela_conteudo">
+                                <tr>
+                                    <td class="titulo_3" colspan="5">
+                                        ITENS DE COTAÇÃO
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="label">Código:</td>
+                                    <td class="label">Peça / Serviço:</td>
+                                    <td class="label">Quantidade:</td>
+                                    <td class="label">Valor Unitário:</td>
+                                    <td class="label">Valor Total:</td>
+                                </tr>
+                                <apex:repeat value="{!WorkOrder.Itens_Para_Cota_o__r}" var="Itens">
+                                    <tr>
+                                        <td class="valor">{!Itens.C_digo__c}</td>
+                                        <td class="valor">{!Itens.Nome_da_Pe_a_Componente_etc__c}</td>
+                                        <td class="valor">{!Itens.Quantidade__c}</td>
+                                        <td class="valor"><apex:outputField value="{!Itens.Valor_Sugerido__c}"/></td>
+                                        <td class="valor"><apex:outputField value="{!Itens.Valor__c}"/></td>
+                                    </tr>
+                                </apex:repeat>
+                                <tr>
+                                    <td class="label" colspan="4">Total Geral:</td>
+                                    <td class="valor"><b><apex:outputField value="{!WorkOrder.Valor_Total_Estimado__c}"/></b></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </apex:outputText>
+
+                <!-- ITENS DE LINHA-->
+                <apex:outputText rendered="{!IF(WorkOrder.Contagem_de_Itens_de_Linha__c>0,true,false)}">
+                    <tr>
+                        <td colspan="2" style="width:50%; vertical-align:top; padding:4px 4px 0px 4px;">
+                            <table cellpadding="0px" cellspacing="0px" class="tabela_conteudo">
+                                <tr>
+                                    <td class="titulo_3" colspan="7">
+                                        RELAÇÃO DE ITENS DA O.T
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="label2" style="width:*; text-align: center">Código:</td>
+                                    <td class="label2" style="width:*; text-align: center">Peça / Serviço:</td>
+                                    <td class="label2" style="width:12%; text-align: center">Valor Unit:</td>
+                                    <td class="label2" style="width:6%; text-align: center">Qtd:</td>
+                                    <td class="label2" style="width:12%; text-align: center">Subtotal:</td>
+                                    <td class="label2" style="width:7%; text-align: center">Desc:</td>
+                                    <td class="label2" style="width:12%; text-align: center">Total:</td>
+                                </tr>
+                                <tr><td class="linha" colspan="7"></td></tr>
+
+                                <apex:repeat value="{!WorkOrder.WorkOrderLineItems}" var="Itens">
+                                    <tr>
+                                        <td class="valor" style="text-align: center">{!Itens.PricebookEntry.Product2.StockKeepingUnit}</td>
+                                        <td class="valor" style="text-align: center">{!Itens.PricebookEntry.Product2.Name}</td>
+                                        <td class="valor" style="text-align: center"><apex:outputField value="{!Itens.UnitPrice}"/></td>
+                                        <td class="valor" style="text-align: center">{!Itens.Quantity}</td>
+                                        <td class="valor" style="text-align: center"><apex:outputField value="{!Itens.Subtotal}"/></td>
+                                        <td class="valor" style="text-align: center"><apex:outputField value="{!Itens.Discount}"/></td>
+                                        <td class="valor" style="text-align: center"><apex:outputField value="{!Itens.TotalPrice}"/></td>
+                                    </tr>
+                                   <!-- <apex:outputText rendered="{!IF(Itens.PricebookEntry.Product2.Description != '',true,false)}">
+                                        <tr>
+                                            <td class="label2" >Descrição:</td>
+                                            <td class="valor" colspan="6">{!Itens.PricebookEntry.Product2.Description}</td>
+                                        </tr>
+                                    </apex:outputText> -->
+                                    <tr><td class="linha" colspan="7"></td></tr>
+                                </apex:repeat>
+                                <tr>
+                                    <td class="label" colspan="6">Total Geral:</td>
+                                    <td class="valor" colspan="1"><b><apex:outputField value="{!WorkOrder.Total_Estimado__c}"/></b></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </apex:outputText>
+                <tr>
+                    <td colspan="2" style="width:100%; vertical-align:top; padding:4px 0px 0px 0px;">
+                    </td>
+                </tr>
+            </table>
+
+            <apex:variable value="Ótimo" var="otimo"/>
+            <apex:variable value="Bom" var="bom"/>
+            <apex:variable value="Regular" var="regular"/>
+            <apex:variable value="Ruim" var="ruim"/>
+
+            
+            <table cellpadding="0px" cellspacing="0px" class="tabela_conteudo">
+                <tr>
+                    <td class="titulo_3" colspan="4">
+                        AVALIAÇÃO DO CONTRATANTE
+                    </td>
+
+                </tr>
+                <tr >
+                    <td class="valor" style="text-align: center; padding:10px;">Ótimo  <apex:image styleClass="check" style="" value="https://hospcom--c.na170.content.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670497152000"/> </td>
+                    <td class="valor" style="text-align: center; padding:10px;">Bom  <apex:image styleClass="check" style="" value="https://hospcom--c.na170.content.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670497152000"/> </td>
+                    <td class="valor" style="text-align: center; padding:10px;">Regular  <apex:image styleClass="check" style="" value="https://hospcom--c.na170.content.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670497152000"/> </td>
+                    <td class="valor" style="text-align: center; padding:10px;">Ruim  <apex:image styleClass="check" style="" value="https://hospcom--c.na170.content.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670497152000"/> </td>
+                    
+                </tr>
+               
+                <tr>
+                    <td>
+                        <apex:outputText rendered="{!IF(WorkOrder.Observacoes_Tecnicas__c == '',true,false)}">
+                            <apex:outputText rendered="{!IF(AND(WorkOrder.Status != 'FECHADO_CONCLUIDO', WorkOrder.Status != 'FECHADO / NÃO AUTORIZADO'),true,false)}">
+                                <tr><td  class="label_inferior" style="margin-top:10px;">OBS Técnicas:</td>   <td colspan="3" class="valor">&nbsp;</td></tr>
+                                <tr><td  class="label_inferior">&nbsp;</td>          <td colspan="3" class="valor">&nbsp;</td></tr>
+                                <tr><td  class="label_inferior">&nbsp;</td>          <td colspan="3" class="valor_inferior">&nbsp;</td></tr>
+                            </apex:outputText>
+                        </apex:outputText>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- ASSINATURAS -->
+            <table class="rodape" cellpadding="0px" cellspacing="0px" style="width:100%;">
+                <tr>
+                    
+                    <td style="width:*;">
+                        <div  style="padding:0; margin: 0 0 -40px 0;" > 
+                            <apex:image style="padding:0; margin:0 auto;" value="{!if(WorkOrder.Vendedor_respons_vel_pela_OT__c == true, if(WorkOrder.Vendedor_da_OT__r.Contact.assinatura__c != "",WorkOrder.Vendedor_da_OT__r.Contact.assinatura__c ,"https://hospcom--c.na170.content.force.com/servlet/servlet.ImageServer?id=0156e00000Bf8Ui&oid=00Di0000000JVhH&lastMod=1667927109000") ,if(WorkOrder.tecnico_executor__r.assinatura__c != "", WorkOrder.tecnico_executor__r.assinatura__c, "https://hospcom--c.na170.content.force.com/servlet/servlet.ImageServer?id=0156e00000Bf8Ui&oid=00Di0000000JVhH&lastMod=1667927109000"))}" width="200" height="50px"/>
+                        </div>      <br/>
+                        ____________________________
+                        
+                        <br/>
+                          <br/>
+                           
+                    </td>
+                    
+                    <apex:outputText rendered="{!IF(OR(WorkOrder.RecordTypeId == '01231000000tb5gAAA',WorkOrder.RecordTypeId == '01231000000tb5lAAA',
+                                                       WorkOrder.RecordTypeId == '01231000000tb6tAAA',WorkOrder.RecordTypeId == '01231000000tb6yAAA',
+                                                       WorkOrder.RecordTypeId == '01231000000tb60AAA',WorkOrder.RecordTypeId == '01231000000tb65AAA'),true,false)}">
+                                                        
+                                                     
+                        <td  style="width:*;">
+                        
+                        
+                        ____________________________
+                        </td>
+                    </apex:outputText>
+                     
+                    <td style="width:*;">____________________________</td>
+                </tr>
+          
+                <tr>
+                    <td style="width:*;">
+                    
+                        <apex:outputText rendered="{!IF(OR(WorkOrder.RecordTypeId == '01231000000tb6AAAQ',WorkOrder.RecordTypeId == '01231000000tb6FAAQ', WorkOrder.RecordTypeId == '01231000000tb5WAAQ',WorkOrder.RecordTypeId == '01231000000tb5bAAA'),true,false)}">
+                            <!-- <apex:outputText rendered="{!IF(WorkOrder.N_da_Autor_do_Org_o_Metrol_gico__c != '',true,false)}"> -->
+                                Técnico Executor:  <br/>
+                            <!--</apex:outputText> -->
+                        </apex:outputText> 
+                        {!if(WorkOrder.Vendedor_respons_vel_pela_OT__c == true,WorkOrder.Vendedor_da_OT__r.name, WorkOrder.tecnico_executor__r.Name)}
+                        
+                        <apex:outputText rendered="{!IF(OR(WorkOrder.RecordTypeId == '01231000000tb6AAAQ',WorkOrder.RecordTypeId == '01231000000tb6FAAQ',
+                                                           WorkOrder.RecordTypeId == '01231000000tb5WAAQ',WorkOrder.RecordTypeId == '01231000000tb5bAAA'),true,false)}">
+                            <apex:outputText rendered="{!IF(WorkOrder.N_da_Autor_do_Org_o_Metrol_gico__c != '',true,false)}">
+                               <br/> RG: {!WorkOrder.RG__c}
+                            </apex:outputText>
+                        </apex:outputText>
+                    </td>
+                    <apex:outputText rendered="{!IF(OR(WorkOrder.RecordTypeId == '01231000000tb5gAAA',WorkOrder.RecordTypeId == '01231000000tb5lAAA',
+                                                       WorkOrder.RecordTypeId == '01231000000tb6tAAA',WorkOrder.RecordTypeId == '01231000000tb6yAAA',
+                                                       WorkOrder.RecordTypeId == '01231000000tb60AAA',WorkOrder.RecordTypeId == '01231000000tb65AAA'),true,false)}">
+                        <td style="width:*;">Engenheiro Responsável</td>
+                    </apex:outputText>
+                    <td style="width:*;">Cliente</td>
+                    
+                </tr>
+            </table>
+        </body>
+    </html>
+
+</apex:page>

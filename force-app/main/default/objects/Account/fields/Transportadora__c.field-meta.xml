@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Transportadora__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <inlineHelpText>Utilizado para vincular contas de transportadora da empresa</inlineHelpText>
+    <label>Transportadora</label>
+    <referenceTo>Transportadora__c</referenceTo>
+    <relationshipLabel>Contas</relationshipLabel>
+    <relationshipName>Contas</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

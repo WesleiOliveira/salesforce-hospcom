@@ -1,0 +1,12 @@
+<aura:component 
+    extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    
+
+    <aura:attribute name="mensagem" type="String"/>
+    <aura:attribute name="chaveDocumento" type="String"/>
+
+    <div>
+        <lightning:textarea label="Mensagem de lembrete" value="{!v.mensagem}" />
+       <lightning:button label="Enviar Lembrete" onclick="{!c.enviarLembrete}" /> 
+    </div>
+</aura:component>

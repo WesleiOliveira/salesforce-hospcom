@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MediaColaborador__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Lideranca__c == false,((C1__c + C2__c + C3__c + C4__c + C5__c + C6__c + C7__c + C8__c + C9__c + C10__c + C11__c + AD_3__c + SO3__c + HO3__c + RESPEITO3__c)/15) * 1.5, ((C1__c + C2__c + C3__c + C4__c + C5__c + C6__c + C7__c + C8__c + C9__c + C10__c + C11__c + C14__c + C15__c + C16__c + AD_3__c + SO3__c + HO3__c + RESPEITO3__c)/19) * 1.5)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Média Colaborador</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( TODAY() &lt;   Data_da_Pr_xima_Qualifica_o1__c   - 60 , IMAGE(&quot;https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0153100000815oV&amp;oid=00Di0000000JVhH&amp;lastMod=1476125905000&quot;, &quot;&quot; ,15, 15) , IF(AND(   Data_da_Pr_xima_Qualifica_o1__c   -60 &lt; TODAY(),TODAY() &lt;   Data_da_Pr_xima_Qualifica_o1__c  ) , IMAGE(&quot;https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0153100000815oa&amp;oid=00Di0000000JVhH&amp;lastMod=1474642985000&quot;, &quot;&quot; ,15, 15),IMAGE(&quot;https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0153100000815of&amp;oid=00Di0000000JVhH&amp;lastMod=1474642970000&quot;, &quot;&quot; ,15, 15)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

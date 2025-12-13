@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>SURGICAL</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>SURGICAL</label>
+        <sharedTo>
+            <group>Gerente_CMI_Elet</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Linha__c</field>
+            <operation>equals</operation>
+            <value>SURGICAL,CIRURGIA MINIMAMENTE INVASIVA,ELETROCIRURGIA,ENDOSCOPIA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>VET</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>VET</label>
+        <sharedTo>
+            <group>Gerente_de_Linha_Vet</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Linha__c</field>
+            <operation>equals</operation>
+            <value>VETERINÁRIA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>Compartilha_com_Edina</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Compartilha com Edina</label>
+        <sharedTo>
+            <group>Departamento_de_Compras</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

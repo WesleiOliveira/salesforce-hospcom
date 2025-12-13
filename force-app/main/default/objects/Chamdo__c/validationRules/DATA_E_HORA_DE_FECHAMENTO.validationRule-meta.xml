@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DATA_E_HORA_DE_FECHAMENTO</fullName>
+    <active>true</active>
+    <description>SE O CHAMADO FOR = A FECHADO E CONCLUÍDO OU FECHADO E NÃO CONCLUÍDO EXIGIR DATA E HORA DE FECHAMENTO</description>
+    <errorConditionFormula>ISBLANK( Data_e_Hora_de_Fechamento_do_Chamado__c ) &amp;&amp; OR(ISPICKVAL( Status_do_Chamado__c ,&quot;FINALIZADO (CONCLUÍDO)&quot;),ISPICKVAL( Status_do_Chamado__c ,&quot;FECHADO (NÃO CONCLUÍDO)&quot;))</errorConditionFormula>
+    <errorDisplayField>Data_e_Hora_de_Fechamento_do_Chamado__c</errorDisplayField>
+    <errorMessage>A DATA DE FECHAMENTO NÃO PODE ESTAR EM BRANCO SE O STATUS FOR IGUAL A FECHADO</errorMessage>
+</ValidationRule>

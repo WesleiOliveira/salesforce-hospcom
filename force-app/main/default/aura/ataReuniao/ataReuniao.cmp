@@ -1,0 +1,57 @@
+<aura:component extends="c.ApexHelper"
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+                access="global">
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="isUserInContas" type="Boolean" />
+    <aura:attribute name="isForecast" type="Boolean" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="record" type="Object" />
+    
+    <!-- Se o usuário está em Contas -->
+    <aura:if isTrue="{!v.isUserInContas}">
+        
+        
+        <lightning:recordEditForm density="comfy" objectApiName="Campaign" recordId="{!v.recordId}" onsuccess="{!c.handleSuccess}">
+            <!-- Mostra essa parte SOMENTE se isForecast for verdadeiro -->
+            <aura:if isTrue="{!v.isForecast}">
+              <br></br>
+                <p	 style="font-weight:bold;padding: 2px;text-indent:5px;">FORECAST</p> 
+                <div class="container">
+                    <div class="slds-grid slds-gutters" style="padding: 5px; width: 60%;align-items: center;">
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning:inputField fieldName="GARANTIDO__c" />
+                        </div>
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning:inputField fieldName="Risco__c" />
+                        </div>
+                        <div class="slds-col slds-size_1-of-3" >
+                            <lightning:inputField fieldName="Forecast_moeda__c"/>
+                        </div>
+                    </div> 
+                </div>
+            </aura:if>
+            <br></br>
+            <!-- Parte exibida para todos os usuários dentro de Contas -->
+            <p style="font-weight:bold;padding: 5px; text-indent:5px;">ASSUNTOS TRATADOS</p> 
+            <div class="slds-form-element" style="position:relative">
+                <div>
+                    <lightning:inputField style="text-indent:10px;" fieldName="Assuntos_tratados__c" />
+                </div>
+                <div width="100%" style="text-align:center;padding: 3px">
+                    <lightning:button class="slds-button slds-button_brand" type="submit" label="Salvar" />
+                </div>
+            </div>	
+        </lightning:recordEditForm>
+        
+    </aura:if>
+    
+    <!-- Se o usuário NÃO estiver em Contas, mostra mensagem de restrição -->
+    <aura:if isTrue="{!not(v.isUserInContas)}">
+        <div>
+            <p>Você não tem acesso às informações.</p>
+        </div>
+    </aura:if>
+    
+</aura:component>

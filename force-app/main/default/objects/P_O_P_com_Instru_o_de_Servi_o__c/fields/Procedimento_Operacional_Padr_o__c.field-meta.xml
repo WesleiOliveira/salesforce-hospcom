@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Procedimento_Operacional_Padr_o__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Procedimento Operacional Padrão</label>
+    <referenceTo>POP__c</referenceTo>
+    <relationshipLabel>P.O.P com Instrução de Serviço</relationshipLabel>
+    <relationshipName>P_O_P_com_Instru_o_de_Servi_o</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Nivel_de_Dependencia_TO__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(TEXT(Medida_de_Independencia_TO__c) = &apos;1 - Assistência total  (sujeito  +/- 0%)&apos; || TEXT(Medida_de_Independencia_TO__c) = &apos;2 - Assistência máxima (sujeito +/- 25%)&apos;, &apos;Dependência Completa&apos;, IF(TEXT(Medida_de_Independencia_TO__c) =&apos;3 - Assistência moderada (indivíduo +/- 50%)&apos; || IF(TEXT(Medida_de_Independencia_TO__c) = &apos;4 - Assistência mínima (indivíduo +/- 75%)&apos;, true, false) || IF(TEXT(Medida_de_Independencia_TO__c) = &apos;5 - Supervisão&apos;, true, false), &apos;Dependência Modificada&apos;, IF(TEXT(Medida_de_Independencia_TO__c) = &apos;6 -Independência modificada ( aparelho)&apos; || IF(TEXT(Medida_de_Independencia_TO__c) = &apos;7 - Independência completa (tempo / segurança)&apos;, true, false), &apos;Independência&apos;, null)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Nível de Dependência</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

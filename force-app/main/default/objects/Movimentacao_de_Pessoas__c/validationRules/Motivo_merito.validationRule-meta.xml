@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Motivo_merito</fullName>
+    <active>true</active>
+    <errorConditionFormula>TEXT(Motivo1__c) == &quot;Mérito (há apenas mudança de salário)&quot; &amp;&amp; Cargo__c != NULL</errorConditionFormula>
+    <errorDisplayField>Cargo__c</errorDisplayField>
+    <errorMessage>Movimentações com o motivo &apos;Mérito&apos; não devem ter alteração de cargo.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,771 @@
+<apex:page standardController="WorkOrder" extensions="proposta_listagem" renderAs="pdf" applyHtmlTag="false" showHeader="false">
+
+    <head>
+        <style type="text/css" media="print">
+            @page {
+                size:21cm 29,7cm;
+                margin:150px 50px 60px 50px;
+                @top-center {
+                    content:element(header);
+                }
+                @bottom-center {
+                    content:element(footer);
+                }
+            }
+            .pagenumber:before {
+                content:counter(page);
+            }
+            .pagecount:before {
+                content:counter(pages);
+            }
+            div.header {
+                margin:0px 0px 0px 0px;
+                padding:30px 0px 50px 0px;
+                position:running(header);
+                height:70px;
+            }
+            div.content {
+            }
+            div.footer {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(footer);
+                height:20px;
+                text-align:right;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:normal;
+            }
+        </style>
+        <style type="text/css">
+            .titulo_proposta{
+                font-family:arial, verdana, sans-serif;
+                font-size:20px;
+                font-weight:bold;
+                text-align:center;
+            }
+            .subtitulo_proposta{ /* remover */
+                font-family:arial, verdana, sans-serif;
+                font-size:16px;
+                font-weight:normal;
+                text-decoration:underline;
+                text-align:center;
+                width:100%;
+            }
+            .titulo_numeracao{
+                font-family:arial, verdana, sans-serif;
+                font-size:14px;
+                font-weight:normal;
+                width:100%;
+                padding-right:20px;
+            }
+            .destaque_label{
+                font-family:arial, verdana, sans-serif;
+                font-size:15px;
+                line-height:150%;
+            }
+            .destaque_dado{
+                font-family:arial, verdana, sans-serif;
+                font-size:17px;
+                line-height:150%;
+                font-weight:bold;
+                padding-left:20px;
+            }
+            .destaque_dado2{
+                font-family:arial, verdana, sans-serif;
+                font-size:14px;
+                line-height:150%;
+                padding-left:20px;:
+            }
+            .clausula_cabecalho{
+                font-family:arial, verdana, sans-serif;
+                font-size:14px;
+                font-weight:bold;
+                line-height:120%;
+            }
+            .clausula_texto{
+                font-family:arial, verdana, sans-serif;
+                font-size:13px;
+                text-align:justify;
+                text-justify:inter-word;
+                line-height:120%;
+                text-indent:50px;
+            }
+            .clausula_texto_declaracao{
+                font-family:arial, verdana, sans-serif;
+                font-size:13px;
+                line-height:120%;
+            }
+            .clausula_obs{
+                font-family:arial, verdana, sans-serif;
+                font-size:11px;
+                font-weight:bold;
+                text-decoration:underline;
+                font-style:italic;
+                line-height:120%;
+                text-align:right;
+            }            
+            .assinatura{
+                font-family:arial, verdana, sans-serif;
+                font-size:13px;
+                line-height:120%;
+            }
+            .notas{
+                font-family:arial, verdana, sans-serif;
+                font-size:13px;
+                font-style:italic;
+            }
+            
+            
+            .tab1 tr{
+                //-fs-table-paginate:paginate;
+                page-break-inside:avoid;
+            }
+            .tab2{
+                table-layout: fixed;
+                page-break-inside:avoid;
+                border-collapse: collapse;
+            }
+            .tab2 tr{
+                table-layout: fixed;
+            }
+            .inv{
+                padding-right: 10px;
+                padding-top: 10px;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                vertical-align:top;
+                text-align:right;
+            }
+            .nul{
+                padding: 0;
+            }
+            .cab2{
+                padding: 3px;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:bold; 
+                vertical-align:top;            
+                background-color: #e2e3e3;
+                border-right: 1px solid #cacecf;
+                border-bottom: 1px solid #cacecf;
+                border-top: 1px solid #cacecf;
+                border-left: 1px solid #cacecf
+            }
+            .cab{
+                padding: 3px;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:bold; 
+                vertical-align:top;            
+                background-color: #e2e3e3;
+                border-right: 1px solid #cacecf;
+                border-bottom: 1px solid #cacecf;
+                border-top: 1px solid #cacecf;
+                line-height:120%;
+            }
+            .cel{
+                padding: 3px;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                vertical-align:top;
+                border-top: 1px solid #eef2f4;
+                border-right: 1px solid #eef2f4;
+                border-bottom: 1px solid #eef2f4;
+                line-height:120%;
+                //word-wrap: break-word;
+                overflow: hidden;
+                text-transform: uppercase;
+            }
+            .desc{
+                <apex:outputText rendered="{!IF(WorkOrder.Formatar_Produto__c != 'ORIGINAL',true,false)}" >
+                    text-align: justify;
+                </apex:outputText>
+                <apex:outputText rendered="{!IF(WorkOrder.Formatar_Produto__c == 'ORIGINAL',true,false)}" >
+                    white-space:pre-wrap;
+                </apex:outputText>
+            }
+            .total{
+                border-left: 1px solid #eef2f4;
+            }
+            .destaque{
+                font-weight: bold;
+            }
+            .descr{
+                text-align:justify;
+                text-justify:inter-word;
+            }
+            .img{
+                padding: 3px;
+                vertical-align:middle;
+                border-top: 1px solid #eef2f4;
+                border-right: 1px solid #eef2f4;
+                border-left: 1px solid #eef2f4;
+                border-bottom: 1px solid #eef2f4;
+            }     
+            
+            
+            
+            .tabela_itens{
+                border-top:1px solid #cacecf;
+                -fs-table-paginate:paginate;
+            }.tabela_itens tr{
+                page-break-inside:avoid;
+            }
+            .item_titulo_imagem{
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:bold;
+                vertical-align:top;
+                padding:4px 4px 4px 4px;
+                background-color:#e2e3e3;
+                border-left:1px solid #cacecf;
+                border-right:1px solid #cacecf;
+                border-bottom:1px solid #cacecf;
+            }
+            .item_titulo{
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:bold;
+                vertical-align:top;
+                padding:4px 4px 4px 4px;
+                background-color:#e2e3e3;
+                border-right:1px solid #cacecf;
+                border-bottom:1px solid #cacecf;
+                line-height:120%;
+            }
+            .item_imagem{
+                vertical-align:middle;
+                border-left:1px solid #eef2f4;
+                border-right:1px solid #eef2f4;
+                border-bottom:1px solid #cacecf;
+                padding:4px 4px 4px 4px;
+            }
+            .item_texto{
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                vertical-align:top;
+                border-right:1px solid #eef2f4;
+                border-bottom:1px solid #eef2f4;
+                padding:4px 4px 4px 4px;
+                line-height:120%;
+            }
+            .item_descricao{
+                vertical-align:top;
+                border-right:1px solid #eef2f4;
+                border-bottom:1px solid #cacecf;
+                padding:4px 4px 6px 4px;
+            }
+            .item_descricao_texto{
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                text-align:justify;
+                text-justify:inter-word;
+                line-height:120%;
+            }            
+            .item_descricao_texto_esquerda{
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                line-height:120%;
+            }            
+        </style>
+    </head>
+
+    <!-- variáveis de validação -->
+    <apex:variable var="prod_qtd"           value="{!0}"/>
+    <apex:variable var="prod_sem_num"       value="{!0}"/>
+    <apex:variable var="prod_num_rep"       value="{!0}"/>
+    <apex:variable var="contador"           value="{!0}"/>
+    <apex:variable var="exibe_proposta"     value="{!1}"/>
+    
+    <!-- variáveis baseadas em faturamento -->
+    <apex:variable var="empresa_nome"       value="{!' '}"/>
+    <apex:variable var="empresa_dados"      value="{!' '}"/>
+    <apex:variable var="empresa_bancario"   value="{!' '}"/>
+    <apex:variable var="empresa_logo"       value="{!' '}"/>
+
+    <!-- Verifica Ordem de Trabalho com "Faturamento Feito" = '' -->
+    <apex:outputText rendered="{!IF(WorkOrder.Faturamento_Feito2__c == '',true,false)}" >
+        <apex:variable var="exibe_proposta" value="{!0}"/>
+        <br/><b>ERRO: CAMPO <u>FATURAMENTO FEITO:</u> NÃO PREENCHIDO.</b>
+        <br/>
+        <br/>Adicione uma empresa para realizar o faturamento.
+    </apex:outputText>
+    
+    <apex:outputText rendered="{!IF(WorkOrder.Faturamento_Feito2__c == '001i00000085QYbAAM',true,false)}" >
+        <apex:variable var="empresa_nome"       value="{!'HOSPCOM EQUIPAMENTOS HOSPITALARES - EIRELI'}"/>
+        <apex:variable var="empresa_dados"      value="{!', inscrita no CNPJ sob n° 05.743.288/0001-08, sediada na Rua 104, N° 74, Setor Sul, Goiânia - GO, CEP 74083-300'}"/>
+        <apex:variable var="empresa_bancario"   value="{!'Banco do Brasil - Agência 1242-4 - Conta Corrente 69869-5'}"/>
+        <apex:variable var="empresa_logo"       value="{!'https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=015310000099Yg1&oid=00Di0000000JVhH'}"/>
+    </apex:outputText>
+    
+    <apex:outputText rendered="{!IF(WorkOrder.Faturamento_Feito2__c == '0015A00001yGbVZQA0',true,false)}" >
+        <apex:variable var="empresa_nome"       value="{!'GDB COMÉRCIO E SERVIÇOS - EIRELI - EPP'}"/>
+        <apex:variable var="empresa_dados"      value="{!', inscrita no CNPJ sob n° 23.813.386/0001-56, sediada na Rua Antônio Viera, N° 76, Jardim Bela Vista, Campo Grande - MS, CEP 79003-071'}"/>
+        <apex:variable var="empresa_bancario"   value="{!'Banco do Brasil - Agência 1610-1 - Conta Corrente 128.057-0'}"/>
+        <apex:variable var="empresa_logo"       value="{!'https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009LNyN&oid=00Di0000000JVhH'}"/>
+    </apex:outputText>
+    
+    <apex:outputText rendered="{!IF(WorkOrder.Faturamento_Feito2__c == '0015A00001tSrPaQAK',true,false)}" >
+        <apex:variable var="empresa_nome"       value="{!'HEALTH SOLUTION COMERCIO E SERIVÇOS - EIRELE - ME'}"/>
+        <apex:variable var="empresa_dados"      value="{!', inscrita no CNPJ sob n° 27.476.124/0001-02, sediada na Rua 89, Nº 717, Qd. F45A, Lt. 81/83, Setor Sul, Goiânia - GO, CEP 74093-140'}"/>
+        <apex:variable var="empresa_bancario"   value="{!'Banco do Brasil - Agência 1242-4 - Conta Corrente 47391-X'}"/>
+        <apex:variable var="empresa_logo"       value="{!'https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009LWSQ&oid=00Di0000000JVhH&lastMod=1520964013000'}"/>
+    </apex:outputText>
+    
+    <apex:outputText rendered="{!IF(AND(WorkOrder.Faturamento_Feito2__c != '001i00000085QYbAAM',
+                                        WorkOrder.Faturamento_Feito2__c != '0015A00001yGbVZQA0',
+                                        WorkOrder.Faturamento_Feito2__c != '0015A00001tSrPaQAK'),true,false)}" >
+        <apex:variable var="empresa_nome"       value="{!'HOSPCOM EQUIPAMENTOS HOSPITALARES - EIRELI'}"/>
+        <apex:variable var="empresa_dados"      value="{!', inscrita no CNPJ sob n° 05.743.288/0001-08, sediada na Rua 104, N° 74, Setor Sul, Goiânia - GO, CEP 74083-300'}"/>
+        <apex:variable var="empresa_bancario"   value="{!'Faturamento feito por: ' + WorkOrder.Faturamento_Feito2__r.Name}"/>
+        <apex:variable var="empresa_logo"       value="{!'https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=015310000099Yg1&oid=00Di0000000JVhH'}"/>
+    </apex:outputText>
+    
+    <!-- Todos: Verifica Ordem de Trabalho sem "Itens de Linha da Ot" Adicionados -->
+    <apex:repeat value="{!WorkOrder.WorkOrderLineItems}" var="item_linha_ot">
+        <apex:variable var="prod_qtd" value="{!prod_qtd+1}"/>
+    </apex:repeat>
+    <apex:outputText rendered="{!IF(prod_qtd = 0, true, false)}" >
+        <apex:variable var="exibe_proposta" value="{!0}"/>
+        <br/><b>ERRO: EXISTEM {!prod_qtd} <u>ITEM(S) DE LINHA DE ORDEM DE TRABALHO</u> ADICIONADOS.</b>
+        <br/>
+        <br/>Para geração da Proposta, é necessário inserir Itens de Linha.
+    </apex:outputText>
+
+
+    <apex:outputText rendered="{!IF(exibe_proposta == 1,true,false)}" >
+        <html>
+            <body style="font-family:Arial; padding:0px; margin:0px; border:0px solid #eef2f4; width:*;">
+
+                <!-- cabeçalho -->
+                <div class="header">
+                    <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                        <tr>
+                            <td style="width:42%; text-align:center;">
+                                <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=015310000099Yfw&oid=00Di0000000JVhH&lastMod=1500637924000" width="274" height="70px"/>
+                            </td>
+                            <td style="width:58%; text-align:center; vertical-align:middle;">                                
+                                <img src="{!empresa_logo}" width="382" height="65px"/>
+                                
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- rodapé -->
+                <div class="footer">
+                    Página <span class="pagenumber"/> de <span class="pagecount"/>
+                </div>
+
+
+                <!-- conteúdo -->
+                <div class="content">
+
+                    <!-- página 1 -->
+                    <div style="width:100%; height:25px;"/>
+                    <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                        <tr>
+                            <td style="text-align:center;">
+                                <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=015310000099Yg6&oid=00Di0000000JVhH&lastMod=1502066027000" width="251" height="345px"/>
+                            </td>
+                            <td style="text-align:center;">
+                                <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=015310000099YgB&oid=00Di0000000JVhH&lastMod=1502890990000" width="251" height="345px"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <div style="width:100%; height:70px;"/>
+                    <div class="titulo_proposta" style="width:100%;">
+                        P&nbsp;&nbsp;R&nbsp;&nbsp;O&nbsp;&nbsp;P&nbsp;&nbsp;O&nbsp;&nbsp;S&nbsp;&nbsp;T&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        D&nbsp;&nbsp;E&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        S&nbsp;&nbsp;E&nbsp;&nbsp;R&nbsp;&nbsp;V&nbsp;&nbsp;I&nbsp;&nbsp;Ç&nbsp;&nbsp;O
+                    </div>
+                    <br/>
+                    <br/>
+                    <table cellpadding="0" cellspacing="0" class="titulo_numeracao">
+                        <tr>
+                            <td rowspan="2" style="width:100%;">&nbsp;</td>
+                            <td style="text-align: right;">Nº:&nbsp;</td>
+                            <td style="text-align: left;">{!WorkOrder.WorkOrderNumber}</td>
+                        </tr>
+                    </table>
+                    <div style="width:100%; height:40px;"/>
+                    <div class="destaque_label">À</div>
+                    <div class="destaque_dado">{!WorkOrder.Account.Name}</div>
+                    <div class="destaque_dado2">CNPJ: {!WorkOrder.Account.CNPJ__c}</div>
+                    <br/>
+                    <br/>
+                    <div class="destaque_label">Aos cuidados de</div>
+                    <div class="destaque_dado">{!WorkOrder.Contact.Name}</div>
+                    <div style="page-break-before:always" />
+
+                    <!-- página 2 em diante -->
+                    <div style="page-break-before:always" />
+
+                    <div class="clausula_cabecalho">Prezados Senhores,</div>
+                    <br/>
+                    <div class="clausula_texto">A <b>{!empresa_nome}</b>{!empresa_dados}, tem a satisfação de transmitir-lhes a seguinte proposta de fornecimento, condições de serviço:</div>
+                    <br/>
+                    <br/>
+                    <div class="clausula_cabecalho">1. Objeto da proposta:</div>
+                    <br/>
+                    <div class="clausula_texto">Constitui objeto da presente proposta o fornecimento do(s) Serviço(s) médico-hospitalar(es), descrito(s) em detalhes no Anexo C (“Produtos (s)”), que será(ão) fornecido(s) pela Hospcom, referente ao seguinte ativo: </div>
+                    <br/>
+                    <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                        <tr>
+                            <td class="item_titulo" colspan="4" style="text-align:center;">
+                                {!WorkOrder.Asset.Name}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="item_texto" style="width:25%; border-left:1px solid #eef2f4; font-size:13px;">
+                                <b>Marca</b>:
+                                <br/>{!WorkOrder.Marca__c}
+                            </td>
+                            <td class="item_texto" style="width:25%; font-size:13px;">
+                                <b>Modelo</b>:
+                                <br/>{!WorkOrder.Modelo__c}
+                            </td>
+                            <td class="item_texto" style="width:25%; font-size:13px;">
+                                <b>Número Série</b>:
+                                <br/>{!WorkOrder.Numero_de_Serie__c}
+                            </td>
+                            <td class="item_texto" style="width:25%; font-size:13px;">
+                                <b>Patrimônio</b>:
+                                <br/>{!WorkOrder.Patrimonio__c}
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <br/>
+                    <div class="clausula_cabecalho">2. Condições gerais de venda</div>
+                    <div class="clausula_cabecalho">2.1. O objeto da presente proposta é(são) a(s) venda(s) do(s) serviço(s):</div>
+                    <br/>
+                    
+                    <!-- lista de itens -->
+                    <table class="tab1" cellpadding="0px" cellspacing="0px" style="width:100%;">
+                    
+                        <apex:variable var="ultimo_reg"  value="{!''}"/>
+                        <apex:variable var="item_cont"   value="{!0}"/>
+                        
+                        <apex:repeat value="{!itens_ok_ot}" var="Itens">
+                            <apex:variable var="item_cont"   value="{!item_cont + 1}"/>
+                            
+                            <!-- item -->
+                            <tr>
+                                <td>
+                                    <table class="tab2" cellpadding="0px" cellspacing="0px" style="width:100%;">
+                                            
+                                        <apex:outputText rendered="{!IF(Itens.Item__c != 0, true, false)}">
+                                            <!-- cabeçalho -->
+                                            <apex:outputText rendered="{!IF(OR(AND(ISBLANK(Itens.Item_Pai__c),OR(ultimo_reg=='filho',ultimo_reg=='')), Itens.Description='cab'),true,false)}">
+                                                <tr>
+                                                    <td class="inv" style="width:25px;">    </td>
+                                                    <td class="cab2" style="width:55px;" colspan="2">  Imagem</td>
+                                                    <td class="cab" style="width:*;">       Produto</td>
+                                                    <td class="cab" style="width:85px;">    Modelo</td>
+                                                    <td class="cab" style="width:85px;">    Fabricante</td>
+                                                    <td class="cab" style="width:75px;">    Valor Unit.</td>
+                                                    <td class="cab" style="width:30px;">    Qtd.</td>
+                                                    <td class="cab" style="width:40px;">    Desc.</td>
+                                                    <td class="cab" style="width:75px;">    Valor Total</td>
+                                                </tr>           
+                                            </apex:outputText>
+                                            
+                                            <!-- informações -->
+                                            <tr>
+                                            
+                                                <!-- se pai/solto -->
+                                                <apex:outputText rendered="{!IF(ISBLANK(Itens.Item_Pai__c),true,false)}" >
+                                                    <apex:variable var="ultimo_reg" value="{!'pai'}"/>
+                                                    <td class="inv"  style="width:25px;" rowspan="2">
+                                                        <apex:outputText rendered="{!IF(Itens.Item__c == null,true,false)}" >
+                                                            -
+                                                        </apex:outputText>
+                                                        <apex:outputText rendered="{!IF(Itens.Item__c != null,true,false)}" >
+                                                            {!FLOOR(Itens.Item__c)}
+                                                        </apex:outputText>
+                                                    </td>
+                                                    <td class="img" style="width:55px; max-width:110px;" rowspan="2" colspan="2">
+                                                        <apex:outputText rendered="{!IF(Itens.Product2.URL_da_Imagem__c == '',true,false)}" >
+                                                            <apex:image value="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=015310000080hog&oid=00Di0000000JVhH&lastMod=1502888568000&{!item_cont}" width="110" height="110"/>
+                                                        </apex:outputText>
+                                                        <apex:outputText rendered="{!IF(Itens.Product2.URL_da_Imagem__c != '',true,false)}" >
+                                                            <apex:image value="{!Itens.Product2.URL_da_Imagem__c}&{!item_cont}" width="110" height="110"/>
+                                                        </apex:outputText>
+                                                    </td>
+                                                </apex:outputText>
+                                                
+                                                <!-- se filho -->
+                                                <apex:outputText rendered="{!IF(NOT(ISBLANK(Itens.Item_Pai__c)),true,false)}" >
+                                                    <apex:variable var="ultimo_reg" value="{!'filho'}"/>
+                                                    <td class="nul"  style="width:25px;"  rowspan="2"></td>
+                                                    <td class="inv"  style="width:42px;"  rowspan="2"></td>
+                                                    <td class="img" style="width:75px;" rowspan="2">
+                                                        <apex:outputText rendered="{!IF(Itens.Product2.URL_da_Imagem__c == '',true,false)}" >
+                                                            <apex:image value="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=015310000080hog&oid=00Di0000000JVhH&lastMod=1502888568000&{!item_cont}" width="75" height="75"/>
+                                                        </apex:outputText>
+                                                        <apex:outputText rendered="{!IF(Itens.Product2.URL_da_Imagem__c != '',true,false)}" >
+                                                            <apex:image value="{!Itens.Product2.URL_da_Imagem__c}&{!item_cont}" width="75" height="75"/>
+                                                        </apex:outputText>
+                                                        
+                                                    </td>                                
+                                                </apex:outputText>
+                                                
+                                                <td class="cel"  style="width:*;">
+                                                    <apex:outputText rendered="{!IF(Itens.Product2.StockKeepingUnit != '',true,false)}" >
+                                                        Cod: {!Itens.Product2.StockKeepingUnit} <br/>
+                                                    </apex:outputText>
+                                                    {!UPPER(Itens.Product2.Name)}
+                                                </td>
+                                                <td class="cel"  style="width:85px;">{!UPPER(Itens.Product2.Modelo__c)}</td>
+                                                <td class="cel"  style="width:85px;">{!UPPER(Itens.Product2.Marca__c)}</td>
+                                                <td class="cel"  style="width:75px;"><apex:outputField value="{!Itens.UnitPrice}"/></td>
+                                                <td class="cel"  style="width:30px;">{!Itens.Quantity}</td>
+                                                <td class="cel"  style="width:40px;"><apex:outputField value="{!Itens.Discount}"/></td>
+                                                <td class="cel"  style="width:75px;"><apex:outputField value="{!Itens.TotalPrice}"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="cel desc"  style="height:100%" colspan="7"> 
+                                                    <apex:outputText rendered="{!IF(Itens.Product2.Description != '',true,false)}" >{!Itens.Product2.Description}</apex:outputText>
+                                                </td>
+                                            </tr>
+                                        </apex:outputText> 
+                                        
+                                        <apex:outputText rendered="{!IF(AND(Itens.Item__c == 0, Itens.PricebookEntryId == null),true,false)}">
+                                            <tr>
+                                                <td class="inv" style="width:149px;"></td>
+                                                <td class="cel total destaque" style="width:*; border-right:none;">   Subtotal</td>
+                                                <td class="cel destaque" style="width:75px; border-left:none;">       <apex:outputField value="{!Itens.UnitPrice}"/></td>
+                                            </tr>           
+                                        </apex:outputText>
+                                        
+                                        <!-- linha: espaço -->
+                                        <apex:outputText rendered="{!IF(OR(AND(Itens.Item__c == 0, Itens.PricebookEntryId == null), Itens.Description='esp'),true,false)}">
+                                            <tr>
+                                                <td class="inv" style="height:5px;" colspan="2"> </td>
+                                            </tr>           
+                                        </apex:outputText>                                          
+                                        
+                                    </table>
+                                    
+                                </td>
+                            </tr>
+
+                        </apex:repeat>
+                        
+                    </table>
+                    
+                    
+                    <br/>
+                    <div class="clausula_obs">Imagens ilustrativas.</div>
+                    <br/>
+                    <table style="page-break-inside:avoid;">
+                        <tr>
+                            <td class="clausula_texto" style="font-weight:bold;text-indent:0px; width:150px;">Valor Total:</td>
+                            <td class="clausula_texto" style="text-indent:0px;"><apex:outputField value="{!WorkOrder.Total_Estimado__c}"/></td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <div class="clausula_texto">O preço acima inclui o ICMS, II, IPI, PIS e COFINS às alíquotas vigentes na data de emissão desta proposta. Qualquer tributo que seja criado ou majorado no futuro correrá por conta exclusiva da COMPRADORA.</div>
+                    <br/>
+                    <div class="clausula_texto">A menos que a COMPRADORA forneça a Hospcom o respectivo certificado de isenção, com antecedência razoável à data em que o(s) Equipamento(s) for(em) disponibilizado(s) para entrega, a Hospcom faturará a COMPRADORA com relação aos impostos relativos, e a COMPRADORA pagará os impostos de acordo com os termos da fatura.</div>
+                    <br/>
+                    <div class="clausula_cabecalho">2.2. Forma de pagamento:</div>
+                    <br/>
+                    <div class="clausula_texto">A condição de pagamento deverá ser assinalada conforme acordado.</div>
+                    <br/>
+                    <table style="page-break-inside:avoid;">
+                        <tr>
+                            <td class="clausula_texto" style="font-weight:bold;text-indent:0px; width:150px;">Forma de pagamento:</td>
+                            <td class="clausula_texto" style="text-indent:0px;">{!WorkOrder.Forma_de_pagamento__c}</td>
+                        </tr>
+                        <apex:outputText rendered="{!IF(WorkOrder.Descricao_de_Pagamento__c != '',true,false)}" >
+                            <tr>
+                                <td class="clausula_texto" style="font-weight:bold;text-indent:0px;">Detalhes:</td>
+                                <td class="clausula_texto" style="text-indent:0px;"><apex:outputField value="{!WorkOrder.Descricao_de_Pagamento__c}"/></td>
+                            </tr>
+                        </apex:outputText>
+                    </table>
+                    <br/>
+                    <div class="clausula_texto"><b>2.2.1.</b> Quando da liberação do(s) Equipamento(s) pela VENDEDORA, esta emitirá Nota Fiscal de Faturamento, nota esta que acompanhará o(s) Equipamento(s) no momento de entrega à COMPRADORA, na forma do presente. </div>
+                    <br/>
+                    <div class="clausula_texto"><b>2.2.2.</b> A forma de pagamento estabelecida acima, não poderá ser alterada sem que para isso exista uma prévia e expressa aprovação da VENDEDORA. A COMPRADORA, desde já, fica ciente e de acordo que qualquer alteração na forma de pagamento poderá ocasionar a revisão/reajuste do Preço de Compra do(s) Equipamento(s), quando o caso.</div>
+                    <br/>
+                    <div class="clausula_texto"><b>2.2.3.</b> O atraso de pagamento acarretará a aplicação de multa de 2% (dois) por cento do saldo devido, acrescida de juros de mora de 1% (um porcento) ao mês, pro rata dia, e correção monetária, calculados considerando a variação acumulada do IGPM/FGV entre a data de vencimento até o efetivo pagamento. Sujeito a protesto após 5 dias de vencimento.</div>
+                    <br/>
+                    <div class="clausula_texto"><b>2.2.4.</b> A VENDEDORA envidará seus melhores esforços para entregar o(s) Equipamento(s) dentro do prazo acordado na presente proposta.</div>
+                    <br/>
+                    <div class="clausula_cabecalho">2.3. Condições de entrega:</div>
+                    <br/>
+                    <div class="clausula_texto"><b>2.3.3.</b> É de responsabilidade exclusiva da COMPRADORA, a devida preparação de suas instalações, em especial do local onde o(s) Equipamento(s) será(ão) instalado(s), bem como assegurar a regularidade da documentação que venha a ser solicitada pela VENDEDORA.</div>
+                    <br/>
+                    <apex:outputText rendered="{!IF(OR(WorkOrder.Prazo_de_entrega__c != '', WorkOrder.Frete__c != ''),true,false)}" >
+                        <table style="page-break-inside:avoid;">
+                            <apex:outputText rendered="{!IF(WorkOrder.Prazo_de_entrega__c != '',true,false)}" >
+                            <tr>
+                                <td class="clausula_texto" style="font-weight:bold;text-indent:0px; width:150px;">Prazo de entrega:</td>
+                                <td class="clausula_texto" style="text-indent:0px;">{!WorkOrder.Prazo_de_entrega__c}</td>
+                            </tr>
+                            </apex:outputText>
+                            <apex:outputText rendered="{!IF(WorkOrder.Frete__c != '',true,false)}" >
+                                <tr>
+                                    <td class="clausula_texto" style="font-weight:bold;text-indent:0px;">Frete:</td>
+                                    <td class="clausula_texto" style="text-indent:0px;">{!WorkOrder.Frete__c}</td>
+                                </tr>
+                            </apex:outputText>
+                        </table>
+                        <br/>
+                    </apex:outputText>
+                    <table style="page-break-inside:avoid;">
+                        <tr>
+                            <td class="clausula_texto" style="font-weight:bold;text-indent:0px; width:150px;">Referência:</td>
+                            <td class="clausula_texto" style="text-indent:0px;">{!WorkOrder.Account.Name}</td>
+                        </tr>
+                        <tr>
+                            <td class="clausula_texto" style="font-weight:bold;text-indent:0px;">End. Faturamento:</td>
+                            <td class="clausula_texto" style="text-indent:0px;">
+                                <apex:outputText rendered="{!IF(WorkOrder.Account.BillingStreet != '',true,false)}" >{!WorkOrder.account.BillingStreet}</apex:outputText>
+                                <apex:outputText rendered="{!IF(WorkOrder.Account.BillingCity != '',true,false)}" > - {!WorkOrder.account.BillingCity}</apex:outputText>
+                                <apex:outputText rendered="{!IF(WorkOrder.Account.BillingState != '',true,false)}" > - {!WorkOrder.account.BillingState}</apex:outputText>
+                                <apex:outputText rendered="{!IF(WorkOrder.Account.BillingCountry != '',true,false)}" > - {!WorkOrder.account.BillingCountry}</apex:outputText>
+                                <apex:outputText rendered="{!IF(WorkOrder.Account.BillingPostalCode != '',true,false)}" > - {!WorkOrder.account.BillingPostalCode}</apex:outputText>
+                            </td>
+                        </tr>
+                        <apex:outputText rendered="{!IF(AND(WorkOrder.Account.ShippingStreet != '',WorkOrder.Account.ShippingCity != '',WorkOrder.Account.ShippingState != ''),true,false)}" >
+                            <tr>
+                                <td class="clausula_texto" style="font-weight:bold;text-indent:0px;">End. Entrega:</td>
+                                <td class="clausula_texto" style="text-indent:0px;">
+                                    <apex:outputText rendered="{!IF(WorkOrder.Account.ShippingStreet != '',true,false)}" >{!WorkOrder.account.ShippingStreet}</apex:outputText>
+                                    <apex:outputText rendered="{!IF(WorkOrder.Account.ShippingCity != '',true,false)}" > - {!WorkOrder.account.ShippingCity}</apex:outputText>
+                                    <apex:outputText rendered="{!IF(WorkOrder.Account.ShippingState != '',true,false)}" > - {!WorkOrder.account.ShippingState}</apex:outputText>
+                                    <apex:outputText rendered="{!IF(WorkOrder.Account.ShippingCountry != '',true,false)}" > - {!WorkOrder.account.ShippingCountry}</apex:outputText>
+                                    <apex:outputText rendered="{!IF(WorkOrder.Account.ShippingPostalCode != '',true,false)}" > - {!WorkOrder.account.ShippingPostalCode}</apex:outputText>
+                                </td>
+                            </tr>
+                        </apex:outputText>
+                    </table>
+                    <br/>
+                    <div class="clausula_cabecalho">3. Garantia:</div>
+                    <br/>
+                    <div class="clausula_texto">O(s) Equipamento(s) objeto desta proposta é(são) garantido(s) exclusivamente contra defeitos de fabricação pelo período de 90 (Noventa) dias para partes e peças.</div>
+                    <br/>
+                    <div class="clausula_texto">Qualquer serviço relacionado à garantia do Equipamento que se faça necessário durante o período de garantia acima informado deverá ser solicitado pela COMPRADORA para o time de serviços da HOSPCOM. Solicitações de atendimento feitas através de qualquer outro canal não serão consideradas válidas, isentando-se a HOSPCOM de responsabilidade pelo não atendimento.</div>
+                    <br/>
+                    <div class="clausula_cabecalho">4. Assistência técnica:</div>
+                    <br/>
+                    <div class="clausula_texto">Com o objetivo de garantir a disponibilidade operacional e, conseqüentemente, manter a produtividade do(s) Equipamento(s), desde já fica facultado à COMPRADORA a opção de negociar e assinar com a INSTALADORA contrato de manutenção para o(s) Equipamento(s) após o término do período de garantia dada pelo fabricante.</div>
+                    <br/>
+                    <div class="clausula_cabecalho">5. Validade da proposta:</div>
+                    <br/>
+                    <div class="clausula_texto">A validade desta proposta abaixo , devendo ser assinada e devolvida à Hospcom dentro deste mesmo prazo. Após o termino do prazo a Hospcom não garantira a manutenção dos preços estabelecidos  bem como a disponibilidade do material e do serviço na forma descrita nesse documento.</div>
+                    <br/>
+                    <table style="page-break-inside:avoid;">
+                        <tr>
+                            <td class="clausula_texto" style="font-weight:bold;text-indent:0px; width:150px;">Data de validade:</td>
+                            <td class="clausula_texto" style="text-indent:0px;"><apex:outputField value="{!WorkOrder.Data_de_validade__c}"/></td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <apex:outputText rendered="{!IF(OR(WorkOrder.Faturamento_Feito2__c == '001i00000085QYbAAM',
+                                                       WorkOrder.Faturamento_Feito2__c == '0015A00001yGbVZQA0',
+                                                       WorkOrder.Faturamento_Feito2__c == '0015A00001tSrPaQAK'),true,false)}" >
+                        <div class="clausula_cabecalho">6. Dados bancários:</div>
+                        <br/>
+                        <div class="clausula_texto">{!empresa_bancario}.</div>
+                        <br/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(AND(WorkOrder.Faturamento_Feito2__c != '001i00000085QYbAAM',
+                                                        WorkOrder.Faturamento_Feito2__c != '0015A00001yGbVZQA0',
+                                                        WorkOrder.Faturamento_Feito2__c != '0015A00001tSrPaQAK'),true,false)}" >
+                        <div class="clausula_cabecalho">6. Informações Financeiras:</div>
+                        <br/>
+                        <div class="clausula_texto">{!empresa_bancario}.</div>
+                        <br/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(WorkOrder.Declara_es__c != '',true,false)}" >
+                        <div class="clausula_cabecalho">Declarações:</div>
+                        <br/>
+                        <div class="clausula_texto_declaracao"><apex:outputField value="{!WorkOrder.Declara_es__c}"/></div>
+                        <br/>
+                    </apex:outputText>
+                    <br/>
+                    
+                    <div style="page-break-inside:avoid; width:100%;">
+                        <div class="destaque_label" style="font-size:15px;">Documento criado por:</div>
+                        <div class="destaque_dado"  style="font-size:14px;">{!$User.FirstName} {!$User.MiddleName} {!$User.LastName}</div>
+                        <apex:outputText rendered="{!IF($User.Email != '',true,false)}" >
+                            <div class="destaque_dado2" style="font-size:14px;">E-mail: {!$User.Email}</div>
+                        </apex:outputText>
+                        <apex:outputText rendered="{!IF($User.Phone != '',true,false)}" >
+                            <div class="destaque_dado2" style="font-size:14px;">Telefone: {!$User.Phone}</div>
+                        </apex:outputText>
+                        <apex:outputText rendered="{!IF($User.Title != '',true,false)}" >
+                            <div class="destaque_dado2" style="font-size:14px;">Cargo: {!$User.Title}</div>
+                        </apex:outputText>
+                        <div class="destaque_dado2" style="font-size:14px;">Data da criação:&nbsp;<apex:outputField value="{!WorkOrder.CreatedDate}"/>
+                        </div>
+                    </div>
+                    
+                    <br/>
+                    <div style="page-break-inside:avoid; width:100%;">
+                        <div class="clausula_cabecalho">Termo de aceite:</div>
+                        <br/>
+                        <div class="clausula_texto">Caso a presente conte com a aprovação de V.Sas., solicitamos a gentileza de nos devolver a segunda via desta, devidamente assinada por seu(s) representante(s) legal(is), incluindo, mas não se limitando ao Item abaixo, rubricando todas as paginas.</div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <table style="width:100%;">
+                            <tr>
+                                <td class="assinatura" style="text-indent:0px; width:50%;">____________________________________</td>
+                                <td class="assinatura" style="text-indent:0px; width:50%;">____________________________________</td>
+                            </tr>
+                            <tr>
+                                <td class="assinatura" style="text-indent:0px;">
+                                    Nome Legivel:
+                                    <br/>Cargo:
+                                    <br/>Data da Assinatura:
+                                </td>
+                                <td class="assinatura" style="text-indent:0px;">
+                                    Testemunha 1
+                                    <br/>Nome:
+                                    <br/>RG:
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="width:100%; height:30px;"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="assinatura" style="text-indent:0px; width:50%;">____________________________________</td>
+                                <td class="assinatura" style="text-indent:0px; width:50%;">____________________________________</td>
+                            </tr>
+                            <tr>
+                                <td class="assinatura" style="text-indent:0px;">
+                                    Testemunha 2
+                                    <br/>Nome:
+                                    <br/>RG:
+                                </td>
+                                <td class="assinatura" style="text-indent:0px;">
+                                    Testemunha 3
+                                    <br/>Nome:
+                                    <br/>RG:
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="clausula_cabecalho">Notas:</div>
+                    <br/>
+                    <div class="notas">1. Esta proposta foi emitida em duas vias iguais;</div>
+                    <div class="notas">2. Os signatários acima deverão rubricar todas as páginas da proposta;</div>
+                    <div class="notas">3. Todos os campos do quadro acima são de preenchimento obrigatório pela COMPRADORA, sob pena de invalidade da proposta;</div>
+                    <div class="notas">4. Não serão aceitas rasuras neste documento.</div>
+
+                    </div> <!-- FIM DE: CONTEÚDO -->
+            </body>
+        </html>
+    </apex:outputText>
+</apex:page>

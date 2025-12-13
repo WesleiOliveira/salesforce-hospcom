@@ -1,0 +1,13 @@
+<aura:component extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <aura:attribute name="recordId" type="Id"/>
+    
+    <div>
+        <div class="container">
+            <div class="block">
+                <div class="btn" onclick="{!c.copiarCargo}">COPIAR CARGO</div>
+            </div>
+            
+        </div> 
+    </div>
+    
+</aura:component>

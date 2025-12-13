@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Faturamento_feito_de_demo</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+text(Natureza_de_Opera_o__c) == &apos;DEMONSTRAÇÃO&apos;,
+Faturamento_Feito__r.CNPJ__c != &apos;05.743.288/0001-08&apos;
+)</errorConditionFormula>
+    <errorDisplayField>Faturamento_Feito__c</errorDisplayField>
+    <errorMessage>Os pedidos de demonstração devem ser faturados pela HOSPCOM.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Todos_os_eventos</fullName>
+    <columns>CAMPAIGN.NAME</columns>
+    <columns>Data_de_in_cio2__c</columns>
+    <columns>Data_de_t_rmino2__c</columns>
+    <columns>CAMPAIGN.CREATED_DATE</columns>
+    <columns>Marca__c</columns>
+    <columns>CAMPAIGN.STATUS</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CAMPAIGN.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Campaign.Externo,Campaign.Interno_Hospcom,Campaign.Interno,Campaign.Reuniao</value>
+    </filters>
+    <label>Todos os eventos externos</label>
+</ListView>

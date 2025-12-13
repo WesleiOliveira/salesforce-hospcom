@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Protocolo_finalizado</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+TEXT(Protocolo__r.Status__c) = &apos;Finalizado&apos;,
+ISNEW()
+)</errorConditionFormula>
+    <errorMessage>Não é possível adicionar objetos em um protocolo já finalizado.</errorMessage>
+</ValidationRule>

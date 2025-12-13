@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bloquea_registro</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT(ISNEW()),
+    OR(
+        ISCHANGED(Carteira_Ativa__c),
+        ISCHANGED(Colaborador__c),
+        ISCHANGED(CurrencyIsoCode),
+        ISCHANGED(Name)
+        
+
+    )
+)</errorConditionFormula>
+    <errorMessage>Operação invalida</errorMessage>
+</ValidationRule>

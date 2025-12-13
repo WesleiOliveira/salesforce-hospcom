@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Campo_retorno</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+!ISNEW(),
+ISCHANGED(Observacoes__c),
+$User.Id != Owner:User.Id 
+)</errorConditionFormula>
+    <errorDisplayField>Retorno__c</errorDisplayField>
+    <errorMessage>Por favor utilize o campo Retorno para atualizar o registro.</errorMessage>
+</ValidationRule>

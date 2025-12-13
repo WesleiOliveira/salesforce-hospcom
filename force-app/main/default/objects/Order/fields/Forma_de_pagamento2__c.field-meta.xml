@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Forma_de_pagamento2__c</fullName>
+    <externalId>false</externalId>
+    <label>Forma de pagamento</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Natureza_de_Opera_o__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>Formas_de_pagamento</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>RETORNO DE LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>DEMONSTRAÇÃO</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>EMPRÉSTIMO</controllingFieldValue>
+            <controllingFieldValue>REMESSA EM CONSIGNAÇÃO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>Sem Mov. Financeiro</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RETORNO DE LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>DEMONSTRAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>EMPRÉSTIMO</controllingFieldValue>
+            <controllingFieldValue>REMESSA EM CONSIGNAÇÃO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>Cartao Credito / Debito</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>EMPRÉSTIMO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>Cob. Boleto - Banco do Brasil - Ag: 1610-1 Cc: 128057-0 - GDB</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>EMPRÉSTIMO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>Cob. Boleto - Banco do Brasil - Ag: 1242-4 Cc: 47391-X - Health</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>EMPRÉSTIMO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>Cob. Boleto - Banco do Brasil - Ag: 1242-4 Cc: 48068-1 - ABC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>EMPRÉSTIMO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>Cob. Boleto - Banco do Brasil - Ag: 1242-4 Cc: 69869-5 - Hospcom</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>EMPRÉSTIMO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>Cob. Boleto - Banco Sicoob - Ag: 5004-0 Cc: 107431-8 - Hospcom</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>R- Banco Caixa Econômica Federal Ag.2512 C/C 4001-4 - Hospcom</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>EMPRÉSTIMO</controllingFieldValue>
+            <controllingFieldValue>REMESSA EM CONSIGNAÇÃO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>Boleto Bancário</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>EMPRÉSTIMO</controllingFieldValue>
+            <controllingFieldValue>REMESSA EM CONSIGNAÇÃO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>Transferência Bancária</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>EMPRÉSTIMO</controllingFieldValue>
+            <controllingFieldValue>REMESSA EM CONSIGNAÇÃO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>Pix</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>EMPRÉSTIMO</controllingFieldValue>
+            <controllingFieldValue>REMESSA EM CONSIGNAÇÃO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>Dinheiro</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>EMPRÉSTIMO</controllingFieldValue>
+            <controllingFieldValue>REMESSA EM CONSIGNAÇÃO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>E-commerce</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>EMPRÉSTIMO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>Cruzamento de Saldos (Permuta) Recebido</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>DEMONSTRAÇÃO</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>EMPRÉSTIMO</controllingFieldValue>
+            <controllingFieldValue>REMESSA EM CONSIGNAÇÃO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>Boleto Banco Santander Contas a Receber - GDB</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>DEMONSTRAÇÃO</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>EMPRÉSTIMO</controllingFieldValue>
+            <controllingFieldValue>REMESSA EM CONSIGNAÇÃO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>Boleto Banco Itaú CC 98357-1 Contas  a Receber - HOSPCOM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>DEMONSTRAÇÃO</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>EMPRÉSTIMO</controllingFieldValue>
+            <controllingFieldValue>REMESSA EM CONSIGNAÇÃO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>Boleto Banco Itaú Contas  a Receber - GDB</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>DEMONSTRAÇÃO</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>EMPRÉSTIMO</controllingFieldValue>
+            <controllingFieldValue>REMESSA EM CONSIGNAÇÃO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>Boleto Banco Safra CC 585288-2 Contas  a Receber - HOSPCOM</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

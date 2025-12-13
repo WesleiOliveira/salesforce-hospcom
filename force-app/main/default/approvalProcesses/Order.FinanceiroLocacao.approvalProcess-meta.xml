@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <submitter>Sistema_todos</submitter>
+        <type>group</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>OrderNumber</field>
+        <field>Account</field>
+        <field>TotalAmount</field>
+        <field>EffectiveDate</field>
+        <field>Prazo_de_entrega__c</field>
+        <field>Faturamento_Feito__c</field>
+        <field>Forma_de_pagamento2__c</field>
+        <field>Condicao_de_pagamento__c</field>
+        <field>Frete__c</field>
+        <field>Opportunity</field>
+        <field>Ordem_de_trabalho__c</field>
+        <field>Owner</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>administrativo@hospcom.net</name>
+                <type>user</type>
+            </approver>
+            <approver>
+                <name>gabriel@hospcom.net</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Account.Inadimplente__c</field>
+                <operation>equals</operation>
+                <value>Verdadeiro</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Diretoria</label>
+        <name>Diretoria</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>agatha.gomes@gestcombpo.com.br</name>
+                <type>user</type>
+            </approver>
+            <approver>
+                <name>financeiro3@hospcom.net</name>
+                <type>user</type>
+            </approver>
+            <approver>
+                <name>gerencia.financeiro@gestcombpo.com.br</name>
+                <type>user</type>
+            </approver>
+            <approver>
+                <name>lorrayne.rodrigues@hospcom.net</name>
+                <type>user</type>
+            </approver>
+            <approver>
+                <name>vivian.sales@hospcom.net</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <label>Financeiro - Locação</label>
+        <name>FinanceiroLocacao</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <emailTemplate>unfiled$public/Aprova_o_de_pedido</emailTemplate>
+    <enableMobileDeviceAccess>true</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>AND(
+OR(
+Contrato_de_Servi_o__r.Fase__c != &apos;null&apos;,
+Contrato_de_Servi_o__r.Data_de_T_rmino_do_Contrato_2__c &lt; EffectiveDate),
+OR(
+TEXT(Status) = &apos;Rascunho&apos;,
+TEXT(Status) = &apos;Aguardando Aprovação Financeira&apos;,
+TEXT(Status) = &apos;Reprovado&apos;,
+TEXT(Status) = &apos;Pendente&apos;
+),
+TEXT(Natureza_de_Opera_o__c) = &apos;LOCAÇÃO&apos;
+)</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>A_o_interna_verdadeiro</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Aprovado2</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Pedido_aprovado</name>
+            <type>Alert</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>A_o_interna_verdadeiro</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Pedido_reprovado</name>
+            <type>Alert</type>
+        </action>
+        <action>
+            <name>Status_Reprovado</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>A_o_interna_verdadeiro</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Ag_Apr_Financ</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Financeiro - Locação</label>
+    <processOrder>3</processOrder>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

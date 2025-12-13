@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ObjectSourceTargetMap xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <creationType>Custom</creationType>
+    <fieldSourceTargetMaps>
+        <creationType>System</creationType>
+        <filterApplied>false</filterApplied>
+        <isSourceFormula>true</isSourceFormula>
+        <sourceField xsi:nil="true"/>
+        <sourceFormula>&apos;SAPHana_SAP_PRINCIPAL&apos;</sourceFormula>
+        <targetField>IRO_PRODUCT_FAMILY_SAP_PRINCIPAL__dll.DataSource__c</targetField>
+    </fieldSourceTargetMaps>
+    <fieldSourceTargetMaps>
+        <creationType>Custom</creationType>
+        <filterApplied>false</filterApplied>
+        <isSourceFormula>false</isSourceFormula>
+        <sourceField>IRO_PRODUCT_FAMILY_SAP_PRINCIPAL.Code__c</sourceField>
+        <sourceFormula>Code</sourceFormula>
+        <targetField>IRO_PRODUCT_FAMILY_SAP_PRINCIPAL__dll.Code__c</targetField>
+    </fieldSourceTargetMaps>
+    <fieldSourceTargetMaps>
+        <creationType>System</creationType>
+        <filterApplied>false</filterApplied>
+        <isSourceFormula>true</isSourceFormula>
+        <sourceField xsi:nil="true"/>
+        <sourceFormula>&apos;SAPHana_SAP_PRINCIPAL_@IRO_PRODUCT_FAMILY&apos;</sourceFormula>
+        <targetField>IRO_PRODUCT_FAMILY_SAP_PRINCIPAL__dll.DataSourceObject__c</targetField>
+    </fieldSourceTargetMaps>
+    <fieldSourceTargetMaps>
+        <creationType>System</creationType>
+        <filterApplied>false</filterApplied>
+        <isSourceFormula>true</isSourceFormula>
+        <sourceField xsi:nil="true"/>
+        <targetField>IRO_PRODUCT_FAMILY_SAP_PRINCIPAL__dll.InternalOrganization__c</targetField>
+    </fieldSourceTargetMaps>
+    <masterLabel>IRO_PRODUCT_FAMILY_SAP_PRINCIPAL_map_IRO_PRODUCT_FAMILY_SAP_PRINCIPAL_1760463904674</masterLabel>
+    <sourceObjectName>IRO_PRODUCT_FAMILY_SAP_PRINCIPAL</sourceObjectName>
+    <targetObjectName>IRO_PRODUCT_FAMILY_SAP_PRINCIPAL__dll</targetObjectName>
+</ObjectSourceTargetMap>

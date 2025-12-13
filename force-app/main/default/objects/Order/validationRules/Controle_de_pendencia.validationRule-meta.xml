@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Controle_de_pendencia</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+$User.Id != &apos;0055A00000AptWM&apos;,
+$User.Id != &apos;0056e00000CrEXi&apos;,
+$User.Id != &apos;005U4000007OHV7&apos;,
+$User.Id != &apos;005U400000GDhHF&apos;,
+$User.Id != &apos;005U400000BCtaHIAT&apos;,
+$User.Id != &apos;005U400000BCtaH&apos;,
+OR(
+ISCHANGED(Nota_de_envio_assinada__c),
+ISCHANGED(Nota_de_retorno_assinada__c),
+ISCHANGED(Checklist_assinado__c),
+ISCHANGED(Registro_da_demo_assinado__c),
+ISCHANGED(Lista_de_participantes_preenchida__c)
+)
+)</errorConditionFormula>
+    <errorMessage>Somente o responsável pelo controle de pendência pode marcar os campos de controle Nota de envio assinada, Nota de retorno assinada, Checklist assinado, Registro da demo assinado e Lista de participantes preenchida.</errorMessage>
+</ValidationRule>

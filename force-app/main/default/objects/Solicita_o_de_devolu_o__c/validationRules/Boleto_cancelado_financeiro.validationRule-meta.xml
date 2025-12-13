@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Boleto_cancelado_financeiro</fullName>
+    <active>true</active>
+    <description>Gestor Financeiro = 00G6e000005qcQAEAY
+Comunidade financeiro = 00e5A000001yRA5QAM</description>
+    <errorConditionFormula>AND(
+    ISCHANGED(Boleto_cancelado__c),
+    NOT(
+        $Profile.Id = &quot;00G6e000005qcQAEAY&quot; || 
+        $Profile.Id = &quot;00e5A000001yRA5QAM&quot;
+    )
+)</errorConditionFormula>
+    <errorDisplayField>Boleto_cancelado__c</errorDisplayField>
+    <errorMessage>Somente usuários do financeiro podem alterar este campo.</errorMessage>
+</ValidationRule>

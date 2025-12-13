@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>testeDeSegurancaEletrica</fullName>
+    <active>true</active>
+    <label>TSE - TESTE DE SEGURANÇA ELÉTRICA</label>
+    <picklistValues>
+        <picklist>Corrente_de_fulga_da_parte_aplicad__c</picklist>
+        <values>
+            <fullName>NÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Corrente_de_fulga_do_equipamento_Ap__c</picklist>
+        <values>
+            <fullName>NÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Equipamento_est_desempenhando_sua_fu__c</picklist>
+        <values>
+            <fullName>NÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Field1__c</picklist>
+        <values>
+            <fullName>NÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Local_de_execucao__c</picklist>
+        <values>
+            <fullName>Cliente</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hospcom</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Os_acionamentos_luminosos_do_equipame__c</picklist>
+        <values>
+            <fullName>NÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Resist_ncia_de_aterramento_Aprovado__c</picklist>
+        <values>
+            <fullName>NÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Resist_ncia_de_isola_o_Aprovado__c</picklist>
+        <values>
+            <fullName>NÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tela_sens_vel_ao_toque_e_ou_bot_es_de__c</picklist>
+        <values>
+            <fullName>NÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>X1_Classe_de_Prote_o_de_Isolamento__c</picklist>
+        <values>
+            <fullName>CLASSE I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CLASSE II</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>X2_Tipo_da_Parte_Aplicada__c</picklist>
+        <values>
+            <fullName>Não possui</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tipo B</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tipo BF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tipo CF</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>X3_Conex_o_com_a_Rede_El_trica__c</picklist>
+        <values>
+            <fullName>DPS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NPS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PIE</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>X5_Inspe_o_Visual_do_Equipamento__c</picklist>
+        <values>
+            <fullName>NÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>X6_Resist_ncia_de_Aterramento_del__c</picklist>
+        <values>
+            <fullName>EQUIPAMENTO NÃO DESCONECTÁVEL DA REDE FIGURA 2 -  %E2%89%A4 500 mΩ</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>X6_Resistencia_de_Aterramento__c</picklist>
+        <values>
+            <fullName>EQUIPAMENTO DESCONECTÁVEL DA REDE MENOR IGUAL A 300 mOhm</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EQUIPAMENTO NÃO DESCONECTÁVEL DA REDE MENOR IGUAL A 500mOhm</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>X7_Resist_ncia_de_Isolamento__c</picklist>
+        <values>
+            <fullName>1-NBR IEC 62353 - FIGURA 3%2E1 %28CLASSE I%29 2 %28MΩ%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2-NBR IEC 62353 - FIGURA 3%2E2 %28CLASSE I%2FCLASSE II%29 %E2%89%A5 7 %28MΩ%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3-NBR IEC 62353 - FIGURA 4 - TIPO B %28CLASSE I%29 %E2%89%A5 2 %28MΩ%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4-NBR IEC 62353 - FIGURA 4 - TIPO B %28CLASSE II%29 %E2%89%A5 7 %28MΩ%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5-NBR IEC 62353 - FIGURA 4 - TIPO F %28CLASSE I%2FCLASSE II%29 %E2%89%A5 70 %28MΩ%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>6-NBR IEC 62353 - FIGURA 5 - TIPO F %28CLASSE I%2FCLASSE II%29  %E2%89%A5 70 %28MΩ%29</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>X8_Corrente_de_Fuga_do_Equipamento__c</picklist>
+        <values>
+            <fullName>1- MÉTODO DIRETO OU DIFERENCIAL FIG%2E7%2F8-CLASSE I%28B%2FBF%2FCF%29 %E2%89%A4 500%28µA%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2- MÉTODO DIRETO OU DIFERENCIAL FIG%2E 7%2F8-CLASSE II%28B%2FBF%2FCF%29 %E2%89%A4 100%28µA%29</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>X9_Corrente_de_Fuga_da_Parte_Aplicada__c</picklist>
+        <values>
+            <fullName>MÉTODO DIRETO FIGURA 10%2F11CLASSE I%2FCLASSE II %28TIPO BF%29 MENOR IGUAL A 5000 uA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MÉTODO DIRETO FIGURA 10%2F11CLASSE I%2FCLASSE II %28TIPO CF%29 MENOR IGUAL A 50 uA</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Forecast_Item__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+  Opportunity.Propriedade_da_conta__c == &apos;PRIVADO&apos; || Opportunity.Propriedade_da_conta__c == &apos;&apos;,
+  IF(TEXT(Opportunity.StageName) = &apos;COMITED&apos;, TotalPrice,
+  IF(TEXT(Opportunity.StageName) = &apos;WIN&apos;, 0,
+  IF(TEXT(Opportunity.StageName) = &apos;UPSIDE HIGH&apos;,
+     IF(Opportunity.Probability &gt; 90, TotalPrice, 0),
+  0))),  /* UPSIDE, OPEN e demais estágios = 0 */
+
+IF(Opportunity.Propriedade_da_conta__c == &apos;PUBLICO&apos; || Opportunity.Propriedade_da_conta__c == &apos;FILANTROPIA&apos;,
+IF(TEXT(Opportunity.StageName) = &apos;WIN&apos;, 0, 
+IF(TEXT(Opportunity.StageName) = &apos;COMITED&apos; &amp;&amp; TEXT(Opportunity.Sub_Fase__c) != &apos;GARANTIDO&apos;, TotalPrice * 0.4,
+IF(TEXT(Opportunity.StageName) = &apos;COMITED&apos; &amp;&amp; TEXT(Opportunity.Sub_Fase__c) = &apos;GARANTIDO&apos;, TotalPrice, 
+IF(TEXT(Opportunity.StageName) = &apos;UPSIDE HIGH&apos;, TotalPrice * 0.2, 
+IF(TEXT(Opportunity.StageName) = &apos;UPSIDE&apos;, TotalPrice * 0.1, 
+IF(TEXT(Opportunity.StageName) = &apos;OPEN&apos;, TotalPrice * 0, TotalPrice * 0)))))), null)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Forecast Item</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <type>Currency</type>
+</CustomField>

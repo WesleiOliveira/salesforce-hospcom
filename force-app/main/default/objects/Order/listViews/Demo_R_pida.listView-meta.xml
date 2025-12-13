@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Demo_R_pida</fullName>
+    <columns>ORDERS.ORDER_NUMBER</columns>
+    <columns>SALES.ACCOUNT.NAME</columns>
+    <columns>Vendedor__c</columns>
+    <columns>Situacao2__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Tipo_de_Registro__c</field>
+        <operation>contains</operation>
+        <value>Rápida</value>
+    </filters>
+    <label>Demo Rápida</label>
+</ListView>

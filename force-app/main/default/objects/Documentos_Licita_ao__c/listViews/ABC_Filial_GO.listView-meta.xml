@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ABC_Filial_GO</fullName>
+    <columns>NAME</columns>
+    <columns>Empresa2__c</columns>
+    <columns>Data_e_Hora_de_Emiss_o__c</columns>
+    <columns>Data_e_Hora_de_Vencimento__c</columns>
+    <columns>prazo_restante__c</columns>
+    <columns>Download__c</columns>
+    <columns>status__c</columns>
+    <columns>Emissao__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Empresa2__c</field>
+        <operation>equals</operation>
+        <value>ABC - FILIAL GO</value>
+    </filters>
+    <label>Empresa ABC Filial GO</label>
+</ListView>

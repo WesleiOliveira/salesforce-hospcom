@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>coordn</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>coordn</label>
+        <sharedTo>
+            <group>Supervisor_Comercial</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>gerente_nacional</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>gerente nacional</label>
+        <sharedTo>
+            <group>Gerente_Nacional</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>todos</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>todos</label>
+        <sharedTo>
+            <group>Financeiro_Geral</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>vet</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>vet</label>
+        <sharedTo>
+            <group>Gerente_de_Linha_Vet</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Vet_equipe</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

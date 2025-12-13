@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Data_Original_Entrega_PC__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    DAY(Fornecedor__r.Prazo_de_recebimento__c ) &lt; 10, 
+    &apos;0&apos; &amp; TEXT(DAY(Fornecedor__r.Prazo_de_recebimento__c )), 
+    TEXT(DAY(Fornecedor__r.Prazo_de_recebimento__c ))
+) 
++ &quot;/&quot; +
+IF(
+    MONTH(Fornecedor__r.Prazo_de_recebimento__c ) &lt; 10, 
+    &apos;0&apos; &amp; TEXT(MONTH(Fornecedor__r.Prazo_de_recebimento__c )), 
+    TEXT(MONTH(Fornecedor__r.Prazo_de_recebimento__c ))
+) 
++ &quot;/&quot; + 
+TEXT(YEAR(Fornecedor__r.Prazo_de_recebimento__c))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Data Original Entrega PC</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

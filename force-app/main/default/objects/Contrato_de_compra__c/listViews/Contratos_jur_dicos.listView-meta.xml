@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contratos_jur_dicos</fullName>
+    <columns>NAME</columns>
+    <columns>Contratado_a__c</columns>
+    <columns>Nome_do_contrato__c</columns>
+    <columns>Inicio_do_contrato__c</columns>
+    <columns>Status__c</columns>
+    <columns>Tipo_de_contrato__c</columns>
+    <columns>StatusAssinatura__c</columns>
+    <columns>Nesta_fase_desde__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Cancelado</value>
+    </filters>
+    <filters>
+        <field>Tipo_de_contrato__c</field>
+        <operation>equals</operation>
+        <value>Prestação de Serviços,Locação de Imóvel,Patrocínio,Representação Comercial</value>
+    </filters>
+    <label>Contratos jurídicos</label>
+</ListView>

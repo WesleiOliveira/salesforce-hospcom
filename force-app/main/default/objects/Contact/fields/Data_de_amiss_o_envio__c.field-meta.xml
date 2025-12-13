@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Data_de_amiss_o_envio__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    NOT(ISBLANK(dataPrimeiraAdmissao__c)),
+    dataPrimeiraAdmissao__c,
+    Admissao__c
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Data de amissão envio</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Date</type>
+</CustomField>

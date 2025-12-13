@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Vendedor_vazio</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+	!$User.Ignorar_erros__c,
+	Vendedor__c == null
+)</errorConditionFormula>
+    <errorDisplayField>Vendedor__c</errorDisplayField>
+    <errorMessage>O vendedor deve ser preenchido.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Intercorrencia__c</fullName>
+    <externalId>false</externalId>
+    <label>Intercorrência</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Grau__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Chegar atrasado no centro cirúrgico</fullName>
+                <default>false</default>
+                <label>Chegar atrasado no centro cirúrgico</label>
+            </value>
+            <value>
+                <fullName>Falha na conduta do hospital e em campo, forma de tratar os profissionais das unidades hospitalares</fullName>
+                <default>false</default>
+                <label>Falha na conduta do hospital e em campo, forma de tratar os profissionais das unidades hospitalares</label>
+            </value>
+            <value>
+                <fullName>Cumprimentos de normativas internas de cada unidade hospitalar</fullName>
+                <default>false</default>
+                <label>Cumprimentos de normativas internas de cada unidade hospitalar</label>
+            </value>
+            <value>
+                <fullName>Ser omisso ao progresso</fullName>
+                <default>false</default>
+                <label>Ser omisso ao progresso</label>
+            </value>
+            <value>
+                <fullName>Não participar dos processos de montagem de sala cirúrgica</fullName>
+                <default>false</default>
+                <label>Não participar dos processos de montagem de sala cirúrgica</label>
+            </value>
+            <value>
+                <fullName>Não seguir os procedimentos de controle de contaminação da cirurgia (assepsia)</fullName>
+                <default>false</default>
+                <label>Não seguir os procedimentos de controle de contaminação da cirurgia (assepsia)</label>
+            </value>
+            <value>
+                <fullName>Não se comprometer em dominar a técnica cirúrgica</fullName>
+                <default>false</default>
+                <label>Não se comprometer em dominar a técnica cirúrgica</label>
+            </value>
+            <value>
+                <fullName>Não cuidar dos implantes, instrumentais e demais ferramentas de trabalho</fullName>
+                <default>false</default>
+                <label>Não cuidar dos implantes, instrumentais e demais ferramentas de trabalho</label>
+            </value>
+            <value>
+                <fullName>Ser proibido de entrar nas unidades hospitalares</fullName>
+                <default>false</default>
+                <label>Ser proibido de entrar nas unidades hospitalares</label>
+            </value>
+            <value>
+                <fullName>Contaminar a cirurgia</fullName>
+                <default>false</default>
+                <label>Contaminar a cirurgia</label>
+            </value>
+            <value>
+                <fullName>Cirurgia ser cancelada por causa do instrumentador</fullName>
+                <default>false</default>
+                <label>Cirurgia ser cancelada por causa do instrumentador</label>
+            </value>
+            <value>
+                <fullName>Enviar o instrumental sujo para a empresa</fullName>
+                <default>false</default>
+                <label>Enviar o instrumental sujo para a empresa</label>
+            </value>
+            <value>
+                <fullName>Enviar kit instrumental com itens faltando para a empresa</fullName>
+                <default>false</default>
+                <label>Enviar kit instrumental com itens faltando para a empresa</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>1</controllingFieldValue>
+            <valueName>Chegar atrasado no centro cirúrgico</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1</controllingFieldValue>
+            <valueName>Falha na conduta do hospital e em campo, forma de tratar os profissionais das unidades hospitalares</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1</controllingFieldValue>
+            <valueName>Cumprimentos de normativas internas de cada unidade hospitalar</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>1</controllingFieldValue>
+            <valueName>Ser omisso ao progresso</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>2</controllingFieldValue>
+            <valueName>Não participar dos processos de montagem de sala cirúrgica</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>2</controllingFieldValue>
+            <valueName>Não seguir os procedimentos de controle de contaminação da cirurgia (assepsia)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>2</controllingFieldValue>
+            <valueName>Não se comprometer em dominar a técnica cirúrgica</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>2</controllingFieldValue>
+            <valueName>Não cuidar dos implantes, instrumentais e demais ferramentas de trabalho</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>3</controllingFieldValue>
+            <valueName>Ser proibido de entrar nas unidades hospitalares</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>3</controllingFieldValue>
+            <valueName>Contaminar a cirurgia</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>3</controllingFieldValue>
+            <valueName>Cirurgia ser cancelada por causa do instrumentador</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>3</controllingFieldValue>
+            <valueName>Enviar o instrumental sujo para a empresa</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>3</controllingFieldValue>
+            <valueName>Enviar kit instrumental com itens faltando para a empresa</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

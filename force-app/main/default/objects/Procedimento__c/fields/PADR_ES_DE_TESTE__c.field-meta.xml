@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PADR_ES_DE_TESTE__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>PADRÕES DE TESTE</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Asset.Categoria_Patrimonial__c</field>
+            <operation>equals</operation>
+            <value>INSTRUMENTOS DE MEDIÇÃO E ENSAIO</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Asset</referenceTo>
+    <relationshipLabel>Procedimentos</relationshipLabel>
+    <relationshipName>Procedimentos</relationshipName>
+    <required>false</required>
+    <securityClassification>Public</securityClassification>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

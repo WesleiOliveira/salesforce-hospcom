@@ -1,0 +1,226 @@
+<apex:page standardController="Order" extensions="NovoPDFdoPedido" renderAs="pdf" applyHtmlTag="false" showHeader="false">
+<head>
+<style type="text/css" media="print">
+    @page {
+        size:A4;
+        margin:150px 50px 120px 50px;
+        background: url({!$Resource.TimbradoHospcom});
+
+        @top-center {
+            content:element(header);
+        }
+        @bottom-center {
+            content:element(footer);
+        }
+    }
+    .pagenumber:before {
+        content:counter(page);
+    }
+    .pagecount:before {
+        content:counter(pages);
+    }
+    div.header {
+        margin:0px 0px 0px 0px;
+        padding:20px 0px 20px 0px;
+        position:running(header);
+        height:60px;
+    }
+    div.content {
+    }
+    div.footer {
+        margin:0px 0px 0px 0px;
+        padding:20px 0px 20px 0px;
+        position:running(footer);
+        height:20px;
+        text-align:right;
+        font-family:arial, verdana, sans-serif;
+        font-size:10px;
+        font-weight:normal;
+    }
+</style>
+<style type="text/css">
+    .titulo{
+        width:100%;
+        font-family:arial, verdana, sans-serif;
+        font-size:15px;
+        font-weight:bold; 
+        text-align:center;
+        margin-bottom:15px;
+    }
+    .tabela_geral tr{
+        //-fs-table-paginate:paginate;
+        //page-break-inside:avoid;
+    }
+    .tabela_item{
+        table-layout: fixed;
+        //page-break-inside:avoid;
+        border-collapse: collapse;
+    }
+    .tabela_item tr{
+        table-layout: fixed;
+    }
+    .incolor{
+        //padding-right: 10px;
+        padding-top: 4px;
+        font-family:arial, verdana, sans-serif;
+        font-size:10px;
+        vertical-align:top;
+        text-align:right;
+    }
+    .invisivel{
+        padding: 0;
+        font-family:arial, verdana, sans-serif;
+        font-size:10px;
+    }
+    .cabecalho{
+        padding: 3px;
+        font-family:arial, verdana, sans-serif;
+        font-size:13px;
+        font-weight:bold; 
+        vertical-align:top;
+        //background-color: #c3c3c3;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;
+        border-left: 1px solid black;
+        text-align:center;
+
+    }
+    .cabecalho2{
+        padding: 3px;
+        font-family:arial, verdana, sans-serif;
+        font-size:11.5px;
+        font-weight:bold; 
+        vertical-align:middle;
+        //background-color: #c3c3c3;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;
+        border-left: 1px solid black;
+        text-align:center;
+
+    }
+    .cab_esq{
+        border-left: 1px solid #c3c3c3
+    }
+    .celula{
+        padding: 3px;
+        font-family:arial, verdana, sans-serif;
+        font-size:13.5px;
+        vertical-align:middle;
+        border-top: 1px solid black;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+        border-left: 1px solid black;
+        line-height:120%;
+        //word-wrap: break-word;
+        overflow: hidden;
+        text-transform: uppercase;
+        text-align:center;
+    }
+    .cel_esq{
+        border-left: 1px solid #c3c3c3;
+    }
+    .descricao{
+        text-align: justify;
+        //white-space:pre-wrap;
+    }
+    .total{
+        border-left: 1px solid #c3c3c3;
+    }
+    .destaque{
+        font-weight: bold;
+    }
+    .clausula_texto{
+        font-family:arial, verdana, sans-serif;
+        font-size:11.5px;
+        text-align:center;
+        text-justify:inter-word;
+        vertical-align:top;
+    }
+    .maiuscula{
+        text-transform: uppercase;
+    }
+    .zebra{
+        background-color: #f3f3f3;
+    }
+</style>
+</head>
+
+
+
+<html>
+<body style="font-family:Arial; padding:0px; margin:0px; border:0px solid #eef2f4; width:*;">
+
+    <!-- rodapé -->
+    <div class="footer">
+        Página <span class="pagenumber"/> de <span class="pagecount"/>
+    </div>
+
+<br/>
+    <!-- conteúdo -->
+    <div class="content">
+        
+        <div class="titulo"> LVE - Lista de Verificação de Envio </div>
+        
+        <br/>        
+            <table class="tabela_item" cellpadding="0px" cellspacing="0px" style="width:100%;">
+                <tr>
+                    <td class="cabecalho2" style="width:100px"><b> PV: {!Order.OrderNumber}</b> </td>
+                    <td class="cabecalho2" colspan="2"> <b>CLIENTE: {!Order.Account.Name}</b></td>
+                </tr>
+                <tr>
+                    <td class="cabecalho2"> NF:&nbsp;<apex:repeat var="nf" value="{!Order.Faturamentos__r}">{!nf.Name}<br/></apex:repeat></td>
+                    <td class="cabecalho2"> <b>CIDADE:</b> {!Order.BillingCity}</td>
+                    <td class="cabecalho2"> <b>ESTADO:</b> {!Order.BillingState}</td>
+                </tr>
+            </table>
+            <br/>
+            
+            <div class="clausula_texto"><b>Favor conferir todo o pedido no momento do recebimento</b></div>
+            
+            <br/>
+                <!-- item -->
+                        <table class="tabela_item" cellpadding="0px" cellspacing="0px" style="width:100%;">
+                            
+                                
+                                <!-- linha: cabeçalho -->
+                                    <tr>
+                                        <td class="cabecalho" style="width:100px">Código</td>
+                                        <td class="cabecalho" style="width:400px">Relação de itens que compõem o pedido</td>
+                                        <td class="cabecalho" >Quantidade</td>
+                                        <td class="cabecalho" >Check</td>
+                                    </tr>
+                                            
+                                    <apex:repeat value="{!itens_por_codigo}" var="item">
+                                    <apex:outputText rendered="{!IF(item.Status__c = 'Aguardando conferência', true, false)}">  
+                                    <tr>
+                                        <td class="celula"  >{!UPPER(item.Product2.ProductCode)}</td>
+                                        <td class="celula"  style="width:*;">{!UPPER(item.Product2.Name)}</td>
+                                        <td class="celula"  >{!ROUND(item.Quantity, 0)}</td>
+                                        <td class="celula" >[&nbsp;&nbsp;&nbsp;&nbsp;]</td>
+                                        
+                                    </tr>
+                                    </apex:outputText>
+                                    </apex:repeat>  
+                            
+                            
+                        </table>
+                        
+        <br/>
+        <br/>
+        <br/>
+                <div class="titulo"> 
+                _______________________________________<br/>
+                Assinatura do Conferente
+                
+                
+                 </div>
+                 
+                 
+
+        
+    </div> <!-- fim de: conteúdo -->
+</body>
+</html>
+</apex:page>

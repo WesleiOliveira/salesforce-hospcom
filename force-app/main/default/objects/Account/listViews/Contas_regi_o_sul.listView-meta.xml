@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contas_regi_o_sul</fullName>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>CNPJ__c</columns>
+    <columns>Endere_o__c</columns>
+    <columns>ACCOUNT.ADDRESS1_STATE_CODE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ACCOUNT.ADDRESS1_STATE_CODE</field>
+        <operation>equals</operation>
+        <value>PR,RS,SC</value>
+    </filters>
+    <filters>
+        <field>ACCOUNT.TYPE</field>
+        <operation>equals</operation>
+        <value>CLIENTE FINAL</value>
+    </filters>
+    <label>Contas Região Sul</label>
+</ListView>

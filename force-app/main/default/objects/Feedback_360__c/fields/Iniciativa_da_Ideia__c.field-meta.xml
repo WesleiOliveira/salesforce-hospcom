@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Iniciativa_da_Ideia__c</fullName>
+    <description>Co-Operar:  o colaborador poderá sugerir mudanças e se estas ideias foram boas e com baixo custo de implementação, o colaborador será premiado por isso.</description>
+    <externalId>false</externalId>
+    <label>Iniciativa da Ideia</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Estrutura Física</fullName>
+                <default>false</default>
+                <label>Estrutura Física</label>
+            </value>
+            <value>
+                <fullName>Gestão</fullName>
+                <default>false</default>
+                <label>Gestão</label>
+            </value>
+            <value>
+                <fullName>Processos</fullName>
+                <default>false</default>
+                <label>Processos</label>
+            </value>
+            <value>
+                <fullName>Sistemas</fullName>
+                <default>false</default>
+                <label>Sistemas</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

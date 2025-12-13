@@ -1,0 +1,22 @@
+<apex:page standardController="PSQ__c">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    
+    <button onclick="gerarPDF()">Baixar PDF</button>
+
+    <script>
+        function gerarPDF() {
+            // Substitua 'SuaPaginaVisualforce' e 'IdDoRegistro' pelos valores reais
+            var nomePagina = 'PDF_PSQ_ABC_GO';
+            var idRegistro = 'a0h6e00000KCEugAAH  '
+            // Construa a URL da sua Visualforce Page com os parâmetros necessários
+            var url = '/apex/' + nomePagina + '?id=' + idRegistro;
+
+            // Use jsPDF para criar o PDF
+            var pdf = new jsPDF();
+            pdf.text('Seu conteúdo PDF aqui', 10, 10);
+
+            // Inicie o download do PDF
+            pdf.save('documento.pdf');
+        }
+    </script>
+</apex:page>

@@ -1,0 +1,951 @@
+<template>
+
+
+  <!-- pop-up evento selecionado -->
+  <template if:true={eventoSelecionado}>
+    <div class="overlay">
+      <div class="popup-evento-selecionado">
+
+        <div class="evento-info">
+
+          <div class="evento-meta">
+            <h1 class="title">{eventoSelecionado.Cliente__r_Name}</h1>
+            <div class="tipo-evento">
+              <lightning-formatted-rich-text style="margin-right: 7px;"
+                value={eventoSelecionado.Fontawesome__c}></lightning-formatted-rich-text>
+              <h2>{eventoSelecionado.Tipo__c}</h2>
+            </div>
+            <div class="help">{eventoSelecionado.DataHora}</div>
+          </div>
+
+          <div class={cobradorFotoClass}>
+            <img src={eventoSelecionado.CreatedBy_SmallPhotoUrl} alt="Foto do responsavel pelo evento"
+              class="cobrador-foto">
+            <div class="cobrador-nome">{eventoSelecionado.CreatedBy_Name}</div>
+          </div>
+        </div>
+
+        <h1 style="color: #747474;">Títulos:</h1>
+        <template if:true={eventoSelecionado.Notas}>
+          <div class="container-notas-selecionadas">
+            <template for:each={eventoSelecionado.Notas} for:item="nota" for:index="index">
+              <a key={nota.Id} href={nota.url} target="_blank" class="notas-seleconadas">
+                {nota.ContasAreceberNome}
+              </a>
+            </template>
+          </div>
+        </template>
+        <template if:false={eventoSelecionado.Notas}>
+          <h3>Nehum título encontro</h3>
+        </template>
+
+
+        <div class="body" style="padding: 0.5rem;margin-bottom: 2rem;margin-top: 1rem;">
+          <label>Descrição:</label>
+          <div class="description-box">{eventoSelecionado.Descricao_evento__c}</div>
+        </div>
+
+        <div class="footer">
+          <button class="btn-fechar" onclick={fecharEventoSelecionado}>
+            Fechar
+          </button>
+        </div>
+      </div>
+    </div>
+  </template>
+
+
+  <!-- Popup para ligar -->
+  <template if:true={popupLigar}>
+
+    <div class="overlay" onclick={fecharPopupLigar}></div>
+
+    <div class="modal-container2">
+
+      <!-- Botão X para fechar -->
+      <button class="close-button" style="z-index:1002" onclick={fecharPopupLigar}>
+        <lightning-icon icon-name="utility:close" size="small"></lightning-icon>
+      </button>
+
+      <!-- Conteúdo do modal -->
+      <div class="modal-content">
+        <!-- Título -->
+        <h1 class="modal-title">Entrar em contato</h1>
+
+        <!-- Nome do Cliente -->
+        <p class="cliente-nome">{conta.Name}</p>
+
+        <template if:false={ligando}>
+          <!-- Select de Número -->
+          <div class="contactCard">
+            <template if:true={verificaContaPhone}>
+              <div class={getPhoneClass} onclick={handleNumeroClick} data-phone={conta.Phone}>
+                <div class="card-header">
+                  <h3 class="card-title">Principal</h3>
+                </div>
+                <h1 class="azul">{conta.Phone}</h1>
+              </div>
+            </template>
+
+            <template if:true={verificaContaTelefoneUltimoContato}>
+              <div class={getLastContatctPhoneClass} onclick={handleNumeroClick}
+                data-phone={conta.Telefone_do_ultimo_contato__c}>
+                <div class="card-header">
+                  <h3 class="card-title">Último contato</h3>
+                </div>
+                <h1 class="azul" style="margin-bottom: 3px;">{conta.Telefone_do_ultimo_contato__c}</h1>
+                <footer style="text-align: center;">
+                  <h2>{conta.ultimo_contato_nome}</h2>
+                </footer>
+              </div>
+            </template>
+          </div>
+
+          <!-- Botões / Caixa de Texto -->
+          <template if:true={numeroSelecionado}>
+
+            <div class="btn-container">
+              <!-- Caixa de texto + enviar + cancelar (abrirInput = true) -->
+              <template if:true={abrirInput}>
+                <div class="barraDeEnvio">
+                  <input type="text" value={mensageToSend} oninput={handleInputChange} onblur={handleBlur}
+                    onkeydown={handleKeyDownEnter} />
+                  <button class="ligar-button enviar" onclick={confirmarEnvio}>➤</button>
+                  <button class="fecharInput" onclick={cancelarEnvio}>X</button>
+                </div>
+              </template>
+
+              <!-- Botão de Ligar -->
+              <template if:false={abrirInput}>
+                <div class="btn-ligar-group" id="btn-ligar">
+                  <button class="ligar-button" onclick={realizarLigacao}>
+                    <lightning-icon icon-name="utility:call" size="medium" variant="inverse"></lightning-icon>
+                  </button>
+                  <span style="color:#60666b">Ligar</span>
+                </div>
+              </template>
+
+              <!-- Botão WhatsApp -->
+              <template if:false={abrirInput}>
+                <div class="btn-ligar-group">
+                  <button class="ligar-button wppLogo" onclick={abrirCaixa}>
+                    <i class="fa fa-whatsapp" aria-hidden="true"></i>
+                  </button>
+                  <span style="color:#60666b">Conversar</span>
+                </div>
+              </template>
+
+            </div>
+          </template>
+
+        </template>
+
+        <template if:true={ligando}>
+          <iframe allow="microphone; camera" frameborder="0" style="border:none;width:100%;height: 460px;"
+            src={iframeUrl}>
+          </iframe>
+
+
+        </template>
+      </div>
+    </div>
+  </template>
+
+
+
+  <!-- pop-up calcular -->
+  <template if:true={popUpCalcular}>
+    <div class="overlay" onclick={todo}></div>
+    <div class={popupClass}>
+
+      <div class={contentContainer}>
+        <div class={resumoDeCobranca}>
+          <div class="headertitle">
+            <h1>COBRANÇA</h1>
+          </div>
+          <div class="linha">
+            <span class="label">Cliente:</span> {conta.Name}
+          </div>
+          <div class="linha">
+            <span class="label">Títulos selecionados:</span>{resumoCalculado.quantidade}
+          </div>
+          <div class="linha">
+            <span>Valor principal:</span>
+            <span class="label">{resumoCalculado.valorBaseLabel}</span>
+          </div>
+          <div class="linha">
+            <span>Juros(2,5% a.m.):</span>
+            <span class="label">{resumoCalculado.jurosLabel}</span>
+          </div>
+          <div class="linha">
+            <span>Multa (2%):</span>
+            <span class="label">{resumoCalculado.multaLabel}</span>
+          </div>
+          <div class="linha">
+            <span>Valor em aberto:</span>
+            <span class="label">{resumoCalculado.valorPagoLabel}</span>
+          </div>
+          <div class="linha total">
+            <span>Valor em aberto:</span>
+            <span class="label total">{resumoCalculado.totalAPagarLabel}</span>
+          </div>
+          <div class="registro">
+            <div class="valores">
+              <div class="lable titulo">Títulos</div>
+              <div class="tab-content">
+                <div class="eventos-table" style="max-height:140px">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Título</th>
+                        <th>Vencimento</th>
+                        <th>Parcela</th>
+                        <th>Valor em aberto</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <template for:each={contasSelecionadas} for:item="item">
+                        <tr key={item.Id}>
+                          <td class="item-value" data-id={item.Id}>{item.Name}</td>
+                          <td>{item.Vencimento__c}</td>
+                          <td>{item.Parcela__c}</td>
+                          <td>{item.Valor_a_pagar__cLabel}</td>
+                        </tr>
+                      </template>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="lable titulo">Pedidos</div>
+            <div class="tab-content">
+              <div class="eventos-table" style="max-height:140px">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Número do Pedido</th>
+                      <th>Data</th>
+                      <th>Valor Total</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <template for:each={pedidosContasReceber} for:item="item">
+                      <tr key={item.Id}>
+                        <td class="item-value click" onclick={orderUrl} data-id={item.Id}>
+                          {item.OrderNumber}
+                        </td>
+                        <td>{item.EffectiveDate}</td>
+                        <td>{item.TotalAmount}</td>
+                        <td>{item.Status}</td>
+                      </tr>
+                    </template>
+                    <template if:true={pedidosIsLoading}>
+                      <tr>
+                        <td colspan="4"> <i class="fa fa-circle-o-notch fa-spin spinner-icon small"
+                            aria-hidden="true"></i>
+                        </td>
+                      </tr>
+                    </template>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class={negociacaoContainer} style="transition:0.5;flex-direction: column;justify-content: space-evenly;">
+          <div class="headertitle">
+            <h1>CÁLCULO</h1>
+          </div>
+          <!-- Cabeçalho -->
+          <div class="header" style="margin-bottom: 0px;gap:0px;justify-content: space-around;">
+            <lightning-input type="date" label="Data do Cálculo" value={negociacao.dataCalculo} min={today}
+              onchange={handleDateChange} required>
+            </lightning-input>
+
+            <lightning-radio-group label="Pagamento" options={opcoesPagamento} value={negociacao.pagamento}
+              type="button" onchange={handlePagamentoChange}>
+            </lightning-radio-group>
+          </div>
+
+          <div class="negociacaoContainerBody" style="transition:0.5;">
+            <!-- Parcelamento -->
+            <div class={parcelamento}>
+              <div class="container-title">Parcelamento</div>
+              <div class="parcelamentoContent">
+                <!-- Coluna esquerda -->
+
+                <!-- Valor de Entrada em BRL -->
+                <div class="input-row">
+                  <label for="valorEntrada">Valor Entrada:</label>
+                  <input id="valorEntrada" type="text" value={valorEntradaFormatado} oninput={handleValorEntrada}
+                    onblur={handleValorEntradaBlur} />
+                  <div class="help">Valor minímo: {valorMinimoEntrada}</div>
+                </div>
+
+                <lightning-combobox class="parcelas-combo" label="Parcelas" value={negociacao.parcelas}
+                  options={opcoesParcelas} onchange={handleParcelas}>
+                </lightning-combobox>
+                <div class="help">Max: 12x</div>
+
+                <!-- Sidebar de descontos -->
+              </div>
+            </div>
+            <div class="descontos">
+              <div class="container-title">Descontos</div>
+
+              <div class="input-container">
+                <div class="input-row" style="display: flex;flex-direction: column;">
+                  <label for="multa">Multa:</label>
+                  <div class="togoup">
+                    <div class="minus-sign">—</div>
+                    <input id="multa" type="text" value={multaFormatado} oninput={handleMultaDesconto} />
+                    <span>%</span>
+                  </div>
+                  <div class="help">Máx: {valoMaximoDescontoMulta}%</div>
+                </div>
+                <div class="input-row" style="display: flex;flex-direction: column;">
+                  <label for="juros">Juros:</label>
+                  <div class="togoup">
+                    <div class="minus-sign">—</div>
+                    <input id="juros" type="text" value={jurosFormatado} oninput={handleJurosDesconto} />
+                    <span>%</span>
+                  </div>
+                  <div class="help">Máx: {valoMaximoDescontoJuros}%</div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="negociacaoContainerFooter" style="transition:0.5;">
+            <!-- Calcular -->
+            <button class={buttonClass} onclick={processarCalculo} disabled={calculando}>
+              <template if:true={calculando}>
+                <div class="loading-spinner"></div>
+              </template>
+              <span class="btn-text">{buttonLabel}</span>
+            </button>
+          </div>
+        </div>
+        <div class={resumoDaNegociacao}>
+          <div class="headertitle">
+            <h1>ACORDO</h1>
+          </div>
+          <div class="linha">
+            <span class="label">Entrada:</span> {getPropostaValorEntradaLabel}
+          </div>
+          <div class="linha">
+            <span class="label">Multa:</span> {proposta.multaLabel}
+          </div>
+          <div class="linha">
+            <span class="label">Juros:</span> {proposta.jurosLabel}
+          </div>
+          <div class="linha">
+            <span>Valores descontados:</span>
+            <span class="label">{proposta.totalDescontadoLabel}</span>
+          </div>
+          <div class="linha total">
+            <span>Valor à pagar:</span>
+            <span class="label total">{proposta.valorAPagarLabel}</span>
+          </div>
+          <div class="registro" style="height: 410px;">
+            <div class="valores">
+              <template if:true={proposta.parcelas}>
+                <div class="lable titulo">Parcelas</div>
+                <div class="eventos-table" style="max-height: 344px;overflow:auto">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Nº</th>
+                        <th>Data Vencimento</th>
+                        <th>Valor</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <template for:each={proposta.parcelas} for:item="parcela">
+                        <tr key={parcela.numero}>
+                          <td class="item-value" data-id={parcela.numero}>
+                            {parcela.numero}
+                          </td>
+                          <td>
+                            {parcela.dataVencimentoLabel}
+                            <template if:true={parcela.reajustada}>
+                              <lightning-icon icon-name="utility:info" size="x-small" alternative-text="Data ajustada"
+                                title="Data ajustada para o próximo dia útil" class="slds-m-left_xx-small">
+                              </lightning-icon>
+                            </template>
+                          </td>
+                          <td>{parcela.valorLabel}</td>
+                        </tr>
+                      </template>
+
+                    </tbody>
+                  </table>
+                </div>
+              </template>
+            </div>
+          </div>
+          <template if:true={proposta.valorAPagar}>
+            <div class="action-group">
+              <!-- Botão principal -->
+              <button class="btn-action" onclick={handleMainAction}>
+                {mainAction.label}
+              </button>
+
+              <!-- Setinha só aparece se houver mais ações -->
+              <template if:true={hasMoreActions}>
+                <button class="btn-action-toggle" onclick={toggleDropdown}>▼</button>
+                <ul if:true={dropdownOpen} class="dropdown-menu">
+                  <template for:each={otherActions} for:item="action">
+                    <li key={action.label}>
+                      <button onclick={action.handler}>{action.label}</button>
+                    </li>
+                  </template>
+                </ul>
+              </template>
+            </div>
+          </template>
+        </div>
+
+      </div>
+      <div class="footer">
+        <button onclick={fecharCalcularPopUp}>Fechar</button>
+        <template if:false={secaoNegociar}>
+          <button class="contratos-calcular-btn-523" onclick={negociarbtn}>Negociar</button>
+        </template>
+      </div>
+    </div>
+
+  </template>
+
+  <!-- Popup Modal de Eventos -->
+  <template if:true={popUpEvento}>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-eventos" aria-modal="true" class="overlay">
+      <div class="modal-container">
+
+        <!-- Header -->
+        <header class="modal-header">
+
+          <h1 id="modal-heading-eventos" class="modal-title">Novo Evento</h1>
+          <template if:true={conta}>
+            <p class="cliente-nome">
+              {conta.Name}
+            </p>
+          </template>
+          <template if:true={contasSelecionadas}>
+            <h1 style="color: #747474;">Títulos:</h1>
+            <div class="container-notas-selecionadas">
+              <template for:each={contasSelecionadas} for:item="c">
+                <a href={c.url} target="_blank" key={c.Id} class="notas-seleconadas">{c.Name} </a>
+              </template>
+            </div>
+          </template>
+
+
+        </header>
+
+        <!-- Body -->
+        <div class="modal-body">
+          <!-- Tipo de Evento -->
+          <div class="form-group">
+            <div class="form-control-wrapper">
+
+              <lightning-combobox label="Tipo do Evento" name="tipoEvento" value={novoEvento.tipoSelecionado}
+                placeholder="Selecione o tipo de evento" options={tipoOptions} onchange={handleTipoChange}
+                class="custom-combobox">
+              </lightning-combobox>
+
+            </div>
+          </div>
+
+          <template if:true={novoEvento.tipoSelecionado}>
+            <div class="descricao-container">
+              <textarea id="descricao" class="input-descricao" rows="15" placeholder="Descrição detalhes do evento"
+                oninput={handleDescricaoChange}></textarea>
+            </div>
+          </template>
+          <!-- Mensagem quando nenhum tipo está selecionado -->
+          <template if:false={novoEvento.tipoSelecionado}>
+            <div class="info-message">
+              <lightning-icon icon-name="utility:info" size="large" class="info-icon"></lightning-icon>
+              <p class="info-text">
+                Selecione um tipo de evento para visualizar os campos específicos
+              </p>
+            </div>
+          </template>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="modal-footer">
+          <lightning-button variant="neutral" label="Cancelar" class="btn-secondary" onclick={fecharEventoPopUp}>
+          </lightning-button>
+
+          <template if:true={desabilitarSalvar}>
+            <button class="contratos-calcular-btn-523" onclick={salvarEvento}>Salvar</button>
+          </template>
+        </footer>
+
+
+      </div>
+    </section>
+
+  </template>
+
+  <!--  <template if:true={registroDeSincronizcao}> -->
+  <!-- <div class="log-container"> -->
+  <!-- <i class="fa fa-cloud-download" title={registroDeSincronizcao.title}></i> -->
+  <!-- <template if:true={registroDeSincronizcao.jaPodeSincronizar}> -->
+  <!-- <i id="log-load-spinner" class={refreshIconClass} title={atualizandoLogsString} onclick={atualizarLogs}></i> -->
+  <!--  -->
+  <!--  </template> -->
+
+  <!-- <template if:false={registroDeSincronizcao.jaPodeSincronizar}> -->
+  <!-- <i style="cursor:not-allowed" class="fa fa-refresh" title="Aguarde um momento..."></i> -->
+  <!-- </template> -->
+  <!--  </div> -->
+  <!--  </template> -->
+
+
+  <div class="wrapper">
+    <div class="combobox-container">
+      <div class="selectContainer">
+        <label>Fila de cobrança</label>
+        <select class="topSelect" name="Fila de cobrança" onchange={handleFilaChange}>
+          <template for:each={filas} for:item="fila">
+            <option key={fila.value} value={fila.value}>{fila.label}</option>
+          </template>
+        </select>
+      </div>
+
+      <div class="selectContainer">
+        <label>Régua de cobrança</label>
+        <select class="topSelect" name="Régua de cobrança" onchange={handleReguaChange}>
+          <template for:each={reguas} for:item="regua">
+            <option key={regua.value} value={regua.value}>{regua.label}</option>
+          </template>
+        </select>
+      </div>
+    </div>
+
+
+    <template if:true={isLoading}>
+      <div class="overlay" style="z-index:100000;">
+        <i class="fa fa-circle-o-notch fa-spin spinner-icon" aria-hidden="true"></i>
+      </div>
+    </template>
+
+    <div class={conteudoFlex}>
+      <template if:true={contasCarregadas}>
+
+
+        <div class={contaContainerClass}>
+          <div class="search-container">
+            <div class="log-container">
+              <i id="log-load-spinner" class={refreshIconClass} title={atualizandoLogsString}
+                onclick={atualizarLogs}></i>
+            </div>
+            <div class="openSearch" onclick={openSearchBar}><i class="fa fa-search"></i></div>
+            <!-- Barra de busca -->
+            <div class="search-bar">
+              <input id="searchBar" value={nomeDaContaASerBuscada} type="text" onkeydown={buscarContaPeloNome}
+                placeholder="Busque pela Razão Social, CNPJ ou CPF..." />
+              <div class="close-button" style="position: static;" onclick={closeSearchBar}>X</div>
+            </div>
+          </div>
+
+          <template if:true={contas}>
+            <template for:each={contas} for:item="item">
+              <div key={item.id} class={contaCardClass} onclick={handleCardClick} data-id={item.id}>
+                <div class="conta-left">
+                  <div class={getContaNameSize}> <template if:true={item.KeyAccount}><i class="fa fa-key key-animate"
+                        aria-hidden="true"></i></template> {item.nome}
+
+                  </div>
+                  <div style="color:#a5a5a5">{item.identificador}</div>
+                </div>
+                <div class="conta-right">
+                  <div class="valor">{item.valorFormatado}</div>
+                  <template if:false={mostrarDetalhes}>
+                    <div style="color:#a5a5a5">{item.telefone} <i class="fa fa-phone icon" aria-hidden="true"></i>
+                    </div>
+                    <div style="color:#a5a5a5">{item.email} <i class="fa fa-envelope icon" aria-hidden="true"></i>
+                    </div>
+                  </template>
+                </div>
+                <div class="conta-right">
+
+                  <template if:false={mostrarDetalhes}>
+
+                  </template>
+                </div>
+
+              </div>
+            </template>
+          </template>
+          <template if:true={loadingContas}>
+            <div class="gradient-ring"></div>
+          </template>
+          <template if:true={nenhumaContaEncontrada}>
+            <div class={contaCardClass}>Ops! Não achei nenhum cliente com esses filtros🤔</div>
+          </template>
+          <template if:false={loadingContas}>
+            <template if:true={hasMore}>
+              <div class="mostrar-mais">
+                <div onclick={mostrarMais} class="btn-showMore">Mostrar mais</div>
+              </div>
+            </template>
+          </template>
+
+          <template if:true={error}>
+            <p class="error">Erro ao carregar dados: {error}</p>
+          </template>
+        </div>
+      </template>
+
+      <!-- Container  lateral -->
+
+      <div class={detalhesPane}>
+        <!-- <button class="fechar" onclick={fecharDetalhes}>×</button> -->
+
+        <!-- Card com iInformações do cliente -->
+        <div class="tabs-container">
+          <div class="tab-nav">
+            <button class={clienteTabClass} data-tab="cliente" onclick={handleTabClick}>
+              Cliente
+            </button>
+            <button class={contatoTabClass} data-tab="contato" onclick={handleTabClick}>
+              Contato
+            </button>
+            <button class={pedidosTabClass} data-tab="pedidos" onclick={handleTabClick}>
+              Pedidos
+            </button>
+          </div>
+
+          <template if:true={conta}>
+
+            <div class="tab-content">
+              <template if:true={showContato}>
+                <div class="content-section">
+                  <div class="item-row">
+                    <div class="item-label"><i class="fa fa-phone iconTab" aria-hidden="true"></i></div>
+                    <div class="item-value">{conta.Phone}</div>
+                  </div>
+                  <div class="item-row">
+                    <div class="item-label"><i class="fa fa-envelope iconTab" aria-hidden="true"></i></div>
+                    <div class="item-value">{conta.Email_cliente__c}</div>
+                  </div>
+                </div>
+
+                <div class="sectionTitle">ÚLTIMO CONTATO</div>
+
+                <div class="content-section">
+                  <div class="item-row">
+                    <div class="item-label"><i class="fa fa-user iconTab " aria-hidden="true"></i></div>
+                    <a href={contactUrl} target="_blank" class="item-value click">{conta.ultimo_contato_nome}</a>
+                  </div>
+                  <div class="item-row">
+                    <div class="item-label"><i class="fa fa-phone iconTab" aria-hidden="true"></i></div>
+                    <div class="item-value">{conta.Telefone_do_ultimo_contato__c}</div>
+                  </div>
+                  <div class="item-row">
+                    <div class="item-label"><i class="fa fa-envelope iconTab" aria-hidden="true"></i></div>
+                    <div class="item-value">{conta.Email_do_ltimo_contato__c}</div>
+                  </div>
+                </div>
+              </template>
+
+              <template if:true={showCliente}>
+                <a class="tabs-container client-titlle-name" href={conta.url} target="_blank"><i class="fa fa-cloud"
+                    aria-hidden="true"></i> {conta.NameTruncado}</a>
+                <div class="content-section">
+                  <div class="item-row">
+                    <div class="item-label">{conta.identificadorLabel}</div>
+                    <div class="item-value">{conta.identificador}</div>
+                  </div>
+                  <div class="item-row">
+                    <div class="item-label">Endereço:</div>
+                    <div class="item-value">{conta.endereco}</div>
+                  </div>
+                  <div class="item-row">
+                    <div class="item-label">Atrasados:</div>
+                    <div class="item-value">TODO</div>
+                  </div>
+                  <div class="item-row">
+                    <div class="item-label">Total em aberto:</div>
+                    <div class="item-value">{conta.Total_em_aberto__c}</div>
+                  </div>
+                  <div class="item-row">
+                    <div class="item-label">Valor em atraso</div>
+                    <div class="item-value">{conta.Total_em_aberto__c}</div>
+                  </div>
+                  <div class="item-row">
+                    <div class="item-label">Total faturado:</div>
+                    <div class="item-value">TODO</div>
+                  </div>
+                  <div class="item-row">
+                    <div class="item-label">Total em pedidos:</div>
+                    <div class="item-value">{conta.Valor_total_em_pedido_em_compra__c}</div>
+                  </div>
+                </div>
+              </template>
+
+              <template if:true={showPedidos}>
+                <div style="display:flex" class="content-section">
+                  <table class="eventos-table">
+                    <thead class="thread">
+                      <tr>
+                        <th>Numero</th>
+                        <th>Data</th>
+                        <th>Valor Total</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <template for:each={pedidos} for:item="item">
+                        <tr key={item.Id}>
+                          <td class="item-value click" onclick={orderUrl} data-id={item.Id}>{item.OrderNumber}</td>
+                          <td>{item.EffectiveDate}</td>
+                          <td>{item.TotalAmount}</td>
+                          <td>{item.Status}</td>
+                        </tr>
+                      </template>
+                    </tbody>
+                  </table>
+                </div>
+              </template>
+            </div>
+
+          </template>
+
+        </div>
+
+
+
+        <!-- Seção de Filtros - apenas quando detalhes estão sendo mostrados -->
+        <div class="tabs-container" style="margin-top: 15px;">
+          <div class="contratos-card-container-523">
+            <div class="contratos-card-header-523">
+              <h2 class="cardTitle">TÍTULOS</h2>
+              <template if:true={contasSelecionadasNaoVazia}>
+                <div style="display: flex;gap:7px">
+                  <button class="evento-card-header-btn" onclick={novoEventoBtn} title="Novo evento">⚡</button>
+
+                  <template if:true={contasSelecionadasEmAberto}>
+                    <button class="evento-card-header-btn" onclick={abrirPopupLigar} title="Entrar em contato">
+                      <i class="fa fa-comments-o" aria-hidden="true"></i>
+                    </button>
+                    <button class="contratos-calcular-btn-523" onclick={abrirCalcularPopUp}>Negociar</button>
+                  </template>
+                </div>
+              </template>
+            </div>
+            <div class="filtros-opcoes">
+              <div class="filtros-container">
+                <lightning-radio-group name="filtroStatus" options={filtroOptions} value={filtroContasAReceber}
+                  type="button" onchange={handleFiltroChange} class="filtro-radio-group">
+                </lightning-radio-group>
+              </div>
+              <span class="total-registros" style="color:#b1b1b1">
+                Total: {contasAReceber.length} título(s)
+              </span>
+            </div>
+            <div class="tab-content" style="max-height:370px;">
+              <table class="eventos-table">
+                <!-- <table class="contas-table"> -->
+                <thead>
+                  <tr>
+                    <th class="col-checkbox"></th>
+                    <th>TÍTULO</th>
+                    <th>VENCIMENTO</th>
+                    <th>STATUS</th>
+                    <th>PARCELA</th>
+                    <th></th>
+                    <th>VALOR EM ABERTO</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <template if:true={hasContasAReceber}>
+                    <template for:each={contasAReceber} for:item="c" for:index="index">
+                      <tr key={c.Id} data-id={c.Id} onclick={handleDivClick} class="linha-contasAReceber"
+                        onchange={handleCheckboxChange}>
+                        <td class="col-checkbox">
+                          <div class="checkbox-container">
+
+                            <input type="checkbox" class="round-checkbox" data-id={c.Id}>
+
+
+                          </div>
+                        </td>
+
+
+                        <td class="col-numero"><a href={c.url} style="color: #0176d6 !important;" target="_blank">{c.Name}</a>
+                          <template if:true={c.renegociacao}>
+                            <i class="fa fa-refresh renegociacao-icon" title="Titulo de renegociação"></i>
+                          </template>
+                        </td>
+                        <td class="col-vencimento">{c.Vencimento__c}</td>
+                        <td class="col-status">
+                          <span class={c.statusClass} style="text-align: left;">{c.Status__c}</span>
+                        </td>
+                        <td class="col-parcela">{c.Parcela__c}</td>
+                        <td>
+                          <div style="gap: 10px;display: flex;align-items: center;">
+                            <template if:true={c.gerarBoleto}>
+
+                              <!-- Baixar boleto -->
+                              <template if:true={c.buscandoBoleto}>
+                                <i class="fa fa-circle-o-notch fa-spin spinner-icon small"></i>
+                              </template>
+                              <template if:false={c.buscandoBoleto}>
+                                <div class="boleto-btn" onclick={buscarBoleto} data-docentry={c.Titulo__c} data-id={c.Id}
+                                  title="Baixar boleto">
+                                  <i class="fa fa-file" aria-hidden="true"></i>
+                                </div>
+                              </template>
+
+                              <!-- Copiar Número -->
+                              <div class="boleto-btn copiar-container" data-id={c.Id}>
+                                <template if:true={c.copiandoBoleto}>
+                                  <i class="fa fa-circle-o-notch fa-spin spinner-icon small"></i>
+                                </template>
+                                <template if:false={c.copiandoBoleto}>
+                                  <i class="fa fa-barcode" onclick={copiarNumero} title="Copiar nº boleto"
+                                    data-docentry={c.docEntry} data-id={c.Id}></i>
+                                </template>
+
+                                <!-- Tooltip de sucesso -->
+                                <template if:true={c.tooltipCopiado}>
+                                  <div class="tooltip-msg">Copiado!</div>
+                                </template>
+
+                              </div>
+
+                              <!-- Gerar QR Code -->
+                              <div class="boleto-btn copiar-container" data-id={c.Id}>
+                                <template if:true={c.gerandoQRCode}>
+                                  <i class="fa fa-circle-o-notch fa-spin spinner-icon small"></i>
+                                </template>
+                                <template if:false={c.gerandoQRCode}>
+                                  <div class="boleto-btn" onclick={gerarQRCode} data-docentry={c.docEntry}
+                                    data-id={c.Id} title="Copiar chave pix">
+                                    <i class="fa fa-key"></i>
+                                  </div>
+                                </template>
+
+                              </div>
+                            </template>
+
+                            <!-- <template if:true={c.renegociado}> -->
+                            <!-- <i class="fa fa-handshake-o" style="font-size:19px;color:#1f86db" -->
+                            <!-- title="Título renegociado"></i> -->
+                            <!-- </template> -->
+                          </div>
+                        </td>
+                        <td class="col-valor">{c.Valor_a_pagar__cLabel}</td>
+                      </tr>
+                    </template>
+                  </template>
+
+                  <!-- ELSE -->
+                  <template if:false={hasContasAReceber}>
+                    <tr>
+                      <td colspan="7" class="no-data">Nenhum título encontrado</td>
+                    </tr>
+                  </template>
+                  <template if:true={contasAReceberIsLoading}>
+                    <tr>
+                      <td colspan="7"> <i class="fa fa-circle-o-notch fa-spin spinner-icon small"
+                          aria-hidden="true"></i>
+                      </td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="tabs-container" style="margin-top: 15px;">
+          <div class="contratos-card-container-523" style="justify-content:flex-start;gap: 15px;">
+            <div class="evento-card-header">
+              <h2 class="cardTitle">EVENTOS⚡</h2>
+
+            </div>
+            <div class="tab-content" style="max-height:370px;">
+              <table class="eventos-table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Tipo</th>
+                    <th>Descrição</th>
+                    <th>Responsável</th>
+                    <th>Data</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <template if:true={haseventos}>
+                    <template for:each={eventosAgrupados} for:item="grupo" for:index="grupoIndex">
+                      <!-- Separador de mês -->
+                      <tr key={grupo.mesAno} class="month-separator">
+                        <td colspan="5" class="month-header">
+                          <div class="month-divider" style="text-align: center;">
+                            <span class="month-label">▾{grupo.mesAnoFormatado}▾</span>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <!-- Eventos do mês -->
+                      <template for:each={grupo.eventos} for:item="evento" for:index="eventoIndex">
+                        <tr key={evento.Id} class="tr-eventos" onclick={abrirEventoSelecionado} data-id={evento.Id}>
+                          <td>
+                            <lightning-formatted-rich-text style="margin-right: 7px;"
+                              value={evento.Fontawesome__c}></lightning-formatted-rich-text>
+                            {evento.Tipo__c}
+                          </td>
+                          <td style="font-size: 14px;padding: 0px 10px 0px 10px;">{evento.Descricao_evento__c}</td>
+                          <td style="text-align:center;">
+                            <img style="width:30%;" src={evento.CreatedBy_SmallPhotoUrl}
+                              alt={evento.CreatedBy_SmallPhotoUrl}>
+                          </td>
+                          <td>{evento.Data}</td>
+                        </tr>
+                      </template>
+                    </template>
+                  </template>
+
+                  <template if:false={haseventos}>
+                    <tr>
+                      <td colspan="5" class="no-data">Clique no <strong>+</strong> para adicionar eventos.</td>
+                    </tr>
+                  </template>
+
+                  <template if:true={eventosIsLoading}>
+                    <tr>
+                      <td colspan="5">
+                        <i class="fa fa-circle-o-notch fa-spin spinner-icon small" aria-hidden="true"></i>
+                      </td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </div>
+            <!-- ELSE -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <template if:false={checkUser}> -->
+  <!-- <div style="display: flex;justify-content: center;width: 100%;flex-direction: column;align-items: center;"> -->
+  <!-- <img style="max-width: 40%;border-radius: 0;flex: 1;" -->
+  <!-- src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEghSBHNaDHwwBc_165XWqyTWRBwTFScNvEdETf370h3RT-WZtikSAcx9gXGlSrYUXjbPrSYNcmhzcl1pRcY0GOg_m70QymWLlivnhGZnfJ-o-wBbZxkK-a597dSdPFZGlgnWeG5DhHYn8lG/s320/Obras.jpg"> -->
+  <!-- <p>Volte mais tarde</p> -->
+  <!-- </div> -->
+  <!-- </template> -->
+
+</template>

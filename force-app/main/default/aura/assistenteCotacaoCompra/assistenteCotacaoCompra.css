@@ -1,0 +1,190 @@
+.THIS .mainDivPrimary{
+    background-color: white;
+    width: 100%;
+    border-radius: 20px;
+    display: flex;
+    height: 700px;
+    row-gap: 5px;
+    padding: 20px;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.THIS .tituloDecisaoCompra{
+    width: 100%;
+    height: 5%;
+    font-size: 20px;
+    color: #00345c;
+    font-weight: bold;
+    text-align: center;
+}
+
+.THIS .inputValueFornecedor{
+    width: 90px;
+}
+
+.THIS .classInputValorFrete{
+    width: 100%;
+}
+
+.THIS .innerBlockValueFornecedor{
+    display:flex;
+}
+
+.THIS .valorFornecedorItem{
+    display: flex;
+    column-gap: 10px;
+    border: 1px solid #ede2e2;
+    padding: 5px;
+}
+
+.THIS .highlight{
+    background-color: #1DEE4E;
+}
+
+.THIS tr {
+    border-bottom: 2px solid #ede2e2;
+    height: 40px;
+}
+
+.THIS .pdfPC{
+    position: absolute;
+    width: 100%;
+    display: none;
+}
+
+.THIS td{
+    vertical-align: middle!important;
+}
+
+.THIS .tg-0pky{
+    position: relative;
+    text-align: center;
+}
+
+.THIS .subtituloDecisaoCompra{
+    width: 100%;
+    height: auto;
+    font-size: 15px;
+    color: #00345c;
+    text-align: center;
+}
+
+.THIS .tg .tg-fymr{
+    border-color: inherit;
+    font-weight: bold;
+    max-width: 200px;
+    min-width: 100px;
+    vertical-align: middle;
+    border-right: 1px solid #f0f0f0;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.THIS .customButton{
+    flex-grow: 1;
+    border-radius: 10px;
+    border: 0px solid white;
+    color: #00345c;
+}
+
+.THIS .customButton:hover{
+    transform: scale(1.04);
+}
+
+.THIS .customButton3{
+    flex-grow: 1;
+    border-radius: 10px;
+    border: 1px solid #00345c;
+    color: #00345c;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.THIS .customButton[disabled],
+.THIS .customButton2[disabled],
+.THIS .customButton3[disabled] {
+    opacity: 0.5;
+}
+
+.THIS .customButton3:hover{
+    transform: scale(1.04);
+}
+
+.THIS .divSearchResults {
+    height: 100px;
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    width: 200px;
+    border-radius: 5px;
+    margin-top: 5px;
+    padding: 10px;
+    overflow: auto;
+    z-index: 200;
+    background: white;
+    display: none;
+}
+
+.THIS .inputPesquisaTransportadora{
+    width: 200px;
+}
+
+.THIS .userResultSearchShare:hover{
+    background-color: rgb(0 0 0 / 7%);
+    cursor: pointer;
+}
+
+.THIS .customButton2{
+    flex-grow: 1;
+    border-radius: 15px;
+    border: 0px solid white;
+    color: #00345c;
+}
+
+.THIS .customButton2:hover{
+    transform: scale(1.01);
+}
+
+.THIS .customFilterInput{
+    border: 1px solid #ede2e2;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.THIS .tabelaClass{
+    width: 100%;
+    height: 80%;
+    overflow: auto;
+    border: 1px solid #ede2e2;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.THIS .divFiltrosButtons{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    border: 1px solid #ede2e2;
+    border-radius: 20px;
+    padding: 10px;
+    column-gap: 10px;
+}
+
+.THIS .divButtons{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    column-gap: 10px;
+}
+
+.THIS .divFiltro{
+    width: 50%;
+    height: 100%;
+}
+.THIS .tg thead {
+    text-align: center;
+    font-size: 12px;
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tosse_Fonoaudiologia__c</fullName>
+    <externalId>false</externalId>
+    <label>Tosse</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Voluntária ausente</fullName>
+                <default>false</default>
+                <label>Voluntária ausente</label>
+            </value>
+            <value>
+                <fullName>Voluntária presente eficaz</fullName>
+                <default>false</default>
+                <label>Voluntária presente eficaz</label>
+            </value>
+            <value>
+                <fullName>Voluntária presente ineficaz</fullName>
+                <default>false</default>
+                <label>Voluntária presente ineficaz</label>
+            </value>
+            <value>
+                <fullName>Reflexa presente eficaz</fullName>
+                <default>false</default>
+                <label>Reflexa presente eficaz</label>
+            </value>
+            <value>
+                <fullName>Reflexa presente ineficaz</fullName>
+                <default>false</default>
+                <label>Reflexa presente ineficaz</label>
+            </value>
+            <value>
+                <fullName>Reflexa ausente</fullName>
+                <default>false</default>
+                <label>Reflexa ausente</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

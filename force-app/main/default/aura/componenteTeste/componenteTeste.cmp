@@ -1,0 +1,65 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+   <ltng:require 
+      styles="{!$Resource.bootstrap5 + '/css/bootstrap.min.css'}" 
+      scripts="{!join(',',
+      $Resource.JQuery,
+      $Resource.popper,
+      $Resource.bootstrap5 + '/js/bootstrap.min.js')}"                  
+      afterScriptsLoaded="{!c.doInit}" />
+    
+   <aura:attribute name="sObj" type="String"/>
+   <aura:attribute name="field" type="String"/>
+
+    <lightning:recordViewForm recordId="0ZS6e0000008OI5GAM" objectApiName="WebStoreCatalog">
+        <div class="slds-box">    
+            <lightning:outputField fieldName="OwnerId" />
+            <lightning:outputField fieldName="CNPJ__c" />
+        </div>
+    </lightning:recordViewForm>
+
+
+
+   <nav>
+      <div class="wrapper" style="display: flex; align-items: center; height: 50px;">
+         <ul class="nav-links">
+            <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+            <li><a href="#">Início</a></li>
+             
+            <li style="display: block" id="menuProdutos">
+               <a href="#" class="desktop-item">Linhas</a>
+               <label for="showMega" class="mobile-item" style="background-color: #00345c">Mega Menu1</label>
+               <div class="mega-box">
+                  <div class="content" style="background-color: #00345c">
+                     <div class="row">
+						<header>Cuidados pessoais</header>
+                         
+                        <ul class="mega-links">
+                           <li><a href="#">Graphics</a></li>
+                           <li><a href="#">Vectors</a></li>
+                        </ul>
+                         
+                     </div>
+                  </div>
+               </div>
+               
+            </li>
+             <!--
+            <li>
+               <a href="#" class="desktop-item">Dropdown Menu</a>
+               <label for="showDrop" class="mobile-item">Dropdown Menu</label>
+               <ul class="drop-menu">
+                  <li><a href="#">Drop menu 1</a></li>
+                  <li><a href="#">Drop menu 2</a></li>
+                  <li><a href="#">Drop menu 3</a></li>
+                  <li><a href="#">Drop menu 4</a></li>
+               </ul>
+            </li> 
+            <li><a href="#">Feedback</a></li> -->
+         </ul>
+         <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+      </div>
+   </nav>
+    
+
+    
+</aura:component>

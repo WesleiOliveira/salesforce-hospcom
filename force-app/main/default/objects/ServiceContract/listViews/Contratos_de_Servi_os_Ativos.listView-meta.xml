@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contratos_de_Servi_os_Ativos</fullName>
+    <columns>CONTRACT.NAME</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>CONTRACT.STARTDATE</columns>
+    <columns>CONTRACT.ENDDATE</columns>
+    <columns>prazo_restante__c</columns>
+    <columns>CONTRACT.STATUSINDICATOR</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CONTRACT.STATUS</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>CONTRACT.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>ServiceContract.Servi_os</value>
+    </filters>
+    <label>Contratos de Serviço Ativos</label>
+</ListView>

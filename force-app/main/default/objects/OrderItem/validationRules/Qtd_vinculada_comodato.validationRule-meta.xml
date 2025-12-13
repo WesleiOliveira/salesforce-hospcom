@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Qtd_vinculada_comodato</fullName>
+    <active>true</active>
+    <errorConditionFormula>Quantidade_vinculada_comodato__c &gt; Quantity</errorConditionFormula>
+    <errorMessage>Quantidade vinculada ultrapassa o total vendido.</errorMessage>
+</ValidationRule>

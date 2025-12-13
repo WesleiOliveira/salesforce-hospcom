@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Rich Text Editor for Flow</masterLabel>
+    <description>Permite edição de Rich Text dentro de Flow Screen</description>
+
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property 
+                name="value"
+                type="String"
+                label="Texto em Rich Text"
+                role="outputOnly"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

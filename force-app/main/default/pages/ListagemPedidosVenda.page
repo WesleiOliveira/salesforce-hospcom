@@ -1,0 +1,750 @@
+<apex:page controller="ListagemPedidosVenda" showHeader="false" showChat="false" standardStylesheets="false" docType="html-5.0">
+    <html>
+        <head>
+            <title>Listagem de Pedidos de Venda</title>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+            <link   href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" rel="stylesheet"/>
+            <link   href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.min.css" rel="stylesheet"/>
+            <script src="{!URLFOR($Resource.bootstrap3iso, 'js/bootstrap.min.js')}"></script>
+            <link   href="{!URLFOR($Resource.bootstrap3iso, 'css/bootstrap.min.css')}" rel="stylesheet"/>
+
+            <style>
+                /* estrutura */
+
+                .cabecalho{
+                    background-color: #f7f9fb!important;
+                    padding-top:10px!important;
+                    padding-bottom:10px!important;
+                }
+                .cabecalho--texto{
+                    font-size:1.125rem!important;
+                    font-weight:300!important;
+                }
+
+                .filtro-cabecalho{
+                    background-color: #f7f9fb!important;
+                    padding-top:4px!important;
+                    padding-bottom:4px!important;
+                }
+
+                .listagem-cabecalho{
+                    border-top: 2px solid #ddd!important;
+                }
+                .listagem-item{
+                    font-size:11.5px!important;
+                    border-top-width:1px!important;
+                }
+                .listagem-item--pai{
+                    background-color:#fbfcfd!important
+                }
+
+                /* geral */
+
+                .espaco-baixo{
+                    margin-bottom:5px!important;
+                }
+                .espaco-cima{
+                    padding-top:5px!important;
+                }
+                .clicavel{
+                    cursor: pointer!important;
+                }
+                .nalinha{
+                    white-space: nowrap;
+                }
+                .emcima{
+                    vertical-align: top!important;
+                }
+                .invisivel{
+                    display:none;
+                }
+
+                /* corrigido */
+
+                .datepicker{
+                    z-index:9997!important;
+                    position:relative;
+                }
+                .input-group-addon {
+                    min-width:80px!important;
+                    text-align:left!important;
+                }
+                .progress{
+                    height:100%!important;
+                    width:100%!important;
+                    position:relative!important;
+                    margin:0px!important;
+                }
+                .progress-bar{
+                    color:black!important;
+                    text-align:left!important;
+                    font-weight:bold!important;
+                    line-height:normal!important;
+                }
+
+                /* customizado */
+
+                .c-loader{
+                    position: fixed;
+                    top:0;
+                    bottom:0;
+                    z-index:9998!important;
+                    width: 100%;
+                    height: 100%;
+                    background: white url({!$Resource.loader}) center 250px no-repeat;
+                    background-size: 50px 50px;
+                    opacity: .8;
+                }
+
+                .alert{
+                    font-weight:bold!important;
+                    padding-top:10px!important;
+                    padding-bottom:10px!important;
+                }
+
+                .c-tooltip + .tooltip > .tooltip-inner {
+                    background-color: #f1f1fc;
+                    color: #000000;
+                    border: 1px solid #c0c0c9;
+                }
+                .c-tooltip + .tooltip.top > .tooltip-arrow {
+                    border-top: 5px solid #c0c0c9;
+                }
+
+                .input-group-field {
+                    width:100px!important;
+                    display: table-cell;
+                    vertical-align: middle;
+                    border-radius:4px;
+                }
+                .input-group-field .form-control {
+                    border-radius: inherit !important;
+                }
+                .input-group-field:not(:first-child):not(:last-child) {
+                    border-radius:0;
+                }
+                .input-group-field:not(:first-child):not(:last-child) .form-control {
+                    border-right-width: 0;
+                }
+                .input-group-field:last-child {
+                    border-bottom-left-radius:0;
+                }
+            </style>
+            <script>
+                $(document).ready(function(){
+
+                    // expande/recolhe campos de seleção múltipla
+                    //$("[data-tipo='bloco-filtro'] select[data-tipo='multiplo']").on('focus',function(){
+                    //  $(this).attr("size","10").change();
+                    //});
+                    //$("[data-tipo='bloco-filtro'] select[data-tipo='multiplo']").on('blur mouseout',function(){
+                    //  $(this).attr("size","2").change();;
+                    //});
+                    
+                    
+                    $("[data-tipo='bloco-filtro'] select[data-tipo='multiplo']").focus(function () {
+                        $(this).attr("data-height",$(this).css("height"));
+                        $(this).animate({
+                            height: "150px"
+                        }, 300);
+                    });
+                    $("[data-tipo='bloco-filtro'] select[data-tipo='multiplo']").focusout(function () {
+                        $(this).animate({
+                            height: $(this).attr("data-height")
+                        }, 300);
+                    });
+                    
+                    
+                    
+                    
+                    
+                    // bloqueio de campo: número do reg origem
+                    $("[data-tipo='campo-filtro'][data-id='numero-pai']").prop("disabled",true);
+                    $("[data-tipo='campo-filtro'][data-id='origem']").on('change',function(){
+                        if($(this).find('option:selected').val() != '')
+                            $("[data-tipo='campo-filtro'][data-id='numero-pai']").prop("disabled",false).val('');
+                        else
+                            $("[data-tipo='campo-filtro'][data-id='numero-pai']").prop("disabled",true);
+                    });
+
+                    // expande/recolhe filtros (botão)
+                    $("[data-tipo='botao-filtrar']").on('click',function(){
+                        if($(this).hasClass("btn-default")){
+                            $(this).removeClass("btn-default");
+                            $(this).addClass("btn-primary");
+                            $("[data-tipo='bloco-filtro']").first().show();
+                            $("[data-tipo='botao-limpar']").first().show();
+                            $("[data-tipo='botao-aplicar']").first().show();
+                        }else{
+                            $(this).removeClass("btn-primary");
+                            $(this).addClass("btn-default");
+                            $("[data-tipo='bloco-filtro']").first().hide();
+                            $("[data-tipo='botao-limpar']").first().hide();
+                            $("[data-tipo='botao-aplicar']").first().hide();
+                        }
+                    });
+
+                    // expande/recolhe filtro (seta)
+                    $("[data-tipo='expandir-filtro']").on('click',function(){
+                        if($(this).hasClass("glyphicon-chevron-right")){
+                            $(this).removeClass("glyphicon-chevron-right");
+                            $(this).addClass("glyphicon-chevron-down");
+                            $("[data-tipo='"+$(this).attr('data-id')+"']").show();
+                        }else{
+                            $(this).removeClass("glyphicon-chevron-down");
+                            $(this).addClass("glyphicon-chevron-right");
+                            $("[data-tipo='"+$(this).attr('data-id')+"']").hide();
+                        }
+                    });
+
+                    // intercala opções predefinidas
+                    $("[data-tipo='check-predefinido']").on('click change',function(){
+                       if($(this).is(":checked")){
+                            $("[data-tipo='check-predefinido']:not([data-id='"+$(this).attr('data-id')+"'])").prop("checked", false);
+                        }
+                    });
+
+                    // intercala opções de filtros
+                    $("[data-tipo='check-filtro']").on('click change',function(){
+                       if($(this).is(":checked")){
+                            $("[data-tipo='check-filtro']:not([data-id='"+$(this).attr('data-id')+"'])").prop("checked", false);
+                        }else{
+                            if($("[data-tipo='check-filtro']:checked").length==0)
+                                $(this).prop("checked", true);
+                        }
+                    });
+
+                    // botão limpar
+                    $("[data-tipo='botao-limpar']").on('click',function(){
+                        $("[data-tipo='bloco-filtro'] input[type=text]").val('').change();
+                        $("[data-tipo='bloco-filtro'] option").prop("selected", false).change();
+                        $("[data-tipo='check-filtro'][data-id='manter']").prop("checked", true).change();
+                        $("[data-tipo='check-predefinido']").prop("checked", false).change();
+                    });
+
+                    InicializaJSPt1();
+                    InicializaJSPt2();
+                });
+
+                function InicializaJSPt1(){
+
+                    // expande/recolhe itens (global)
+                    $("[data-tipo='expandir-item-global']").on('click',function(){
+                        if($(this).hasClass("glyphicon-chevron-right")){
+                            $("[data-tipo='expandir-item-global'], [data-tipo='expandir-item']").each(function(){
+                                $(this).removeClass("glyphicon-chevron-right");
+                                $(this).addClass("glyphicon-chevron-down");
+                            })
+                            $("[data-tipo='bloco-item']").show();
+                        }else{
+                            $("[data-tipo='expandir-item-global'], [data-tipo='expandir-item']").each(function(){
+                                $(this).removeClass("glyphicon-chevron-down");
+                                $(this).addClass("glyphicon-chevron-right");
+                            })
+                            $("[data-tipo='bloco-item']").hide();
+                        }
+                    });
+
+                    // expande/recolhe item (local)
+                    $("[data-tipo='expandir-item']").on('click',function(){
+                        if($(this).hasClass("glyphicon-chevron-right")){
+                            $(this).removeClass("glyphicon-chevron-right");
+                            $(this).addClass("glyphicon-chevron-down");
+                            $("[data-tipo='bloco-item'][data-id='"+$(this).attr('data-id')+"']").show();
+                        }else{
+                            $(this).removeClass("glyphicon-chevron-down");
+                            $(this).addClass("glyphicon-chevron-right");
+                            $("[data-tipo='bloco-item'][data-id='"+$(this).attr('data-id')+"']").hide();
+                        }
+                    });
+
+                }
+
+                // controle do Loader
+                function LoaderOn(){
+                    $("[data-tipo='bloco-loader']").show();
+                }
+                function LoaderOff(){
+                    $("[data-tipo='bloco-loader']").hide();
+                }
+            </script>
+        </head>
+
+        <body id="corpo-pag" style="margin-top:7px;">
+            <div class="bootstrap-iso">
+                <div class="container-fluid">
+                    <apex:form >
+
+                        <!-- loader -->
+                        <div class=" row c-loader" data-tipo="bloco-loader" style="display:none;"></div>
+
+                        <!-- mensagens -->
+                        <apex:outputPanel id="mensagem">
+                            <apex:outputText rendered="{!IF(c_mensagem.tem_mensagem == true, true, false)}" >
+                                <apex:variable var="cont_msg" value="{!0}"/>
+                                <div class="alert alert-danger alert-dismissible">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <apex:repeat value="{!c_mensagem.mensagens}" var="mensagem">
+                                        <apex:variable var="cont_msg" value="{!cont_msg+1}"/>
+                                        <apex:outputText rendered="{!IF(cont_msg > 1, true, false)}" >
+                                            <br/>
+                                        </apex:outputText>
+                                        {!mensagem}
+                                    </apex:repeat>
+                                </div>
+                            </apex:outputText>
+                        </apex:outputPanel>
+
+                        <!-- cabeçalho -->
+                        <div class="row cabecalho" data-tipo="bloco-cabecalho">
+                            <div class="col-xs-6">
+                                <table cellpadding="0" cellspacing="0" border="0">
+                                    <tr>
+                                        <td>
+                                            <img class="img-rounded" style="width:32px;height:32px; background-color:#4286f4;" src="https://developer2-hospcomhospitalar.cs96.force.com/img/icon/t4v35/standard/orders_120.png"/>
+                                        </td>
+                                        <td style="padding-left:10px;">
+                                            <div class="cabecalho--texto">Pedidos de Venda</div>
+                                        </td>
+                                        <td style="padding-left:15px;" class="invisivel">
+                                            <button type="button" class="btn btn-default btn-sm">Novo</button>
+                                            <!-- https://developer2-hospcomhospitalar.cs96.force.com/Sales/s/sfdcpage/%2Fapex%2FAssistentePedidoVenda%3F%26id%3D0065A00000jJlmYQAS -->
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-xs-6" style="text-align:right;">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-sm" style="display:none;" data-tipo="botao-limpar">
+                                        <span class="glyphicon glyphicon-remove"></span>&nbsp;Limpar
+                                    </button>
+                                    <apex:commandButton styleClass="btn btn-success btn-sm" style="display:none;" html-data-tipo="botao-aplicar" action="{!NovaPesquisa}" rerender="listagem,mensagem" onclick="LoaderOn();" oncomplete="InicializaJSPt1();InicializaJSPt2();LoaderOff();" value="Aplicar"/>
+                                    <button type="button" class="btn btn-default btn-sm" data-tipo="botao-filtrar">
+                                        <span class="glyphicon glyphicon-filter"></span>&nbsp;Filtros
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- filtro -->
+                        <div class="row listagem-cabecalho" style="display:none;" data-tipo="bloco-filtro">
+                            <div class="col-xs-12">
+
+                                <!-- busca global -->
+                                <div class="row" style="color:gray;">
+                                    <div class="col-xs-12">
+                                        <div class="input-group input-group-sm espaco-cima espaco-baixo">
+                                            <span class="input-group-addon">Busca Global</span>
+                                            <apex:inputText styleClass="form-control input-sm" value="{!c_filtro.pedido_global}"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- predefinidos -->
+                                <div class="row invisivel" style="color:gray;">
+                                    <!-- #1 -->
+                                    <div class="col-xs-3">
+                                        <div class="checkbox disabled">
+                                            <label><input type="checkbox" data-tipo="check-predefinido" data-id="valor1" disabled="disabled"/>Predefinido 1</label>
+                                        </div>
+                                    </div>
+                                    <!-- #2 -->
+                                    <div class="col-xs-3">
+                                        <div class="checkbox disabled">
+                                            <label><input type="checkbox" data-tipo="check-predefinido" data-id="valor2" disabled="disabled"/>Predefinido 2</label>
+                                        </div>
+                                    </div>
+                                    <!-- #3 -->
+                                    <div class="col-xs-3">
+                                        <div class="checkbox disabled">
+                                            <label><input type="checkbox" data-tipo="check-predefinido" data-id="valor3" disabled="disabled"/>Predefinido 3</label>
+                                        </div>
+                                    </div>
+                                    <!-- #4 -->
+                                    <div class="col-xs-3">
+                                        <div class="checkbox disabled">
+                                            <label><input type="checkbox" data-tipo="check-predefinido" data-id="valor4" disabled="disabled"/>Predefinido 4</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- pedido -->
+                                <div class="row filtro-cabecalho">
+                                    <div class="col-xs-12">
+                                        <span class="glyphicon glyphicon-chevron-right clicavel" data-tipo="expandir-filtro" data-id="bloco-filtro-pedido"></span> Pedido
+                                    </div>
+                                </div>
+                                <div class="row espaco-cima" style="display:none" data-tipo="bloco-filtro-pedido">
+                                    <!-- #1 -->
+                                    <div class="col-xs-4">
+                                        <div class="form-group input-group input-group-sm espaco-baixo">
+                                            <span class="input-group-addon">Número</span>
+                                            <apex:inputText styleClass="form-control input-sm" value="{!c_filtro.pedido_numero}"/>
+                                        </div>
+                                        <div class="form-group input-group input-group-sm espaco-baixo">
+                                            <span class="input-group-addon">Cliente</span>
+                                            <apex:inputText styleClass="form-control input-sm" value="{!c_filtro.pedido_cliente}"/>
+                                        </div>
+                                        <div class="form-group input-group input-group-sm espaco-baixo">
+                                            <span class="input-group-addon">Origem</span>
+                                            <div class="input-group-field">
+                                                <apex:selectList styleClass="form-control input-sm" multiselect="false" size="1" value="{!c_filtro.pedido_tipo_pai}" html-data-tipo="campo-filtro" html-data-id="origem">
+                                                    <apex:selectOptions value="{!c_valor.pedido_tipo_pais}"/>
+                                                </apex:selectList>
+                                            </div>
+                                            <apex:inputText styleClass="form-control input-sm" value="{!c_filtro.pedido_numero_pai}" html-data-tipo="campo-filtro" html-data-id="numero-pai"/>
+                                        </div>
+                                        <div class="form-group input-group input-group-sm espaco-baixo">
+                                            <span class="input-group-addon">Estado</span>
+                                            <apex:selectList styleClass="form-control input-sm" multiselect="true" size="2" html-data-tipo="multiplo" value="{!c_filtro.pedido_estado}">
+                                                <apex:selectOptions value="{!c_valor.pedido_estados}"/>
+                                            </apex:selectList>
+                                        </div>
+                                    </div>
+                                    <!-- #2 -->
+                                    <div class="col-xs-4">
+                                        <div class="form-group input-group input-group-sm espaco-baixo">
+                                            <span class="input-group-addon">Tipo</span>
+                                            <apex:selectList styleClass="form-control input-sm" multiselect="true" size="2" html-data-tipo="multiplo" value="{!c_filtro.pedido_tipo}">
+                                                <apex:selectOptions value="{!c_valor.pedido_tipos}"/>
+                                            </apex:selectList>
+                                        </div>
+                                        <div class="form-group input-group input-group-sm espaco-baixo">
+                                            <span class="input-group-addon">Status</span>
+                                            <apex:selectList styleClass="form-control input-sm" multiselect="true" size="2" html-data-tipo="multiplo" value="{!c_filtro.pedido_status}">
+                                                <apex:selectOptions value="{!c_valor.pedido_status}"/>
+                                            </apex:selectList>
+                                        </div>
+                                    </div>
+                                    <!-- #3 -->
+                                    <div class="col-xs-4">
+                                        <div class="form-group input-group input-group-sm espaco-baixo">
+                                            <span class="input-group-addon">Frete</span>
+                                            <apex:selectList styleClass="form-control input-sm" multiselect="false" size="1" value="{!c_filtro.pedido_frete}">
+                                                <apex:selectOptions value="{!c_valor.pedido_fretes}"/>
+                                            </apex:selectList>
+                                        </div>
+                                        <div class="form-group input-group input-group-sm espaco-baixo">
+                                            <span class="input-group-addon">Entr. Parc.</span>
+                                            <apex:selectList styleClass="form-control input-sm" multiselect="false" size="1" value="{!c_filtro.pedido_entrega}">
+                                                <apex:selectOptions value="{!c_valor.pedido_entregas}"/>
+                                            </apex:selectList>
+                                        </div>
+                                        <div class="form-group input-group input-group-sm espaco-baixo">
+                                            <span class="input-group-addon">Proprietário</span>
+                                            <apex:selectList styleClass="form-control input-sm" multiselect="true" size="2" html-data-tipo="multiplo" value="{!c_filtro.pedido_proprietario}">
+                                                <apex:selectOptions value="{!c_valor.pedido_proprietarios}"/>
+                                            </apex:selectList>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <!-- produto -->
+                                <div class="row filtro-cabecalho">
+                                    <div class="col-xs-3">
+                                        <span class="glyphicon glyphicon-chevron-right clicavel" data-tipo="expandir-filtro" data-id="bloco-filtro-produto"></span> Produto
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <label class="checkbox-inline">
+                                            <apex:inputCheckbox value="{!c_filtro.manter_itens}" html-data-tipo="check-filtro" html-data-id="manter"/>
+                                            Filtrar pedidos e <b>manter</b> itens
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <label class="checkbox-inline">
+                                            <apex:inputCheckbox value="{!c_filtro.filtrar_itens}" html-data-tipo="check-filtro" html-data-id="filtrar"/>
+                                            Filtrar pedidos e <b>filtrar</b> itens
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row espaco-cima" style="display:none" data-tipo="bloco-filtro-produto">
+                                    <!-- #1 -->
+                                    <div class="col-xs-4">
+                                        <div class="form-group input-group input-group-sm espaco-baixo">
+                                            <span class="input-group-addon">Código</span>
+                                            <apex:inputText styleClass="form-control input-sm" value="{!c_filtro.item_codigo}"/>
+                                        </div>
+                                        <div class="form-group input-group input-group-sm espaco-baixo">
+                                            <span class="input-group-addon">Nome</span>
+                                            <apex:inputText styleClass="form-control input-sm" value="{!c_filtro.item_nome}"/>
+                                        </div>
+                                        <div class="form-group input-group input-group-sm espaco-baixo">
+                                            <span class="input-group-addon">Modelo</span>
+                                            <apex:inputText styleClass="form-control input-sm" value="{!c_filtro.item_modelo}"/>
+                                        </div>
+                                    </div>
+                                    <!-- #2 -->
+                                    <div class="col-xs-4">
+                                        <div class="form-group input-group input-group-sm espaco-baixo">
+                                            <span class="input-group-addon">Status</span>
+                                            <apex:selectList styleClass="form-control input-sm" multiselect="true" size="2" html-data-tipo="multiplo" value="{!c_filtro.item_status}">
+                                                <apex:selectOptions value="{!c_valor.item_status}"/>
+                                            </apex:selectList>
+                                        </div>
+                                        <div class="form-group input-group input-group-sm espaco-baixo">
+                                            <span class="input-group-addon">Marca</span>
+                                            <apex:selectList styleClass="form-control input-sm" multiselect="true" size="2" html-data-tipo="multiplo" value="{!c_filtro.item_marca}">
+                                                <apex:selectOptions value="{!c_valor.item_marcas}"/>
+                                            </apex:selectList>
+                                        </div>
+                                    </div>
+                                    <!-- #3 -->
+                                    <div class="col-xs-4">
+                                        <div class="form-group input-group input-group-sm espaco-baixo">
+                                            <span class="input-group-addon">Família</span>
+                                            <apex:selectList styleClass="form-control input-sm" multiselect="true" size="2" html-data-tipo="multiplo" value="{!c_filtro.item_familia}">
+                                                <apex:selectOptions value="{!c_valor.item_familias}"/>
+                                            </apex:selectList>
+                                        </div>
+                                        <div class="form-group input-group input-group-sm espaco-baixo">
+                                            <span class="input-group-addon">Tipo</span>
+                                            <apex:selectList styleClass="form-control input-sm" multiselect="true" size="2" html-data-tipo="multiplo" value="{!c_filtro.item_tipo}">
+                                                <apex:selectOptions value="{!c_valor.item_tipos}"/>
+                                            </apex:selectList>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <apex:outputPanel id="listagem">
+                            <!-- listagem -->
+                            <div class="row" data-tipo="bloco-listagem">
+                                <div class="col-xs-12" style="padding:0px!important;">
+                                    <table class="table table-condensed emcima" style="width:100%;">
+
+                                        <!-- cabeçalho -->
+                                        <thead class="listagem-cabecalho">
+                                            <tr>
+                                                <th>
+                                                    <span class="glyphicon glyphicon-chevron-right clicavel" data-tipo="expandir-item-global"></span >
+                                                </th>
+                                                <th>Pedido</th>
+                                                <th>Cliente</th>
+                                                <th>Origem</th>
+                                                <th>Proprietário</th>
+                                                <th>Status</th>
+                                                <th style='width:160px!important;'>Valor Total</th>
+                                            </tr>
+                                        </thead>
+
+                                        <!-- itens -->
+                                        <apex:repeat value="{!c_pedidos}" var="c_pedido">
+                                            <tbody class="listagem-item">
+                                                <tr class="listagem-item--pai">
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-chevron-right clicavel" data-tipo="expandir-item" data-id="{!c_pedido.pedido.Id}"></span >
+                                                    </td>
+                                                    <td><a href="https://hospcomhospitalar.force.com/Sales/{!c_pedido.pedido.Id}"><apex:outputField value="{!c_pedido.pedido.OrderNumber}"/></a></td>
+                                                    <td>
+                                                        <a href="https://hospcomhospitalar.force.com/Sales/{!c_pedido.pedido.AccountId}">
+                                                            <apex:outputField value="{!c_pedido.pedido.Account.Name}"/>
+                                                            &nbsp;(<apex:outputField value="{!c_pedido.pedido.Account.BillingCity}"/>&nbsp;-&nbsp;<apex:outputField value="{!c_pedido.pedido.Account.BillingState}"/>)</a>
+                                                        <br/>
+                                                        <small>
+                                                            <b>Dt. Início: </b><apex:outputField value="{!c_pedido.pedido.EffectiveDate}"/>
+                                                            <apex:outputText rendered="{!IF(c_pedido.pedido.Prazo_de_entrega__c != null, true, false)}" >
+                                                                <apex:variable var="classe" value="{!''}"/>
+                                                                <apex:outputText rendered="{!IF(c_pedido.pedido.EndDate == null, true, false)}" >
+                                                                    <apex:outputText rendered="{!IF(c_pedido.pedido.Prazo_de_entrega__c < c_valor.hoje, true, false)}" >
+                                                                        <apex:variable var="classe" value="{!'label-danger'}"/>
+                                                                    </apex:outputText>
+                                                                    <apex:outputText rendered="{!IF(c_pedido.pedido.Prazo_de_entrega__c < c_valor.hoje, false, true)}" >
+                                                                        <apex:variable var="classe" value="{!'label-success'}"/>
+                                                                    </apex:outputText>
+                                                                </apex:outputText>
+                                                                <apex:outputText rendered="{!IF(classe == '', true, false)}" >
+                                                                    - <b>Pz. Entrega: </b><apex:outputField value="{!c_pedido.pedido.Prazo_de_entrega__c}"/>
+                                                                </apex:outputText>
+                                                                <apex:outputText rendered="{!IF(classe != '', true, false)}" >
+                                                                    - <span class="label {!classe}" style="font-size:100%!important;"><b>Pz. Entrega: </b><apex:outputField value="{!c_pedido.pedido.Prazo_de_entrega__c}"/></span>
+                                                                </apex:outputText>
+                                                            </apex:outputText>
+                                                            <apex:outputText rendered="{!IF(c_pedido.pedido.EndDate != null, true, false)}" >
+                                                                <apex:variable var="classe" value="{!''}"/>
+                                                                <apex:outputText rendered="{!IF(c_pedido.pedido.Prazo_de_entrega__c != null, true, false)}" >
+                                                                    <apex:outputText rendered="{!IF(c_pedido.pedido.EndDate > c_pedido.pedido.Prazo_de_entrega__c, true, false)}" >
+                                                                        <apex:variable var="classe" value="{!'label-danger'}"/>
+                                                                    </apex:outputText>
+                                                                    <apex:outputText rendered="{!IF(c_pedido.pedido.EndDate > c_pedido.pedido.Prazo_de_entrega__c, false, true)}" >
+                                                                        <apex:variable var="classe" value="{!'label-success'}"/>
+                                                                    </apex:outputText>
+                                                                </apex:outputText>
+                                                                <apex:outputText rendered="{!IF(classe == '', true, false)}" >
+                                                                    - <b>Dt. Entrega: </b><apex:outputField value="{!c_pedido.pedido.EndDate}"/>
+                                                                </apex:outputText>
+                                                                <apex:outputText rendered="{!IF(classe != '', true, false)}" >
+                                                                    - <span class="label {!classe}" style="font-size:100%!important;"><b>Dt. Entrega: </b><apex:outputField value="{!c_pedido.pedido.EndDate}"/></span>
+                                                                </apex:outputText>
+                                                            </apex:outputText>
+                                                        </small>
+                                                    </td>
+                                                    <td class="nalinha">
+                                                        <apex:outputText rendered="{!IF(c_pedido.pedido.OpportunityId != '', true, false)}" >
+                                                            <a href="https://hospcomhospitalar.force.com/Sales/{!c_pedido.pedido.OpportunityId}">OPP&nbsp;<apex:outputText value="{!c_pedido.pedido.Opportunity.Numero_OP__c}"/></a>
+                                                        </apex:outputText>
+                                                        <apex:outputText rendered="{!IF(c_pedido.pedido.Ordem_de_trabalho__c != '', true, false)}" >
+                                                            <a href="https://hospcomhospitalar.force.com/Sales/{!c_pedido.pedido.Ordem_de_trabalho__c}">OT&nbsp;<apex:outputText value="{!c_pedido.pedido.Ordem_de_trabalho__r.WorkOrderNumber}"/></a>
+                                                        </apex:outputText>
+                                                    </td>
+                                                    <td class="nalinha">
+                                                        <apex:variable var="pai_nome" value="{!''}"/>
+                                                        <apex:variable var="pai_tipo" value="{!''}"/>
+                                                        <apex:outputText rendered="{!IF(c_pedido.pedido.OpportunityId != '', true, false)}" >
+                                                            <apex:variable var="pai_nome" value="{!c_pedido.pedido.Opportunity.Owner.Name}"/>
+                                                            <apex:variable var="pai_tipo" value="{!'Oportunidade'}"/>
+                                                        </apex:outputText>
+                                                        <apex:outputText rendered="{!IF(c_pedido.pedido.Ordem_de_trabalho__c != '', true, false)}" >
+                                                            <apex:variable var="pai_nome" value="{!c_pedido.pedido.Ordem_de_trabalho__r.Owner.Name}"/>
+                                                            <apex:variable var="pai_tipo" value="{!'Ordem de Trabalho'}"/>
+                                                        </apex:outputText>
+                                                        <img src="{!c_pedido.proprietario_foto}" data-toggle="tooltip" data-html="true" title="<b>Pedido</b><br/>{!c_pedido.pedido.Owner.Name}" style="width:30px;height:30px;" class="img-circle c-tooltip"/>
+                                                        <img src="{!c_pedido.proprietario_pai_foto}" data-toggle="tooltip" data-html="true" title="<b>{!pai_tipo}</b><br/>{!pai_nome}" style="width:30px;height:30px;" class="img-circle c-tooltip"/>
+                                                    </td>
+                                                    <td class="nalinha">
+                                                        <apex:outputField value="{!c_pedido.pedido.Status}"/>
+                                                        <br/>
+                                                        <small>
+                                                            <apex:outputField value="{!c_pedido.pedido.Faturamento_feito__r.Raz_o_Social__c}"/>
+                                                        </small>
+                                                    </td>
+                                                    <td class="nalinha" style='width:160px!important;'>
+                                                        <div class="progress">
+                                                            <div class="progress-bar progress-bar-success" aria-valuenow="{!c_pedido.pedido.Faturado__c}" aria-valuemin="0" aria-valuemax="100" style="width:{!c_pedido.pedido.Faturado__c}%">
+                                                                <div style="margin:3px;">
+                                                                    <apex:outputField value="{!c_pedido.pedido.TotalAmount}"/>
+                                                                    <br/><small><apex:outputField value="{!c_pedido.pedido.Faturado__c}"/></small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <!-- listagem dos itens -->
+                                                <apex:variable var="ordem" value="{!1}"/>
+                                                
+                                                <apex:repeat value="{!c_pedido.pedido.OrderItems}" var="controle">
+                                                    <apex:repeat value="{!c_pedido.pedido.OrderItems}" var="item_pedido">
+                                                        
+                                                        <apex:outputText rendered="{!IF(item_pedido.Ordem__c == ordem, true, false)}">
+                                                            <tr data-tipo="bloco-item" data-id="{!c_pedido.pedido.Id}" style="display:none;">
+
+                                                                <apex:variable var="colspan" value="{!'2'}"/>
+                                                                <apex:variable var="padding" value="{!'10'}"/>
+                                                                <apex:outputText rendered="{!IF(item_pedido.Item_Pai__c != null, true, false)}" >
+                                                                    <td class="nalinha" style="padding-left:20px; padding-right:0px; color:#b8b8b8;">
+                                                                        &#8627;
+                                                                    </td>
+                                                                    <apex:variable var="colspan" value="{!'1'}"/>
+                                                                    <apex:variable var="padding" value="{!'5'}"/>
+                                                                </apex:outputText>
+
+                                                                <td class="nalinha" colspan="{!colspan}" style="padding-left:{!padding}px; text-align:left!important;">
+                                                                    <apex:variable var="item_imagem" value="{!''}"/>
+                                                                    <apex:outputText rendered="{!IF(item_pedido.PriceBookEntry.Product2.URL_da_Imagem__c == '', true, false)}" >
+                                                                        <apex:variable var="item_imagem" value="{!$Resource.noimg}"/>
+                                                                    </apex:outputText>
+                                                                    <apex:outputText rendered="{!IF(item_pedido.PriceBookEntry.Product2.URL_da_Imagem__c != '', true, false)}" >
+                                                                        <apex:variable var="item_imagem" value="{!item_pedido.PriceBookEntry.Product2.URL_da_Imagem__c}"/>
+                                                                    </apex:outputText>
+                                                                    <img src="{!item_imagem}" style="width:30px;height:30px; padding-left" />
+                                                                </td>
+
+                                                                <td colspan="3">
+                                                                    <table cellpadding="0" cellspacing="0" border="0" style="width:100%;">
+                                                                        <tr>
+                                                                            <td style="width:33%;" class="emcima">
+                                                                                <a href="https://hospcomhospitalar.force.com/Sales/{!item_pedido.Id}"><apex:outputText value="{!item_pedido.PriceBookEntry.Product2.Name}"/></a>
+                                                                            </td>
+                                                                            <td style="width:33%;" class="emcima">
+                                                                                <b>Marca: </b> <apex:outputText value="{!item_pedido.PriceBookEntry.Product2.Marca__c}"/>
+                                                                            </td>
+                                                                            <td style="width:33%;" class="emcima">
+                                                                                <b>Modelo: </b> <apex:outputText value="{!item_pedido.PriceBookEntry.Product2.Modelo__c}"/>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <apex:outputText rendered="{!IF(OR(item_pedido.Descricao_da_linha__c != '',item_pedido.PriceBookEntry.ProductCode != ''), true, false)}" >
+                                                                            <tr>
+                                                                                <td colspan="3">
+                                                                                    <apex:outputText rendered="{!IF(item_pedido.PriceBookEntry.ProductCode != '', true, false)}" >
+                                                                                        <b>PN: </b><apex:outputText value="{!item_pedido.PriceBookEntry.ProductCode}"/>&nbsp;&nbsp;
+                                                                                    </apex:outputText>
+                                                                                    <apex:outputText rendered="{!IF(item_pedido.Descricao_da_linha__c != '', true, false)}" >
+                                                                                        <b>Descrição: </b><apex:outputText value="{!item_pedido.Descricao_da_linha__c}"/>.&nbsp;
+                                                                                    </apex:outputText>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </apex:outputText>
+                                                                    </table>
+                                                                </td>
+                                                                <td class="nalinha">
+                                                                    <apex:outputField value="{!item_pedido.Status__c}"/>
+                                                                </td>
+                                                                <td class="nalinha" style='width:160px!important;'>
+                                                                    <div class="progress">
+                                                                        <div class="progress-bar progress-bar-info" aria-valuenow="{!item_pedido.Quantidade_entregue__c/item_pedido.Quantity*100}" aria-valuemin="0" aria-valuemax="100" style="width:{!item_pedido.Quantidade_entregue__c/item_pedido.Quantity*100}%">
+                                                                            <div style="margin:3px;">
+                                                                                <apex:outputField value="{!item_pedido.Total_acumulado__c}"/>
+                                                                                <br/><small>({!ROUND(item_pedido.Quantidade_entregue__c, 0)}/{!ROUND(item_pedido.Quantity, 0)}&nbsp;x&nbsp;<apex:outputField value="{!item_pedido.UnitPrice}"/>)</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </apex:outputText>
+                                                        
+                                                    </apex:repeat>
+                                                    <apex:variable var="ordem" value="{!ordem+1}"/>
+                                                </apex:repeat>
+                                            </tbody>
+                                        </apex:repeat>
+
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- rodapé -->
+                            <div class="row" data-tipo="bloco-rodape">
+                                <div class="col-xs-offset-2 col-xs-3" style="text-align:right;">
+                                    <apex:outputText rendered="{!IF(c_paginacao.pagina_atual > 1, true, false)}" >
+                                        <apex:commandButton styleClass="btn btn-sm btn-default" action="{!PaginaAnterior}" value="Voltar" rerender="listagem,mensagem" onclick="LoaderOn();" oncomplete="InicializaJSPt1();InicializaJSPt2();LoaderOff();"/>
+                                    </apex:outputText>
+                                </div>
+
+                                <div class="col-xs-2" style="text-align:center;">
+                                    Pg. {!c_paginacao.pagina_atual}/{!c_paginacao.pagina_final}, {!c_paginacao.registro_total} Regs.
+                                </div>
+
+                                <div class="col-xs-4" style="text-align:left;">
+                                    <apex:outputText rendered="{!IF(c_paginacao.pagina_atual < c_paginacao.pagina_final, true, false)}" >
+                                        <apex:commandButton styleClass="btn btn-sm btn-default" action="{!PaginaSeguinte}" value="Próxima" rerender="listagem,mensagem" onclick="LoaderOn();" oncomplete="InicializaJSPt1();InicializaJSPt2();LoaderOff();"/>
+                                    </apex:outputText>
+                                </div>
+                            </div>
+                            <br/>
+
+                        </apex:outputPanel>
+
+
+                    </apex:form>
+                </div>
+            </div>
+
+            <script>
+                $(document).ready(function(){
+                    InicializaJSPt2()
+                });
+
+                function InicializaJSPt2(){
+                    $('[data-toggle="tooltip"]').tooltip();
+                }
+            </script>
+        </body>
+    </html>
+</apex:page>

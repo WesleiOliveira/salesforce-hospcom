@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Vinculo_pai_inconsistente</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF(Demonstracao__c == &apos;&apos;,
+OR(
+	AND(!Ignora_validacao__c,
+		RecordType.DeveloperName == &apos;Hospcom&apos;,
+                   TEXT(Natureza_de_Opera_o__c) != &apos;REMESSA DE COMODATO&apos;,
+		(
+			IF(OpportunityId!=&apos;&apos;,1,0) +
+			IF(Contrato_de_Fornecimento_de_Insumo__c !=&apos;&apos;,1,0) +
+			IF(Ordem_de_trabalho__c!=&apos;&apos;,1,0) +
+			IF(Contrato_de_Servi_o__c!=&apos;&apos;,1,0)
+		) != 1
+	),
+	AND(
+		RecordType.DeveloperName == &apos;Representacao&apos;,
+		(
+			IF(OpportunityId!=&apos;&apos;,1,0) +
+			IF(Ordem_de_trabalho__c!=&apos;&apos;,1,0) +
+			IF(Demonstracao__c!=&apos;&apos;,1,0) +
+			IF(Contrato_de_Servi_o__c!=&apos;&apos;,1,0)
+		) &gt; 1
+	)
+),
+false)</errorConditionFormula>
+    <errorMessage>Há inconsistências com os vínculos pai, por favor verifique.</errorMessage>
+</ValidationRule>

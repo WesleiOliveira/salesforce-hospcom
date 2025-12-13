@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pedido_Convertido_em_Venda__c</fullName>
+    <description>Esse pedido de Demo foi convertido em uma venda?
+Se sim, favor preencher o campo Pedido de Venda.</description>
+    <externalId>false</externalId>
+    <label>Pedido Convertido em Venda?</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>SIM</fullName>
+                <default>false</default>
+                <label>SIM</label>
+            </value>
+            <value>
+                <fullName>NÃO</fullName>
+                <default>false</default>
+                <label>NÃO</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

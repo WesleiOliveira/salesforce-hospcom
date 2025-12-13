@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Excedeu_Tempo_Estimado__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+  NOT(ISBLANK(Data_Estimada_de_T_rmino__c)),
+  IF(
+    ISBLANK(Ticket_Finalizado_Em__c),
+    NOW() &gt; DATETIMEVALUE(Data_Estimada_de_T_rmino__c),
+    Ticket_Finalizado_Em__c &gt; DATETIMEVALUE(Data_Estimada_de_T_rmino__c)
+  ),
+  FALSE
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Excedeu Tempo Estimado</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

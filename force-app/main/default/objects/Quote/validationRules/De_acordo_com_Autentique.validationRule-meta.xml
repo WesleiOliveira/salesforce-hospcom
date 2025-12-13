@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>De_acordo_com_Autentique</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND (
+!$User.Ignorar_erros__c,
+idDocAutentique__c  != null,
+OR (
+ISCHANGED(Condicao_de_pagamento__c ),
+ISCHANGED(Forma_de_pagamento__c ),
+ISCHANGED(TotalPrice )
+)
+)</errorConditionFormula>
+    <errorMessage>Condição e forma de pagamento já previstas em contrato.</errorMessage>
+</ValidationRule>

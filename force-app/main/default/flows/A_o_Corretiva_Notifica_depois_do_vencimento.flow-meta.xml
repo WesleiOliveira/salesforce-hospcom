@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Copy_1_of_notifica_proprietrario</name>
+        <label>notifica responsavel</label>
+        <locationX>50</locationX>
+        <locationY>468</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>$Record.Responsevel__r.Email</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>subject</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>body_responsavel</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <actionCalls>
+        <name>notifica_proprietrario</name>
+        <label>notifica proprietrario</label>
+        <locationX>50</locationX>
+        <locationY>360</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>Copy_1_of_notifica_proprietrario</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>$Record.Owner:User.Email</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>subject</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>body</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <apiVersion>62.0</apiVersion>
+    <decisions>
+        <name>verifica_vencimento</name>
+        <label>verifica vencimento</label>
+        <locationX>182</locationX>
+        <locationY>252</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>venceu</name>
+            <conditionLogic>(1 AND 2) OR 3</conditionLogic>
+            <conditions>
+                <leftValueReference>$Flow.CurrentDate</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <elementReference>$Record.Prazo__c</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Aguardando Retorno</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Pendente</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>notifica_proprietrario</targetReference>
+            </connector>
+            <label>venceu</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <interviewLabel>Ação Corretiva — Notifica depois do vencimento {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Ação Corretiva — Notifica depois do vencimento</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>verifica_vencimento</targetReference>
+        </connector>
+        <object>Acao_corretiva__c</object>
+        <schedule>
+            <frequency>Once</frequency>
+            <startDate>2025-02-13</startDate>
+            <startTime>11:50:00.000Z</startTime>
+        </schedule>
+        <triggerType>Scheduled</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>body</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>---------------------------------------------------------------------------------------------
+
+A Ação Corretiva {!$Record.Name} venceu {!$Record.Prazo__c}.
+Link: https://hospcom.my.site.com/Sales/s/acao-corretiva/{!$Record.Id}
+
+---------------------------------------------------------------------------------------------</text>
+    </textTemplates>
+    <textTemplates>
+        <name>body_responsavel</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>---------------------------------------------------------------------------------------------
+
+A Ação Corretiva {!$Record.Name} registrada no seu nome venceu dia {!$Record.Prazo__c}
+
+Clique no link e justifique.
+Link: https://hospcom.my.site.com/Sales/s/acao-corretiva/{!$Record.Id}
+
+---------------------------------------------------------------------------------------------</text>
+    </textTemplates>
+    <textTemplates>
+        <name>subject</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>AÇÂO CORRETIVA VENCIDA</text>
+    </textTemplates>
+</Flow>

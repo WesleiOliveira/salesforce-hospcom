@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Data_primeiro_faturamento</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISCHANGED(Status_do_Contrato__c),
+TEXT(Status_do_Contrato__c) == &apos;CONTRATO VIGENTE&apos;,
+Primeiro_faturamento__c == null
+)</errorConditionFormula>
+    <errorDisplayField>Primeiro_faturamento__c</errorDisplayField>
+    <errorMessage>Preencha a data do primeiro faturamento.</errorMessage>
+</ValidationRule>

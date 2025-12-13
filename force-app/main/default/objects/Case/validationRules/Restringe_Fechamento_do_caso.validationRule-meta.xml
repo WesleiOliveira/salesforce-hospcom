@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restringe_Fechamento_do_caso</fullName>
+    <active>true</active>
+    <description>Apenas o analista de qualidade pode finalisar um caso</description>
+    <errorConditionFormula>AND(
+$User.ProfileId != &apos;00e31000001dwIY&apos;,
+TEXT(Status) = &apos;FINALIZADO&apos;, 
+!$User.Ignorar_erros__c,
+ISCHANGED(Status)
+)</errorConditionFormula>
+    <errorMessage>Apenas o departamento de Qualidade pode finalizar um Caso</errorMessage>
+</ValidationRule>

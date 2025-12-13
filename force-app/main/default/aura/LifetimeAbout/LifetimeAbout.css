@@ -1,0 +1,79 @@
+.THIS .circle {
+    height: 100px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  padding: 13px 20px;
+  border-radius: 50%;
+  background-color: #a0bb31;
+  color: #fff;
+  max-height: 50px;
+  z-index: 2;
+}
+
+.THIS .how-it-works.row .col-2 {
+  align-self: stretch;
+}
+
+.THIS .how-it-works.row .col-2::after {
+  content: "";
+  position: absolute;
+  border-left: 3px solid #ED8D8D;
+  z-index: 1;
+}
+
+.THIS .how-it-works.row .col-2.bottom::after {
+  height: 50%;
+  left: 50%;
+  top: 50%;
+}
+.THIS .how-it-works.row .THIS .col-2.full::after {
+  height: 100%;
+  left: calc(50% - 3px);
+}
+
+.THIS .how-it-works.row .THIS .col-2.top::after {
+  height: 50%;
+  left: 50%;
+  top: 0;
+}
+
+
+.THIS .timeline div {
+  padding: 0;
+  height: 40px;
+}
+.THIS .timeline hr {
+  border-top: 3px solid #0a3759;
+  margin: 0;
+  top: 17px;
+  position: relative;
+  opacity: 1!important;
+}
+.THIS .timeline .col-2 {
+  display: flex;
+  overflow: hidden;
+}
+.THIS .timeline .corner {
+  border: 3px solid #0a3759;
+  width: 100%;
+  position: relative;
+  border-radius: 15px;
+}
+.THIS .timeline .top-right {
+  left: 50%;
+  top: -50%;
+}
+.THIS .timeline .left-bottom {
+  left: -50%;
+  top: calc(50% - 3px);
+}
+.THIS .timeline .top-left {
+  left: -50%;
+  top: -50%;
+}
+.THIS .timeline .right-bottom {
+  left: 50%;
+  top: calc(50% - 3px);
+}

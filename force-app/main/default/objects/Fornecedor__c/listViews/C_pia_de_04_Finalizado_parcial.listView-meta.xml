@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>C_pia_de_04_Finalizado_parcial</fullName>
+    <columns>NAME</columns>
+    <columns>Fornecedor__c</columns>
+    <columns>Valor_total_comprado__c</columns>
+    <columns>Prazo_de_recebimento__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Valor_total_comprado__c</field>
+        <operation>greaterThan</operation>
+        <value>BRL 0</value>
+    </filters>
+    <filters>
+        <field>Status_do_PC__c</field>
+        <operation>equals</operation>
+        <value>Ativo</value>
+    </filters>
+    <label>03 - Ativo</label>
+</ListView>

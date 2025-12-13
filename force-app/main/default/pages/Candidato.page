@@ -1,0 +1,360 @@
+<apex:page showChat="False" title="Hospcom - Trabalhe conosco" showHeader="true" sidebar="false" showQuickActionVfHeader="False"
+    controller="CandidatoController" docType="html-5.0">
+    <html>
+
+    <head>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+            crossorigin="anonymous" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+
+        <style>
+            body {
+                margin: 0px!important;
+                border: 0px!important;
+            }
+
+            #contentWrapper>div.bodyDiv.brdPalette.brandPrimaryBrd {
+                margin: 0px!important;
+                border: 0px!important;
+            }
+
+            #contentWrapper>div.bPageFooter.noTableFooter {
+                display: none!important;
+            }
+
+            #contentWrapper>div.bPageFooter.noTableFooter>div {
+                display: none!important;
+            }
+
+            #contentWrapper>div.bPageFooter.noTableFooter>div {
+                display: none!important;
+            }
+
+            #AppBodyHeader {
+                display: none!important;
+            }
+
+            #globalHeaderBar {
+                display: none!important;
+            }
+
+            .sfdcBody {
+                background: transparent!important;
+            }
+
+            #contentWrapper>div.bodyDiv.brdPalette.brandPrimaryBrd {
+                box-shadow: none!important;
+                background-color: transparent!important;
+            }
+
+            .form-control {
+                background: transparent!important;
+                color: #163757!important;
+                border: 2px solid #163757!important;
+            }
+
+            .botao {
+                color: #163757!important;
+                background-color: #86D0F3!important;
+                border-color: #86D0F3!important;
+                font-size: 16px!important;
+                display: block!important;
+                width: 100%!important;
+                display: inline-block!important;
+                margin-bottom: 0!important;
+                font-weight: normal!important;
+                text-align: center;
+                vertical-align: middle!important;
+                -ms-touch-action: manipulation!important;
+                touch-action: manipulation!important;
+                cursor: pointer!important;
+                background-image: none!important;
+                border: 1px solid transparent!important;
+                white-space: nowrap!important;
+                padding: 6px 12px!important;
+                font-size: 14px!important;
+                line-height: 1.42857143!important;
+                border-radius: 4px!important;
+                -webkit-user-select: none!important;
+                -moz-user-select: none!important;
+                -ms-user-select: none!important;
+                user-select: none!important;
+                font-family: inherit!important;
+                font-size: inherit!important;
+                line-height: inherit!important;
+                -webkit-appearance: button!important;
+                cursor: pointer!important;
+                text-transform: none!important;
+                overflow: visible!important;
+                color: inherit!important;
+                font: inherit!important;
+                margin: 0!important;
+            }
+
+            .botao:hover {
+                color: #fff!important;
+                background-color: #286090!important;
+                border-color: #204d74!important;
+                text-decoration: none!important;
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <apex:messages style="text-align:center;color:red;font-size:15px;" />
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <!-- <apex:image height="150px" url="https://hospcom--c.na170.content.force.com/servlet/servlet.ImageServer?id=0156e00000BiaHB&oid=00Di0000000JVhH&lastMod=1635259233000"/> -->
+
+                <div style="width:100%; height:10px;"></div>
+                <h3>Trabalhe conosco
+                    <small>
+                        <br/>
+                        <br/>Cadastre-se aqui para participar de algum processo seletivo.
+                    </small>
+                </h3>
+
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <apex:outputText rendered="{!IF(Mensagem == '',true,false)}">
+            <apex:form >
+                <div class="form-group">
+                    <br/>
+
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-8 ">
+                            <apex:inputText styleClass="form-control" html-placeholder="Cargo Pretendido" value="{!Cargo}" />
+                        </div>
+                    </div>
+                    <br/>
+                    <div style="text-align:center; font-size:22px;">
+                        Informações Pessoais
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 ">
+                            <apex:inputText style="resize:none;" styleClass="form-control" html-placeholder="Nome" value="{!Nome}" />
+                        </div>
+                        <div class="col-sm-4 ">
+                            <apex:inputText style="resize:none;" styleClass="form-control" html-placeholder="Sobrenome" value="{!Sobrenome}" />
+                        </div>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-8 "> 
+                                <apex:selectList size="1" style="resize:none;" styleClass="form-control nacionalidadeInput" value="{!Nacionalidade}">
+                                <apex:selectOption itemValue="" itemLabel="— Nacionalidade" />
+                                <apex:selectOption itemValue="Brasileira" itemLabel="Brasileira" />
+                                <apex:selectOption itemValue="Outras" itemLabel="Outras" />
+                            </apex:selectList>
+                        </div>
+                        </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4" style="display: flex">
+                            <div class="col-md-4" style="padding: 0px; justify-content: center;">
+                                <span style="width: 100%; height: 100%;display: flex; align-items: center;">Data de nascimento</span>
+                            </div>
+
+                            <div class="col-md-8" style="padding: 0px;">
+                                <apex:input type="date" style="resize:none;" styleClass="form-control" html-placeholder="Data de Nascimento" value="{!dataNasc}"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-sm-4 ">
+                            <apex:inputText style="resize:none;" styleClass="form-control telefoneInput" html-placeholder="Telefone" value="{!telefone}"
+                            />
+                        </div>
+                        <br/>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4">
+                            <apex:inputText style="resize:none;" styleClass="form-control cpfInput" html-placeholder="CPF" value="{!CPF}" />
+                        </div>
+                        <div class="col-sm-4 ">
+                            <apex:inputText style="resize:none;" styleClass="form-control" html-placeholder="Endereço" value="{!Endereco}" />
+                        </div>
+                        <br/>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 ">
+                            <apex:inputText style="resize:none;" styleClass="form-control rgInput" html-placeholder="RG" value="{!RG}" />
+                        </div>
+                        <div class="col-sm-4 ">
+                            <apex:inputText style="resize:none;" styleClass="form-control" html-placeholder="E-mail" value="{!Email}" />
+                        </div>
+                        <br/>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 ">
+                            <apex:selectList size="1" style="resize:none;" styleClass="form-control" value="{!estadoCivil}">
+                                <apex:selectOption itemValue="" itemLabel="— Estado civil" />
+                                <apex:selectOption itemValue="Solteiro" itemLabel="Solteiro" />
+                                <apex:selectOption itemValue="Casado" itemLabel="Casado" />
+                                <apex:selectOption itemValue="Amasiado" itemLabel="Amasiado" />
+                                <apex:selectOption itemValue="Divorciado" itemLabel="Divorciado" />
+                                <apex:selectOption itemValue="Desquitado" itemLabel="Desquitado" />
+                                <apex:selectOption itemValue="Sep. Judicial" itemLabel="Sep. Judicial" />
+                                <apex:selectOption itemValue="Viúvo" itemLabel="Viúvo" />
+                            </apex:selectList>
+                        </div>
+                        
+                        
+                        <div class=" col-sm-4 ">
+                            <apex:inputText style="resize:none;" required="true" styleClass="form-control rgInput" html-placeholder="Telefone em caso de emergência" value="{!telefoneEmergencia}" />
+                        </div>
+                        
+                        <br/>
+                    </div>
+                    <br/>
+                    
+                     <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 "> 
+                                <apex:selectList size="1" style="resize:none;" styleClass="form-control" value="{!tipoSanguineo}">
+                                <apex:selectOption itemValue="" itemLabel="— Tipo Sanguíneo" />
+                                <apex:selectOption itemValue="A+" itemLabel="A+" />
+                                <apex:selectOption itemValue="A-" itemLabel="A-" />
+                                <apex:selectOption itemValue="B+" itemLabel="B+" />
+                                <apex:selectOption itemValue="B-" itemLabel="B-" />
+                                <apex:selectOption itemValue="AB+" itemLabel="AB+" />
+                                <apex:selectOption itemValue="AB-" itemLabel="AB-" />
+                                <apex:selectOption itemValue="O+" itemLabel="O+" />
+                                <apex:selectOption itemValue="O-" itemLabel="O-" />
+                            </apex:selectList>
+                        </div>
+                        <div class=" col-sm-4 "> 
+                                <apex:selectList size="1" style="resize:none;" styleClass="form-control" value="{!corRaca}" required="true">
+                                <apex:selectOption itemValue="" itemLabel="— Cor/Raça" />
+                                <apex:selectOption itemValue="Indígena" itemLabel="Indígena" />
+                                <apex:selectOption itemValue="Branca" itemLabel="Branca" />
+                                <apex:selectOption itemValue="Preta" itemLabel="Preta" />
+                                <apex:selectOption itemValue="Amarela" itemLabel="Amarela" />
+                                <apex:selectOption itemValue="Parda" itemLabel="Parda" />
+                            </apex:selectList>
+                        </div>                        
+                        
+                        <br/>
+                    </div>
+                    <br/>
+                    
+                    <div style="text-align:center; font-size:22px;">
+                        Informações Profissionais
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 "> Grau de Escolaridade
+                            <apex:selectList size="1" style="resize:none;" styleClass="form-control" value="{!Grau}">
+                                <apex:selectOption itemValue="" itemLabel="— Selecione" />
+                                <apex:selectOption itemValue="Ensino fundamental incompleto" itemLabel="Ensino fundamental incompleto" />
+                                <apex:selectOption itemValue="Ensino fundamental completo" itemLabel="Ensino fundamental completo" />
+                                <apex:selectOption itemValue="Ensino médio completo" itemLabel="Ensino médio completo" />
+                                <apex:selectOption itemValue="Superior incompleto" itemLabel="Superior incompleto" />
+                                <apex:selectOption itemValue="Superior completo" itemLabel="Superior completo" />
+                                <apex:selectOption itemValue="Pós-graduação" itemLabel="Pós-graduação" />
+                                <apex:selectOption itemValue="Técnico" itemLabel="Técnico" />
+                            </apex:selectList>
+                        </div>
+                        <div class="col-sm-4 "> Atualmente Empregado
+                            <apex:selectList size="1" style="resize:none;" styleClass="form-control" value="{!Empreg}">
+                                <apex:selectOption itemValue="true" itemLabel="Sim" />
+                                <apex:selectOption itemValue="false" itemLabel="Não" />
+                                <apex:selectOption itemValue="false" itemLabel="— Selecione" />
+                            </apex:selectList>
+                        </div>
+                        <br/>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 ">
+                            <apex:inputTextarea style="resize:none;" styleClass="form-control" html-placeholder="Formação Acadêmica" value="{!Form}"
+                            />
+                        </div>
+                        <div class="col-sm-4 ">
+                            <apex:inputTextarea style="resize:none;" styleClass="form-control" html-placeholder="Qual seu último cargo, funções desempenhadas e salário?"
+                                value="{!Ult}" />
+                        </div>
+                        <br/>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-8 ">
+                            <apex:inputTextarea style="resize:none;" styleClass="form-control" html-placeholder="Coloque aqui suas últimas experiências detalhadamente: cargo, salário, atividades desempenhadas..."
+                                value="{!Exp}" />
+                        </div>
+                        <br/>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-sm-offset-4 col-sm-4 text-center" style="font-weight:bold;">
+                            <apex:commandLink styleClass="botao" value="Enviar" action="{!Salvar}" />
+                        </div>
+                    </div>
+
+                </div>
+            </apex:form>
+        </apex:outputText>
+
+        <apex:outputText rendered="{!IF(Mensagem != '',true,false)}">
+            <div class="row">
+                <div class="col-sm-offset-3 col-sm-6">
+                    <div class="alert alert-{!Cor} text-center" role="alert" style="font-weight:bold;">
+                        {!Mensagem}
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-sm-offset-3 col-sm-6 text-center">
+                    <!-->
+                    <apex:form>
+                        <apex:inputfile value="{!myfile.body}" filename="{!myfile.Name}" />
+                        <br/>
+                        <apex:commandLink styleClass="botao" style="width:15% !important;" value="Enviar!" action="{!Savedoc}" />
+                    </apex:form>
+                    <-->
+                        <br/>
+                        <br/>
+                        <a href='#' onclick="location.href=location.href">Retornar ao formulário</a>
+                </div>
+            </div>
+        </apex:outputText>
+    </body>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Função para aplicar ou remover as máscaras
+        function aplicarMascara() {
+            var nacionalidade = $(".nacionalidadeInput").val();
+            
+            // Se a nacionalidade for "Brasileira", aplica a máscara
+            if (nacionalidade === 'Brasileira') {
+                $(".cpfInput").mask('000.000.000-00', { reverse: true }); // Aplica a máscara de CPF
+                $(".telefoneInput").mask('(00) 00000-0000'); // Aplica a máscara de telefone
+            } else {
+                $(".cpfInput").unmask(); // Remove a máscara de CPF
+                $(".telefoneInput").unmask(); // Remove a máscara de telefone
+            }
+        }
+
+        // Inicializa a máscara com base na nacionalidade selecionada
+        aplicarMascara();
+
+        // Quando a nacionalidade for alterada, chama a função
+        $(".nacionalidadeInput").change(function () {
+            aplicarMascara();
+        });
+    });
+</script>
+
+
+    </html>
+</apex:page>

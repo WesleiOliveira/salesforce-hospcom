@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Audience xmlns="http://soap.sforce.com/2006/04/metadata">
+    <audienceName>Supervisor comercial</audienceName>
+    <container>Hospcom</container>
+    <criteria>
+        <criterion>
+            <criteriaNumber>1</criteriaNumber>
+            <criterionValue>
+                <entityField>$User.ID_do_usu_rio__c</entityField>
+                <entityType>User</entityType>
+                <fieldValue>0055A000008puvc</fieldValue>
+            </criterionValue>
+            <operator>Equal</operator>
+            <type>FieldBased</type>
+        </criterion>
+        <criterion>
+            <criteriaNumber>1</criteriaNumber>
+            <criterionValue>
+                <entityField>$User.ID_do_usu_rio__c</entityField>
+                <entityType>User</entityType>
+                <fieldValue>0055A000006JycN</fieldValue>
+            </criterionValue>
+            <operator>Equal</operator>
+            <type>FieldBased</type>
+        </criterion>
+        <criterion>
+            <criteriaNumber>2</criteriaNumber>
+            <criterionValue>
+                <audienceDeveloperName>Administradores</audienceDeveloperName>
+            </criterionValue>
+            <operator>Equal</operator>
+            <type>Audience</type>
+        </criterion>
+    </criteria>
+    <formulaFilterType>AnyCriterionMatches</formulaFilterType>
+    <isDefaultAudience>false</isDefaultAudience>
+    <targets>
+        <target>
+            <groupName>2333fe6c-b73a-42a1-a8c9-f6463b4eff53$#$53319983-d995-4023-9ce3-a486df55a7ee</groupName>
+            <priority>1</priority>
+            <targetType>ExperienceVariation</targetType>
+            <targetValue>Performance_Comercial_Guias_Component</targetValue>
+        </target>
+    </targets>
+</Audience>

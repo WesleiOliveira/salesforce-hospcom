@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MediaGestor__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    ISBLANK(Novo_Gestor__c),
+    IF(
+        Lideranca__c == false,
+        ((G1__c + G2__c + G3__c + G4__c + G5__c + G6__c + G7__c + G8__c + G9__c + G10__c + G11__c + GAD3__c + GCSO3__c + GCHO3__c + GCRESPEITO3__c) / 15) * 7,
+        ((G1__c + G2__c + G3__c + G4__c + G5__c + G6__c + G7__c + G8__c + G9__c + G10__c + G11__c + G14__c + G15__c + G16__c + GAD3__c + GCSO3__c + GCHO3__c + GCRESPEITO3__c) / 19) * 7
+    ),
+    IF(
+        Lideranca__c == false,
+        (
+            (
+                ((G1__c + NG1__c) / 2) +
+                ((G2__c + NG2__c) / 2) +
+                ((G3__c + NG3__c) / 2) +
+                ((G4__c + NG4__c) / 2) +
+                ((G5__c + NG5__c) / 2) +
+                ((G6__c + NG6__c) / 2) +
+                ((G7__c + NG7__c) / 2) +
+                ((G8__c + NG8__c) / 2) +
+                ((G9__c + NG9__c) / 2) +
+                ((G10__c + NG10__c) /2) +
+                ((G11__c + NG11__c) /2) +
+                ((GAD3__c + NGAD_3__c) /2) +
+                ((GCSO3__c + NGSO3__c) /2) +
+                ((GCHO3__c + NGHO3__c) /2) +
+                ((GCRESPEITO3__c + NGRESPEITO3__c) /2)
+            ) / 15
+        ) * 7,
+        (
+            (
+                ((G1__c + NG1__c) / 2) +
+                ((G2__c + NG2__c) / 2) +
+                ((G3__c + NG3__c) / 2) +
+                ((G4__c + NG4__c) / 2) +
+                ((G5__c + NG5__c) / 2) +
+                ((G6__c + NG6__c) / 2) +
+                ((G7__c + NG7__c) / 2) +
+                ((G8__c + NG8__c) / 2) +
+                ((G9__c + NG9__c) / 2) +
+                ((G10__c + NG10__c) /2) +
+                ((G11__c + NG11__c) /2) +
+                ((G14__c + NG14__c) /2) +
+                ((G15__c + NG15__c) /2) +
+                ((G16__c + NG16__c) /2) +
+                ((GAD3__c + NGAD_3__c) /2) +
+                ((GCSO3__c + NGSO3__c) /2) +
+                ((GCHO3__c + NGHO3__c) /2) +
+                ((GCRESPEITO3__c + NGRESPEITO3__c) /2)
+            ) / 18
+        ) * 7
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Média Gestor</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

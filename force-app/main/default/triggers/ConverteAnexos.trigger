@@ -1,0 +1,1 @@
+trigger ConverteAnexos on Documentos_Licita_ao__c (before update) {}

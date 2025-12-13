@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fontawesome__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(Tipo__c,
+  &quot;Caso para Análise&quot;, &quot;&lt;i class=&apos;fa fa-search&apos;&gt; &lt;/i&gt;&quot;,
+  &quot;Cliente Alega Desconhecer Divida&quot;, &quot;&lt;i class=&apos;fa fa-question-circle&apos;&gt; &lt;/i&gt;&quot;,
+  &quot;Cliente Pesquisado Lemitt&quot;, &quot;&lt;i class=&apos;fa fa-user-secret&apos;&gt; &lt;/i&gt;&quot;,
+  &quot;Cobrança via E-mail&quot;, &quot;&lt;i class=&apos;fa fa-envelope&apos;&gt; &lt;/i&gt;&quot;,
+  &quot;Contato com Cliente&quot;, &quot;&lt;i class=&apos;fa fa-phone&apos;&gt;&lt;/i&gt;&quot;,
+  &quot;Contato Receptivo&quot;, &quot;&lt;i class=&apos;fa fa-thumbs-up&apos;&gt; &lt;/i&gt;&quot;,
+  &quot;Acordo&quot;, &quot;&lt;i class=&apos;fa fa-handshake-o&apos; aria-hidden=&apos;true&apos;&gt;&lt;/i&gt;&quot;,
+  &quot;Devolução&quot;, &quot;&lt;i class=&apos;fa fa-undo&apos;&gt; &lt;/i&gt;&quot;,
+  &quot;Falecido&quot;, &quot;&lt;i class=&apos;fa fa-times-circle&apos;&gt; &lt;/i&gt;&quot;,
+  &quot;Notificação Extrajudicial&quot;, &quot;&lt;i class=&apos;fa fa-file-text&apos;&gt; &lt;/i&gt;&quot;,
+  &quot;Pendência de Entrega&quot;, &quot;&lt;i class=&apos;fa fa-truck&apos;&gt; &lt;/i&gt;&quot;,
+  &quot;Pendência de Treinamento&quot;, &quot;&lt;i class=&apos;fa fa-graduation-cap&apos;&gt; &lt;/i&gt;&quot;,
+  &quot;Promessa de Pagamento&quot;, &quot;&lt;i class=&apos;fa fa-handshake-o&apos;&gt; &lt;/i&gt;&quot;,
+  &quot;Recado com Terceiros&quot;, &quot;&lt;i class=&apos;fa fa-users&apos;&gt; &lt;/i&gt;&quot;,
+  &quot;Renegociação Jurídico&quot;, &quot;&lt;i class=&apos;fa fa-balance-scale&apos;&gt; &lt;/i&gt;&quot;,
+  &quot;Telefone Caixa Postal&quot;, &quot;&lt;i class=&apos;fa fa-voicemail&apos;&gt; &lt;/i&gt;&quot;,
+  &quot;Telefone Desligado&quot;, &quot;&lt;i class=&apos;fa fa-phone-slash&apos;&gt; &lt;/i&gt;&quot;,
+  &quot;Telefone Nao Atende&quot;, &quot;&lt;i class=&apos;fa fa-phone-slash&apos;&gt; &lt;/i&gt;&quot;,
+  &quot;Telefone Nao Existe&quot;, &quot;&lt;i class=&apos;fa fa-ban&apos;&gt; &lt;/i&gt;&quot;,
+  &quot;Telefone Ocupado&quot;, &quot;&lt;i class=&apos;fa fa-phone&apos;&gt; &lt;/i&gt;&quot;,
+  &quot;Pago&quot;, &quot;&lt;i class=&apos;fa fa-check&apos;&lt;/i&gt;&quot;,
+  &quot;Mensagem Enviada&quot;, &quot;&lt;i class=&apos;fa fa-whatsapp&apos;&lt;/i&gt;&quot;,
+  &quot;Tratativa com Gestor&quot;, &quot;&lt;i class=&apos;fa fa-user-circle&apos;&gt; &lt;/i&gt;&quot;,
+  &quot;&lt;i class=&apos;fa fa-dot-circle-o&apos;&gt; &lt;/i&gt;&quot;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Font awesome Icon</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Regi_o__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+OR(OPME__c &gt; 0, Huawei__c &gt; 0), &apos;Exclusiva&apos;,
+IF(
+AND(
+OpportunityId != &apos;006U4000003toGz&apos;,
+OpportunityId != &apos;006U40000052kwj&apos;,
+OpportunityId != &apos;006U4000005yCoD&apos;,
+OpportunityId != &apos;006U4000003uLo1&apos;,
+OpportunityId != &apos;006U4000008Uw1x&apos;,
+OpportunityId != &apos;006U400000Go7Rj&apos;,
+BillingState = &quot;São Paulo&quot;
+), &quot;Região SP&quot;,
+IF(
+OR(
+BillingState == &quot;Acre&quot;, 
+BillingState == &quot;Amazonas&quot;, 
+BillingState == &quot;Amapá&quot;, 
+BillingState == &quot;Pará&quot;, 
+BillingState == &quot;Rondônia&quot;, 
+BillingState == &quot;Roraima&quot;,
+OpportunityId == &apos;006U4000003toGz&apos;,
+OpportunityId == &apos;006U4000005rhLj&apos;,
+OpportunityId == &apos;006U40000052kwj&apos;,
+OpportunityId == &apos;006U4000005yCoD&apos;,
+OpportunityId == &apos;006U4000003uLo1&apos;,
+OpportunityId == &apos;006U4000008Uw1x&apos;
+), &quot;Região Norte&quot;,
+IF(
+OR(
+BillingState = &quot;Rio de Janeiro&quot;, 
+BillingState = &quot;Espírito Santo&quot;, 
+BillingState = &quot;Paraná&quot;, 
+BillingState = &quot;Santa Catarina&quot;, 
+BillingState = &quot;Rio Grande do Sul&quot; 
+), &quot;Região RJ/ES/Sul&quot;,
+IF(
+OR(
+BillingState = &quot;Mato Grosso&quot;, 
+BillingState = &quot;Mato Grosso do Sul&quot; 
+), &quot;Região MT/MS&quot;,
+IF(
+BillingState = &quot;Distrito Federal&quot;,
+&quot;Região DF&quot;,
+IF(
+OR(
+BillingState = &quot;Minas Gerais&quot;, 
+BillingState = &quot;Ceará&quot;, 
+BillingState = &quot;Piauí&quot;, 
+BillingState = &quot;Rio Grande do Norte&quot;, 
+BillingState = &quot;Piauí&quot;,
+BillingState = &quot;Paraíba&quot;,
+BillingState = &quot;Pernambuco&quot;,
+BillingState = &quot;Sergipe&quot;,
+BillingState = &quot;Maranhão&quot;,
+BillingState = &quot;Bahia&quot;,
+BillingState = &quot;Alagoas&quot; 
+), &quot;Região NE/MG&quot;,
+&quot;Região GO/TO&quot;
+)))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Região</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

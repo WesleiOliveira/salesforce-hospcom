@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Alteracao_de_datas</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+!ISNEW(),
+OR(
+ISCHANGED(Data_da_demonstracao__c), ISCHANGED( Data_de_termino_da_demonstracao__c) 
+)
+)</errorConditionFormula>
+    <errorMessage>Não é permitido realizar alterações de data. Cancele e faça um novo registro.</errorMessage>
+</ValidationRule>

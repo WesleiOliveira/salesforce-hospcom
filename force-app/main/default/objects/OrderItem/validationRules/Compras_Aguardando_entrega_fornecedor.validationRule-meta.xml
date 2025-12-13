@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Compras_Aguardando_entrega_fornecedor</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    !$User.Ignorar_erros__c,
+    Acao_interna__c = false,
+    OR(
+        TEXT(PRIORVALUE(Status__c)) = &apos;CMP - COTAÇÃO DE COMPRA&apos;,
+        TEXT(PRIORVALUE(Status__c)) = &apos;CMP - AG. DADOS TECNICOS&apos;,
+        TEXT(PRIORVALUE(Status__c)) = &apos;CMP - AG. PAGAMENTO FORN&apos;,
+        TEXT(PRIORVALUE(Status__c)) = &apos;CMP - AG. ENTREGA FORNECEDOR&apos;,
+        TEXT(PRIORVALUE(Status__c)) = &apos;CMP - EM PRODUÇÃO FORN.&apos;,
+        TEXT(PRIORVALUE(Status__c)) = &apos;CMP - PRE-EMBARQUE IMPORTAÇÃO&apos;,
+        TEXT(PRIORVALUE(Status__c)) = &apos;CMP - AG. CONSOLIDAÇÃO DE CARGA&apos;,
+        TEXT(PRIORVALUE(Status__c)) = &apos;CMP - AG. ACEITE DE CARGA DG/BATERIA&apos;,
+        TEXT(PRIORVALUE(Status__c)) = &apos;CMP - EM TRANSITO INTERNACIONAL&apos;,
+        TEXT(PRIORVALUE(Status__c)) = &apos;CMP - AG. REMOÇAO DE CARGA&apos;,
+        TEXT(PRIORVALUE(Status__c)) = &apos;CMP - AG. DESEMBARAÇO ADUANEIRO&apos;,
+        TEXT(PRIORVALUE(Status__c)) = &apos;CMP - AG. AUTORIZAÇÃO DESEMBARAÇO&apos;,
+        TEXT(PRIORVALUE(Status__c)) = &apos;CMP - AG. LIBERAÇAO CANAL VERMELHO&apos;,
+        TEXT(PRIORVALUE(Status__c)) = &apos;CMP - AG. LIBERAÇAO CANAL AMARELO&apos;,
+        TEXT(PRIORVALUE(Status__c)) = &apos;CMP - AG. LIBERAÇAO CANAL CINZA&apos;,
+        TEXT(PRIORVALUE(Status__c)) = &apos;CMP - AG. NFE NACIONALIZAÇÃO&apos;,
+        TEXT(PRIORVALUE(Status__c)) = &apos;CMP - EM COLETA PORTO/FORNECEDOR&apos;,
+        TEXT(PRIORVALUE(Status__c)) = &apos;CMP - EM TRANSITO NACIONAL&apos;
+    ),
+    ISCHANGED(Status__c)
+)</errorConditionFormula>
+    <errorDisplayField>Status__c</errorDisplayField>
+    <errorMessage>Não foi possível concluir a alteração de Status. O registro encontra-se em um Status controlado do processo de compra (OPR ou CMP), no qual mudanças não são permitidas.</errorMessage>
+</ValidationRule>

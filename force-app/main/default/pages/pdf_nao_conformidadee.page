@@ -1,0 +1,420 @@
+<apex:page standardController="Nao_Conformidade__c" applyHtmlTag="false" showHeader="false" renderAs="pdf">
+  <head>
+  <style type="text/css" media="print">
+            @page {
+                size:21cm 29.7cm;
+                margin:100px 40px 60px 40px;
+                @top-center {
+                    content:element(header);
+                }
+                @bottom-center {
+                    content:element(footer);
+                }
+            }
+            @page{
+                size:A4;
+                background: url({!IF(Nao_Conformidade__c.Auditoria__r.Empresa_Auditada__r.CNPJ__c  == '27.476.124/0001-02',$Resource.TimbradoHealth,IF(Nao_Conformidade__c.Auditoria__r.Empresa_Auditada__r.CNPJ__c == '05.743.288/0001-08' || Nao_Conformidade__c.Auditoria__r.Empresa_Auditada__r.CNPJ__c == '05.743.288/0003-70',$Resource.TimbradoHospcom,IF(Nao_Conformidade__c.Auditoria__r.Empresa_Auditada__r.CNPJ__c == '23.813.386/0001-56',$Resource.TimbradoGDB,IF(Nao_Conformidade__c.Auditoria__r.Empresa_Auditada__r.CNPJ__c == '40.014.621/0001-49',$Resource.TimbradoABC,$Resource.TimbradoGenerico))))});
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);}
+            }
+            .pagenumber:before {
+                content:counter(page);
+            }
+            .pagecount:before {
+                content:counter(pages);
+            }
+            div.header {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(header);
+                height:60px;
+            }
+            div.content {
+            }
+            
+            div.footer {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(footer);
+                height:20px;
+                text-align:right;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                font-weight:normal;
+            }
+        </style>
+        <style type="text/css" media="print">
+        /*
+            @page:first{
+                size:A4;
+                background: url($Resource.SobreHealth);
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);
+                }
+            }
+            
+            @page{
+                size:A4;
+                background: url($Resource.TimbradoHealth);
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);}
+            }
+  */
+            td, tr{
+            padding: 0;
+            margin: 0;
+        }
+            
+            *{
+                letter-spacing: 10px;
+                font-family: Arial, Helvetica, sans-serif;
+                color: #0c3557;
+                font-size: 12px;
+                text-transform: uppercase;
+            }
+            .titulo{
+                font-family:arial, verdana, sans-serif;
+                font-size:15px;
+                text-align:left;
+                font-weight:bold; 
+                width:100%;
+            }
+            .tabela_geral{
+                border-collapse:collapse;
+                width:100%;
+            }
+            table.print-friendly tr td, table.print-friendly tr th {
+                page-break-inside: avoid;
+            }
+            .titulo{
+              
+                text-align: left;
+                padding: 1px 1px;
+                font-size: 14px;
+
+                
+            }
+            .maiuscula{
+                text-transform: uppercase;
+            }
+          
+            .questoes{
+             
+            
+            }
+            .questao{
+                display: flex;
+                flex-direction: row;
+                padding: 5px;
+            }
+
+            .valor{
+                margin-bottom: -100px;
+                border: #0c3557 1px solid;
+                
+            }
+
+            .sessao-questao{
+                font-size: 14px;
+                padding: 10px 0  0 5px;
+            }
+            
+            
+            .questao{
+                padding: 10px !important;
+                padding-right: 15px !important;
+            }
+
+            h1,h2{
+                padding: 0;
+                margin: 0;
+            }
+            .resposta{
+                font-weight: bold;
+                font-size: 14px;
+            }
+            .t{
+                text-align: center;
+                padding: 1px 1px;
+                font-size: 14px;
+            }
+            .t2{
+                text-align: left;
+                padding: 1px 1px;
+                font-size: 14px;
+            }
+            table{
+                width: 100%;
+            }
+            .NC{              
+                padding: 5px;
+               
+                margin: 15px 0 ;
+            }
+            .tp-nc {
+            
+            }
+
+            .linha, .linha2{
+                padding: 5px;
+               
+
+            }
+            .campo{
+                font-weight: bold;
+            }
+            .linha2{
+                width: 50%;
+                padding-right: 20px;
+            }
+            .value{
+                text-transform:lowercase;
+                letter-spacing:1rem;
+            }
+            .aline_bottom{
+
+                position: fixed;
+                bottom: 10px;
+            }
+        </style>
+  </head>
+  <body>
+  <apex:pageBlock >
+
+    <div class="footer" style="text-align:center !important"><br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Página <span class="pagenumber"></span> de <span class="pagecount"></span> - Emissão em:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{! TODAY() }" /></apex:outputText>
+    </div>
+
+    <table >
+        
+     
+
+        <tr>
+            <td colspan="2" >
+                <h1 class = "t" > Relatório de Não Conformidade  - {!Nao_Conformidade__c.name} </h1>
+             </td>
+        </tr>
+
+      
+        <tr>
+            <td>
+                &nbsp; <br/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp; <br/>
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+            
+
+                    <table class="NC">                     
+                        
+                
+
+                
+                        <tr>
+                            <td>
+                                <h2 class = "t2" > {!Nao_Conformidade__c.Auditoria__r.Empresa_Auditada__r.name} -  {!Nao_Conformidade__c.Auditoria__r.Empresa_Auditada__r.CNPJ__c}</h2>
+                            </td>
+                        </tr>
+                                        
+                        <tr style="border-top: #0c3557 1px solid;"> 
+                            
+                            <td colspan="1" class="tp-nc linha2" style="border-top: #0c3557 1px solid;" >
+                                <span class="campo">Não conformidade: </span> {!Nao_Conformidade__c.N_o_conformidade__c } 
+                            </td>
+                            
+                            <td colspan="1" class="tp-nc linha2" style="border-top: #0c3557 1px solid;">
+                                <span class="campo">Funcionário:</span> <span class="value">{!Nao_Conformidade__c.Funcionario__r.name}</span>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: #0c3557 1px solid;">
+                            <td colspan="1" class="tp-nc linha2"  style="border-bottom: #0c3557 1px solid;">
+                                <span class="campo">Data da abertura do RNC:</span>&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!Nao_Conformidade__c.Data_de_Abertura_do_RNC__c}" /></apex:outputText>
+                            </td>
+
+                            <td colspan="1" class="tp-nc linha2 "  style="border-bottom: #0c3557 1px solid;">
+                                <span class="campo">Setor:</span> <span class="value">{!Nao_Conformidade__c.Departamento__c}</span>
+                            </td>         
+                        </tr>
+                       
+                        <tr>
+                            <td>
+                                &nbsp; <br/><br/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="1" class = "linha">
+                                <span class="campo">Tipo da não conformidade:</span> <span class="value">{!Nao_Conformidade__c.Tipo_de_nao_conformidade__c}</span>
+                            </td>    
+
+                            <td colspan="1" class="linha">
+                                <span class="campo">Origem da não conformidade:</span> <span class="value">{!Nao_Conformidade__c.Origem_da_nao_conformidade__c}</span>
+                            </td>
+                        </tr>
+
+                        
+
+                        <tr>
+                            <td colspan = "1" class="linha">
+                                <span class="campo">Possível causa da não conformidade:</span>  <span class="value">{!Nao_Conformidade__c.Poss_vel_causa_da_n_o_conformidade__c}</span>
+                            </td>
+
+                            <td colspan="1" class="linha">
+                                <span class="campo">ação imediata: </span> <span  class="value"> {!Nao_Conformidade__c.ACAo_imediata__c    }</span>
+                            
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                &nbsp; <br/><br/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan = "2" class="linha">
+                                <span class="campo">Descrição da não conformidade: </span> <span class="value">{!Nao_Conformidade__c.Descricao__c}</span>
+                            </td>
+                        </tr>
+                        <apex:outputText rendered="{!IF(Nao_Conformidade__c.Codigo__c != '', true, false)}">
+                        <tr>
+                            <td colspan = "2" class="linha">
+                                <span class="campo">Produto: </span> Código: <span class="value">{!Nao_Conformidade__c.Codigo__c}</span>, Lote: {!Nao_Conformidade__c.Lote__c}, Quantidade: {!Nao_Conformidade__c.Quant__c}, NF: {!Nao_Conformidade__c.NF1__c}
+                            </td>
+                        </tr>               
+                        </apex:outputText>
+                        <apex:outputText rendered="{!IF(Nao_Conformidade__c.Item_da_Nomar__c    != '', true, false)}">
+                        <tr>
+                            <td colspan = "2" class="linha">
+                                <span class="campo">ITEM DA NOMAR: </span> <span class="value">{!Nao_Conformidade__c.Item_da_Nomar__c}</span>
+                            </td>
+                        </tr>               
+                        </apex:outputText>
+                        <tr>
+                            <td colspan="2" class="linha">
+                                <span class="campo">observações: </span> <span  class="value"> {!Nao_Conformidade__c.Observa_es__c}.</span>
+                            </td>
+                        </tr>
+                        
+
+                        
+                     
+
+                        
+                        <tr>
+                            <td>
+                                &nbsp; <br/><br/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2">
+                                <table style="border: #0c3557 1px solid; margin: 5px auto; padding: 5px; " >
+                                    <tr >
+                                        <td width="33.3%" style="text-align: center;" class="">
+                                            gravidade: {!Nao_Conformidade__c.Gravidade__c}
+                                        </td>
+
+                                        <td width="33.3%" style="text-align: center;" class=""> 
+                                            urgência: {!Nao_Conformidade__c.Urg_ncia__c}
+                                        </td>
+
+                                        <td width="33.3%" style="text-align: center;" class="">
+                                            Tendência: {!Nao_Conformidade__c.Tend_ncia__c}
+                                        </td>
+                                        
+                                    </tr>
+                                </table>
+                            </td>
+
+                           
+                        </tr>
+
+
+                        
+                        <tr>
+                            <td>
+                                &nbsp; <br/><br/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="linha">
+                                <span class="campo">Análise do supervisor: </span> <span  class="value"> {!Nao_Conformidade__c.Aprovado__c}</span>
+                            </td> 
+                            
+                            <td class="linha">
+                                <span class="campo">Data da Análise: </span> <span  class="value">  <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!Nao_Conformidade__c.Data_da_Aprova_o__c}" /></apex:outputText></span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="linha">
+                                <span class="campo">Parecer </span> <span  class="value"> {!Nao_Conformidade__c.Parecer__c  }</span>
+                           
+                            </td>
+                        </tr>
+                        
+
+
+
+                    </table>
+                
+            </td>
+        </tr>
+    </table>
+
+    <table class="aline_bottom">
+        <tr style="margin-top:10px;">
+            <td style="border:none; text-align:center;" width="50%">
+                <div style="padding:0; margin:0; text-align:center;">
+                    <div  style="padding:0; margin: 0 0 -3px 0; text-align:center;" > 
+                        <apex:image style="padding:0; margin:0 auto -15px ; text-align:center;" value="{!if(Nao_Conformidade__c.Auditoria__r.Responsavel__r.assinatura__c !="", Nao_Conformidade__c.Auditoria__r.Responsavel__r.assinatura__c ,"https://hospcom--c.na170.content.force.com/servlet/servlet.ImageServer?id=0156e00000Bf8Ui&oid=00Di0000000JVhH&lastMod=1667927109000" )}" width="250" height="60px"/>
+                    </div>     
+                    
+                    <div style="padding:0; margin:0;">
+                        <p style="padding:0; margin:0 auto;">
+                            <div class="underline" style="padding:0; margin:0 auto; width: 70%;border-bottom: 1px solid #0c3557;"></div><br/>
+                            {!Nao_Conformidade__c.Auditoria__r.Responsavel__r.Name}<br/>
+                                parecer da qualidade
+                        </p>
+                    </div>
+                </div>                                      
+            </td>
+
+
+                            <td style="border:none; text-align:center;" colspan="1" >
+                                <div style="padding:0; margin:0; text-align:center;">
+                                    <div  style="padding:0; margin: 0 0 -3px 0; text-align:center;" > 
+                                        <apex:image style="padding:0; margin:0 auto -15px ; text-align:center;" value="{!"https://hospcom--c.na170.content.force.com/servlet/servlet.ImageServer?id=0156e00000BgFbi&oid=00Di0000000JVhH&lastMod=1672836269000" }"  width="250" height="60px"/>
+                                    </div>     
+                                    
+                                    
+                                    <div style="padding:0; margin:0; ">
+                                        <p style="padding:0; margin:0 auto;">
+                                            <div class="underline" style="padding:0; margin: auto; width: 70%;border-bottom: 1px solid #0c3557;"></div><br/>
+                                               Daniel Alencar<br/>
+                                                Representante da Gerência
+                                                                        </p>
+                                    </div>
+                                </div>                                      
+                            </td>
+            
+        </tr>
+       
+
+    </table>
+           
+  </apex:pageBlock>
+
+  </body>
+
+</apex:page>

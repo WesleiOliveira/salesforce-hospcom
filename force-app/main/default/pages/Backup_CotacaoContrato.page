@@ -1,0 +1,593 @@
+<apex:page renderAs="pdf" standardController="Quote" extensions="CotacaoProposta" standardStylesheets="false" cache="false" showHeader="false" sidebar="false" applyHtmlTag="true" applyBodyTag="false">
+    <head>
+        <style type="text/css" media="print">
+            
+            /* pdf */
+            @page:first{
+                size:A4;
+                background: url({!documento.sobre});
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(paginacao);}
+            }
+            @page{
+                size:A4;
+                background: url({!documento.timbrado});
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(paginacao);}
+            }
+            .pagina:before{content:counter(page);}
+            .paginas:before{content:counter(pages);}
+            
+            /* paginação */
+            .paginacao{
+                height:120px;
+                position:running(paginacao);
+            }.paginacao .valor{
+                position: absolute;
+                top: 74px;
+                left: 410px;
+                text-align:center;
+                background-color:white;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:600;
+                color:#697f9b;
+            }
+            
+            /* documento */
+            .documento{
+                padding:0px;
+                margin:0px;
+                font-family:arial, verdana, sans-serif;
+            }.bloco{
+                page-break-inside:avoid;
+            }.linha{
+                white-space: nowrap;
+            }
+            
+            /* capa */
+            .capa .titulo{
+
+                width:100%;
+                text-align:center;
+                text-transform:uppercase;
+                font-weight:bold;
+                font-size:20px;
+                white-space:pre;
+            }.capa .numero{
+                margin-top:40px;
+                width:100%;
+                text-align:right;
+                font-size:14px;
+            }.capa .rotulo{
+                margin-top:35px;
+                font-size:15px;
+            }.capa .valor{
+                margin-top:5px;
+                margin-left:20px;
+                font-size:17px;
+                font-weight:bold;
+            }.capa .nota{
+                margin-top:5px;
+                margin-left:20px;
+                font-size:14px;
+            }
+            
+            /* conteudo */
+            .conteudo{
+                page-break-before:always;
+            }.conteudo .titulo{
+                font-size:14px;
+                font-weight:bold;
+                line-height:120%;
+            }.conteudo .paragrafo{
+                font-size:13px;
+                text-align:justify;
+                line-height:120%;
+                text-justify:inter-word;
+                text-indent:50px;
+            }.conteudo .obsimgs{
+                text-align:right;
+                font-size:11px;
+                font-weight:bold;
+                font-style:italic;
+            }.conteudo .assinatura{
+                width:100%;
+            }.conteudo .assinatura td{
+                width:50%;
+                font-size:13px;
+                line-height:130%;
+                vertical-align:top;
+            }.conteudo .nota{
+                font-size:13px;
+                text-align:justify;
+                line-height:120%;
+                font-style:italic;
+            }
+            
+            /* listagem */
+            .listagem{ 
+                width:100%;
+            }.listagem table{ 
+                width:100%;
+                border-collapse:collapse;
+            }.listagem td{ 
+                padding:2px 5px;
+                line-height:120%;
+            }.listagem .pre-cabecalho{
+                height:10px;
+            }.listagem .cabecalho td{
+                font-size:12px;
+                font-weight:bold;
+                background-color:#e2e3e3;
+                white-space: nowrap;
+                border-color:#cacecf;
+                border-style:solid;
+                border-width:1px 0px 1px 0px;
+            }.listagem .item-dados .imagem{
+                vertical-align:middle;
+            }.listagem .item-dados.acessorio .imagem{
+                text-align:right;
+            }.listagem .item-dados.equipamento img{
+                width: 80px;
+                height: 80px; 
+            }.listagem .item-dados.acessorio img{
+                width: 55px;
+                height: 55px; 
+            }.listagem .item-dados .valor{
+                border-color:#eef2f4;
+                border-style:solid;
+                border-width:1px 0px 0px 0px;
+            }.listagem .item-dados td{
+                font-size:10px;
+                vertical-align:top;
+            }.listagem .item-descr td{
+                font-size:10px;
+                text-align:justify;
+                vertical-align:top;
+                text-justify:inter-word;
+                border-color:#eef2f4;
+                border-style:solid;
+                border-width:0px 0px 1px 0px;
+            }.listagem .subtotal{
+                font-weight: bold;
+                font-size:10px;
+                white-space: nowrap;
+            }.listagem .subtotal .valor{
+                border-color:#eef2f4;
+                border-style:solid;
+                border-width:0px 0px 1px 0px;
+            }
+        </style>
+    </head>
+    
+    <body class="documento" style="font-size:13px;">
+        
+        <!-- paginacao -->
+        <div class="paginacao">
+            <div class="valor" style="margin: -9px -50px">Contrato: {!Quote.QuoteNumber} - Página <span class="pagina"/> de <span class="paginas"/></div>
+        </div>
+        
+        <!-- capa -->
+        <div class="capa">
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        
+        
+            <div class="titulo">CONTRATO DE COMPRA E VENDA DE EQUIPAMENTOS HOSPITALARES</div>
+            <br/><br/><br/><br/><br/><br/><br/><br/>
+            <div class="titulo">Nº: {!cotacao.QuoteNumber}</div>
+            <apex:outputText rendered="{!IF(cotacao.Account.RecordType.Name=='Conta comercial',true,false)}">
+            </apex:outputText>
+           
+            <apex:outputText rendered="{!IF(cotacao.Opportunity.RecordType.Name=='Licitação',true,false)}">
+                <div class="rotulo">{!cotacao.Opportunity.Modalidade__c}</div>
+                <div class="valor">{!cotacao.Opportunity.Name}</div>
+                <apex:OutputText rendered="{!If(cotacao.Opportunity.Processo__c!=null,true,false)}">
+                    <div class="nota">Nº. Processo: {!cotacao.Opportunity.Processo__c}</div>            
+                </apex:OutputText>
+            </apex:outputText>
+        </div>
+        
+        <!-- conteudo -->
+        <div class="conteudo">
+            
+            <div class="bloco">
+                <apex:variable var="n1" value="{!0}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+                <div >Pelo presente instrumento particular, celebrando entre as partes, a saber.</div>
+                <br/>
+                <div style="text-align: justify;"><b>VENDEDORA: </b> <b>{!documento.empresa_nome}</b>{!IF(Quote.Opportunity.Faturamento_Feito2__r.Ownership = 'PUBLICO' , ', pessoa jurídica de direito público',', pessoa jurídica de direito privado')}, {!documento.empresa_dados} e, de outro lado,</div>
+                <br/>
+                <apex:outputText rendered="{!IF(Quote.Account.CNPJ__c != null, true, false)}">
+                    <div style="text-align: justify;"><b>COMPRADOR(A): </b> <b>{!Quote.Account.Raz_o_Social__c}</b>{!IF(Quote.Opportunity.Account.Ownership = 'PUBLICO' , ', pessoa jurídica de direito público',', pessoa jurídica de direito privado')},  inscrita no CNPJ sob o Nº {!Quote.Account.CNPJ__c} sediada no endereço: {!Quote.Account.BillingStreet}, {!Quote.Account.BillingCity}, {!Quote.Account.BillingState}, CEP: {!Quote.Account.BillingPostalCode}</div>
+                </apex:outputText>
+                <apex:outputText rendered="{!IF(Quote.Account.CNPJ__c == null, true, false)}">
+                    <div style="text-align: justify;"><b>COMPRADOR(A): </b> <b>{!Quote.Account.Name}</b>, pessoa física inscrita no CPF sob o n.º {!Quote.Account.CPF__pc}, RG n.º {!Quote.Account.RG__pc} residente e domiciliado à {!Quote.Account.BillingStreet}, {!Quote.Account.BillingCity}, {!Quote.Account.BillingState}, CEP: {!Quote.Account.BillingPostalCode}</div>
+                </apex:outputText>
+                <apex:outputText rendered="{!IF(Quote.Fiador__c != null, true, false)}">
+                    <br/>
+                    <div style="text-align: justify;"><b>FIADOR(A): </b> <b>{!Quote.Fiador__r.Name}</b>, pessoa física inscrita no CPF sob o n.º {!Quote.Fiador__r.CPF__pc}, RG n.º {!Quote.Fiador__r.RG__pc} residente e domiciliado à {!Quote.Fiador__r.BillingStreet}, {!Quote.Fiador__r.BillingCity}, {!Quote.Fiador__r.BillingState}, CEP: {!Quote.Fiador__r.BillingPostalCode}</div>
+                </apex:outputText>
+                <apex:outputText rendered="{!IF(Quote.Conjuge_do_Fiador__c != null, true, false)}">
+                    <br/>
+                    <div style="text-align: justify;"><b>CONJUGE DO FIADOR(A): </b> <b>{!Quote.Conjuge_do_Fiador__r.Name}</b>, pessoa física inscrita no CPF sob o n.º {!Quote.Conjuge_do_Fiador__r.CPF__pc}, RG n.º {!Quote.Conjuge_do_Fiador__r.RG__pc} residente e domiciliado à {!Quote.Conjuge_do_Fiador__r.BillingStreet}, {!Quote.Conjuge_do_Fiador__r.BillingCity}, {!Quote.Conjuge_do_Fiador__r.BillingState}, CEP: {!Quote.Conjuge_do_Fiador__r.BillingPostalCode}</div>
+                </apex:outputText>
+                <br/>
+                <div style="text-align: justify;">Têm entre si justo e acertado o presente contrato de compra e venda, que se regerá pelas cláusulas e condições a seguir delineadas.</div>
+            </div>
+            <br/>
+            <div class="bloco">
+                <div><b>1. OBJETO</b></div>
+                <br/>
+                <div style="text-align: justify"><b>1.1. </b> A <b>VENDEDORA</b> pelo presente instrumento e na melhor forma de direito, vende ao(à) <b>COMPRADOR(A)</b>, equipamentos e/ou acessórios para uso hospitalar, pelo preço total estabelecido na cláusula 2.1.</div>
+                <br/>
+                <div style="text-align: justify"><b>Parágrafo Único. </b>Os serviços de instalação e assistência técnica em garantia se estiverem inclusos na venda serão prestados pela <b>VENDEDORA</b> ou por outra empresa por ela designada, conforme condições explicitadas no presente instrumento e em seus anexos.</div>
+            </div>
+            <br/>
+            <br/>
+            <div class="bloco">
+                <div><b>2. CONDIÇÕES GERAIS DE VENDA</b></div>
+                <br/>
+                <div>2.1. O objeto da presente proposta é(são) a(s) venda(s) do(s) equipamento(s):</div>              
+            </div>
+            
+            <div class="listagem">
+                <apex:variable var="subtotal" value="{!0}"/>
+                
+                <table cellpadding="0px" cellspacing="0px" border="0">
+                    <apex:repeat value="{!produtos}" var="produto">
+                        <tbody class='bloco'>
+
+                            <!-- cabeçalho -->
+                            <apex:outputText rendered="{!IF(produto.cabecalho,true,false)}">
+                                <tr class="pre-cabecalho"><tr cellspacing="7"></tr></tr>
+                                <tr class="cabecalho">
+                                    <td style="visibility:hidden;border:0px;"></td>
+                                    <td>Imagem</td>
+                                    <td>Produto</td>
+                                    <td>Modelo</td>
+                                    <td>Fabricante</td>
+                                    <td>Valor Unit.</td>
+                                    <td>Qtd.</td>
+                                    <td>Valor Total</td>
+                                </tr>
+                            </apex:outputText>
+                            
+                            <!-- item -->
+                            <apex:variable var="tipo" value="{!IF(produto.item.Item_Pai__c==null,'equipamento','acessorio')}"/>
+                            <tr class="item-dados {!tipo}">
+                                <td rowspan="2"><apex:outputText value="{!produto.item.Item__c}" rendered="{!IF(tipo=='equipamento',true,false)}"/></td>
+                                <td rowspan="2" class="imagem"><img src="{!produto.item.Product2.URL_da_Imagem__c}"/></td>
+                                <td class="valor">
+                                    COD: {!produto.item.Product2.StockKeepingUnit}
+                                    <apex:outputText value="{!', LOTE: '+produto.item.Lote__c}" rendered="{!IF(produto.item.Lote__c!=null,true,false)}" />
+                                    <br/>
+                                    {!produto.item.Product2.Name}
+                                </td>
+                                <td class="valor">{!produto.item.Product2.Modelo__c}</td>
+                                <td class="valor">{!produto.item.Product2.Marca__c}</td>
+                                <td class="linha valor"><apex:outputField value="{!produto.item.UnitPrice}"/></td>
+                                <td class="linha valor"><apex:outputField value="{!produto.item.Quantity}"/></td>
+                                <td class="linha valor"><apex:outputField value="{!produto.item.TotalPrice}"/></td>
+                            </tr>
+                            <tr class="item-descr">
+                                <td colspan="6">
+                                    <apex:outputText rendered="{!if(produto.item.Descricao_da_linha__c!=null,true,false)}">
+                                        {!produto.item.Descricao_da_linha__c}.
+                                    </apex:outputText>
+                                    <apex:outputText rendered="{!if(produto.item.Product2.Numero_Anvisa__c!=null,true,false)}">
+                                        Nº. ANVISA: {!produto.item.Product2.Numero_Anvisa__c}.
+                                    </apex:outputText>
+                                </td>                               
+                            </tr>
+                            
+                            <!-- subtotal -->
+                            <apex:variable var="subtotal" value="{!subtotal+produto.item.TotalPrice+1}"/>
+                            <apex:outputText rendered="{!IF(produto.subtotal!=null,true,false)}">
+                                <tr class="subtotal">
+                                    <td colspan="2">&nbsp;</td>
+                                    <td colspan="5" class="valor">SUBTOTAL</td>
+                                    <td class="valor">{!produto.subtotal}</td>
+                                </tr>
+                                <apex:variable var="subtotal" value="{!0}"/>
+                            </apex:outputText>
+                        
+                        </tbody>
+                    </apex:repeat>
+                </table>
+            </div>
+            
+            <br/>
+            <div class="obsimgs">Imagens ilustrativas.</div>
+            <br/>
+            
+            <div class="bloco">
+                <apex:outputText rendered="{!IF(AND(cotacao.ShippingHandling!=null,cotacao.ShippingHandling>0),true,false)}">
+                    <div class="paragrafo"><b>Envio e manuseio: </b> <apex:outputField value="{!cotacao.ShippingHandling}"/>.</div>
+                    <br/>
+                </apex:outputText>
+                <div class="paragrafo"><b>Valor total: </b> <apex:outputField value="{!cotacao.GrandTotal}"/>.</div>
+                <br/>
+                <div style="text-align: justify"><b>2.2. </b>As informações comerciais contidas neste instrumento serão válidas até a data de&nbsp;<apex:outputField value="{!Quote.ExpirationDate}"/> e, em caso de assinatura do contrato pela <b>VENDEDORA</b>, serão ratificadas pelo tempo que perdurar o contrato.</div>                
+                <br/>
+                <div style="text-align: justify"><b>2.3. </b>O preço acima descrito, constitui a venda em sua totalidade, ou seja, estão embutidos no preço todos os impostos de responsabilidade da <b>VENDEDORA</b>. Quaisquer valores excedentes ao preço ora estipulado deverão ser arcados em sua totalidade pelo(a) <b>COMPRADOR(A)</b>.</div>
+            </div>
+            <br/>
+            <div style="text-align: justify"><b>Parágrafo Único. </b>A menos que o(a) <b>COMPRADOR(A)</b> forneça à <b>VENDEDORA</b> o respectivo certificado de isenção, com antecedência razoável à data em que o(s) equipamento(s) for(em) disponibilizado(s) para entrega, a <b>VENDEDORA</b> faturará o produto a ser entregue ao(à) <b>COMPRADOR(A)</b> com a inclusão dos impostos relativos à venda, e o(a) <b>COMPRADOR(A)</b> pagará os impostos de acordo com os termos da fatura.</div>
+            <br/>
+            <br/>
+            <div><b>3. FORMA DE PAGAMENTO</b></div>
+            <br/>
+            
+            <div ><b>3.1. </b>O pagamento referente à presente compra e venda será realizado da seguinte forma:</div>
+            <br/>
+            <div style="margin-left: 80px;">
+                <b>Forma de pagamento: </b> {!Quote.Forma_de_pagamento__c}
+                <apex:outputText rendered="{!IF(Quote.Forma_de_pagamento__c=='Recebimento via Transferência Bancária',true,false)}">
+                <br/>
+                {!documento.empresa_bancario}
+                </apex:outputText>
+                <!--apex:outputText value="{!' '+SUBSTITUTE(cotacao.Forma_de_pagamento__c, 'Recebimento', 'Pagamento')}"/> -->
+                <!--<apex:outputText value="{!' '+IF(cotacao.Numero_de_prestacoes__c!=null,cotacao.Numero_de_prestacoes__c, cotacao.Condicao_de_pagamento__c)}"/>.-->
+                <apex:outputText value="{!IF(Quote.Condicao_de_pagamento__c != 'Condição Especial - Aprovado pela Diretoria', '.', ' referente à condição especial aprovada pela diretoria.')}"></apex:outputText>
+                <apex:outputText rendered="{!IF(Quote.Observa_o_da_Condi_o__c != null, true, false)}"><br/><br/><b>Condição de pagamento: </b>{!Quote.Observa_o_da_Condi_o__c} </apex:outputtext>
+                <apex:outputText rendered="{!IF(Quote.Condicao_de_pagamento__c != 'Condição Especial - Aprovado pela Diretoria', true, false)}"><br/><br/><b>Condição de pagamento:</b> {!IF(!contains(Quote.Condicao_de_pagamento__c,'entrada') && !contains(Quote.Condicao_de_pagamento__c,'Entrada') && !contains(Quote.Condicao_de_pagamento__c,'Financiamento') && !contains(Quote.Condicao_de_pagamento__c,'ista') ,'Vencimento em ' + Quote.Condicao_de_pagamento__c, Quote.Condicao_de_pagamento__c)}  </apex:outputtext>
+                <apex:outputText rendered="{!IF(Quote.Valor_de_entrada__c != null, true, false)}"><br/><br/><b>Valor de entrada: </b> <apex:outputField value="{!Quote.Valor_de_entrada__c}"/>  </apex:outputtext>
+                <apex:outputText rendered="{!IF(Quote.Data_da_entrada__c != null, true, false)}"><br/><br/><b>Data da entrada: </b> <apex:outputField value="{!Quote.Data_da_entrada__c}"/>  </apex:outputtext>
+                <apex:outputText rendered="{!IF(Quote.Numero_de_prestacoes__c != null, true, false)}"><br/><br/><b>Número de parcelas: </b> <apex:outputField value="{!Quote.Numero_de_prestacoes__c}"/>  </apex:outputtext>
+                
+                
+            </div>
+            <br/>
+            
+                <div style="text-align: justify"><b>3.2. </b>Fica certo e ajustado que caso o(a) <b>COMPRADOR(A)</b> não efetue o pagamento até a data de vencimento, serão aplicadas as seguintes sanções, calculadas sempre sobre o valor total da obrigação e até o seu efetivo pagamento:</div>
+                <br/>
+                <div style="margin-left: 80px;text-align: justify;"><b>a. </b>Juros de mora a razão de 1% (um por cento) ao mês;</div>
+                <br/>
+                <div style="margin-left: 80px;text-align: justify;"><b>b. </b>Multa moratória de 2% (dois por cento) sobre o valor total da obrigação em atraso;</div>
+                <br/>
+                <div style="margin-left: 80px;text-align: justify;"><b>c. </b>Correção monetária, "<i>pró rata tempore</i>", com base na variação do valor IGPM/FGV (Índice Geral de Preços de Mercado da Fundação Getúlio Vargas);</div>
+                <br/>
+                <div style="margin-left: 80px;text-align: justify;"><b>d. </b>Todas as despesas de cobrança, custas judiciais extrajudiciais e honorários advocatícios na monta de 10% sobre o valor total do débito;</div>
+                <br/>
+                <div style="text-align: justify"><b>Parágrafo Único:</b> em caso de venda parcelada e inadimplemento de uma das parcelas aqui acordadas, ocorrerá o vencimento antecipado de todas as outras parcelas, com a consequente aplicação dos encargos contratuais mencionados acima.</div>
+                <br/>
+                <div style="text-align: justify"><b>3.3. </b>Quando da liberação do(s) equipamento(s) pela <b>VENDEDORA</b>, esta emitirá Nota Fiscal de Faturamento, o que acompanhará o(s) equipamento(s) no momento de entrega ao(à) <b>COMPRADOR(A)</b>, na qual, desde já, o(a) <b>COMPRADOR(A)</b> dá seu aceite, ficando certo que em caso de ausência de assinatura da referida nota fiscal no momento da entrega, o referido aceite substituirá a assinatura da nota mencionada.</div>       
+                <br/>
+                <div style="text-align: justify"><b>3.4. </b>A forma de pagamento estabelecida no item 3.1, não poderá ser alterada sem que para isso exista uma prévia e expressa aprovação da <b>VENDEDORA</b>, ficando o(a) <b>COMPRADOR(A)</b>, desde já, ciente que qualquer pagamento realizado de forma divergente do acordado, poderá ocasionar na cobrança de encargos moratórios e da multa contratual pactuada no item 7.1.</div>       
+                <br/><br/>               
+                <div style="text-align: justify"><b>4. CONDIÇÕES DE ENTREGA</b></div>       
+                <br/>
+                <div style="text-align: justify"><b>4.1. </b>Cabe ao <b>COMPRADOR(A)</b> preparar o local de instalação, sendo que as partes no ato de assinatura deste instrumento consideram que o local de instalação já esteja disponível e pronto para tanto.</div>       
+                <br/>
+                <div style="text-align: justify"><b>4.2. </b>Caso o(a) <b>COMPRADOR(A)</b> tenha a necessidade de prorrogar a data de liberação do local de instalação do(s) equipamento(s) acima informado, deverá comunicar à <b>VENDEDORA</b> seu interesse por escrito, sendo que referida prorrogação deverá ser regulada por meio de aditamento a este documento, sendo que essa prorrogação poderá ser requerida uma única vez e o prazo de prorrogação não poderá ser superior a 30 (trinta) dias corridos.</div>       
+                <br/>
+                <div style="text-align: justify"><b>4.3. </b>Caso no momento da entrega o(a) <b>COMPRADOR(A)</b> não esteja com o local de instalação pronto, as despesas de armazenagem passarão a correr por conta exclusiva do(a) <b>COMPRADOR(A)</b>. Se o(a) <b>COMPRADOR(A)</b> não assumir os custos de armazenagem, a <b>VENDEDORA</b> poderá efetuar os pagamentos devidos, repassando as despesas ao(à) <b>COMPRADOR(A)</b> para reembolso por esta no prazo de até 10 (dez) dias contados do recebimento de comunicado escrito da <b>VENDEDORA</b> nesse sentido.</div>       
+                <br/>
+                <div style="text-align: justify"><b>4.4. </b>É de responsabilidade exclusiva do(a) <b>COMPRADOR(A)</b>, a devida preparação de suas instalações, em especial do local onde o(s) equipamento (s) será(ão) instalado(s), bem como assegurar a regularidade da documentação que venha a ser solicitada pela <b>VENDEDORA</b>.</div>       
+                <br/><br/>
+                <div style="text-align: justify"><b>5. DOS CUSTOS DE LOCOMOÇÃO</b></div>       
+                <br/>
+                <div style="text-align: justify"><b>5.1. </b> Os custos de locomoção do(s) equipamento(s) objeto do presente instrumento, correrão conforme os termos de referência e endereço de faturamento especificados abaixo:</div>       
+                <br/>
+                <br/>
+                <div style="text-align: justify; margin-left:80px;"><b>TIPO DE ENVIO:</b> {!Quote.Frete__c}</div>
+                <br/>
+                <div style="text-align: justify; margin-left:80px;"><b>ENDEREÇO DE ENTREGA:</b> Aos cuidados do setor de {!cotacao.ShippingName}, no endereço:
+                    <apex:outputText rendered="{!IF(cotacao.ShippingStreet != null,true,false)}" > {!cotacao.ShippingStreet}</apex:outputText>
+                    <apex:outputText rendered="{!IF(cotacao.ShippingCity != null,true,false)}" >, {!cotacao.ShippingCity}</apex:outputText>
+                    <apex:outputText rendered="{!IF(cotacao.ShippingStateCode != null,true,false)}" >-{!cotacao.ShippingStateCode}</apex:outputText>
+                    <apex:outputText rendered="{!IF(cotacao.ShippingPostalCode != null,true,false)}" >, CEP: {!cotacao.ShippingPostalCode}</apex:outputText>
+                    <apex:outputText rendered="{!IF(cotacao.ShippingCountry != null,true,false)}" >, {!cotacao.ShippingCountry}</apex:outputText>.</div>       
+                <br/>
+                <div style="text-align: justify; margin-left:80px;"><b>ENDEREÇO DE FATURAMENTO: </b> <apex:outputText rendered="{!IF(cotacao.BillingStreet != null,true,false)}" >{!cotacao.BillingName}, {!cotacao.BillingStreet}</apex:outputText>
+                    <apex:outputText rendered="{!IF(cotacao.BillingCity != null,true,false)}" >, {!cotacao.BillingCity}</apex:outputText>
+                    <apex:outputText rendered="{!IF(cotacao.BillingStateCode != null,true,false)}" >-{!cotacao.BillingStateCode}</apex:outputText>
+                    <apex:outputText rendered="{!IF(cotacao.BillingPostalCode != null,true,false)}" >, CEP: {!cotacao.BillingPostalCode}</apex:outputText>
+                    <apex:outputText rendered="{!IF(cotacao.BillingCountry != null,true,false)}" >, {!cotacao.BillingCountry}</apex:outputText>.</div>       
+                <br/><br/>
+                <apex:outputText rendered="{!IF(Quote.Fiador__c != null, true, false)}">
+                    <div style="text-align: justify"><b>6. DA GARANTIA CONTRATUAL</b></div>       
+                    <br/>
+                    <div style="text-align: justify"><b>6.1. </b>Fica o(a) <b>FIADOR(A)</b> no preâmbulo deste instrumento, por força de lei, de sua plena vontade e de todas as partes aqui descritas, obrigado perante os pagamentos e obrigações contratuais.</div>       
+                    <br/>
+                    <div style="text-align: justify"><b>6.2. </b>O(A) <b>FIADOR(A)</b> concorda expressamente em manter a fiança, renunciando ao benefício de ordem e ao exercício da faculdade do artigo 835 do Código Civil Brasileiro. Em caso de manifestação de renúncia por parte do(a) <b>FIADOR(A),</b> fica o(a) <b>COMPRADOR(A)</b> obrigado a indicar novo(a) <b>FIADOR(A)</b> no prazo de 5 dias corridos, sob pena de incorrer em multa por descumprimento contratual prevista no item 7.1.</div>       
+                    <br/>
+                    <apex:outputText rendered="{!IF(Quote.Conjuge_do_Fiador__r != null, true, false)}">
+                    <div style="text-align: justify"><b>6.3. </b>Em respeito às disposições legais, fica expressa a outorga uxória do cônjuge do(a) <b>FIADOR(A)</b>, pela qual anui e declara ciência do dever de pleno cumprimento de suas obrigações contratuais.</div>       
+                    <br/><br/>
+                    </apex:outputText>
+                </apex:outputText>
+
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '6', '7')}. DA RESCISÃO ANTECIPADA</b></div>       
+                <br/>
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '6', '7')}.1 </b>Em razão dos custos despendidos pela <b>VENDEDORA</b> para a conclusão e fechamento do negócio, fica resguardado seu direito a cobrança de multa penal que será calculada na monta de 10% do valor total do contrato, em caso de manifesta vontade de rescindir antecipadamente ou em razão de desistência do negócio por parte do(a) <b>COMPRADOR(A)</b> após assinatura do presente contrato de compra e venda.</div>       
+                <br/>
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '7', '8')}. DA GARANTIA DOS EQUIPAMENTOS</b></div>       
+                <br/>
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '7', '8')}.1. </b>O(s) equipamento(s) objeto deste instrumento é(são) garantido(s) exclusivamente contra defeitos de fabricação para equipamentos durante {!Quote.Prazo_de_garantia_dos_equipamentos__c} e para acessórios durante {!Quote.Prazo_de_garantia_acessorios__c}, contados da data de entrega dos equipamentos.</div>       
+                <br/>
+                <div style="text-align: justify"><b>Parágrafo Único: </b>Qualquer serviço relacionado à garantia do equipamento que se faça necessário durante o período de garantia acima informado deverá ser solicitado pelo(a) <b>COMPRADOR(A)</b> ao time de serviços da <b>VENDEDORA</b>. Solicitações de atendimento feitas através de qualquer outro canal não serão consideradas válidas, ficando a <b>VENDEDORA</b> isento(a) de responsabilidade pelo não atendimento.</div>       
+                <br/><br/>
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '8', '9')}. DA MANUTENÇÃO PREVENTIVA E CORRETIVA</b></div>       
+                <br/>
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '8', '9')}.1 </b>O(s) equipamento(s) objeto do presente instrumento não possuem manutenção preventiva e corretiva inclusas na venda, o que poderá ser formalizado juntamente com a equipe de assistência técnica da <b>VENDEDORA</b>.</div>       
+                <br/>
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '8', '9')}.2. </b>Com o objetivo de garantir a disponibilidade operacional e, consequentemente, manter a produtividade do(s) equipamento (s), desde já fica facultado ao(à) <b>COMPRADOR(A)</b> a opção de negociar e assinar com a <b>VENDEDORA</b> contrato de manutenção para o(s) equipamento(s).</div>       
+                <br/>
+                <br/>
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '9', '10')}. DA DESTINAÇÃO DO PRODUTO</b></div>       
+                <br/>
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '9', '10')}.1. </b>Sendo os produtos vendidos destinados ao uso de tratamento hospitalar, o(a) <b>COMPRADOR(A)</b>, declara desde já, estar ciente de todos os riscos, isentando a <b>VENDEDORA</b> de toda e qualquer responsabilidade decorrente do tratamento, não se responsabilizando a <b>VENDEDORA</b> acerca de qualquer certeza de resultado ou benefício que seja de expectativa do(a) <b>COMPRADOR(A)</b>.</div>       
+                <br/><br/>
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '10', '11')}. DOS MATERIAIS DE CONSUMO</b></div>       
+                <br/>
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '10', '11')}.1. </b>Caso o(a) <b>COMPRADOR(A)</b> manifeste a intenção de adquirir os componentes, consumíveis e os serviços de manutenção do equipamento de outras fontes, desde já declara a ciência de que eventual aquisição correrá por sua estrita e exclusiva responsabilidade, caso em que eventuais danos causados ao equipamento, os valores referentes aos custos para o reparo serão de sua responsabilidade.</div>       
+                <br/>
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '10', '11')}.2. </b>Toda e qualquer aquisição de componentes, consumíveis e, ainda, serviços de manutenção do equipamento que sejam realizadas pelo(a) <b>COMPRADOR(A)</b> e adquiridos através de outras fontes, não serão reembolsadas pela <b>VENDEDORA</b>, bem como, não haverá qualquer abatimento no valor da venda.</div>       
+                <br/><br/>
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '11', '12')}. DA CIÊNCIA QUANTO AO USO DO(S) EQUIPAMENTO(S)</b></div>       
+                <br/>
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '11', '12')}.1. </b>Declara o(a) <b>COMPRADOR(A)</b> ciência quanto ao dever de adequado uso dos equipamentos objeto do contrato de compra e venda, bem como quanto ao dever de observância ao treinamento dado pela <b>VENDEDORA</b> quanto a não reutilização de acessórios considerados descartáveis, devendo zelar sempre pela boa higiene e segurança do paciente tratado.</div>       
+                <br/>
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '11', '12')}.2. </b>Diante dos treinamentos e orientações repassadas ao(à) <b>COMPRADOR(A)</b>, declara esta ciência quanto a ausência de responsabilidade da <b>VENDEDORA</b> quanto ao uso inadequado dos equipamentos, dando ainda seu aceite quanto a sua exclusiva responsabilidade por eventuais riscos, perdas e danos ou quaisquer questionamentos ou responsabilidades administrativas ou judiciais advindas de atos decorrentes de imprudência, imperícia ou negligência do(a) <b>COMPRADOR(A)</b>.</div>       
+                <br/><br/>
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '12', '13')}. DAS PRÁTICAS ANTICORRUPÇÃO</b></div>       
+                <br/>
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '12', '13')}.1. </b>As Partes obrigam-se a observar, cumprir e/ou fazer cumprir, por si, suas afiliadas (entidades controladoras, controladas, coligadas ou sob controle comum) e representantes (diretores, membros do conselho de administração, quaisquer terceiros, incluindo assessores ou prestadores de serviços) toda e qualquer lei anticorrupção, em especial a Lei Federal nº 12.846/13, conforme aplicável.</div>
+                <br/>
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '12', '13')}.2. </b>Na vigência deste contrato, o(a) <b>COMPRADOR(A)</b> reconhece que nem ela, nem quaisquer de seus administradores, empregados, agentes, representantes, sócios ou acionistas deve dar, oferecer, pagar, prometer pagar, ou autorizar o pagamento, direta ou indiretamente, qualquer dinheiro ou coisa de valor a qualquer autoridade governamental, consultor, representante, parceiro, ou qualquer terceiro, com a finalidade de influenciar qualquer ato ou decisão de agentes ou entes governamentais (assim definidos nas Leis Anticorrupção Brasileiras), ou com objetivo de assegurar qualquer vantagem indevida ou direcionar negócios em violação às Leis Anticorrupção Brasileiras.</div>
+                <br/>
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '12', '13')}.3. </b>O(A) <b>COMPRADOR(A)</b>, se obriga a, em caso de eventual violação às Leis Anticorrupção Brasileiras, indenizar a <b>VENDEDORA</b> por todos e quaisquer danos, incluindo multas, custos, obrigações de reparação de danos, taxas, juros, honorários advocatícios ou outras responsabilidades cíveis, criminais e/ou administrativas que sejam decorrentes de: (i) investigações sobre eventual quebra de integridade e/ou ato ilícito pelo(a) <b>COMPRADOR(A)</b> ou de seus funcionários e prestadores de serviços e, (ii) qualquer litígio ou outro procedimento judicial ou administrativo envolvendo violação das Leis Anticorrupção Brasileiras em face da <b>VENDEDORA</b> e que tenha sido originado a partir de qualquer ação ou omissão do(a) <b>COMPRADOR(A)</b> seja diretamente ou por meio de seus administradores, empregados, agentes, representantes, terceiros e/ou sócios.</div>
+                <br/><br/>
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '13', '14')}. DA NECESSIDADE DE APROVAÇÃO EM ANÁLISE DE CRÉDITO</b></div>       
+                <br/>
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '13', '14')}.1. </b>Declara o(a) <b>COMPRADOR(A)</b> a ciência de que essas tratativas comerciais somente perdurarão mediante aprovação do(a) <b>COMPRADOR(A)</b> em análise de crédito a ser realizada pela <b>VENDEDORA</b> e, ainda, tão somente mediante assinatura do presente instrumento por parte de pessoa com poderes para assinar pela <b>VENDEDORA</b>.</div>       
+                <br/><br/>         
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '14', '15')}. DA ASSINATURA ELETRÔNICA</b></div>       
+                <br/>
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '14', '15')}.1. </b>Caso o presente instrumento seja assinado de forma digital ou eletronicamente, cada parte declara e garante que sua assinatura digital ou eletrônica tem o mesmo efeito vinculativo que teria a assinatura manuscrita, possuindo caráter irrevogável e irretratável, sendo realizada através de plataforma de conhecida confiabilidade, estando as partes atentas ao disposto na Medida Provisória 2.200-2/2001 ou em outra legislação que venha a substituí-la.</div>       
+                <br/><br/>
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '15', '16')}. DA PROTEÇÃO DE DADOS</b></div>     
+                <br/>
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '15', '16')}.1. </b>  As partes, por si e por seus colaboradores, obrigam-se a atuar no presente contrato em conformidade com a Legislação vigente sobre Proteção de Dados Pessoais e as determinações de órgãos reguladores/fiscalizadores sobre a matéria, tudo conforme o que rege a Lei 13.709/2018. No que tange à utilização dos dados as partes deverão:</div><br/>
+                <div style="text-align: justify;margin-left: 80px !important;">i. Tratar os dados pessoais a que tiver acesso de acordo com o que a outra parte lhe direcionar sempre em conformidade com estas cláusulas. Para os casos em que for obrigada e não mais puder cumprir estas obrigações, por qualquer razão, concorda em informar de modo formal este fato à outra parte. </div>
+                <div style="text-align: justify;margin-left: 80px !important;">ii. Manter e utilizar medidas de segurança para que possa proteger a confidencialidade e integridade de todos os dados pessoais mantidos ou transmitidos eletronicamente, a fim de que possa garantir a proteção desses dados contra acesso não autorizado, destruição, uso, modificação, divulgação ou perda acidental ou indevida.</div>
+                <div style="text-align: justify;margin-left: 80px !important;">iii. Acessar os dados dentro de seu escopo e na medida abrangida pela autorização da outra parte, não podendo estes serem modificados sem expressa autorização da outra parte.</div>
+                <div style="text-align: justify;margin-left: 80px !important;">iv. Garantir, por si própria ou quaisquer de seus empregados, prepostos, sócios, diretores, representantes ou terceiros contratados, a confidencialidade dos dados processados, bem como a manter quaisquer Dados Pessoais estritamente confidenciais e de não os utilizar para outros fins, com exceção da prestação de serviços à outra parte.</div>       
+                <br/>
+              
+                
+                <div style=" page-break-inside: avoid;">
+                
+                
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '16', '17')}. DO FORO DO CONTRATO</b></div>       
+                <br/>
+                <div style="text-align: justify"><b>{!IF(Quote.Fiador__c == null, '16', '17')}.1</b> Fica eleito como competente o foro da Comarca de Brasília, Distrito Federal, para solução de quaisquer dúvidas ou litígios decorrentes deste contrato, renunciando os contratantes a qualquer outro que tenham ou venham a ter, por mais privilegiado que seja.</div>       
+                <br/>
+                <div style="text-align: justify">E assim, justo e contratado, firmam o presente instrumento em 02 (duas) vias de igual teor, e forma, na presença das 02 (duas) testemunhas abaixo assinadas.</div>       
+                <br/>
+                <br/>
+               
+                
+                <div style="text-align: right">Goiânia, ____ de ______________ de _________</div>       
+                <br/><br/><br/><br/><br/>
+                <div style="text-align: center">_______________________________________________________________________</div>       
+                <div style="text-align: center"><b>{!Quote.Opportunity.Faturamento_Feito2__r.Raz_o_Social__c}</b></div>       
+                <div style="text-align: center"><b>CNPJ sob o n.º {!Quote.Opportunity.Faturamento_Feito2__r.CNPJ__c}</b></div>       
+                <br/>
+                <div style="text-align: center"></div>       
+                <br/>
+                <div style="text-align: center"></div>       
+                <br/>
+                <br/>
+                <br/>
+                <br/>                             
+                <div style="text-align: center">_______________________________________________________________________</div>              
+                <div style="text-align: center">
+                    <apex:outputText rendered="{!IF(Quote.Account.CNPJ__c != null, true, false)}">
+                        <b>{!Quote.Account.Raz_o_Social__c}</b><br/>
+                        <b>CNPJ sob o n.º {!Quote.Account.CNPJ__c}</b><br/>
+                    
+                </apex:outputText>
+                <apex:outputText rendered="{!IF(Quote.Account.CNPJ__c == null, true, false)}">
+                    <b>{!Quote.Account.Name}</b><br/>
+                    <b>CPF sob o n.º {!Quote.Account.CPF__pc}</b><br/>
+                </apex:outputText>
+                </div>              
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <apex:outputText rendered="{!IF(Quote.Fiador__c != null, true, false)}">
+                <div style="text-align: center">_______________________________________________________________________</div>              
+                <div style="text-align: center">
+                    <apex:outputText rendered="{!IF(Quote.Fiador__r.CNPJ__c != null, true, false)}">
+                        <b>{!Quote.Fiador__r.Raz_o_Social__c}</b><br/>
+                        <b>CNPJ sob o n.º {!Quote.Account.CNPJ__c}</b><br/>
+                    
+                </apex:outputText>
+                <apex:outputText rendered="{!IF(Quote.Fiador__r.CNPJ__c == null, true, false)}">
+                    <b>{!Quote.Fiador__r.Name}</b><br/>
+                    <b>CPF sob o n.º {!Quote.Fiador__r.CPF__pc}</b><br/>
+                </apex:outputText>
+                </div>
+                </apex:outputText>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <apex:outputText rendered="{!IF(Quote.Conjuge_do_Fiador__c != null, true, false)}">
+                <div style="text-align: center">_______________________________________________________________________</div>              
+                <div style="text-align: center">
+                    <apex:outputText rendered="{!IF(Quote.Conjuge_do_fiador__r.CNPJ__c != null, true, false)}">
+                        <b>{!Quote.Conjuge_do_fiador__r.Raz_o_Social__c}</b><br/>
+                        <b>CNPJ sob o n.º {!Quote.Fiador__r.CNPJ__c}</b><br/>
+                    
+                </apex:outputText>
+                <apex:outputText rendered="{!IF(Quote.Conjuge_do_fiador__r.CNPJ__c == null, true, false)}">
+                    <b>{!Quote.Conjuge_do_fiador__r.Name}</b><br/>
+                    <b>CPF sob o n.º {!Quote.Conjuge_do_fiador__r.CPF__pc}</b><br/>
+                </apex:outputText>
+                </div>
+                </apex:outputText>
+                <br/>
+                <br/>
+                <b>TESTEMUNHAS:</b>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <table width="100%" style="text-align:center">
+                    <tr>
+                        <td width="50%">
+                            <table width="100%">
+                                <tr>
+                                    <td>
+                                    1) _______________________________
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    CPF-MF:
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        
+                        <td width="50%">
+                            <table width="100%">
+                                <tr>
+                                    <td>
+                                     2) _______________________________
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    CPF-MF:
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>    
+                <!--
+                <table class="assinatura">
+                        <tr>
+                            <td>
+                                <br/><br/>____________________________________
+                                <br/>Nome: {!documento.ass_nome} 
+                                <br/>RG: {!documento.ass_rg} 
+                                <br/>CPF: {!documento.ass_cpf} 
+                                <br/>E-mail: {!IF(cotacao.Opportunity.RecordType.Name=='Licitação','licitacao@hospcom.net', 'comercial@hospcom.net')}
+                                <br/>Telefone: (62) 3241-5555
+                            </td>
+                        </tr>
+                    </table>
+                    -->            
+        </div>
+ </div>       
+    </body>
+</apex:page>

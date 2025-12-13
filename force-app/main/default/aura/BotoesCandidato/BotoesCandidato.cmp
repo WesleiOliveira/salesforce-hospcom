@@ -1,0 +1,9 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global">
+    <h1 style="text-align:center">
+            <lightning:buttonGroup>
+        	<lightning:button iconName="utility:adduser" label="Novo Candidato" title="Novo Candidato"  onclick="{! c.createRecord }" class="slds-button slds-button_outline-brand"/>
+        	<lightning:button iconName="utility:edit" label="Editar Registro" title="Editar Registro"  onclick="{! c.editRecord }" class="slds-button slds-button_outline-brand"/>
+			<lightning:button label = "Gerar em PDF" iconName="utility:file" onclick="{! c.handleClick }" class="slds-button slds-button_outline-brand" title="Gerar em PDF" />
+       	    </lightning:buttonGroup>
+        </h1>
+</aura:component>

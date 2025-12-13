@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Retorno</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISCHANGED(Retorno__c),
+$User.ProfileId != &apos;00e6e000002JQUa&apos;
+)</errorConditionFormula>
+    <errorDisplayField>Retorno__c</errorDisplayField>
+    <errorMessage>Apenas o jurídico pode preencher o retorno.</errorMessage>
+</ValidationRule>

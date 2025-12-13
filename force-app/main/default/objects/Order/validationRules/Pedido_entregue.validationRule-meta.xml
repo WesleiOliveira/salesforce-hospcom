@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pedido_entregue</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+RecordType.Name != &apos;Representação&apos;,
+$User.Id != &apos;0055A000008pNJG&apos;,
+AND(ISCHANGED(Status),
+    TEXT(PRIORVALUE(Status)) == &apos;Entregue Total&apos;
+			),
+NOT(
+     OR(
+         TEXT(Status) = &apos;Cancelado&apos;,
+         TEXT(Status) = &apos;Devolvido Parcial&apos;,
+									TEXT(Status) = &apos;Devolvido Total&apos;
+        )
+    ),
+OR(
+ISCHANGED(TotalAmount),
+ISCHANGED(Departamento3__c),
+ISCHANGED(EffectiveDate),
+ISCHANGED(AccountId),
+ISCHANGED(Condicao_de_pagamento__c),
+ISCHANGED(Forma_de_pagamento2__c),
+ISCHANGED(Natureza_de_Opera_o__c),
+ISCHANGED(BillingAddress),
+ISCHANGED(ShippingAddress),
+NOT(Acao_interna__c),
+ISCHANGED(Faturamento_Feito__c)
+)
+)</errorConditionFormula>
+    <errorMessage>Pedido entregue não pode sofrer alterações.</errorMessage>
+</ValidationRule>

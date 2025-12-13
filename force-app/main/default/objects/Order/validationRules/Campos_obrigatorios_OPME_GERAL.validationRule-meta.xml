@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Campos_obrigatorios_OPME_GERAL</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    $RecordType.Id = &apos;012U4000002EZ3B&apos;,
+    CreatedDate &gt; DATETIMEVALUE(&apos;2025-02-21 00:00:00&apos;),
+    ISPICKVAL(Natureza_de_Opera_o__c, &apos;VENDA&apos;),    
+    OR(
+        ISBLANK(hospital_opme__c),
+        ISBLANK(data_procedimento__c),
+        ISBLANK(Contato__c),
+        ISBLANK(medico_opme__c),
+        ISPICKVAL(Confirmado__c, &apos;&apos;)
+    )
+)</errorConditionFormula>
+    <errorMessage>Os campos data e hora do procedimento, paciente, confirmado, médico, hospital e pedido de remessa devem ser preenchidos.</errorMessage>
+</ValidationRule>

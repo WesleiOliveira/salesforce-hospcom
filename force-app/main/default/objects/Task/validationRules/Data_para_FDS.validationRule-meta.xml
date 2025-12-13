@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Data_para_FDS</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(
+WEEKDAY(ActivityDate) = 1,
+WEEKDAY(ActivityDate) = 7
+)</errorConditionFormula>
+    <errorDisplayField>ActivityDate</errorDisplayField>
+    <errorMessage>O prazo da atividade não pode ser sábado ou domingo</errorMessage>
+</ValidationRule>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>preencher_cnpj_da_conta</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISNEW(),
+BillingCountry != &apos;Colômbia&apos;,
+RecordTypeId != &apos;0125A000001ETFq&apos;,
+CNPJ__c == null
+)</errorConditionFormula>
+    <errorDisplayField>CNPJ__c</errorDisplayField>
+    <errorMessage>prencha o cnpj da conta</errorMessage>
+</ValidationRule>

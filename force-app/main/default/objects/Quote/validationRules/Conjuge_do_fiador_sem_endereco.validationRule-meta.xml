@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Conjuge_do_fiador_sem_endereco</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+Conjuge_do_Fiador__c != null,
+OR(
+Conjuge_do_Fiador__r.BillingPostalCode == null,
+Conjuge_do_Fiador__r.BillingCity == null,
+Conjuge_do_Fiador__r.BillingStreet == null
+)
+)</errorConditionFormula>
+    <errorDisplayField>Conjuge_do_Fiador__c</errorDisplayField>
+    <errorMessage>Endereço do cônjuge do fiador incompleto.</errorMessage>
+</ValidationRule>

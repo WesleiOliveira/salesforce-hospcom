@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Opp_recurso_sem_motivo</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( 
+	!$User.Ignorar_erros__c,
+	Text(Necess_rio_Recurso__c) == &apos;SIM&apos;,
+	Text(Motivo_Recurso__c) == &apos;&apos;
+)</errorConditionFormula>
+    <errorDisplayField>Motivo_Recurso__c</errorDisplayField>
+    <errorMessage>Oportunidade com recurso deve ter o motivo preenchido.</errorMessage>
+</ValidationRule>

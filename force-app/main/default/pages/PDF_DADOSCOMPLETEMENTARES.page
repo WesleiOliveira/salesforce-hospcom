@@ -1,0 +1,672 @@
+<apex:page standardController="Account" renderas="pdf" applyHtmlTag="false" showHeader="false">
+  
+  <head>
+        <style type="text/css" media="print">
+          
+            @page{
+                size:A4;
+                background: url({!IF(Account.Name != 'HQUALQUER COISA',$Resource.TimbradoHospcom,"")});
+                margin:120px 50px 0px 50px;
+                @bottom-center{content:element(footer);}
+            }
+            
+                  
+        </style>
+
+    </head>
+  <body style="font-family:Helvetica,SansSerif ; padding:0px; margin:0px; border:0px solid #eef2f4; width:*; font-size: 9pt">
+      <div style="text-align: center; text-decoration: underline">
+           <b>FICHA DE DADOS DO CLIENTE</b>    
+          
+      </div>
+      <br/>
+      <table width="100%" cellpadding="1px" cellspacing="0px">
+          <tr>
+              <td style="text-align:right; border: 0.3px solid black" width="80px">
+                      <b>Cliente:</b>
+              </td>
+              <td style="border: 0.3px solid black" colspan="3">
+                      {!IF(Account.Name = "HOSPCOM","", Account.Name)}
+              </td>
+          </tr>
+          <tr>
+              <td style="text-align:right; border: 0.3px solid black" width="80px">
+                      <b>CNPJ:</b>
+              </td>
+              <td style="border: 0.3px solid black" width="200px">
+                      {!IF(Account.Name = "HOSPCOM","", Account.CNPJ__c)}
+              </td>
+              
+              <td style="border: 0.3px solid black" width="160px">
+                     <b>Quantidade Total de Leitos:</b>
+              </td>
+              <td style="border: 0.3px solid black">
+              </td>
+          </tr>
+          
+      </table>
+      <br/>
+      <table width="100%" cellpadding="1px" cellspacing="0px">
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="80px" colspan="6">
+                      <b>CONTATOS COMERCIAIS</b>
+              </td>
+             
+          </tr>
+          <tr>
+              <td style="text-align:right; border: 0.3px solid black" width="80px">
+                      <b>Diretor:</b>
+              </td>
+              <td style="border: 0.3px solid black" width="250px">
+                      
+              </td>
+              <td style="text-align:center; border: 0.3px solid black" width="80px">
+                      <b>Tel/Cel:</b>
+              </td>
+              <td style="border: 0.3px solid black" width="150px">
+                      
+              </td>
+              <td style="text-align:center; border: 0.3px solid black" width="80px">
+                      <b>E-MAIL:</b>
+              </td>
+              <td style="border: 0.3px solid black" width="250px">
+                      
+              </td>
+          </tr>
+          
+          <tr>
+              <td style="text-align:right; border: 0.3px solid black" width="90px">
+                      <b>Comprador:</b>
+              </td>
+              <td style="border: 0.3px solid black" width="250px">
+                      
+              </td>
+              <td style="text-align:center; border: 0.3px solid black" width="80px">
+                      <b>Tel/Cel:</b>
+              </td>
+              <td style="border: 0.3px solid black" width="150px">
+                      
+              </td>
+              <td style="text-align:center; border: 0.3px solid black" width="80px">
+                      <b>E-MAIL:</b>
+              </td>
+              <td style="border: 0.3px solid black" width="250px">
+                      
+              </td>
+          </tr>
+          
+          <tr>
+              <td style="text-align:right; border: 0.3px solid black" width="90px">
+                      <b>Eng. Clin.:</b>
+              </td>
+              <td style="border: 0.3px solid black" width="250px">
+                      
+              </td>
+              <td style="text-align:center; border: 0.3px solid black" width="80px">
+                      <b>Tel/Cel:</b>
+              </td>
+              <td style="border: 0.3px solid black" width="150px">
+                      
+              </td>
+              <td style="text-align:center; border: 0.3px solid black" width="80px">
+                      <b>E-MAIL:</b>
+              </td>
+              <td style="border: 0.3px solid black" width="250px">
+                      
+              </td>
+          </tr>
+          
+          
+      </table>
+      
+      <br/>
+      <br/>
+      <div style="text-align: center; text-decoration: underline">
+           <b>LEVANTAMENTO DO PARQUE TECNOLÓGICO</b>    
+          
+      </div>
+      <br/>
+      <table width="100%" cellpadding="1px" cellspacing="0px">
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="80px" colspan="6">
+                      <b>UTI - ADULTO</b>
+              </td>
+             
+          </tr>
+          <tr>
+              <td style="text-align:right; border: 0.3px solid black" width="90px">
+                      <b>Responsável:</b>
+              </td>
+              <td style="border: 0.3px solid black" width="250px">
+                      
+              </td>
+              <td style="text-align:center; border: 0.3px solid black" width="80px">
+                      <b>Tel/Cel:</b>
+              </td>
+              <td style="border: 0.3px solid black" width="150px">
+                      
+              </td>
+              <td style="text-align:center; border: 0.3px solid black" width="80px">
+                      <b>E-MAIL:</b>
+              </td>
+              <td style="border: 0.3px solid black" width="250px">
+                      
+              </td>
+             
+          </tr>
+      </table>
+      <br/>
+      <table width="100%" cellpadding="1px" cellspacing="0px">
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      <b>EQUIPAMENTO</b>
+              </td>
+             
+              <td style="text-align:center; border: 0.3px solid black" width="80px">
+                      <b>QUANTIDADE</b>
+              </td>
+              <td style="text-align:center; border: 0.3px solid black" width="300px">
+                       <b>MARCA(S)</b> 
+              </td>
+          </tr>
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Monitor Multiparâmetros
+              </td>
+             
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+              
+              <td style="border: 0.3px solid black" width="300px">
+                      
+              </td>
+          </tr>
+          
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Ventilador Pulmonar
+              </td>
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+                          
+              <td style="border: 0.3px solid black" width="300">
+                      
+              </td>
+          </tr>
+          
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Cardioversor/Desfibrilador
+              </td>
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+              
+
+              <td style="border: 0.3px solid black" width="300">
+                      
+              </td>
+          </tr>
+          
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Bomba de Infusão
+              </td>
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+              
+
+              <td style="border: 0.3px solid black" width="300">
+                      
+              </td>
+          </tr>
+          
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Eletrocardiógrafo
+              </td>
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+              
+
+              <td style="border: 0.3px solid black" width="300">
+                      
+              </td>
+          </tr>
+          
+          
+      </table>
+  
+  <br/>
+      <table width="100%" cellpadding="1px" cellspacing="0px">
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="80px" colspan="6">
+                      <b>UTI - PED/NEO</b>
+              </td>
+             
+          </tr>
+          <tr>
+              <td style="text-align:right; border: 0.3px solid black" width="90px">
+                      <b>Responsável:</b>
+              </td>
+              <td style="border: 0.3px solid black" width="250px">
+                      
+              </td>
+              <td style="text-align:center; border: 0.3px solid black" width="80px">
+                      <b>Tel/Cel:</b>
+              </td>
+              <td style="border: 0.3px solid black" width="150px">
+                      
+              </td>
+              <td style="text-align:center; border: 0.3px solid black" width="80px">
+                      <b>E-MAIL:</b>
+              </td>
+              <td style="border: 0.3px solid black" width="250px">
+                      
+              </td>
+             
+          </tr>
+      </table>
+      <br/>
+      <table width="100%" cellpadding="1px" cellspacing="0px">
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      <b>EQUIPAMENTO</b>
+              </td>
+             
+              <td style="text-align:center; border: 0.3px solid black" width="80px">
+                      <b>QUANTIDADE</b>
+              </td>
+              <td style="text-align:center; border: 0.3px solid black" width="300px">
+                       <b>MARCA(S)</b> 
+              </td>
+          </tr>
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Monitor Multiparâmetros
+              </td>
+             
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+              
+              <td style="border: 0.3px solid black" width="300px">
+                      
+              </td>
+          </tr>
+          
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Ventilador Pulmonar
+              </td>
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+                          
+              <td style="border: 0.3px solid black" width="300">
+                      
+              </td>
+          </tr>
+          
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Cardioversor/Desfibrilador
+              </td>
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+              
+
+              <td style="border: 0.3px solid black" width="300">
+                      
+              </td>
+          </tr>
+          
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Bomba de Infusão
+              </td>
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+              
+
+              <td style="border: 0.3px solid black" width="300">
+                      
+              </td>
+          </tr>
+          
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Bomba de Seringa
+              </td>
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+              
+
+              <td style="border: 0.3px solid black" width="300">
+                      
+              </td>
+          </tr>
+          
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Eletrocardiógrafo
+              </td>
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+              
+
+              <td style="border: 0.3px solid black" width="300">
+                      
+              </td>
+          </tr>
+          
+          
+      </table>
+      
+      <br/>
+      <table width="100%" cellpadding="1px" cellspacing="0px">
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="80px" colspan="6">
+                      <b>EMERGÊNCIA</b>
+              </td>
+             
+          </tr>
+          <tr>
+              <td style="text-align:right; border: 0.3px solid black" width="90px">
+                      <b>Responsável:</b>
+              </td>
+              <td style="border: 0.3px solid black" width="250px">
+                      
+              </td>
+              <td style="text-align:center; border: 0.3px solid black" width="80px">
+                      <b>Tel/Cel:</b>
+              </td>
+              <td style="border: 0.3px solid black" width="150px">
+                      
+              </td>
+              <td style="text-align:center; border: 0.3px solid black" width="80px">
+                      <b>E-MAIL:</b>
+              </td>
+              <td style="border: 0.3px solid black" width="250px">
+                      
+              </td>
+             
+          </tr>
+          
+      </table>
+      <br/>
+      <table width="100%" cellpadding="1px" cellspacing="0px">
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      <b>EQUIPAMENTO</b>
+              </td>
+             
+              <td style="text-align:center; border: 0.3px solid black" width="80px">
+                      <b>QUANTIDADE</b>
+              </td>
+              <td style="text-align:center; border: 0.3px solid black" width="300px">
+                       <b>MARCA(S)</b> 
+              </td>
+          </tr>
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Monitor Multiparâmetros
+              </td>
+             
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+              
+              <td style="border: 0.3px solid black" width="300px">
+                      
+              </td>
+          </tr>
+          
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Ventilador Pulmonar
+              </td>
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+                          
+              <td style="border: 0.3px solid black" width="300">
+                      
+              </td>
+          </tr>
+          
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Cardioversor/Desfibrilador
+              </td>
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+              
+
+              <td style="border: 0.3px solid black" width="300">
+                      
+              </td>
+          </tr>
+          
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Bomba de Infusão
+              </td>
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+              
+
+              <td style="border: 0.3px solid black" width="300">
+                      
+              </td>
+          </tr>
+          
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Eletrocardiógrafo
+              </td>
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+              
+
+              <td style="border: 0.3px solid black" width="300">
+                      
+              </td>
+          </tr>
+          
+          
+      </table>
+      
+      <br/>
+      <table width="100%" cellpadding="1px" cellspacing="0px">
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="80px" colspan="6">
+                      <b>CENTRO CIRÚRGICO</b>
+              </td>
+             
+          </tr>
+          <tr>
+              <td style="text-align:right; border: 0.3px solid black" width="90px">
+                      <b>Responsável:</b>
+              </td>
+              <td style="border: 0.3px solid black" width="250px">
+                      
+              </td>
+              <td style="text-align:center; border: 0.3px solid black" width="80px">
+                      <b>Tel/Cel:</b>
+              </td>
+              <td style="border: 0.3px solid black" width="150px">
+                      
+              </td>
+              <td style="text-align:center; border: 0.3px solid black" width="80px">
+                      <b>E-MAIL:</b>
+              </td>
+              <td style="border: 0.3px solid black" width="250px">
+                      
+              </td>
+             
+          </tr>
+      </table>
+      <br/>
+      <table width="100%" cellpadding="1px" cellspacing="0px">
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      <b>EQUIPAMENTO</b>
+              </td>
+             
+              <td style="text-align:center; border: 0.3px solid black" width="80px">
+                      <b>QUANTIDADE</b>
+              </td>
+              <td style="text-align:center; border: 0.3px solid black" width="300px">
+                       <b>MARCA(S)</b> 
+              </td>
+          </tr>
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Monitor Multiparâmetros
+              </td>
+             
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+              
+              <td style="border: 0.3px solid black" width="300px">
+                      
+              </td>
+          </tr>
+          
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Aparelho de Anestesia
+              </td>
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+                          
+              <td style="border: 0.3px solid black" width="300">
+                      
+              </td>
+          </tr>
+          
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Cardioversor/Desfibrilador
+              </td>
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+              
+
+              <td style="border: 0.3px solid black" width="300">
+                      
+              </td>
+          </tr>
+          
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Bomba de Infusão
+              </td>
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+              
+
+              <td style="border: 0.3px solid black" width="300">
+                      
+              </td>
+          </tr>
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Foco Cirúrgico de Teto
+              </td>
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+              
+
+              <td style="border: 0.3px solid black" width="300">
+                      
+              </td>
+          </tr>
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Mesa Cirúrgica
+              </td>
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+              
+
+              <td style="border: 0.3px solid black" width="300">
+                      
+              </td>
+          </tr>
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Estativa
+              </td>
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+              
+
+              <td style="border: 0.3px solid black" width="300">
+                      
+              </td>
+          </tr>
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Ultrassom
+              </td>
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+              
+
+              <td style="border: 0.3px solid black" width="300">
+                      
+              </td>
+          </tr>
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Bisturí Elétrico
+              </td>
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+              
+
+              <td style="border: 0.3px solid black" width="300">
+                      
+              </td>
+          </tr>
+          <tr>
+              <td style="text-align:center; border: 0.3px solid black" width="250px">
+                      Torre de Vídeolaparoscopia
+              </td>
+              <td style="border: 0.3px solid black" width="100px">
+                      
+              </td>
+              
+
+              <td style="border: 0.3px solid black" width="300">
+                      
+              </td>
+          </tr>
+      </table>
+      
+      
+  
+   </body>
+</apex:page>

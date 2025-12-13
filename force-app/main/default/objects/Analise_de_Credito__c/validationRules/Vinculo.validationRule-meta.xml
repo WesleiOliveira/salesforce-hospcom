@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Vinculo</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(
+ISNULL(Cotacao__c),
+ISNULL(Oportunidade__c),
+ISNULL(Conta__c)
+)</errorConditionFormula>
+    <errorMessage>Vincule a análise a uma oportunidade ou uma cotação.</errorMessage>
+</ValidationRule>

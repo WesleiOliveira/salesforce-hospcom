@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Condicao_de_pagamento__c</fullName>
+    <externalId>false</externalId>
+    <label>Condição de pagamento</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Natureza_de_Opera_o__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>Condicoes_de_pagamento</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>RETORNO DE LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>DEMONSTRAÇÃO</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>EMPRÉSTIMO</controllingFieldValue>
+            <controllingFieldValue>REMESSA EM CONSIGNAÇÃO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>Sem Mov. Financeiro</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>5 Dias</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>10 Dias</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>15 Dias</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>15/30 Dias</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>21 Dias</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>30 Dias</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>60 Dias</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>90 Dias</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>2x 30/60 Dias</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>3x 30/60/90 Dias</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>4x 30/60/90/120 Dias</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>5x 30/60/90/120/150 Dias</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>6x 30/60/90/120/150/180 Dias</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>7x 30/60/90/120/150/180/210 Dias</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>8x 30/60/90/120/150/180/210/240 Dias</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>9x 30/60/90/120/150/180/210/240/270 Dias</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>10x 30/60/90/120/150/180/210/240/270/300 Dias</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>11x 30/60/90/120/150/180/210/240/270/300/330 Dias</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>12x 30/60/90/120/150/180/210/240/270/300/330/360 Dias</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>À Vista</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>DEMONSTRAÇÃO</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>Cruzamento de Saldos (Permuta)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>BONIFICAÇÃO</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>Financiamento Bancário</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EXPORTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>VENDA</controllingFieldValue>
+            <controllingFieldValue>LOCAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>REMESSA DE TROCA</controllingFieldValue>
+            <controllingFieldValue>VENDA DA CONSIGNAÇÃO</controllingFieldValue>
+            <valueName>Renegociação</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

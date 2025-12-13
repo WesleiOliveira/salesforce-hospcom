@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>email_para_proprietario</name>
+        <label>email para proprietario</label>
+        <locationX>50</locationX>
+        <locationY>360</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>email_para_responsavel</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>$Record.Owner:User.Email</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>Subject</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>body</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <actionCalls>
+        <name>email_para_responsavel</name>
+        <label>email para responsavel</label>
+        <locationX>50</locationX>
+        <locationY>468</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>$Record.Responsevel__r.Email</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>Subject</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>body_responsavel</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <apiVersion>62.0</apiVersion>
+    <decisions>
+        <name>Decision_1</name>
+        <label>Decision 1</label>
+        <locationX>182</locationX>
+        <locationY>252</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Outcome_1_of_Decision_1</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Prazo__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>$Flow.CurrentDate</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>email_para_proprietario</targetReference>
+            </connector>
+            <label>Verifica se venceu</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <interviewLabel>Ação corretiva — Envia e-mail no dia do vencimento da AC {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Ação corretiva — Envia e-mail no dia do vencimento da AC</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Decision_1</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Status__c</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>Finalizado</stringValue>
+            </value>
+        </filters>
+        <object>Acao_corretiva__c</object>
+        <schedule>
+            <frequency>Daily</frequency>
+            <startDate>2025-02-13</startDate>
+            <startTime>08:00:00.000Z</startTime>
+        </schedule>
+        <triggerType>Scheduled</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>body</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>---------------------------------------------------------------------------------------------
+
+A Ação Corretiva {!$Record.Name} vence hoje!
+Link: https://hospcom.my.site.com/Sales/s/acao-corretiva/{!$Record.Id}
+
+---------------------------------------------------------------------------------------------</text>
+    </textTemplates>
+    <textTemplates>
+        <name>body_responsavel</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>---------------------------------------------------------------------------------------------
+A Ação Corretiva {!$Record.Name} criada no seu nome vence hoje!
+
+Link: https://hospcom.my.site.com/Sales/s/acao-corretiva/{!$Record.Id}
+---------------------------------------------------------------------------------------------</text>
+    </textTemplates>
+    <textTemplates>
+        <name>Subject</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>VENCIMENTO AÇÂO CORRETIVA</text>
+    </textTemplates>
+</Flow>

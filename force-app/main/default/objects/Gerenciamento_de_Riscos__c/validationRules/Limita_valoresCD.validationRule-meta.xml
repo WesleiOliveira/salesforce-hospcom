@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Limita_valoresCD</fullName>
+    <active>true</active>
+    <errorConditionFormula>Capacidade_de_Detec_o__c &gt; 4 || Capacidade_de_Detec_o__c &lt; 0 ||
+Capacidade_de_Detec_o_Estimada__c &gt; 4 || Capacidade_de_Detec_o_Estimada__c &lt; 0</errorConditionFormula>
+    <errorMessage>Os valores devem estar entre 0 e 4 para Capacidade de Detecção (Atual ou Estimada).</errorMessage>
+</ValidationRule>

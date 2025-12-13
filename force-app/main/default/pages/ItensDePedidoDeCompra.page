@@ -1,0 +1,29 @@
+<apex:page title="Itens do Pedido" standardStylesheets="false"  standardController="Fornecedor__c" extensions="ItensPCompraController" showHeader="false" >
+            <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css"/>
+    <style>
+    .table thead th{
+        text-align:center;
+        }
+     body{
+     font-size:12px;
+     }
+     .table tfoot th{
+         text-align:center !important;
+         }
+    </style>
+    <apex:pageBlock >
+    <apex:pageBlockTable styleClass="table table-border striped" style="text-align:center;" value="{!itens}" var="it">
+        <apex:column headerValue="Nº"><apex:outputLink target="_blank" value="https://hospcom.my.site.com/Sales/s/item-de-fornecedor/{!it.Id}">{!it.Name}</apex:outputLink></apex:column>
+        <apex:column headerValue="Código"><apex:outputField value="{!it.Codigo_do_produto__c}"/></apex:column>        
+        <apex:column headerValue="Produto" style="text-align:left;"><apex:outputField value="{!it.Produto__c}"/></apex:column>
+        <apex:column headerValue="Modelo"><apex:outputField value="{!it.Modelo__c}"/></apex:column> 
+        <apex:column headerValue="Marca"><apex:outputField value="{!it.Marca__c}"/></apex:column>
+        <apex:column headerValue="Qtd"><apex:outputText value="{!it.Quantidade__c}"/></apex:column>
+        <apex:column headerValue="Qtd Recebida"><apex:outputText value="{!it.Quantidade_Recebida__c + it.Quantidade_recebida2__c}"/></apex:column>
+        <apex:column headerValue="Valor unitário"><apex:outputField value="{!it.Valor_unitario__c}"/></apex:column>
+        <apex:column headerValue="Valor total"><apex:outputField value="{!it.Valor_total__c}"/><apex:facet name="footer"><apex:outputField value="{!Fornecedor__c.Valor_total_cotado__c}"/></apex:facet></apex:column>
+        <apex:column headerValue="Status"><apex:outputField value="{!it.Status__c}"></apex:outputField></apex:column>
+    
+    </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>

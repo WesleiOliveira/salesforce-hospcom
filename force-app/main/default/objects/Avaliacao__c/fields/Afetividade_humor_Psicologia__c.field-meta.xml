@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Afetividade_humor_Psicologia__c</fullName>
+    <externalId>false</externalId>
+    <label>Afetividade/humor</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Normal</fullName>
+                <default>false</default>
+                <label>Normal</label>
+            </value>
+            <value>
+                <fullName>Alterada</fullName>
+                <default>false</default>
+                <label>Alterada</label>
+            </value>
+            <value>
+                <fullName>Depressão</fullName>
+                <default>false</default>
+                <label>Depressão</label>
+            </value>
+            <value>
+                <fullName>Mania</fullName>
+                <default>false</default>
+                <label>Mania</label>
+            </value>
+            <value>
+                <fullName>Labilidade Afetiva</fullName>
+                <default>false</default>
+                <label>Labilidade Afetiva</label>
+            </value>
+            <value>
+                <fullName>Ansiedade</fullName>
+                <default>false</default>
+                <label>Ansiedade</label>
+            </value>
+            <value>
+                <fullName>Angústia</fullName>
+                <default>false</default>
+                <label>Angústia</label>
+            </value>
+            <value>
+                <fullName>Ambivalência Afetiva</fullName>
+                <default>false</default>
+                <label>Ambivalência Afetiva</label>
+            </value>
+            <value>
+                <fullName>Não se aplica</fullName>
+                <default>false</default>
+                <label>Não se aplica</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

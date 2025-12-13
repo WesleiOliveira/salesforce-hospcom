@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tecnico_Executor_obrigatorio</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(ISNEW(),
+  ISBLANK(Tecnico_executor__c)
+)</errorConditionFormula>
+    <errorMessage>O campo Técnico Executor deve ser preenchido.</errorMessage>
+</ValidationRule>

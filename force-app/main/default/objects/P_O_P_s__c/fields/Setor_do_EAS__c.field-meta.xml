@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Setor_do_EAS__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Campo designado para o setor ao qual o P.O.P pertence.</description>
+    <externalId>false</externalId>
+    <label>Setor do E.A.S</label>
+    <referenceTo>Setor__c</referenceTo>
+    <relationshipLabel>P.O.P&apos;s</relationshipLabel>
+    <relationshipName>P_O_P_s</relationshipName>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

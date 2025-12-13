@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>prazo_de_entrega_em_dia_util</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT(
+        OR(
+            $User.Id = &apos;0055A00000AptWMQAZ&apos;,
+            $User.Id = &apos;0055A00000AptWM&apos;
+        )
+    ),
+    NOT(Ignora_validacao__c),
+    OR(
+        WEEKDAY(Prazo_de_entrega__c) = 1,
+        WEEKDAY(Prazo_de_entrega__c) = 7
+    ),
+    CreatedDate &gt; DATETIMEVALUE(&quot;2024-11-07 00:00:00&quot;)
+)</errorConditionFormula>
+    <errorDisplayField>Prazo_de_entrega__c</errorDisplayField>
+    <errorMessage>O prazo de entrega deve ser definido em um dia útil.</errorMessage>
+</ValidationRule>

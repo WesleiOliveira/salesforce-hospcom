@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>g_juridico</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>g juridico</label>
+        <sharedTo>
+            <group>Gerente_Jur_dico</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>juridico</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>juridico</label>
+        <sharedTo>
+            <group>Juridico</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>StatusAssinatura__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Fase__c = &apos;1&apos;, &apos;Aguardando assinatura&apos;, IF(Fase__c = &apos;null&apos;, &apos;Assinado&apos;, &apos;Documento não enviado&apos;))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Status Assinatura</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

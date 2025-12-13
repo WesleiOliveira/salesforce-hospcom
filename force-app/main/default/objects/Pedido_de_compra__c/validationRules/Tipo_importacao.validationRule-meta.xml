@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo_importacao</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ NOT(ISPICKVAL(Tipo__c, &apos;Importação&apos;)),
+ ISPICKVAL(Requisicao_Interna__r.Tipo_de_Requisi_o__c,&apos;Importação&apos;)
+)</errorConditionFormula>
+    <errorDisplayField>Tipo__c</errorDisplayField>
+    <errorMessage>❌A Cotação precisa ser do tipo &apos;Importação&apos; para requisições de importação.</errorMessage>
+</ValidationRule>

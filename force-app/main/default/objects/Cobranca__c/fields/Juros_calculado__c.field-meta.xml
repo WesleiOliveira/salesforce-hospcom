@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Juros_calculado__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    Atraso__c &gt; 0,
+    ROUND(
+        (Valor_do_recebimento__c - IF(ISBLANK(Valor_pago__c), 0, Valor_pago__c)) * ((Atraso__c * 0.0833) / 100),
+        2
+    ),
+    0
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>O campo &quot;Juros&quot; calcula os juros diários de 2.5% sobre o saldo devedor (Valor do Recebimento - Valor Pago) quando há atraso no pagamento.</inlineHelpText>
+    <label>Juros calculado</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

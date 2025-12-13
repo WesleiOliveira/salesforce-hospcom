@@ -1,0 +1,41 @@
+<aura:component extends="c.ApexHelper" controller="UserLanguageController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    
+    <!-- Atributos -->
+    <aura:attribute name="userId" type="String" />
+    <aura:attribute name="languageLocaleKey" type="String" />
+    <aura:attribute name="languageOptions" type="List" default="[
+                                                                { label: 'English (US)', value: 'en_US' },
+                                                                { label: 'Português (Brasil)', value: 'pt_BR' },
+                                                                { label: 'Español (España)', value: 'es_ES' }
+                                                                ]" />
+        
+    <div style="display: flex; width: 100%; background-color: #0c375a; height: 20px; justify-content: center; align-items: center; margin-bottom: 5px;">
+        <div class="class3453245">
+            <div class="textClass34524534">Porque a vida exige precisão</div>
+            
+            <div class="flag-container">
+                <!-- Bandeira Brasil -->
+                <img src="{!$Resource.BrasilianFlag}" alt="Português (Brasil)" 
+                     class="flag" 
+                     onclick="{!c.changeLanguage}" 
+                     data-lang="pt_BR" />
+                
+                <!-- Bandeira EUA -->
+                <img src="{!$Resource.euaFlag}" alt="English (US)" 
+                     class="flag" 
+                     onclick="{!c.changeLanguage}" 
+                     data-lang="en_US" />
+                
+                <!-- Bandeira Portugal -->
+                <img src="{!$Resource.portugalFlag}" alt="Português (Portugal)" 
+                     class="flag" 
+                     onclick="{!c.changeLanguage}" 
+                     data-lang="es_US" />
+            </div>
+        </div>
+        
+    </div>
+    
+        
+    
+</aura:component>

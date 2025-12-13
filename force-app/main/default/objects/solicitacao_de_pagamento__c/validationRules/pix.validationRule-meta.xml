@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>pix</fullName>
+    <active>true</active>
+    <errorConditionFormula>(TEXT(Forma_de_Pagamento__c) == &quot;PIX&quot; &amp;&amp; 
+TEXT(Tipo_de_Chave_pix__c)== &quot;&quot;)
+||
+(TEXT(Forma_de_Pagamento__c) == &quot;PIX&quot; &amp;&amp; 
+TEXT(Tipo_de_Chave_pix__c)== &quot;&quot; &amp;&amp; Chave_pix__c == &quot;&quot;)</errorConditionFormula>
+    <errorDisplayField>Tipo_de_Chave_pix__c</errorDisplayField>
+    <errorMessage>Selecione um tipo de chave pix</errorMessage>
+</ValidationRule>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Regiao__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+TEXT(Estado__c) = &quot;São Paulo&quot;
+, &quot;Região SP&quot;,
+IF(
+OR(
+TEXT(Estado__c) = &quot;Acre&quot;,
+TEXT(Estado__c) = &quot;Amazonas&quot;,
+TEXT(Estado__c) = &quot;Amapá&quot;,
+TEXT(Estado__c) = &quot;Pará&quot;,
+TEXT(Estado__c) = &quot;Rondônia&quot;,
+TEXT(Estado__c) = &quot;Roraima&quot;
+), &quot;Região Norte&quot;,
+IF(
+OR(
+TEXT(Estado__c) = &quot;Rio de Janeiro&quot;, 
+TEXT(Estado__c) = &quot;Espírito Santo&quot;, 
+TEXT(Estado__c) = &quot;Paraná&quot;, 
+TEXT(Estado__c) = &quot;Santa Catarina&quot;, 
+TEXT(Estado__c) = &quot;Rio Grande do Sul&quot; 
+), &quot;Região RJ/ES/Sul&quot;,
+IF(
+OR(
+TEXT(Estado__c) = &quot;Mato Grosso&quot;, 
+TEXT(Estado__c) = &quot;Mato Grosso do Sul&quot; 
+), &quot;Região MT/MS&quot;,
+IF(
+OR(
+TEXT(Estado__c) = &quot;Minas Gerais&quot;, 
+TEXT(Estado__c) = &quot;Ceará&quot;, 
+TEXT(Estado__c) = &quot;Piauí&quot;, 
+TEXT(Estado__c) = &quot;Rio Grande do Norte&quot;, 
+TEXT(Estado__c) = &quot;Piauí&quot;,
+TEXT(Estado__c) = &quot;Paraíba&quot;,
+TEXT(Estado__c) = &quot;Pernambuco&quot;,
+TEXT(Estado__c) = &quot;Sergipe&quot;,
+TEXT(Estado__c) = &quot;Maranhão&quot;,
+TEXT(Estado__c) = &quot;Bahia&quot;,
+TEXT(Estado__c) = &quot;Alagoas&quot; 
+), &quot;Região NE/MG&quot;,
+IF(
+TEXT(Estado__c) = &quot;Distrito Federal&quot;,
+&quot;Região DF&quot;,
+&quot;Região GO/TO&quot;
+))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Região</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

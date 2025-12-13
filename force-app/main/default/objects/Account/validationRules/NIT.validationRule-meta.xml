@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NIT</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT(ISBLANK(NIT__c)), /* Verifica se o campo NIT não está vazio */
+    
+    /* Verifica o formato: 3 números, ponto, 3 números, ponto, 3 números, espaço, hífen, 1 número */
+    NOT(
+        REGEX(NIT__c, &quot;^[0-9]{3}\\.([0-9]{3})\\.([0-9]{3})\\s-\\s[0-9]{1}$&quot;)
+    ),
+
+    /* Verifica o comprimento da string sem pontos e hífens (10 caracteres - 9 números + 1 dígito de verificação) */
+    LEN(SUBSTITUTE(SUBSTITUTE(NIT__c, &quot;.&quot;, &quot;&quot;), &quot; - &quot;, &quot;&quot;)) != 10,
+
+    /* Valida o dígito verificador */
+    NOT(
+        CASE(
+            MOD(
+                VALUE(MID(SUBSTITUTE(SUBSTITUTE(NIT__c, &quot;.&quot;, &quot;&quot;), &quot; - &quot;, &quot;&quot;), 1, 1)) * 41 +
+                VALUE(MID(SUBSTITUTE(SUBSTITUTE(NIT__c, &quot;.&quot;, &quot;&quot;), &quot; - &quot;, &quot;&quot;), 2, 1)) * 37 +
+                VALUE(MID(SUBSTITUTE(SUBSTITUTE(NIT__c, &quot;.&quot;, &quot;&quot;), &quot; - &quot;, &quot;&quot;), 3, 1)) * 29 +
+                VALUE(MID(SUBSTITUTE(SUBSTITUTE(NIT__c, &quot;.&quot;, &quot;&quot;), &quot; - &quot;, &quot;&quot;), 4, 1)) * 23 +
+                VALUE(MID(SUBSTITUTE(SUBSTITUTE(NIT__c, &quot;.&quot;, &quot;&quot;), &quot; - &quot;, &quot;&quot;), 5, 1)) * 19 +
+                VALUE(MID(SUBSTITUTE(SUBSTITUTE(NIT__c, &quot;.&quot;, &quot;&quot;), &quot; - &quot;, &quot;&quot;), 6, 1)) * 17 +
+                VALUE(MID(SUBSTITUTE(SUBSTITUTE(NIT__c, &quot;.&quot;, &quot;&quot;), &quot; - &quot;, &quot;&quot;), 7, 1)) * 13 +
+                VALUE(MID(SUBSTITUTE(SUBSTITUTE(NIT__c, &quot;.&quot;, &quot;&quot;), &quot; - &quot;, &quot;&quot;), 8, 1)) * 7 +
+                VALUE(MID(SUBSTITUTE(SUBSTITUTE(NIT__c, &quot;.&quot;, &quot;&quot;), &quot; - &quot;, &quot;&quot;), 9, 1)) * 3,
+                11
+            ),
+            0, 0, 
+            1, 1, 
+            2, 9, 
+            3, 8, 
+            4, 7, 
+            5, 6, 
+            6, 5, 
+            7, 4, 
+            8, 3, 
+            9, 2, 
+            10, 1,
+
+            /* Caso contrário, retorna falso */
+            -1
+        ) = VALUE(RIGHT(NIT__c, 1))
+    )
+)</errorConditionFormula>
+    <errorDisplayField>NIT__c</errorDisplayField>
+    <errorMessage>NIT inválido.</errorMessage>
+</ValidationRule>

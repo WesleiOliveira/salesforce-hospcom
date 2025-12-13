@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Status</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Novo</fullName>
+                <default>true</default>
+                <label>Novo</label>
+            </value>
+            <value>
+                <fullName>Aguardando aprovação</fullName>
+                <default>false</default>
+                <label>Aguardando aprovação</label>
+            </value>
+            <value>
+                <fullName>Documentação/DP</fullName>
+                <default>false</default>
+                <label>Documentação/DP</label>
+            </value>
+            <value>
+                <fullName>Conversa Deslig/Ass. Docume</fullName>
+                <default>false</default>
+                <label>ASO Demissional</label>
+            </value>
+            <value>
+                <fullName>Aguardando registro</fullName>
+                <default>false</default>
+                <label>Aguardando registro</label>
+            </value>
+            <value>
+                <fullName>Entrevista</fullName>
+                <default>false</default>
+                <label>Entrevista</label>
+            </value>
+            <value>
+                <fullName>Registrado</fullName>
+                <default>false</default>
+                <label>Registrado</label>
+            </value>
+            <value>
+                <fullName>Reprovado</fullName>
+                <default>false</default>
+                <label>Reprovado</label>
+            </value>
+            <value>
+                <fullName>Pagamento/Financeiro</fullName>
+                <default>false</default>
+                <label>Pagamento/Financeiro</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

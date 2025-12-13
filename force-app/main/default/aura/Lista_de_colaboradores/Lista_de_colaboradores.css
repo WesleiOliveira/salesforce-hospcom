@@ -1,0 +1,134 @@
+.THIS * {
+      margin: 0;
+      padding: 0;
+    }
+
+   
+.THIS  #body {
+    
+     
+      background: #111;
+    
+        display: flex; 
+    justify-content: center;
+    align-items: flex-start;
+    }
+
+ 
+.THIS .list {
+          position: relative;
+    flex-grow: 30;
+    background: #fff;
+    /* width: 350px; */
+    box-shadow: 0 0 2px 2px #e5e5e5;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+
+    }
+
+    
+.THIS .list h2 {
+      background: #0f375c;
+      color: #fff;
+      font-weight: 600;
+      padding: 10px 20px;
+      width:100%;
+    text-align:center;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    }
+
+    
+.THIS .list ul {
+      position: relative;
+      padding: 20px;
+      width: -webkit-fill-available;
+        max-height: 50vh;
+        overflow: auto;
+    }
+
+.THIS .list ul li {
+         position: relative;
+    list-style: none;
+    padding: 15px 0px 10px 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+.THIS .list ul li:last-child {
+      border-bottom: none;
+    }
+
+.THIS .list ul li label {
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+.THIS .list ul li label input {
+      visibility: hidden;
+      appearance: none;
+    }
+
+.THIS .list ul li label p {
+      position: absolute;
+    }
+
+.THIS .list ul li label span {
+      position: relative;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      border: 1px solid #adadad;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    
+.THIS .list ul li label span::before {
+      content: "";
+      position: absolute;
+      top: 5px;
+      width: 10px;
+      height: 5px;
+      /* border-left: 2px solid #ccc;
+      border-bottom: 2px solid #ccc; */
+      transform: rotate(-40deg);
+    }
+
+    
+/*.THIS .list ul li label input:checked~p {
+      text-decoration: line-through;
+      color: #ccc;
+    }*/
+
+    
+.THIS .list ul li label input:checked~span {
+      background: #0f375c;
+      border: 1px solid #0f375c;
+    }
+
+    
+.THIS .list ul li label input:checked~span::before {
+      border-left: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+    }
+.THIS #continuar{
+    
+    background:#0f375c;
+    color:#fff;
+    padding:5px 10px;
+    border-radius:10px;
+    
+    margin:5px 5px 10px;
+    
+}
+.THIS .name{
+    padding:20px 15px !important;
+}

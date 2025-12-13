@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valor_Mensal_Atual__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Aditivo_Contratual_Relacionado__c == null, Valor_Total_Mensal__c +  Valor_Adicionado__c -  Valor_Suprimido__c ,  Valor_Total_Mensal__c )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Valor Mensal Atual</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

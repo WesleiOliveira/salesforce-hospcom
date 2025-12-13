@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Autoconceito_Psicologia__c</fullName>
+    <externalId>false</externalId>
+    <label>Autoconceito</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Bom</fullName>
+                <default>false</default>
+                <label>Bom</label>
+            </value>
+            <value>
+                <fullName>Ruim</fullName>
+                <default>false</default>
+                <label>Ruim</label>
+            </value>
+            <value>
+                <fullName>Regular</fullName>
+                <default>false</default>
+                <label>Regular</label>
+            </value>
+            <value>
+                <fullName>Não se aplica</fullName>
+                <default>false</default>
+                <label>Não se aplica</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

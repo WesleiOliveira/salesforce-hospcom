@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>img_Assinatura_Hospcom_Retorno__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+OR(ISBLANK(Assinatura_Hospcom_Retorno__c), NOT(CONTAINS(Assinatura_Hospcom_Retorno__c, &quot;hospcom&quot;))),
+IMAGE(&quot;https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=015310000080hog&amp;oid=00Di0000000JVhH&amp;lastMod=1502888568000&quot; , &quot;&quot;, 60,60),
+IMAGE(Assinatura_Hospcom_Retorno__c, &quot;&quot;, 60,200)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Assinatura Hospcom Retorno</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

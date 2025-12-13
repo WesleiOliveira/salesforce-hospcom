@@ -1,0 +1,51 @@
+<template>
+    <lightning-combobox 
+        label="Vendedor" 
+        value={vendedorId} 
+        options={vendedorOptions} 
+        onchange={handleVendedorChange}>
+    </lightning-combobox>
+    
+    <lightning-input 
+        label="Nova Linha" 
+        value={novaLinha} 
+        onchange={handleNovaLinhaChange}>
+    </lightning-input>
+    <lightning-button 
+        label="Adicionar Linha" 
+        onclick={handleAdicionarLinha}>
+    </lightning-button>
+    
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+        <thead>
+            <tr>
+                <th>Linha</th>
+                <template for:each={meses} for:item="mes">
+                    <th key={mes.label}>{mes.label}</th>
+                </template>
+            </tr>
+        </thead>
+        <tbody>
+            <template for:each={linhas} for:item="linha">
+                <tr key={linha}>
+                    <td>{linha}</td>
+                    <template for:each={meses} for:item="mes">
+                        <td key={mes.label}>
+                            <lightning-input 
+                                type="number" 
+                                data-linha={linha} 
+                                data-inicio={mes.inicio} 
+                                onchange={handleInputChange}>
+                            </lightning-input>
+                        </td>
+                    </template>
+                </tr>
+            </template>
+        </tbody>
+    </table>
+    
+    <lightning-button 
+        label="Salvar" 
+        onclick={handleSave}>
+    </lightning-button>
+</template>

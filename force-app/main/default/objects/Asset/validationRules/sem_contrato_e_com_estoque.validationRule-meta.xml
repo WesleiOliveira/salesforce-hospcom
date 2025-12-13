@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>sem_contrato_e_com_estoque</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+	!$User.Ignorar_erros__c,
+	INCLUDES(Disponivel_p_contratos__c, &apos;Nenhum&apos;),
+	TEXT(Estoque__c) != &apos;&apos;
+)</errorConditionFormula>
+    <errorDisplayField>Estoque__c</errorDisplayField>
+    <errorMessage>Ativo não disponível para contrato não deve ter o estoque preenchido.</errorMessage>
+</ValidationRule>

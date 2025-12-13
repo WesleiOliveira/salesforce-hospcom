@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Todos_os_contratos_HOSPCOM_GO</fullName>
+    <columns>NAME</columns>
+    <columns>Comprador__c</columns>
+    <columns>Nome_do_contrato__c</columns>
+    <columns>Inicio_do_contrato__c</columns>
+    <columns>Final_do_contrato__c</columns>
+    <columns>Status__c</columns>
+    <columns>Tipo_de_contrato__c</columns>
+    <columns>StatusAssinatura__c</columns>
+    <columns>Nesta_fase_desde__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Cancelado</value>
+    </filters>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Contrato_de_compra__c.Padrao</value>
+    </filters>
+    <filters>
+        <field>Comprador__c</field>
+        <operation>equals</operation>
+        <value>HOSPCOM</value>
+    </filters>
+    <label>Todos os contratos - HOSPCOM GO</label>
+</ListView>

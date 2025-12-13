@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Regiao__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    NOT(ISBLANK(State)),
+    CASE(
+        State,
+        &apos;Goiás&apos;, &apos;Região GO/TO&apos;,
+        &apos;Mato Grosso&apos;, &apos;Região MT/MS&apos;,
+        &apos;Tocantins&apos;, &apos;Região GO/TO&apos;,
+        &apos;Amapá&apos;, &apos;Região Norte&apos;,
+        &apos;Amazonas&apos;, &apos;Região Norte&apos;,
+        &apos;Acre&apos;, &apos;Região Norte&apos;,
+        &apos;Pará&apos;, &apos;Região Norte&apos;,
+        &apos;Rondônia&apos;, &apos;Região Norte&apos;,
+        &apos;Roraima&apos;, &apos;Região Norte&apos;,
+        &apos;Mato Grosso do Sul&apos;, &apos;Região MT/MS&apos;,
+        &apos;São Paulo&apos;, &apos;Região SP&apos;,
+        &apos;Rio de Janeiro&apos;, &apos;Região RJ/ES/Sul&apos;,
+        &apos;Espírito Santo&apos;, &apos;Região RJ/ES/Sul&apos;,
+        &apos;Paraná&apos;, &apos;Região RJ/ES/Sul&apos;,
+        &apos;Santa Catarina&apos;, &apos;Região RJ/ES/Sul&apos;,
+        &apos;Rio Grande do Sul&apos;, &apos;Região RJ/ES/Sul&apos;,
+        &apos;Distrito Federal&apos;, &apos;Região DF&apos;,
+        NULL
+    ),
+    IF(
+        OR(
+            NOT(ISBLANK(MobilePhone)),
+            NOT(ISBLANK(Phone))
+        ),
+        CASE(
+            LEFT(
+                IF(NOT(ISBLANK(MobilePhone)), MobilePhone, Phone),
+                4
+            ),
+            &quot;(68)&quot;, &quot;Região Norte&quot;,
+            &quot;(96)&quot;, &quot;Região Norte&quot;,
+            &quot;(92)&quot;, &quot;Região Norte&quot;,
+            &quot;(97)&quot;, &quot;Região Norte&quot;,
+            &quot;(91)&quot;, &quot;Região Norte&quot;,
+            &quot;(93)&quot;, &quot;Região Norte&quot;,
+            &quot;(94)&quot;, &quot;Região Norte&quot;,
+            &quot;(69)&quot;, &quot;Região Norte&quot;,
+            &quot;(95)&quot;, &quot;Região Norte&quot;,
+            &quot;(67)&quot;, &quot;Região MT/MS&quot;,
+            &quot;(65)&quot;, &quot;Região MT/MS&quot;,
+            &quot;(66)&quot;, &quot;Região MT/MS&quot;,
+            &quot;(11)&quot;, &quot;Região SP&quot;,
+            &quot;(12)&quot;, &quot;Região SP&quot;,
+            &quot;(13)&quot;, &quot;Região SP&quot;,
+            &quot;(14)&quot;, &quot;Região SP&quot;,
+            &quot;(15)&quot;, &quot;Região SP&quot;,
+            &quot;(16)&quot;, &quot;Região SP&quot;,
+            &quot;(17)&quot;, &quot;Região SP&quot;,
+            &quot;(19)&quot;, &quot;Região SP&quot;,
+            &quot;(21)&quot;, &quot;Região RJ/ES/Sul&quot;,
+            &quot;(22)&quot;, &quot;Região RJ/ES/Sul&quot;,
+            &quot;(24)&quot;, &quot;Região RJ/ES/Sul&quot;,
+            &quot;(27)&quot;, &quot;Região RJ/ES/Sul&quot;,
+            &quot;(28)&quot;, &quot;Região RJ/ES/Sul&quot;,
+            &quot;(41)&quot;, &quot;Região RJ/ES/Sul&quot;,
+            &quot;(42)&quot;, &quot;Região RJ/ES/Sul&quot;,
+            &quot;(43)&quot;, &quot;Região RJ/ES/Sul&quot;,
+            &quot;(44)&quot;, &quot;Região RJ/ES/Sul&quot;,
+            &quot;(45)&quot;, &quot;Região RJ/ES/Sul&quot;,
+            &quot;(46)&quot;, &quot;Região RJ/ES/Sul&quot;,
+            &quot;(47)&quot;, &quot;Região RJ/ES/Sul&quot;,
+            &quot;(48)&quot;, &quot;Região RJ/ES/Sul&quot;,
+            &quot;(49)&quot;, &quot;Região RJ/ES/Sul&quot;,
+            &quot;(51)&quot;, &quot;Região RJ/ES/Sul&quot;,
+            &quot;(53)&quot;, &quot;Região RJ/ES/Sul&quot;,
+            &quot;(54)&quot;, &quot;Região RJ/ES/Sul&quot;,
+            &quot;(55)&quot;, &quot;Região RJ/ES/Sul&quot;,
+            &quot;(61)&quot;, &quot;Região DF&quot;,
+            &quot;Região GO/TO&quot;
+        ),
+        NULL
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Fórmula gerada com base no endereço descrito do Lead.</inlineHelpText>
+    <label>Região do endereço</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

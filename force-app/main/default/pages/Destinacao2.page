@@ -1,0 +1,71 @@
+<apex:page title="Destinação" standardController="Fornecedor__c" standardStylesheets="false" extensions="DestinacaoController"  showHeader="false" docType="html-5.0" >
+    <body style="font-size:11px;">
+    <apex:slds />
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css"/>
+    <style>
+        .table thead th{
+        text-align:center;
+        }
+        .slds-scope td{
+        text-align:center;
+        }
+    </style>
+        <apex:variable value="{!0}" var="index"/>
+    <apex:pageBlock id="pb1">
+        <apex:pageMessages id="MSG" />
+        <apex:form id="dados">
+            <div>
+        <apex:pageBlockTable id="tab" rendered="{!show}" styleClass="table table-border striped" style="text-align:center;" value="{!Records}" var="Rec">        
+            <apex:column headerValue="Item de Cotação">
+                <apex:outputLink value="/{!Rec.Id}" >{!Rec.Name}</apex:outputLink>
+            </apex:column>
+            <apex:column headerValue="Código"> 
+                <apex:outputText value="{!Rec.Produto__r.ProductCode}" />
+            </apex:column>
+            <apex:column headerValue="Produto">
+                <apex:outputField value="{!Rec.Produto__c}" />              
+            </apex:column>
+            <apex:column headerValue="Modelo"> 
+                <apex:outputText value="{!Rec.Produto__r.Modelo__c}" />
+            </apex:column>
+            <apex:column headerValue="Marca">
+                <apex:outputText value="{!Rec.Produto__r.Marca__c}"/>
+            </apex:column>
+            <apex:column headerValue="Qtd Direcionada"> 
+                <apex:outputText value="{!Rec.Quantidade_requisitada__c}" />
+            </apex:column>
+            <apex:column headerValue="Requisições">
+                    <table class="slds-table">
+                        <tr>
+                            <th style="text-align:center"><b>Destinação</b></th>
+                            <th style="text-align:center"><b>Qtd Requisitada</b></th>
+                            <th style="text-align:center"><b>Qtd Disponível</b></th>
+                            <th style="text-align:center"><b>Pedido de Venda</b></th>
+                            <th style="text-align:center"><b>Prod. do PV</b></th>
+                            <th style="text-align:center"><b>Ação</b></th>
+                        </tr>
+                                    <apex:repeat value="{!Rec.Requisicoes_de_Itens__r}" var="Reqs">
+                        <tr>
+                            <td style="text-align:center"><apex:outputText value="{!IF(Reqs.RecordTypeId = '0126e000001YbImAAK', '**Estoque', IF(Reqs.RecordTypeId = '0125A000001QVQAQA4', 'Suprir venda com compra', IF(Reqs.RecordTypeId = '0125A000001QVQCQA4', 'Suprir estoque com compra', null)))}" /></td>
+                            <td style="text-align:center"><apex:outputField rendered="{!IF(Reqs.RecordTypeId != '0126e000001YbImAAK', true, false)}" value="{!Reqs.Quantidade_requisitada__c}" /><apex:outputText rendered="{!IF(Reqs.RecordTypeId = '0126e000001YbImAAK', true, false)}" value="{!Reqs.Quantidade_requisitada__c}" /></td>
+                            <td style="text-align:center"><apex:outputField rendered="{!IF(Reqs.RecordTypeId = '0126e000001YbImAAK', true, false)}" value="{!Reqs.Quantidade_Disponivel__c}" /><apex:outputText value="—" rendered="{!IF(Reqs.RecordTypeId != '0126e000001YbImAAK', true, false)}" /></td>
+                            <td style="text-align:center"><apex:outputField rendered="{!IF(Reqs.Item_de_pedido_de_venda__r.Order.OrderNumber != null, true,false)}" value="{!Reqs.Item_de_pedido_de_venda__r.OrderId}" /><apex:outputText value="—" rendered="{!IF(Reqs.Item_de_pedido_de_venda__r.Order.OrderNumber == null, true,false)}" /></td>                            
+                            <td style="text-align:center"><apex:outputText value="{!IF(Reqs.Item_de_pedido_de_venda__c == null, '—', null)}"/> <apex:outputField rendered="{!IF(Reqs.Item_de_pedido_de_venda__c != null, true, false)}" value="{!Reqs.Item_de_pedido_de_venda__c}" /></td>
+                            <td style="text-align:center"><apex:outputText rendered="{!IF(Reqs.RecordTypeId == '0126e000001YbImAAK', true,false)}"><apex:outputLink disabled="{!IF(Reqs.Quantidade_Disponivel__c == 0,true,false)}" value="/apex/Requisicao?core.apexpages.request.devconsole=1&id={!Reqs.Id}" >Definir Destinação</apex:outputLink></apex:outputText> 
+                                <apex:outputText rendered="{!IF(Reqs.RecordTypeId == '0126e000001YbImAAK', false,true)}">
+                                    <apex:commandLink action="{!deleteRecord}" value="Excluir Destinação" oncomplete="location.reload()" onclick="if(!confirm('Tem certeza que deseja excluir esta requisição?')) return false;"> 
+                                <apex:param name="rowId" assignTo="{!reqId}" value="{!Reqs.Id}"/>                 
+                                    </apex:commandLink>
+                                </apex:outputText></td>
+                        </tr>
+                                    </apex:repeat>
+                    </table>
+                </apex:column>
+            <apex:inlineEditSupport showOnEdit="savebtn" />            
+            </apex:pageBlockTable><br/>
+                <apex:commandButton id="savebtn" value="Salvar" style="display:none;" action="{!upd}" />
+            </div>
+        </apex:form>
+    </apex:pageBlock>
+    </body>   
+    </apex:page>

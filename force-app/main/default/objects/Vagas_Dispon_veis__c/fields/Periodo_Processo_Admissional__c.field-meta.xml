@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Periodo_Processo_Admissional__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+ISBLANK(Final_Processo_Admissional__c) || ISBLANK( Inicio_Processo_Admissional__c),
+null,
+IF(
+(Final_Processo_Admissional__c - Inicio_Processo_Admissional__c) &gt;= 1,
+TEXT(FLOOR(Final_Processo_Admissional__c - Inicio_Processo_Admissional__c)) &amp; &quot; dia(s) e &quot; &amp;
+TEXT(FLOOR(MOD((Final_Processo_Admissional__c - Inicio_Processo_Admissional__c) * 24, 24))) &amp; &quot;:&quot; &amp;
+RIGHT(&quot;0&quot; &amp; TEXT(FLOOR(MOD((Final_Processo_Admissional__c - Inicio_Processo_Admissional__c) * 60, 60))), 2) &amp; &quot; horas&quot;,
+IF(
+(Final_Processo_Admissional__c  - Inicio_Processo_Admissional__c) * 24 &gt;= 1,
+TEXT(FLOOR((Final_Processo_Admissional__c - Inicio_Processo_Admissional__c) * 24)) &amp; &quot;:&quot; &amp;
+RIGHT(&quot;0&quot; &amp; TEXT(FLOOR(MOD((Final_Processo_Admissional__c - Inicio_Processo_Admissional__c) * 60, 60))), 2) &amp; &quot; horas&quot;,
+TEXT(FLOOR((Final_Processo_Admissional__c - Inicio_Processo_Admissional__c) * 24 * 60)) &amp; &quot; minutos&quot;
+)
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Período - Processo Admissional</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

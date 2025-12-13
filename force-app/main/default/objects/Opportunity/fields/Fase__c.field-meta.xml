@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fase__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(TEXT(StageName) = &apos;OPEN&apos;, &apos;1 - OPEN&apos;,
+IF(TEXT(StageName) = &apos;QUALIFY&apos;, &apos;2 - QUALIFY&apos;, 
+IF(TEXT(StageName) = &apos;UPSIDE&apos;, &apos;3 - UPSIDE&apos;, 
+IF(TEXT(StageName) = &apos;UPSIDE HIGH&apos;, &apos;4 - UPSIDE HIGH&apos;, 
+IF(TEXT(StageName) = &apos;COMITED&apos;, &apos;5 - COMITED&apos;, 
+IF(TEXT(StageName) = &apos;WIN&apos;, &apos;6 - WIN&apos;, 
+IF(TEXT(StageName) = &apos;LOSS&apos;, &apos;7 - LOSS&apos;, 
+&apos;&apos;)))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Fase*</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

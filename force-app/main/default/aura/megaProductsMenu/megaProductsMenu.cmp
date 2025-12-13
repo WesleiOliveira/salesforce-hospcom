@@ -1,0 +1,171 @@
+<aura:component extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="setMeOnInit" type="String" default="default value" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="produtosObj" type="Object[]" default="{!c.soql}" />
+    <aura:handler name="render" value="{!this}" action="{!c.onRead}"/>
+    <aura:handler name="render" value="{!this}" action="{!c.onRead2}"/>
+    
+    <aura:method name="preencheFamiliaMethod" action="{!c.preencheFamilia}" description="funcao que preenche select de familias">
+    </aura:method>
+    
+    <aura:method name="preencheTipoMethod" action="{!c.preencheTipo}" description="funcao que preenche select dos tipos">
+    </aura:method>
+    
+    <aura:method name="preencheScroolMethod" action="{!c.preencheScrool}" description="funcao que preenche o scrool">
+    </aura:method>
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.bootstrap5 + '/js/bootstrap.bundle.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js')}"                  
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    <div style="position: relative; background-color: #00345c; display: flex; flex-direction: column; width: 100.14vw!important; left: calc(-50.6vw + 50%); justify-content: center">
+        
+        <div class="row" style="width: 100%; padding-top: 12px; padding-bottom: 12px; padding-left: 6vw; padding-right: 6vw!important; margin: 0">
+            
+            <!-- TITULO NOSSOS PRODUTOS -->
+            <div class="col-lg-3 col-md-6" style="">
+                <div style="
+                            font-size:5vh;
+                            font-weight:500;
+                            line-height: 1.6;
+                            text-align:left;
+                            color:#ffffff;
+                            " class="generated-text">Nossos Produtos
+                </div>
+            </div>
+            
+            <!-- LINHAS -->
+            <div  id='colunaMarca' class="col-lg-3 col-md-6 mobileStyle" style="display: flex; align-items: center; ">
+                <div style="display: flex; align-items: center; flex-direction: column; width: 100%">
+                    <!-- CUSTOM SELECT -->
+                    <details class="custom-select" id="selectLinhas">
+                        <summary class="radios" id="listaItens1">
+                            
+                        </summary>
+                        
+                        <ul class="list" id="listaItens2" style="padding-right: 0rem!important;">
+                            
+                        </ul>
+                    </details>
+                    <!-- FIM CUSTOM SELECT -->
+                </div>
+            </div>
+            
+            <!-- FAMÍLIA -->
+            <div id='colunaFamilia' class="col-lg-3 col-md-6 mobileStyle" style="display: none; align-items: center; ">
+                <div style="display: flex; align-items: center; flex-direction: column; width: 100%">
+
+					<!-- CUSTOM SELECT -->
+                    <details class="custom-select" id="selectFamilias">
+                        <summary class="radios" id="listaFamilia1">
+                           
+                        </summary>
+                        
+                        <ul class="list" id="listaFamilia2">
+                            
+                        </ul>
+                    </details>
+                    <!-- FIM CUSTOM SELECT -->
+                </div>
+            </div>
+            
+            <!-- TIPO -->
+            <div  id='colunaTipo' class="col-lg-3 col-md-6 mobileStyle" style="display: none; align-items: center; ">
+                <div style="display: flex; align-items: center; flex-direction: column; width: 100%">
+                    <!-- <div style="
+                                font-size:1.5vh;
+                                font-weight:500;
+                                width: 100%;
+                                text-align:left;
+                                color:#ffffff;
+                                " class="generated-text customFont">Selecione um tipo
+                    </div>
+                    <select id="selectTipo" onchange="{!c.preencheScrool}" class="form-select customSelectHospcom customFontSelect" aria-label="Default select example">
+                        
+                    </select> -->
+                <!-- CUSTOM SELECT -->
+                <details class="custom-select" id="selectTipos">
+                    <summary class="radios" id="listaTipo1">
+                        
+                    </summary>
+                    
+                    <ul class="list" id="listaTipo2">
+                        
+                    </ul>
+                </details>
+                <!-- FIM CUSTOM SELECT -->
+                </div>
+            </div>
+            
+            <div id='spinnerDiv' style="display: none">
+                <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+            </div>
+            <!-- COLUNA VAZIA 
+            <div class="col-lg-1 col-md-6" style="background-color:">
+                <div id='spinnerDiv' style="display: none">
+                    <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+                </div>
+                
+            </div> -->
+        </div>
+        
+        
+        
+        <div class="row" id="bigBoxItens" style="display: none; width: 100%; margin: 0; padding-left: 1vw">
+            <div class="col-12" style="background-color: #ffffff; display: flex; max-height: 200px; padding-top: 10px;">         
+                <div id="leftDiv" style="display: flex; width: 5%; height: 100%; flex-direction: column">
+                    <div style="display: flex; width: 100%; height: 20%">
+                    </div>
+                    <div style="display: flex; width: 100%; height: 70%; border-right: 1px solid #00345C; justify-content: right">
+                        <i class="fa fa-angle-left" id="left" aria-hidden="true" 
+                           style="color: #00345c;
+                                  font-size: 50px; 
+                                  width: 5%;
+                                  display: flex;
+                                  justify-content: right;
+                                  align-items: center;
+                                  padding-right: 10px;
+                                  "></i>
+                    </div>
+                    <div style="display: flex; width: 100%; height: 20%">
+                    </div>
+                </div>
+                
+                
+                
+                <div id="boxItens" class="boxItens">
+                    
+                </div>  
+                
+                <div style="display: flex; width: 5%; height: 100%; flex-direction: column">
+                    <div style="display: flex; width: 100%; height: 20%">
+                    </div>
+                    <div style="display: flex; width: 100%; height: 70%; border-left: 1px solid #00345C;">
+                        <i class="fa fa-angle-right" id="right" aria-hidden="true" 
+                           style="color: #00345c;
+                                  font-size: 50px; 
+                                  width: 5%;
+                                  display: flex;
+                                  justify-content: left;
+                                  align-items: center;
+                                  padding-left: 10px;
+                                  "></i>
+                    </div>
+                    <div style="display: flex; width: 100%; height: 20%">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    
+    
+</aura:component>

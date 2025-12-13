@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>Compartilha_Financeiro</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Compartilha Financeiro</label>
+        <sharedTo>
+            <group>Financeiro_Geral</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Compartilha_log_stica</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Compartilha logística</label>
+        <sharedTo>
+            <group>Logistica</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

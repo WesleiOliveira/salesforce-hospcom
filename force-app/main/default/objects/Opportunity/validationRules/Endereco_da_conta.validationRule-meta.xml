@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Endereco_da_conta</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+Account.BillingCountry == &apos;Brasil&apos;,
+ISNEW(),
+OR(
+Account.BillingState == &apos;&apos;,
+Account.BillingCity == &apos;&apos;,
+Account.BillingStreet == &apos;&apos;,
+Account.BillingPostalCode == &apos;&apos;
+)
+)</errorConditionFormula>
+    <errorMessage>Preencha corretamente o endereço da conta.</errorMessage>
+</ValidationRule>

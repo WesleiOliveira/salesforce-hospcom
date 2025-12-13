@@ -1,0 +1,77 @@
+<aura:component extends="c.ApexHelper" controller="ChecklistController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <ltng:require
+                  scripts="{!join(',',
+                           $Resource.JQuery)}" />
+  
+    
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="modelos" type="List" />
+    <aura:attribute name="selectedModeloId" type="Id" />
+    <aura:attribute name="checklist" type="Object" />
+    <aura:attribute name="respostas" type="Map" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <div style="margin: 15px; border-radius: 20px; padding: 20px; box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;">
+        <!-- Título -->
+        <div class="slds-p-around_medium">
+            <h1 class="slds-text-heading_large title4358u348">Checklists de Serviço</h1>
+        </div>
+        
+        <!-- Select de Modelos -->
+        <div class="slds-p-around_medium">
+            <lightning:select name="modelSelect"
+                              label="Selecione o modelo de checklist"
+                              value="{!v.selectedModeloId}"
+                              onchange="{!c.handleModeloChange}">
+                <option value="" disabled="true" selected="true">-- Selecione --</option>
+                <aura:iteration items="{!v.modelos}" var="modelo">
+                    <option value="{!modelo.Id}">{!modelo.Name}</option>
+                </aura:iteration>
+            </lightning:select>
+        </div>
+        
+        <!-- Renderização do Checklist com seções -->
+        <aura:if isTrue="{!not(empty(v.checklist))}">
+            <lightning:card title="{!v.checklist.titulo}" class="slds-m-around_medium">
+                
+                <aura:iteration items="{!v.checklist.secoes}" var="secao">
+                    <div class="slds-m-vertical_medium">
+                        <h3 class="slds-text-title_bold slds-m-bottom_small">{!secao.titulo}</h3>
+                        
+                        <aura:iteration items="{!secao.campos}" var="campo">
+                            <div class="slds-p-around_x-small">
+                                <aura:if isTrue="{!campo.tipo == 'select'}">
+                                    <lightning:select name="{!campo.nome}"
+                                                      label="{!campo.label}"
+                                                      required="{!campo.obrigatorio}"
+                                                      onchange="{!c.handleInputChange}">
+                                        <aura:iteration items="{!campo.opcoes}" var="opcao">
+                                            <option value="{!opcao}">{!opcao}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                    <aura:set attribute="else">
+                                        <lightning:input
+                                                         name="{!campo.nome}"
+                                                         label="{!campo.label}"
+                                                         type="{!campo.tipo == 'boolean' ? 'checkbox' : (campo.tipo == 'numero' ? 'number' : 'text')}"
+                                                         fieldLevelHelp="{!campo.ajuda}"
+                                                         required="{!campo.obrigatorio}"
+                                                         onchange="{!c.handleInputChange}" />
+                                    </aura:set>
+                                </aura:if>
+                            </div>
+                        </aura:iteration>
+                    </div>
+                </aura:iteration>
+                
+                <lightning:button label="Salvar"
+                                  onclick="{!c.salvarChecklist}"
+                                  class="slds-m-top_medium" />
+            </lightning:card>
+        </aura:if>
+        
+        
+    </div>
+</aura:component>

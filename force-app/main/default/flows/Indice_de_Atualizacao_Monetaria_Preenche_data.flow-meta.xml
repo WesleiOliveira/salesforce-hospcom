@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <environments>Default</environments>
+    <formulas>
+        <name>dataFormula</name>
+        <dataType>Date</dataType>
+        <expression>DATE(
+    {!$Record.Ano__c},
+    CASE(
+        {!$Record.Mes__c},
+        &quot;janeiro&quot;, 1,
+        &quot;fevereiro&quot;, 2,
+        &quot;março&quot;, 3,
+        &quot;abril&quot;, 4,
+        &quot;maio&quot;, 5,
+        &quot;junho&quot;, 6,
+        &quot;julho&quot;, 7,
+        &quot;agosto&quot;, 8,
+        &quot;setembro&quot;, 9,
+        &quot;outubro&quot;, 10,
+        &quot;novembro&quot;, 11,
+        &quot;dezembro&quot;, 12,
+        1
+    ),
+    1
+)</expression>
+    </formulas>
+    <interviewLabel>Índice de Atualização Monetária — Preenche data {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Índice de Atualização Monetária — Preenche data</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Data</name>
+        <label>Data</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <inputAssignments>
+            <field>Data__c</field>
+            <value>
+                <elementReference>dataFormula</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Data</targetReference>
+        </connector>
+        <object>Indice_de_Atualizacao_Monetaria__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

@@ -1,0 +1,598 @@
+<apex:page standardController="X5S__c" extensions="ListagemIMEs_PMP,PegaUrlImagemAnexada" applyHtmlTag="false" showHeader="false" renderAs="pdf">
+
+    <head>
+        <style type="text/css" media="print">
+            @page {
+                size: 21cm 29.7cm;
+                margin: 100px 40px 60px 40px;
+
+                @top-center {
+                    content: element(header);
+                }
+
+                @bottom-center {
+                    content: element(footer);
+                }
+            }
+
+            *{
+                font-family: sans-serif !important;
+             
+            }
+            
+            @page {
+                size: A4;
+                background:url({!$Resource.TimbradoHospcom});
+                margin: 150px 20px 120px 20px;
+
+                @bottom-center {
+                    content: element(footer);
+                }
+            }
+
+            .pagenumber:before {
+                content: counter(page);
+            }
+
+            .pagecount:before {
+                content: counter(pages);
+            }
+
+            div.header {
+                margin: 0px 0px 0px 0px;
+                padding: 20px 0px 20px 0px;
+                position: running(header);
+                height: 60px;
+            }
+
+            div.footer {
+                margin: 0px 0px 0px 0px;
+                padding: 20px 0px 20px 0px;
+                position: running(footer);
+                height: 20px;
+                text-align: right;
+                font-family: arial, verdana, sans-serif;
+                font-size: 10px;
+                font-weight: normal;
+            }
+            .image-grid {
+                display: grid;
+                gap: 10px; /* Espaço entre as imagens */
+                justify-content: center; /* Centraliza o grid */
+                align-items: center; /* Centraliza verticalmente */
+                text-align: center; /* Alinha o conteúdo no centro */
+                width: 100%;
+                padding: 20px;
+            }
+            
+         
+            
+                  
+            
+        </style>
+        <style type="text/css" media="print">
+         
+            
+           table{
+               width:100%;
+                       border-collapse: collapse;
+           }
+           
+           td{
+               color:#1a3f60 ;
+                  
+           }
+           
+           tr, td{
+               border:1px solid #626363;
+               padding: 5px 2px;
+                 border-collapse: collapse;
+           }
+           
+           .topico{
+               /*background:blue;*/
+               width: 20%;
+           }
+           
+           
+           .valor{
+               width:5%;               
+               color:#1a3f60 ;
+               text-align: center;
+           }
+           .sessao{
+               text-align: center;
+               background: #1a365f;
+               color: #fff;
+              
+           }
+           
+           .container, .valor_cabecalho {
+               border:none;
+           }
+           .valor_cabecalho{
+               color:#1a3f60;
+               padding:0;
+           }
+           .container{
+               font-size: 16px !important; 
+               
+           }
+           .dado_auditoria{
+                font-weight: 900;
+           }           
+        </style>
+    </head>
+
+    <body>
+        <apex:pageBlock >
+
+            <div class="footer" style="text-align:center !important">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Página <span class="pagenumber" /> de <span class="pagecount" /> - Emissão em:&nbsp;<apex:outputText value="{0,date,dd/MM/yyyy}"> <apex:param value="{! TODAY() }" /></apex:outputText>
+            </div>
+            
+            
+            <table >
+                <tr class="container c1">
+                    <td class='valor_cabecalho'>
+                          <spam class="dado_auditoria" > Auditado:  </spam>{! X5S__c.Auditado__r.Name}
+                    </td>
+                 
+                    <td class='valor_cabecalho'>
+                         <spam class="dado_auditoria" > Pontos: </spam> {! X5S__c.Pontuacao_geral_veicular__c}%
+                     </td>
+                </tr>
+               
+                 <tr class="container c2">
+                    <td class='valor_cabecalho'>
+                         <spam class="dado_auditoria" > Veículo: </spam> {!X5S__c.Veiculo__r.Name}
+                    </td> 
+                 </tr >
+                 
+                 
+                 <tr class="container c2">
+                    <td class='valor_cabecalho'>
+                        <spam class="dado_auditoria" >Auditor: </spam> {! X5S__c.Auditor__r.Name}
+                    </td>
+                 </tr >
+                 
+                 
+                 <tr class="container c2">
+                     
+                      <td class='valor_cabecalho'>
+                         <spam class="dado_auditoria" > Data:  </spam> <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{! X5S__c.Data__c }" /></apex:outputText>
+                    </td> 
+                 </tr >
+                 
+            </table>
+            
+            <br/><br/>
+            
+            <table>
+            
+               <tr>
+                   <td colspan='3' class='sessao'>
+                       INTERNO
+                   </td>
+              </tr>
+            
+            
+                <!-- 1 INTERNO-->
+                <tr>
+                
+                   
+                    
+                    <td class="topico">
+                       Manutenção
+                    </td>
+                    
+                    
+                    <td>
+                       O Painel informa algum tipo de inconformidade?
+                    </td>
+                    
+                    <td class="valor">
+                        {!X5S__c.x1__c}
+                    </td>
+                </tr>
+                
+                
+            
+                <!-- 2 INTERNO-->
+                <tr>
+                    <td class="topico">
+                        Limpeza
+                    </td>
+                    
+                    
+                    <td>
+                       O Interior do veículo se encontra limpo?
+                    </td>
+                    
+                    <td class="valor">
+                        {!X5S__c.x2__c}
+                    </td>
+                </tr>
+                
+                
+            
+                <!-- 3 INTERNO-->
+                <tr>
+                    <td class="topico">
+                       Organização
+                    </td>
+                    
+                    
+                    <td>
+                       Existe lixo acumulado no interior do veículo?
+                    </td>
+                  
+                    <td class="valor">
+                        {!X5S__c.x3__c}
+                    </td>
+                </tr>
+                
+                
+            
+                <!-- 4 INTERNO-->
+                <tr>
+                    <td class="topico">
+                       Manutenção
+                    </td>
+                    
+                    
+                    <td>
+                       Existe alguma avaria ou dano no lado interno do veiculo?
+                    </td>
+                
+                    <td class="valor">
+                        {!X5S__c.x4__c}
+                    </td>
+                </tr>
+                
+                
+            
+                <!--5 INTERNO-->
+                <tr>
+                    <td class="topico">
+                       Controle Visual
+                    </td>
+                    
+                    
+                    <td>
+                       O interior do veículo encontra-se organizado?
+                    </td>
+                    
+                    <td class="valor">
+                        {!X5S__c.x5__c}
+                    </td>
+                </tr>
+                
+                
+            
+                <!-- 6 INTERNO-->
+                <tr>
+                    <td class="topico">
+                       Controle Visual
+                    </td>
+                    
+                    
+                    <td>
+                       Existe algum item inconforme no interior do veículo?
+                    </td>
+                    
+                    <td class="valor">
+                        {!X5S__c.x6__c}
+                    </td>
+                </tr>
+                
+                
+            
+                <!-- 7 INTERNO-->
+                <tr>
+                    <td class="topico">
+                        Rastreabilidade
+                    </td>
+                    
+                    
+                    <td>
+                       Rastreador emite sinal sorono quando liga a ignição?
+                    </td>
+                    
+                    <td class="valor">
+                        {!X5S__c.x7__c}
+                    </td>
+                </tr>
+                
+                
+            </table>
+            
+            
+            
+            <!-- 
+            #################
+                EXTERNO
+            ##################
+            -->
+            
+            <table>
+            
+            
+               <tr>
+                   <td colspan='3' class='sessao'>
+                       EXTERNO
+                   </td>
+              </tr>
+            
+              <!-- 8 EXTERNO-->
+              <tr>
+                    <td class="topico">
+                       Limpeza
+                    </td>
+                    
+                    
+                    <td>
+                       O lado externo do veículo se encontra limpo?
+                    </td>
+                 
+                    <td  class="valor">
+                          {! X5S__c.x8__c}
+                    </td>
+              </tr>
+                
+            
+              <!-- 9 EXTERNO-->
+              <tr>
+                    <td class="topico">
+                        Controle Visual
+                    </td>
+                    
+                    
+                    <td>
+                       Existe alguma avaria ou dano no lado externo?
+                    </td>
+                    
+                    
+                    <td class="valor">
+                        {!X5S__c.x9__c}
+                    </td>
+              </tr>
+                
+            
+              <!-- 10 EXTERNO-->
+              <tr>
+                    <td class="topico">
+                       Manutenção
+                    </td>
+                    
+                    
+                    <td>
+                       Os faróis estão funcionando?
+                    </td>
+                    
+                    <td class="valor">
+                        {!X5S__c.x10__c}
+                    </td>
+               </tr>
+                
+                
+                <!-- 10 EXTERNO-->
+                <tr>
+                    <td class="topico">
+                       Manutenção
+                    </td>
+                    
+                    
+                    <td>
+                       Setas de sinalização estão funcionando?
+                    </td>
+                    
+                    <td class="valor">
+                        {!X5S__c.X11__c}
+                    </td>
+                </tr>
+                
+                
+            </table>
+            
+            
+            <!-- 
+            #################
+                DOCUMENTAL
+            ##################
+            -->
+            
+            <table>
+            
+            
+               <tr>
+                   <td colspan='3' class='sessao'>
+                       DOCUMENTAL
+                   </td>
+              </tr>
+              
+              
+                <!-- 11 DOCUMENTAL-->
+                <tr>
+                    <td class="topico">
+                       Documento
+                    </td>
+                    
+                    
+                    <td>
+                          Certificado de Veicular está disponivel do SF?
+                    </td>
+                    
+                    
+                    <td class="valor">
+                        {!X5S__c.X12__c}
+                    </td>
+                </tr>
+                
+            
+                <!-- 12 DOCUMENTAL-->
+                <tr>
+                    <td class="topico">
+                         Documento
+                    </td>
+                    
+                    
+                    <td>
+                       Etiqueta de Manutenção interna está atualizada?
+                    </td>
+                    
+                    
+                    <td class="valor">
+                        {!X5S__c.X13__c}
+                    </td>
+                </tr>
+                
+            
+                <!-- 13 DOCUMENTAL-->
+                <tr>
+                    <td class="topico">
+                       Documento
+                    </td>
+                    
+                    <td>
+                       CRLV está disponível no SF?
+                    </td>
+                    
+                    <td class="valor">
+                        {!X5S__c.X14__c}
+                    </td>
+                </tr>
+                
+            
+                <!-- 14 DOCUMENTAL-->
+                <tr>
+                    <td class="topico">
+                       Documento
+                    </td>
+                    
+                    <td>
+                       IPVA esta empreso e disponivel no veículo? 
+                    </td>
+                    
+                    
+                    <td class="valor">
+                        {!X5S__c.X15__c}
+                    </td>
+                </tr>
+                
+            </table>
+            
+            <!-- 
+            #################
+              PADRONIZAÇÃO 
+            ##################
+            -->
+            
+            <table>
+            
+            
+               <tr>
+                   <td colspan='3' class='sessao'>
+                       PADRONIZAÇÃO 
+                   </td>
+              </tr>
+            
+                <!-- 15 PADRONIZAÇÃO -->
+                <tr>
+                    <td class="topico">
+                        Padrão
+                    </td>
+                    
+                    
+                    <td>
+                         Os pneus estão calibrados e em condição de uso?
+                    </td>
+                    
+                    
+                    <td class="valor">
+                        {!X5S__c.X16__c}
+                    </td>
+                </tr>
+                
+                
+            
+                <!-- 16 PADRONIZAÇÃO -->
+                <tr>
+                    <td class="topico">
+                         Padrão
+                    </td>
+                    
+                    
+                    <td>
+                      Os estepe estão calibrado e em candição de uso?
+                    </td>
+                    
+                    <td class="valor">
+                        {!X5S__c.X17__c}
+                    </td>
+                </tr>
+                
+                <!-- 17 PADRONIZAÇÃO -->
+                <tr>
+                    <td class="topico">
+                       Padrão
+                    </td>
+                    
+                    <td>
+                        O carro está com itens basico de segurança chave de roda/ Triangulo / Macaco Hidráulico?
+                    </td>
+                 
+                    <td class="valor">
+                        {!X5S__c.X18__c}
+                    </td>
+                </tr>
+                
+            </table>
+
+
+        <br>
+        </br>
+        <br>
+        </br>
+        <br>
+        </br>
+        <br>
+        </br>
+
+            <!--  Observação -->
+            <table>
+            
+            
+                <tr>
+                    <td colspan='3' class='sessao'>
+                        OBSERVAÇÕES 
+                    </td>
+                    
+               </tr>
+             
+                 
+                 <tr>
+                     
+                    <td colspan='3' style="text-align: left; padding: 1rem;" >
+                         <apex:outputField value="{!X5S__c.Observa_es__c}"/>
+                     </td>
+                 </tr>
+               
+                </table>
+
+
+            </apex:pageBlock>
+               <div style="gap: 10px; padding: 1rem;">
+                    <apex:repeat value="{!fileURLs}" var="fileUrl">
+                        <apex:image url="{!fileUrl}" width="180px" height="240px"
+                        style="object-fit: none; border: 2px solid #000; padding: 1rem; gap: 1rem;"/>
+                    </apex:repeat>
+                </div>
+                
+                    
+
+          
+    </body>
+</apex:page>

@@ -1,0 +1,61 @@
+.THIS .divPrincipal3423422{
+    padding-left: 16px;
+    padding-right: 16px;
+    display: flex;
+    width: 100%;
+    height: 30px;
+    column-gap: 5px;
+    position: relative;
+}
+
+
+.THIS .divInput853497538{
+    border-radius: 5px;
+    border: 1px solid #d4d4d4;
+    width: 80%;
+}
+
+.THIS .divBusca34895234{
+    border-radius: 5px;
+    background-color: #00345c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    color: white;
+    column-gap: 5px;
+    width: 20%;
+}
+
+.THIS .divBusca34895234:hover{
+    cursor: pointer;
+}
+
+.THIS .resultadosncmsearch342{
+    position: absolute;
+    background-color: white;
+    border: 1px solid #d4d4d4;
+    width: 100%;
+    height: 150px;
+    top: 35px;
+    z-index: 10000;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    display: none;
+    overflow: auto;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.THIS .resultado457432{
+    cursor: pointer;
+    border-bottom: 1px solid #d4d4d4;
+    padding-bottom: 5px;
+    font-family: system-ui;
+}
+
+.THIS .resultado457432:hover{
+	background-color: #F3F3F3;
+    cursor: pointer;
+}

@@ -1,0 +1,582 @@
+<apex:page standardController="WorkOrder" showChat="false" showHeader="false" renderAs="pdf">
+
+    <!-- Cabeçalho com logotipo da Hospcom -->
+
+    <apex:image style="position:relative; margin-left:-20px" id="theImage" value="https://hospcom--c.na25.content.force.com/servlet/servlet.ImageServer?id=01531000008useP&oid=00Di0000000JVhH&lastMod=1486514655000" width="720" height="120"/>
+
+    <!-- ------------------------------------------------------------------------------------------- -->
+     
+     
+    <!-- --------------------------Parte de cima da Ordem de Trabalho------------------------------- -->
+     
+    <body style="font-family:calibre,sans-serif; font-size:10px;">
+         
+        <table>
+            <tr>
+                <td style="border:1.5px solid black;text-align:center; padding:2px;" width="710px"><b>ORDEM DE SERVIÇO</b></td>
+            </tr>
+            <tr>
+                <td heght="1px">
+                </td>
+            </tr>
+            <tr style="font-size:9px; text-align:left;">
+                <td style="border:1px solid black;padding: 2px">Nº da OS: <b>{!WorkOrder.WorkOrderNumber}&nbsp;&nbsp;&nbsp;&nbsp;
+                </b> Equipamento: <b>{!WorkOrder.Asset.Name} - {!WorkOrder.Asset.Modelo__c} ({!WorkOrder.Asset.Marca__c}) - N/S: {!WorkOrder.Numero_de_Serie__c}</b><br/>
+                <b> {!WorkOrder.Status}</b>
+            </td>
+            <tr><td heght="1px"></td></tr>
+            </tr>
+        </table>
+            <tr style="font-size:9px; text-align:left;">
+                <td>Cliente:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>{!WorkOrder.Account.Name}</b>
+                    <b style="position:absolute; right:13px;">Aberta em:&nbsp;<apex:outputField value="{!WorkOrder.CreatedDate}"/></b>
+                </td>
+        <table>
+            <tr style="font-size:9px; text-align:left;">
+                <td>
+                    Endereço:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b> <apex:outputField value="{!WorkOrder.Endere_o__c}"/></b>
+                </td>
+            </tr>
+        </table>
+            </tr>
+            <tr style="font-size:9px; text-align:left;">
+                <td width="350px">Tipo da OS:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{!WorkOrder.RecordType.Name}</b></td>
+            </tr>
+        <table>
+            <tr style="font-size:9px; text-align:left;" width="710px">
+                <td>
+                    Assunto: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>{!WorkOrder.Subject}</b>
+                </td>
+            </tr>
+            <tr style="font-size:9px; text-align:left;" width="710px">
+                <td>
+                    Problema/Defeito: &nbsp; <b>{!WorkOrder.Subject}</b>
+                </td>
+            </tr>
+        </table>
+        <br/>
+        <!-- ------------------------------------------------------------------------------------------ -->
+        <div style="border:1px solid black; padding:2px; text-align:center;font-family:Calibri, sans-serif">
+            <b>ANÁLISE DO(S) SERVIÇO(S)</b>
+        </div>
+        <br/>
+         
+
+         
+         <!-- ***********************************************CALIBRAÇÃO AVULSO E CONTRATO ******************************************** -->
+        
+        <apex:outputPanel rendered="{!IF(OR(WorkOrder.RecordType.Name='CALIBRAÇÃO (CONTRATO)',WorkOrder.RecordType.Name='CALIBRAÇÃO'),TRUE,FALSE)}">
+        
+        
+        <table style="font-size:10px; text-align:left;" border="1 solid black" align="center">
+            <tr>
+             
+                <td style="padding:4px;text-align:center" width="200">
+                    <b>Serviço Realizado</b>
+                </td>
+                <td style="padding:4px;text-align:center" width="113px">
+                    <b>Data e Hora de Inicio</b>
+                </td>
+                <td style="padding:4px;text-align:center" width="112px">
+                    <b>Data e Hora de Fim</b>
+                </td>
+            </tr>
+            <tr>
+
+                <td style="text-align:center">
+                Higienização
+                </td>
+
+                <td style="text-align:center">
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Higienizacao_I__c),FALSE,TRUE)}">
+                    <apex:outputfield value="{!WorkOrder.Data_e_Hora_da_Higienizacao_I__c}"/> 
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Higienizacao_I__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+
+                </td>
+                <td style="text-align:center">
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Higienizacao_T__c),FALSE,TRUE)}">
+                    <apex:outputfield value="{!WorkOrder.Data_e_Hora_da_Higienizacao_T__c}"/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Higienizacao_T__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center">
+                    Calibração
+                </td>
+                <td style="text-align:center">
+                   <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Calibracao_I__c),FALSE,TRUE)}">
+                   <apex:outputField value="{!WorkOrder.Data_e_Hora_da_Calibracao_I__c}"/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Calibracao_I__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+                </td>
+                <td style="text-align:center">
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Calibracao_T__c),FALSE,TRUE)}">
+                    <apex:outputField value="{!WorkOrder.Data_e_Hora_da_Calibracao_T__c}"/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Calibracao_T__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+                </td>
+            </tr>
+            
+
+        </table>
+</apex:outputPanel>
+
+
+ <!-- ***********************************************QUALIFICAÇÃO AVULSO E CONTRATO ******************************************** -->
+
+
+<apex:outputPanel rendered="{!IF(OR(WorkOrder.RecordType.Name='QUALIFICAÇÃO (CONTRATO)',WorkOrder.RecordType.Name='QUALIFICAÇÃO'),TRUE,FALSE)}">
+        
+        
+        <table style="font-size:10px; text-align:left;" border="1 solid black" align="center">
+            <tr>
+             
+                <td style="padding:4px;text-align:center" width="200">
+                    <b>Serviço Realizado</b>
+                </td>
+                <td style="padding:4px;text-align:center" width="113px">
+                    <b>Data e Hora de Inicio</b>
+                </td>
+                <td style="padding:4px;text-align:center" width="112px">
+                    <b>Data e Hora de Fim</b>
+                </td>
+            </tr>
+            <tr>
+
+                <td style="text-align:center">
+                Higienização
+                </td>
+
+                <td style="text-align:center">
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Higienizacao_I__c),FALSE,TRUE)}">
+                    <apex:outputfield value="{!WorkOrder.Data_e_Hora_da_Higienizacao_I__c}"/> 
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Higienizacao_I__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+
+                </td>
+                <td style="text-align:center">
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Higienizacao_T__c),FALSE,TRUE)}">
+                    <apex:outputfield value="{!WorkOrder.Data_e_Hora_da_Higienizacao_T__c}"/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Higienizacao_T__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center">
+                    Qualificação
+                </td>
+                <td style="text-align:center">
+                   <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Qualifica_o_I__c),FALSE,TRUE)}">
+                   <apex:outputField value="{!WorkOrder.Data_e_Hora_da_Qualifica_o_I__c}"/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Qualifica_o_I__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+                </td>
+                <td style="text-align:center">
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Qualifica_o_T__c),FALSE,TRUE)}">
+                    <apex:outputField value="{!WorkOrder.Data_e_Hora_da_Qualifica_o_T__c}"/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Qualifica_o_T__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+                </td>
+            </tr>
+            
+
+        </table>
+</apex:outputPanel>
+
+
+
+<!-- ***********************************************E.S.E AVULSO E CONTRATO ******************************************** -->
+
+
+<apex:outputPanel rendered="{!IF(OR(WorkOrder.RecordType.Name='ENSAIO DE SEG. ELÉTRICA (CONTRATO)',WorkOrder.RecordType.Name='ENSAIO DE SEG. ELÉTRICA'),TRUE,FALSE)}">
+        
+        
+        <table style="font-size:10px; text-align:left;" border="1 solid black" align="center">
+            <tr>
+             
+                <td style="padding:4px;text-align:center" width="200">
+                    <b>Serviço Realizado</b>
+                </td>
+                <td style="padding:4px;text-align:center" width="113px">
+                    <b>Data e Hora de Inicio</b>
+                </td>
+                <td style="padding:4px;text-align:center" width="112px">
+                    <b>Data e Hora de Fim</b>
+                </td>
+            </tr>
+            <tr>
+
+                <td style="text-align:center">
+                Higienização
+                </td>
+
+                <td style="text-align:center">
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Higienizacao_I__c),FALSE,TRUE)}">
+                    <apex:outputfield value="{!WorkOrder.Data_e_Hora_da_Higienizacao_I__c}"/> 
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Higienizacao_I__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+
+                </td>
+                <td style="text-align:center">
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Higienizacao_T__c),FALSE,TRUE)}">
+                    <apex:outputfield value="{!WorkOrder.Data_e_Hora_da_Higienizacao_T__c}"/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Higienizacao_T__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center">
+                    Ensaio de Seg. Elétrica
+                </td>
+                <td style="text-align:center">
+                   <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_do_E_S_E_I__c),FALSE,TRUE)}">
+                   <apex:outputField value="{!WorkOrder.Data_e_Hora_do_E_S_E_I__c}"/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_do_E_S_E_I__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+                </td>
+                <td style="text-align:center">
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_do_E_S_E_T__c),FALSE,TRUE)}">
+                    <apex:outputField value="{!WorkOrder.Data_e_Hora_do_E_S_E_T__c}"/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_do_E_S_E_T__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+                </td>
+            </tr>
+            
+
+        </table>
+</apex:outputPanel>
+
+
+
+
+<!-- ***********************************************MANUTENÇÃO CORRETIVA AVULSO E CONTRATO ******************************************** -->
+
+
+<apex:outputPanel rendered="{!IF(OR(WorkOrder.RecordType.Name='MANUTENÇÃO CORRETIVA (CONTRATO)',WorkOrder.RecordType.Name='MANUTENÇÃO CORRETIVA'),TRUE,FALSE)}">
+        
+        
+        <table style="font-size:10px; text-align:left;" border="1 solid black" align="center">
+            <tr>
+             
+                <td style="padding:4px;text-align:center" width="200">
+                    <b>Serviço Realizado</b>
+                </td>
+                <td style="padding:4px;text-align:center" width="113px">
+                    <b>Data e Hora de Inicio</b>
+                </td>
+                <td style="padding:4px;text-align:center" width="112px">
+                    <b>Data e Hora de Fim</b>
+                </td>
+            </tr>
+            <tr>
+
+                <td style="text-align:center">
+                Higienização
+                </td>
+
+                <td style="text-align:center">
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Higienizacao_I__c),FALSE,TRUE)}">
+                    <apex:outputfield value="{!WorkOrder.Data_e_Hora_da_Higienizacao_I__c}"/> 
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Higienizacao_I__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+
+                </td>
+                <td style="text-align:center">
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Higienizacao_T__c),FALSE,TRUE)}">
+                    <apex:outputfield value="{!WorkOrder.Data_e_Hora_da_Higienizacao_T__c}"/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Higienizacao_T__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center">
+                    Run-in
+                </td>
+                <td style="text-align:center">
+                   <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_do_Runin_I__c),FALSE,TRUE)}">
+                   <apex:outputField value="{!WorkOrder.Data_e_Hora_do_Runin_I__c}"/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_do_Runin_I__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+                </td>
+                <td style="text-align:center">
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_do_Runin_T__c),FALSE,TRUE)}">
+                    <apex:outputField value="{!WorkOrder.Data_e_Hora_do_Runin_T__c}"/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_do_Runin_T__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+                </td>
+            </tr>
+             <tr>
+                <td style="text-align:center">
+                    Manutenção Corretiva
+                </td>
+                <td style="text-align:center">
+                   <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Manutencao_I__c),FALSE,TRUE)}">
+                   <apex:outputField value="{!WorkOrder.Data_e_Hora_da_Manutencao_I__c}"/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Manutencao_I__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+                </td>
+                <td style="text-align:center">
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Manutencao_T__c),FALSE,TRUE)}">
+                    <apex:outputField value="{!WorkOrder.Data_e_Hora_da_Manutencao_T__c}"/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Manutencao_T__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center">
+                   2º Run-in
+                </td>
+                <td style="text-align:center">
+                   <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_do_2_Runin_I__c),FALSE,TRUE)}">
+                   <apex:outputField value="{!WorkOrder.Data_e_Hora_do_2_Runin_I__c}"/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_do_2_Runin_I__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+                </td>
+                <td style="text-align:center">
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_do_2_Runin_T__c),FALSE,TRUE)}">
+                    <apex:outputField value="{!WorkOrder.Data_e_Hora_do_2_Runin_T__c}"/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_do_2_Runin_T__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+                </td>
+            </tr>
+        </table>
+</apex:outputPanel>
+
+
+
+
+
+<!-- ***********************************************MANUTENÇÃO PREVENTIVA AVULSO E CONTRATO ******************************************** -->
+
+
+<apex:outputPanel rendered="{!IF(OR(WorkOrder.RecordType.Name='MANUTENÇÃO PREVENTIVA (CONTRATO)',WorkOrder.RecordType.Name='MANUTENÇÃO PREVENTIVA'),TRUE,FALSE)}">
+        
+        
+        <table style="font-size:10px; text-align:left;" border="1 solid black" align="center">
+            <tr>
+             
+                <td style="padding:4px;text-align:center" width="200">
+                    <b>Serviço Realizado</b>
+                </td>
+                <td style="padding:4px;text-align:center" width="113px">
+                    <b>Data e Hora de Inicio</b>
+                </td>
+                <td style="padding:4px;text-align:center" width="112px">
+                    <b>Data e Hora de Fim</b>
+                </td>
+            </tr>
+            <tr>
+
+                <td style="text-align:center">
+                Higienização
+                </td>
+
+                <td style="text-align:center">
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Higienizacao_I__c),FALSE,TRUE)}">
+                    <apex:outputfield value="{!WorkOrder.Data_e_Hora_da_Higienizacao_I__c}"/> 
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Higienizacao_I__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+
+                </td>
+                <td style="text-align:center">
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Higienizacao_T__c),FALSE,TRUE)}">
+                    <apex:outputfield value="{!WorkOrder.Data_e_Hora_da_Higienizacao_T__c}"/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Higienizacao_T__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center">
+                    Run-in
+                </td>
+                <td style="text-align:center">
+                   <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_do_Runin_I__c),FALSE,TRUE)}">
+                   <apex:outputField value="{!WorkOrder.Data_e_Hora_do_Runin_I__c}"/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_do_Runin_I__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+                </td>
+                <td style="text-align:center">
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_do_Runin_T__c),FALSE,TRUE)}">
+                    <apex:outputField value="{!WorkOrder.Data_e_Hora_do_Runin_T__c}"/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_do_Runin_T__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+                </td>
+            </tr>
+             <tr>
+                <td style="text-align:center">
+                    Manutenção Corretiva
+                </td>
+                <td style="text-align:center">
+                   <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Manutencao_I__c),FALSE,TRUE)}">
+                   <apex:outputField value="{!WorkOrder.Data_e_Hora_da_Manutencao_I__c}"/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Manutencao_I__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+                </td>
+                <td style="text-align:center">
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Manutencao_T__c),FALSE,TRUE)}">
+                    <apex:outputField value="{!WorkOrder.Data_e_Hora_da_Manutencao_T__c}"/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Manutencao_T__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center">
+                   2º Run-in
+                </td>
+                <td style="text-align:center">
+                   <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_do_2_Runin_I__c),FALSE,TRUE)}">
+                   <apex:outputField value="{!WorkOrder.Data_e_Hora_do_2_Runin_I__c}"/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_do_2_Runin_I__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+                </td>
+                <td style="text-align:center">
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_do_2_Runin_T__c),FALSE,TRUE)}">
+                    <apex:outputField value="{!WorkOrder.Data_e_Hora_do_2_Runin_T__c}"/>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_do_2_Runin_T__c),TRUE,FALSE)}">
+                        ___/___/____&nbsp;&nbsp;___:___
+                    </apex:outputText>
+                </td>
+            </tr>
+        </table>
+</apex:outputPanel>
+
+
+
+<br/>
+        <apex:outputPanel rendered="{!IF(ISBLANK(WorkOrder.Observacoes_Tecnicas__c),false,true)}">
+            <table style="font-size:10px; text-align:left;" border="1 solid black">
+                <tr>
+                    <td width="710px" height="20px; padding:4px;">
+                        <b>Observações:&nbsp;</b><apex:outputField value="{!WorkOrder.Observacoes_Tecnicas__c}"/>
+                    </td>
+                </tr>
+            </table>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!IF(ISBLANK(WorkOrder.Observacoes_Tecnicas__c),true,false)}">
+            <table style="font-size:10px; text-align:left;" border="1 solid black">
+                <tr>
+                    <td width="710px" style="padding:4px;">
+                        <b style="">Observações:&nbsp;</b>
+                    </td>
+                </tr>
+                <table style="font-size:10px; text-align:left;" border="1 solid black">
+
+                    <tr>
+                        <td width="710px" height="100px">
+                        </td>
+                    </tr>
+
+                </table>
+            </table>
+        </apex:outputPanel>
+        <br/>
+        <apex:outputLabel rendered="{!IF(WorkOrder.Contagem_de_Itens_de_Cota_o__c > 0, true, false)}">
+        <div style="border:1px solid black; padding:2px; text-align:center;font-family:Calibri, sans-serif">
+            <b>COTAÇÃO DO(S) SERVIÇO(S)</b>
+        </div>
+        
+        
+            
+            <table>
+                <tr>
+                    <td style="border:0.5px solid black; text-align:center; padding:4px" width="100px"><b>Código</b></td>
+                    <td style="border:0.5px solid black; text-align:center; padding:4px" width="310px"><b>Peça / Serviço</b></td>
+                    <td style="border:0.5px solid black; text-align:center; padding:4px" width="100px"><b>Quantidade</b></td>
+                    <td style="border:0.5px solid black; text-align:center; padding:4px" width="100px"><b>Valor Unitário</b></td>
+                    <td style="border:0.5px solid black; text-align:center; padding:4px" width="100px"><b>Valor Total</b></td>
+                </tr>
+                <apex:repeat value="{!WorkOrder.Itens_Para_Cota_o__r}" var="IC">
+                <tr>
+                       <td style="border:0.5px solid black; text-align:center; padding:2px" width="100px">{!IC.C_digo__c}</td>
+                       <td style="border:0.5px solid black; text-align:center; padding:2px" width="310px">{!IC.Nome_da_Pe_a_Componente_etc__c}</td>
+                       <td style="border:0.5px solid black; text-align:center; padding:2px" width="100px">{!IC.Quantidade__c}</td>
+                       <td style="border:0.5px solid black; text-align:center; padding:2px" width="100px"><apex:outputField value="{!IC.Valor_Sugerido__c}"/> </td>
+                       <td style="border:0.5px solid black; text-align:center; padding:2px" width="100px"><apex:outputField value="{!IC.Valor__c}"/></td>                           
+                    
+                </tr>
+                </apex:repeat>
+            </table>
+            <br/>
+            <div style="font-size:13px; margin-right:2px" align="right">
+            <b>Total Geral:&nbsp; <apex:outputField value="{!WorkOrder.Valor_Total_Estimado__c}"/></b>
+            </div>
+        
+        </apex:outputLabel>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div>
+               <table cellspacing="0px" cellpadding="0px" style="border:none; text-align:center; font-weight:bold; width:100%;">
+                   <tr>
+                       <td>______________________________ <br/>Técnico Responsável</td>
+                       <td>______________________________ <br/>Engenheiro(a) Responsável</td>
+                       <td>______________________________ <br/>Colaborador(a) Responsável</td>
+                   </tr>
+               </table>
+            </div>
+    </body>
+
+</apex:page>

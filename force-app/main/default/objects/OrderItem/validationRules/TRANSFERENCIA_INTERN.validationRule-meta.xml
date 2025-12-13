@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TRANSFERENCIA_INTERN</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+TEXT(Order.Natureza_de_Opera_o__c) != &apos;DEMONSTRAÇÃO&apos;,
+TEXT(Order.Natureza_de_Opera_o__c) != &apos;REMESSA DE COMODATO&apos;,
+TEXT(Status__c) = &apos;Transferência Interna&apos;
+)</errorConditionFormula>
+    <errorMessage>o Status &quot;Transferência Interna&quot; só pode ser inserido no tipo de registro &quot;Demonstração&quot;</errorMessage>
+</ValidationRule>

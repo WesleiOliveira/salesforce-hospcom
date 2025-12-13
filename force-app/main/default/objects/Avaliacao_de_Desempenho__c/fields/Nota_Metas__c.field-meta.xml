@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Nota_Metas__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Nota_Meta_Gestor__c != null, Nota_Meta_Gestor__c ,
+
+IF(Gestor__c != null,((C_Resultado__c * 3) + (G_Resultado__c * 7)) / 10, C_Resultado__c )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Nota Metas</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

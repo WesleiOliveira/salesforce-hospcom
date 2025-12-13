@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Responsabilidade_pelos_Encargos__c</fullName>
+    <description>Selecione quem será responsável pelos encargos financeiros.
+Esta informação define se haverá cessão de crédito pela Hospcom ou se os juros serão assumidos pelo cliente.</description>
+    <externalId>false</externalId>
+    <label>Responsabilidade pelos Encargos</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Cessão de Crédito – Hospcom</fullName>
+                <default>false</default>
+                <label>Cessão de Crédito – Hospcom</label>
+            </value>
+            <value>
+                <fullName>Juros por Conta do Cliente</fullName>
+                <default>false</default>
+                <label>Juros por Conta do Cliente</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

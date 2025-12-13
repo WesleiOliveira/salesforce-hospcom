@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Categoria__c</fullName>
+    <externalId>false</externalId>
+    <label>Categoria</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>AVULSO</fullName>
+                <default>false</default>
+                <label>AVULSO</label>
+            </value>
+            <value>
+                <fullName>CONTRATO DE LOCAÇÃO</fullName>
+                <default>true</default>
+                <label>CONTRATO DE LOCAÇÃO</label>
+            </value>
+            <value>
+                <fullName>CONTRATO DE SERVIÇO</fullName>
+                <default>false</default>
+                <label>CONTRATO DE SERVIÇO</label>
+            </value>
+            <value>
+                <fullName>GARANTIA DE FABRICA</fullName>
+                <default>false</default>
+                <label>GARANTIA DE FABRICA</label>
+            </value>
+            <value>
+                <fullName>GARANTIA DE FÁBRICA</fullName>
+                <default>false</default>
+                <label>GARANTIA DE FÁBRICA</label>
+            </value>
+            <value>
+                <fullName>GARANTIA DE SERVIÇO</fullName>
+                <default>false</default>
+                <label>GARANTIA DE SERVIÇO</label>
+            </value>
+            <value>
+                <fullName>INSTALAÇÃO</fullName>
+                <default>false</default>
+                <label>INSTALAÇÃO</label>
+            </value>
+            <value>
+                <fullName>COMODATO</fullName>
+                <default>false</default>
+                <label>COMODATO</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

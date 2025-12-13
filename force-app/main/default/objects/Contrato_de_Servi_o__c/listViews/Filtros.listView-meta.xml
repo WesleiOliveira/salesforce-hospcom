@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Filtros</fullName>
+    <columns>NAME</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>N_mero_da_Proposta_Contrato__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status_do_Contrato__c</field>
+        <operation>equals</operation>
+        <value>CONTRATO VIGENTE</value>
+    </filters>
+    <label>Filtros</label>
+</ListView>

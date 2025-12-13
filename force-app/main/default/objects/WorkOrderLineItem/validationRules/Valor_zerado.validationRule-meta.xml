@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valor_zerado</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    TEXT(WorkOrder.Categoria__c) != &apos;GARANTIA DE FÁBRICA&apos;,
+     PricebookEntry.Product2Id != &apos;01t6e000009a4CA&apos;,
+    OR(
+        UnitPrice = 0,
+        ISBLANK(UnitPrice)
+    )
+)</errorConditionFormula>
+    <errorDisplayField>UnitPrice</errorDisplayField>
+    <errorMessage>O valor não pode ser 0.</errorMessage>
+</ValidationRule>

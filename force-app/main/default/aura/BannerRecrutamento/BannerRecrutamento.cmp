@@ -1,0 +1,19 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global">
+     <aura:attribute name="record" type="Object"/>
+     <aura:attribute name="simpleRecord" type="Object"/>
+        
+    <force:recordData aura:id="recordLoader"
+      fields="Name, Nome_do_candidato__c, Sobrenome__c"
+      recordId="{!v.recordId}"
+      targetFields="{!v.simpleRecord}"
+        />      
+    <div> 
+    <lightning:card iconName="standard:employee_contact" title="{!v.simpleRecord.Name}" >
+        <div class="slds-p-horizontal--small">
+            <h1 class="slds-text-heading--medium">
+                Dados do Candidato: <lightning:formattedText value="{!v.simpleRecord.Nome_do_candidato__c + ' '+ v.simpleRecord.Sobrenome__c}"/> 
+                </h1>
+        </div>
+    </lightning:card>
+    </div>
+</aura:component>

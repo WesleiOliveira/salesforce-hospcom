@@ -1,0 +1,101 @@
+<apex:page standardController="Asset" applyHtmlTag="false" showHeader="false" renderAs="pdf">
+<head>
+<style type="text/css" media="print">
+        @page {
+            size:21cm 29.7cm;
+            margin:100px 40px 60px 40px;
+            @top-center {
+                content:element(header);
+            }
+            @bottom-center {
+                content:element(footer);
+            }
+        }
+        @page{
+            size:A4;
+            background: url({!$Resource.TimbradoHospcom});
+            margin:150px 50px 120px 50px;
+            @bottom-center{content:element(footer);}
+        }
+        .pagenumber:before {
+            content:counter(page);
+        }
+        .pagecount:before {
+            content:counter(pages);
+        }
+        body{
+            background:url({!$Resource.marca_d_agua});
+            background-size: auto;
+        }
+        div.header {
+            margin:0px 0px 0px 0px;
+            padding:20px 0px 20px 0px;
+            position:running(header);
+            height:60px;
+        }
+        div.content {
+        }
+        div.footer {
+            margin:0px 0px 0px 0px;
+            padding:20px 0px 20px 0px;
+            position:running(footer);
+            height:20px;
+            text-align:right;
+            font-family:arial, verdana, sans-serif;
+            font-size:10px;
+            font-weight:normal;
+    }
+</style>
+<style type="text/css" media="print">
+    p{
+    font-size:14px;
+    line-height: 1.6;
+    }
+    h1{
+    font-size:16px;
+    text-align:center;
+    }
+</style>
+</head>
+<body>
+<apex:pageBlock >
+                
+                 <h1>TERMO DE DEVOLUÇÃO DE EQUIPAMENTO </h1> 
+         
+           <p style="text-indent:10px; text-align:justify">&nbsp;&nbsp;&nbsp;&nbsp;Eu, Gyselle Morais Mairinck declaro que recebi de {!if(Asset.usuarioResponsavel__r.name == "",Asset.ContatoReponsavel__r.name, Asset.usuarioResponsavel__r.name)}, 
+         em nome da HOSPCOM EQUIPAMENTOS HOSPITALARES EIRELI, pessoa jurídica de direito privado, 
+         inscrita no CNPJ 05.743.288/0001-08 com sede à Rua 104, Nº 74, Goiânia, Estado de Goiás, os equipamentos abaixo especificados: </p>
+          
+          <p style = "  text-transform: uppercase; margin:10px 50px; font-weight: bold;">
+              1 - {!Asset.Name}, {!Asset.Marca_Patrimonio__c} {!Asset.Modelo__c}, N° Série {!Asset.SerialNumber}<br/>
+             
+                <apex:repeat var="item" value="{!Asset.Itens_de_Checklist_do_Ativo__r}">
+                   
+               <apex:outputField value="{!item.Quantidade__c}"  />  {!if(item == "", ""," - " +  item.Nome_do_Item__c + "." )} <br/>  
+               
+              </apex:repeat>
+          </p>
+          <p><strong style="text-transform:uppercase;">observação:</strong> {!Asset.Observa_es__c}</p>
+
+<br/><br/>
+
+<p style = "  text-align: right;">Goiânia, _______ de ____________________________________ de {!YEAR(TODAY())}. </p>
+
+
+
+
+
+<br/><br/>
+
+<br/><br/>
+
+__________________________________________________________________________________   
+
+<p style = "  text-align:center;">Gyselle Morais Mairinck</p>
+<p style = "  text-align:center;">CPF: 705.510.451-32</p>
+                
+</apex:pageBlock>
+
+</body>
+
+</apex:page>

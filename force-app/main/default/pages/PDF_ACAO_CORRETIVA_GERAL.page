@@ -1,0 +1,490 @@
+<apex:page standardController="Auditoria__c" applyHtmlTag="false" showHeader="false" renderAs="pdf">
+  <head>
+   <style type="text/css" media="print">
+            @page {
+                size:21cm 29.7cm;
+                margin:100px 40px 60px 40px;
+                @top-center {
+                    content:element(header);
+                }
+                @bottom-center {
+                    content:element(footer);
+                }
+            }
+            @page{
+                size:A4;
+                background: url({!IF(Auditoria__c.Empresa_Auditada__r.CNPJ__c  == '27.476.124/0001-02',$Resource.TimbradoHealth,IF(Auditoria__c.Empresa_Auditada__r.CNPJ__c == '05.743.288/0001-08' || Auditoria__c.Empresa_Auditada__r.CNPJ__c == '05.743.288/0003-70',$Resource.TimbradoHospcom,IF(Auditoria__c.Empresa_Auditada__r.CNPJ__c == '23.813.386/0001-56',$Resource.TimbradoGDB,IF(Auditoria__c.Empresa_Auditada__r.CNPJ__c == '40.014.621/0001-49',$Resource.TimbradoABC,$Resource.TimbradoGenerico))))});
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);}
+            }
+            .pagenumber:before {
+                content:counter(page);
+            }
+            .pagecount:before {
+                content:counter(pages);
+            }
+            div.header {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(header);
+                height:60px;
+            }
+            div.content {
+            }
+            div.footer {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(footer);
+                height:20px;
+                text-align:right;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                font-weight:normal;
+            }
+        </style>
+        <style type="text/css" media="print">
+        /*
+            @page:first{
+                size:A4;
+                background: url($Resource.SobreHealth);
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);
+                }
+            }
+            
+            @page{
+                size:A4;
+                background: url($Resource.TimbradoHealth);
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);}
+            }
+  */
+            td, tr{
+            padding: 0;
+            margin: 0;
+        }
+            
+            *{
+                font-family: Arial, Helvetica, sans-serif;
+                color: #0c3557;
+                
+                text-transform: uppercase;
+            }
+            .titulo{
+                font-family:arial, verdana, sans-serif;
+                font-size:15px;
+                text-align:left;
+                font-weight:bold; 
+                width:100%;
+            }
+            .tabela_geral{
+                border-collapse:collapse;
+                width:100%;
+            }
+            table.print-friendly tr td, table.print-friendly tr th {
+                page-break-inside: avoid;
+            }
+            .titulo{
+              
+                text-align: left;
+                padding: 5px 1px;
+                margin-top: 20px;
+                
+
+                
+            }
+            .maiuscula{
+                text-transform: uppercase;
+            }
+          
+            .questoes{
+             
+            
+            }
+            .questao{
+                display: flex;
+                flex-direction: row;
+                padding: 5px;
+            }
+
+            .valor{
+                margin-bottom: -100px;
+                border: #0c3557 1px solid;
+                
+            }
+
+            .sessao-questao{
+                font-size: 14px;
+                padding: 10px 0  0 5px;
+            }
+            
+            
+            .questao, p{
+                padding: 0px !important;
+                margin: 0;
+                padding-right: 15px !important;
+                font-size: 12px !important;
+            }
+
+            h1,h2{
+                padding: 10px 0;
+                margin: 0;
+                font-size: 14px !important;
+            }
+            .resposta{
+                font-weight: bold;
+                font-size: 14px;
+            }
+            .t{
+                text-align: center;
+                padding: 1px 1px;
+                font-size: 14px;
+            }
+            span{font-size: 12px !important;}
+            .ass{
+                position: fixed;
+                bottom: 0;
+            }
+            td{
+                width: 50%;
+            }
+            .bordas{
+                border: #0c3557 1px solid;
+                padding: 10px;
+                margin: 10px 0 ;
+                page-break-inside:avoid;
+            }
+        </style>
+  </head>
+  <body>
+  <apex:pageBlock >
+            
+            <div class="footer" style="text-align:center !important"><br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Página <span class="pagenumber"></span> de <span class="pagecount"></span> - Emissão em:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{! TODAY() }" /></apex:outputText>
+            </div>
+            <div class="corpo-do-doc">
+            <div class="questoes">
+                <div class="questao">
+                
+                <table>
+                    <tr>
+            <td colspan="2">
+               <h1 class = "titulo" >Unidade auditada: {!Auditoria__c.Empresa_Auditada__r.name}</h1>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <h1 class = "titulo" > Data da Auditoria:  &nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!Auditoria__c.Data_da_Auditoria__c    }" /></apex:outputText></h1>
+             </td>
+        </tr>
+
+        <tr>
+            <td>
+                &nbsp; <br/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp; <br/>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2" >
+                <h1 class = "t" > Relatório de ação corretiva geral </h1>
+             </td>
+        </tr>
+
+        <tr>
+            <td>
+                &nbsp; <br/>
+            </td>
+        </tr>
+                </table>
+
+                <apex:repeat var="rc" value="{!Auditoria__c.A_es_corretivas__r}">
+                    <div class="bordas">
+                        <table>
+                            <tr>
+                                <td colspan="1">
+                                    <p style="padding: 5px; margin-bottom: 8px;" class = "titulo" >{!rc.Name}</p>
+                                </td>  
+                                <td colspan="1">
+                                    <p> <span class = "titulo"> Data de abertura da RCA:</span> <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!rc.Data_da_abertura_do_RCA__c}" /></apex:outputText></p>
+                                </td>  
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="1">
+                                    <p class = "questao" >  <span class="titulo">RNC:</span> {!rc.RNC__r.name} </p>
+                                </td>
+
+                                <td colspan="1">
+                                    <p class = "questao" >  <span class="titulo">Descrição da RNC:</span> {!rc.RNC__r.Descricao__c} </p>
+                                </td>
+                            </tr>
+                            <tr style="margin-top:10px;  ">
+                                    <td style=" border-top: 1px solid #0c3557; text-align:center; width: 1000px; text-align: center;" colspan="2" >
+                                        &nbsp;&nbsp;&nbsp;
+                                    </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="1">
+                                    <p class = "questao" ><span class="titulo">Origem:</span> {!rc.Origem__c} </p>
+                                </td>
+                            </tr>
+
+                            <!--hr/-->
+                            <apex:outputText rendered="{! if(rc.Origem__c =='Produto', true, false )}">
+                    
+                                    <tr>
+                                        <td>
+                                            <h1 colspan="2" class="titulo">Produto</h1>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>
+                                            <p class="questao"><span class="titulo">Código:</span> {!rc.Codigo__c}</p>
+                                        </td>
+
+                                        <td>
+                                            <p class="questao"><span class="titulo">Lote:</span> {!rc.Lote__c}</p>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <p class="questao"><span class="titulo">NF:</span> {!rc.NF__c}</p>
+                                        </td>
+
+                                        <td>
+                                            <p class="questao"><span class="titulo">Qunat.:</span> {!rc.Quant__c}</p>
+                                        </td>
+
+                                    </tr>
+                            
+                            </apex:outputText>
+
+                            <!-- AUDITORIA -->
+                            <apex:outputText rendered="{!if(rc.Origem__c == 'Auditoria', true, false)}">
+                    
+                            <tr>
+                                <td colspan="2">
+                                    <h1 class="titulo">Auditoria</h1>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="2">
+                                    <p  class="questao"><span class="titulo">Item da Norma:</span> {!rc.Item_da_Norma__c}</p>
+                                </td>
+                            </tr>
+
+                        
+                        </apex:outputText>
+
+                        <apex:outputText rendered="{!if(rc.Origem__c == 'Material', true, false)}">
+                            
+                            <tr>
+                                <td colspan="2">
+                                    <p  class="titulo">Material</p>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="2">
+                                    <p class="questao"><span class="titulo">Código:</span> {!rc.Fornecedor__c}</p>
+                                </td>
+
+                                <td colspan="2">
+                                    <p class="questao"><span class="titulo">Lote:</span> {!rc.NF2__c}</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2">
+                                    <p class="questao"><span class="titulo">NF:</span> {!rc.Quant2__c}</p>
+                                </td>
+                            </tr>
+
+                        </apex:outputText>
+
+                        
+                            <!-- Reclamação do Cliente -->
+                            <apex:outputText rendered="{!if(rc.Origem__c == 'Reclamação de Cliente', true , false)}">
+
+                                <tr>
+                                    <td colspan="2">
+                                        <h1  class="titulo">Reclamação do Cliente</h1>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td  colspan="1">
+                                        <p class="questao"><span class="titulo">Cliente:</span> {!rc.Cliente__c}</p>
+                                    </td>
+
+                                    <td  colspan="1">
+                                        <p class="questao"> <span class="titulo">Motivo:</span> {!rc.Motivo__c}</p>
+                                    </td>
+                                    
+                                </tr>
+
+                            </apex:outputText>
+                
+                            <apex:outputText rendered="{!if(rc.Origem__c == 'Outros', true, false)}">
+                                
+                                <tr>
+                                    <td  colspan="2">
+                                        <h1 class="titulo"><span class="titulo">Outros</span></h1>
+                                    </td>       
+                                </tr>
+                                
+                                <tr>
+                                    <td  colspan="2">
+                                        <p class="questao"><span class="titulo">Detalhes_outros__c:</span> {!rc.Detalhes_outros__c}</p>
+                                    </td>
+                                    
+                                </tr>
+
+                            </apex:outputText>
+                                <!--
+                                    ############
+                                        DADOS 
+                                    ############
+                                -->
+                                
+                            <tr>
+                                <td  colspan="2">
+                                    <h1 class="titulo">Dados</h1>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td  colspan="1">
+                                    <p class="questao"><span class="titulo">Responsável:</span> {!rc.Responsevel__r.FirstName}</p>
+                                </td>
+
+                                <td  colspan="1">
+                                    <p class="questao"><span class="titulo">Entregue por:</span> {!rc.Entregue_por__r.FirstName}</p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td  colspan="1">
+                                    <p class="questao"><span class="titulo">Setor:</span> {!rc.Setor__c}</p>
+                                </td>
+
+                                <td  colspan="1">
+                                    <p class="questao"><span class="titulo">Responsável:</span> {!rc.Responsevel__r.FirstName}</p>
+                                </td>
+                            </tr>
+        <hr/>
+                            <!--hr/-->
+                                <!--
+                                    #############
+                                        CAUSA 
+                                    ############
+                                -->
+                                <tr>
+                                    <td  colspan="2">
+                                        <h1 class="titulo">CAUSA</h1>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td  colspan="2">
+                                        <p class="questao"><span class="titulo">CAUSAS:</span> {!rc.Causa__c}</p>
+                                    </td>
+                                </tr>
+
+                                <!--hr/-->
+                                <!--
+                                    ########################
+                                        AÇÃO CORRETIVA 
+                                    ########################
+                                -->
+                                <tr>
+                                    <td  colspan="2">
+                                        <h1 class="titulo">Ação Corretiva</h1>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <p class="questao"><span class="titulo">Ação Corretiva Detalhada:</span> {!rc.A_o_Corretiva_Detalhada__c}</p>
+                                    </td>
+                                </tr>
+
+                                <!--hr/-->
+                                <!--
+                                    #################################
+                                        RESPONSÁVEL/PRAZO
+                                    #################################
+                                -->
+                                <tr>
+                                    <td colspan="2">
+                                        <h1  class="titulo">RESPONSÁVEL/PRAZO</h1>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="1">
+                                        <p  class="questao"><span class="titulo">Prazo: </span> <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!rc.Prazo__c}" /></apex:outputText> </p>
+                                    </td>
+                                    <td colspan="1">
+                                        <p  class="questao"><span class="titulo">obs.: </span> {!rc.Obs__c}</p>
+                                    </td>
+                                </tr>
+
+                                <!--hr/-->
+                                
+                                <!--
+                                    ##########################
+                                        VERIFICAÇÃO
+                                    ##########################
+                                -->
+                                <tr>
+                                    <td colspan="2">
+                                        <h1  class="titulo">Verificação da eficácia</h1>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="1">
+                                        <p  class="questao"><span class="titulo">Verificação da eficácia: </span> {!rc.Verifica_o_da_efic_cia__c}</p>
+                                    </td>
+                                    <td colspan="1">
+                                        <p  class="questao"><span class="titulo">Encerrado: </span> {!rc.Encerrado__c}</p>
+                                    </td>
+                                </tr>
+
+
+                                <!--hr/-->
+
+
+                                <!--
+                                ********************
+                                    ASSINATURAS
+                                ********************
+                                -->
+
+                        </table>
+                    </div>
+                </apex:repeat>
+            
+
+                </div>
+            </div>
+            
+           
+            </div>
+  </apex:pageBlock>
+
+  </body>
+
+</apex:page>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo_s_de_Qualifica_o_Submetido__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipo(s) de Qualificação Submetido</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Qualificação Biológica</fullName>
+                <default>false</default>
+                <label>Qualificação Biológica</label>
+            </value>
+            <value>
+                <fullName>Qualificação de Desempenho</fullName>
+                <default>false</default>
+                <label>Qualificação de Desempenho</label>
+            </value>
+            <value>
+                <fullName>Qualificação de Instalação</fullName>
+                <default>false</default>
+                <label>Qualificação de Instalação</label>
+            </value>
+            <value>
+                <fullName>Qualificação de Operação</fullName>
+                <default>false</default>
+                <label>Qualificação de Operação</label>
+            </value>
+            <value>
+                <fullName>Qualificação Térmica</fullName>
+                <default>false</default>
+                <label>Qualificação Térmica</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>5</visibleLines>
+</CustomField>

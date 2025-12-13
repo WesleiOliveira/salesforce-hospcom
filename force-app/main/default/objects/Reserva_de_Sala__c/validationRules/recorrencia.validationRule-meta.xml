@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>recorrencia</fullName>
+    <active>true</active>
+    <errorConditionFormula>Frequencia__c != null &amp;&amp;  recorrencia__c == null ||
+ Frequencia__c == null &amp;&amp;  recorrencia__c != null</errorConditionFormula>
+    <errorDisplayField>Frequencia__c</errorDisplayField>
+    <errorMessage>Caso haja recorrência, deverão ser preenchidos os campos de frequência e recorrência corretamente.</errorMessage>
+</ValidationRule>

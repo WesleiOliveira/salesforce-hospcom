@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Status_Ag_Aprova_o</fullName>
+        <field>Status__c</field>
+        <literalValue>Aguardando aprovação</literalValue>
+        <name>Status: Ag Aprovação</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Ag_Registro</fullName>
+        <field>Status__c</field>
+        <literalValue>Aguardando registro</literalValue>
+        <name>Status: Ag Registro</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Rejeitada</fullName>
+        <field>Status__c</field>
+        <literalValue>Reprovado</literalValue>
+        <name>Status: Rejeitada</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_documentacao</fullName>
+        <field>Status__c</field>
+        <literalValue>Documentação/DP</literalValue>
+        <name>Status:Doc.DP</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+</Workflow>

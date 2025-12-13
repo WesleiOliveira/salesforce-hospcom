@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prazo_Alvara_Fornecedor__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+(Validade_Alvara_Fornecedor__c - TODAY())&gt; 1,
+TEXT((Validade_Alvara_Fornecedor__c - TODAY())) &amp; &quot; Dias p/ Vencer&quot;,
+IF(
+(Validade_Alvara_Fornecedor__c - TODAY())= 1,
+&quot;Vence Amanhã&quot;,
+IF(
+(Validade_Alvara_Fornecedor__c - TODAY())= 0,
+&quot;Vence Hoje&quot;,
+IF(
+(Validade_Alvara_Fornecedor__c - TODAY())= -1,
+TEXT((Validade_Alvara_Fornecedor__c - TODAY())*(-1)) &amp; &quot; Dia Vencido&quot;,
+TEXT((Validade_Alvara_Fornecedor__c - TODAY())*(-1)) &amp; &quot; Dias Vencido&quot;
+)
+)
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Prazo Alvará Fornecedor</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

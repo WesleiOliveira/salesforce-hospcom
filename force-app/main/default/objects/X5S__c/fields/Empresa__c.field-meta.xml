@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Empresa__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Local auditado</label>
+    <lookupFilter>
+        <active>true</active>
+        <booleanFilter>1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7 OR 8 OR 9</booleanFilter>
+        <errorMessage>Essa empresa não está na lista de empresa do grupo HOSPCOM</errorMessage>
+        <filterItems>
+            <field>Account.CNPJ__c</field>
+            <operation>contains</operation>
+            <value>05.743.288/0001-08,05.743.288/0006-12,05.743.288/0005-31</value>
+        </filterItems>
+        <filterItems>
+            <field>Account.CNPJ__c</field>
+            <operation>contains</operation>
+            <value>05.743.288/0003-70, 05.743.288/0004-50</value>
+        </filterItems>
+        <filterItems>
+            <field>Account.CNPJ__c</field>
+            <operation>contains</operation>
+            <value>40.014.621/0001-49</value>
+        </filterItems>
+        <filterItems>
+            <field>Account.CNPJ__c</field>
+            <operation>contains</operation>
+            <value>40.014.621/0003-00</value>
+        </filterItems>
+        <filterItems>
+            <field>Account.CNPJ__c</field>
+            <operation>contains</operation>
+            <value>27.476.124/0001-02</value>
+        </filterItems>
+        <filterItems>
+            <field>Account.CNPJ__c</field>
+            <operation>contains</operation>
+            <value>23.813.386/0001-56</value>
+        </filterItems>
+        <filterItems>
+            <field>Account.CNPJ__c</field>
+            <operation>contains</operation>
+            <value>42.008.640/0001-98</value>
+        </filterItems>
+        <filterItems>
+            <field>Account.CNPJ__c</field>
+            <operation>contains</operation>
+            <value>40.014.621/0004-91</value>
+        </filterItems>
+        <filterItems>
+            <field>Account.GrupoHospcom__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>auditoria</relationshipLabel>
+    <relationshipName>X5S</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

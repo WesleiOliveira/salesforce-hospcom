@@ -1,0 +1,20 @@
+<aura:component controller="DocumentosRegistros" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css')}"  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.sortableJs + '/Sortable.js',
+                           $Resource.popper + '/popper.js')}"                     
+                  />
+    
+    <aura:attribute name="recordId" type="String"/>
+    <br/>
+    <div>
+        <button class="buttonAbrirr slds-button slds-button--brand" onclick="{!c.handleClick}" > Baixar documentos dos ativos</button>
+    </div>
+
+
+    
+</aura:component>

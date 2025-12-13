@@ -1,0 +1,106 @@
+<template>
+    <lightning-card class="valeu-card">
+        <div class="mainCard">
+            <div class="valeu-card__header">
+                <div class="valeu-card__title-text">PROGRAMA VALEU🪙</div>
+                <template if:true={userName}>
+                    <div class="userName">Bem vindo, {userName}</div>
+                </template>
+            </div>
+
+            <div class="valeu-card__body">
+                <div class="fildsContainer43">
+
+                      <!-- Input para Nome (Aparece se userId for undefined) -->
+                    <template if:true={showNomeInput}>
+                        <div class="combox54">
+                            <lightning-combobox name="contact" label="Selecione seu nome" value={selectedContact2}
+                                placeholder="Escolha um contato" options={contactsNoUser} onchange={handleNomeChange}
+                                class="valeu-card__combobox">
+                            </lightning-combobox>
+                        </div>
+                    </template>
+
+                    <div class="combox54">
+                        <!-- Combobox para selecionar contato -->
+                        <lightning-combobox name="contact" label="Selecione o destinatário" value={selectedContact}
+                            placeholder="Escolha um contato" options={contacts} onchange={handleContactChange}
+                            class="valeu-card__combobox">
+                        </lightning-combobox>
+                    </div>
+
+                  
+
+                    <!-- Justificativa -->
+                    <div class="combox54">
+                        <lightning-textarea name="justificativa" label="Justificativa" value={justificativa}
+                            placeholder="'pedro me ajudou bastante nas demandas do meu departamento'"
+                            onchange={handleJustificativaChange} class="valeu-card__textarea">
+                        </lightning-textarea>
+                    </div>
+                </div>
+
+                <!-- Botão -->
+                <template if:true={showButton}>
+                    <div class="valeu-card__button-container">
+                        <lightning-button label="Enviar Solicitação" variant="brand" onclick={handleSubmit}
+                            class="valeu-card__button">
+                        </lightning-button>
+                    </div>
+                </template>
+                <div class="rules-body">
+                    <h1>Regras</h1>
+                    <div class="rule-item">
+                        <h3>1. Período de Doações</h3>
+                        <p>📅 As doações acontecem mensalmente:</p>
+                        <ul>
+                            <li><strong>Início:</strong> dia 25 de cada mês</li>
+                            <li><strong>Encerramento:</strong> último dia do mês</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-item">
+                        <h3>2. Finalidade</h3>
+                        <p>💡 As Hospcoins devem ser utilizadas para reconhecer colegas que <strong>contribuíram com
+                                suas entregas durante o mês</strong>.</p>
+                    </div>
+
+                    <div class="rule-item">
+                        <h3>3. Escolha do Destinatário</h3>
+                        <p>⚠️ <strong>Atenção ao selecionar o destinatário!</strong></p>
+                        <ul>
+                            <li>Uma vez enviada, a doação <strong>não poderá ser alterada</strong>.</li>
+                            <li>Você só poderá doar novamente para a <strong>mesma pessoa após 2 meses</strong>.</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-item">
+                        <h3>4. Anonimato</h3>
+                        <p>🙈 A doação é <strong>anônima</strong>. O destinatário <strong>não saberá quem
+                                enviou</strong> a moeda.</p>
+                    </div>
+
+                    <div class="rule-item">
+                        <h3>5. Validade e Transferência</h3>
+                        <p>♻️ As Hospcoins são:</p>
+                        <ul>
+                            <li><strong>Intransferíveis</strong></li>
+                            <li><strong>Sem prazo de validade</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-item">
+                        <h3>6. Justificativas</h3>
+                        <p>📝 Capriche na justificativa!</p>
+                        <ul>
+                            <li>Justificativas <strong>inadequadas ou genéricas não serão aceitas</strong>.</li>
+                            <li>Nesses casos, o envio será <strong>cancelado</strong> e a moeda <strong>não será
+                                    considerada</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Media_Rede__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    NOT(ISBLANK(Rede_de_relacionamento__c)),
+    (
+        (
+            R1__c + R2__c + R3__c + R4__c + R5__c +
+            R6__c + R7__c + R8__c + R9__c + R10__c +
+            R11__c + RRESPEITO3__c + RHO3__c +
+            RSO3__c + RAD3__c
+        ) / 15
+    ) * 1.5, 0
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Média Rede</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

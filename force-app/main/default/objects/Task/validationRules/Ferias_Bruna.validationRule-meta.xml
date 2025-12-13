@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ferias_Bruna</fullName>
+    <active>true</active>
+    <description>Bloqua a criação de registros no nome da Bruna</description>
+    <errorConditionFormula>ISNEW() &amp;&amp;
+(OwnerId = &quot;0055A00000BcBOn&quot; || WhoId = &quot;0035A00003hto9GQAQ&quot;)</errorConditionFormula>
+    <errorDisplayField>OwnerId</errorDisplayField>
+    <errorMessage>A usuária Bruna Oliveira não está disponível. 
+Tente Juliana Guimarães para assuntos do Jurídico</errorMessage>
+</ValidationRule>

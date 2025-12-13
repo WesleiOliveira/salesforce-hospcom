@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Vencido_prazo_interno__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+  AND(
+    NOT(ISBLANK(CreatedDate)),
+    NOT(ISBLANK(CompletedDateTime))
+  ),
+  ROUND(
+    (
+      (
+        ( Data_interna__c - DATEVALUE(CreatedDate) ) * 1440
+      ) - 
+      IF(ISBLANK(Tempo_parado__c), 0, Tempo_parado__c)
+    ) / 1440,
+    2
+  ),
+  NULL
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Concluido prazo interno (dias)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

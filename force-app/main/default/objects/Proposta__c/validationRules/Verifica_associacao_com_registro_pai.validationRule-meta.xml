@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Verifica_associacao_com_registro_pai</fullName>
+    <active>true</active>
+    <description>Não deixa prosseguir se não tem associação, ou se tem mais que uma.</description>
+    <errorConditionFormula>IF(
+    (IF(Oportunidade__c != NULL, 1, 0) + IF(Ordem_de_trabalho__c != NULL, 1, 0)) != 1,
+    TRUE, FALSE
+)</errorConditionFormula>
+    <errorMessage>Associe a pelo menos, e somente 1 registro pai.</errorMessage>
+</ValidationRule>

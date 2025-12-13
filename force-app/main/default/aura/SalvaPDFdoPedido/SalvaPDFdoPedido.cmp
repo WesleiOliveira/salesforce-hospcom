@@ -1,0 +1,21 @@
+<aura:component controller="SalvaPDFdoPedido" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="resultado" type="String"/>
+    <aura:attribute name="desabilitado" type="Boolean" default="false"/>
+    
+    <ltng:require
+                  scripts="{!join(',',
+                           $Resource.JQuery)}"                     
+                  afterScriptsLoaded="{!c.doInit}" />
+    
+    <div style="text-align:center;">
+        <b>{!v.resultado}</b>&nbsp;
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <div style="text-align:center;vertical-align:middle">        
+        <button id="save" disabled="{!v.desabilitado}" class="slds-button slds-button_neutral">
+            <lightning:icon iconName="utility:download" size="large" alternativeText="Indicates approval"/> &nbsp; Salvar nos Arquivos
+        </button>
+    </div>
+</aura:component>

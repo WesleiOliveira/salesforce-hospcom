@@ -1,0 +1,514 @@
+<apex:page standardController="WorkOrder" applyBodyTag="false" renderAs="pdf">
+    <html>
+
+        <head>
+            <style>                             </style>
+            <script type="text/javascript">     </script>
+        </head>
+
+        <body style="font-size:13px; font-family:calibri, sans-serif;">
+
+
+            <!-- CABEÇALHO -->
+
+
+            <!-- Imagens -->
+            <table border="0" style="width:100%; font-size:13px; font-family:calibri, sans-serif;">
+                <tr>
+                    <td>
+                        <img src="https://hospcom--c.na25.content.force.com/servlet/servlet.FileDownload?file=01531000008uM4U" width="200" height="55px"/>
+                    </td>
+                    <td style="text-align:right;">
+                        <img src="https://hospcom--c.na25.content.force.com/servlet/servlet.FileDownload?file=01531000008vEXV" width="390" height="55px"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="height:5px;" colspan="2">
+                    </td>
+                </tr>
+            </table>
+
+
+            <!-- Título -->
+            <table border="0" style="width:100%; font-size:13px; font-family:calibri, sans-serif;">
+                <tr>
+                    <td style="height:10px;" colspan="2">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-size:16px; font-weight:bold; text-align:center;">
+                        REGISTRO DE TREINAMENTO
+                    </td>
+                </tr>
+            </table>
+            <br />
+
+
+            <!-- CONTEÚDO -->
+
+
+            <!-- Infos do Cliente -->
+            <table border="0" style="width:100%; font-size:13px; font-family:calibri, sans-serif;" cellpadding="0">
+                <tr>
+                    <td style="font-size:15px; font-weight:bold; text-align:center; height:25px; border:1px solid black; background-color:#f8f8f8;" colspan="2">
+                        INFORMAÇÕES DO CLIENTE
+                    </td>
+                </tr>
+                <tr>
+                    <td style="height:5px;" colspan="2">
+                    </td>
+                </tr>
+                <tr>
+                    <td width="150px" style="font-weight:bold;">
+                        &nbsp; Cliente:
+                    </td>
+                    <td>{!WorkOrder.Account.Name}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold;">
+                        &nbsp; Endereço:
+                    </td>
+                    <td>{!WorkOrder.Endere_o__c}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold;">
+                        &nbsp; CNPJ:
+                    </td>
+                    <td>{!WorkOrder.Account.CNPJ__c}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold;">
+                        &nbsp; Contato:
+                    </td>
+                    <td>{!WorkOrder.Contact.Name}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold;">
+                        &nbsp; E-mail / Telefone:
+                    </td>
+                    <td>{!WorkOrder.E_mail__c} / {!WorkOrder.Telefone__c}</td>
+                </tr>
+                <tr>
+                    <td style="height:30px;" colspan="2">
+                    </td>
+                </tr>
+            </table>
+
+
+            <!-- Infos da OT -->
+            <table border="0" style="width:100%; font-size:13px; font-family:calibri, sans-serif;" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td style="font-size:15px; font-weight:bold; text-align:center; height:25px; border:1px solid black; background-color:#f8f8f8;" colspan="2">
+                        INFORMAÇÕES DA ORDEM DE TRABALHO
+                    </td>
+                </tr>
+                <tr>
+                    <td style="height:5px;" colspan="2">
+                    </td>
+                </tr>
+                <tr>
+
+                    <!-- Coluna 1 -->
+                    <td style="width:50%; vertical-align: top;">
+                        <table border="0" style="width:100%; font-size:13px; font-family:calibri, sans-serif;" cellpadding="0">
+                            <tr>
+                                <td width="150px" style="font-weight:bold;">
+                                    &nbsp; Ordem de Trabalho:
+                                </td>
+                                <td>{!WorkOrder.WorkOrderNumber}</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight:bold;">
+                                    &nbsp; Data Agendada:
+                                </td>
+                                <td>
+                                    <apex:outputField value="{!WorkOrder.Data_Agendada_para_Servi_o__c}"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+
+                    <!-- Coluna 2 -->
+                    <td style="width:50%; vertical-align: top;">
+                        <table border="0" style="width:100%; font-size:13px; font-family:calibri, sans-serif;" cellpadding="0">
+                            <tr>
+                                <td width="150px" style="font-weight:bold;">
+                                    &nbsp; Ministrante:
+                                </td>
+                                <td>{!WorkOrder.T_cnico_Respons_vel__c}</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight:bold;">
+                                    &nbsp; Tipo de Serviço:
+                                </td>
+                                <td>{!WorkOrder.Tipo_de_Servi_o__c}</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight:bold;">
+                                    &nbsp; Status: 
+                                </td>
+                                <td>{!WorkOrder.Status}</td>
+                            </tr>                       
+                        </table>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td style="height:30px;" colspan="2">
+                    </td>
+                </tr>
+            </table>
+
+
+            <!-- Lista de Equipamentos -->
+
+
+            <!-- Ativos (P/Demonstração) -->
+            <apex:outputPanel rendered="{!IF(WorkOrder.Tipo_de_Servi_o__c = 'DEMONSTRAÇÃO DE PRODUTOS',true,false)}">
+                <table border="0" style="width:100%; font-size:13px; font-family:calibri, sans-serif;" cellpadding="1" cellspacing="0">
+                    <tr>
+                        <td style="font-size:15px; font-weight:bold; text-align:center; height:25px; border:1px solid black; background-color:#f8f8f8;" colspan="5">
+                            PRODUTOS PARA DEMONSTRAÇÃO
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="height:5px;" colspan="5">
+                        </td>
+                    </tr>
+                </table>
+                <table border="0" style="width:100%; border-collapse: collapse; font-size:13px; font-family:calibri, sans-serif;" cellpadding="2" cellspacing="0">
+                    <tr>
+                        <td style="width:35%; font-weight:bold; border:1px solid black;">
+                            &nbsp; Produto:                               
+                        </td>                                     
+                        <td style="width:20%; font-weight:bold; border:1px solid black;">
+                            &nbsp; Marca:                               
+                        </td>                                     
+                        <td style="width:15%; font-weight:bold; border:1px solid black;">
+                            &nbsp; Modelo:                              
+                        </td>                                     
+                        <td style="width:15%; font-weight:bold; border:1px solid black;">
+                            &nbsp; Cód. de Fábr.:                            
+                        </td>                                     
+                        <td style="width:15%; font-weight:bold; border:1px solid black;">
+                            &nbsp; Imagem:
+                        </td>
+                    </tr>
+                </table>
+
+                <apex:repeat value="{!WorkOrder.Itens_para_Demonstra_o_Treinamento__r}" var="PD" >
+                    <table border="0" style="width:100%; border-collapse: collapse; font-size:13px; font-family:calibri, sans-serif;" cellpadding="2" cellspacing="0">
+                        <tr>
+                            <td style="width:35%; border:1px dotted black; border-top:none;">
+                                <div style="width:100%; max-width:100%px;">
+                                    &nbsp;{!PD.Produto_para_Demonstra_o__r.Name}
+                                </div>
+                            </td>
+                            <td style="width:20%; border:1px dotted black; border-top:none;">
+                                <div style="width:100%; max-width:100%px;">
+                                    &nbsp;{!PD.Produto_para_Demonstra_o__r.Marca__c}
+                                </div>
+                            </td>
+                            <td style="width:15%; border:1px dotted black; border-top:none;">
+                                <div style="width:100%; max-width:100%px;">
+                                    &nbsp;{!PD.Produto_para_Demonstra_o__r.Modelo__c}
+                                </div>
+                            </td>
+                            <td style="width:15%; border:1px dotted black; border-top:none;">
+                                <div style="width:100%; max-width:100%px;">
+                                    &nbsp;{!PD.Produto_para_Demonstra_o__r.ProductCode}
+                                </div>
+                            </td>
+                            <td style="width:15%; border:1px dotted black; border-top:none; text-align:center;">
+                                <img src="{!PD.Produto_para_Demonstra_o__r.URL_da_Imagem__c}" alt="Sem Imagem" height="50" width="50"> </img>
+                            </td>
+                        </tr>
+                    </table>
+                </apex:repeat>
+
+                <table border="0" style="width:100%; border-collapse: collapse; font-size:13px; font-family:calibri, sans-serif;" cellpadding="2" cellspacing="0">
+                    <tr>
+                        <td style="height:30px;" colspan="2">
+                        </td>
+                    </tr>
+                </table>
+            </apex:outputPanel>
+
+
+            <!-- Ativos (P/Treinamento) -->
+            <apex:outputPanel rendered="{!IF(WorkOrder.Tipo_de_Servi_o__c = 'TREINAMENTO DE ATIVOS',true,false)}">
+                <table border="0" style="width:100%; font-size:13px; font-family:calibri, sans-serif;" cellpadding="1" cellspacing="0">
+                    <tr>
+                        <td style="font-size:15px; font-weight:bold; text-align:center; height:25px; border:1px solid black; background-color:#f8f8f8;" colspan="5">
+                            INFORMAÇÕES DOS ATIVOS
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="height:5px;" colspan="5">
+                        </td>
+                    </tr>
+                </table>
+                <table border="0" style="width:100%; border-collapse: collapse; font-size:13px; font-family:calibri, sans-serif;" cellpadding="2" cellspacing="0">
+                    <tr>
+                        <td style="width:35%; font-weight:bold; border:1px solid black;">
+                            &nbsp; Ativo:                               
+                        </td>                                     
+                        <td style="width:20%; font-weight:bold; border:1px solid black;">
+                            &nbsp; Marca:                               
+                        </td>                                     
+                        <td style="width:15%; font-weight:bold; border:1px solid black;">
+                            &nbsp; Modelo:                              
+                        </td>                                     
+                        <td style="width:15%; font-weight:bold; border:1px solid black;">
+                            &nbsp; Nº de Série:                            
+                        </td>                                     
+                        <td style="width:15%; font-weight:bold; border:1px solid black;">
+                            &nbsp; ID/Tag:
+                        </td>
+                    </tr>
+                </table>
+
+                <apex:repeat value="{!WorkOrder.Itens_para_Demonstra_o_Treinamento__r}" var="PD" >
+                    <table border="0" style="width:100%; border-collapse: collapse; font-size:11px; font-family:calibri, sans-serif;" cellpadding="2" cellspacing="0">
+                        <tr>
+                            <td style="vertical-align: top; width:35%; border:1px dotted black; border-top:none;">
+                                <div style="width:100%; max-width:100%px;">
+                                    &nbsp;{!PD.Ativo_Relacionado__r.Name} 
+                                </div>
+                            </td>
+                            <td style="vertical-align: top; width:20%; border:1px dotted black; border-top:none;">
+                                <div style="width:100%; max-width:100%px;">
+                                    &nbsp;{!PD.Ativo_Relacionado__r.Marca__c}
+                                </div>
+                            </td>
+                            <td style="vertical-align: top; width:15%; border:1px dotted black; border-top:none;">
+                                <div style="width:100%; max-width:100%px;">
+                                    &nbsp;{!PD.Ativo_Relacionado__r.Modelo__c}
+                                </div>
+                            </td>
+                            <td style="vertical-align: top; width:15%; border:1px dotted black; border-top:none;">
+                                <div style="width:100%; max-width:100%px;">
+                                    &nbsp;{!PD.Ativo_Relacionado__r.SerialNumber} 
+                                </div>
+                            </td>
+                            <td style="vertical-align: top; width:15%; border:1px dotted black; border-top:none;">
+                                <div style="width:100%; max-width:100%px;">
+                                    &nbsp;{!PD.Ativo_Relacionado__r.ID_Tag__c}
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </apex:repeat>
+
+                <table border="0" style="width:100%; border-collapse: collapse; font-size:13px; font-family:calibri, sans-serif;" cellpadding="2" cellspacing="0">
+                    <tr>
+                        <td style="height:30px;" colspan="2">
+                        </td>
+                    </tr>
+                </table>
+            </apex:outputPanel>
+
+
+            <!-- Lista de Participantes -->
+
+
+            <!-- Preenchida -->
+            <apex:outputPanel rendered="{!IF(WorkOrder.Controle_Participantes__c > 0,true,false)}">
+                <table border="0" style="width:100%; font-size:13px; font-family:calibri, sans-serif;" cellpadding="1" cellspacing="0">
+                    <tr>
+                        <td style="font-size:15px; font-weight:bold; text-align:center; height:25px; border:1px solid black; background-color:#f8f8f8;" colspan="4">
+                            INFORMAÇÕES DOS PARTICIPANTES
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="height:5px;" colspan="4">
+                        </td>
+                    </tr>
+                </table>
+                <table border="0" style="width:100%; border-collapse: collapse; font-size:13px; font-family:calibri, sans-serif;" cellpadding="2" cellspacing="0">
+                    <tr>
+                        <td style="width:32%; font-weight:bold; border:1px solid black;">
+                            &nbsp; Nome Completo: 
+                        </td>
+                        <td style="width:30%; font-weight:bold; border:1px solid black;">
+                            &nbsp; Cargo:
+                        </td>
+                        <td style="width:24%; font-weight:bold; border:1px solid black;">
+                            &nbsp; E-mail:
+                        </td>
+                        <td style="width:14%; font-weight:bold; border:1px solid black;">
+                            &nbsp; Telefone:
+                        </td>
+                    </tr>
+                </table>    
+                <apex:repeat value="{!WorkOrder.Participantes1__r}" var="PT"> 
+                    <table border="0" style="width:100%; border-collapse: collapse; font-size:13px; font-family:calibri, sans-serif;" cellpadding="2" cellspacing="0">
+                        <tr>
+                            <td style="width:32%; border:1px dotted black; border-top:none;">
+                                <div style="width:100%; max-width:100%px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                                    &nbsp;{!PT.Nome_do_Participante__c}
+                                </div>
+                            </td>
+                            <td style="width:30%; border:1px dotted black; border-top:none;">
+                                <div style="width:100%; max-width:100%px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                                    &nbsp;{!PT.Cargo__c}
+                                </div>
+                            </td>
+                            <td style="width:24%; border:1px dotted black; border-top:none;">
+                                <div style="width:100%; max-width:100%px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                                    &nbsp;{!PT.E_mail__c}
+                                </div>
+                            </td>
+                            <td style="width:14%; border:1px dotted black; border-top:none;">
+                                <div style="width:100%; max-width:100%px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                                    &nbsp;{!PT.Telefone__c}
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </apex:repeat>
+                <table border="0" style="width:100%; border-collapse: collapse; font-size:13px; font-family:calibri, sans-serif;" cellpadding="2" cellspacing="0">
+                    <tr>
+                        <td style="height:30px;" colspan="2">
+                        </td>
+                    </tr>
+                </table>
+            </apex:outputPanel>
+
+
+            <!-- Vazia -->
+
+
+            <apex:outputPanel rendered="{!IF(WorkOrder.Controle_Participantes__c = 0,true,false)}">
+                <table border="0" style="width:100%; font-size:13px; font-family:calibri, sans-serif;" cellpadding="1" cellspacing="0">
+                    <tr>
+                        <td style="font-size:15px; font-weight:bold; text-align:center; height:25px; border:1px solid black; background-color:#f8f8f8;" colspan="4">
+                            INFORMAÇÕES DOS PARTICIPANTES
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="height:5px;" colspan="4">
+                        </td>
+                    </tr>
+                </table>
+                <table border="0" style="width:100%; border-collapse: collapse; font-size:13px; font-family:calibri, sans-serif;" cellpadding="2" cellspacing="0">
+                    <tr>
+                        <td style="width:3%; font-weight:bold; border:1px solid black;">
+                            &nbsp; #
+                        </td>
+                        <td style="width:31%; font-weight:bold; border:1px solid black;">
+                            &nbsp; Nome Completo: 
+                        </td>
+                        <td style="width:28%; font-weight:bold; border:1px solid black;">
+                            &nbsp; Cargo:
+                        </td>
+                        <td style="width:24%; font-weight:bold; border:1px solid black;">
+                            &nbsp; E-mail:
+                        </td>
+                        <td style="width:14%; font-weight:bold; border:1px solid black;">
+                            &nbsp; Telefone:
+                        </td>
+                    </tr>
+                </table>
+                <table border="0" style="width:100%; border-collapse: collapse; font-size:13px; font-family:calibri, sans-serif;" cellpadding="2" cellspacing="0">
+                    <tr>
+                        <td style="width:3%; border:1px dotted black; border-top:none; font-weight:bold; text-align:center;">1</td>
+                        <td style="width:31%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:28%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:24%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:14%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="width:3%; border:1px dotted black; border-top:none; font-weight:bold; text-align:center;">2</td>
+                        <td style="width:31%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:28%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:24%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:14%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="width:3%; border:1px dotted black; border-top:none; font-weight:bold; text-align:center;">3</td>
+                        <td style="width:31%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:28%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:24%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:14%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="width:3%; border:1px dotted black; border-top:none; font-weight:bold; text-align:center;">4</td>
+                        <td style="width:31%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:28%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:24%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:14%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="width:3%; border:1px dotted black; border-top:none; font-weight:bold; text-align:center;">5</td>
+                        <td style="width:31%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:28%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:24%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:14%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="width:3%; border:1px dotted black; border-top:none; font-weight:bold; text-align:center;">6</td>
+                        <td style="width:31%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:28%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:24%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:14%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="width:3%; border:1px dotted black; border-top:none; font-weight:bold; text-align:center;">7</td>
+                        <td style="width:31%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:28%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:24%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:14%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="width:3%; border:1px dotted black; border-top:none; font-weight:bold; text-align:center;">8</td>
+                        <td style="width:31%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:28%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:24%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:14%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="width:3%; border:1px dotted black; border-top:none; font-weight:bold; text-align:center;">9</td>
+                        <td style="width:31%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:28%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:24%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:14%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="width:3%; border:1px dotted black; border-top:none; font-weight:bold; text-align:center;">10</td>
+                        <td style="width:31%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:28%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:24%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                        <td style="width:14%; border:1px dotted black; border-top:none;">&nbsp;</td>
+                    </tr>
+                </table>
+
+                <table border="0" style="width:100%; border-collapse: collapse; font-size:13px; font-family:calibri, sans-serif;" cellpadding="2" cellspacing="0">
+                    <tr>
+                        <td style="height:30px;" colspan="2">
+                        </td>
+                    </tr>
+                </table>
+            </apex:outputPanel>
+
+
+            <!-- RODAPÉ -->
+
+
+            <!-- Assinaturas -->
+            <br />
+            <table border="0" style="width:100%; font-size:13px; font-family:calibri, sans-serif;">
+                <tr>
+                    <td>_______________________________________</td>
+                    <td>_______________________________________</td>
+                </tr>
+                <tr>
+                    <td>Ministrante</td>
+                    <td>Responsável</td>
+                </tr>
+            </table>
+
+
+        </body>
+    </html>
+</apex:page>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>De_acordo_com_Contrato</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+TEXT(Natureza_de_Opera_o__c) != &apos;BONIFICAÇÃO&apos;,
+OR(
+AND (QuoteId != null, Quote.Documento_Assinado__c != null),
+AND (Ordem_de_trabalho__c != null, Ordem_de_trabalho__r.Documento_Assinado__c != null),
+AND (Contrato_de_Servi_o__c != null, Contrato_de_Servi_o__r.Documento_Assinado__c != null)
+),
+OR(
+AND(QuoteId != null, TEXT(Quote.Condicao_de_pagamento__c) != TEXT(Condicao_de_pagamento__c)),
+AND(QuoteId != null, TEXT(Quote.Forma_de_pagamento__c) != TEXT(Forma_de_pagamento2__c)),
+AND(Ordem_de_trabalho__c != null, TEXT(Ordem_de_trabalho__r.Condicao_de_pagamento__c) != TEXT(Condicao_de_pagamento__c)),
+AND(Ordem_de_trabalho__c != null, TEXT(Ordem_de_trabalho__r.Forma_de_pagamento__c) != TEXT(Forma_de_pagamento2__c))
+))</errorConditionFormula>
+    <errorMessage>Condição e/ou forma de pagamento difere(m) do aprovado em contrato via Autentique.</errorMessage>
+</ValidationRule>

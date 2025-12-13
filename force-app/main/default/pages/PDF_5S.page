@@ -1,0 +1,205 @@
+<apex:page standardController="L_M_D__c" applyHtmlTag="false" showHeader="false" renderAs="pdf">
+
+    <head>
+        <style type="text/css" media="print">
+            @page {
+                size: 21cm 29.7cm;
+                margin: 100px 40px 60px 40px;
+
+                @top-center {
+                    content: element(header);
+                }
+
+                @bottom-center {
+                    content: element(footer);
+                }
+            }
+
+            @page {
+                size: A4;
+                background: url({!IF(L_M_D__c.Conta_Relacionada__r.CNPJ__c  == '27.476.124/0001-02',$Resource.TimbradoHealth,IF(L_M_D__c.Conta_Relacionada__r.CNPJ__c == '05.743.288/0001-08' || L_M_D__c.Conta_Relacionada__r.CNPJ__c == '05.743.288/0003-70',$Resource.TimbradoHospcom,IF(L_M_D__c.Conta_Relacionada__r.CNPJ__c == '23.813.386/0001-56',$Resource.TimbradoGDB,IF(L_M_D__c.Conta_Relacionada__r.CNPJ__c == '40.014.621/0001-49',$Resource.TimbradoABC,$Resource.TimbradoGenerico))))
+            });
+            margin:150px 50px 120px 50px;
+
+            @bottom-center {
+                content: element(footer);
+            }
+            }
+
+            .pagenumber:before {
+                content: counter(page);
+            }
+
+            .pagecount:before {
+                content: counter(pages);
+            }
+
+            div.header {
+                margin: 0px 0px 0px 0px;
+                padding: 20px 0px 20px 0px;
+                position: running(header);
+                height: 60px;
+            }
+
+            div.content {}
+
+            div.footer {
+                margin: 0px 0px 0px 0px;
+                padding: 20px 0px 20px 0px;
+                position: running(footer);
+                height: 20px;
+                text-align: right;
+                font-family: arial, verdana, sans-serif;
+                font-size: 10px;
+                font-weight: normal;
+            }
+        </style>
+        <style type="text/css" media="print">
+            /*
+        @page:first{
+            size:A4;
+            background: url($Resource.SobreHealth);
+            margin:150px 50px 120px 50px;
+            @bottom-center{content:element(footer);
+            }
+        }
+        
+        @page{
+            size:A4;
+            background: url($Resource.TimbradoHealth);
+            margin:150px 50px 120px 50px;
+            @bottom-center{content:element(footer);}
+        }
+*/
+
+            /*
+            @page {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+*/
+
+.titulo_cont{
+    display: inline;
+    flex-direction: row;
+    background: #47f43a;
+    color: #fff;
+}
+        </style>
+    </head>
+
+    <body class="body">
+        <apex:pageBlock >
+
+            <div class="footer" style="text-align:center !important"><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Página <span class="pagenumber"></span> de <span class="pagecount"></span> - Emissão em:&nbsp;
+                <apex:outputText value="{0,date,dd/MM/yyyy}">
+                    <apex:param value="{! TODAY() }" />
+                </apex:outputText>
+            </div>
+
+
+            <div class="docuemnto">
+
+            </div>
+
+        </apex:pageBlock>
+
+    </body>
+    <apex:pageBlock >
+        <div class="container_ass">
+
+            <div class="cabecalho">
+                <div class="logoMAISauditoria">
+                    <div class="logo"></div>
+                    <div class="auditoria_titulo"></div>
+                </div>
+
+                <div class="dados">
+                    <div>
+                        <div class="Nome da empresa">Auditado: {!}</div>
+                        <div class="departamento">Departametno: {!}</div>
+                    </div>
+                    <div>
+                        <div class="Nome da empresa">data: {!}</div>
+                        <div class="departamento"></div>
+                    </div>
+                </div>
+            </div>
+
+                <div class="camadas">
+                    <div class="1s">
+                        <div class="titulo_camada" >
+                            1S - Utilização
+                        </div>
+
+                        <div class="titulo_cont" >
+                            <div class="numero1_titulo"> # </div>
+                            <div class="Check_item_titulo">Check Item</div>
+                            <div class="descricao_titulo">Descrição</div>
+                            <div class="pontuacao_titulo"> <div class="pnt">Pontuação</div> <div class="numeracao"> <div class="numero">0</div> <div class="numero">1</div> <div class="numero">2</div> <div class="numero">3</div> <div class="numero">4</div> <div class="numero">5</div> </div> </div>
+                        </div>
+
+
+                        <div class="campo">
+                            <div class="numero1"> 1 </div>
+                            <div class="Check_item">Materiais ou partes</div>
+                            <div class="descricao">Os materiais na área de trabalho são somente os necessários para execução do trabalho?</div>
+                            <div class="pontuacao"> <div class="numero">0</div> <div class="numero">1</div> <div class="numero">2</div> <div class="numero">3</div> <div class="numero">4</div> <div class="numero">5</div>  </div>
+                        </div>
+                        <div class="campo">
+                            <div class="numero1"> 1 </div>
+                            <div class="Check_item">Materiais ou partes</div>
+                            <div class="descricao">Os materiais na área de trabalho são somente os necessários para execução do trabalho?</div>
+                            <div class="pontuacao"> <div class="numero">0</div> <div class="numero">1</div> <div class="numero">2</div> <div class="numero">3</div> <div class="numero">4</div> <div class="numero">5</div>  </div>
+                        </div>
+                        <div class="campo">
+                            <div class="numero1"> 1 </div>
+                            <div class="Check_item">Materiais ou partes</div>
+                            <div class="descricao">Os materiais na área de trabalho são somente os necessários para execução do trabalho?</div>
+                            <div class="pontuacao"> <div class="numero">0</div> <div class="numero">1</div> <div class="numero">2</div> <div class="numero">3</div> <div class="numero">4</div> <div class="numero">5</div>  </div>
+                        </div>
+                        <div class="campo">
+                            <div class="numero1"> 1 </div>
+                            <div class="Check_item">Materiais ou partes</div>
+                            <div class="descricao">Os materiais na área de trabalho são somente os necessários para execução do trabalho?</div>
+                            <div class="pontuacao"> <div class="numero">0</div> <div class="numero">1</div> <div class="numero">2</div> <div class="numero">3</div> <div class="numero">4</div> <div class="numero">5</div>  </div>
+                        </div>
+                        <div class="campo">
+                            <div class="numero1"> 1 </div>
+                            <div class="Check_item">Materiais ou partes</div>
+                            <div class="descricao">Os materiais na área de trabalho são somente os necessários para execução do trabalho?</div>
+                            <div class="pontuacao"> <div class="numero">0</div> <div class="numero">1</div> <div class="numero">2</div> <div class="numero">3</div> <div class="numero">4</div> <div class="numero">5</div>  </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="1s">
+                        <div class="titulo_camada">
+                            2S - Organização
+                        </div>
+
+                        <div class="campo">
+                            <div class="numero1_titulo"> # </div>
+                            <div class="Check_item_titulo">Check Item</div>
+                            <div class="descricao_titulo">Descrição</div>
+                            <div class="pontuacao_titulo"> <div class="pnt">Pontuação</div> <div class="numeracao"> <div class="numero">0</div> <div class="numero">1</div> <div class="numero">2</div> <div class="numero">3</div> <div class="numero">4</div> <div class="numero">5</div> </div> </div>
+                        </div>
+                        <div class="campo">
+                            <div class="numero1"> 1 </div>
+                            <div class="Check_item">Materiais ou partes</div>
+                            <div class="descricao">Os materiais na área de trabalho são somente os necessários para execução do trabalho?</div>
+                            <div class="pontuacao"> <div class="numero">0</div> <div class="numero">1</div> <div class="numero">2</div> <div class="numero">3</div> <div class="numero">4</div> <div class="numero">5</div>  </div>
+                        </div>
+                    </div>
+                </div>
+
+            
+        </div>
+    </apex:pageBlock>
+</apex:page>

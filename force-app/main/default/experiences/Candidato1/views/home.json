@@ -1,0 +1,71 @@
+{
+  "appPageId" : "f3b15820-caac-4d7d-82ff-12c7be5ac1fe",
+  "componentName" : "community_layout:sldsFlexibleLayout",
+  "dataProviders" : [ ],
+  "id" : "d224e225-8cbb-473e-a242-5fc8629c39fd",
+  "label" : "Home",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "backgroundImageConfig" : "",
+        "backgroundImageOverlay" : "rgba(0,0,0,0)",
+        "sectionConfig" : "{\"UUID\":\"7333fd72-aa97-4f08-a3e0-13a1f5f5917a\",\"columns\":[{\"UUID\":\"d454617e-2f68-4e51-a180-52f12f66aa41\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}"
+      },
+      "componentName" : "community_layout:section",
+      "id" : "7333fd72-aa97-4f08-a3e0-13a1f5f5917a",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "richTextValue" : "<p>Use this HTML Editor to add your own markup.</p>"
+          },
+          "componentName" : "community_builder:htmlEditor",
+          "id" : "220ac92a-63d7-4a34-a064-3ec194aaf138",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        }, {
+          "componentAttributes" : {
+            "richTextValue" : "<div style=\"display: flex; justify-content: center; align-items: center; margin: 50px 0; flex-direction: column; text-align: center;\"><div style=\"background-image: url(assets/img/desert.svg); background-size: cover; background-position: center; height: 300px; width: 100%; max-width: 600px; min-width: 300px;\"></div><h1 class=\"slds-text-heading_medium slds-p-bottom_x-small\">Start Building Your Page</h1> <div>Drag and drop a component into the content slots.</div></div>"
+          },
+          "componentName" : "community_builder:htmlEditor",
+          "id" : "6c2169a1-2086-4cc8-b0df-dcc2d9307f76",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "d454617e-2f68-4e51-a180-52f12f66aa41",
+        "regionLabel" : "Coluna 1",
+        "regionName" : "col1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "scopedBrandingSetId" : null,
+      "type" : "component"
+    } ],
+    "id" : "400a8021-fbc3-4d38-8ff8-da9cbba329f8",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "pageTitle" : "Home",
+        "recordId" : "{!recordId}"
+      },
+      "componentName" : "community_builder:seoAssistant",
+      "id" : "0bb95a25-602a-479e-864b-65a1b1582ac8",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "a09ceb2b-7bab-478c-b355-f45267763c46",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "home"
+}

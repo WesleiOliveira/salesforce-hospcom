@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo_da_Dura_o__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipo da Duração</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>dia(s)</fullName>
+                <default>false</default>
+                <label>dia(s)</label>
+            </value>
+            <value>
+                <fullName>mes(es)</fullName>
+                <default>false</default>
+                <label>mes(es)</label>
+            </value>
+            <value>
+                <fullName>procedimento(s)</fullName>
+                <default>false</default>
+                <label>procedimento(s)</label>
+            </value>
+            <value>
+                <fullName>serviço(s)</fullName>
+                <default>false</default>
+                <label>serviço(s)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

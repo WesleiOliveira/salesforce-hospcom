@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>Compartilha_com_francisco</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Compartilha com francisco</label>
+        <sharedTo>
+            <group>MKT_Todos</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Gerente_Cl_nico</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Gerente Clínico</label>
+        <sharedTo>
+            <group>Gerente_Clinico</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

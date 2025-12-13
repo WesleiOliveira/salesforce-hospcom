@@ -1,0 +1,51 @@
+.THIS .logos {
+    overflow: hidden;
+    padding: 30px 0px;
+    white-space: nowrap;
+    position: relative;
+    width: 70%;
+}
+
+.THIS .logos:before, .THIS .logos:after {
+  position: absolute;
+  top: 0;
+  content: '';
+  width: 250px;
+  height: 100%;
+  z-index: 2;
+}
+
+.THIS .logos:before {
+  left: 0;
+  background: linear-gradient(to left, rgba(255,255,255,0), rgb(255, 255, 255));
+}
+
+.THIS .logos:after {
+  right: 0;
+  background: linear-gradient(to right, rgba(255,255,255,0), rgb(255, 255, 255));
+}
+
+.THIS .logo_items {
+  display: inline-block;
+  animation: 35s slides infinite linear;
+}
+
+.THIS .logos:hover .logo_items {
+  animation-play-state: paused;
+}
+
+.THIS .logo_items img {
+  height: 100px;
+    margin-right: 20px;
+                clip-path: inset(0 0 5px 0); /* Corta os últimos 3px da parte inferior */
+
+}
+
+@keyframes slides {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}

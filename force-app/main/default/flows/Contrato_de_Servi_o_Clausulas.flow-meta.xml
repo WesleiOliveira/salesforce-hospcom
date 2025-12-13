@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <decisions>
+        <name>Clausula_decima</name>
+        <label>Clausula decima</label>
+        <locationX>182</locationX>
+        <locationY>3359</locationY>
+        <defaultConnector>
+            <targetReference>Clausula_decima_primeira</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>N_editada</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Cl_usula_D_cima_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X10</targetReference>
+            </connector>
+            <label>Não editada</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Clausula_decima_primeira</name>
+        <label>Clausula decima primeira</label>
+        <locationX>182</locationX>
+        <locationY>3695</locationY>
+        <defaultConnector>
+            <targetReference>Clausula_decima_segunda</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>N_o_editadaaa</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Cl_usula_D_cima_Primeira_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X11</targetReference>
+            </connector>
+            <label>Não editada</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Clausula_decima_segunda</name>
+        <label>Clausula decima segunda</label>
+        <locationX>182</locationX>
+        <locationY>4031</locationY>
+        <defaultConnector>
+            <targetReference>Clausula_decima_terceira</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Nao_editadaa</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Cl_usula_D_cima_Segunda_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X12</targetReference>
+            </connector>
+            <label>Não editada</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Clausula_decima_terceira</name>
+        <label>Clausula decima terceira</label>
+        <locationX>182</locationX>
+        <locationY>4367</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>N_o_edit_ada</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Cl_usula_D_cima_Terceira_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X13</targetReference>
+            </connector>
+            <label>Não editada</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Clausula_nona</name>
+        <label>Clausula nona</label>
+        <locationX>182</locationX>
+        <locationY>3023</locationY>
+        <defaultConnector>
+            <targetReference>Clausula_decima</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Noa_editada</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Cl_usula_Nona_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X9</targetReference>
+            </connector>
+            <label>Não editada</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Clausula_oitava</name>
+        <label>Clausula oitava</label>
+        <locationX>182</locationX>
+        <locationY>2687</locationY>
+        <defaultConnector>
+            <targetReference>Clausula_nona</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>N_oeditada</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Cl_usula_Oitava_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X8</targetReference>
+            </connector>
+            <label>Não editada</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Clausula_primeira</name>
+        <label>Clausula primeira</label>
+        <locationX>182</locationX>
+        <locationY>335</locationY>
+        <defaultConnector>
+            <targetReference>Clausula_segunda</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Nao_editada</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Cl_usula_Primeira_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X1</targetReference>
+            </connector>
+            <label>Não editada</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Clausula_quarta</name>
+        <label>Clausula quarta</label>
+        <locationX>182</locationX>
+        <locationY>1343</locationY>
+        <defaultConnector>
+            <targetReference>Clausula_quinta</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Naao_editada</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Cl_usula_Quarta_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X4</targetReference>
+            </connector>
+            <label>Não editada</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Clausula_quinta</name>
+        <label>Clausula quinta</label>
+        <locationX>182</locationX>
+        <locationY>1679</locationY>
+        <defaultConnector>
+            <targetReference>Clausula_sexta</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>N_o_editadaa</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Cl_usula_Quinta_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X5</targetReference>
+            </connector>
+            <label>Não editada</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Clausula_segunda</name>
+        <label>Clausula segunda</label>
+        <locationX>182</locationX>
+        <locationY>671</locationY>
+        <defaultConnector>
+            <targetReference>Clausula_terceira</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>N_ao_editada</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Cl_usula_Segunda_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X2</targetReference>
+            </connector>
+            <label>Não editada</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Clausula_setima</name>
+        <label>Clausula setima</label>
+        <locationX>182</locationX>
+        <locationY>2351</locationY>
+        <defaultConnector>
+            <targetReference>Clausula_oitava</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>N_o_editada2</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Cl_usula_S_tima_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X7</targetReference>
+            </connector>
+            <label>Não editada</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Clausula_sexta</name>
+        <label>Clausula sexta</label>
+        <locationX>182</locationX>
+        <locationY>2015</locationY>
+        <defaultConnector>
+            <targetReference>Clausula_setima</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Nao_ediyada</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Cl_usula_Sexta_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X6</targetReference>
+            </connector>
+            <label>Não editada</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Clausula_terceira</name>
+        <label>Clausula terceira</label>
+        <locationX>182</locationX>
+        <locationY>1007</locationY>
+        <defaultConnector>
+            <targetReference>Clausula_quarta</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>N_o_editada</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Cl_usula_Terceira_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X3</targetReference>
+            </connector>
+            <label>Não editada</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>validadeContrato</name>
+        <dataType>Date</dataType>
+        <expression>{!$Record.Data_de_emiss_o_do_contrato__c} + {!$Record.Validade_do_Contrato_dias__c}</expression>
+    </formulas>
+    <interviewLabel>Contrato de Serviço — Clausulas {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Contrato de Serviço — Clausulas</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>X1</name>
+        <label>1</label>
+        <locationX>50</locationX>
+        <locationY>455</locationY>
+        <connector>
+            <targetReference>Clausula_segunda</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Cl_usula_Primeira__c</field>
+            <value>
+                <elementReference>clausula1</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X10</name>
+        <label>10</label>
+        <locationX>50</locationX>
+        <locationY>3479</locationY>
+        <connector>
+            <targetReference>Clausula_decima_primeira</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Cl_usula_D_cima__c</field>
+            <value>
+                <elementReference>clausula10</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X11</name>
+        <label>11</label>
+        <locationX>50</locationX>
+        <locationY>3815</locationY>
+        <connector>
+            <targetReference>Clausula_decima_segunda</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Cl_usula_D_cima_Primeira__c</field>
+            <value>
+                <elementReference>clausula11</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X12</name>
+        <label>12</label>
+        <locationX>50</locationX>
+        <locationY>4151</locationY>
+        <connector>
+            <targetReference>Clausula_decima_terceira</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Cl_usula_D_cima_Segunda__c</field>
+            <value>
+                <elementReference>clausula12</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X13</name>
+        <label>13</label>
+        <locationX>50</locationX>
+        <locationY>4487</locationY>
+        <inputAssignments>
+            <field>Cl_usula_D_cima_Terceira__c</field>
+            <value>
+                <elementReference>clausula13</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X2</name>
+        <label>2</label>
+        <locationX>50</locationX>
+        <locationY>791</locationY>
+        <connector>
+            <targetReference>Clausula_terceira</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Cl_usula_Segunda__c</field>
+            <value>
+                <elementReference>clausula2</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X3</name>
+        <label>3</label>
+        <locationX>50</locationX>
+        <locationY>1127</locationY>
+        <connector>
+            <targetReference>Clausula_quarta</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Cl_usula_Terceira__c</field>
+            <value>
+                <elementReference>clausula3</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X4</name>
+        <label>4</label>
+        <locationX>50</locationX>
+        <locationY>1463</locationY>
+        <connector>
+            <targetReference>Clausula_quinta</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Cl_usula_Quarta__c</field>
+            <value>
+                <elementReference>clausula4</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X5</name>
+        <label>5</label>
+        <locationX>50</locationX>
+        <locationY>1799</locationY>
+        <connector>
+            <targetReference>Clausula_sexta</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Cl_usula_Quinta__c</field>
+            <value>
+                <elementReference>clausula5</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X6</name>
+        <label>6</label>
+        <locationX>50</locationX>
+        <locationY>2135</locationY>
+        <connector>
+            <targetReference>Clausula_setima</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Cl_usula_Sexta__c</field>
+            <value>
+                <elementReference>clausula6</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X7</name>
+        <label>7</label>
+        <locationX>50</locationX>
+        <locationY>2471</locationY>
+        <connector>
+            <targetReference>Clausula_oitava</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Cl_usula_S_tima__c</field>
+            <value>
+                <elementReference>clausula7</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X8</name>
+        <label>8</label>
+        <locationX>50</locationX>
+        <locationY>2807</locationY>
+        <connector>
+            <targetReference>Clausula_nona</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Cl_usula_Oitava__c</field>
+            <value>
+                <elementReference>clausula8</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X9</name>
+        <label>9</label>
+        <locationX>50</locationX>
+        <locationY>3143</locationY>
+        <connector>
+            <targetReference>Clausula_decima</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Cl_usula_Nona__c</field>
+            <value>
+                <elementReference>clausula9</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Clausula_primeira</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>0125A000001QydLQAS</stringValue>
+            </value>
+        </filters>
+        <object>Contrato_de_Servi_o__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>clausula1</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;1. OBJETO&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;1.1. &lt;/strong&gt;Constitui objeto do presente instrumento a prestação de serviços de manutenção e/ ou venda de peças:&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>clausula10</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;10. DA NECESSIDADE DE APROVAÇÃO EM ANÁLISE DE CRÉDITO &lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;10.1.&lt;/strong&gt; Declara o(a) &lt;strong&gt;CONTRATANTE &lt;/strong&gt;a ciência de que estas tratativas comerciais somente perdurarão mediante aprovação da &lt;strong&gt;CONTRATANTE &lt;/strong&gt;em análise de crédito a ser realizada pela &lt;strong&gt;CONTRATADA &lt;/strong&gt;e, ainda, tão somente mediante assinatura do presente instrumento por parte de pessoa com poderes para assinar pela &lt;strong&gt;CONTRATADA&lt;/strong&gt;.&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>clausula11</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;11. DA ASSINATURA ELETRÔNICA&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;11.1.&lt;/strong&gt; Caso o presente instrumento seja assinado de forma digital ou eletronicamente, cada parte declara e garante que sua assinatura digital ou eletrônica tem o mesmo efeito vinculativo que teria a assinatura manuscrita, possuindo caráter irrevogável e irretratável, sendo realizada através de plataforma de conhecida confiabilidade, estando as partes atentas ao disposto na Medida Provisória 2.200-2/2001 ou em outra legislação que venha a substituí-la&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>clausula12</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;12. DA PROTEÇÃO DE DADOS&lt;/strong&gt; &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;12.1. &lt;/strong&gt;As partes, por si e por seus colaboradores, obrigam-se a atuar no presente Contrato em conformidade com a Legislação vigente sobre Proteção de Dados Pessoais e as determinações de órgãos reguladores/fiscalizadores sobre a matéria, tudo conforme o que rege a Lei 13.709/2018. No que tange à utilização dos dados as partes deverão: &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p style=&quot;margin-left:100px;&quot;&gt;i. Tratar os dados pessoais a que tiver acesso de acordo com o que a outra parte lhe direcionar sempre em conformidade com estas cláusulas. Para os casos em que for obrigada e não mais puder cumprir estas obrigações, por qualquer razão, concorda em informar de modo formal este fato à outra parte. &lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p style=&quot;margin-left:100px;&quot;&gt;ii. Manter e utilizar medidas de segurança para que possa proteger a confidencialidade e integridade de todos os dados pessoais mantidos ou transmitidos eletronicamente, a fim de que possa garantir a proteção desses dados contra acesso não autorizado, destruição, uso, modificação, divulgação ou perda acidental ou indevida. &lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p style=&quot;margin-left:100px;&quot;&gt;iii. Acessar os dados dentro de seu escopo e na medida abrangida pela autorização da outra parte, não podendo estes serem modificados sem expressa autorização da outra parte. &lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p style=&quot;margin-left:100px;&quot;&gt;iv. Garantir, por si própria ou quaisquer de seus empregados, prepostos, sócios, diretores, representantes ou terceiros contratados, a confidencialidade dos dados processados, bem como a manter quaisquer Dados Pessoais estritamente confidenciais e de não os utilizar para outros fins, com exceção da prestação de serviços à outra parte.&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>clausula13</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;13. DO FORO DO CONTRATO &lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;13.1.&lt;/strong&gt; Fica eleito como competente o foro da Comarca de Goiânia, Estado de Goiás, para solução de quaisquer dúvidas ou litígios decorrentes deste contrato, renunciando os contratantes a qualquer outro que tenham ou venham a ter, por mais privilegiado que seja.&lt;/p&gt;&lt;p&gt;E assim, justo e contratado, firmam o presente instrumento em 02 (duas) vias de igual teor, e forma, na presença das 02 (duas) testemunhas abaixo assinadas.&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>clausula2</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;2. CONDIÇÕES GERAIS DO CONTRATO&amp;nbsp;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;2.1.&lt;/strong&gt; Este instrumento será regido pelas seguintes informações comerciais:&amp;nbsp;&lt;/p&gt;&lt;table class=&quot;ql-table-blob&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style=&quot;border: 0.5px solid black; padding: 3px; width:30%;&quot;&gt; &lt;strong&gt;Valor total &lt;/strong&gt;&lt;/td&gt;&lt;td style=&quot;border: 0.5px solid black; padding: 3px&quot;&gt; BRL {!$Record.Valor_Total_do_Contrato__c}&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border: 0.5px solid black; padding: 3px&quot;&gt;&lt;strong&gt; Forma de Pagamento &lt;/strong&gt;&lt;/td&gt;&lt;td style=&quot;border: 0.5px solid black; padding: 3px&quot;&gt; {!$Record.Forma_de_Pagamento__c}, vencimento dia {!$Record.Vencimento_dia__c}&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border: 0.5px solid black; padding: 3px&quot;&gt;&lt;strong&gt; Início do contrato&lt;/strong&gt; &lt;/td&gt;&lt;td style=&quot;border: 0.5px solid black; padding: 3px&quot;&gt; {!$Record.Data_de_In_cio_do_Contrato__c}&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border: 0.5px solid black; padding: 3px&quot;&gt; &lt;strong&gt;Duração do contrato &lt;/strong&gt; &lt;/td&gt;&lt;td style=&quot;border: 0.5px solid black; padding: 3px&quot;&gt; {!$Record.Dura_o_do_Contrato_meses__c} {!$Record.Tipo_da_Dura_o__c}&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border: 0.5px solid black; padding: 3px&quot;&gt; &lt;strong&gt;Tipo de entrega &lt;/strong&gt;&lt;/td&gt;&lt;td style=&quot;border: 0.5px solid black; padding: 3px&quot;&gt; {!$Record.Tipo_de_Entrega__c}&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;border: 0.5px solid black; padding: 3px&quot;&gt;&lt;strong&gt; Tipo de devolução&lt;/strong&gt;&lt;/td&gt;&lt;td style=&quot;border: 0.5px solid black; padding: 3px&quot;&gt; {!$Record.Tipo_de_Devolu_o__c}&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;&lt;strong&gt;2.2.&lt;/strong&gt; As informações comerciais contidas neste instrumento serão válidas até a data de {!validadeContrato} e em caso de assinatura do contrato pela &lt;strong&gt;CONTRATADA &lt;/strong&gt;serão ratificadas pelo tempo que perdurar o contrato.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;2.3.&lt;/strong&gt; O preço acima descrito, constitui a venda em sua totalidade, ou seja, estão embutidos no preço todos os impostos de responsabilidade da &lt;strong&gt;CONTRATADA&lt;/strong&gt;. Quaisquer valores excedentes ao preço ora estipulado deverão ser arcados em sua totalidade pelo(a) &lt;strong&gt;CONTRATANTE&lt;/strong&gt;.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Parágrafo Único.&lt;/strong&gt; A menos que o(a) &lt;strong&gt;CONTRATANTE &lt;/strong&gt;forneça à &lt;strong&gt;CONTRATADA &lt;/strong&gt;o respectivo certificado de isenção, com antecedência razoável à data em que o(s) equipamento(s) for(em) disponibilizado(s) para entrega, a &lt;strong&gt;CONTRATADA &lt;/strong&gt;faturará o produto a ser entregue ao(a) &lt;strong&gt;CONTRATANTE &lt;/strong&gt;com a inclusão dos impostos relativos à venda e o(a) &lt;strong&gt;CONTRATANTE &lt;/strong&gt;pagará os impostos de acordo com os termos da fatura.&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>clausula3</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;3. DOS ENCARGOS MORATÓRIOS &lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;3.1 &lt;/strong&gt;Fica certo e ajustado que caso o(a) &lt;strong&gt;CONTRATANTE &lt;/strong&gt;não efetue o pagamento até a data de vencimento serão aplicadas as seguintes sanções, calculadas sempre sobre o valor total da obrigação e até o seu efetivo pagamento:&lt;/p&gt;&lt;p style=&quot;margin-left:100px;&quot;&gt;3.1.1. Juros de mora a razão de 1% (um por cento) ao mês;&lt;/p&gt;&lt;p style=&quot;margin-left:100px;&quot;&gt;3.1.2. Multa moratória de 2% (dois por cento) sobre o valor total da obrigação em atraso;&lt;/p&gt;&lt;p style=&quot;margin-left:100px;&quot;&gt;3.1.3. Correção monetária, &quot;pró rata tempore&quot;,com base na variação do valor do IGPM/FGV (Índice Geral de Preços de Mercado da Fundação Getúlio Vargas);&lt;/p&gt;&lt;p style=&quot;margin-left:100px;&quot;&gt;3.1.4. Todas as despesas de cobrança, custas judiciais, extrajudiciais e honorários advocatícios na monta de 10% sobre o valor total do débito;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Parágrafo Único:&lt;/strong&gt; em caso de pagamento de forma parcelada e inadimplemento de uma das parcelas aqui acordadas, ocorrerá o vencimento antecipado de todas as outras parcelas, com a consequente aplicação dos encargos contratuais mencionados acima.&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>clausula4</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;4. DA FORMA DE PRESTAÇÃO DE SERVIÇOS E OBRIGAÇÕES DA CONTRATADA &lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;4.1. &lt;/strong&gt;A prestação dos serviços de manutenção será realizada de segunda à sexta-feira, das 08h às 18h, salvo feriados, em local previamente estipulado entre as partes. Em caso de necessidade manifestada pela &lt;strong&gt;CONTRATANTE &lt;/strong&gt;de que sejam prestados os serviços em referência fora do horário comercial ou local ora estipulado, as despesas de atendimento extraordinário serão cobradas pela &lt;strong&gt;CONTRATADA&lt;/strong&gt;, em valores a serem estipulados entre &lt;strong&gt;CONTRATADA &lt;/strong&gt;e &lt;strong&gt;CONTRATANTE&lt;/strong&gt;.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Parágrafo Único:&lt;/strong&gt; A &lt;strong&gt;CONTRATANTE &lt;/strong&gt;fica obrigada, após a prestação dos serviços, satisfazer às suas próprias custas, a todas e quaisquer intimações dos poderes competentes a que der causa, mesmo que expedidas em nome da &lt;strong&gt;CONTRATADA&lt;/strong&gt;.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;4.2.&lt;/strong&gt; Quando da liberação do(s) equipamento(s) pela &lt;strong&gt;CONTRATADA&lt;/strong&gt;, esta emitirá nota referente à ordem de trabalho, o que acompanhará o(s) equipamento(s) no momento de entrega ao(à) &lt;strong&gt;CONTRATANTE&lt;/strong&gt;, na qual, desde já, o(a) &lt;strong&gt;CONTRATANTE &lt;/strong&gt;dá seu aceite, ficando certo que em caso de ausência de assinatura da referida nota referente à ordem de trabalho no momento da entrega, o referido aceite substituirá a assinatura da nota mencionada.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;4.3.&lt;/strong&gt; A forma de pagamento estabelecida no item 2.1, não poderá ser alterada sem que para isso exista uma prévia e expressa aprovação da &lt;strong&gt;CONTRATADA&lt;/strong&gt;, ficando a &lt;strong&gt;CONTRATANTE&lt;/strong&gt;, desde já, fica ciente que qualquer pagamento realizado de forma divergente do acordado, poderá ocasionar na cobrança de encargos moratórios e da multa contratual pactuada no item 3.1.&amp;nbsp;&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>clausula5</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;5. CONDIÇÕES DE ENTREGA&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;5.1. &lt;/strong&gt;Cabe ao(a) &lt;strong&gt;CONTRATANTE &lt;/strong&gt;preparar o local de entrega e instalação, sendo que as partes no ato de assinatura deste instrumento consideram que o local de instalação já esteja disponível e pronto para tanto.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;5.2.&lt;/strong&gt; Caso o(a) &lt;strong&gt;CONTRATANTE &lt;/strong&gt;tenha a necessidade de prorrogar a data de liberação do local de instalação do(s) equipamento(s) acima informado, deverá comunicar à &lt;strong&gt;CONTRATADA &lt;/strong&gt;seu interesse por escrito, sendo que referida prorrogação deverá ser regulada por meio de aditamento a este documento, sendo que essa prorrogação poderá ser requerida uma única vez e o prazo de prorrogação não poderá ser superior a 30 (trinta) dias corridos.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;5.3. &lt;/strong&gt;Caso no momento de entrega o(a) &lt;strong&gt;CONTRATANTE &lt;/strong&gt;tenha a necessidade de prorrogar a data de liberação do local de instalação do(s) equipamento(s) acima informado, deverá comunicar à &lt;strong&gt;CONTRATADA &lt;/strong&gt;seu interesse por escrito, sendo que referida prorrogação deverá ser regulada por meio de aditamento a este documento, sendo que essa prorrogação poderá ser requerida uma única vez e o prazo de prorrogação não poderá ser superior a 30 (trinta) dias corridos.&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>clausula6</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;6. OBRIGAÇÕES DAS PARTES &lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;6.1.&lt;/strong&gt; É obrigação da &lt;strong&gt;CONTRATANTE &lt;/strong&gt;executar os serviços objeto deste instrumento, por meio de técnicos devidamente qualificados e identificados com crachá e uniforme, usando equipamentos de proteção individual de segurança, fornecidos exclusivamente pela &lt;strong&gt;CONTRATADA&lt;/strong&gt;, executando os serviços de acordo com as necessidades de cada ambiente e as normativas em vigor.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;6.2&lt;/strong&gt;. É obrigação da &lt;strong&gt;CONTRATADA&lt;/strong&gt; oferecer atendimento habilitado para responder, por telefone, e-mail ou, quando estritamente necessário, responder pessoalmente aos questionamentos que envolvam o objeto deste contrato.&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>clausula7</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;7. GARANTIA &lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;7.1.&lt;/strong&gt; O(s) serviço(s) e peças objeto deste instrumento é(são) garantido(s) por 90 (noventa) dias, salvo o mau uso comprovado pela &lt;strong&gt;CONTRATANTE&lt;/strong&gt;, prazo que será contado da data de assinatura do presente instrumento.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Parágrafo Único:&lt;/strong&gt; Qualquer acionamento de garantia do equipamento que se faça necessário durante o período de garantia acima informado deverá ser solicitado pelo(a) &lt;strong&gt;CONTRATANTE &lt;/strong&gt;ao time de serviços da &lt;strong&gt;CONTRATADA&lt;/strong&gt;. Solicitações de atendimento feitas através de qualquer outro canal não serão consideradas válidas, ficando o(a) &lt;strong&gt;CONTRATADA &lt;/strong&gt;isento de responsabilidade pelo não atendimento.&amp;nbsp;&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>clausula8</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;8. DA RESCISÃO ANTECIPADA&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;8.1.&lt;/strong&gt; Em razão dos custos despendidos pela &lt;strong&gt;CONTRATADA &lt;/strong&gt;para a conclusão e fechamento do negócio, fica resguardado seu direito a cobrança de multa penal que será calculada na monta de 10% do valor total do contrato, em caso de manifesta vontade de rescindir antecipadamente ou em razão de desistência do negócio por parte do &lt;strong&gt;CONTRATANTE&lt;/strong&gt; após assinatura do presente contrato de compra e venda.&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>clausula9</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;9. DAS PRÁTICAS ANTICORRUPÇÃO&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;9.1.&lt;/strong&gt; As partes obrigam-se a observar, cumprir e/ou fazer cumprir, por si, suas afiliadas (entidades controladoras, controladas, coligadas ou sob controle comum) e representantes (diretores, membros do conselho de administração, quaisquer terceiros, incluindo assessores ou prestadores de serviços) toda e qualquer lei anticorrupção, em especial a Lei Federal nº 12.846/13, conforme aplicável.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;9.2.&lt;/strong&gt; Na vigência deste contrato, o(a) &lt;strong&gt;CONTRATANTE &lt;/strong&gt;reconhece que nem ela, nem quaisquer de seus administradores, empregados, agentes, representantes, sócios ou acionistas deve dar, oferecer, pagar, prometer pagar, ou autorizar o pagamento, direta ou indiretamente, qualquer dinheiro ou coisa de valor a qualquer autoridade governamental, consultor, representante, parceiro, ou qualquer terceiro, com a finalidade de influenciar qualquer ato ou decisão de agentes ou entes governamentais (assim definidos nas Leis Anticorrupção Brasileiras), ou com objetivo de assegurar qualquer vantagem indevida ou direcionar negócios em violação às Leis Anticorrupção Brasileiras.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;9.3. &lt;/strong&gt;O(A) &lt;strong&gt;CONTRATANTE&lt;/strong&gt;, se obriga a, em caso de eventual violação às Leis Anticorrupção Brasileiras, indenizar a &lt;strong&gt;CONTRATADA &lt;/strong&gt;por todos e quaisquer danos, incluindo multas, custos, obrigações de reparação de danos, taxas, juros, honorários advocatícios ou outras responsabilidades cíveis, criminais e/ou administrativas que sejam decorrentes de: (i) investigações sobre eventual quebra de integridade e/ou ato ilícito pela &lt;strong&gt;CONTRATADA &lt;/strong&gt;ou de seus funcionários e prestadores de serviços e, (ii) qualquer litígio ou outro procedimento judicial ou administrativo envolvendo violação das Leis Anticorrupção Brasileiras em face da(s) &lt;strong&gt;CONTRATADA &lt;/strong&gt;e que tenha sido originado a partir de qualquer ação ou omissão do(a) &lt;strong&gt;CONTRATANTE &lt;/strong&gt;seja diretamente ou por meio de seus administradores, empregados, agentes, representantes, terceiros e/ou sócios.&lt;/p&gt;</text>
+    </textTemplates>
+</Flow>

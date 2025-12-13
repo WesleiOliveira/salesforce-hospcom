@@ -1,0 +1,8 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global">
+    <h1 style="text-align:center">
+        <lightning:buttonGroup>
+        <lightning:button iconName="utility:add" label="Informar Índice de Atualização Monetária" title="Base action"  onclick="{! c.createRecord }" class="slds-button slds-button_outline-brand"/>
+        </lightning:buttonGroup>
+        </h1>
+    <br/>
+</aura:component>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fechadas_trimestre_anterior</fullName>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>Numero_OP__c</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>OPPORTUNITY.STAGE_NAME</columns>
+    <columns>OPPORTUNITY.AMOUNT</columns>
+    <columns>OPPORTUNITY.CLOSE_DATE</columns>
+    <columns>OPPORTUNITY.RECORDTYPE</columns>
+    <columns>Departamento__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>OPPORTUNITY.CLOSE_DATE</field>
+        <operation>equals</operation>
+        <value>LAST_QUARTER</value>
+    </filters>
+    <label>Fechadas trimestre anterior</label>
+</ListView>

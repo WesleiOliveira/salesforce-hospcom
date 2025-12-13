@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>Data_de_Abertura_do_RNC__c</columns>
+    <columns>Status__c</columns>
+    <columns>Status_da_a_o_corretira__c</columns>
+    <columns>Data_da_Aprova_o__c</columns>
+    <columns>Gravidade_Imagem__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Nao_Conformidade__c.Externa</value>
+    </filters>
+    <filters>
+        <field>Funcionario__c</field>
+        <operation>contains</operation>
+        <value>will</value>
+    </filters>
+    <label>NC Externa</label>
+</ListView>

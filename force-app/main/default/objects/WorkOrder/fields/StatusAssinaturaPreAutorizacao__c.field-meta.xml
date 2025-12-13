@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>StatusAssinaturaPreAutorizacao__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    ISBLANK(idDocAutentiquePreAutorizacao__c),
+    &quot;Não enviado&quot;,
+    CASE(
+        FasePreAutorizacao__c,
+        &quot;1&quot;, &quot;Assinatura do cliente&quot;,
+        &quot;2&quot;, &quot;Aprovação financeira&quot;,
+        &quot;3&quot;, &quot;Assinatura do administrador&quot;,
+        &quot;Assinaturas finalizadas&quot; 
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Status da Assinatura Pré-Autorização</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

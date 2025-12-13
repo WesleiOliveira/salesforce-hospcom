@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Periodo_Entrevista_com_RH__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+ISBLANK(Final_Entrevista_com_RH__c ) || ISBLANK( Inicio_Entrevista_com_RH__c),
+null,
+IF(
+(Final_Entrevista_com_RH__c - Inicio_Entrevista_com_RH__c) &gt;= 1,
+TEXT(FLOOR(Final_Entrevista_com_RH__c - Inicio_Entrevista_com_RH__c)) &amp; &quot; dia(s) e &quot; &amp;
+TEXT(FLOOR(MOD((Final_Entrevista_com_RH__c - Inicio_Entrevista_com_RH__c) * 24, 24))) &amp; &quot;:&quot; &amp;
+RIGHT(&quot;0&quot; &amp; TEXT(FLOOR(MOD((Final_Entrevista_com_RH__c - Inicio_Entrevista_com_RH__c) * 60, 60))), 2) &amp; &quot; horas&quot;,
+IF(
+(Final_Entrevista_com_RH__c - Inicio_Entrevista_com_RH__c) * 24 &gt;= 1,
+TEXT(FLOOR((Final_Entrevista_com_RH__c - Inicio_Entrevista_com_RH__c) * 24)) &amp; &quot;:&quot; &amp;
+RIGHT(&quot;0&quot; &amp; TEXT(FLOOR(MOD((Final_Entrevista_com_RH__c - Inicio_Entrevista_com_RH__c) * 60, 60))), 2) &amp; &quot; horas&quot;,
+TEXT(FLOOR((Final_Entrevista_com_RH__c - Inicio_Entrevista_com_RH__c ) * 24 * 60)) &amp; &quot; minutos&quot;
+)
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Período - Entrevista com RH</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

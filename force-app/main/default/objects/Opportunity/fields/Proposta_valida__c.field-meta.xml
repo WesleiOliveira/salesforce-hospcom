@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Proposta_valida__c</fullName>
+    <externalId>false</externalId>
+    <formula>NOT(
+OR(
+    ISBLANK(Contato__c),
+    ISBLANK(Prazo_de_entrega__c),
+    ISBLANK(Data_de_emissao__c),
+    ISBLANK(Data_de_Validade__c),
+    ISBLANK(Nome_da_Referencia_de_Faturamento__c),
+    ISBLANK(Prazo_de_garantia_acessorios__c),
+    ISBLANK(Prazo_de_garantia_dos_equipamentos__c),
+    ISBLANK(TEXT(Frete__c)),
+    ISBLANK(TEXT(Forma_de_pagamento2__c)),
+    ISBLANK(TEXT(Condicao_de_pagamento__c))
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Proposta válida</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

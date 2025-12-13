@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Regional__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+  Account.BillingCountry = &quot;Brasil&quot;,
+  IF(
+    AND(
+      Id != &apos;006U4000003toGz&apos;,
+      Id != &apos;006U40000052kwj&apos;,
+      Id != &apos;006U4000005yCoD&apos;,
+      Id != &apos;006U4000003uLo1&apos;,
+      Id != &apos;006U4000008Uw1x&apos;,
+      Id != &apos;006U400000Go7Rj&apos;,
+      Account.BillingState = &quot;São Paulo&quot;
+    ), &quot;Região SP&quot;,
+    IF(
+      OR(
+        Account.BillingState == &quot;Acre&quot;,
+        Account.BillingState == &quot;Amazonas&quot;,
+        Account.BillingState == &quot;Amapá&quot;,
+        Account.BillingState == &quot;Pará&quot;,
+        Account.BillingState == &quot;Rondônia&quot;,
+        Account.BillingState == &quot;Roraima&quot;,
+        Id == &apos;006U4000003toGz&apos;,
+        Id == &apos;006U4000005rhLj&apos;,
+        Id == &apos;006U40000052kwj&apos;,
+        Id == &apos;006U4000005yCoD&apos;,
+        Id == &apos;006U4000003uLo1&apos;,
+        Id == &apos;006U4000008Uw1x&apos;
+      ), &quot;Região Norte&quot;,
+      IF(
+        OR(
+          Account.BillingState = &quot;Rio de Janeiro&quot;,
+          Account.BillingState = &quot;Espírito Santo&quot;,
+          Account.BillingState = &quot;Paraná&quot;,
+          Account.BillingState = &quot;Santa Catarina&quot;,
+          Account.BillingState = &quot;Rio Grande do Sul&quot;
+        ), &quot;Região RJ/ES/Sul&quot;,
+        IF(
+          OR(
+            Account.BillingState = &quot;Mato Grosso&quot;,
+            Account.BillingState = &quot;Mato Grosso do Sul&quot;
+          ), &quot;Região MT/MS&quot;,
+          IF(
+            Account.BillingState = &quot;Distrito Federal&quot;,
+            &quot;Região DF&quot;,
+            IF(
+              OR(
+                Account.BillingState = &quot;Minas Gerais&quot;,
+                Account.BillingState = &quot;Ceará&quot;,
+                Account.BillingState = &quot;Piauí&quot;,
+                Account.BillingState = &quot;Rio Grande do Norte&quot;,
+                Account.BillingState = &quot;Paraíba&quot;,
+                Account.BillingState = &quot;Pernambuco&quot;,
+                Account.BillingState = &quot;Sergipe&quot;,
+                Account.BillingState = &quot;Maranhão&quot;,
+                Account.BillingState = &quot;Bahia&quot;,
+                Account.BillingState = &quot;Alagoas&quot;
+              ), &quot;Região NE/MG&quot;,
+              &quot;Região GO/TO&quot;
+            )
+          )
+        )
+      )
+    )
+  ),
+  IF(
+    Account.BillingCountry = &quot;Colômbia&quot;,
+    &quot;Colômbia&quot;,
+    &quot;&quot;
+  )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Regional</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

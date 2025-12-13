@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Motivo__c</fullName>
+    <externalId>false</externalId>
+    <label>Motivo</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Comercial - Acessórios sem destaque de valor</fullName>
+                <default>false</default>
+                <label>Comercial - Acessórios sem destaque de valor</label>
+            </value>
+            <value>
+                <fullName>Comercial - Desconto acima de 5% sem informação de liberação</fullName>
+                <default>false</default>
+                <label>Comercial - Desconto acima de 5% sem informação de liberação</label>
+            </value>
+            <value>
+                <fullName>Comercial - Divergências de quantidade entre equipamentos e acessórios</fullName>
+                <default>false</default>
+                <label>Comercial - Divergências de quantidade entre equipamentos e acessórios</label>
+            </value>
+            <value>
+                <fullName>Comercial - Endereço de entrega divergente</fullName>
+                <default>false</default>
+                <label>Comercial - Endereço de entrega divergente</label>
+            </value>
+            <value>
+                <fullName>Comercial - Endereços de cobrança e entrega sem preenchimento</fullName>
+                <default>false</default>
+                <label>Comercial - Endereços de cobrança e entrega sem preenchimento</label>
+            </value>
+            <value>
+                <fullName>Comercial - Natureza de operação invalida para esse pedido</fullName>
+                <default>false</default>
+                <label>Comercial - Natureza de operação invalida para esse pedido</label>
+            </value>
+            <value>
+                <fullName>Comercial - Ordem de compra ou contrato diferente do pedido de venda</fullName>
+                <default>false</default>
+                <label>Comercial - Ordem de compra ou contrato diferente do pedido de venda</label>
+            </value>
+            <value>
+                <fullName>Comercial - Pedido em duplicidade</fullName>
+                <default>false</default>
+                <label>Comercial - Pedido em duplicidade</label>
+            </value>
+            <value>
+                <fullName>Comercial - Prazo de entrega anterior à data de criação do pedido</fullName>
+                <default>false</default>
+                <label>Comercial - Prazo de entrega anterior à data de criação do pedido</label>
+            </value>
+            <value>
+                <fullName>Comercial - Sem destaque do pedido anterior de referência para validação</fullName>
+                <default>false</default>
+                <label>Comercial - Sem destaque do pedido anterior de referência para validação</label>
+            </value>
+            <value>
+                <fullName>Comercial - Sem destaque na obs de qual ot de cobrança por mal uso</fullName>
+                <default>false</default>
+                <label>Comercial - Sem destaque na obs de qual ot de cobrança por mal uso</label>
+            </value>
+            <value>
+                <fullName>Comercial - Sem observações da orientação da troca/bonificação</fullName>
+                <default>false</default>
+                <label>Comercial - Sem observações da orientação da troca/bonificação</label>
+            </value>
+            <value>
+                <fullName>Comercial - Sem preenchimento de forma ou condição de pagamento</fullName>
+                <default>false</default>
+                <label>Comercial - Sem preenchimento de forma ou condição de pagamento</label>
+            </value>
+            <value>
+                <fullName>Comercial - Venda de produtos em locação ou demonstração sem informação</fullName>
+                <default>false</default>
+                <label>Comercial - Venda de produtos em locação ou demonstração sem informação</label>
+            </value>
+            <value>
+                <fullName>Financeiro - Cancelado (Solicitação do Comercial)</fullName>
+                <default>false</default>
+                <label>Financeiro - Cancelado (Solicitação do Comercial)</label>
+            </value>
+            <value>
+                <fullName>Financeiro - CNPJ Divergente</fullName>
+                <default>false</default>
+                <label>Financeiro - CNPJ Divergente</label>
+            </value>
+            <value>
+                <fullName>Financeiro - Comprovante de pagamento</fullName>
+                <default>false</default>
+                <label>Financeiro - Comprovante de pagamento</label>
+            </value>
+            <value>
+                <fullName>Financeiro - Condição de Pagamento Divergente</fullName>
+                <default>false</default>
+                <label>Financeiro - Condição de Pagamento Divergente</label>
+            </value>
+            <value>
+                <fullName>Financeiro - Contato Financeiro (telefone/e-mail)</fullName>
+                <default>false</default>
+                <label>Financeiro - Contato Financeiro (telefone/e-mail)</label>
+            </value>
+            <value>
+                <fullName>Financeiro - Contrato ou Aditivo de Locação assinado</fullName>
+                <default>false</default>
+                <label>Financeiro - Contrato ou Aditivo de Locação assinado</label>
+            </value>
+            <value>
+                <fullName>Financeiro - Contrato ou Pedido de Compra assinado</fullName>
+                <default>false</default>
+                <label>Financeiro - Contrato ou Pedido de Compra assinado</label>
+            </value>
+            <value>
+                <fullName>Financeiro - Dados Bancários (cliente público)</fullName>
+                <default>false</default>
+                <label>Financeiro - Dados Bancários (cliente público)</label>
+            </value>
+            <value>
+                <fullName>Financeiro - Empenho ou Ordem de Fornecimento assinada</fullName>
+                <default>false</default>
+                <label>Financeiro - Empenho ou Ordem de Fornecimento assinada</label>
+            </value>
+            <value>
+                <fullName>Financeiro - Endereço Divergente do Cadastro</fullName>
+                <default>false</default>
+                <label>Financeiro - Endereço Divergente do Cadastro</label>
+            </value>
+            <value>
+                <fullName>Financeiro - Filial Correta</fullName>
+                <default>false</default>
+                <label>Financeiro - Filial Correta</label>
+            </value>
+            <value>
+                <fullName>Financeiro - Fora da política de crédito</fullName>
+                <default>false</default>
+                <label>Financeiro - Fora da política de crédito</label>
+            </value>
+            <value>
+                <fullName>Financeiro - Inadimplente</fullName>
+                <default>false</default>
+                <label>Financeiro - Inadimplente</label>
+            </value>
+            <value>
+                <fullName>Financeiro - Judicializado</fullName>
+                <default>false</default>
+                <label>Financeiro - Judicializado</label>
+            </value>
+            <value>
+                <fullName>Financeiro - Pendência de documento(s)</fullName>
+                <default>false</default>
+                <label>Financeiro - Pendência de documento(s)</label>
+            </value>
+            <value>
+                <fullName>Financeiro - Razão Social Divergente</fullName>
+                <default>false</default>
+                <label>Financeiro - Razão Social Divergente</label>
+            </value>
+            <value>
+                <fullName>Financeiro - Reprovado</fullName>
+                <default>false</default>
+                <label>Financeiro - Reprovado</label>
+            </value>
+            <value>
+                <fullName>Financeiro - Sem Análise de Crédito</fullName>
+                <default>false</default>
+                <label>Financeiro - Sem Análise de Crédito</label>
+            </value>
+            <value>
+                <fullName>Financeiro - Valor Divergente</fullName>
+                <default>false</default>
+                <label>Financeiro - Valor Divergente</label>
+            </value>
+            <value>
+                <fullName>Locação - configuração de equipamento incorreto</fullName>
+                <default>false</default>
+                <label>Locação - configuração de equipamento incorreto</label>
+            </value>
+            <value>
+                <fullName>Locação - Dados incorretos</fullName>
+                <default>false</default>
+                <label>Locação - Dados incorretos</label>
+            </value>
+            <value>
+                <fullName>Locação - Falta de logística para entrega</fullName>
+                <default>false</default>
+                <label>Locação - Falta de logística para entrega</label>
+            </value>
+            <value>
+                <fullName>Locação - informações insuficientes</fullName>
+                <default>false</default>
+                <label>Locação - informações insuficientes</label>
+            </value>
+            <value>
+                <fullName>Locação - não disponibilidade do equipamento</fullName>
+                <default>false</default>
+                <label>Locação - não disponibilidade do equipamento</label>
+            </value>
+            <value>
+                <fullName>Locação - Prazo inviável para atendimento</fullName>
+                <default>false</default>
+                <label>Locação - Prazo inviável para atendimento</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

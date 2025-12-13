@@ -1,0 +1,358 @@
+<apex:page standardController="Order" extensions="AssistenteEdicaoMassa" showHeader="false" showChat="false" standardStylesheets="false" docType="html-5.0">
+    <html>
+        <head>
+            <title>Edição em Massa de Itens de Venda</title>
+            <meta   charset="utf-8" />
+            <meta   name="viewport" content="width=device-width, initial-scale=1" />
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+            <link   href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" rel="stylesheet"/>
+            <link   href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.min.css" rel="stylesheet"/>
+            <script src="{!URLFOR($Resource.bootstrap3iso, 'js/bootstrap.min.js')}"></script>
+            <link   href="{!URLFOR($Resource.bootstrap3iso, 'css/bootstrap.min.css')}" rel="stylesheet"/>
+
+            <style>
+                .cabecalho-principal{
+                    background-color: #f2f7ff!important;
+                    padding:4px!important;
+                    text-align:center!important;
+                    font-size:22px!important;
+                    font-weight:bold!important;
+                }
+                .cabecalho-secundario-a{
+                    background-color: #fdfdfd!important;
+                    text-align:center!important;
+                    padding:5px!important;
+                    border-bottom: 1px solid #ddd!important;
+                }
+                .cabecalho-secundario-b{
+                    padding:7px!important;
+                    font-size:18px!important;
+                }
+                
+                .tabela-cabecalho{
+                    border-top: 2px solid #ddd!important;
+                }
+                .item-cabecalho{
+                    font-weight:bold!important;
+                    font-size:12px!important;
+                }
+                .item-descricao{
+                    font-size:11.5px!important;
+                    border-top-width:1px!important;
+                }
+                .item-descricao:hover{
+                    background-color:#f5f5f5;
+                }
+                .item-pai{
+                    background-color:#f9f9f9;
+                }
+                .datepicker{ 
+                    z-index:9999!important;
+                    position:relative;
+                }
+                .alert{
+                    font-weight:bold!important;
+                    padding-top:10px!important;
+                    padding-bottom:10px!important;
+                }
+                
+                .alterado{
+                    border: 2px solid blue!important;
+                }
+                .legenda{
+                    font-size: 10px;
+                    color: gray;
+                }
+                
+                .lateral{
+                    border-left: 2px dotted blue!important;
+                    border-right: 2px dotted blue!important;
+                }
+                .baixo{
+                    border-bottom: 2px dotted blue!important;
+                    border-left: 2px dotted blue!important;
+                    border-right: 2px dotted blue!important;
+                }
+                .cima{
+                    border-top: 2px dotted blue!important;
+                    border-left: 2px dotted blue!important;
+                    border-right: 2px dotted blue!important;
+                }
+                .negrito{
+                      font-weight: bold;
+                }
+                
+            </style>
+            <script>    
+                var status_novo = ["Novo","Aberto"];
+                var status_divide = ["Pendência interna", "Em Separação", "Reservado", "Aguardando Compra Fornecedor", "Aguardando Entrega Fornecedor", "Recebido Fornecedor", "Aguardando Faturamento", "Aguardando conferência", "Atendido", "Faturado", "Aguardando Coleta", "Em rota de entrega", "Entregue Cliente", "Cancelado"];
+                // Seleção simples: "Aguardando Compra Fornecedor" => OU Automatizado (pela divisão de item de cima)
+                //                  "Aguardando Entrega Fornecedor" => Automatizado (pelo pedido de compra)
+                
+                $(document).ready(function(){
+                    
+                    // bloqueia status não aplicáveis
+                    $("option[value='Aguardando Entrega Fornecedor'], option[value=''], option[value='Recebido Fornecedor']").each(function(){
+                        $(this).prop("disabled", true);
+                        $(this).addClass("bg-danger");
+                    });
+                    
+                    // negrita aguardando compra
+                    $("option[value='Aguardando Compra Fornecedor']").each(function(){
+                        $(this).addClass("negrito");
+                    });
+
+                    // "master-flag"
+                    $("[data-tipo='master-flag']").change(function(){
+                        if($(this).is(":checked")){
+                            $("[data-tipo='flag']").each(function(){
+                                if($(this).closest("tbody").is(':visible')){
+                                    $(this).prop("checked", true).change();
+                                }
+                            })
+                        }else{
+                            $("[data-tipo='flag']").each(function(){
+                                if($(this).closest("tbody").is(':visible')){
+                                    $(this).prop("checked", false).change();
+                                }
+                            })
+                        }
+                    });
+                    
+                    // "flag"
+                    $("[data-tipo='flag'], #caixa-pesquisa").on('change keyup', function (){
+                        var isAllChecked = true;
+                        $("[data-tipo='flag']").each(function(){
+                            if($(this).closest("tbody").is(':visible')){
+                                if(!($(this).is(":checked"))){
+                                    isAllChecked = false;
+                                }
+                            }
+                        })
+                        if(isAllChecked){ 
+                            $("[data-tipo='master-flag']").prop("checked", true);
+                        }else{
+                            $("[data-tipo='master-flag']").prop("checked", false); 
+                        }
+                    });
+                    
+                    // "master-status"
+                    $("[data-tipo='master-status']").change(function (){
+                        var novo_valor = $("[data-tipo='master-status'] option:selected").val();
+                        $("[data-tipo='flag']").each(function(){
+                            if ($(this).is(":checked")){
+                                $("[data-tipo='status'][data-id='"+$(this).attr('data-id')+"'] option[value='"+novo_valor+"']").first().prop('selected', true);
+                                $("[data-tipo='status'][data-id='"+$(this).attr('data-id')+"']").change();
+                            }
+                        })
+                    });
+                    
+                    // "status"
+                    $("[data-tipo='status']").change(function (){
+                        if($(this).attr('data-old') != $(this).find("option:selected").val()){
+                            // formatação se alterou
+                            $(this).addClass("alterado");
+                            $("[data-tipo='status-old'][data-id='"+$(this).attr('data-id')+"']").first().html("<b>Antes: </b><i>"+$(this).attr('data-old')+"</i>");
+                            
+                            //IMPEDE ALTERAÇÃO DO STATUS DE ITENS EM AGUARDANDO COMPRA FORNECEDOR
+                            if($(this).attr('data-old') == "Aguardando Compra Fornecedor"){
+                                alert("Somente é permitido editar itens em Aguardando Compra Fornecedor através do pedido de Compra");
+                                $(this).val($(this).attr('data-old'))
+                            }
+                            
+                            // desbloqueio qtd se divide
+                            if(jQuery.inArray($(this).attr('data-old'), status_novo) >= 0 && 
+                               jQuery.inArray($(this).find("option:selected").text(), status_divide) >= 0){
+                                $("[data-tipo='quantidade'][data-id='"+$(this).attr('data-id')+"']").first().show();
+                            }else{
+                                $("[data-tipo='quantidade'][data-id='"+$(this).attr('data-id')+"']").first().hide();
+                            }
+                        }else{
+                            $(this).removeClass("alterado");
+                            $("[data-tipo='status-old'][data-id='"+$(this).attr('data-id')+"']").first().html("");
+                            $("[data-tipo='quantidade'][data-id='"+$(this).attr('data-id')+"']").first().hide();
+                        }
+                    });
+                    
+                    // reset
+                    $("[data-tipo='reset']").click(function (){
+                        $("[data-tipo='flag']").each(function(){
+                            $(this).prop("checked", false).change();
+                        })
+                        $("[data-tipo='status']").each(function(){
+                            $(this).find("option[value='"+$(this).attr('data-old')+"']").first().prop('selected', true).change();
+                        })
+                        $("[data-tipo='quantidade']").each(function(){
+                            $(this).val(0);
+                        })
+                        $("[data-tipo='master-flag']").first().prop("checked", false);
+                        $("[data-tipo='master-status'] option[value='']").first().prop('selected', true);
+                    });
+                    
+                });
+            </script>
+        </head>
+
+        <body style="margin-top:7px;">
+            <div class="bootstrap-iso">
+                <div class="container-fluid">
+                    <apex:form >
+
+                        <!-- painel -->
+                        <div class="panel panel-default">
+
+                            <!-- painel: cabeçalho -->
+                            <div class="panel-heading cabecalho-principal">
+                                Edição em Massa de Itens de Venda
+                            </div>
+                            <div class="panel-body cabecalho-secundario-a">
+                                <div class="cabecalho-secundario-b">Pedido:&nbsp;{!pedido.OrderNumber}</div>
+                            </div>
+
+                            <!-- painel: corpo -->
+                            <div class="panel-body">
+                            
+                                <!-- corpo: erros -->
+                                <apex:outputText rendered="{!IF(tem_erros == true, true, false)}" >
+                                    <apex:variable var="cont_msg" value="{!0}"/>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="alert alert-danger alert-dismissible">
+                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                <apex:repeat value="{!erros}" var="erro">
+                                                    <apex:variable var="cont_msg" value="{!cont_msg+1}"/>
+                                                    <apex:outputText rendered="{!IF(cont_msg > 1, true, false)}" >
+                                                        <br/>
+                                                    </apex:outputText>
+                                                    {!erro}
+                                                </apex:repeat>
+                                            </div>                      
+                                        </div>
+                                    </div>
+                                    <br/>
+                                </apex:outputText>
+
+                                <!-- corpo: filtro e status  -->
+                                <div class="row">
+                                    <div class="col-xs-7" style="text-align:center;">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Filtrar</span>
+                                            <input type="text" placeholder="P/N, nome, modelo, etc..." class="form-control input-md" id="caixa-pesquisa" />
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-1" style="text-align:center;">                                       
+                                        <button type="button" class="btn btn-default" data-tipo="reset">
+                                            <span class="glyphicon glyphicon-refresh"></span> Resetar
+                                        </button>
+                                    </div>
+                                    <div class="col-xs-4" style="text-align:center;">                                       
+                                        <apex:selectList styleClass="form-control input-md" multiselect="false" size="1" value="{!status}" html-data-tipo="master-status">
+                                            <apex:selectOptions value="{!status_todos}"/>
+                                        </apex:selectList>  
+                                    </div>
+                                </div>
+                                <br/>
+                                
+                                <!-- corpo: itens de pedido -->
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                    
+                                        <table class="table table-condensed" style="width:100%;" id="lista-itens" >
+
+                                            <!-- cabeçalho -->
+                                            <thead class="tabela-cabecalho">
+                                                <tr>
+                                                    <th><input type="checkbox" data-tipo="master-flag"/></th>
+                                                    <th>P/N</th>
+                                                    <th>Img</th>
+                                                    <th>Nome</th>
+                                                    <th>Modelo</th>
+                                                    <th>Marca</th>
+                                                    <th>Valor Unitário</th>
+                                                    <th>Qtd.</th>
+                                                    <th width="250px">Status</th>
+                                                    <th>Qtd. Atendida</th>
+                                                </tr>
+                                            </thead>
+
+                                            <!-- itens -->
+                                            <apex:repeat value="{!c_itens_venda}" var="c_item_venda">
+                                                <tbody class="item-descricao {!c_item_venda.borda}" >
+                                                    <tr>
+                                                        <td>
+                                                            
+                                                            <apex:outputText rendered="{!IF(c_item_venda.item_venda.Status__c != 'Aguardando Entrega Fornecedor',true,false)}">                                                             
+                                                                <apex:inputCheckbox value="{!c_item_venda.flag}" html-data-tipo="flag" html-data-id="{!c_item_venda.item_venda.Id}"/>
+                                                            </apex:outputText>
+                                                        </td>
+                                                        <td><apex:outputField value="{!c_item_venda.item_venda.PriceBookEntry.Product2.ProductCode}"/></td>
+                                                        <td><img src="{!c_item_venda.item_venda.PriceBookEntry.Product2.URL_da_Imagem__c}" style="width:40px;height:40px;" /></td>
+                                                        <td class="item-cabecalho"><apex:outputField value="{!c_item_venda.item_venda.PriceBookEntry.Product2.Name}"/></td>
+                                                        <td><apex:outputField value="{!c_item_venda.item_venda.Modelo__c}"/></td>
+                                                        <td><apex:outputField value="{!c_item_venda.item_venda.Marca__c}"/></td>
+                                                        <td><apex:outputField value="{!c_item_venda.item_venda.UnitPrice}"/></td>
+                                                        <td><apex:outputField value="{!c_item_venda.item_venda.Quantity}"/></td>
+                                                        <td>
+                                                            <apex:outputText rendered="{!IF(AND(c_item_venda.item_venda.Status__c != 'Aguardando Entrega Fornecedor', c_item_venda.item_venda.Status__c != 'Aguardando Compra Fornecedor'),true,false)}">                                                             
+                                                                <apex:inputField value="{!c_item_venda.item_venda.Status__c}" styleClass="form-control input-sm" html-data-tipo="status" html-data-id="{!c_item_venda.item_venda.Id}" html-data-old="{!c_item_venda.status_old}"/>
+                                                                <div data-tipo="status-old" data-id="{!c_item_venda.item_venda.Id}" style="legenda"></div>
+                                                            </apex:outputText>
+                                                            <apex:outputText rendered="{!IF(c_item_venda.item_venda.Status__c == 'Aguardando Entrega Fornecedor',true,false)}">                                                             
+                                                                <apex:outputField value="{!c_item_venda.item_venda.Status__c}"/>
+                                                                <div data-id="{!c_item_venda.item_venda.Id}" style="legenda"><i>Alterar via pedido de compra</i></div>
+                                                            </apex:outputText>
+                                                            <apex:outputText rendered="{!IF(c_item_venda.item_venda.Status__c == 'Aguardando Compra Fornecedor',true,false)}">                                                             
+                                                                <b><apex:inputField value="{!c_item_venda.item_venda.Status__c}" styleClass="form-control input-sm" html-data-tipo="status" html-data-id="{!c_item_venda.item_venda.Id}" html-data-old="{!c_item_venda.status_old}"/></b>
+                                                                <div data-tipo="status-old" data-id="{!c_item_venda.item_venda.Id}" style="legenda"></div>
+                                                            </apex:outputText>
+                                                        </td>
+                                                        <td><apex:inputText value="{!c_item_venda.qtd_atendida}" styleClass="form-control input-sm" style="display: none;" html-data-tipo="quantidade" html-data-id="{!c_item_venda.item_venda.Id}"/></td>
+                                                    </tr>
+                                                </tbody>
+                                            </apex:repeat>
+                                        </table>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- painel: rodapé -->
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <div class="col-xs-offset-4 col-xs-2">
+                                        <apex:commandButton styleClass="btn btn-default" style="width:100%;" action="{!RetornarRegistro}" value="Voltar ao Pedido"/>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <apex:commandButton styleClass="btn btn-default" style="width:100%;" action="{!Efetiva}" value="Salvar Alterações"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </apex:form>
+                </div>
+            </div>
+            <script>
+                // inicializa campos de filtro
+                $("#caixa-pesquisa").val("");
+                $("#caixa-pesquisa").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("#lista-itens tbody").filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+
+                $(document).ready(function(){
+                    // inicializa calendários em campos data
+                    $(".datepicker").datepicker({
+                        dateFormat: 'dd/mm/yy'
+                    });
+                })
+            </script>
+        </body>
+    </html>
+</apex:page>

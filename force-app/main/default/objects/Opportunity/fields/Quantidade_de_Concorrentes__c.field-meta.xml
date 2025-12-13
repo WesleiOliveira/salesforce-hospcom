@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Quantidade_de_Concorrentes__c</fullName>
+    <externalId>false</externalId>
+    <label>Quantidade de Concorrentes</label>
+    <summaryForeignKey>Concorrente__c.Oportunidade_Relacionada__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

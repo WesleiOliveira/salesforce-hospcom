@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    Exclusiva__c == true &amp;&amp; Novas_locacoes__c == false, 
+    &apos;EXCLUSIVA&apos;,
+
+    IF(
+        TEXT(Linha__c) == &apos;MONITORES DE GRAU MEDICO&apos;, 
+        &apos;INDEPENDENTE&apos;,
+
+        IF(
+            Exclusiva__c == true &amp;&amp; Novas_locacoes__c == true, 
+            &apos;EXCLUSIVA NOVAS LOCAÇÕES&apos;,
+
+            IF(
+                Novas_locacoes__c == true &amp;&amp; Exclusiva__c == FALSE, 
+                &apos;NOVAS LOCAÇÕES &apos;, 
+                &apos; &apos;
+            ) +
+            IF(
+                TEXT(Linha__c) != &apos;&apos;, 
+                &apos;POR LINHA&apos;, 
+                &apos; &apos;
+            ) + 
+            IF(
+                Vendedor__c != null, 
+                &apos; POR VENDEDOR&apos;, 
+                &apos; &apos;
+            ) + 
+            IF(
+                TEXT(Departamento__c) != &apos;&apos;, 
+                &apos; POR DEPARTAMENTO&apos;, 
+                &apos; &apos;
+            ) + 
+            IF(
+                TEXT(Linha__c) == &apos;&apos; &amp;&amp; TEXT(Departamento__c) == &apos;&apos;, 
+                &apos; GERAL&apos;, 
+                &apos; &apos;
+            ) +  
+            IF(
+                PICKLISTCOUNT(Estado__c) &gt; 1 
+                || INCLUDES(Estado__c, &apos;Distrito Federal&apos;) 
+                || INCLUDES(Estado__c, &apos;São Paulo&apos;), 
+                &apos; POR REGIAO&apos;, 
+                &apos; &apos;
+            ) + 
+            IF(
+                PICKLISTCOUNT(Estado__c) == 1 
+                &amp;&amp; !INCLUDES(Estado__c, &apos;Distrito Federal&apos;) 
+                &amp;&amp; !INCLUDES(Estado__c, &apos;São Paulo&apos;), 
+                &apos; POR ESTADO&apos;, 
+                &apos; &apos;
+            ) + 
+            IF(
+                ska__c, 
+                &apos;SKA&apos;, 
+                &apos; &apos;
+            ) +
+            IF(
+                Regi_o__c = &apos;Colômbia&apos;,
+                &apos; POR REGIAO&apos;,
+                &apos; &apos;
+            )
+        )
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Tipo</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Unidade_Hospitalar</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISNEW(),
+    ISPICKVAL(Natureza_de_Opera_o__c, &quot;LOCAÇÃO&quot;),
+    Contrato__c = &quot;Locação&quot;, 
+    ISPICKVAL(Departamento3__c, &quot;Locação&quot;),
+    OR(
+        ISBLANK(Unidade_Hospitalar__c),
+        ISBLANK(Locado_em__c)
+    )
+)</errorConditionFormula>
+    <errorDisplayField>Unidade_Hospitalar__c</errorDisplayField>
+    <errorMessage>&apos;Unidade Hospitalar&apos; e &apos;Locado em&apos; precisam ser preenchidos</errorMessage>
+</ValidationRule>

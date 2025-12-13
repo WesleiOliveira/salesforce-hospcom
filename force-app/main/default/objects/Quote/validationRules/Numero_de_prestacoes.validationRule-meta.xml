@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Numero_de_prestacoes</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+TEXT(Opportunity.Departamento__c) != &apos;Governo&apos;,
+!ISPICKVAL(Condicao_de_pagamento__c, &apos;À Vista - Antecipado&apos;),
+!ISPICKVAL(Condicao_de_pagamento__c, &apos;À vista - Paga e Retira&apos;),
+ Numero_de_prestacoes__c == &apos;&apos;
+)</errorConditionFormula>
+    <errorDisplayField>Numero_de_prestacoes__c</errorDisplayField>
+    <errorMessage>Preencha o número de prestações</errorMessage>
+</ValidationRule>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PMLS_valor__c</fullName>
+    <externalId>false</externalId>
+    <label>PMLS_valor</label>
+    <summarizedField>OrderItem.Item__c</summarizedField>
+    <summaryFilterItems>
+        <field>OrderItem.Linha2__c</field>
+        <operation>equals</operation>
+        <value>PMLS</value>
+    </summaryFilterItems>
+    <summaryForeignKey>OrderItem.OrderId</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

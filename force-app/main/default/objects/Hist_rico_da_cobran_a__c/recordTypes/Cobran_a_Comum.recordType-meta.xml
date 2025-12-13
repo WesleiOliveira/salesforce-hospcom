@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cobran_a_Comum</fullName>
+    <active>true</active>
+    <label>Cobrança Comum</label>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Aguardando resposta</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contatando</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Finalizando</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Negativado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Negociação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Não respondido</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pago</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sem retorno</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

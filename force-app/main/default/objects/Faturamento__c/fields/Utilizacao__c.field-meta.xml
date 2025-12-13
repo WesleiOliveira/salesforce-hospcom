@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Utilizacao__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    Tipo_de_registro__c = &apos;Vendas (Hospcom)&apos; &amp;&amp; TEXT(Departamento3__c) != &apos;Locação&apos; &amp;&amp; TEXT(Tipo__c) != &apos;Dev da NF de Saída&apos;, 
+    &apos;VENDA&apos;, 
+    IF(
+        Tipo_de_registro__c = &apos;Serviços (Mão de Obra)&apos;, 
+        &apos;SERVIÇO&apos;, 
+        IF(
+            TEXT(Departamento3__c) = &apos;LOCAÇÃO&apos;, 
+            &apos;LOCAÇÃO&apos;, 
+            &apos;&apos;
+        )
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Utilização</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

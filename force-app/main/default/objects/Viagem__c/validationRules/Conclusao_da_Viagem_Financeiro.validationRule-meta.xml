@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Conclusao_da_Viagem_Financeiro</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+!$User.Ignorar_erros__c,
+$User.Id &lt;&gt; &quot;0055A000008leOe&quot;,  
+ISPICKVAL(Status__c,&quot;Concluída&quot;))</errorConditionFormula>
+    <errorDisplayField>Status__c</errorDisplayField>
+    <errorMessage>Apenas o financeiro pode concluir o processo de viagem, escolha outro status ou solicite auxilio ao financeiro.</errorMessage>
+</ValidationRule>

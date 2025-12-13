@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tempo_de_Atendimento__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    NOT(ISBLANK(Ticket_Finalizado_Em__c)),
+
+    /* Quando finalizado */
+    IF(FLOOR(Ticket_Finalizado_Em__c - Ticket_Criado_Em__c) &gt; 0,
+        TEXT(FLOOR(Ticket_Finalizado_Em__c - Ticket_Criado_Em__c)) &amp; &quot; dias, &quot;,
+        &quot;&quot;
+    ) &amp;
+    IF(FLOOR(MOD((Ticket_Finalizado_Em__c - Ticket_Criado_Em__c) * 24, 24)) &gt; 0,
+        TEXT(FLOOR(MOD((Ticket_Finalizado_Em__c - Ticket_Criado_Em__c) * 24, 24))) &amp; &quot; horas, &quot;,
+        &quot;&quot;
+    ) &amp;
+    TEXT(FLOOR(MOD((Ticket_Finalizado_Em__c - Ticket_Criado_Em__c) * 24 * 60, 60))) &amp; &quot; minutos&quot;,
+
+    /* Quando ainda aberto */
+    IF(FLOOR(TODAY() - DATEVALUE(Ticket_Criado_Em__c)) &gt; 0,
+        TEXT(FLOOR(TODAY() - DATEVALUE(Ticket_Criado_Em__c))) &amp; &quot; dias, &quot;,
+        &quot;&quot;
+    ) &amp;
+    IF(FLOOR(MOD((NOW() - Ticket_Criado_Em__c) * 24, 24)) &gt; 0,
+        TEXT(FLOOR(MOD((NOW() - Ticket_Criado_Em__c) * 24, 24))) &amp; &quot; horas, &quot;,
+        &quot;&quot;
+    ) &amp;
+    TEXT(FLOOR(MOD((NOW() - Ticket_Criado_Em__c) * 24 * 60, 60))) &amp; &quot; minutos&quot;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Tempo de Atendimento</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

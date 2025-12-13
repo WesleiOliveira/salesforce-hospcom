@@ -1,0 +1,82 @@
+<!-- relatorioComodato.html -->
+<template>
+    <lightning-card title="Relatório de Comodato">
+        <div class="slds-p-horizontal_medium slds-p-vertical_small">
+            <lightning-combobox
+                name="ano"
+                label="Ano"
+                value={anoSelecionado}
+                options={opcoesAno}
+                onchange={handleAnoChange}>
+            </lightning-combobox>
+        </div>
+        <div class="slds-p-horizontal_medium slds-p-vertical_small">
+            <lightning-combobox
+                name="linha"
+                label="Linha"
+                value={linhaSelecionada}
+                placeholder="Selecione uma linha"
+                options={linhaOptions}
+                onchange={handleLinhaChange}>
+            </lightning-combobox>
+        </div>
+        <div class="slds-p-horizontal_medium slds-p-vertical_small">
+            <lightning-combobox
+                name="regiao"
+                label="Região"
+                value={regiaoSelecionada}
+                placeholder="Selecione uma região"
+                options={regiaoOptions}
+                onchange={handleRegiaoChange}>
+            </lightning-combobox>
+        </div>
+
+        <div class="slds-p-horizontal_medium">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-scrollable_x">
+                <thead>
+                    <tr>
+                        <th>Nº Comodato</th>
+                        <th>Equipamentos em Comodato</th>
+                        <th>Consumível</th>
+                        <th>Código</th>
+                        <th>Qtd. Req/Mês</th>
+                        <template for:each={meses} for:item="mes">
+                            <th key={mes}>{mes}</th>
+                        </template>
+                        <th>Total Vendido</th>
+                        <th>Req. Total Ano</th>
+                        <th>Diferença</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={finalData} for:item="row">
+                        <tr key={row.numero}>
+                            <!-- Mostra o número só na primeira linha do grupo -->
+                            <template if:true={row.produtosDaDemonstracao}>
+                                <td rowspan={row.rowspan}>{row.numero}</td>
+                            </template>
+                
+                            <template if:true={row.produtosDaDemonstracao}>
+                                <td rowspan={row.rowspan}>
+                                    <pre>{row.produtosDaDemonstracao}</pre>
+                                </td>
+                            </template>
+                
+                            <td>{row.produto}</td>
+                            <td>{row.productCode}</td>
+                            <td>{row.quantidadeRequerida}</td>
+                
+                            <template for:each={row.quantidadeVendida} for:item="mes">
+                                <td key={mes.key} class={mes.class}>{mes.value}</td>
+                            </template>
+                
+                            <td>{row.totalVendido}</td>
+                            <td>{row.qtdTotalAno}</td>
+                            <td class={row.diferencaClass}>{row.diferenca}</td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </lightning-card>
+</template>

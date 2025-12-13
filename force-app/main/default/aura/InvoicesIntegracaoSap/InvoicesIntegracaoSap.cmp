@@ -1,0 +1,219 @@
+<aura:component controller="integracaoSAP" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <ltng:require
+                  styles="{!join(',', $Resource.fontAwesome + '/css/font-awesome.min.css', $Resource.bootstrap5 + '/css/bootstrap.min.css', $Resource.bootstrapSelect14 + '/docs/docs/dist/css/bootstrap-select.min.css')}"
+                  scripts="{!join(',', $Resource.JQuery, $Resource.popper + '/popper.js', $Resource.bootstrap5 + '/js/bootstrap.min.js', $Resource.bootstrapSelect14 + '/docs/docs/dist/js/bootstrap-select.min.js')}"
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    <aura:attribute name="userId" type="String" />
+    <aura:attribute name="DocumentoComPedidoId" type="String"/>
+    <aura:attribute name="isDocumentUploaded" type="Boolean" default="false"/>
+    <aura:attribute name="documentosEnviados" type="List" default="[]"/>
+    <aura:attribute name="urlsGeradas" type="List" default="[]"/>
+    <aura:attribute name="documentsCount" type="Integer" default="0"/>
+    
+    <aura:handler name="change" value="{!v.emailsClientes}" action="{!c.onEmailsChange}"/>
+    
+    
+    <aura:attribute name="emailDigitado" type="String"/>
+    <aura:attribute name="emailList" type="List" default="[]"/>
+    
+    <aura:attribute name="mostrarDocs" type="Boolean" default="false"/>
+
+    
+
+    <aura:attribute name="resultado" type="String" />
+    
+    
+    
+    
+    
+    
+    <div>
+        <!--
+            <img class="imagem" style="display:none;justify-self:center;}" 
+                 src="https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=015U400000HmiUp&amp;oid=00Di0000000JVhH&amp;lastMod=1743166770000"/>
+            -->
+        
+        <div class="main-container"> 
+            <div id="spinnerDiv" style="display: none">
+                <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+            </div>
+            
+            <div class="dados">
+                <div id="pedidoContainer" class="pedido-container">
+                    
+                    <div id="calendarModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <h2>Selecione a Data para Agendamento</h2>
+                            <input type="date" id="agendarDate" />
+                            <button id="confirmDateButton">Confirmar Data</button>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="tabelaContainer">
+                        <div id="buttonContainer" class="button-container">
+                            <div class="input-group">
+                                <input type="text" id="numeroPedido" placeholder="Pesquise o número do pedido" class="pesquisarpedido" onkeydown="{!c.handleEnter}"/>
+                                
+                                <button aura:id="pesquisarButton" id="pesquisarButton" class="fa fa-search" style="border: none!important;background: none!important;padding: 0!important;color: #0070d2!important;" ></button>
+                            </div>
+                            <div class="input-group">
+                                <input class="dataFiltro" type="date" id="dataFaturamento" />
+                                <button id="filtrarDataButton" class="fa fa-filter" style=" border: none!important;background: none!important;padding: 0!important;color: #0070d2!important;"></button>
+                            </div>
+                            
+                         
+
+                        <div class="{!'documentos ' + (v.mostrarDocs ? '' : 'slds-hide')}">
+                        <div class="input-group1" style= "display: flex">
+                         <input style= "height: 50px" class="renviar" type="text" aura:id="pedidoInput" placeholder="Número do pedido SAP"/>
+                        <button style= "height: 50px" class="slds-button slds-button_brand" onclick="{!c.reenviarPedido}">Reenviar Documentos</button>
+                        </div>
+                        </div>
+                             <div onclick="{!c.toggleDocs}" style= "cursor: pointer; width: 40%; text-align: right"><h3>📄</h3></div> 
+                        </div>
+                        <table id="tabelaPedidos" >
+                            <thead>
+                                <tr>
+                                    <th></th> 
+                                    <th>Contrato</th> 
+                                    <th>Cliente</th>
+                                    <th>Pedido</th>                                    
+                                    <th>Valor</th>
+                                    <th>Empresa</th>
+                                    <th>Status</th>
+                                    <th>Vendedor</th>
+                                    <th>Estado</th>
+                                    <th>Data de Faturamento</th>                                                      
+                                </tr>
+                            </thead>
+                            <tbody id="listaPedidos"></tbody>
+                        </table>
+                    </div>
+                    <div class="btn-botton-container">
+                        
+                        <button id="agendarPedidos" style="width: fit-content;margin:0;" class="slds-button slds-button--brand full-width-button">AGENDAR FATURAMENTO NO SAP</button>
+                        <button style="width: 253px;height:51px;font-size:16px;font-weight: bold;" class="slds-button slds-button--brand full-width-button" onclick="{!c.HandleOpenPopUp}">FATURAR PEDIDOS NO SAP</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <div class="principal1">
+        <div class="principal">
+            <h3>Pedidos faturados (<span id="quantidade-pedidos">0</span>)</h3>
+            <input type="text" id="buscar-pedido" placeholder="Pesquisar pedido..." 
+                   style="padding: 10px; font-size: 16px; border-radius: 31px; border: 1px solid #ccc; width: 300px; margin-right: 10px; background-color: #f7f7f7;" />
+            
+            <button id="btn-pesquisar" 
+                    style="padding: 10px 20px; font-size: 16px; border-radius: 31px; border: none; background-color: #0070d2; color: white; cursor: pointer;">
+                Pesquisar
+            </button>
+            
+            
+            <div class="pedidos-filtrados" id="pedidos-filtrados" style="display:none;">
+                <!-- Os pedidos filtrados serão exibidos aqui -->
+            </div>
+            
+            <div class="faturados">
+                <div class="faturas" id="pedidos-faturados">
+                    <!-- Os pedidos serão carregados dinamicamente aqui -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div>
+        <div class="overlayFaturar" id="overlayFaturar">
+            <div class="JanelaFaturar" id="popUpFaturar">
+                <div id="spinnerPopupDiv" style="display: none">
+                    <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+                </div>
+                <div class="closePopup" onclick="{!c.handleClosePopup}">×</div>
+                <div style="font-size: medium;text-align: center;padding: 5px;">
+                    Pedidos selecionados
+                </div>
+                <div class="tabelaPeidosEscolhidos">
+                    <table>   
+                        <tr>                           
+                            <th>Pedido</th>
+                            <th>Valor</th>
+                            <th>Cliente</th>
+                        </tr>                         
+                    </table>
+                </div>
+                
+                
+                <div aura:id="fileContainer"
+                     class="{!v.isDocumentUploaded ? 'fileContainer success' : 'fileContainer error'}">
+                    
+                    <div class="fileTitle">
+                        {!v.isDocumentUploaded ? 'Documentos Enviados' : 'Carregue os Documentos'}
+                    </div>
+                    
+                    <!-- Só mostra o fileUpload se ainda não tiver enviado -->
+                    <aura:if isTrue="{!not(v.isDocumentUploaded)}">
+                        <lightning:fileUpload                                               
+                                              class="file"                                            
+                                              name="fileUploader"
+                                              multiple="true"
+                                              recordId="{!v.DocumentoComPedidoId}"
+                                              onuploadfinished="{!c.handleUploadFinished}" />
+                    </aura:if>
+                    
+                    
+                    
+                </div>
+                
+                <div class="documentsCount"> Total de documentos enviados: {!v.documentsCount}</div>
+                
+               <!-- <aura:if isTrue="{!v.isDocumentUploaded}">-->
+                <div class="emailContainer">
+                   
+                        
+                        <!-- Campo de input e botão para adicionar e-mail -->
+                        <div class="emailblock">
+                            <div class="emailfield">
+                           
+                                <lightning:input name="emailInput"                                               
+                                                 value="{!v.emailDigitado}"
+                                                 placeholder="Digite um e-mail" />
+                            </div>
+                            <div class="email-btn">
+                                <lightning:button variant="brand"
+                                                  label="Adicionar"
+                                                  onclick="{!c.adicionarEmail}" />
+                            </div>
+                        </div>
+                        
+                        <!-- Lista de e-mails como tags -->
+                        <div class="tag-container">
+                            <aura:iteration items="{!v.emailList}" var="email">
+                                <div class="tag-item">
+                                    <span>{!email}</span>
+                                    <span class="remove-tag" onclick="{!c.removerTag}" data-email="{!email}">×</span>
+                                </div>
+                            </aura:iteration>
+                        </div>
+                        
+                        <!--</aura:if>-->
+               
+                    
+                    
+                </div>
+                
+                <div class="btn-FileUploadContainer">                             
+                    <div class="btn-cancelarPedido" onclick="{!c.handleClosePopup}">CANCELAR</div>
+                    <button id="integrarPedidos" class="btn-faturarPedido" style="width: fit-content !important;">FATURAR</button>
+                </div>    
+            </div>
+            
+        </div>
+    </div>
+    
+</aura:component>

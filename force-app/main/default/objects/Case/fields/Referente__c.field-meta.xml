@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Referente__c</fullName>
+    <externalId>false</externalId>
+    <label>Referente</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <controllingField>Sub_Tipo__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CALIBRAÇÃO</fullName>
+                <default>false</default>
+                <label>CALIBRAÇÃO</label>
+            </value>
+            <value>
+                <fullName>CONTRATOS</fullName>
+                <default>false</default>
+                <label>CONTRATOS</label>
+            </value>
+            <value>
+                <fullName>ENSAIO DE SEG. ELÉTRICA</fullName>
+                <default>false</default>
+                <label>ENSAIO DE SEG. ELÉTRICA</label>
+            </value>
+            <value>
+                <fullName>GARANTIA DE SERVIÇO</fullName>
+                <default>false</default>
+                <label>GARANTIA DE SERVIÇO</label>
+            </value>
+            <value>
+                <fullName>GESTÃO DE ATIVOS</fullName>
+                <default>false</default>
+                <label>GESTÃO DE ATIVOS</label>
+            </value>
+            <value>
+                <fullName>INSTALAÇÃO DE EQUIPAMENTOS</fullName>
+                <default>false</default>
+                <label>INSTALAÇÃO DE EQUIPAMENTOS</label>
+            </value>
+            <value>
+                <fullName>LOCAÇÃO</fullName>
+                <default>false</default>
+                <label>LOCAÇÃO</label>
+            </value>
+            <value>
+                <fullName>MANUTENÇÃO CORRETIVA</fullName>
+                <default>false</default>
+                <label>MANUTENÇÃO CORRETIVA</label>
+            </value>
+            <value>
+                <fullName>MANUTENÇÃO PREVENTIVA</fullName>
+                <default>false</default>
+                <label>MANUTENÇÃO PREVENTIVA</label>
+            </value>
+            <value>
+                <fullName>PEÇAS E ACESSÓRIOS</fullName>
+                <default>false</default>
+                <label>PEÇAS E ACESSÓRIOS</label>
+            </value>
+            <value>
+                <fullName>QUALIFICAÇÃO DE DESEMPENHO</fullName>
+                <default>false</default>
+                <label>QUALIFICAÇÃO DE DESEMPENHO</label>
+            </value>
+            <value>
+                <fullName>QUALIFICAÇÃO DE INSTALAÇÃO</fullName>
+                <default>false</default>
+                <label>QUALIFICAÇÃO DE INSTALAÇÃO</label>
+            </value>
+            <value>
+                <fullName>QUALIFICAÇÃO DE OPERAÇÃO</fullName>
+                <default>false</default>
+                <label>QUALIFICAÇÃO DE OPERAÇÃO</label>
+            </value>
+            <value>
+                <fullName>SOFTWARE</fullName>
+                <default>false</default>
+                <label>SOFTWARE</label>
+            </value>
+            <value>
+                <fullName>TREINAMENTOS</fullName>
+                <default>false</default>
+                <label>TREINAMENTOS</label>
+            </value>
+            <value>
+                <fullName>VISITA TÉCNICA</fullName>
+                <default>false</default>
+                <label>VISITA TÉCNICA</label>
+            </value>
+            <value>
+                <fullName>OUTROS</fullName>
+                <default>false</default>
+                <label>OUTROS</label>
+            </value>
+            <value>
+                <fullName>DENUNCIA</fullName>
+                <default>false</default>
+                <label>DENUNCIA</label>
+            </value>
+            <value>
+                <fullName>GARANTIA DE FÁBRICA</fullName>
+                <default>false</default>
+                <label>GARANTIA DE FÁBRICA</label>
+            </value>
+            <value>
+                <fullName>QUALIFICAÇÃO AMBIENTAL</fullName>
+                <default>false</default>
+                <label>QUALIFICAÇÃO AMBIENTAL</label>
+            </value>
+            <value>
+                <fullName>DEMONSTRAÇÃO</fullName>
+                <default>false</default>
+                <label>DEMONSTRAÇÃO</label>
+            </value>
+            <value>
+                <fullName>EQUIPAMENTO</fullName>
+                <default>false</default>
+                <label>EQUIPAMENTO</label>
+            </value>
+            <value>
+                <fullName>ACESSÓRIOS</fullName>
+                <default>false</default>
+                <label>ACESSÓRIOS</label>
+            </value>
+            <value>
+                <fullName>PARTES E PEÇAS</fullName>
+                <default>false</default>
+                <label>PARTES E PEÇAS</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>ORÇAMENTO</controllingFieldValue>
+            <controllingFieldValue>PROCESSO</controllingFieldValue>
+            <valueName>CALIBRAÇÃO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>ORÇAMENTO</controllingFieldValue>
+            <controllingFieldValue>PROCESSO</controllingFieldValue>
+            <valueName>CONTRATOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>ORÇAMENTO</controllingFieldValue>
+            <controllingFieldValue>PROCESSO</controllingFieldValue>
+            <valueName>ENSAIO DE SEG. ELÉTRICA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>ORÇAMENTO</controllingFieldValue>
+            <controllingFieldValue>PROCESSO</controllingFieldValue>
+            <valueName>GARANTIA DE SERVIÇO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>ORÇAMENTO</controllingFieldValue>
+            <controllingFieldValue>PROCESSO</controllingFieldValue>
+            <valueName>GESTÃO DE ATIVOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>ORÇAMENTO</controllingFieldValue>
+            <controllingFieldValue>PROCESSO</controllingFieldValue>
+            <valueName>INSTALAÇÃO DE EQUIPAMENTOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>ORÇAMENTO</controllingFieldValue>
+            <controllingFieldValue>PROCESSO</controllingFieldValue>
+            <valueName>LOCAÇÃO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>ORÇAMENTO</controllingFieldValue>
+            <controllingFieldValue>PROCESSO</controllingFieldValue>
+            <valueName>MANUTENÇÃO CORRETIVA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>ORÇAMENTO</controllingFieldValue>
+            <controllingFieldValue>PROCESSO</controllingFieldValue>
+            <valueName>MANUTENÇÃO PREVENTIVA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>ORÇAMENTO</controllingFieldValue>
+            <controllingFieldValue>PROCESSO</controllingFieldValue>
+            <valueName>PEÇAS E ACESSÓRIOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>ORÇAMENTO</controllingFieldValue>
+            <controllingFieldValue>PROCESSO</controllingFieldValue>
+            <valueName>QUALIFICAÇÃO DE DESEMPENHO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>ORÇAMENTO</controllingFieldValue>
+            <controllingFieldValue>PROCESSO</controllingFieldValue>
+            <valueName>QUALIFICAÇÃO DE INSTALAÇÃO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>ORÇAMENTO</controllingFieldValue>
+            <controllingFieldValue>PROCESSO</controllingFieldValue>
+            <valueName>QUALIFICAÇÃO DE OPERAÇÃO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>ORÇAMENTO</controllingFieldValue>
+            <controllingFieldValue>PROCESSO</controllingFieldValue>
+            <valueName>SOFTWARE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>ORÇAMENTO</controllingFieldValue>
+            <controllingFieldValue>PROCESSO</controllingFieldValue>
+            <valueName>TREINAMENTOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>ORÇAMENTO</controllingFieldValue>
+            <controllingFieldValue>PROCESSO</controllingFieldValue>
+            <valueName>VISITA TÉCNICA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>ORÇAMENTO</controllingFieldValue>
+            <controllingFieldValue>OUTROS</controllingFieldValue>
+            <controllingFieldValue>PROCESSO</controllingFieldValue>
+            <valueName>OUTROS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>ORÇAMENTO</controllingFieldValue>
+            <controllingFieldValue>PROCESSO</controllingFieldValue>
+            <valueName>DENUNCIA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>ORÇAMENTO</controllingFieldValue>
+            <controllingFieldValue>PROCESSO</controllingFieldValue>
+            <valueName>GARANTIA DE FÁBRICA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>ORÇAMENTO</controllingFieldValue>
+            <controllingFieldValue>PROCESSO</controllingFieldValue>
+            <valueName>QUALIFICAÇÃO AMBIENTAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ATENDIMENTO</controllingFieldValue>
+            <controllingFieldValue>ORÇAMENTO</controllingFieldValue>
+            <controllingFieldValue>PROCESSO</controllingFieldValue>
+            <valueName>DEMONSTRAÇÃO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PRODUTO</controllingFieldValue>
+            <valueName>EQUIPAMENTO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PRODUTO</controllingFieldValue>
+            <valueName>ACESSÓRIOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PRODUTO</controllingFieldValue>
+            <valueName>PARTES E PEÇAS</valueName>
+        </valueSettings>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

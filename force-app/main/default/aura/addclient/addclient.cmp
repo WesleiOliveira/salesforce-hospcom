@@ -1,0 +1,9 @@
+<aura:component  implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="iframeSrc" type="String" />
+    <iframe aura:id="myIframe" src="{!v.iframeSrc}" width="600px" height="600px" frameborder="0"></iframe>
+
+    
+    <lightning:button label="Gerar QR Code" onclick="{!c.myAction}" />
+</aura:component>

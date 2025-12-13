@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Justificativa_Gravidade_1</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISNEW(),
+    TEXT(Gravidade__c) == &quot;Gravidade 1 - Funcionalidade principal, impacta o fluxo operacional&quot;,
+    Justificativa__c == &apos;&apos;
+)</errorConditionFormula>
+    <errorMessage>Você deve fornecer uma justificativa para feedbacks de Gravidade 1.</errorMessage>
+</ValidationRule>

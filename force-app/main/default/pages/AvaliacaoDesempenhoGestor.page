@@ -1,0 +1,263 @@
+<apex:page title="Avaliação" standardStylesheets="false"  standardController="Avaliacao_de_Desempenho__c" showHeader="false">
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css"/>
+<style>
+    td{
+    padding-right:140px !important;
+    padding-top:10px !important;
+    padding-bottom:8px !important;
+    }
+</style>
+<apex:form >
+
+<apex:outputText rendered="{!IF($User.Id == Avaliacao_de_Desempenho__c.OwnerId, true, false)}"> Avaliação já preenchida.</apex:outputText>
+
+
+<apex:outputText rendered="{!IF($User.Id != Avaliacao_de_Desempenho__c.OwnerId, true, false)}">
+
+    <div style="margin:50px;">
+    
+    <h1>Avaliação de Desempenho — {!Avaliacao_de_Desempenho__c.Contato__r.Name}</h1>
+    <h2><small style="color:#16325c!important;">Afetividade Familiar</small></h2>    
+    <div class="form-group">
+        <label>Tem a capacidade de estabelecer vínculos, proximidades e parcerias que favoreçam o ambiente e a entrega de resultados?</label><br/>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G1__c == null, true, false)}">
+            <apex:selectRadio value="{!Avaliacao_de_Desempenho__c.G1__c}" styleClass="clsRadio" required="false">
+                <apex:selectOption itemValue="1" itemLabel="Não atende"/>
+                <apex:selectOption itemValue="2" itemLabel="Atende parcialmente"/>
+                <apex:selectOption itemValue="3" itemLabel="Atende totalmente"/>
+                <apex:selectOption itemValue="4" itemLabel="Supera"/>
+                <apex:messages />
+            </apex:selectRadio>
+           </apex:outputText>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G1__c != null, true, false)}">
+               — A resposta para essa pergunta foi <b><apex:outputField value="{!Avaliacao_de_Desempenho__c.G1__c}"/></b>
+           </apex:outputText>
+    </div>
+    <div class="form-group">
+        <label>Tem inteligência emocional para enfrentar os osbtáculos e superá-los?</label><br/>
+            <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G2__c == null, true, false)}">
+            <apex:selectRadio value="{!Avaliacao_de_Desempenho__c.G2__c}" styleClass="clsRadio" required="true">
+                <apex:selectOption itemValue="1" itemLabel="Não atende"/>
+                <apex:selectOption itemValue="2" itemLabel="Atende parcialmente"/>
+                <apex:selectOption itemValue="3" itemLabel="Atende totalmente"/>
+                <apex:selectOption itemValue="4" itemLabel="Supera"/>
+            </apex:selectRadio>
+           </apex:outputText>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G2__c != null, true, false)}">
+               — A resposta para essa pergunta foi <b><apex:outputField value="{!Avaliacao_de_Desempenho__c.G2__c}"/></b>
+           </apex:outputText>
+    </div>
+    <h2><small style="color:#16325c!important;">Acreditar e ter Atitude </small></h2>    
+    <div class="form-group">
+        <label>Entrega seus resultados e ainda pensa de que maneira poderia fazer ainda mais e melhor?</label><br/>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G3__c == null, true, false)}">
+            <apex:selectRadio value="{!Avaliacao_de_Desempenho__c.G3__c}" styleClass="clsRadio">
+                <apex:selectOption itemValue="1" itemLabel="Não atende"/>
+                <apex:selectOption itemValue="2" itemLabel="Atende parcialmente"/>
+                <apex:selectOption itemValue="3" itemLabel="Atende totalmente"/>
+                <apex:selectOption itemValue="4" itemLabel="Supera"/>
+            </apex:selectRadio>
+           </apex:outputText>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G3__c != null, true, false)}">
+               — A resposta para essa pergunta foi <b><apex:outputField value="{!Avaliacao_de_Desempenho__c.G3__c}"/></b>
+           </apex:outputText>       
+    </div>
+    <div class="form-group">
+        <label>Tem energia suficiente para buscar e atingir todos os objetivos propostos?</label><br/>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G4__c == null, true, false)}">
+            <apex:selectRadio value="{!Avaliacao_de_Desempenho__c.G4__c}" styleClass="clsRadio">
+                <apex:selectOption itemValue="1" itemLabel="Não atende"/>
+                <apex:selectOption itemValue="2" itemLabel="Atende parcialmente"/>
+                <apex:selectOption itemValue="3" itemLabel="Atende totalmente"/>
+                <apex:selectOption itemValue="4" itemLabel="Supera"/>
+            </apex:selectRadio>
+           </apex:outputText>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G4__c != null, true, false)}">
+               — A resposta para essa pergunta foi <b><apex:outputField value="{!Avaliacao_de_Desempenho__c.G4__c}"/></b>
+           </apex:outputText>
+    </div>
+    <div class="form-group">
+        <label>É corajoso e até corre riscos para não deixar de entregar os resultados?</label><br/>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G5__c == null, true, false)}">
+            <apex:selectRadio value="{!Avaliacao_de_Desempenho__c.G5__c}" styleClass="clsRadio">
+                <apex:selectOption itemValue="1" itemLabel="Não atende"/>
+                <apex:selectOption itemValue="2" itemLabel="Atende parcialmente"/>
+                <apex:selectOption itemValue="3" itemLabel="Atende totalmente"/>
+                <apex:selectOption itemValue="4" itemLabel="Supera"/>
+            </apex:selectRadio>
+           </apex:outputText>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G5__c != null, true, false)}">
+               — A resposta para essa pergunta foi <b><apex:outputField value="{!Avaliacao_de_Desempenho__c.G5__c}"/></b>
+           </apex:outputText>    
+    </div>
+    <h2><small style="color:#16325c!important;">Liberdade de ser e agir</small></h2>       
+    <div class="form-group">
+        <label>Tem autonomia para pensar em novas ideias e propor soluções que tragam melhores resultados?</label><br/>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G6__c == null, true, false)}">
+            <apex:selectRadio value="{!Avaliacao_de_Desempenho__c.G6__c}" styleClass="clsRadio">
+                <apex:selectOption itemValue="1" itemLabel="Não atende"/>
+                <apex:selectOption itemValue="2" itemLabel="Atende parcialmente"/>
+                <apex:selectOption itemValue="3" itemLabel="Atende totalmente"/>
+                <apex:selectOption itemValue="4" itemLabel="Supera"/>
+            </apex:selectRadio>
+           </apex:outputText>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G6__c != null, true, false)}">
+               — A resposta para essa pergunta foi <b><apex:outputField value="{!Avaliacao_de_Desempenho__c.G6__c}"/></b>
+           </apex:outputText>        
+    </div>
+    <div class="form-group">
+        <label>Entrega suas responsabilidades no prazo combinado?</label><br/>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G7__c == null, true, false)}">
+            <apex:selectRadio value="{!Avaliacao_de_Desempenho__c.G7__c}" styleClass="clsRadio">
+                <apex:selectOption itemValue="1" itemLabel="Não atende"/>
+                <apex:selectOption itemValue="2" itemLabel="Atende parcialmente"/>
+                <apex:selectOption itemValue="3" itemLabel="Atende totalmente"/>
+                <apex:selectOption itemValue="4" itemLabel="Supera"/>
+            </apex:selectRadio>
+           </apex:outputText>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G7__c != null, true, false)}">
+               — A resposta para essa pergunta foi <b><apex:outputField value="{!Avaliacao_de_Desempenho__c.G7__c}"/></b>
+           </apex:outputText>     
+    </div>
+    <h2><small style="color:#16325c!important;">Compromisso/Comprometimento</small></h2>            
+    <div class="form-group">
+        <label>Assume responsabilidades e traz soluções assertivas ao invés de procurar culpados?</label><br/>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G8__c == null, true, false)}">
+            <apex:selectRadio value="{!Avaliacao_de_Desempenho__c.G8__c}" styleClass="clsRadio">
+                <apex:selectOption itemValue="1" itemLabel="Não atende"/>
+                <apex:selectOption itemValue="2" itemLabel="Atende parcialmente"/>
+                <apex:selectOption itemValue="3" itemLabel="Atende totalmente"/>
+                <apex:selectOption itemValue="4" itemLabel="Supera"/>
+            </apex:selectRadio>
+           </apex:outputText>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G8__c != null, true, false)}">
+               — A resposta para essa pergunta foi <b><apex:outputField value="{!Avaliacao_de_Desempenho__c.G8__c}"/></b>
+           </apex:outputText>
+    </div>
+    <div class="form-group">
+        <label>Procura saber quais são suas prioridades e trabalha com velocidade para atingir minhas metas?</label><br/>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G9__c == null, true, false)}">
+            <apex:selectRadio value="{!Avaliacao_de_Desempenho__c.G9__c}" styleClass="clsRadio">
+                <apex:selectOption itemValue="1" itemLabel="Não atende"/>
+                <apex:selectOption itemValue="2" itemLabel="Atende parcialmente"/>
+                <apex:selectOption itemValue="3" itemLabel="Atende totalmente"/>
+                <apex:selectOption itemValue="4" itemLabel="Supera"/>
+            </apex:selectRadio>
+           </apex:outputText>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G9__c != null, true, false)}">
+               — A resposta para essa pergunta foi <b><apex:outputField value="{!Avaliacao_de_Desempenho__c.G9__c}"/></b>
+           </apex:outputText>
+    </div>
+    <h2><small style="color:#16325c!important;">Fazer Acontecer</small></h2>                
+    <div class="form-group">
+        <label>"Arregaça as mangas" e soluciona problemas a fim de sermos a melhor empresa do mercado?</label><br/>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G10__c == null, true, false)}">
+            <apex:selectRadio value="{!Avaliacao_de_Desempenho__c.G10__c}" styleClass="clsRadio">
+                <apex:selectOption itemValue="1" itemLabel="Não atende"/>
+                <apex:selectOption itemValue="2" itemLabel="Atende parcialmente"/>
+                <apex:selectOption itemValue="3" itemLabel="Atende totalmente"/>
+                <apex:selectOption itemValue="4" itemLabel="Supera"/>
+            </apex:selectRadio>
+           </apex:outputText>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G10__c != null, true, false)}">
+               — A resposta para essa pergunta foi <b><apex:outputField value="{!Avaliacao_de_Desempenho__c.G10__c}"/></b>
+           </apex:outputText>
+    </div>
+    <div class="form-group">
+        <label>Está preocupado com a qualidade das suas  entregas a fim de se superar?</label><br/>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G11__c == null, true, false)}">
+            <apex:selectRadio value="{!Avaliacao_de_Desempenho__c.G11__c}" styleClass="clsRadio">
+                <apex:selectOption itemValue="1" itemLabel="Não atende"/>
+                <apex:selectOption itemValue="2" itemLabel="Atende parcialmente"/>
+                <apex:selectOption itemValue="3" itemLabel="Atende totalmente"/>
+                <apex:selectOption itemValue="4" itemLabel="Supera"/>
+            </apex:selectRadio>
+           </apex:outputText>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G11__c != null, true, false)}">
+               — A resposta para essa pergunta foi <b><apex:outputField value="{!Avaliacao_de_Desempenho__c.G11__c}"/></b>
+           </apex:outputText>
+    </div>
+    <div class="form-group">
+        <label>Quais são os pontos fortes?</label><br/>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G12__c == '', true, false)}">
+              <apex:inputField value="{!Avaliacao_de_Desempenho__c.G12__c}" styleClass="metro-input"/><br/>
+           </apex:outputText>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G12__c != '', true, false)}">
+               — A resposta para essa pergunta foi <b><apex:outputField value="{!Avaliacao_de_Desempenho__c.G12__c}"/></b>
+           </apex:outputText>
+    </div>
+    <div class="form-group">
+        <label>Quais são as oportunidades de melhoria?</label><br/>
+              <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G13__c == '', true, false)}">
+              <apex:inputField value="{!Avaliacao_de_Desempenho__c.G13__c}" styleClass="metro-input"/><br/>
+           </apex:outputText>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G13__c != '', true, false)}">
+               — A resposta para essa pergunta foi <b><apex:outputField value="{!Avaliacao_de_Desempenho__c.G13__c}"/></b>
+           </apex:outputText>
+    </div><br/>
+    <h2><small style="color:#16325c!important;">Entrega de Resultados</small></h2>                    
+    <div class="form-group">
+        <label>Entregou todas as suas metas neste ano?</label><br/>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G_Resultado__c == null, true, false)}">
+            <apex:selectRadio value="{!Avaliacao_de_Desempenho__c.G_Resultado__c }" styleClass="clsRadio">
+                <apex:selectOption itemValue="1" itemLabel="Não atende"/>
+                <apex:selectOption itemValue="2" itemLabel="Atende parcialmente"/>
+                <apex:selectOption itemValue="3" itemLabel="Atende totalmente"/>
+                <apex:selectOption itemValue="4" itemLabel="Supera"/>
+            </apex:selectRadio>
+           </apex:outputText>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G_Resultado__c != null, true, false)}">
+               — A resposta para essa pergunta foi <b><apex:outputField value="{!Avaliacao_de_Desempenho__c.G_Resultado__c }"/></b>
+           </apex:outputText><br/>
+    </div>
+    <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.C14__c != null, true, false)}">
+        <h2><small style="color:#16325c!important;">Liderança Inspiradora</small></h2>                    
+    <div class="form-group">
+        <label>Pratica rituais de gestão (reuniões, conversas e acompanhamentos individuais) com a equipe a fim de estarem alinhados com as metas, desafios e projetos da área?</label><br/>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G14__c== null, true, false)}">
+            <apex:selectRadio value="{!Avaliacao_de_Desempenho__c.G14__c}" styleClass="clsRadio">
+                <apex:selectOption itemValue="1" itemLabel="Não atende"/>
+                <apex:selectOption itemValue="2" itemLabel="Atende parcialmente"/>
+                <apex:selectOption itemValue="3" itemLabel="Atende totalmente"/>
+                <apex:selectOption itemValue="4" itemLabel="Supera"/>
+            </apex:selectRadio>
+           </apex:outputText>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G14__c!= null, true, false)}">
+               — A resposta para essa pergunta foi <b><apex:outputField value="{!Avaliacao_de_Desempenho__c.G14__c}"/></b>
+           </apex:outputText><br/>   
+    </div>
+    <div class="form-group">
+        <label>Tem uma gestão pautada nos valores da empresa e sempre desafia o time a pensarem fora da caixa e entregarem cada vez mais resultados?</label><br/>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G15__c== null, true, false)}">
+            <apex:selectRadio value="{!Avaliacao_de_Desempenho__c.G15__c}" styleClass="clsRadio">
+                <apex:selectOption itemValue="1" itemLabel="Não atende"/>
+                <apex:selectOption itemValue="2" itemLabel="Atende parcialmente"/>
+                <apex:selectOption itemValue="3" itemLabel="Atende totalmente"/>
+                <apex:selectOption itemValue="4" itemLabel="Supera"/>
+            </apex:selectRadio>
+           </apex:outputText>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G15__c!= null, true, false)}">
+               — A resposta para essa pergunta foi <b><apex:outputField value="{!Avaliacao_de_Desempenho__c.G15__c}"/></b>
+           </apex:outputText><br/>   
+    </div>
+    <div class="form-group">
+        <label>Sente que seus subordinados enxergam nele um líder inspirador, motivador e equilibrado e que influencia outras pessoas?</label><br/>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G16__c== null, true, false)}">
+            <apex:selectRadio value="{!Avaliacao_de_Desempenho__c.G16__c}" styleClass="clsRadio">
+                <apex:selectOption itemValue="1" itemLabel="Não atende"/>
+                <apex:selectOption itemValue="2" itemLabel="Atende parcialmente"/>
+                <apex:selectOption itemValue="3" itemLabel="Atende totalmente"/>
+                <apex:selectOption itemValue="4" itemLabel="Supera"/>
+            </apex:selectRadio>
+           </apex:outputText>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.G16__c!= null, true, false)}">
+               — A resposta para essa pergunta foi <b><apex:outputField value="{!Avaliacao_de_Desempenho__c.G16__c}"/></b>
+           </apex:outputText><br/>   
+    </div>
+    </apex:outputText>
+    <br/>
+        <div style="text-align:center;"><apex:commandButton action="{!quicksave}" value="Enviar" rendered="{!!Avaliacao_de_Desempenho__c.Respondido__c}"/></div>
+   </div>
+</apex:outputText>
+</apex:form>
+</apex:page>

@@ -1,0 +1,290 @@
+<aura:component extends="c.ApexHelper" controller="PopcriaAtualizacao" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    
+    <!-- Atributos -->
+    <aura:attribute name="searchTerm" type="String" default="" />
+    <aura:attribute name="selectedInstrucoesIds" type="List" default="[]" />
+    <aura:attribute name="instrucoesDeServico" type="Instrucao_de_Servico__c[]" />
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="instrucaoText" type="String"/>
+    <aura:attribute name="selectedInstrucoes" type="Instrucao_de_Servico__c[]" default="[]"/>
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome6 + '/css/all.min.css',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css',
+                          $Resource.bootstrapSelect14 + '/docs/docs/dist/css/bootstrap-select.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.sortableJs + '/Sortable.js',
+                           $Resource.popper + '/popper.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js',
+                           $Resource.bootstrapSelect14 + '/docs/docs/dist/js/bootstrap-select.min.js')}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    <body id="delitePop">
+        <div class="content">
+            <div class="visualiza-pop">
+                <div class="Texto">
+                    Visualizar
+                </div>
+                
+                <div class="imagem">
+                    <i class="fa fa-file-text-o" aria-hidden="true" style=" font-size:8rem; color:#00345c;"></i>
+                </div>
+            </div>
+            
+            <div class="Edita-pop">
+                <div class="Texto">
+                    Editar 
+                </div>
+                
+                <div class="imagem">
+                    <i class="fa fa-pencil" aria-hidden="true" style=" font-size:8rem; color:#00345c;"></i>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class = "body">
+            <div class= "container-geral">
+                <div class = "cabecalho">
+                    <div class= "cont-titulo">
+                        <h1 class="titulo">Procedimento Operacional Padrão</h1>             
+                    </div>
+                    
+                    <div class = "cont-subTitulo">
+                        <h2 id = "subTitulo"> Selecione as empresas</h2>
+                    </div>
+                </div>
+                
+                
+                <div class="edicaoStatusGeral">
+                    
+                    
+                    <div>
+                        <label for="GDB">
+                            <div class="empresa fundo2label">
+                                <img class="img fundo2" src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000CI0PL&amp;oid=00Di0000000JVhH&amp;lastMod=1679916443000" />
+                            </div>
+                        </label>
+                        <input id="GDB" class="empresa i" type="checkbox" name="meuCheckbox" value="a0g6e00000J4FLSAA3" />
+                    </div>    
+                    
+                    <div> <!-- acb-to -->
+                        <label for="ABC-TO">
+                            <div class="empresa fundo2label">
+                                <img class="img fundo2" src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000CI0PQ&amp;oid=00Di0000000JVhH&amp;lastMod=1679916450000" />
+                            </div>
+                        </label>
+                        <input id="ABC-TO" class="empresa i" type="checkbox" name="meuCheckbox" value="a0g6e00000J4FLhAAN" />    
+                    </div>
+                    
+                    <div>
+                        <label for="HEALTH_SOLUTION">
+                            <div class="empresa fundo2label">
+                                <img class="img fundo2" src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000CI0QJ&amp;oid=00Di0000000JVhH&amp;lastMod=1679916400000" />
+                            </div>
+                        </label>
+                        <input id="HEALTH_SOLUTION" class="empresa i" type="checkbox" name="meuCheckbox" value="a0g3100000DeRswAAF" />
+                    </div>
+                    
+                    <div> <!-- hospcom -->
+                        <label for="HOSPCOM">
+                            <div class="empresa">
+                                <img class="img fundo1"
+                                     src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000CI0QY&amp;oid=00Di0000000JVhH&amp;lastMod=1679917033000" />
+                            </div>
+                        </label>
+                        <input id="HOSPCOM" class="empresa i" type="checkbox" name="meuCheckbox" value="a0g3100000EOrZPAA1" />
+                    </div>
+                    <!-- hospcom-df -->
+                    
+                    <div>
+                        <label for="HOSPCOM2-DF">
+                            <div class="empresa">
+                                <img class="img fundo1"
+                                     src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000CI0QT&amp;oid=00Di0000000JVhH&amp;lastMod=1679916465000" />
+                            </div>
+                        </label>
+                        <input id="HOSPCOM2-DF" class="empresa i" type="checkbox" name="meuCheckbox"  value="a0g6e00000KN836AAD" />
+                    </div> 
+                    
+                    <div>
+                        <label for="GESTCOM">
+                            <div class="empresa">
+                                <img class="img fundo1"
+                                     src="https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=0156e00000CI0QO&amp;oid=00Di0000000JVhH&amp;lastMod=1679916456000" />
+                            </div>
+                        </label>
+                        <input id="GESTCOM" class="empresa i" type="checkbox" name="meuCheckbox" value="a0gU4000002HYfFIAW" />
+                    </div>
+                    
+                    
+                    
+                    <!-- gestcom 
+                        
+                        <div>
+                            <label for="gest">
+                                <div class="empresa">
+                                    <img class="img fundo"
+                                        src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000CI0QO&amp;oid=00Di0000000JVhH&amp;lastMod=1679916456000" />
+                                </div>
+                            </label>
+                            
+                            <input id="gest" class="empresa i" type="checkbox" name="meuCheckbox" value="gest" />
+                            
+                        </div>-->
+                </div>
+                
+                <div>
+                    <hr/>
+                </div> 
+                <div class="container-campos">
+                    
+                    
+                    <div class="texto-contentPop">
+                        <select class="revisorPop"  id='revisorPop' data-bs-toggle="dropdown" data-show-subtext="true" data-live-search="true">
+                            <option value="" disabled="disabled"  selected="selected" hidden="hidden">Revisor</option>
+                        </select>
+                        <div>
+                            <p data-campoS="Revisor__c"></p> 
+                            <textarea class="Texto" id="Revisor__cPop" name="Revisor__c" hidden="hidden" value = ""> </textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="texto-contentPop">
+                        <select class="elaboradorPop"  id='elaboradorPop' data-bs-toggle="dropdown" data-show-subtext="true" data-live-search="true">
+                            <option value="" disabled="disabled"  selected="selected" hidden="hidden">Elaborador</option>
+                        </select>
+                        <div>
+                            <p data-campoS="Elaborador__c"></p> 
+                            <textarea class="Texto" id="Elaborador__cPop" name="Elaborador__c" hidden="hidden" value = ""> </textarea>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="texto-contentPop">
+                        <p data-campoS="T_tulo_do_Documento__c">Título do Documento</p> 
+                        <textarea class="Texto" id="T_tulo_do_Documento__cPop" name="Name" rows="2" cols="130" maxlength="80"></textarea>
+                    </div>  
+                    
+                    
+                    <div class="texto-contentPop">
+                        <p data-campoS="Natureza_da_Altera_o__c">Natureza da Alteração</p> 
+                        <textarea class="Texto" id="Natureza_da_Altera_o__cPop" name="Name" rows="2" cols="130" maxlength="255"></textarea>
+                    </div> 	   
+                    
+                    <div class="texto-contentPop">
+                        <p data-campoS="C_digo_do_Documento__c">Código do Documento</p> 
+                        <textarea class="Texto" id="C_digo_do_Documento__cPop" name="C_digo_do_Documento__c" rows="2" cols="130" maxlength="50"></textarea>
+                    </div> 
+                    
+                    <div class="texto-contentPop">
+                        <p data-campoS="N_da_Revis_o__c">N° da Revisão</p> 
+                        <textarea class="Texto" id="N_da_Revis_o__cPop" name="N_da_Revis_o__c" rows="2" cols="130"  maxlength="50"></textarea>
+                        
+                    </div> 
+                    <div class="texto-contentPop">
+                        <p data-campoS="Objetivo__c">1.Objetivo</p> 
+                        <textarea class="Texto" id="Objetivo__cPop" name="Objetivo__c" rows="2" cols="130" maxlength="100000"></textarea>
+                    </div> 
+                    
+                    <div class="texto-contentPop">
+                        <p data-campoS="Aplica_o__c">2.Aplicação</p> 
+                        <textarea class="Texto" id="Aplica_o__cPop" name="Aplica_o__c" rows="2" cols="130" maxlength="100000"></textarea>
+                    </div>
+                    
+                    <div class="texto-contentPop">
+                        <p data-campoS="Defini_es__c">3.Definições</p> 
+                        <textarea class="Texto" id="Defini_es__cPop" name="Defini_es__c" rows="2" cols="130" maxlength="100000"></textarea>
+                    </div> 
+                    
+                    <div class="texto-contentPop">
+                        <p data-campoS="Equipamentos_e_Softwares__c">4.Equipamentos e Softwares</p> 
+                        <textarea class="Texto" id="Equipamentos_e_Softwares__cPop" name="Equipamentos_e_Softwares__c" rows="2" cols="130" maxlength="100000"></textarea>
+                    </div> 
+                    
+                    <div class="texto-contentPop">
+                        <p data-campoS="Condi_es_Gerais__c">5.Condições Gerais</p> 
+                        <textarea class="Texto" id="Condi_es_Gerais__cPop" name="Condi_es_Gerais__c" rows="2" cols="130" maxlength="100000"></textarea>
+                    </div> 
+                    
+                    <div class="texto-contentPop">
+                        <p data-campoS="Condi_es_Espec_ficas__c">6.Condições Específicas</p> 
+                        <textarea class="Texto" id="Condi_es_Espec_ficas__cPop" name="Condi_es_Espec_ficas__c" rows="2" cols="130" maxlength="100000"></textarea>
+                    </div> 
+                    
+                    <div class="texto-contentPop">
+                        <p data-campoS="Responsabilidade_e_Autoridade__c">7.Responsabilidade e Autoridade</p> 
+                        <textarea class="Texto" id="Responsabilidade_e_Autoridade__cPop" name="Responsabilidade_e_Autoridade__c" rows="2" cols="130" maxlength="100000"></textarea>
+                    </div>                
+                    
+                    <div class="texto-contentPop">
+                        <p data-campoS="Formul_rios_Anexos_e_Documentos__c">8.Formulários, Anexos e Documentos</p> 
+                        <textarea class="Texto" id="Formul_rios_Anexos_e_Documentos__cPop" name="Formul_rios_Anexos_e_Documentos__c" rows="2" cols="130" maxlength="100000"></textarea>
+                    </div>
+                    <div class="texto-contentPop">
+                        <p data-campoS="Instru_o_de_Servi_oText__c">8.Intruções de Serviço</p> 
+                        <p class="Texto" id="Instru_o_de_Servi_oText__cPop" name="Instru_o_de_Servi_oText__c" rows="2" cols="130" maxlength="100000">{!v.instrucaoText}</p>
+                    </div>
+                    
+                    <div class="texto-contentPop">
+                        <label style="width:500px !important; text-align: center;">
+                            <input type="file" id="documentoPop" name="documento" multiple="multiple" />
+                            
+                        </label>
+                    </div>   
+                </div>
+                
+                <div style="padding: 5px">
+                    
+                    <button id='button12312321' class='button12312321'>Clique para adicionar uma Instrução de Serviço</button>
+                    
+                    <div id='principalDiv342344' class='principalDiv342344'>
+                        
+                        <lightning:input name="search" style="width: 100%" label="Pesquise selecione as Intruções de Serviço" value="{!v.searchTerm}" onchange="{!c.buscaIs}"/>
+                        
+                        <div class="tag-container">
+                            <aura:iteration items="{!v.selectedInstrucoes}" var="tag">
+                                <div class="tag-item">
+                                    <span>{!tag.Name}</span>
+                                    <span class="remove-tag" onclick="{!c.removerTag}" data-tagid="{!tag.Id}">×</span>
+                                </div>
+                            </aura:iteration>
+                        </div>
+                        <br></br>
+                        
+                        
+                        <div class='resultados12312312' id='resultados12312312'>
+                            <aura:iteration items="{!v.instrucoesDeServico}" var="item">
+                                <p class='is12312312' data-id='{!item.Id}' onclick="{!c.adicionarTag}">                   
+                                    <strong class='textoIs'>Instrução de Serviço:&nbsp;</strong> {!item.Name} |&nbsp;
+                                    <strong class='textoIs'>Departamento:&nbsp;</strong> {!item.Departamento__c}
+                                </p>
+                            </aura:iteration>
+                        </div>
+                    </div>
+                </div>
+                <br></br>
+                <div class = "cont-buttons"> 
+                    <div class = "button">
+                        <button id="nextPop" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+                            CONTINUAR
+                        </button>
+                    </div>
+                </div>        
+            </div>
+        </div>
+        
+        <div class="load"> 
+            <div class="spinner-border" role="status">
+                <span class="sr-only"></span>
+            </div>
+        </div>
+        
+    </body>
+    
+</aura:component>

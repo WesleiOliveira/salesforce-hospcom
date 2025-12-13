@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Estado__c</fullName>
+    <externalId>false</externalId>
+    <label>Estado</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>checkout</fullName>
+                <default>false</default>
+                <label>checkout</label>
+            </value>
+            <value>
+                <fullName>resumo</fullName>
+                <default>false</default>
+                <label>resumo</label>
+            </value>
+            <value>
+                <fullName>conversar</fullName>
+                <default>false</default>
+                <label>conversar</label>
+            </value>
+            <value>
+                <fullName>conversa finalizada</fullName>
+                <default>false</default>
+                <label>conversa finalizada</label>
+            </value>
+            <value>
+                <fullName>aguardando localização</fullName>
+                <default>false</default>
+                <label>aguardando localização</label>
+            </value>
+            <value>
+                <fullName>aguardando feedback</fullName>
+                <default>false</default>
+                <label>aguardando feedback</label>
+            </value>
+            <value>
+                <fullName>conversando sobre o resumo</fullName>
+                <default>false</default>
+                <label>conversando sobre o resumo</label>
+            </value>
+            <value>
+                <fullName>criando cotação</fullName>
+                <default>false</default>
+                <label>criando cotação</label>
+            </value>
+            <value>
+                <fullName>cadastrar conta</fullName>
+                <default>false</default>
+                <label>cadastrar conta</label>
+            </value>
+            <value>
+                <fullName>agendar visita</fullName>
+                <default>false</default>
+                <label>agendar visita</label>
+            </value>
+            <value>
+                <fullName>aguardando datahora</fullName>
+                <default>false</default>
+                <label>aguardando datahora</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pedido_referene_a_demo_ou_loca</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+
+ ISPICKVAL(Referente_a_Demonstra_o_loca_o__c, &quot;SIM&quot;),
+
+ ISBLANK(Pedido_De_Demonstra_o_Loca_o__c)
+)</errorConditionFormula>
+    <errorDisplayField>Pedido_De_Demonstra_o_Loca_o__c</errorDisplayField>
+    <errorMessage>Favor preencher com o Pedido de Demonstração / Locação referente.</errorMessage>
+</ValidationRule>

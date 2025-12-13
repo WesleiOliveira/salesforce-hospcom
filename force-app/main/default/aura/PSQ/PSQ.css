@@ -1,0 +1,284 @@
+.THIS * {
+    margin:0;
+    padding:0;
+}
+ 
+.THIS .content {
+    display: flex;
+    flex-direction: rwap;
+    justify-content: center;
+    align-items: center;
+    display:none;
+}
+.THIS .visualiza-psq, .THIS .Edita-psq{
+     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    
+    padding: 1rem 2rem;
+    border: 8px solid #00345c;
+    border-radius: 20%;
+    font-size:1rem;
+    margin: 1.2rem;
+}
+.THIS .visualiza-psq:hover, .THIS .Edita-psq:hover{
+    padding: 1.2rem 2.2rem;
+    cursor: pointer;
+    margin: 1rem;
+}
+.THIS .texto{
+    font-family: sans-serif;
+    /*text-transform: ;*/
+    padding: 10px;
+    
+}
+
+/*
+#############################
+	TELA DE EDIÇÃO
+#############################
+*/
+
+
+.THIS .container-geral{
+    display: flex;
+    flex-direction: column;
+    width: 98%;
+    margin: auto;
+    border: 1px solid #aeaeae;
+    padding: 0;
+    border-radius: 5px;
+    overflow: auto;
+}
+
+
+/*cabeçalho*/
+.THIS .cabecalho{
+    color: #000
+}
+.THIS .cont-titulo{
+    color: #000
+}
+.THIS #subTitulo{
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 10px;
+    background: #f9f9f9;
+    border-bottom: 1px solid #cfcfcf;
+    border-top: 1px solid #cfcfcf;
+    color:#7e7e7e;
+}
+
+.THIS .titulo{
+    font-size: 1.5rem;
+    background-color: #f2f7ff;
+    padding: 10px !important;
+    text-align: center;
+    color:#7e7e7e;
+}
+.THIS .item-requisicao, .THIS .item-requisicao-cabecalho {
+    padding: 0;
+    margin: auto;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    font-size: 1.1rem;
+    
+
+}
+.THIS .td, .THIS .th{
+    /**/
+    padding: 10px;
+    width: 170px;
+    color: #292929;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+       font-size: .9rem;
+}
+
+.THIS .th{
+    color: #000;
+    font-weight: 500;
+    padding: 10px;
+}
+.THIS .container-itens{
+    max-height: 300px;
+    /*border: 1px solid #aeaeae;*/
+} 
+
+.THIS .itens{
+    width: 98%;
+    margin: 5px auto 10px;
+   
+    overflow: auto;
+    max-height: 300px;
+}
+
+.THIS #check{
+    
+}
+/*status*/
+.THIS .edicaoStatusGeral{
+    display:flex;
+    flex-wrap: nowrap;
+     width: 100% !important;
+}
+.THIS .form-control{
+    padding: 5px 10px;
+}
+
+.THIS .cont-buttons{
+ 	display: flex;
+
+    justify-content: center;
+    align-items: center;
+    background:#f5f5f5;
+    
+}
+.THIS .button{
+    padding: 10px;
+}
+.THIS .btn-primary{
+     padding: 5px 20px;
+    background:#00345C;
+    border-color: #00345C;
+    border-radius: 5px;
+}
+.THIS .btn-primary:hover{
+    padding: 5px 20px;
+    background:#01345a;
+    background-color: #031836 !important;
+    border-radius: 5px;
+}
+
+.THIS .border{
+    font-size: .8rem;
+    border-radius: 10px!important;
+    margin: 0.7rem!important;
+    width: 100%;
+}
+.THIS .select{
+    width:60px;
+}
+
+/*
+#############################
+	FIM TELA DE EDIÇÃO
+#############################
+*/
+
+/*
+##################################
+		     LOGOS
+##################################
+*/
+.THIS .img {
+  
+    cursor:pointer;
+}
+
+.THIS .fundo2label{    
+     padding:  10px;
+   
+}
+
+
+.THIS .fundo2{
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 0 1px 1px #b0aeae;
+}
+
+
+
+.THIS .i{
+    display:none;
+}
+
+.THIS .edicaoStatusGeral{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 0;
+    min-height: 200px;
+}
+.THIS label{
+   width:130px;
+   margin-top:0;
+     margin:2px;
+    
+}
+.THIS label:hover{
+    
+   margin-top:10;
+    border-radius: 20px;
+    background: #f1f1f1;
+    border-radius: 20px;
+    box-shadow: 0 0 3px 2px #fff;
+}
+
+/*
+##################################
+		    FIm  LOGOS
+##################################
+*/
+
+/*
+##################################
+		tela com area de texto 
+##################################
+*/
+
+.THIS #documento{
+   /* border: 1px solid #6b6b6b;*/
+    padding: 2px;
+}
+
+.THIS .container-campos{
+	display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+}
+
+
+.THIS .texto-content{
+    margin: auto;
+    width: 40%;
+    padding: 15px 0 32px;
+    display: flex;
+    flex-direction: column;
+}
+
+.THIS .texto{
+    padding: 0px 0 20px;
+}
+.THIS .elaborador__c,.THIS .revisor__c{
+   padding:5px;
+
+}
+
+
+
+
+/*
+##################################
+		fim area de texto 
+##################################
+*/
+.THIS .load{
+    position: absolute;
+    /* top: 50%; */
+    /* left: 50%; */
+    background: rgb(89 89 83 / 53%);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}

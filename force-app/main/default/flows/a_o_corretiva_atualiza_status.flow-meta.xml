@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>notifica_responsavel</name>
+        <label>notifica responsavel</label>
+        <locationX>176</locationX>
+        <locationY>431</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>$Record.Responsevel__r.Email</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>subject</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>body</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <apiVersion>60.0</apiVersion>
+    <environments>Default</environments>
+    <interviewLabel>ação corretiva —  atualiza status {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>ação corretiva —  atualiza status</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>atualiza_nc</name>
+        <label>atualiza nc</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <connector>
+            <targetReference>notifica_responsavel</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.RNC__r.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Status_da_a_o_corretira__c</field>
+            <value>
+                <elementReference>$Record.Status__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Nao_Conformidade__c</object>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>atualiza_nc</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Ação Não Implementada</stringValue>
+            </value>
+        </filters>
+        <object>Acao_corretiva__c</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>body</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>---------------------------------------------------------------------------------------------
+
+A Ação Corretiva registrada em seu nome; {!$Record.Name}, teve seu status atualizado para {!$Record.Status__c}.
+
+Clique no link para obter mais informações
+Link: https://hospcom.my.site.com/Sales/s/acao-corretiva/{!$Record.Id}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+A Ação Corretiva registrada em seu nome; {!$Record.Name}, teve seu status atualizado para {!$Record.Status__c}.
+
+Clique no link para obter mais informações
+Link: https://hospcom.my.site.com/Sales/s/acao-corretiva/{!$Record.Id}
+
+---------------------------------------------------------------------------------------------</text>
+    </textTemplates>
+    <textTemplates>
+        <name>subject</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>ATUALIZAÇÂO DE STATUS DE AÇÂO CORRETIVA</text>
+    </textTemplates>
+</Flow>

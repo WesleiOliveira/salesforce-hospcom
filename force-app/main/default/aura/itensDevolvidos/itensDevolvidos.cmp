@@ -1,0 +1,50 @@
+<aura:component controller="ApexHelperController" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global">
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="records" type="Item_da_Solicita_o_de_devolu_o__c[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+	<lightning:notificationsLibrary aura:id="notifLib"/>
+
+    <lightning:card title="Itens da Devolução">
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+        <thead>
+            <tr class="slds-line-height_reset">
+                <th scope="col">
+                    <div class="slds-truncate" title="Código">Código</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Código">Produto</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Quantidade">Quantidade</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <aura:iteration items="{!v.records}" var="item" indexVar="index">
+                <tr>
+                    <td>
+                        <div class="slds-truncate" title="{!item.Name}">{!item.C_digo_do_produto_do_pedido__c}</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate" title="{!item.Name}">{!item.nomeProduto__c}</div>
+                    </td>
+
+                    <td>
+                        <lightning:input 
+                            value="{!item.Quantidade__c}" 
+                            type="number" 
+                            variant="label-hidden"
+                            onchange="{!c.handleInputChange}" 
+                            data-index="{!index}" />
+                    </td>
+                </tr>
+            </aura:iteration>
+        </tbody>
+    </table>
+
+    <div class="slds-m-top_medium" style="text-align:right">
+        <lightning:button label="Salvar" variant="brand" onclick="{!c.saveRecords}"/>
+    </div>
+</lightning:card>
+
+</aura:component>

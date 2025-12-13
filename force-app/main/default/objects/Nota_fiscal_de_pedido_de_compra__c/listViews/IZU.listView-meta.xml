@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IZU</fullName>
+    <booleanFilter>1 OR 2 OR 3 OR 4 OR 5</booleanFilter>
+    <columns>Ver_DANFE__c</columns>
+    <columns>NAME</columns>
+    <columns>Data_de_emissao__c</columns>
+    <columns>Fornecedor__c</columns>
+    <columns>Valor_da_nota__c</columns>
+    <columns>Data_de_vencimento__c</columns>
+    <columns>CNPJ_Fornecedor__c</columns>
+    <columns>Status__c</columns>
+    <columns>Lancada__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>CREATEDBY_USER</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CNPJ_Comprador__c</field>
+        <operation>contains</operation>
+        <value>23.212.652/0004-38</value>
+    </filters>
+    <filters>
+        <field>CNPJ_Comprador__c</field>
+        <operation>contains</operation>
+        <value>23.212.652/0003-57</value>
+    </filters>
+    <filters>
+        <field>CNPJ_Comprador__c</field>
+        <operation>contains</operation>
+        <value>23.212.652/0001-95</value>
+    </filters>
+    <filters>
+        <field>CNPJ_Comprador__c</field>
+        <operation>contains</operation>
+        <value>23.212.652/0002-76</value>
+    </filters>
+    <filters>
+        <field>CNPJ_Comprador__c</field>
+        <operation>contains</operation>
+        <value>23.212.652/0005-19</value>
+    </filters>
+    <label>IZU</label>
+</ListView>

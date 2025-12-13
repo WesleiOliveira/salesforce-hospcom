@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Motivo1__c</fullName>
+    <externalId>false</externalId>
+    <label>Motivo</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Redução de Quadro</fullName>
+                <default>false</default>
+                <label>Redução de Quadro</label>
+            </value>
+            <value>
+                <fullName>Baixa Performance</fullName>
+                <default>false</default>
+                <label>Baixa Performance</label>
+            </value>
+            <value>
+                <fullName>Problemas Pessoais</fullName>
+                <default>false</default>
+                <label>Problemas Pessoais</label>
+            </value>
+            <value>
+                <fullName>Mau Comportamento</fullName>
+                <default>false</default>
+                <label>Mau Comportamento</label>
+            </value>
+            <value>
+                <fullName>Outra Oportunidade</fullName>
+                <default>false</default>
+                <label>Outra Oportunidade</label>
+            </value>
+            <value>
+                <fullName>Outros/Mudança na Estrutura</fullName>
+                <default>false</default>
+                <label>Outros/Mudança na Estrutura</label>
+            </value>
+            <value>
+                <fullName>Mérito (há apenas mudança de salário)</fullName>
+                <default>false</default>
+                <label>Mérito (há apenas mudança de salário)</label>
+            </value>
+            <value>
+                <fullName>Promoção (há mudança de cargo e salário)</fullName>
+                <default>false</default>
+                <label>Promoção (há mudança de cargo e salário)</label>
+            </value>
+            <value>
+                <fullName>Movimentação Lateral (não há mudança de salário, apenas de cargo)</fullName>
+                <default>false</default>
+                <label>Movimentação Lateral (não há mudança de salário, apenas de cargo)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

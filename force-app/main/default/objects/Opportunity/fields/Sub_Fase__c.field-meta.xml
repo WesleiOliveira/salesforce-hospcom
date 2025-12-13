@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sub_Fase__c</fullName>
+    <externalId>false</externalId>
+    <label>Subfase</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>StageName</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>COTAÇÃO PRÉVIA</fullName>
+                <default>false</default>
+                <label>COTAÇÃO PRÉVIA</label>
+            </value>
+            <value>
+                <fullName>ABORTADO</fullName>
+                <default>false</default>
+                <label>ABORTADO</label>
+            </value>
+            <value>
+                <fullName>AGUARDANDO ANÁLISE</fullName>
+                <default>false</default>
+                <label>AGUARDANDO ANÁLISE</label>
+            </value>
+            <value>
+                <fullName>AGUARDANDO CONTRATO</fullName>
+                <default>false</default>
+                <label>AGUARDANDO CONTRATO</label>
+            </value>
+            <value>
+                <fullName>AGUARDANDO EMPENHO</fullName>
+                <default>false</default>
+                <label>AGUARDANDO EMPENHO</label>
+            </value>
+            <value>
+                <fullName>AGUARDANDO HOMOLOGAÇÃO/ADJUDICADO</fullName>
+                <default>false</default>
+                <label>AGUARDANDO HOMOLOGAÇÃO/ADJUDICADO</label>
+            </value>
+            <value>
+                <fullName>AGUARDANDO PARTICIPAÇÃO</fullName>
+                <default>false</default>
+                <label>AGUARDANDO PARTICIPAÇÃO</label>
+            </value>
+            <value>
+                <fullName>EM ANDAMENTO</fullName>
+                <default>false</default>
+                <label>EM ANDAMENTO</label>
+            </value>
+            <value>
+                <fullName>CANCELADO</fullName>
+                <default>false</default>
+                <label>CANCELADO</label>
+            </value>
+            <value>
+                <fullName>DUPLICADO</fullName>
+                <default>false</default>
+                <label>DUPLICADO</label>
+            </value>
+            <value>
+                <fullName>LOCAÇÃO</fullName>
+                <default>false</default>
+                <label>LOCAÇÃO</label>
+            </value>
+            <value>
+                <fullName>ESTIMATIVA DE PREÇOS</fullName>
+                <default>false</default>
+                <label>ESTIMATIVA DE PREÇOS</label>
+            </value>
+            <value>
+                <fullName>FINALIZADO TOTAL</fullName>
+                <default>false</default>
+                <label>FINALIZADO TOTAL</label>
+            </value>
+            <value>
+                <fullName>IMPUGNAÇÃO/ESCLARECIMENTOS</fullName>
+                <default>false</default>
+                <label>IMPUGNAÇÃO/ESCLARECIMENTOS</label>
+            </value>
+            <value>
+                <fullName>PERDIDO</fullName>
+                <default>false</default>
+                <label>PERDIDO</label>
+            </value>
+            <value>
+                <fullName>RECURSO</fullName>
+                <default>false</default>
+                <label>RECURSO</label>
+            </value>
+            <value>
+                <fullName>SUSPENSO</fullName>
+                <default>false</default>
+                <label>SUSPENSO</label>
+            </value>
+            <value>
+                <fullName>FINALIZADO PARCIAL</fullName>
+                <default>false</default>
+                <label>FINALIZADO PARCIAL</label>
+            </value>
+            <value>
+                <fullName>AGUARDANDO HABILITAÇÃO</fullName>
+                <default>false</default>
+                <label>AGUARDANDO HABILITAÇÃO</label>
+            </value>
+            <value>
+                <fullName>AGUARDANDO ENTREGA</fullName>
+                <default>false</default>
+                <label>AGUARDANDO ENTREGA</label>
+            </value>
+            <value>
+                <fullName>CONTRARRAZÃO DE RECURSO</fullName>
+                <default>false</default>
+                <label>CONTRARRAZÃO DE RECURSO</label>
+            </value>
+            <value>
+                <fullName>NEGÓCIO FUTURO</fullName>
+                <default>false</default>
+                <label>NEGÓCIO FUTURO</label>
+            </value>
+            <value>
+                <fullName>COMODATO</fullName>
+                <default>false</default>
+                <label>COMODATO</label>
+            </value>
+            <value>
+                <fullName>GARANTIDO</fullName>
+                <default>false</default>
+                <label>GARANTIDO</label>
+            </value>
+            <value>
+                <fullName>AGUARDANDO DECISÃO DE RECURSO</fullName>
+                <default>false</default>
+                <label>AGUARDANDO DECISÃO DE RECURSO</label>
+            </value>
+            <value>
+                <fullName>AGUARDANDO CONTRATO/EMPENHO</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>AGUARDANDO CONTRATO/EMPENHO</label>
+            </value>
+            <value>
+                <fullName>PREVISTO</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>PREVISTO</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>OPEN</controllingFieldValue>
+            <valueName>COTAÇÃO PRÉVIA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OPEN</controllingFieldValue>
+            <valueName>AGUARDANDO ANÁLISE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OPEN</controllingFieldValue>
+            <valueName>AGUARDANDO PARTICIPAÇÃO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OPEN</controllingFieldValue>
+            <valueName>EM ANDAMENTO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OPEN</controllingFieldValue>
+            <valueName>ESTIMATIVA DE PREÇOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OPEN</controllingFieldValue>
+            <valueName>IMPUGNAÇÃO/ESCLARECIMENTOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OPEN</controllingFieldValue>
+            <controllingFieldValue>UPSIDE</controllingFieldValue>
+            <controllingFieldValue>UPSIDE HIGH</controllingFieldValue>
+            <valueName>RECURSO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OPEN</controllingFieldValue>
+            <valueName>CONTRARRAZÃO DE RECURSO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OPEN</controllingFieldValue>
+            <controllingFieldValue>UPSIDE</controllingFieldValue>
+            <controllingFieldValue>UPSIDE HIGH</controllingFieldValue>
+            <valueName>AGUARDANDO DECISÃO DE RECURSO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>UPSIDE</controllingFieldValue>
+            <controllingFieldValue>UPSIDE HIGH</controllingFieldValue>
+            <valueName>AGUARDANDO HABILITAÇÃO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COMITED</controllingFieldValue>
+            <valueName>AGUARDANDO CONTRATO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COMITED</controllingFieldValue>
+            <valueName>AGUARDANDO EMPENHO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COMITED</controllingFieldValue>
+            <valueName>AGUARDANDO HOMOLOGAÇÃO/ADJUDICADO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COMITED</controllingFieldValue>
+            <valueName>GARANTIDO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>WIN</controllingFieldValue>
+            <valueName>LOCAÇÃO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>WIN</controllingFieldValue>
+            <valueName>FINALIZADO TOTAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>WIN</controllingFieldValue>
+            <valueName>FINALIZADO PARCIAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>WIN</controllingFieldValue>
+            <valueName>AGUARDANDO ENTREGA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>WIN</controllingFieldValue>
+            <valueName>COMODATO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>LOSS</controllingFieldValue>
+            <valueName>ABORTADO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>LOSS</controllingFieldValue>
+            <valueName>CANCELADO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>LOSS</controllingFieldValue>
+            <valueName>DUPLICADO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>LOSS</controllingFieldValue>
+            <valueName>PERDIDO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>LOSS</controllingFieldValue>
+            <valueName>SUSPENSO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>LOSS</controllingFieldValue>
+            <valueName>NEGÓCIO FUTURO</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

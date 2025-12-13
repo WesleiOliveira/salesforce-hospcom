@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Hospcom</fullName>
+    <active>true</active>
+    <description>Recebimento feito sobre NFs da Hospcom.</description>
+    <label>Hospcom</label>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Aberto</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Finalizado</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

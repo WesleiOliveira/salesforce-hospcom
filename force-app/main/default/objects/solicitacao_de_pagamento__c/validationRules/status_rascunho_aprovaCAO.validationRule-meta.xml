@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>status_rascunho_aprovaCAO</fullName>
+    <active>true</active>
+    <errorConditionFormula>acao_interna__c == false &amp;&amp;   TEXT(Statustus__c ) == &quot;Em aprovação&quot;</errorConditionFormula>
+    <errorDisplayField>Statustus__c</errorDisplayField>
+    <errorMessage>Você não pode mudar para aprovação alterando o status.</errorMessage>
+</ValidationRule>

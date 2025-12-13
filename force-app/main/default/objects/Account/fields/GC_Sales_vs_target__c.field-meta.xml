@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GC_Sales_vs_target__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(  GC_Sales_target_this_year__c &lt;&gt; 0, image(&quot;http://chart.apis.google.com/chart?cht=gom&amp;chd=t:&quot;&amp;TEXT(100 * GC_Sold_2010__c /  GC_Sales_target_this_year__c  )&amp;&quot;&amp;chs=200x75&amp;chco=CCCCCC,236FBD&amp;chl=&quot;,&quot;Sales vs target&quot;), 
+image(&quot;http://chart.apis.google.com/chart?cht=gom&amp;chco=CCCCCC,236FBD&amp;chd=t:&quot;&amp;TEXT(0 )&amp;&quot;&amp;chs=200x75&amp;chl=&quot;,&quot;Sales vs target&quot;))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Sales vs target</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Datas</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+Aprovado__c = true,
+OR(
+ISCHANGED(Inicio_do_contrato__c),
+ISCHANGED(Final_do_contrato__c)
+)
+)</errorConditionFormula>
+    <errorMessage>Datas do contrato só podem ser alteradas através de aditivo.</errorMessage>
+</ValidationRule>

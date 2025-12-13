@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Qtd_negativa</fullName>
+    <active>true</active>
+    <errorConditionFormula>Aguardando_recebimento__c &lt; 0</errorConditionFormula>
+    <errorMessage>Quantidade em recebimento não pode ser negativa.</errorMessage>
+</ValidationRule>

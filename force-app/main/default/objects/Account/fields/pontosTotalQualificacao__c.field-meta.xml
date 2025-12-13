@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>pontosTotalQualificacao__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(qualificacaoProduto__c == false &amp;&amp; 
+qualificaPrazo__c == false &amp;&amp; 
+qualificaAtendimento__c == false &amp;&amp;  
+Servi_o_de_garantia_do_fabricante__c == false,
+ &apos;0&apos;,
+
+IF(qualificacaoProduto__c == false &amp;&amp; 
+qualificaPrazo__c == false &amp;&amp; 
+qualificaAtendimento__c == false &amp;&amp;  
+Servi_o_de_garantia_do_fabricante__c == true,
+ &apos;20&apos;,
+
+IF(qualificacaoProduto__c == false &amp;&amp; 
+qualificaPrazo__c == false &amp;&amp; 
+qualificaAtendimento__c == true &amp;&amp;  
+Servi_o_de_garantia_do_fabricante__c == false,
+ &apos;15&apos;,
+
+IF(qualificacaoProduto__c == false &amp;&amp; 
+qualificaPrazo__c == false &amp;&amp; 
+qualificaAtendimento__c == true &amp;&amp;  
+Servi_o_de_garantia_do_fabricante__c == true,
+ &apos;45&apos;,
+
+IF(qualificacaoProduto__c == false &amp;&amp; 
+qualificaPrazo__c == true &amp;&amp; 
+qualificaAtendimento__c == false &amp;&amp;  
+Servi_o_de_garantia_do_fabricante__c == false,
+ &apos;20&apos;,
+
+IF(qualificacaoProduto__c == false &amp;&amp; 
+qualificaPrazo__c == true &amp;&amp; 
+qualificaAtendimento__c == false &amp;&amp;  
+Servi_o_de_garantia_do_fabricante__c == true,
+ &apos;40&apos;,
+
+IF(qualificacaoProduto__c == false &amp;&amp; 
+qualificaPrazo__c == true &amp;&amp; 
+qualificaAtendimento__c == true &amp;&amp;  
+Servi_o_de_garantia_do_fabricante__c == false,
+ &apos;35&apos;,
+
+IF(qualificacaoProduto__c == false &amp;&amp; 
+qualificaPrazo__c == true &amp;&amp; 
+qualificaAtendimento__c == true &amp;&amp;  
+Servi_o_de_garantia_do_fabricante__c == true,
+ &apos;55&apos;,
+
+
+IF(qualificacaoProduto__c == true &amp;&amp; 
+qualificaPrazo__c == false &amp;&amp; 
+qualificaAtendimento__c == false &amp;&amp;  
+Servi_o_de_garantia_do_fabricante__c == false,
+ &apos;45&apos;,
+
+
+IF(qualificacaoProduto__c == true &amp;&amp; 
+qualificaPrazo__c == false &amp;&amp; 
+qualificaAtendimento__c == false &amp;&amp;  
+Servi_o_de_garantia_do_fabricante__c == true,
+ &apos;65&apos;,
+
+
+IF(qualificacaoProduto__c == true &amp;&amp; 
+qualificaPrazo__c == false &amp;&amp; 
+qualificaAtendimento__c == true &amp;&amp;  
+Servi_o_de_garantia_do_fabricante__c == false,
+ &apos;60&apos;,
+
+
+IF(qualificacaoProduto__c == true &amp;&amp; 
+qualificaPrazo__c == false &amp;&amp; 
+qualificaAtendimento__c == true &amp;&amp;  
+Servi_o_de_garantia_do_fabricante__c == true,
+ &apos;80&apos;,
+
+
+IF(qualificacaoProduto__c == true &amp;&amp; 
+qualificaPrazo__c == true &amp;&amp; 
+qualificaAtendimento__c == false &amp;&amp;  
+Servi_o_de_garantia_do_fabricante__c == false,
+ &apos;65&apos;,
+
+IF(qualificacaoProduto__c == true &amp;&amp; 
+qualificaPrazo__c == true &amp;&amp; 
+qualificaAtendimento__c == false &amp;&amp;  
+Servi_o_de_garantia_do_fabricante__c == true,
+ &apos;85&apos;,
+
+
+
+IF(qualificacaoProduto__c == true &amp;&amp; 
+qualificaPrazo__c == true &amp;&amp; 
+qualificaAtendimento__c == true &amp;&amp;  
+Servi_o_de_garantia_do_fabricante__c == false,
+ &apos;80&apos;,
+&apos;100&apos;
+)))))))))))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Pontos Total da Qualificação</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Motivo__c</fullName>
+    <externalId>false</externalId>
+    <label>Motivo</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Produto do concorrente não atende</fullName>
+                <default>false</default>
+                <label>Produto do concorrente não atende</label>
+            </value>
+            <value>
+                <fullName>Concorrente com documentação errada</fullName>
+                <default>false</default>
+                <label>Concorrente com documentação errada</label>
+            </value>
+            <value>
+                <fullName>Inabilitação imprópria</fullName>
+                <default>false</default>
+                <label>Inabilitação imprópria</label>
+            </value>
+            <value>
+                <fullName>Melhoria de Termo de Referência</fullName>
+                <default>false</default>
+                <label>Melhoria de Termo de Referência</label>
+            </value>
+            <value>
+                <fullName>Descritivo direcionado</fullName>
+                <default>false</default>
+                <label>Descritivo direcionado</label>
+            </value>
+            <value>
+                <fullName>Valor inexequível</fullName>
+                <default>false</default>
+                <label>Valor inexequível</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

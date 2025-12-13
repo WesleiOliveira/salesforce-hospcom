@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>WIN</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+OpportunityId != &apos;&apos;,
+TEXT(Opportunity.StageName) != &apos;WIN&apos;,
+TEXT(Departamento3__c) = &apos;Comercial&apos;,
+TEXT(Natureza_de_Opera_o__c) = &apos;VENDA&apos;,
+TEXT(Status) = &apos;Aguardando Aprovação Financeira&apos;
+)</errorConditionFormula>
+    <errorDisplayField>OpportunityId</errorDisplayField>
+    <errorMessage>A oportunidade deve estar na fase WIN.</errorMessage>
+</ValidationRule>

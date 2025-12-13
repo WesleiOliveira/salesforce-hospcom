@@ -1,0 +1,832 @@
+<apex:page docType="html-5.0" controller="Scrum" showHeader="false" showChat="false" standardStylesheets="false"> 
+    <html>
+        <head>
+            <title>Scrum</title>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+            
+            <link   href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" rel="stylesheet"/>
+            <link   href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.min.css" rel="stylesheet"/>
+            
+            <script src="{!URLFOR($Resource.bootstrap3iso, 'js/bootstrap.min.js')}"></script>
+            <link  href="{!URLFOR($Resource.bootstrap3iso, 'css/bootstrap.min.css')}" rel="stylesheet"/>
+
+            <style>
+                /* ------------------ filtro ------------------ */
+                .cabecalho-quadro{
+                    overflow: hidden;
+                }
+                .cabecalho-coluna{
+                    margin-bottom: -99999px;
+                    padding-bottom: 99999px;
+                    padding-left:0px!important;
+                    padding-right:0px!important;
+                }
+                .cabecalho-coluna-interna{
+                    padding:5px!important;
+                }
+                .cabecalho-legenda{
+                    margin-bottom:2px!important;
+                    padding:1px;
+                    border:1px solid gray!important;
+                    border-left:5px solid gray!important;
+                    border-radius:0!important;
+                    font-size:11px;
+                }
+                .control-label{
+                    font-size:12px!important;
+                }
+                .form-group{
+                    margin-bottom:5px!important;
+                }
+                /* ------------------ legenda ------------------ */
+                .dpto-Administrativo    {border-color:Orange!important;}
+                .dpto-Diretoria         {border-color:Black!important;}
+                .dpto-Financeiro        {border-color:DarkGreen!important;}
+                .dpto-Comercial         {border-color:Chocolate!important;}
+                .dpto-Governo           {border-color:Red!important;}
+                .dpto-Assistência       {border-color:PaleGoldenrod!important;}
+                .dpto-Recursos_Humanos  {border-color:HotPink!important;}
+                .dpto-TI                {border-color:Blue!important;}
+                .dpto-Logística         {border-color:Yellow!important;}
+                .dpto-Compras           {border-color:#ff0066!important;}
+                .dpto-Qualidade         {border-color:Gray!important;}
+
+                /* ------------------ quadro ------------------ */
+                .quadro{
+                    overflow: hidden; 
+                    border:1px blue dotted!important;
+                    min-height:200px;
+                }
+                /* ------------------ coluna ------------------ */
+                .coluna-externa{
+                    margin-bottom: -99999px;
+                    padding-bottom: 99999px;
+                    padding-left:0px!important;
+                    padding-right:0px!important;
+                    border-right:1px blue dotted!important;
+                }
+                .coluna-interna{
+                    padding:5px!important;
+                    min-height:55px;
+                }
+                .coluna-cabecalho{
+                    text-align:center;
+                    font-weight:bold;
+                    padding:5px!important;
+                }
+                /* ------------------ cartão ------------------ */
+                .cartao{
+                    margin-bottom:5px!important;
+                    border-width: 1px 1px 1px 5px!important;
+                    border-color:gray;                  
+                    border-radius:0!important;
+                }
+                .cartao-cabecalho {
+                    cursor: move;
+                    padding:5px!important;
+                    font-size:12px;
+                    font-weight:bold;
+                }
+                .cartao-corpo {
+                    padding:5px!important;
+                    font-size:11.5px;
+                }
+                .cartao-rodape {
+                    padding:5px!important;
+                    font-size:12px;
+                    background-color:transparent!important;
+                }
+                .cartao-placeholder {
+                    border: 1px blue dotted;
+                    height: 50px;
+                    margin-bottom:5px;
+                }
+                .botao-novo:hover{
+                    cursor: pointer;
+                    color: #04B404;
+                }
+                .botao-pessoas:hover{
+                    cursor: pointer;
+                    color: blue;
+                }
+                .botao-editar:hover{
+                    cursor: pointer;
+                    color: #04B404;
+                }
+                .botao-excluir:hover{
+                    cursor: pointer;
+                    color: red;
+                }
+                /* ------------------ pessoas ------------------ */
+                .modal-pessoas-corpo{
+                    padding-top:0px!important;
+                    //padding-bottom:0px!important;
+                }
+                .pessoa-corpo{
+                    cursor: move!important;
+                    //border: 1px gray dotted!important;
+                    padding:0px!important;
+                }
+                .pessoa-placeholder {
+                    width:33.33%;
+                    border: 1px gray dotted;
+                    height: 44px;
+                    margin-bottom:5px;
+                }
+                .coluna-interna-pessoa{
+                    min-height:50px;
+                }
+                
+            </style>
+
+            <script type="text/javascript">
+                let timerId2; var modal_pai, modal_filho, pag_pai, pag_filho;
+                
+                var string_list, string_spri, string_exec, string_para, string_conc;
+                var string_in, string_out;
+                var atividade_coluna, atividade_id;
+                var assunto, descricao, prioridade, departamento, prazo, inicio;
+                var tem_mensagem, modal_nome='',botao='';
+                
+                $(document).ready(function(){
+                    // inicio geral
+                    if('{!add_pessoas}' != ''){
+                        MostrarPessoas('{!add_pessoas}');
+                    }
+                    $('#modal-botao-inserir, #modal-botao-editar').hide();
+                    
+                    function BloqueioBotoes(){
+                        if(botao == 'inserir' || botao == 'todos')
+                            $('#modal-botao-inserir input').attr("disabled", "disabled");
+                        if(botao == 'editar' || botao == 'todos')
+                            $('#modal-botao-editar input').attr("disabled", "disabled");
+                        if(botao == 'excluir' || botao == 'todos')
+                            $('#modal-botao-exclui input').attr("disabled", "disabled");
+                        if(botao == 'pessoas' || botao == 'todos')
+                            $('#modal-botao-pessoas input').attr("disabled", "disabled");
+                    }
+                    
+                    botao='todos';
+                    BloqueioBotoes();
+                    
+                    // modal inserir/editar
+                    $('#modal').on('show.bs.modal', function(e){
+                        if(window.top.document.querySelector('iframe')) {
+                            $('#modal').css('top', window.top.scrollY);
+                        }
+                    });
+                    $('#modal').on('hidden.bs.modal', function(){
+                        $('#modal-botao-inserir, #modal-botao-editar').hide();
+                        botao='todos';
+                        BloqueioBotoes();
+                        pag_pai.style.height = pag_filho.style.height;                        
+                    });
+                    
+                    // modal excluir
+                    $('#modal-exclui').on('hidden.bs.modal', function(){
+                        botao='todos';
+                        BloqueioBotoes('excluir');
+                    });
+                    
+                    // modal pessoas
+                    $('#modal-pessoas').on('show.bs.modal', function(e){
+                        if(window.top.document.querySelector('iframe')) {
+                            $('#modal-pessoas').css('top', window.top.scrollY);
+                        }
+                    });
+                    $('#modal-pessoas').on('hidden.bs.modal', function(){
+                        botao='todos';
+                        BloqueioBotoes('excluir');
+                        pag_pai.style.height = pag_filho.style.height;                        
+                    });
+                    
+                });    
+
+                function NovoCartao(valor_coluna){
+                    botao='inserir';
+                    modal_nome='formulario';
+                    $('#modal-botao-inserir').show();
+                    $('#modal-cabecalho').text('Novo Cartão');
+                    LimpaCartao();
+                    atividade_coluna.value = valor_coluna;
+                    $('#modal').modal({
+                        keyboard: true
+                    })      
+                    timerId2 = setInterval(AjustaAltura, 50); 
+                }
+
+                function EditaCartao(valor_id){
+                    botao='editar';
+                    modal_nome='formulario';
+                    $('#modal-botao-editar').show();
+                    $('#modal-cabecalho').text('Editar Cartão');
+                    atividade_id.value = valor_id;
+                    BuscaCartao();
+                    $('#modal').modal({
+                        keyboard: true
+                    })      
+                    timerId2 = setInterval(AjustaAltura, 50); 
+                }
+                
+                function ExcluiCartao(valor_id){
+                    botao='excluir';
+                    atividade_id.value = valor_id;
+                    BuscaCartao();
+                    $('#modal-exclui').modal({
+                        keyboard: true
+                    })
+                }
+                
+                function MostrarPessoas(valor_id){
+                    botao='pessoas';
+                    modal_nome='pessoas';
+                    atividade_id.value = valor_id;
+                    
+                    ExibirPessoas();
+                    $('#modal-pessoas').modal({
+                        keyboard: true
+                    })
+                    if('{!add_pessoas}' != ''){
+                        string_in.value = '{!pessoa_atual}';
+                    }
+                    timerId2 = setInterval(AjustaAltura, 50); 
+                }
+                
+                function AjustaAltura(){
+                    pag_pai     = document.querySelector('.bootstrap-iso');
+                    pag_filho   = document.querySelector('.container-fluid');   
+                    if(modal_nome=='formulario'){
+                        modal_pai   = document.querySelector('#modal');
+                        modal_filho = document.querySelector('#modal .modal-dialog');
+                    }
+                    else if(modal_nome=='pessoas'){
+                        modal_pai   = document.querySelector('#modal-pessoas');
+                        modal_filho = document.querySelector('#modal-pessoas .modal-dialog');
+                    }
+                    if((modal_pai.offsetHeight != 0) && ((modal_pai.offsetTop + modal_filho.offsetHeight) > pag_pai.offsetHeight)){
+                        pag_pai.style.height = (modal_pai.offsetTop + modal_filho.offsetHeight)+'px';
+                        clearInterval(timerId2);
+                    }
+                }
+            </script>
+
+        </head>
+
+        <body id="corpo-pag" style="padding-top:7px;">
+            <div class="bootstrap-iso">
+                <div class="container-fluid">
+                    
+                    <!-- cabeçalho -->
+                    <div class="row cabecalho-quadro">
+                        
+                        <!-- filtro -->
+                        <apex:form >
+                            <apex:actionFunction name="BuscaCartoes" action="{!BuscaCartoes}" />
+                            <div class="col-sm-6 panel-info cabecalho-coluna">
+                                <div class="panel-body cabecalho-coluna-interna">
+                                    <form class="form-horizontal" action="#">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-4" for="departamento">Departamento:</label>
+                                                    <div class="col-sm-8">
+                                                        <apex:selectList styleClass="form-control input-sm" multiselect="false" size="1" value="{!departamento_f}" onchange="BuscaCartoes()">
+                                                            <apex:selectOptions value="{!departamentos_l}"/>
+                                                        </apex:selectList>  
+                                                    </div>
+                                                </div>
+                                            </div>                                  
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-4" for="usuario">Pessoa:</label>
+                                                    <div class="col-sm-8">
+                                                        <apex:selectList styleClass="form-control input-sm" multiselect="false" size="1" value="{!pessoa_f}" onchange="BuscaCartoes()">
+                                                            <apex:selectOptions value="{!pessoas_l}"/>
+                                                        </apex:selectList>  
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div>                                          
+                                        <div class="row">                                           
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-4" for="usuario">Filtrar:</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control input-sm" id="filtro_quadro" placeholder="Tudo"/>
+                                                    </div>
+                                                </div>
+                                            </div>      
+                                            <div class="col-sm-offset-2 col-sm-4">
+                                                <button type="button" class="btn btn-info btn-sm" onclick="window.location.href=window.location.href;" style="margin-top:2px;margin-left:5px;">
+                                                    <span class="glyphicon glyphicon-refresh"></span> Recarregar
+                                                </button>                                               
+                                            </div>                                  
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </apex:form>
+                        
+                        <!-- legenda -->
+                        <div class="col-sm-offset-1 col-sm-5 panel-info cabecalho-coluna">
+                            <div class="panel-body cabecalho-coluna-interna">
+                                <label class="control-label col-sm-2">Legenda:</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <apex:repeat value="{!legendas}" var="legenda">
+                                            <div class="col-sm-4">
+                                                <div class="cabecalho-legenda dpto-{!SUBSTITUTE(SUBSTITUTE(legenda,' ','_'),'.','')}">{!legenda}</div>
+                                            </div>
+                                        </apex:repeat>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>    
+                    
+                    <apex:outputText rendered="{!IF(tem_mensagem == true, true, false)}" >
+                        <apex:variable var="cont_msg" value="{!0}"/>
+                        <div class="alert alert-danger alert-dismissible" style="font-weight:bold;margin-bottom:5px!important; padding-top:5px!important;padding-bottom:5px!important;">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <apex:repeat value="{!mensagens}" var="mensagem">
+                                <apex:variable var="cont_msg" value="{!cont_msg+1}"/>
+                                <apex:outputText rendered="{!IF(cont_msg > 1, true, false)}" >
+                                    <br/>
+                                </apex:outputText>
+                                {!mensagem}
+                            </apex:repeat>
+                        </div>                      
+                    </apex:outputText>
+                    
+                    
+                    <!-- quadro scrum -->                    
+                    <apex:form >
+                    
+                        <apex:inputHidden value="{!string_list}" id="string_list" />
+                        <apex:inputHidden value="{!string_spri}" id="string_spri" />
+                        <apex:inputHidden value="{!string_exec}" id="string_exec" />
+                        <apex:inputHidden value="{!string_para}" id="string_para" />
+                        <apex:inputHidden value="{!string_conc}" id="string_conc" />
+                        <apex:inputHidden value="{!atividade_id}" id="atividade_id" />
+                        <script>
+                            string_list = document.getElementById('{!$Component.string_list}');
+                            string_spri = document.getElementById('{!$Component.string_spri}');
+                            string_exec = document.getElementById('{!$Component.string_exec}');
+                            string_para = document.getElementById('{!$Component.string_para}');
+                            string_conc = document.getElementById('{!$Component.string_conc}');
+                            atividade_id = document.getElementById('{!$Component.atividade_id}');
+                        </script>
+                        <apex:actionFunction name="AtualizaCartaoColuna" action="{!AtualizaCartaoColuna}" /> <!--rerender="FormMensagem", oncomplete="ValidaColunaAtualizada();"-->
+                        <apex:actionFunction name="BuscaCartao" action="{!BuscaCartao}" rerender="assunto,prioridade,descricao,departamento,prazo,inicio" oncomplete="ValidaPreenchimento();InicializaCalendario();DesbloqueioBotoes()"/>
+                        <apex:actionFunction name="LimpaCartao" action="{!LimpaCartao}" rerender="assunto,prioridade,descricao,departamento,prazo,inicio" oncomplete="ValidaPreenchimento();InicializaCalendario();DesbloqueioBotoes();"/>
+                        <apex:actionFunction name="ExibirPessoas" action="{!ExibirPessoas}" rerender="form-modal-pessoas" oncomplete="InicializaArrastavelPessoas();InicializaFiltroPessoas();DesbloqueioBotoes()"/>
+                        
+                        <div class="row quadro" id="quadro">
+                            
+                            <!-- colunas -->
+                            <apex:repeat value="{!colunas}" var="coluna">
+                                <apex:variable var="largura" value="{!'2'}"/>
+                                <apex:outputText rendered="{!IF(OR(coluna=='Executando',coluna=='Concluído'), true, false)}" >
+                                    <apex:variable var="largura" value="{!'3'}"/>
+                                </apex:outputText>
+                                <div class="col-sm-{!largura} panel-primary coluna-externa">
+                                    <div class="panel-heading coluna-cabecalho">
+                                        {!coluna}
+                                        <span class="glyphicon glyphicon-plus-sign botao-novo" style="position:absolute; right:0; padding:6px;" onclick="NovoCartao('{!coluna}');"></span> 
+                                    </div>
+                                    <div class="panel-body coluna-interna" id="{!SUBSTITUTE(coluna,' ','_')}">
+                                        
+                                        <!-- cartões -->
+                                        <apex:repeat value="{!atividades}" var="atividade">
+                                            <apex:outputText rendered="{!IF(atividade.Coluna__c == coluna, true, false)}" >
+                                                <div class="panel panel-default cartao dpto-{!SUBSTITUTE(SUBSTITUTE(atividade.Departamento__c,' ','_'),'.','')}" id="{!atividade.Id}">
+                                                    <div class="panel-heading cartao-cabecalho">
+                                                        <table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+                                                            <tr>
+                                                                <td>
+                                                                    {!atividade.Name}
+                                                                </td>
+                                                                <td style="text-align:right">
+                                                                    <apex:variable var="classe" value="{!''}"/>
+                                                                    <apex:outputText rendered="{!IF(atividade.Prioridade__c == 'Alta', true, false)}" >
+                                                                        <apex:variable var="classe" value="{!'label-danger'}"/>
+                                                                    </apex:outputText>                                              
+                                                                    <apex:outputText rendered="{!IF(atividade.Prioridade__c == 'Média', true, false)}" >
+                                                                        <apex:variable var="classe" value="{!'label-warning'}"/>
+                                                                    </apex:outputText>                                              
+                                                                    <apex:outputText rendered="{!IF(atividade.Prioridade__c == 'Baixa', true, false)}" >
+                                                                        <apex:variable var="classe" value="{!'label-success'}"/>
+                                                                    </apex:outputText>      
+                                                                    <span class="label {!classe}"><apex:outputField value="{!atividade.Prioridade__c}"/></span>
+                                                                    <span class="glyphicon glyphicon-user botao-pessoas"  onclick="MostrarPessoas('{!atividade.Id}')"></span> 
+                                                                    <span class="glyphicon glyphicon-pencil botao-editar" onclick="EditaCartao('{!atividade.Id}')"></span> 
+                                                                    <span class="glyphicon glyphicon-trash botao-excluir" onclick="ExcluiCartao('{!atividade.Id}')"></span> 
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    <div class="panel-body cartao-corpo">
+                                                        <table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+                                                            <tr>
+                                                                <td colspan="2" style="text-align: justify; text-justify: inter-word;padding-bottom:5px;">
+                                                                    <apex:outputField value="{!atividade.Descricao__c}"/>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="text-align:left;width:50%;">
+                                                                    <apex:outputText rendered="{!IF(atividade.Inicio__c != null, true, false)}" >                                                                       
+                                                                        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> 
+                                                                        &nbsp;<apex:outputField value="{!atividade.Inicio__c}"/>
+                                                                    </apex:outputText>
+                                                                </td>
+                                                                <apex:variable var="destaque" value="{!''}"/>
+                                                                <apex:variable var="prazo" value="{!''}"/>
+                                                                <apex:outputText rendered="{!IF(AND(atividade.Prazo__c != null,atividade.Coluna__c != 'Concluído'), true, false)}" >
+                                                                    <apex:outputText rendered="{!IF(hoje > atividade.Prazo__c, true, false)}" >
+                                                                        <apex:variable var="destaque" value="{!'background-color:yellow;'}"/>
+                                                                        <apex:variable var="prazo" value="atrazado"/>
+                                                                    </apex:outputText>                                              
+                                                                </apex:outputText> 
+                                                                
+                                                                <td style="text-align:right;width:50%;{!destaque}">
+                                                                    <apex:outputText rendered="{!IF(atividade.Prazo__c != null, true, false)}" >                                                                        
+                                                                        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> 
+                                                                        &nbsp;<apex:outputField value="{!atividade.Prazo__c}"/>
+                                                                    </apex:outputText>
+                                                                </td>
+                                                            </tr>
+                                                            <div style="display:none">
+                                                                {!atividade.Departamento__c} {!prazo} {!atividade.Coluna__c}
+                                                            </div>
+                                                        </table>
+                                                    </div>
+                                                    
+                                                    <apex:variable var="cont" value="{!0}"/>
+                                                    <apex:repeat value="{!tarefas}" var="tarefa">
+                                                        <apex:outputText rendered="{!IF(tarefa.WhatId == atividade.Id, true, false)}" >
+                                                            <apex:variable var="cont" value="{!cont+1}"/>
+                                                        </apex:outputText>                                              
+                                                    </apex:repeat>
+                                                
+                                                    <apex:outputText rendered="{!IF(cont > 0, true, false)}" >
+                                                        <div class="panel-footer cartao-rodape">
+                                                            <div class="row">
+                                                                <apex:repeat value="{!tarefas}" var="tarefa">
+                                                                    <apex:outputText rendered="{!IF(tarefa.WhatId == atividade.Id, true, false)}" >
+                                                                        <div class="col-sm-12">
+                                                                            <table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+                                                                                <tr>
+                                                                                    <td style="padding-right:5px; vertical-align:middle; width:27px;">
+                                                                                        <apex:repeat value="{!usuarios}" var="usuario">
+                                                                                            <apex:outputText rendered="{!IF(tarefa.OwnerId == usuario.Id, true, false)}" >
+                                                                                                <img src="{!usuario.SmallPhotoUrl}" class="img-circle" style="width:22px;height:22px; border:1px solid gray;" />                                                                                        
+                                                                                            </apex:outputText>  
+                                                                                        </apex:repeat>
+                                                                                    </td>
+                                                                                    <td style="vertical-align:middle;">
+                                                                                        <apex:outputField value="{!tarefa.Owner.Name}"/>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </apex:outputText>                                              
+                                                                </apex:repeat>
+                                                            </div>
+                                                        </div>
+                                                    </apex:outputText>                                              
+
+                                                </div>
+                                            </apex:outputText> 
+                                        </apex:repeat>
+
+                                    </div>
+                                </div>
+                            </apex:repeat>
+                            
+                        </div>
+                    </apex:form>
+                    
+                    <!-- modal inserir/editar -->
+                    <div class="modal fade" id="modal" role="dialog">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content panel panel-default cartao">
+
+                                <!-- cabeçalho -->
+                                <div class="modal-header panel-heading" style="text-align:center;">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title" id="modal-cabecalho"></h4>
+                                </div>
+
+                                <!-- conteúdo -->
+                                <div class="modal-body" id="modal-corpo">
+                                    <apex:form styleClass="form-horizontal" id="form-modal">
+                                        <apex:inputHidden value="{!atividade_coluna}" id="atividade_coluna" />
+                                        <script>
+                                            atividade_coluna = document.getElementById('{!$Component.atividade_coluna}');
+                                        </script>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2" for="assunto">Assunto:</label>
+                                            <div class="col-sm-5">
+                                                <apex:inputField styleClass="form-control obrigatorio" id="assunto" value="{!atividade.Name}" html-autofocus="true"/>
+                                                <script>assunto = document.getElementById('{!$Component.assunto}');</script>
+                                            </div>
+                                            <label class="control-label col-sm-2" for="prioridade">Prioridade:</label>
+                                            <div class="col-sm-3">
+                                                <apex:inputField styleClass="form-control obrigatorio" id="prioridade" value="{!atividade.Prioridade__c}"/>
+                                                <script>prioridade = document.getElementById('{!$Component.prioridade}');</script>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2" for="descricao">Descrição:</label>
+                                            <div class="col-sm-10">
+                                                <apex:inputField styleClass="form-control obrigatorio" id="descricao" value="{!atividade.Descricao__c}"/>
+                                                <script>descricao = document.getElementById('{!$Component.descricao}');</script>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2" for="departamento">Departamento:</label>
+                                            <div class="col-sm-4">
+                                                <apex:inputField styleClass="form-control obrigatorio" id="departamento" value="{!atividade.Departamento__c}"/>
+                                                <script>departamento = document.getElementById('{!$Component.departamento}');</script>
+                                            </div>
+                                            <label class="control-label col-sm-1" for="inicio">Início:</label>
+                                            <div class="col-sm-2">
+                                                <apex:inputField styleClass="form-control datepicker" id="inicio" value="{!atividade.Inicio__c}"/>
+                                                <script>inicio = document.getElementById('{!$Component.inicio}');</script>
+                                            </div>
+                                            <label class="control-label col-sm-1" for="prazo">Prazo:</label>
+                                            <div class="col-sm-2">
+                                                <apex:inputField styleClass="form-control datepicker" id="prazo" value="{!atividade.Prazo__c}"/>
+                                                <script>prazo = document.getElementById('{!$Component.prazo}');</script>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <div class="row" id="modal-botao-inserir">
+                                            <div class="col-sm-12" style="text-align:right">
+                                                <apex:commandButton value="Fixar no quadro" styleClass="btn btn-success" action="{!InsereCartao}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row" id="modal-botao-editar">
+                                            <div class="col-sm-12" style="text-align:right">
+                                                <apex:commandButton value="Efetivar alterações" styleClass="btn btn-success" action="{!AtualizaCartao}"/>
+                                            </div>
+                                        </div>
+                                    </apex:form>
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>                  
+                    
+                    <!-- modal excluir -->
+                    <div class="modal fade" id="modal-exclui" role="dialog">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content panel panel-default cartao">
+
+                                <!-- cabeçalho -->
+                                <div class="modal-header panel-heading" style="text-align:center;">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title" id="modal-exclui-cabecalho">Certeza disso?</h4>
+                                </div>
+
+                                <!-- conteúdo -->
+                                <div class="modal-body" id="modal-exclui-corpo">
+                                    <apex:form styleClass="form-horizontal" id="form-modal-exclui">
+                                        <div class="row" id="modal-botao-exclui">
+                                            <div class="col-sm-12" style="text-align:right">
+                                                <apex:commandButton value="Jogar fora" styleClass="btn btn-danger" action="{!DeletaCartao}"/>
+                                            </div>
+                                        </div>
+                                    </apex:form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- modal pessoas -->
+                    <div class="modal fade" id="modal-pessoas" role="dialog">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content panel panel-default pessoa">
+                                
+                                <!-- MODAL CABEÇALHO -->
+                                <div class="modal-header panel-heading" style="text-align:center;">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title" id="modal-pessoas-cabecalho">Quem faz parte?</h4>
+                                    <input type="text" class="form-control input-sm" id="filtro_out" placeholder="Pesquisar..."/>
+                                </div>
+                                
+                                <!-- MODAL CORPO -->
+                                <div class="modal-body panel-body modal-pessoas-corpo" id="modal-pessoas-corpo">
+                                    <apex:form styleClass="form-horizontal" id="form-modal-pessoas">
+                                        <apex:inputHidden value="{!string_in}" id="string_in" />
+                                        <apex:inputHidden value="{!string_out}" id="string_out" />
+                                        <script>
+                                            string_in = document.getElementById('{!$Component.string_in}');
+                                            string_out = document.getElementById('{!$Component.string_out}');
+                                        </script>
+
+                                    
+                                        <!-- QUADRO -->
+                                        <div class="row">
+                                            
+                                            <!-- COLUNA IN -->
+                                            <div class="col-sm-6 panel-default" style="padding:0px;">
+                                                
+                                                <!-- COLUNA CABEÇALHO -->
+                                                <div class="panel-heading coluna-cabecalho">
+                                                    Esses fazem 
+                                                </div>
+                                                
+                                                <!-- COLUNA CORPO -->
+                                                <div class="panel-body coluna-interna-pessoa" id="grupo-in" style="font-size:11px;min-height:100px!important;max-height:270px!important;overflow-y:auto; width:100%;">
+                                                    
+                                                    <!-- PESSOA -->
+                                                    <apex:repeat value="{!pessoas_in}" var="pessoa" id="pessoas_in">
+                                                        <div class="col-xs-4 pessoa-corpo" id="{!pessoa.Id}">
+                                                            <table cellspacing="0" cellpadding="0" border="0" style="width:100%;" class="pessoa-cabecalho">
+                                                                <tr>
+                                                                    <td style="padding-right:5px; vertical-align:top; width:50px;">
+                                                                        <img src="{!pessoa.SmallPhotoUrl}" class="img-circle" style="width:40px;height:40px; border:1px solid gray;" />                                                                                     
+                                                                    </td>
+                                                                    <td style="vertical-align:top;">
+                                                                        <apex:outputField value="{!pessoa.Name}"/>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </apex:repeat>
+                                                        
+                                                </div>
+                                                
+                                            </div>                                          
+                                            
+                                            <!-- COLUNA OUT -->
+                                            <div class="col-sm-6 panel-default" style="padding:0px;">
+                                                
+                                                <!-- COLUNA CABEÇALHO -->
+                                                <div class="panel-heading coluna-cabecalho">
+                                                    Esses não 
+                                                </div>
+                                                
+                                                <!-- COLUNA CORPO -->
+                                                <div class="panel-body" style="font-size:11px;max-height:270px!important;overflow-y:auto;">
+                                                    <div class="row coluna-interna-pessoa" style="width:100%;" id="grupo-out">
+                                                    
+                                                        <!-- PESSOA -->
+                                                        <apex:repeat value="{!pessoas_out}" var="pessoa" id="pessoas_out">
+                                                            <div class="col-xs-4 pessoa-corpo" id="{!pessoa.Id}">
+                                                                <table cellspacing="0" cellpadding="0" border="0" style="width:100%;" class="pessoa-cabecalho pessoa-corpo">
+                                                                    <tr>
+                                                                        <td style="padding-right:5px; vertical-align:top; width:50px;">
+                                                                            <img src="{!pessoa.SmallPhotoUrl}" class="img-circle" style="width:40px;height:40px; border:1px solid gray;" />                                                                                     
+                                                                        </td>
+                                                                        <td style="vertical-align:top;">
+                                                                            <apex:outputField value="{!pessoa.Name}"/>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </apex:repeat>
+                                                        
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                        <div class="row" id="modal-botao-pessoas">
+                                            <div class="col-sm-12" style="text-align:right">
+                                                <apex:commandButton value="Terminei!" styleClass="btn btn-success" style="margin-top:15px;" action="{!AtualizaPessoas}"/>
+                                            </div>
+                                        </div>
+
+                                    </apex:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>      
+                
+                
+                <script>
+                    $(document).ready(function() {
+                        ValidaPreenchimento();
+                        InicializaCalendario();
+                        
+                        InicializaArrastavelPainel();
+                        InicializaFiltroQuadro();
+                        
+                        InicializaArrastavelPessoas();
+                        InicializaFiltroPessoas();                      
+                    });
+                    
+                    function DesbloqueioBotoes(){
+                        if(botao == 'inserir' || botao == 'todos')
+                            $('#modal-botao-inserir input').removeAttr('disabled');
+                        if(botao == 'editar' || botao == 'todos')
+                            $('#modal-botao-editar input').removeAttr('disabled');
+                        if(botao == 'excluir' || botao == 'todos')
+                            $('#modal-botao-exclui input').removeAttr('disabled');
+                        if(botao == 'pessoas' || botao == 'todos')
+                            $('#modal-botao-pessoas input').removeAttr('disabled');
+                    }
+                    
+                    function ValidaPreenchimento(){
+                        $('#modal-corpo .obrigatorio').attr('required', true);
+                    }
+                    
+                    function InicializaCalendario(){
+                        $( "#modal-corpo .datepicker" ).datepicker({
+                            dateFormat: 'dd/mm/yy'
+                        });
+                    }
+                    
+                    function InicializaArrastavelPainel(){
+                        $(".coluna-interna").sortable({
+                            connectWith: ".coluna-interna",
+                            handle: ".cartao-cabecalho",
+                            placeholder: "cartao-placeholder ui-corner-all",
+                        });
+                        $(".cartao")
+                            .addClass("ui-widget ui-widget-content ui-helper-clearfix ui-corner-all")
+                            .find(".cartao-cabecalho")
+                            .addClass("ui-widget-header ui-corner-all")
+                        $(".portlet-toggle").click(function() {
+                            var icon = $( this );
+                            icon.toggleClass("ui-icon-minusthick ui-icon-plusthick");
+                            icon.closest(".cartao").find(".cartao-corpo").toggle();
+                        });
+                        $(".coluna-interna").on("sortupdate", function( event, ui ) {
+                            if (this === ui.item.parent()[0]) {
+                                string_list.value   = $("#Lista_de_Entrega").sortable('toArray').toString();
+                                string_spri.value   = $("#Sprint").sortable('toArray').toString();
+                                string_exec.value   = $("#Executando").sortable('toArray').toString();
+                                string_para.value   = $("#Paralisado").sortable('toArray').toString();
+                                string_conc.value   = $("#Concluído").sortable('toArray').toString();
+                                AtualizaCartaoColuna();
+                            }
+                        } );
+                    }
+                    
+                    function InicializaArrastavelPessoas(){
+                        $(".coluna-interna-pessoa").sortable({
+                            connectWith: ".coluna-interna-pessoa",
+                            handle: ".pessoa-cabecalho",
+                            placeholder: "pessoa-placeholder ui-corner-all"
+                        });
+                        $(".pessoa")
+                            .addClass("ui-widget ui-widget-content ui-helper-clearfix ui-corner-all")
+                            .find(".pessoa-cabecalho")
+                            .addClass("ui-widget-header ui-corner-all")
+                        $(".portlet-toggle-pessoa").click(function() {
+                            var icon = $( this );
+                            icon.toggleClass("ui-icon-minusthick ui-icon-plusthick");
+                            icon.closest(".pessoa").find(".pessoa-corpo").toggle();
+                        });
+                        $(".coluna-interna-pessoa").on("sortupdate", function( event, ui ) {
+                            if (this === ui.item.parent()[0]) {
+                                string_in.value     = $("#grupo-in").sortable('toArray').toString();
+                                string_out.value    = $("#grupo-out").sortable('toArray').toString();
+                            }
+                        } );
+                    }
+                    
+                    function InicializaFiltroQuadro(){
+                        $("#filtro_quadro").on("keyup", function() {
+                            var value = $(this).val().toLowerCase();
+                            $("#quadro .cartao").filter(function() {
+                                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                            });
+                        });
+                    }
+                    function InicializaFiltroPessoas(){
+                        $("#filtro_out").val("");
+                        $("#filtro_out").on("keyup", function() {
+                            var value = $(this).val().toLowerCase();
+                            $("#modal-pessoas-corpo .pessoa-corpo").filter(function() {
+                                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                            });
+                        });
+                    }
+                    
+                    function ValidaColunaAtualizada(){
+                        if(tem_mensagem.value == 'true'){
+                            $(".coluna-interna-pessoa").sortable("cancel");
+                        }
+                    }
+                </script>
+            </div>
+        </body>
+    </html>
+</apex:page>

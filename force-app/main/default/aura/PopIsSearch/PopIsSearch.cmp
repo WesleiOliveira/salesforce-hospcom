@@ -1,0 +1,48 @@
+<aura:component extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <!-- Atributos -->
+    <lightning:flow aura:id="flowData" onstatuschange="{!c.statusFlow}"/>
+    <aura:attribute name="isLoading" type="Boolean" default="false"/>
+    <aura:attribute name="searchTerm" type="String" default="" />
+    <aura:attribute name="instrucoesDeServico" type="Instrucao_de_Servico__c[]" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="selectedInstrucoes" type="Instrucao_de_Servico__c[]" default="[]"/> 
+
+    
+    <div style="padding: 5px">
+            
+            <div id='principalDiv12345' class='principalDiv12345'>
+                
+                <lightning:input name="search" id="campoDePesquisa" style="width: 100%" label="Pesquise e selecione as Intruções de Serviço" value="{!v.searchTerm}" onchange="{!c.buscaIs}"/>
+                
+                <div class="tag-container">
+                    <aura:iteration items="{!v.selectedInstrucoes}" var="tag">
+                        <div class="tag-item">
+                            <span>{!tag.Name}</span>
+                            <span class="remove-tag" onclick="{!c.removerTag}" data-tagid="{!tag.Id}">×</span>
+                        </div>
+                    </aura:iteration>
+                </div>
+                
+                <br></br>
+                
+                
+                <div class='resultados12212' id='resultados12212'>
+                    <aura:iteration items="{!v.instrucoesDeServico}" var="item">
+                        <p class='is12122' data-id='{!item.Id}' onclick="{!c.adicionarTag}">                   
+                            <strong>Instrução de Serviço:&nbsp;</strong> {!item.Name} |&nbsp;
+                            <strong>Departamento:&nbsp;</strong> {!item.Departamento__c}
+                        </p>
+                    </aura:iteration>
+                </div>
+            </div>
+            
+            <aura:if isTrue="{!not(empty(v.selectedInstrucoes))}">
+                <button id='button3243' class='button3243' onclick="{!c.inicarFlow}">
+                    Clique para adicionar uma Instrução de Serviço
+                </button>
+            </aura:if>
+            
+
+    </div>
+    
+</aura:component>

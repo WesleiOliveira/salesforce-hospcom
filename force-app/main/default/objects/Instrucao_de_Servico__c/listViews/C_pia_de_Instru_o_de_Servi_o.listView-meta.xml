@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>C_pia_de_Instru_o_de_Servi_o</fullName>
+    <columns>NAME</columns>
+    <columns>Departamento__c</columns>
+    <columns>Cargo__c</columns>
+    <columns>Responsavel__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Empresa__c</field>
+        <operation>contains</operation>
+        <value>IZU</value>
+    </filters>
+    <label>Instrução de Serviço IZU</label>
+</ListView>

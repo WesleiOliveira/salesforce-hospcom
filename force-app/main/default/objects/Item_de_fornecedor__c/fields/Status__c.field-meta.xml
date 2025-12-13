@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>NOVO</fullName>
+                <default>true</default>
+                <label>NOVO</label>
+            </value>
+            <value>
+                <fullName>RECEBIDO PARCIAL</fullName>
+                <default>false</default>
+                <label>RECEBIDO PARCIAL</label>
+            </value>
+            <value>
+                <fullName>RECEBIDO TOTAL</fullName>
+                <default>false</default>
+                <label>RECEBIDO TOTAL</label>
+            </value>
+            <value>
+                <fullName>CMP - EM PRODUÇÃO FORN.</fullName>
+                <default>false</default>
+                <label>CMP - EM PRODUÇÃO FORN.</label>
+            </value>
+            <value>
+                <fullName>CMP - EM COLETA PORTO/FORNECEDOR</fullName>
+                <default>false</default>
+                <label>CMP - EM COLETA PORTO/FORNECEDOR</label>
+            </value>
+            <value>
+                <fullName>EM TRANSITO</fullName>
+                <default>false</default>
+                <label>EM TRANSITO</label>
+            </value>
+            <value>
+                <fullName>CMP - EM DESEMBARAÇO</fullName>
+                <default>false</default>
+                <label>CMP - EM DESEMBARAÇO</label>
+            </value>
+            <value>
+                <fullName>CMP - EM TRANSITO NACIONAL</fullName>
+                <default>false</default>
+                <label>CMP - EM TRANSITO NACIONAL</label>
+            </value>
+            <value>
+                <fullName>CMP - EM TRANSITO INTERNACIONAL</fullName>
+                <default>false</default>
+                <label>CMP - EM TRANSITO INTERNACIONAL</label>
+            </value>
+            <value>
+                <fullName>CMP - PRE-EMBARQUE IMPORTAÇÃO</fullName>
+                <default>false</default>
+                <label>CMP - PRE-EMBARQUE IMPORTAÇÃO</label>
+            </value>
+            <value>
+                <fullName>CMP - AG. PAGAMENTO FORN</fullName>
+                <default>false</default>
+                <label>CMP - AG. PAGAMENTO FORN</label>
+            </value>
+            <value>
+                <fullName>CMP - AG. CONSOLIDAÇÃO DE CARGA</fullName>
+                <default>false</default>
+                <label>CMP - AG. CONSOLIDAÇÃO DE CARGA</label>
+            </value>
+            <value>
+                <fullName>CMP - AG. DESEMBARAÇO ADUANEIRO</fullName>
+                <default>false</default>
+                <label>CMP - AG. DESEMBARAÇO ADUANEIRO</label>
+            </value>
+            <value>
+                <fullName>CMP - AG. NFE NACIONALIZAÇÃO</fullName>
+                <default>false</default>
+                <label>CMP - AG. NFE NACIONALIZAÇÃO</label>
+            </value>
+            <value>
+                <fullName>AG APROVAÇÃO PEDIDO</fullName>
+                <default>false</default>
+                <label>AG APROVAÇÃO PEDIDO</label>
+            </value>
+            <value>
+                <fullName>CMP - AG. DADOS TECNICOS</fullName>
+                <default>false</default>
+                <label>CMP - AG. DADOS TECNICOS</label>
+            </value>
+            <value>
+                <fullName>AG. RECEBIMENTO LOGISTICA</fullName>
+                <default>false</default>
+                <label>AG. RECEBIMENTO LOGISTICA</label>
+            </value>
+            <value>
+                <fullName>CMP - AG. AUTORIZAÇÃO DESEMBARAÇO</fullName>
+                <default>false</default>
+                <label>CMP - AG. AUTORIZAÇÃO DESEMBARAÇO</label>
+            </value>
+            <value>
+                <fullName>CMP - AG. REMOÇAO DE CARGA</fullName>
+                <default>false</default>
+                <label>CMP - AG. REMOÇAO DE CARGA</label>
+            </value>
+            <value>
+                <fullName>CMP - AG. LIBERAÇAO CANAL VERMELHO</fullName>
+                <default>false</default>
+                <label>CMP - AG. LIBERAÇAO CANAL VERMELHO</label>
+            </value>
+            <value>
+                <fullName>CMP - AG. LIBERAÇAO CANAL AMARELO</fullName>
+                <default>false</default>
+                <label>CMP - AG. LIBERAÇAO CANAL AMARELO</label>
+            </value>
+            <value>
+                <fullName>CMP - AG. LIBERAÇAO CANAL CINZA</fullName>
+                <default>false</default>
+                <label>CMP - AG. LIBERAÇAO CANAL CINZA</label>
+            </value>
+            <value>
+                <fullName>CMP - AG. ACEITE DE CARGA DG/BATERIA</fullName>
+                <default>false</default>
+                <label>CMP - AG. ACEITE DE CARGA DG/BATERIA</label>
+            </value>
+            <value>
+                <fullName>AG. PRONTIDÃO</fullName>
+                <default>false</default>
+                <label>AG. PRONTIDÃO</label>
+            </value>
+            <value>
+                <fullName>CMP - AG. ENTREGA FORNECEDOR</fullName>
+                <default>false</default>
+                <label>CMP - AG. ENTREGA FORNECEDOR</label>
+            </value>
+            <value>
+                <fullName>CANCELADO</fullName>
+                <default>false</default>
+                <label>CANCELADO</label>
+            </value>
+            <value>
+                <fullName>CMP - COTAÇÃO DE COMPRA</fullName>
+                <default>false</default>
+                <label>CMP - COTAÇÃO DE COMPRA</label>
+            </value>
+            <value>
+                <fullName>Devolvido</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Devolvido</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

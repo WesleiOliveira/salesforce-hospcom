@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_da_Conta__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    ISPICKVAL(Type, &quot;FORNECEDOR&quot;),
+    &quot;FORNECEDOR&quot;,
+
+    IF(
+        AND(TODAY() &gt; DATEVALUE(Data_do_Ultimo_Pedido__c) + 120, TODAY() &lt;= DATEVALUE(Data_do_Ultimo_Pedido__c) + 240),
+        &quot;Parcialmente Ativo&quot;,
+
+        IF(
+            AND(TODAY() &gt; DATEVALUE(Data_do_Ultimo_Pedido__c) + 240, TODAY() &lt;= DATEVALUE(Data_do_Ultimo_Pedido__c) + 365 ),
+            &quot;Parcialmente Inativo&quot;,
+
+            IF(
+                TODAY() &lt; DATEVALUE(Data_do_Ultimo_Pedido__c) + 120,
+                &quot;Ativo&quot;,
+
+                IF(
+                    TODAY() &gt; DATEVALUE(Data_do_Ultimo_Pedido__c) + 365,
+                    &quot;Inativo&quot;,
+                    &quot;Inativo&quot;
+                )
+            )
+        )
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Campo gerado automaticamente para Clientes Finais, levando em consideração a data do ultimo pedido de venda.</inlineHelpText>
+    <label>Status da Conta</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

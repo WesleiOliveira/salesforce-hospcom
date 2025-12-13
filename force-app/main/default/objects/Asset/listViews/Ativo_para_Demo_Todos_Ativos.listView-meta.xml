@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ativo_para_Demo_Todos_Ativos</fullName>
+    <booleanFilter>1</booleanFilter>
+    <columns>ASSET.NAME</columns>
+    <columns>Modelo__c</columns>
+    <columns>ASSET.SERIAL_NUMBER</columns>
+    <columns>Situacao__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Disponivel_p_contratos__c</field>
+        <operation>includes</operation>
+        <value>Demonstração</value>
+    </filters>
+    <label>Ativo para Demo (Todos Ativos)</label>
+</ListView>

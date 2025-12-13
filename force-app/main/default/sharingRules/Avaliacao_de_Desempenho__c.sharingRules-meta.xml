@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>Compartilha_Gerente_RH</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Compartilha Gerente RH</label>
+        <sharedTo>
+            <group>Gerente_de_RH</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Gabi</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Gabi</label>
+        <sharedTo>
+            <group>Usu_rio_Gabriela</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

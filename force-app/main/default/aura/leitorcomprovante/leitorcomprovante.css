@@ -1,0 +1,60 @@
+.THIS .container {
+    font-family: 'Arial', sans-serif;
+    margin: 20px;
+}
+
+.THIS h1 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.THIS .upload-section {
+    margin-bottom: 20px;
+}
+
+.THIS .custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    background: #0070d2;
+    color: white;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.THIS .custom-file-upload input[type="file"] {
+    display: none;
+}
+
+.THIS .file-name {
+    display: inline-block;
+    margin-left: 10px;
+    font-style: italic;
+}
+
+.THIS .btn-upload,
+.THIS .btn-save {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.THIS .btn-upload:hover,
+.THIS .btn-save:hover {
+    background: #218838;
+}
+
+.THIS .manual-entry {
+    margin-top: 20px;
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+}
+
+.THIS .message {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #ff0000;
+}

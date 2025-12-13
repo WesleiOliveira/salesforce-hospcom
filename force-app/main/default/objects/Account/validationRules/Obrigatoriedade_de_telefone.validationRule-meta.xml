@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Obrigatoriedade_de_telefone</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( CPF__pc != null,Phone = NULL, PersonMobilePhone = NULL)</errorConditionFormula>
+    <errorMessage>!Atenção! Preencha um número de telefone ou celular.</errorMessage>
+</ValidationRule>

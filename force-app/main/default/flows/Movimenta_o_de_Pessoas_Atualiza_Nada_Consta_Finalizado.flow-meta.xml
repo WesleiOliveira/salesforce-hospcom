@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <decisions>
+        <name>Verifica_Nada_Consta_Finalizado</name>
+        <label>Verifica Nada Consta Finalizado</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Finalizado</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>ndaFinalizado</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>atualiza_campo_finalizado</targetReference>
+            </connector>
+            <label>Finalizado</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>ndaFinalizado</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(
+    OR(
+ {!$Record.Nada_consta_Jur_dico__c},
+        LEN({!$Record.Obser__c}) &gt; 0
+    ),
+    OR(
+        {!$Record.Nada_Consta_Finaneiro__c},
+        LEN({!$Record.Observa_es_Juridico__c}) &gt; 0
+    ),
+    OR(
+        {!$Record.Nada_consta_Governo__c},
+        LEN({!$Record.Observa_es_Governo__c}) &gt; 0
+    )
+)</expression>
+    </formulas>
+    <interviewLabel>Movimentação de Pessoas — Atualiza Nada Consta Finalizado {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Movimentação de Pessoas — Atualiza Nada Consta Finalizado</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>atualiza_campo_finalizado</name>
+        <label>atualiza campo finalizado</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <inputAssignments>
+            <field>Nada_Consta_Finalizado__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Verifica_Nada_Consta_Finalizado</targetReference>
+        </connector>
+        <object>Movimentacao_de_Pessoas__c</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

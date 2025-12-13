@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Relativo_a__c</fullName>
+    <externalId>false</externalId>
+    <label>Relativo a</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Contrato</fullName>
+                <default>false</default>
+                <label>Contrato</label>
+            </value>
+            <value>
+                <fullName>Demonstração</fullName>
+                <default>false</default>
+                <label>Demonstração</label>
+            </value>
+            <value>
+                <fullName>Oportunidade</fullName>
+                <default>false</default>
+                <label>Oportunidade</label>
+            </value>
+            <value>
+                <fullName>Ordem de Trabalho</fullName>
+                <default>false</default>
+                <label>Ordem de Trabalho</label>
+            </value>
+            <value>
+                <fullName>Pedido</fullName>
+                <default>false</default>
+                <label>Pedido</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

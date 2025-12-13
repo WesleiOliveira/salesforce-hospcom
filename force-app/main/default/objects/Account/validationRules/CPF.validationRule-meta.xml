@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CPF</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    !$User.Ignorar_erros__c,
+    CPF__pc != null,
+    NOT(REGEX(CPF__pc, &quot;^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$&quot;))
+
+)</errorConditionFormula>
+    <errorDisplayField>CPF__pc</errorDisplayField>
+    <errorMessage>O CPF deve ser formatado (XXX.XXX.XXX-XX)</errorMessage>
+</ValidationRule>

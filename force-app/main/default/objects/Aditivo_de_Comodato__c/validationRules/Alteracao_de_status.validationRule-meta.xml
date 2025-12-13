@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Alteracao_de_status</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+!$User.Ignorar_erros__c,
+ISCHANGED(Status__c),
+Acao_interna__c = false)</errorConditionFormula>
+    <errorDisplayField>Status__c</errorDisplayField>
+    <errorMessage>Status do aditivo se altera apenas a partir de aprovação.</errorMessage>
+</ValidationRule>

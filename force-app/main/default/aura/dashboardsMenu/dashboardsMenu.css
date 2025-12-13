@@ -1,0 +1,53 @@
+.THIS .tituloComponente {
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    /* width: 100%; */
+    /* height: 100%; */
+    font-size: 20px;
+    color: #00345c;
+    /* padding-bottom: 30px; */
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.THIS .btn-light{
+    color: #1a365f!important;
+    border-color: #1a365f!important;
+    border-radius: 15px!important;
+}
+
+.THIS .divSelects{
+    display: flex;
+    justify-content: center;
+    column-gap: 20px;
+}
+
+.THIS .dropdown{
+    width: 300px!important;
+}
+
+.THIS .container{
+    padding-right: 0px!important;
+    padding-left: 0px!important;
+}
+
+.THIS a{
+    text-decotarion: none!important;
+}
+
+
+/* CSS APLICADO EM DISPOSITIVOS MÓVEIS */
+@media screen
+    and (max-device-width: 480px)
+    and (orientation: portrait){
+    .THIS .divSelects{
+        flex-direction: column;
+        row-gap: 10px;
+        align-items: center;
+        
+    }
+    
+    
+}

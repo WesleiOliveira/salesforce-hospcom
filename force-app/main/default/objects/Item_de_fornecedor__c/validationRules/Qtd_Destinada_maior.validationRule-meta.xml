@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Qtd_Destinada_maior</fullName>
+    <active>false</active>
+    <errorConditionFormula>Quantidade_destinada__c &gt; Quantidade__c</errorConditionFormula>
+    <errorMessage>Quantidade destinada é maior que a quantidade total.</errorMessage>
+</ValidationRule>

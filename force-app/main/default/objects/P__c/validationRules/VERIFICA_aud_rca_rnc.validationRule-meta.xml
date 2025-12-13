@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VERIFICA_aud_rca_rnc</fullName>
+    <active>false</active>
+    <errorConditionFormula>(N_o_Conformidade__c = &quot;&quot; ||  Auditoria__c = &quot;&quot; ||  Acao_corretiva__c = &quot;&quot;)</errorConditionFormula>
+    <errorMessage>Certifique-se de criar esse registro a partir de uma Ação corretiva</errorMessage>
+</ValidationRule>

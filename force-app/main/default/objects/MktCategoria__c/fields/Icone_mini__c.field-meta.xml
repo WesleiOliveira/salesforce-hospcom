@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Icone_mini__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    ISBLANK(Icone_url__c),
+    IMAGE(&quot;https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009y8x0&amp;oid=00Di0000000JVhH&amp;lastMod=1544439560000&quot; , &quot;&quot;, 125, 166),
+    IMAGE(Icone_url__c , &quot;&quot;, 125, 166)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Icone</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

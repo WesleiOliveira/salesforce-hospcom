@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_do_prazo_do_documento__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Prazo_para_o_vencimento__c &lt; TODAY() , &apos;VENCIDO&apos;,&apos;DENTRO DO PRAZO&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Status do prazo do documento</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

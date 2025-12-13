@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Assinatura_Cliente__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+OR(ISBLANK(AssinaturaTermino__c), NOT(CONTAINS(AssinaturaTermino__c, &quot;hospcom&quot;))),
+IMAGE(&quot;https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=015310000080hog&amp;oid=00Di0000000JVhH&amp;lastMod=1502888568000&quot; , &quot;&quot;, 60,60),
+IMAGE(AssinaturaTermino__c, &quot;&quot;, 60,150)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Assinatura Cliente</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

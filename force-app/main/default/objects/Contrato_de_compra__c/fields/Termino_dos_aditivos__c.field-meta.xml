@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Termino_dos_aditivos__c</fullName>
+    <externalId>false</externalId>
+    <label>Término dos aditivos</label>
+    <summarizedField>Aditivo_do_Contrato_de_Compra__c.Novo_termino_do_contrato__c</summarizedField>
+    <summaryForeignKey>Aditivo_do_Contrato_de_Compra__c.Contrato_de_Compra__c</summaryForeignKey>
+    <summaryOperation>max</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

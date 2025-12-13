@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Via_de_alimenta_o_2_Fonoaudiologia__c</fullName>
+    <externalId>false</externalId>
+    <label>Via de alimentação</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Oral</fullName>
+                <default>false</default>
+                <label>Oral</label>
+            </value>
+            <value>
+                <fullName>Sonda nasoenteral/Nasogástrica</fullName>
+                <default>false</default>
+                <label>Sonda nasoenteral/Nasogástrica</label>
+            </value>
+            <value>
+                <fullName>Sonda oroenteral/Orogástrica</fullName>
+                <default>false</default>
+                <label>Sonda oroenteral/Orogástrica</label>
+            </value>
+            <value>
+                <fullName>Sonda de gastrostomia</fullName>
+                <default>false</default>
+                <label>Sonda de gastrostomia</label>
+            </value>
+            <value>
+                <fullName>Sonda de jejunostomia</fullName>
+                <default>false</default>
+                <label>Sonda de jejunostomia</label>
+            </value>
+            <value>
+                <fullName>Parenteral</fullName>
+                <default>false</default>
+                <label>Parenteral</label>
+            </value>
+            <value>
+                <fullName>Oral + Sonda nasoenteral</fullName>
+                <default>false</default>
+                <label>Oral + Sonda nasoenteral</label>
+            </value>
+            <value>
+                <fullName>Oral + Sonda de gastrostomia</fullName>
+                <default>false</default>
+                <label>Oral + Sonda de gastrostomia</label>
+            </value>
+            <value>
+                <fullName>Oral + Sonda de jejunostomia</fullName>
+                <default>false</default>
+                <label>Oral + Sonda de jejunostomia</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

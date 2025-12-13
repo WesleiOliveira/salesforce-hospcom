@@ -1,0 +1,229 @@
+<apex:page standardController="WorkOrder" showChat="false" showHeader="false" renderAs="pdf">
+
+<!-- Cabeçalho com logotipo da Hospcom -->
+
+    <apex:image style="position:relative; margin-left:-20px" id="theImage" value="https://hospcom--c.na25.content.force.com/servlet/servlet.ImageServer?id=01531000008useP&oid=00Di0000000JVhH&lastMod=1486514655000" width="720" height="120"/>
+
+ <!-- ------------------------------------------------------------------------------------------- -->
+ 
+ 
+ <!-- --------------------------Parte de cima da Ordem de Trabalho------------------------------- -->
+ 
+ <body style="font-family:calibre,sans-serif; font-size:12px;">
+ 
+ <table>
+ <tr>
+ <td style="border:1.5px solid black;text-align:center; padding:2px" width="710px"><b>ORDEM DE SERVIÇO</b></td>
+ </tr>
+ <tr><td heght="1px"></td></tr>
+ <tr style="font-size:10px; text-align:left;">
+ <td style="border:1px solid black;padding: 2px">Nº da OS: <b>{!WorkOrder.WorkOrderNumber}&nbsp;&nbsp;&nbsp;&nbsp;
+ </b> Equipamento: <b>{!WorkOrder.Asset.Name} - {!WorkOrder.Asset.Modelo__c} ({!WorkOrder.Asset.Marca__c}) - N/S: {!WorkOrder.Numero_de_Serie__c}</b>
+ <b style="position:absolute; right:13px;"></b>
+ </td>
+ <tr><td heght="1px"></td></tr>
+ </tr>
+  </table>
+<tr style="font-size:10px; text-align:left;">
+ <td>Cliente:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>{!WorkOrder.Account.Name}</b>
+ <b style="position:absolute; right:13px;">Aberta em:&nbsp;<apex:outputField value="{!WorkOrder.CreatedDate}"/></b>
+ </td>
+ <table>
+ <tr style="font-size:10px; text-align:left;">
+ <td>
+ Endereço:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b> <apex:outputField value="{!WorkOrder.Endere_o__c}"/></b>
+ </td>
+ </tr>
+ </table>
+ </tr>
+ <tr style="font-size:10px; text-align:left;">
+ <td width="350px">Tipo da OS:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{!WorkOrder.Tipo_de_Servi_o__c}</b></td>
+ </tr>
+ <table>
+ <tr style="font-size:10px; text-align:left;" width="710px">
+
+ </tr>
+  <tr style="font-size:10px; text-align:left;" width="710px">
+ <td>
+ Problema/Defeito: &nbsp; <b>{!WorkOrder.Subject}</b>
+ </td>
+ </tr>
+ </table>
+<br/>
+<!-- ------------------------------------------------------------------------------------------ -->
+  <div style="border:1px solid black; padding:2px; text-align:center;font-family:Calibri, sans-serif">
+ <b>ANÁLISE INTERNA</b>
+ </div>
+ 
+<br/>
+ 
+ <table style="font-size:10px; text-align:left;" border="1 solid black" align="center">
+ <tr>
+ 
+ <td style="padding:4px;text-align:center" width="200">
+ <b>Serviço Realizado</b>
+ </td>
+ <td style="padding:4px;text-align:center" width="113px">
+ <b>Data e Hora de Inicio</b>
+ </td>
+ <td style="padding:4px;text-align:center" width="112px">
+ <b>Data e Hora de Fim</b>
+ </td>
+ </tr>
+  <tr >
+
+ <td style="text-align:left">
+    Inspeção da Caixa do Equipamento 
+ </td>
+ 
+ <td style="text-align:center">
+ 
+ <apex:outputLabel rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Inspe_o_I__c),TRUE,FALSE)}"> ___/___/____&nbsp;&nbsp;___:___ </apex:outputLabel>
+ <apex:outputLabel rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Inspe_o_I__c),FALSE,TRUE)}"> <apex:outputField value="{!WorkOrder.Data_e_Hora_da_Inspe_o_I__c}"/></apex:outputLabel>
+
+ </td>
+  <td style="text-align:center">
+  
+ <apex:outputLabel rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Inspe_o_T__c),TRUE,FALSE)}"> ___/___/____&nbsp;&nbsp;___:___ </apex:outputLabel>
+ <apex:outputLabel rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Inspe_o_T__c),FALSE,TRUE)}"> <apex:outputField value="{!WorkOrder.Data_e_Hora_da_Inspe_o_T__c}"/></apex:outputLabel>
+
+ </td>
+ </tr>
+ <tr>
+ <td style="text-align:left">
+ Instalação do Equipamento
+ </td>
+  <td style="text-align:center">
+  
+ <apex:outputLabel rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Instala_o_I__c),TRUE,FALSE)}"> ___/___/____&nbsp;&nbsp;___:___ </apex:outputLabel>
+ <apex:outputLabel rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Instala_o_I__c),FALSE,TRUE)}"> <apex:outputField value="{!WorkOrder.Data_e_Hora_da_Instala_o_I__c}"/></apex:outputLabel>
+ 
+ </td>
+  <td style="text-align:center">
+  
+ <apex:outputLabel rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Instala_o_T__c),TRUE,FALSE)}"> ___/___/____&nbsp;&nbsp;___:___ </apex:outputLabel>
+ <apex:outputLabel rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_da_Instala_o_T__c),FALSE,TRUE)}"> <apex:outputField value="{!WorkOrder.Data_e_Hora_da_Instala_o_T__c}"/></apex:outputLabel>
+ 
+ </td>
+ </tr>
+  <tr>
+ <td style="text-align:left"> 
+ Teste Funcional do Equipamento
+ </td>
+  <td style="text-align:center">
+ 
+ <apex:outputLabel rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_do_Teste_I__c),TRUE,FALSE)}"> ___/___/____&nbsp;&nbsp;___:___ </apex:outputLabel>
+ <apex:outputLabel rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_do_Teste_I__c),FALSE,TRUE)}"> <apex:outputField value="{!WorkOrder.Data_e_Hora_do_Teste_I__c}"/></apex:outputLabel>
+ 
+ </td>
+  <td style="text-align:center">
+ 
+ <apex:outputLabel rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_do_Teste_T__c),TRUE,FALSE)}"> ___/___/____&nbsp;&nbsp;___:___ </apex:outputLabel>
+ <apex:outputLabel rendered="{!IF(ISBLANK(WorkOrder.Data_e_Hora_do_Teste_T__c),FALSE,TRUE)}"> <apex:outputField value="{!WorkOrder.Data_e_Hora_do_Teste_T__c}"/></apex:outputLabel>
+ 
+ </td>
+ </tr>
+  <tr>
+ <td> 
+ </td>
+  <td style="text-align:center">
+ ___/___/____&nbsp;&nbsp;___:___
+ </td>
+  <td style="text-align:center">
+ ___/___/____&nbsp;&nbsp;___:___
+ </td>
+ </tr>
+  <tr>
+
+ <td> 
+ </td>
+  <td style="text-align:center">
+ ___/___/____&nbsp;&nbsp;___:___
+ </td>
+  <td style="text-align:center">
+ ___/___/____&nbsp;&nbsp;___:___
+ </td>
+ </tr>
+  <tr>
+
+ <td> 
+ </td>
+  <td style="text-align:center">
+ ___/___/____&nbsp;&nbsp;___:___
+ </td>
+  <td style="text-align:center">
+ ___/___/____&nbsp;&nbsp;___:___
+ </td>
+ </tr>
+  <tr>
+ <td> 
+ </td>
+  <td style="text-align:center">
+ ___/___/____&nbsp;&nbsp;___:___
+ </td>
+  <td style="text-align:center">
+ ___/___/____&nbsp;&nbsp;___:___
+ </td>
+ </tr>
+ </table>
+ <br/>
+   <apex:outputPanel rendered="{!IF(ISBLANK(WorkOrder.Observacoes_Tecnicas__c),false,true)}">
+    <table style="font-size:11px; text-align:left;" border="1 solid black">
+ <tr>
+ <td width="710px" height="20px; padding:4px;">
+    <b>Observações:&nbsp;</b><apex:outputField value="{!WorkOrder.Observacoes_Tecnicas__c}"/>
+</td>
+</tr>
+</table>
+    </apex:outputPanel>
+    <apex:outputPanel rendered="{!IF(ISBLANK(WorkOrder.Observacoes_Tecnicas__c),true,false)}">
+    <table style="font-size:11px; text-align:left;" border="1 solid black">
+ <tr>
+ <td width="710px" style="padding:4px;">
+    <b style="">Observações:&nbsp;</b>
+</td>
+</tr>
+<table style="font-size:10px; text-align:left;" border="1 solid black">
+
+<tr>
+<td width="710px" height="100px">
+</td>
+</tr>
+
+ <tr>
+ <td width="710px" style="padding:4px; font-size:11px">
+    <b style="">Solução:&nbsp;</b>
+</td>
+</tr>
+</table>
+
+<table style="font-size:10px; text-align:left;" border="1 solid black">
+
+<tr>
+<td width="710px" height="100px">
+</td>
+</tr>
+
+</table>
+</table>
+</apex:outputPanel>
+<footer>
+
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+ <div>
+ <b>___________fdsadfsa___________________</b>
+<b style="position:absolute; right:13px;">
+ ______________________________</b>
+ <b style="position:absolute; right:260px">______________________________</b>
+ <br/>
+ <b style="position:absolute; left:45px">Técnico Responsável</b>
+ <b style="position:absolute; right:32px;">Engenheiro(a) Responsável</b>
+ <b style="position:absolute; right:276px">Colaborador(a) Responsável</b>
+ </div>
+ </footer>
+</body>
+
+</apex:page>

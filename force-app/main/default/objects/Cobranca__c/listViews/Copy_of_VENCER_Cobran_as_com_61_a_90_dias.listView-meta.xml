@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Copy_of_VENCER_Cobran_as_com_61_a_90_dias</fullName>
+    <columns>NAME</columns>
+    <columns>Conta__c</columns>
+    <columns>Pedido__c</columns>
+    <columns>Valor_pago__c</columns>
+    <columns>Valor_a_pagar__c</columns>
+    <columns>Juros__c</columns>
+    <columns>Atraso__c</columns>
+    <columns>Vencimento__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Atraso__c</field>
+        <operation>lessOrEqual</operation>
+        <value>-61</value>
+    </filters>
+    <filters>
+        <field>Atraso__c</field>
+        <operation>greaterOrEqual</operation>
+        <value>-90</value>
+    </filters>
+    <label>À VENCER - Cobranças com 91 a 120 dias</label>
+</ListView>

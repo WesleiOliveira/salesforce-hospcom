@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Notas_escrituradas__c</fullName>
+    <externalId>false</externalId>
+    <label>Notas escrituradas</label>
+    <summaryFilterItems>
+        <field>Nota_fiscal_de_pedido_de_compra__c.Lancada__c</field>
+        <operation>equals</operation>
+        <value>True</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Nota_fiscal_de_pedido_de_compra__c.Pedido_de_Compra__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

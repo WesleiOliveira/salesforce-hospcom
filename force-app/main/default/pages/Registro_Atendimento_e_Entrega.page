@@ -1,0 +1,254 @@
+<apex:page standardController="WorkOrder" applyBodyTag="false" renderAs="pdf">
+    <html>
+
+        <head>
+            <style>                             </style>
+            <script type="text/javascript">     </script>
+        </head>
+
+        <body style="font-size:13px; font-family:calibri, sans-serif;">
+
+            <!-- CABEÇALHO -->
+
+
+            <!-- Imagens -->
+            <table border="0" style="width:100%; font-size:13px; font-family:calibri, sans-serif;">
+                <tr>
+                    <td>
+                        <img src="https://hospcom--c.na25.content.force.com/servlet/servlet.FileDownload?file=01531000008uM4U" width="200" height="55px"/>
+                    </td>
+                    <td style="text-align:right;">
+                        <img src="https://hospcom--c.na25.content.force.com/servlet/servlet.FileDownload?file=01531000008vEXV" width="390" height="55px"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="height:5px;" colspan="2">
+                    </td>
+                </tr>
+            </table>
+            <table border="1" style="width:100%; font-family:Calibri, sans-serif">
+                <tr>
+                    <td style="height:10px; font-family:Calibri,sans-serif; font-size:16px; text-align:right">
+                        
+                        
+                        <div style="font-size:16px;">
+                            <apex:outputPanel rendered="{WorkOrder.Status = 'FECHADO / CONCLUIDO'}">
+                                <b>R.A.:</b>&nbsp;<apex:outputField value="{!WorkOrder.WorkOrderNumber}"/>
+                            </apex:outputPanel>
+                        </div>
+                        
+                        
+                        <div style="font-size:12px;">
+                        </div>
+                        
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td >
+                        <div style="font-size:16px; text-align:center; font-family:Calibri, sans-serif">
+                            <b style="text-decoration:underline;font-family:Calibri, sans-serif">REGISTRO DE ATENDIMENTO</b>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <br />
+
+            <!-- Corpo -->
+            <table border="0" style="width:100%; font-size:13px; font-family:calibri, sans-serif" cellpadding="0">
+                <tr>
+                    <td style="font-size:15px; font-weight:bold; height:25px; border-bottom:1px solid black; border-top:1px solid black; text-align:center" colspan="2">
+                        &nbsp; DADOS DO CLIENTE
+                    </td>
+                </tr>
+                <tr>
+                    <td style="height:5px;" colspan="2">
+                    </td>
+                </tr>
+                <tr>
+                    <td width="210px">
+                        <b>&nbsp; Cliente:</b>
+                    </td>
+                    <td>{!WorkOrder.Account.Name}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>&nbsp; Endereço:</b>
+                    </td>
+                    <td>{!WorkOrder.Endere_o__c}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>&nbsp; Contato:</b>
+                    </td>
+                    <td>{!WorkOrder.Contact.Name}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>&nbsp; Telefone:</b>
+                    </td>
+                    <td>{!WorkOrder.Telefone__c}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>&nbsp; E-mail:</b>
+                    </td>
+                    <td>{!WorkOrder.E_mail__c}</td>
+                </tr>
+                <tr>
+                    <td style="height:25px;" colspan="2">
+                    </td>
+                </tr>
+
+                <!-- Parte 2 -->
+                <tr>
+                    <td style="font-size:15px; font-weight:bold; height:25px;  border-bottom:1px solid black; border-top:1px solid black; text-align:center" colspan="2">
+                        &nbsp; DADOS DO EQUIPAMENTO
+                    </td>
+                </tr>
+                <tr>
+                    <td style="height:5px;" colspan="2">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>&nbsp; Equipamento:</b>
+                    </td>
+                    <td>{!WorkOrder.Asset.Name}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>&nbsp; Marca:</b>
+                    </td>
+                    <td>{!WorkOrder.Marca__c}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>&nbsp; Modelo:</b>
+                    </td>
+                    <td>{!WorkOrder.Modelo__c}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>&nbsp; Número de Série:</b>
+                    </td>
+                    <td>{!WorkOrder.Numero_de_Serie__c}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>&nbsp; ID/Tag:</b>
+                    </td>
+                    <td>{!WorkOrder.ID_Tag__c}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>&nbsp; Patrimônio:</b>
+                    </td>
+                    <td>{!WorkOrder.Patrimonio__c}</td>
+                </tr>
+                <tr>
+                    <td style="height:5px;" colspan="2">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>&nbsp; Itens que Acompanham
+                            <br /> &nbsp; o Equipamento:</b>
+                    </td>
+                    <td>{!WorkOrder.Acess_rios_que_Acompanham_o_Equipamento__c}</td>
+                </tr>
+                <tr>
+                    <td style="height:5px;" colspan="2">
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Excessão para produtos da GE -->
+            <apex:outputPanel rendered="{!IF(WorkOrder.Asset.Marca__c == 'GE HEALTHECARE',true,false)}">
+                <table border="0" style="width:100%; font-size:13px; font-family:calibri, sans-serif" cellpadding="0">
+                    <tr>
+                        <td width="210px">
+                            <b>&nbsp; Inicialização:</b>
+                        </td>
+                        <td>_____/_____/__________, &nbsp; _____:_____ Hs</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>&nbsp; Finalização:</b>
+                        </td>
+                        <td>_____/_____/__________, &nbsp; _____:_____ Hs</td>
+                    </tr>
+                    <tr>
+                        <td style="height:25px;" colspan="2">
+                        </td>
+                    </tr>
+                </table>
+            </apex:outputPanel>
+
+            <!-- Corpo Continuação -->
+            <table border="0" style="width:100%; font-size:13px; font-family:calibri, sans-serif" cellpadding="0">
+                <tr>
+                    <td style="font-size:15px; font-weight:bold; height:25px;  border-top:1px solid black;border-bottom:1px solid black; text-align:center;" colspan="2">
+                        &nbsp; DEFEITO / OBSERVAÇÃO
+                    </td>
+                </tr>
+                <tr>
+                    <td style="height:5px;" colspan="2">
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Excessão para local do Equipamento -->
+            <apex:outputPanel rendered="{!IF(ISBLANK(WorkOrder.Asset.Local_do_Equipamentolocacao__r.Name),false,true)}">
+                <table border="0" style="width:100%; font-size:13px; font-family:calibri, sans-serif" cellpadding="0">
+                    <tr>
+                        <td width="210px">
+                            <b>&nbsp; Localização do Equipamento:</b>
+                        </td>
+                        <td>{!WorkOrder.Asset.Local_do_Equipamentolocacao__r.Name}</td>
+                    </tr>
+                </table>
+            </apex:outputPanel>
+
+            <!-- Corpo Continuação -->
+            <table border="0" style="width:100%; font-size:13px; font-family:calibri, sans-serif" cellpadding="0">
+                <tr>
+                    <td width="210px">
+                        <b>&nbsp; Tipo de Serviço:</b>
+                    </td>
+                    <td>{!WorkOrder.Tipo_de_Servi_o__c}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>&nbsp; Descrição/Problema:</b>
+                    </td>
+                    <td>{!WorkOrder.Description}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>&nbsp; Observações:</b>
+                    </td>
+                    <td>{!WorkOrder.Observacoes_Tecnicas__c}</td>
+                </tr>
+            </table>
+
+            <br />
+            <br />
+            <br />
+
+            <!-- Final -->
+            <table border="0" style="width:100%; font-size:14px;">
+                <tr>
+                    <td>_______________________________________</td>
+                    <td>_______________________________________</td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Técnico:</b> {!WorkOrder.T_cnico_Respons_vel__c}</td>
+                    <td>Cliente</td>
+                </tr>
+            </table>
+
+        </body>
+    </html>
+</apex:page>

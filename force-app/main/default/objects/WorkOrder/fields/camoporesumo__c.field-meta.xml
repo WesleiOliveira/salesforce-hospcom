@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>camoporesumo__c</fullName>
+    <externalId>false</externalId>
+    <label>Resumo de quantidade de itens</label>
+    <summarizedField>Item_Para_Cota_o__c.Quantidade__c</summarizedField>
+    <summaryForeignKey>Item_Para_Cota_o__c.Ordem_de_trabalho__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

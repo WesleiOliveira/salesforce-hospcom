@@ -1,0 +1,270 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="setMeOnInit" type="String" default="default value" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <ltng:require 
+                  styles="{!$Resource.bootstrap5 + '/css/bootstrap.min.css'}" 
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.popper,
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js')}"                  
+                  afterScriptsLoaded="{!c.doInit}" />
+    
+    <div class="">
+      <div class="container">
+          
+        <!--first section-->
+        <div class="row align-items-center how-it-works d-flex">
+          <div class="col-2 text-center top d-inline-flex justify-content-center align-items-center">
+            <div class="circle font-weight-bold">2003</div>
+          </div>
+          <div class="col-6">
+            <h5>Fundação da Hospcom</h5>
+            <p>Surgiu com a finalidade de prestar serviços na área de saúde em um espaço de 35m². Constituída com 2 colaboradores.</p>
+          </div>
+        </div>
+         
+        <!--path between 1-2-->
+        <div class="row timeline">
+          <div class="col-2">
+            <div class="corner top-right"></div>
+          </div>
+          <div class="col-8">
+            <hr style="background-color: #ffffff!important"/>
+          </div>
+          <div class="col-2">
+            <div class="corner left-bottom"></div>
+          </div>
+        </div>
+          
+        <!--second section-->
+        <div class="row align-items-center justify-content-end how-it-works d-flex">
+          <div class="col-6 text-right">
+            <h5>Mudança de Endereço</h5>
+            <p>Muda de endereço para o Setor Sul em um novo espaço de 400m². Assume a representação da Fanem e ganha seu primeiro prêmio de destaque em vendas do mesmo ano.</p>
+          </div>
+          <div class="col-2 text-center full d-inline-flex justify-content-center align-items-center">
+            <div class="circle font-weight-bold">2005</div>
+          </div>
+        </div>
+          
+        <!--path between 2-3-->
+        <div class="row timeline">
+          <div class="col-2">
+            <div class="corner right-bottom"></div>
+          </div>
+          <div class="col-8">
+            <hr style="background-color: #ffffff!important"/>
+          </div>
+          <div class="col-2">
+            <div class="corner top-left"></div>
+          </div>
+        </div>
+          
+        <!--third section-->
+        <div class="row align-items-center how-it-works d-flex">
+          <div class="col-2 text-center top d-inline-flex justify-content-center align-items-center">
+            <div class="circle font-weight-bold">2007</div>
+          </div>
+          <div class="col-6">
+            <h5>Novos Parceiros</h5>
+            <p>Empresa se vincula à novos parceiros como Covidien, mantém o foco no mercado de serviços se tornando um dos maiores prestadores de serviço do estado de Goiás, sendo responsável por contratos como Goiânia, Aparecida, Bela Vista, Senador Canedo entre outros.</p>
+          </div>
+        </div>
+          
+        <!--path between 1-2-->
+        <div class="row timeline">
+          <div class="col-2">
+            <div class="corner top-right"></div>
+          </div>
+          <div class="col-8">
+            <hr style="background-color: #ffffff!important"/>
+          </div>
+          <div class="col-2">
+            <div class="corner left-bottom"></div>
+          </div>
+        </div>
+          
+        <!--second section-->
+        <div class="row align-items-center justify-content-end how-it-works d-flex">
+          <div class="col-6 text-right">
+            <h5>Líder em Vendas no estado de Goiás</h5>
+            <p>Empresa assume o protagonismo na estruturação de leitos do H1N1 se tornando líder na venda de equipamentos para UTI no estado de Goiás, com parceiros como: Covidien, Intermed, Fanem, Mindray e Zoll.</p>
+          </div>
+          <div class="col-2 text-center full d-inline-flex justify-content-center align-items-center">
+            <div class="circle font-weight-bold">2009</div>
+          </div>
+        </div>
+        
+        <!--path between 2-3-->
+        <div class="row timeline">
+          <div class="col-2">
+            <div class="corner right-bottom"></div>
+          </div>
+          <div class="col-8">
+            <hr style="background-color: #ffffff!important"/>
+          </div>
+          <div class="col-2">
+            <div class="corner top-left"></div>
+          </div>
+        </div>
+          
+        <!--third section-->
+        <div class="row align-items-center how-it-works d-flex">
+          <div class="col-2 text-center top d-inline-flex justify-content-center align-items-center">
+            <div class="circle font-weight-bold">2010</div>
+          </div>
+          <div class="col-6">
+            <h5>Destaque no Mercado</h5>
+            <p>Empresa se torna destaque no mercado assumindo novos parceiros Intermed e Shimadzu.</p>
+          </div>
+        </div>
+        
+       	<!--path between 1-2-->
+        <div class="row timeline">
+          <div class="col-2">
+            <div class="corner top-right"></div>
+          </div>
+          <div class="col-8">
+            <hr style="background-color: #ffffff!important"/>
+          </div>
+          <div class="col-2">
+            <div class="corner left-bottom"></div>
+          </div>
+        </div>
+          
+        <!--second section-->
+        <div class="row align-items-center justify-content-end how-it-works d-flex">
+          <div class="col-6 text-right">
+            <h5>Expansão tecnológica</h5>
+            <p>É iniciado o processo de inclusão dos filhos Gabriel e Daniel nas operações da empresa. Abertura dos mercados de Brasília, Mato Grosso e Mato Grosso do Sul. Início das atividades de locação de equipamentos hospitalares. Início da implantação do Salesforce.</p>
+          </div>
+          <div class="col-2 text-center full d-inline-flex justify-content-center align-items-center">
+            <div class="circle font-weight-bold">2014</div>
+          </div>
+        </div>
+        
+        <!--path between 2-3-->
+        <div class="row timeline">
+          <div class="col-2">
+            <div class="corner right-bottom"></div>
+          </div>
+          <div class="col-8">
+            <hr style="background-color: #ffffff!important"/>
+          </div>
+          <div class="col-2">
+            <div class="corner top-left"></div>
+          </div>
+        </div>
+          
+        <!--third section-->
+        <div class="row align-items-center how-it-works d-flex">
+          <div class="col-2 text-center top d-inline-flex justify-content-center align-items-center">
+            <div class="circle font-weight-bold">2016</div>
+          </div>
+          <div class="col-6">
+            <h5>Expansão Operacional</h5>
+            <p>É iniciado o processo de inclusão da filha Barbara nas operações da empresa. Empresa assume papel de destaque com parceria GE no mercado Centro Oeste, e recebe prêmio de destaque em vendas do mesmo ano. A empresa inaugura sua nova sede em Goiânia no setor Marista. Abertura da sede Brasília.</p>
+          </div>
+        </div>
+          
+        <!--path between 1-2-->
+        <div class="row timeline">
+          <div class="col-2">
+            <div class="corner top-right"></div>
+          </div>
+          <div class="col-8">
+            <hr style="background-color: #ffffff!important"/>
+          </div>
+          <div class="col-2">
+            <div class="corner left-bottom"></div>
+          </div>
+        </div>
+          
+        <!--second section-->
+        <div class="row align-items-center justify-content-end how-it-works d-flex">
+          <div class="col-6 text-right">
+            <h5>Governança do Grupo</h5>
+            <p>É iniciado o processo de governança do grupo Hospcom. Empresa reestrutura sua linha comercial com parceiros mundiais, como: Mindray e Richard Woff. Inclusão da região do Tocantins na base de atendimento.</p>
+          </div>
+          <div class="col-2 text-center full d-inline-flex justify-content-center align-items-center">
+            <div class="circle font-weight-bold">2018</div>
+          </div>
+        </div>
+          
+        <!--path between 2-3-->
+        <div class="row timeline">
+          <div class="col-2">
+            <div class="corner right-bottom"></div>
+          </div>
+          <div class="col-8">
+            <hr style="background-color: #ffffff!important"/>
+          </div>
+          <div class="col-2">
+            <div class="corner top-left"></div>
+          </div>
+        </div>
+          
+        <!--third section-->
+        <div class="row align-items-center how-it-works d-flex">
+          <div class="col-2 text-center top d-inline-flex justify-content-center align-items-center">
+            <div class="circle font-weight-bold">2019</div>
+          </div>
+          <div class="col-6">
+            <h5>Expansão Norte</h5>
+              <p>Expansão para a região Norte do País com a linha de ultrassom.</p>
+          </div>
+        </div>
+          
+          <!--path between 1-2-->
+          <div class="row timeline">
+              <div class="col-2">
+                  <div class="corner top-right"></div>
+              </div>
+              <div class="col-8">
+                  <hr style="background-color: #ffffff!important"/>
+              </div>
+              <div class="col-2">
+                  <div class="corner left-bottom"></div>
+              </div>
+          </div>
+          
+          <!--second section-->
+          <div class="row align-items-center justify-content-end how-it-works d-flex">
+              <div class="col-6 text-right">
+                  <h5>Protagonismo na estruturação de leitos contra a COVID-19</h5>
+                  <p>Empresa assume o protagonismo na estruturação de leitos para o Covid-19, com apoio de parceiros como a Mindray. Abertura da sede Tocantins. Inclusão do parceiro Arjo. Destaque de vendas nas empresas Fisher e Paykel, Arjo e Mindray. Consolidação da operação de locação e implantação do SAP.</p>
+              </div>
+              <div class="col-2 text-center full d-inline-flex justify-content-center align-items-center">
+                  <div class="circle font-weight-bold">2020</div>
+              </div>
+          </div>
+
+          <!--path between 2-3-->
+        <div class="row timeline">
+          <div class="col-2">
+            <div class="corner right-bottom"></div>
+          </div>
+          <div class="col-8">
+            <hr style="background-color: #ffffff!important"/>
+          </div>
+          <div class="col-2">
+            <div class="corner top-left"></div>
+          </div>
+        </div>
+          
+        <!--third section-->
+        <div class="row align-items-center how-it-works d-flex">
+          <div class="col-2 text-center top d-inline-flex justify-content-center align-items-center">
+            <div class="circle font-weight-bold">2021</div>
+          </div>
+          <div class="col-6">
+            <h5>Líder de mercado</h5>
+              <p>Consolidação da empresa como referência no mercado regional, se tornando líder na região centro-oeste.</p>
+          </div>
+        </div>
+          
+      </div>
+    </div>
+     
+</aura:component>

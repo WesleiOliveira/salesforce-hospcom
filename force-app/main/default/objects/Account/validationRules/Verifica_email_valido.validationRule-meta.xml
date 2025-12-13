@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Verifica_email_valido</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISCHANGED(Status__c),
+    ISPICKVAL(Status__c, &quot;Aprovado&quot;),
+    NOT(Email_verificado__c)
+)</errorConditionFormula>
+    <errorMessage>Não é possível aprovar o registro sem que o e-mail esteja verificado.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Motivo_Promocao</fullName>
+    <active>true</active>
+    <errorConditionFormula>TEXT(Motivo1__c) == &quot;Promoção (há mudança de cargo e salário)&quot; &amp;&amp; Cargo__c == NULL</errorConditionFormula>
+    <errorDisplayField>Cargo__c</errorDisplayField>
+    <errorMessage>Preencha o novo cargo.</errorMessage>
+</ValidationRule>

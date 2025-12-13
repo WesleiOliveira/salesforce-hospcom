@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>tipoServico__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipo de Serviço</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>INSTALAÇÃO</fullName>
+                <default>false</default>
+                <label>INSTALAÇÃO</label>
+            </value>
+            <value>
+                <fullName>CALIBRAÇÃO</fullName>
+                <default>false</default>
+                <label>CALIBRAÇÃO</label>
+            </value>
+            <value>
+                <fullName>CORRETIVA</fullName>
+                <default>false</default>
+                <label>CORRETIVA</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

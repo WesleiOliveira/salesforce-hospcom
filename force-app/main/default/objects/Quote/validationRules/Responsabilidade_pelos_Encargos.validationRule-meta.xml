@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Responsabilidade_pelos_Encargos</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+  ISPICKVAL(Condicao_de_pagamento__c, &quot;Financiamento Bancário&quot;),
+  ISPICKVAL(Responsabilidade_pelos_Encargos__c, &quot;&quot;)
+)</errorConditionFormula>
+    <errorDisplayField>Responsabilidade_pelos_Encargos__c</errorDisplayField>
+    <errorMessage>É obrigatório informar a Responsabilidade pelos Encargos quando a Condição de Pagamento for Financiamento Bancário.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,118 @@
+<aura:component  extends="c.ApexHelper" controller="atualizaItemRequisicao" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <!-- <aura:handler name="render" value="{!this}" action="{!c.onRead}"/> -->
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css',
+                          $Resource.bootstrapSelect14 + '/docs/docs/dist/css/bootstrap-select.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.sortableJs + '/Sortable.js',
+                           $Resource.popper + '/popper.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js',
+                           $Resource.bootstrapSelect14 + '/docs/docs/dist/js/bootstrap-select.min.js')}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    
+    
+    
+    
+    <div class = "body">
+        <div class= "container-geral">
+            <div class = "cabecalho">
+                <div class= "cont-titulo">
+                    <h1 class = "titulo">Edição em Massa de Itens da Requisição </h1>
+                </div>
+                
+                <div class = "cont-subTitulo">
+                    <h2 id = "subTitulo"> Requisição - 00000 </h2>
+                </div>
+            </div>
+            
+            <div class="edicaoStatusGeral">
+                
+                <!-- DIV COM FILTROS -->
+                <fieldset class="border p-2" >
+                    <legend  style="    font-size: 1rem;" class="float-none w-auto tituloComponente">Selecione um status</legend>
+                    
+                    <select id="status" class="form-select ">
+                        <option value="" disabled="disabled"  selected="selected" hidden="hidden">STATUS</option>
+                        <option>NOVO</option>
+                        <option>OPR - ANALISE DE COMPRA</option>
+                        <option>CMP - AG. ENTREGA FORNECEDOR</option>
+                        <option>FINALIZADO</option> 
+                        <option>CANCELADO</option>
+                        
+                    </select>
+                    
+                </fieldset>
+                <!-- FIM DIV COM FILTROS -->
+                
+                
+            </div>
+            
+            
+            <div class = "itens">
+                <div class = "hr">
+                    <hr/>
+                </div> 
+                <div class= "item-requisicao-cabecalho"> 
+                    
+                    <div class = "th select">	
+                        
+                        <label> 
+                            <span id = "check"></span> 
+                            <input type="checkbox"  id="selectAll"/>
+                        </label>       
+                    </div>
+                    
+                    <div class = "th">
+                        <p>Item</p>
+                    </div>
+                    
+                    <div class = "th">
+                        <p>Status </p>
+                    </div>
+                    
+                    <div class = "th">
+                        <p>Categoria </p>
+                    </div>
+                    
+                    <div class = "th">
+                        <p>Quantidade </p>
+                    </div>
+                </div>
+                <div class = "hr">
+                    <hr/>
+                </div>            
+                <div class = "container-itens" id="container-itens" >
+                    
+                  
+                 
+                </div>  
+            </div>
+            
+            <div>
+                <hr/>
+            </div> 
+            
+            <div class = "cont-buttons">
+                <!--div class = "button">
+                    <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+                        CANCELAR
+                    </button>
+                </div-->
+                <div class = "button">
+                    <button id="salvar" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+                        SALVAR
+                    </button>
+                </div>
+            </div>        
+        </div>
+    </div>
+</aura:component>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Data_recebimento</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+    OR(
+        Subject = &quot;Defesa processo administrativo&quot;,
+        Subject = &quot;Notificação extrajudicial&quot;,
+        Subject = &quot;Defesa Processo Judicial&quot;,
+        Subject = &quot;Prorrogação de entrega&quot;
+    ),
+    ISBLANK(Qual_a_data_de_recebimento_do_primei__c)
+)</errorConditionFormula>
+    <errorDisplayField>Qual_a_data_de_recebimento_do_primei__c</errorDisplayField>
+    <errorMessage>O campo &quot;Qual a data de recebimento do primeiro documento?&quot; deve ser preenchido para este tipo de assunto.</errorMessage>
+</ValidationRule>

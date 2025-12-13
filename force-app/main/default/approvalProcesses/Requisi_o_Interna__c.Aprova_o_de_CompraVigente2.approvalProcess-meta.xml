@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <submitter>Departamento_de_Compras</submitter>
+        <type>group</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>Owner</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>gabriel@hospcom.net</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <formula>AND(
+TEXT(Prioridade__c) == &apos;REGULARIZAÇÃO&apos;,
+OR(
+TEXT(CreatedBy.Departamento3__c) == &apos;Comercial&apos;,
+TEXT(CreatedBy.Departamento3__c) == &apos;Governo&apos;,
+TEXT(CreatedBy.Departamento3__c) == &apos;Locação&apos;,
+TEXT(CreatedBy.Departamento3__c) == &apos;Serviço&apos;
+)
+)</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Regularização</label>
+        <name>Regularizacao</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>administrativo@hospcom.net</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <formula>AND(
+TEXT(Prioridade__c) == &apos;REGULARIZAÇÃO&apos;,
+OR(
+TEXT(CreatedBy.Departamento3__c) == &apos;Administrativo&apos;,
+TEXT(CreatedBy.Departamento3__c) == &apos;Compras&apos;,
+TEXT(CreatedBy.Departamento3__c) == &apos;Contabilidade&apos;,
+TEXT(CreatedBy.Departamento3__c) == &apos;Desenvolvimento&apos;,
+TEXT(CreatedBy.Departamento3__c) == &apos;Financeiro&apos;,
+TEXT(CreatedBy.Departamento3__c) == &apos;Jurídico&apos;,
+TEXT(CreatedBy.Departamento3__c) == &apos;Logística&apos;,
+TEXT(CreatedBy.Departamento3__c) == &apos;Marketing&apos;,
+TEXT(CreatedBy.Departamento3__c) == &apos;Outros&apos;,
+TEXT(CreatedBy.Departamento3__c) == &apos;Qualidade&apos;,
+TEXT(CreatedBy.Departamento3__c) == &apos;RH&apos;
+)
+)</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Regularização</label>
+        <name>Regulariza_o</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>tamara.morais@hospcom.net</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Requisi_o_Interna__c.Algum_produto_da_TI__c</field>
+                <operation>equals</operation>
+                <value>Verdadeiro</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>TI</label>
+        <name>TI</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Gestor__c</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <booleanFilter>(1 OR 2) AND 3</booleanFilter>
+            <criteriaItems>
+                <field>Requisi_o_Interna__c.Tipo_de_Requisi_o__c</field>
+                <operation>equals</operation>
+                <value>Serviço(s),Produto(s),Locação</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Requisi_o_Interna__c.OPME__c</field>
+                <operation>equals</operation>
+                <value>Verdadeiro</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Requisi_o_Interna__c.Prioridade__c</field>
+                <operation>notEqual</operation>
+                <value>REGULARIZAÇÃO</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Aprovação de compra</label>
+        <name>Etapa_1</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>alberth.oliveira@hospcom.net</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Requisi_o_Interna__c.Tipo_de_Requisi_o__c</field>
+                <operation>equals</operation>
+                <value>Compra para estoque revenda,Compra para estoque locação/assistência</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Requisi_o_Interna__c.Prioridade__c</field>
+                <operation>notEqual</operation>
+                <value>REGULARIZAÇÃO</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Estoque</label>
+        <name>Servi_os_loca_o</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>alberth.oliveira@hospcom.net</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Requisi_o_Interna__c.Tipo_de_Requisi_o__c</field>
+                <operation>equals</operation>
+                <value>Compra para estoque OPME</value>
+            </criteriaItems>
+        </entryCriteria>
+        <label>Estoque OPME</label>
+        <name>Estoque_OPME</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <description>Nessa versão é incluído a etapa de passar pelo gerente de TI a depender do item requirido</description>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <criteriaItems>
+            <field>Requisi_o_Interna__c.Status_da_Requisi_o__c</field>
+            <operation>equals</operation>
+            <value>Novo,Retornado ao solicitante,Reprovado</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Status_Em_cotacao</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Status_Rejeitado</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Status_Aguardando_Aprova_o</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Aprovação de CompraVigente2</label>
+    <processOrder>2</processOrder>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

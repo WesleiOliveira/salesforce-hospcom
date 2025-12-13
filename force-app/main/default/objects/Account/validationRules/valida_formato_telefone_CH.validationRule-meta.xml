@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>valida_formato_telefone_CH</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+    BillingCountry = &quot;China&quot;,
+    NOT(
+        REGEX(
+            Phone, 
+            &quot;\\(\\d{2}\\) \\d{4}-\\d{4}|\\(\\d{2}\\) \\d{5}-\\d{4}&quot;
+        )
+    )
+)</errorConditionFormula>
+    <errorDisplayField>Phone</errorDisplayField>
+    <errorMessage>Para clientes na China, o número de telefone deve estar em um dos seguintes formatos: (XX) XXXX-XXXX ou (XX) XXXXX-XXXX.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <environments>Default</environments>
+    <formulas>
+        <name>formula_4_myRule_1_A1_5686634654</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.Responsavel__c}</expression>
+    </formulas>
+    <interviewLabel>Em Rota {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Em Rota — Preenche responsável no faturamento</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>ATUALIZA_INSERE_RESPONSAVEL_DA_ROTA_NO_FATURAMENTO</name>
+        <label>ATUALIZA/INSERE RESPONSAVEL DA ROTA NO FATURAMENTO</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Nota_Fiscal__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>contatoResponsavel__c</field>
+            <value>
+                <elementReference>$Record.Responsavel__r.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Faturamento__c</object>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>ATUALIZA_INSERE_RESPONSAVEL_DA_ROTA_NO_FATURAMENTO</targetReference>
+        </connector>
+        <object>Em_rota_Pedidos__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

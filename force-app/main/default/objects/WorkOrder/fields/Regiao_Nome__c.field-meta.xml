@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Regiao_Nome__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+OR(
+ Account.BillingState = &quot;Mato Grosso do Sul&quot;,
+ Account.BillingState= &quot;São Paulo&quot;
+), &quot;Região SP/MS&quot;,
+IF(
+OR(
+ Account.BillingState= &quot;Acre&quot;,
+ Account.BillingState= &quot;Amazonas&quot;,
+ Account.BillingState= &quot;Amapá&quot;,
+ Account.BillingState= &quot;Pará&quot;,
+ Account.BillingState= &quot;Rondônia&quot;,
+ Account.BillingState= &quot;Roraima&quot;
+), &quot;Região Norte&quot;,
+IF(
+OR(
+Account.BillingState = &quot;Rio de Janeiro&quot;, 
+Account.BillingState = &quot;Espírito Santo&quot;, 
+Account.BillingState = &quot;Paraná&quot;, 
+Account.BillingState = &quot;Santa Catarina&quot;, 
+Account.BillingState = &quot;Rio Grande do Sul&quot; 
+), &quot;Região RJ/ES/Sul&quot;,
+IF(
+OR(
+Account.BillingState = &quot;Minas Gerais&quot;, 
+Account.BillingState = &quot;Ceará&quot;, 
+Account.BillingState = &quot;Piauí&quot;, 
+Account.BillingState = &quot;Rio Grande do Norte&quot;, 
+Account.BillingState = &quot;Piauí&quot;,
+Account.BillingState = &quot;Paraíba&quot;,
+Account.BillingState = &quot;Pernambuco&quot;,
+Account.BillingState = &quot;Sergipe&quot;,
+Account.BillingState = &quot;Maranhão&quot;,
+Account.BillingState = &quot;Bahia&quot;,
+Account.BillingState = &quot;Alagoas&quot; 
+), &quot;Região NE/MG&quot;,
+IF(
+ Account.BillingState= &quot;Distrito Federal&quot;,
+&quot;Região DF&quot;,
+&quot;Região GO/MT/TO&quot;
+)))))</formula>
+    <label>Região (Nome)</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

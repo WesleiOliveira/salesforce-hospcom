@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <decisions>
+        <name>Tem_CFI</name>
+        <label>Tem CFI</label>
+        <locationX>182</locationX>
+        <locationY>323</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Sim</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Contrato_de_Fornecimento_de_Insumo__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Atualiza_CFI</targetReference>
+            </connector>
+            <label>Sim</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>valor</name>
+        <dataType>Currency</dataType>
+        <expression>{!$Record.Contrato_de_Fornecimento_de_Insumo__r.Valor_de_pedidos_ativos__c} + {!$Record.TotalAmount}</expression>
+        <scale>2</scale>
+    </formulas>
+    <interviewLabel>Pedido — Soma saldo de Fornecimento de Insumo {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Pedido — Soma saldo de Fornecimento de Insumo</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Atualiza_CFI</name>
+        <label>Atualiza CFI</label>
+        <locationX>50</locationX>
+        <locationY>431</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Contrato_de_Fornecimento_de_Insumo__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Valor_de_pedidos_ativos__c</field>
+            <value>
+                <elementReference>valor</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Contrato_de_Fornecimento_de_Insumo__c</object>
+    </recordUpdates>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Tem_CFI</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Status</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Ativo</stringValue>
+            </value>
+        </filters>
+        <object>Order</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

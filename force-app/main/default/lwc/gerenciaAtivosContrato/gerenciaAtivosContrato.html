@@ -1,0 +1,98 @@
+<template>
+    <div class="card">
+        <div class="card-header">
+            <button class="btn btn-primary" onclick={handleRemoveSelecionados}>Retornar selecionados</button>
+            <!--<button class="btn btn-primary" onclick={handleEntregarSelecionados}>Entregar selecionados</button>-->
+        </div>
+        <lightning-record-form
+        object-api-name=Contrato_de_Servi_o__c
+        record-id={recordId}
+        fields=Valor_Periodico_do_Contrato_Atual__c
+        mode=readonly
+        >
+</lightning-record-form>
+        <div class="card-body">
+            <template if:true={ativos}>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                <input type="checkbox" onchange={handleSelectAll} />
+                            </th>
+                            <th>Imagem</th> <!-- Imagem na primeira coluna -->
+                            <th>Ativo</th>
+                            <th>N° de Série</th>
+                            <th>Data de Entrega</th>
+                            <th>No Cliente</th> <!-- Ícones em vez de texto -->
+                            <th>Valor mensal</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={ativos} for:item="ativo">
+                            <tr key={ativo.Id}>
+                                <td>
+                                    <input type="checkbox" 
+                                           data-id={ativo.Id} 
+                                           checked={ativo.isSelected} 
+                                           onchange={handleSelectOne} />
+                                </td>
+                                <td style="text-align:center">
+                                    <!-- Exibindo imagem -->
+                                        <img src={ativo.URL_da_Imagem__c} alt="Imagem do Ativo" class="ativo-image" />
+                                </td>
+                                <td>{ativo.Nome_do_ativo__c}</td>
+                                <td>{ativo.N_de_S_rie__c}</td>
+                                <td>{ativo.Data_de_Entrega_formatada__c}</td>
+                                <td style="text-align:center">
+                                    <!-- Exibindo ícones de check ou X -->
+                                    <template if:true={ativo.Equipamento_no_Cliente__c}>
+                                        <span title="TESTE" style="color: green;">&#x2714;</span> <!-- Check -->
+                                    </template>
+                                    <template if:false={ativo.Equipamento_no_Cliente__c}>
+                                        <span  style="color: red;">&#x274C;</span> <!-- X -->
+                                        <br/>Data de retorno: {ativo.Data_de_retorno_formatada__c}
+                                        <br/>Substituído por: {ativo.Substituido_por__c}
+                                    </template>
+                                </td>
+                                <td>{ativo.Valor_Total_Mensal_Atual__c}</td>
+                                <td>
+                                    <button class="btn btn-secondary" data-id={ativo.Id} onclick={handleSubstituirClick}>SUBSTITUIR</button>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </template>
+            <template if:true={error}>
+                <p class="error">{error}</p>
+            </template>
+        </div>
+
+        <!-- Modal Date Picker -->
+        <template if:true={showDatePicker}>
+            <div class="modal1">
+                <div class="modal-content1">
+                    <span class="close-btn" onclick={closeModal}>&times;</span>
+                    <label>Data de retorno&nbsp;</label>
+                    <input type="date" value={selectedDate} onchange={handleDateChange} /><br/><br/>
+                    <button class="btn btn-primary" onclick={handleConfirm}>Confirmar</button>
+                </div>
+            </div>
+        </template>
+
+        <!-- Modal Substituir Input -->
+        <template if:true={showSubstituirInput}>
+            <div class="modal1">
+                <div class="modal-content1">
+                    <span class="close-btn" onclick={closeModal}>&times;</span>
+                    <label>Novo Número de Série&nbsp;</label>
+                    <input type="text" value={newSerialNumber} onchange={handleSerialNumberChange} /> <br/><br/>
+                    <label>Data de Substituição&nbsp;</label>
+                    <input type="date" value={dataSubstituicao} onchange={handleDataSubstituicaoChange} /> <br/><br/>
+                    <button class="btn btn-primary" onclick={handleSubstituirConfirm}>Substituir</button>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

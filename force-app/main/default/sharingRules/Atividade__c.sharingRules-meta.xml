@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Compartilha_Gerente_financeiro</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Compartilha Gerente financeiro</label>
+        <sharedTo>
+            <group>Gerente_Jur_dico</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Name</field>
+            <operation>contains</operation>
+            <value>Departamento Juridico</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>Assistente_comercial</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Assistente comercial</label>
+        <sharedTo>
+            <group>Usu_rio_Eduardo</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Compartilha_DP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Compartilha DP</label>
+        <sharedTo>
+            <group>Departamento_pessoal</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Compartilha_Loca_o</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Compartilhamento com o grupo da locação</description>
+        <label>Compartilha Locação</label>
+        <sharedTo>
+            <group>Gestor_Loca_o</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Locacao</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Regiao_Lucas</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Regiao Luckas</label>
+        <sharedTo>
+            <group>Gerente_Regional_Regi_o_Lu</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Vendedores_Regiao_Luckas</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>TESTE</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>TESTE</label>
+        <sharedTo>
+            <group>Supervisor_Comercial</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Comercial_equipe</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>U_S</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>U.S</label>
+        <sharedTo>
+            <group>Gerente_Ultrassom</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Equipe_U_S</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Vet</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Vet</label>
+        <sharedTo>
+            <group>Gerente_de_Linha_Vet</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Vet_equipe</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>valor_valido_incorreto</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+	!$User.Ignorar_erros__c,
+	OR(
+		Valor_valido__c &gt; Valor__c
+		
+	)
+)</errorConditionFormula>
+    <errorDisplayField>Valor_valido__c</errorDisplayField>
+    <errorMessage>O valor valido não deve sair dos limites do valor da transação.</errorMessage>
+</ValidationRule>

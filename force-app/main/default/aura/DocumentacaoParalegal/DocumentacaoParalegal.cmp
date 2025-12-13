@@ -1,0 +1,578 @@
+<aura:component extends="c.ApexHelper" Controller="FileController"
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+                access="global">
+    
+    
+    <aura:attribute name="filetype" type="String" default=".pdf" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="accountType" type="String" />
+    <aura:attribute name="isProcessing" type="Boolean" default="true"/>
+    <aura:attribute name="isModalOpen" type="Boolean" default="false"/>
+    <aura:attribute name="selectedPdfUrl" type="String" default=""/>
+    <aura:attribute name="contratoSocialDocUrl" type="String" default="" />
+    <aura:attribute name="contratoSocialDocId" type="String" default="" />
+    <aura:attribute name="cartaoCNPJDocUrl" type="String" default="" />
+    <aura:attribute name="cartaoCNPJDocId" type="String" default="" />
+    <aura:attribute name="creaDocUrl" type="String" default="" />
+    <aura:attribute name="creaDocId" type="String" default="" />
+    <aura:attribute name="venc_CREA__c" type="Date"/>
+    <aura:attribute name="corpoDocUrl" type="String" default="" />
+    <aura:attribute name="corpoDocId" type="String" default="" />
+    <aura:attribute name="alvaraLDocUrl" type="String" default="" />
+    <aura:attribute name="alvaraLDocId" type="String" default="" />
+    <aura:attribute name="relatorioDocUrl" type="String" default="" />
+    <aura:attribute name="relatorioDocId" type="String" default="" />
+    <aura:attribute name="afeDocUrl" type="String" default="" />
+    <aura:attribute name="afeDocId" type="String" default="" />
+    <aura:attribute name="alvaraSDocUrl" type="String" default="" />
+    <aura:attribute name="alvaraSDocId" type="String" default="" />
+    <aura:attribute name="isVencCREAEmpty" type="Boolean" default="false"/>
+    <aura:attribute name="isCBEmpty" type="Boolean" default="false"/>
+    <aura:attribute name="isLocalizacaoEmpty" type="Boolean" default="false"/>
+    <aura:attribute name="isSanitarioEmpty" type="Boolean" default="false"/>
+    <aura:attribute name="creaOnChanging" type="Boolean" default="false"/>
+    <aura:attribute name="bombeirosOnChanging" type="Boolean" default="false"/>
+    <aura:attribute name="localizacaoOnChanging" type="Boolean" default="false"/>
+    <aura:attribute name="sanitarioOnChanging" type="Boolean" default="false"/>
+    <aura:attribute name="clickedButton" type="String"/>
+    <aura:attribute name="isVencCREAFieldEmpty" type="Boolean" default="true"/>
+    <aura:attribute name="isVencCorpoFieldEmpty" type="Boolean" default="true"/>
+    <aura:attribute name="isLocalizacaoFieldEmpty" type="Boolean" default="true"/>
+    <aura:attribute name="isSanitarioFieldEmpty" type="Boolean" default="true"/>
+    <aura:attribute name="licencaDocUrl" type="String" default="" />
+    <aura:attribute name="licencaDocId" type="String" default="" />
+    <aura:attribute name="venc_Licenca_Ambiental__c" type="Date"/>
+    <aura:attribute name="licencaChanging" type="Boolean" default="false"/>
+    <aura:attribute name="isLicencaEmpty" type="Boolean" default="false"/>
+    <aura:attribute name="isLicencaFieldEmpty" type="Boolean" default="false"/>
+
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <div style="background-color: white;" >
+        
+        
+        
+        <div class="nonAcceptedAccountTypeContainer">
+            Documentos Paralegais disponíveis exclusivamente para empresas do grupo Hospcom!
+            
+        </div>    
+        
+        
+        
+        <lightning:recordEditForm recordId="{!v.recordId}" objectApiName="Account">
+            <div class="mainCard">
+                
+                <div class="head" >
+                    <p class="docName">Documentos paralegais</p> 
+                  
+                </div>
+                <div class="subtitle">Válidos somente arquivos .pdf</div>
+                <div class="elements"> 
+                    
+                    <!-- Contrato Social -->
+                    
+                    <div class="{!'doc-container ' + (empty(v.contratoSocialDocUrl) ? 'bg-red' : 'bg-green')}" id="contratoSocialContainer">
+                        <label class="docName">Contrato Social</label>
+                        <div class="btn-pdf">
+                            <aura:if isTrue="{!not(empty(v.contratoSocialDocUrl))}">
+                                <div class="doc-actions">
+                                    <a href="javascript:void(0);" onclick="{!c.openPdfModal}" data-url="{!v.contratoSocialDocUrl}" class="doc-link">
+                                        📄 Visualizar PDF
+                                    </a>
+                                    <lightning:buttonIcon iconName="utility:delete" 
+                                                          variant="bare" 
+                                                          alternativeText="Remover" 
+                                                          onclick="{!c.handleDeleteFile}" 
+                                                          class="delete-icon"
+                                                          value="Contrato Social"
+                                                          disabled="{!v.isProcessing}"/>
+                                </div>
+                                
+                            </aura:if>
+                        </div>
+                        
+                        <aura:if isTrue="{!empty(v.contratoSocialDocUrl)}">
+                            
+                            <lightning:fileUpload aura:id="Contrato Social" 
+                                                  class="file" 
+                                                  name="fileUploader"
+                                                  accept="{!v.filetype}"
+                                                  recordId="{!v.recordId}"
+                                                  onuploadfinished="{!c.handleUploadFinished}"
+                                                  disabled="{!v.isProcessing}"/>
+                        </aura:if>
+                        
+                    </div>
+                    
+                    
+                    <!-- Cartão CNPJ -->
+                    
+                    <div class="{!'doc-container ' + (empty(v.cartaoCNPJDocUrl) ? 'bg-red' : 'bg-green')}" id="cartaoContainer">
+                        
+                        <label class="docName">Cartão CNPJ</label>
+                        <div class="btn-pdf">
+                            <aura:if isTrue="{!not(empty(v.cartaoCNPJDocUrl))}">
+                                <div class="doc-actions">
+                                    <a href="javascript:void(0);" onclick="{!c.openPdfModal}" data-url="{!v.cartaoCNPJDocUrl}" class="doc-link">
+                                        📄 Visualizar PDF
+                                    </a>
+                                    <lightning:buttonIcon iconName="utility:delete" 
+                                                          variant="bare" 
+                                                          alternativeText="Remover" 
+                                                          onclick="{!c.handleDeleteFile}" 
+                                                          class="delete-icon"
+                                                          value="Cartão CNPJ"
+                                                          disabled="{!v.isProcessing}"/>
+                                </div>
+                            </aura:if>
+                        </div>
+                        
+                        <aura:if isTrue="{!empty(v.cartaoCNPJDocUrl)}">
+                            
+                            <lightning:fileUpload aura:id="Cartão CNPJ" 
+                                                  class="file" 
+                                                  name="fileUploader"
+                                                  accept="{!v.filetype}"
+                                                  recordId="{!v.recordId}"
+                                                  onuploadfinished="{!c.handleUploadFinished}"
+                                                  disabled="{!v.isProcessing}"/>
+                        </aura:if>
+                    </div>
+                    
+                    
+                    <!-- CREA -->
+                    
+                    <div class="{!'doc-container ' + 
+                                ((!empty(v.creaDocUrl) &amp;&amp; !v.isVencCREAEmpty) ? 'bg-green' : 'bg-red')}" 
+                         id="creaContainer">
+                        
+                        <label class="docName">CREA</label>
+                        <aura:if isTrue="{!not(empty(v.creaDocUrl))}">
+                            <div class="btn-pdf">
+                                
+                                <div class="doc-actions">
+                                    <a href="javascript:void(0);" onclick="{!c.openPdfModal}" data-url="{!v.creaDocUrl}" class="doc-link">
+                                        📄 Visualizar PDF
+                                    </a>
+                                    <lightning:buttonIcon iconName="utility:delete" 
+                                                          variant="bare" 
+                                                          alternativeText="Remover" 
+                                                          onclick="{!c.handleDeleteFile}" 
+                                                          class="delete-icon"
+                                                          value="CREA"
+                                                          disabled="{!v.isProcessing}"/>
+                                </div>
+                            </div>
+                            <!-- FORMULÁRIO PARA SALVAR A DATA -->
+                            <lightning:recordEditForm recordId="{!v.recordId}" 
+                                                      objectApiName="Account"
+                                                      onsubmit="{!c.handleSubmit}"
+                                                      onsuccess="{!c.handleSuccess}"
+                                                      onerror="{!c.handleError}">
+                                
+                                
+                                <div class="input-container">
+                                    <label class="custom-label">Data de Vencimento</label>
+                                    <div class="hidden-label">
+                                        <lightning:inputField class="teste8439"
+                                                              style="padding-left: 0!important"
+                                                              fieldName="venc_CREA__c"
+                                                              aura:id="venc_CREA"
+                                                              onclick="{!c.setClickedButton}"
+                                                              onchange="{!c.handleDateChange}"
+                                                              disabled="{!not(v.isVencCREAEmpty)}"/>
+                                    </div>
+                                </div>
+                                
+                                <!-- Botão só aparece se a data estiver vazia -->
+                                
+                                <aura:if isTrue="{!and(
+                                                 not(empty(v.creaDocUrl)),
+                                                 v.creaOnChanging,
+                                                 not(v.isVencCREAFieldEmpty)
+                                                 )}">
+                                    <lightning:button label="Confirmar" 
+                                                      class="slds-m-top_small"
+                                                      type="submit"
+                                                      variant="brand"/>
+                                </aura:if>
+                                
+                                
+                                
+                            </lightning:recordEditForm>
+                            
+                            
+                        </aura:if>
+                        
+                        <aura:if isTrue="{!empty(v.creaDocUrl)}">
+                            <lightning:fileUpload aura:id="CREA" 
+                                                  class="file" 
+                                                  name="fileUploader"
+                                                  accept="{!v.filetype}"
+                                                  recordId="{!v.recordId}"
+                                                  onuploadfinished="{!c.handleUploadFinished}"
+                                                  disabled="{!v.isProcessing}"/>
+                        </aura:if>
+                        
+                        
+                        
+                        
+                    </div>
+                    
+                    
+                    
+                    
+                    <!-- Corpo de Bombeiros -->
+                    
+                    <div class="{!'doc-container ' +((!empty(v.corpoDocUrl) &amp;&amp; !v.isCBEmpty) ? 'bg-green' : 'bg-red')}"  id="corpoDeBombeirosContainer">
+                        <label class="docName">Corpo de Bombeiros</label>
+                        <aura:if isTrue="{!not(empty(v.corpoDocUrl))}">
+                            <div class="btn-pdf">
+                                
+                                <div class="doc-actions">
+                                    <a href="javascript:void(0);" onclick="{!c.openPdfModal}" data-url="{!v.corpoDocUrl}" class="doc-link">
+                                        📄 Visualizar PDF
+                                    </a>
+                                    <lightning:buttonIcon iconName="utility:delete" 
+                                                          variant="bare" 
+                                                          alternativeText="Remover" 
+                                                          onclick="{!c.handleDeleteFile}" 
+                                                          class="delete-icon"
+                                                          value="Corpo de Bombeiros"
+                                                          disabled="{!v.isProcessing}"/>
+                                </div>                            
+                                
+                            </div>
+                            
+                            <!-- FORMULÁRIO PARA SALVAR A DATA -->
+                            <lightning:recordEditForm recordId="{!v.recordId}" 
+                                                      objectApiName="Account"
+                                                      onsubmit="{!c.handleSubmit}"
+                                                      onsuccess="{!c.handleSuccess}"
+                                                      onerror="{!c.handleError}">
+                                
+                                
+                                <div class="input-container">
+                                    <label class="custom-label">Data de Vencimento</label>
+                                    <div class="hidden-label">
+                                        <lightning:inputField class="teste8439"
+                                                              style="padding-left: 0!important"
+                                                              fieldName="venc_C_Bombeiros__c"
+                                                              aura:id="venc_C_Bombeiros"
+                                                              onclick="{!c.setClickedButton}"
+                                                              onchange="{!c.handleDateChange}"
+                                                              disabled="{!not(v.isCBEmpty)}"/>
+                                    </div>
+                                </div>
+                                
+                                <!-- Botão só aparece se a data estiver vazia -->
+                                
+                                <aura:if isTrue="{!and(
+                                                 not(empty(v.corpoDocUrl)),
+                                                 v.bombeirosOnChanging,
+                                                 not(v.isVencCorpoFieldEmpty)
+                                                 )}">
+                                    <lightning:button label="Confirmar" 
+                                                      class="slds-m-top_small"
+                                                      type="submit"
+                                                      variant="brand"/>
+                                </aura:if>
+                                
+                                
+                                
+                            </lightning:recordEditForm>
+                        </aura:if>
+                        <aura:if isTrue="{!empty(v.corpoDocUrl)}">
+                            
+                            <lightning:fileUpload aura:id="Corpo de Bombeiros" 
+                                                  class="file" 
+                                                  name="fileUploader"
+                                                  accept="{!v.filetype}"
+                                                  recordId="{!v.recordId}"
+                                                  onuploadfinished="{!c.handleUploadFinished}"
+                                                  disabled="{!v.isProcessing}"/>
+                        </aura:if>
+                        
+                    </div>
+                    
+                    
+                    
+                    <!-- Alvará de Localização e Funcionamento -->
+                    <div class="{!'doc-container ' + ((!empty(v.alvaraLDocUrl) &amp;&amp; !v.isLocalizacaoEmpty) ? 'bg-green' : 'bg-red')}" 
+                         id="alvaraLContainer">
+                        <label class="docName">Alvará de Localização e Funcionamento</label>
+                        
+                        <aura:if isTrue="{!not(empty(v.alvaraLDocUrl))}">
+                            <div class="btn-pdf">
+                                <div class="doc-actions">
+                                    <a href="javascript:void(0);" onclick="{!c.openPdfModal}" data-url="{!v.alvaraLDocUrl}" class="doc-link">
+                                        📄 Visualizar PDF
+                                    </a>
+                                    <lightning:buttonIcon iconName="utility:delete" 
+                                                          variant="bare" 
+                                                          alternativeText="Remover" 
+                                                          onclick="{!c.handleDeleteFile}" 
+                                                          class="delete-icon"
+                                                          value="Alvará de Localização e Funcionamento"
+                                                          disabled="{!v.isProcessing}"/>
+                                </div>
+                            </div>
+                            
+                            <!-- FORMULÁRIO PARA SALVAR A DATA -->
+                            <lightning:recordEditForm recordId="{!v.recordId}" 
+                                                      objectApiName="Account"
+                                                      onsubmit="{!c.handleSubmit}"
+                                                      onsuccess="{!c.handleSuccess}"
+                                                      onerror="{!c.handleError}">
+                                <div class="input-container">
+                                    <label class="custom-label">Data de Vencimento</label>
+                                    <div class="hidden-label">
+                                        <lightning:inputField fieldName="venc_Alv_Localizacao__c"
+                                                              aura:id="venc_Alv_Localizacao"
+                                                              onclick="{!c.setClickedButton}"
+                                                              onchange="{!c.handleDateChange}"
+                                                              disabled="{!not(v.isLocalizacaoEmpty)}"/>
+                                    </div>
+                                </div>
+                                
+                                <!-- Botão só aparece se a data estiver preenchida -->
+                                <aura:if isTrue="{!and(not(empty(v.alvaraLDocUrl)), v.localizacaoOnChanging, not(v.isLocalizacaoFieldEmpty))}">
+                                    <lightning:button label="Confirmar" 
+                                                      class="slds-m-top_small"
+                                                      type="submit"
+                                                      variant="brand"/>
+                                </aura:if>
+                            </lightning:recordEditForm>
+                            
+                        </aura:if>
+                        
+                        <aura:if isTrue="{!empty(v.alvaraLDocUrl)}">
+                            <lightning:fileUpload aura:id="Alvará de Localização e Funcionamento" 
+                                                  class="file" 
+                                                  name="fileUploader"
+                                                  accept="{!v.filetype}"
+                                                  recordId="{!v.recordId}"
+                                                  onuploadfinished="{!c.handleUploadFinished}"
+                                                  disabled="{!v.isProcessing}"/>
+                        </aura:if>
+                    </div>
+                    
+                    <!-- Relatório de Visita VISA Municipal -->
+                    
+                    <div class="{!'doc-container ' + (empty(v.relatorioDocUrl) ? 'bg-red' : 'bg-green')}" id="relatorioContainer">
+                        <label class="docName">Relatório de Visita VISA Municipal</label>
+                        <div class="btn-pdf">
+                            <aura:if isTrue="{!not(empty(v.relatorioDocUrl))}">
+                                <div class="doc-actions">
+                                    <a href="javascript:void(0);" onclick="{!c.openPdfModal}" data-url="{!v.relatorioDocUrl}" class="doc-link">
+                                        📄 Visualizar PDF
+                                    </a>
+                                    <lightning:buttonIcon iconName="utility:delete" 
+                                                          variant="bare" 
+                                                          alternativeText="Remover" 
+                                                          onclick="{!c.handleDeleteFile}" 
+                                                          class="delete-icon"
+                                                          value="Relatório de Visita VISA Municipal"
+                                                          disabled="{!v.isProcessing}"/>
+                                </div>                            
+                            </aura:if>
+                        </div>
+                        
+                        <aura:if isTrue="{!empty(v.relatorioDocUrl)}">
+                            
+                            <lightning:fileUpload aura:id="Relatório de Visita VISA Municipal" 
+                                                  class="file" 
+                                                  name="fileUploader"
+                                                  accept="{!v.filetype}"
+                                                  recordId="{!v.recordId}"
+                                                  onuploadfinished="{!c.handleUploadFinished}"
+                                                  disabled="{!v.isProcessing}"/>
+                        </aura:if>
+                    </div>
+                    
+                    <!-- AFE ANVISA -->
+                    <div class="{!'doc-container ' + (empty(v.afeDocUrl) ? 'bg-red' : 'bg-green')}" id="afeContainer">
+                        <label class="docName">AFE ANVISA</label>
+                        <div class="btn-pdf">
+                            <aura:if isTrue="{!not(empty(v.afeDocUrl))}">
+                                <div class="doc-actions">
+                                    <a href="javascript:void(0);" onclick="{!c.openPdfModal}" data-url="{!v.afeDocUrl}" class="doc-link">
+                                        📄 Visualizar PDF
+                                    </a>
+                                    <lightning:buttonIcon iconName="utility:delete" 
+                                                          variant="bare" 
+                                                          alternativeText="Remover" 
+                                                          onclick="{!c.handleDeleteFile}" 
+                                                          class="delete-icon"
+                                                          value="AFE ANVISA"
+                                                          disabled="{!v.isProcessing}"/>
+                                </div>                            
+                            </aura:if>
+                        </div>
+                        
+                        <aura:if isTrue="{!empty(v.afeDocUrl)}">
+                            
+                            <lightning:fileUpload aura:id="AFE ANVISA" 
+                                                  class="file" 
+                                                  name="fileUploader"
+                                                  accept="{!v.filetype}"
+                                                  recordId="{!v.recordId}"
+                                                  onuploadfinished="{!c.handleUploadFinished}"
+                                                  disabled="{!v.isProcessing}"/>
+                        </aura:if>
+                    </div>
+                    <!-- Alvará Sanitário Municipal -->
+                    <div class="{!'doc-container ' + ((!empty(v.alvaraSDocUrl) &amp;&amp; !v.isSanitarioEmpty) ? 'bg-green' : 'bg-red')}" id="alvaraSContainer">
+                        <label class="docName">Alvará Sanitário Municipal</label>
+                        
+                        <aura:if isTrue="{!not(empty(v.alvaraSDocUrl))}">
+                            <div class="btn-pdf">
+                                <div class="doc-actions">
+                                    <a href="javascript:void(0);" onclick="{!c.openPdfModal}" data-url="{!v.alvaraSDocUrl}" class="doc-link">
+                                        📄 Visualizar PDF
+                                    </a>
+                                    <lightning:buttonIcon iconName="utility:delete" 
+                                                          variant="bare" 
+                                                          alternativeText="Remover" 
+                                                          onclick="{!c.handleDeleteFile}" 
+                                                          class="delete-icon"
+                                                          value="Alvará Sanitário Municipal"
+                                                          disabled="{!v.isProcessing}"/>
+                                </div>
+                            </div>
+                            
+                            <!-- FORMULÁRIO PARA SALVAR A DATA -->
+                            <lightning:recordEditForm recordId="{!v.recordId}" 
+                                                      objectApiName="Account"
+                                                      onsubmit="{!c.handleSubmit}"
+                                                      onsuccess="{!c.handleSuccess}"
+                                                      onerror="{!c.handleError}">
+                                <div class="input-container">
+                                    <label class="custom-label">Data de Vencimento</label>
+                                    <div class="hidden-label">
+                                        <lightning:inputField fieldName="venc_Alv_Sanitario__c"
+                                                              aura:id="venc_Alv_Sanitario"
+                                                              onclick="{!c.setClickedButton}"
+                                                              onchange="{!c.handleDateChange}"
+                                                              disabled="{!not(v.isSanitarioEmpty)}"/>
+                                    </div>
+                                </div>
+                                
+                                <!-- Botão só aparece se a data estiver preenchida -->
+                                <aura:if isTrue="{!and(not(empty(v.alvaraSDocUrl)), v.sanitarioOnChanging, not(v.isSanitarioFieldEmpty))}">
+                                    <lightning:button label="Confirmar" 
+                                                      class="slds-m-top_small"
+                                                      type="submit"
+                                                      variant="brand"/>
+                                </aura:if>
+                            </lightning:recordEditForm>
+                            
+                        </aura:if>
+                        
+                        <aura:if isTrue="{!empty(v.alvaraSDocUrl)}">
+                            <lightning:fileUpload aura:id="Alvará Sanitário Municipal" 
+                                                  class="file" 
+                                                  name="fileUploader"
+                                                  accept="{!v.filetype}"
+                                                  recordId="{!v.recordId}"
+                                                  onuploadfinished="{!c.handleUploadFinished}"
+                                                  disabled="{!v.isProcessing}"/>
+                        </aura:if>
+                    </div>
+                    
+                    
+                    <!-- Licença Ambiental -->
+                    <div class="{!'doc-container ' + ((!empty(v.licencaDocUrl) &amp;&amp; !v.isLicencaEmpty) ? 'bg-green' : 'bg-red')}" id="licencaContainer">
+                        <label class="docName">Licença Ambiental</label>
+                        
+                        <aura:if isTrue="{!not(empty(v.licencaDocUrl))}">
+                            <div class="btn-pdf">
+                                <div class="doc-actions">
+                                    <a href="javascript:void(0);" onclick="{!c.openPdfModal}" data-url="{!v.licencaDocUrl}" class="doc-link">
+                                        📄 Visualizar PDF
+                                    </a>
+                                    <lightning:buttonIcon iconName="utility:delete" 
+                                                          variant="bare" 
+                                                          alternativeText="Remover" 
+                                                          onclick="{!c.handleDeleteFile}" 
+                                                          class="delete-icon"
+                                                          value="Licenca Ambiental"
+                                                          disabled="{!v.isProcessing}"/>
+                                </div>
+                            </div>
+                            
+                            <!-- FORMULÁRIO PARA SALVAR A DATA -->
+                            <lightning:recordEditForm recordId="{!v.recordId}" 
+                                                      objectApiName="Account"
+                                                      onsubmit="{!c.handleSubmit}"
+                                                      onsuccess="{!c.handleSuccess}"
+                                                      onerror="{!c.handleError}">
+                                <div class="input-container">
+                                    <label class="custom-label">Data de Vencimento</label>
+                                    <div class="hidden-label">
+                                        <lightning:inputField fieldName="venc_Licenca_Ambiental__c"
+                                                              aura:id="venc_Licenca_Ambiental"
+                                                              onclick="{!c.setClickedButton}"
+                                                              onchange="{!c.handleDateChange}"
+                                                              disabled="{!not(v.isLicencaEmpty)}"/>
+                                    </div>
+                                </div>
+                                
+                                <!-- Botão só aparece se a data estiver preenchida -->
+                                <aura:if isTrue="{!and(not(empty(v.licencaDocUrl)), v.licencaChanging, not(v.islicencaFieldEmpty))}">
+                                    <lightning:button label="Confirmar" 
+                                                      class="slds-m-top_small"
+                                                      type="submit"
+                                                      variant="brand"/>
+                                </aura:if>
+                            </lightning:recordEditForm>
+                            
+                        </aura:if>
+                        
+                        <aura:if isTrue="{!empty(v.licencaDocUrl)}">
+                            <lightning:fileUpload aura:id="Licenca Ambiental" 
+                                                  class="file" 
+                                                  name="fileUploader"
+                                                  accept="{!v.filetype}"
+                                                  recordId="{!v.recordId}"
+                                                  onuploadfinished="{!c.handleUploadFinished}"
+                                                  disabled="{!v.isProcessing}"/>
+                        </aura:if>
+                    </div>
+                    
+                    
+                    <!-- Modal para exibir PDF -->
+                    <aura:if isTrue="{!v.isModalOpen}">
+                        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open custom-modal">
+                            <div class="slds-modal__container">
+                                <header class="slds-modal__header custom-modal-header">
+                                    <h2 class="slds-text-heading_medium">Visualizar Documento</h2>
+                                    <lightning:buttonIcon iconName="utility:close"
+                                                          alternativeText="Fechar"
+                                                          class="slds-modal__close custom-close-btn"
+                                                          onclick="{!c.closePdfModal}" />
+                                </header>
+                                <div class="slds-modal__content slds-p-around_medium custom-modal-content">
+                                    <iframe src="{!v.selectedPdfUrl}" class="pdf-viewer"></iframe>
+                                </div>
+                                <footer class="slds-modal__footer custom-modal-footer">
+                                    <lightning:button label="Fechar" onclick="{!c.closePdfModal}" class="slds-button_neutral" />
+                                </footer>
+                            </div>
+                        </section>
+                        <div class="slds-backdrop slds-backdrop_open custom-backdrop"></div>
+                    </aura:if>
+                    
+                    
+                    <!-- Spinner de carregamento -->
+                    <aura:if isTrue="{!v.isProcessing}">
+                        <div class="slds-align_absolute-center slds-m-top_large">
+                            <lightning:spinner alternativeText="Processando..." size="medium"/>
+                        </div>
+                    </aura:if>
+                </div>
+            </div>
+        </lightning:recordEditForm>
+    </div>
+    
+</aura:component>

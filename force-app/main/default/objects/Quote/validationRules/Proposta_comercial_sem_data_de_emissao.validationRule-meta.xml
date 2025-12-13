@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Proposta_comercial_sem_data_de_emissao</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+	!$User.Ignorar_erros__c,
+	Opportunity.RecordType.Name  == &apos;Comercial&apos;,
+	ISNULL(Data_de_emissao__c)
+)</errorConditionFormula>
+    <errorDisplayField>Data_de_emissao__c</errorDisplayField>
+    <errorMessage>Cotação de oportunidade comercial deve ter data de emissão.</errorMessage>
+</ValidationRule>

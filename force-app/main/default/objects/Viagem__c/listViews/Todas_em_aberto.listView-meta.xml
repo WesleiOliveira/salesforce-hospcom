@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Todas_em_aberto</fullName>
+    <columns>NAME</columns>
+    <columns>Conta__c</columns>
+    <columns>Motivo__c</columns>
+    <columns>Status__c</columns>
+    <columns>Departamento__c</columns>
+    <columns>OWNER.FIRST_NAME</columns>
+    <columns>OWNER.LAST_NAME</columns>
+    <columns>Classificacao__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Cancelada,Reprovada</value>
+    </filters>
+    <label>Todas em aberto</label>
+</ListView>

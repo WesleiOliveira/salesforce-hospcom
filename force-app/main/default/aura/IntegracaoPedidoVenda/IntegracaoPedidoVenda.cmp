@@ -1,0 +1,44 @@
+<aura:component controller="integracaoSAP" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <ltng:require
+                  styles="{!join(',', 
+                          $Resource.fontAwesome + '/css/font-awesome.min.css')}"  
+                  scripts="{!join(',', 
+                           $Resource.JQuery)}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    <div>
+        <!-- SPINNER DE CARREGAMENTO -->
+        <div id='spinnerDivPedidoVenda' style="display: none">
+            <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+        </div>
+        
+        <div class='divButtonSAP'>
+            <button id="integracaoSAP" title="funcionalidade em implementacao" onClick="teste" class="slds-button slds-button--brand slds-path__mark-complete stepAction current uiButton">
+                Integrar Pedido ao SAP
+            </button>
+            <!--<button id="integracaoSAP2">
+                N
+            </button>-->
+        </div>
+        
+        
+        <div class="modal-overlayer-IntegracaoPedidoVenda" id="modal-overlayer">
+            <div class="modal-IntegracaoPedidoVenda" id="modal-Integracao">
+                <div class="close-modal">
+                    <button type="button" id="close-modal-button" class="close-modal-button"> 
+                        <span aria-hidden="true">×</span> 
+                    </button>
+                </div>
+                <div id="modal-content">
+                    <div id="modal-content-cobranca">
+                    </div>
+                    <div id="modal-content-entrega">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    
+</aura:component>

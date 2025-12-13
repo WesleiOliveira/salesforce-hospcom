@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VERIFICA_STATUS_DEMO</fullName>
+    <active>true</active>
+    <description>VERIFICA SE O STATU DA DEMONSTRAÇÃO AO SERT CRIADA ESTÁ COMO RASCUNHO</description>
+    <errorConditionFormula>AND(
+!$User.Ignorar_erros__c,
+RecordType.DeveloperName == &quot;Demonstracao&quot;,
+ISNEW(),
+TEXT(Status) != &quot;Rascunho&quot;
+)</errorConditionFormula>
+    <errorDisplayField>Status</errorDisplayField>
+    <errorMessage>O pedido de demonstração deve ser criado com o status igual a &quot;Rascunho&quot;</errorMessage>
+</ValidationRule>

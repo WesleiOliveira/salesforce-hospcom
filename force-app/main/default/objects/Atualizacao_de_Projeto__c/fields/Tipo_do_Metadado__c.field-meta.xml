@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo_do_Metadado__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipo do Metadado</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Objeto</fullName>
+                <default>false</default>
+                <label>Objeto</label>
+            </value>
+            <value>
+                <fullName>Campo</fullName>
+                <default>false</default>
+                <label>Campo</label>
+            </value>
+            <value>
+                <fullName>Classe Apex</fullName>
+                <default>false</default>
+                <label>Classe Apex</label>
+            </value>
+            <value>
+                <fullName>Fluxo</fullName>
+                <default>false</default>
+                <label>Fluxo</label>
+            </value>
+            <value>
+                <fullName>Página do Visualforce</fullName>
+                <default>false</default>
+                <label>Página do Visualforce</label>
+            </value>
+            <value>
+                <fullName>Acionador Apex</fullName>
+                <default>false</default>
+                <label>Acionador Apex</label>
+            </value>
+            <value>
+                <fullName>Permissão</fullName>
+                <default>false</default>
+                <label>Permissão</label>
+            </value>
+            <value>
+                <fullName>Regra de Compartilhamento</fullName>
+                <default>false</default>
+                <label>Regra de Compartilhamento</label>
+            </value>
+            <value>
+                <fullName>Processo de Aprovação</fullName>
+                <default>false</default>
+                <label>Processo de Aprovação</label>
+            </value>
+            <value>
+                <fullName>Regra de Validação</fullName>
+                <default>false</default>
+                <label>Regra de Validação</label>
+            </value>
+            <value>
+                <fullName>Dashboard</fullName>
+                <default>false</default>
+                <label>Dashboard</label>
+            </value>
+            <value>
+                <fullName>Layout de Pagina</fullName>
+                <default>false</default>
+                <label>Layout de Pagina</label>
+            </value>
+            <value>
+                <fullName>Fluxo N8N</fullName>
+                <default>false</default>
+                <label>Fluxo N8N</label>
+            </value>
+            <value>
+                <fullName>Outros</fullName>
+                <default>false</default>
+                <label>Outros</label>
+            </value>
+            <value>
+                <fullName>LWC</fullName>
+                <default>false</default>
+                <label>LWC</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

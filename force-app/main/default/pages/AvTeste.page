@@ -1,0 +1,199 @@
+<apex:page showChat="False" showHeader="true" sidebar="false" showQuickActionVfHeader="False" controller="AvaliacaoController">
+    <html>
+    <head>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+        <style>
+            body{margin:0px!important;border:0px!important;}
+            #contentWrapper > div.bodyDiv.brdPalette.brandPrimaryBrd{margin:0px!important;border:0px!important;}
+            #contentWrapper > div.bPageFooter.noTableFooter{display:none!important;}
+            #contentWrapper > div.bPageFooter.noTableFooter > div{display:none!important;}
+            #contentWrapper > div.bPageFooter.noTableFooter > div{display:none!important;}
+            #AppBodyHeader{display:none!important;}
+            #globalHeaderBar{display:none!important;}
+            .sfdcBody{
+                background: transparent!important;
+            }
+            #contentWrapper > div.bodyDiv.brdPalette.brandPrimaryBrd{
+                box-shadow:none!important;
+                background-color: transparent!important;
+            }
+            .form-control {
+                background: transparent!important;
+                color: #163757!important;
+                border: 2px solid #163757!important;
+            }
+            .botao{
+                color: #163757!important;
+                background-color: #86D0F3!important;
+                border-color: #86D0F3!important;
+                font-size: 16px!important;
+                display: block!important;
+                width: 100%!important;
+                display: inline-block!important;
+                margin-bottom: 0!important;
+                font-weight: normal!important;
+                text-align: center;
+                vertical-align: middle!important;
+                -ms-touch-action: manipulation!important;
+                touch-action: manipulation!important;
+                cursor: pointer!important;
+                background-image: none!important;
+                border: 1px solid transparent!important;
+                white-space: nowrap!important;
+                padding: 6px 12px!important;
+                font-size: 14px!important;
+                line-height: 1.42857143!important;
+                border-radius: 4px!important;
+                -webkit-user-select: none!important;
+                -moz-user-select: none!important;
+                -ms-user-select: none!important;
+                user-select: none!important;
+                font-family: inherit!important;
+                font-size: inherit!important;
+                line-height: inherit!important;
+                -webkit-appearance: button!important;
+                cursor: pointer!important;
+                text-transform: none!important;
+                overflow: visible!important;
+                color: inherit!important;
+                font: inherit!important;
+                margin: 0!important;            
+            }
+            .botao:hover{
+                color: #fff!important;
+                background-color: #286090!important;
+                border-color: #204d74!important;
+                text-decoration: none!important;
+            }
+        </style>
+        
+    </head>
+
+    <body>    
+        
+
+        <apex:form id="form" >
+                <div class="form-group">
+                    <br/>   
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 ">
+                            <apex:inputText style="resize:none;" styleClass="form-control" html-placeholder="Prontuário..." value="{!ide}"/>
+                        </div>
+                        <div class="col-sm-4 ">
+                            <apex:inputText style="resize:none;" styleClass="form-control" html-placeholder="Ordem de Atendimento..." value="{!ide2}"/> 
+                        </div>
+                    </div>
+                    <br/>                
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 "> AIVD's
+                            <apex:selectList size="1" style="resize:none;" styleClass="form-control" label="AIVDs"  value="{!AIVD}">
+                                <apex:selectOption itemValue="0" itemLabel="0" />
+                                <apex:selectOption itemValue="1" itemLabel="1" />
+                                <apex:selectOption itemValue="2" itemLabel="2" />
+                                <apex:selectOption itemValue="3" itemLabel="3" />
+                                <apex:selectOption itemValue="4" itemLabel="4" />                                
+                            </apex:selectList>
+                        </div>
+                        <div class="col-sm-4 ">AVD's
+                            <apex:selectList size="1" style="resize:none;" styleClass="form-control" label="AVDs"  value="{!AVD}">
+                                <apex:selectOption itemValue="0" itemLabel="0" />
+                                <apex:selectOption itemValue="1" itemLabel="1" />
+                                <apex:selectOption itemValue="2" itemLabel="2" />
+                                <apex:selectOption itemValue="3" itemLabel="3" />
+                                <apex:selectOption itemValue="4" itemLabel="4" />                                
+                            </apex:selectList>                        
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 "> Incapacidade Psíquica
+                            <apex:selectList size="1" style="resize:none;" styleClass="form-control" value="{!incpsiq}">
+                                <apex:selectOption itemValue="0" itemLabel="0" />
+                                <apex:selectOption itemValue="1" itemLabel="1" />
+                                <apex:selectOption itemValue="2" itemLabel="2" />
+                                <apex:selectOption itemValue="3" itemLabel="3" />
+                                <apex:selectOption itemValue="4" itemLabel="4" />                                
+                            </apex:selectList>
+                        </div>
+                        <div class="col-sm-4 ">Vias Áereas Superiores
+                            <apex:selectList size="1" style="resize:none;" styleClass="form-control" value="{!viasaereas}">
+                                <apex:selectOption itemValue="0" itemLabel="0" />
+                                <apex:selectOption itemValue="1" itemLabel="1" />
+                                <apex:selectOption itemValue="2" itemLabel="2" />
+                                <apex:selectOption itemValue="3" itemLabel="3" />
+                                <apex:selectOption itemValue="4" itemLabel="4" />                                
+                            </apex:selectList>                        
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 "> Incontinência Urinária  
+                            <apex:selectList size="1" style="resize:none;" styleClass="form-control" value="{!incontinencia}">
+                                <apex:selectOption itemValue="0" itemLabel="0" />
+                                <apex:selectOption itemValue="1" itemLabel="1" />
+                                <apex:selectOption itemValue="2" itemLabel="2" />
+                                <apex:selectOption itemValue="3" itemLabel="3" />
+                                <apex:selectOption itemValue="4" itemLabel="4" />                                
+                            </apex:selectList>
+                        </div>
+                        <div class="col-sm-4 ">Uso de Medicação
+                            <apex:selectList size="1" style="resize:none;" styleClass="form-control" value="{!usodemedicacao}">
+                                <apex:selectOption itemValue="0" itemLabel="0" />
+                                <apex:selectOption itemValue="1" itemLabel="1" />
+                                <apex:selectOption itemValue="2" itemLabel="2" />
+                                <apex:selectOption itemValue="3" itemLabel="3" />
+                                <apex:selectOption itemValue="4" itemLabel="4" />                                
+                            </apex:selectList>
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 "> Suporte Respiratório    
+                            <apex:selectList size="1" style="resize:none;" styleClass="form-control" value="{!suporterespiratorio}">
+                                <apex:selectOption itemValue="0" itemLabel="0" />
+                                <apex:selectOption itemValue="1" itemLabel="1" />
+                                <apex:selectOption itemValue="2" itemLabel="2" />
+                                <apex:selectOption itemValue="3" itemLabel="3" />
+                                <apex:selectOption itemValue="4" itemLabel="4" />                                
+                            </apex:selectList>
+                        </div>
+                        <div class="col-sm-4 ">Presença de úlcera de pressão
+                            <apex:selectList size="1" style="resize:none;" styleClass="form-control" value="{!presencadeulcera}">
+                                <apex:selectOption itemValue="0" itemLabel="0" />
+                                <apex:selectOption itemValue="1" itemLabel="1" />
+                                <apex:selectOption itemValue="2" itemLabel="2" />
+                                <apex:selectOption itemValue="3" itemLabel="3" />
+                                <apex:selectOption itemValue="4" itemLabel="4" />                                
+                            </apex:selectList>
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-4 "> Reabilitação Fisioterapia e Fonoterapia     
+                            <apex:selectList size="1" style="resize:none;" styleClass="form-control" value="{!reabilitacao}">
+                                <apex:selectOption itemValue="0" itemLabel="0" />
+                                <apex:selectOption itemValue="1" itemLabel="1" />
+                                <apex:selectOption itemValue="2" itemLabel="2" />
+                                <apex:selectOption itemValue="3" itemLabel="3" />
+                                <apex:selectOption itemValue="4" itemLabel="4" />                                
+                            </apex:selectList>
+                        </div>
+                        <div class="col-sm-4 ">Terapia Nutricional  
+                            <apex:selectList size="1" style="resize:none;" styleClass="form-control" value="{!terapianutric}">
+                                <apex:selectOption itemValue="0" itemLabel="0" />
+                                <apex:selectOption itemValue="1" itemLabel="1" />
+                                <apex:selectOption itemValue="2" itemLabel="2" />
+                                <apex:selectOption itemValue="3" itemLabel="3" />
+                                <apex:selectOption itemValue="4" itemLabel="4" />                                
+                            </apex:selectList>                        
+                        </div>
+                    </div><br/>
+                    <br/>                
+                    <div class="row">
+                        <div class="col-sm-offset-4 col-sm-4 text-center" style="font-weight:bold;">
+                            <apex:commandLink styleClass="botao"  value="Enviar!" action="{!creategeral}"/>
+                        </div>
+                    </div>                  
+                </div>
+            </apex:form>
+                <br/><br/>       
+            </body>
+    </html>
+</apex:page>

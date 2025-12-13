@@ -1,0 +1,901 @@
+<apex:page standardController="Auditoria_Estrutural_Semanal__c" renderAs="pdf" applyHtmlTag="false" showHeader="false" extensions="PegaUrlImagemAnexada" >
+   <head>
+      <style>
+      @page{
+               size:A4;
+               background: url({!$Resource.TimbradoHospcom});
+               margin:120px 50px 120px 50px;
+               @bottom-center{content:element(paginacao);}
+            }
+            body {
+               font-family: Arial, sans-serif;
+               font-size: 11px;
+               margin: 20px;
+            }
+            .header {
+               text-align: center;
+               margin-bottom: 20px;
+            }
+
+            .header img {
+               width: 150px;
+               margin-bottom: 10px;
+            }
+            .title {
+               font-size: 16px;
+               font-weight: bold;
+               text-align: center;
+               margin-bottom: 10px;
+            }
+            .info-table {
+               width: 100%;
+               border-collapse: collapse;
+               margin-bottom: 20px;
+            }
+            .info-table th, .info-table td {
+               border: 1px solid #000;
+               padding: 8px;
+               text-align: left;
+            }
+            .info-table th {
+               background-color: #f2f2f2;
+               font-weight: bold;
+            }
+            .section-title {
+               font-size: 14px;
+               font-weight: bold;
+               margin-top: 15px;
+               border-bottom: 1px solid #000;
+               padding-bottom: 5px;
+            }
+            .question-container {
+               margin-bottom: 10px;
+               padding-bottom: 5px;
+            }
+            .question-label {
+               font-weight: bold;
+               display: block;
+            }
+            .response {
+               margin-top: 5px;
+               font-style: italic;
+            }
+            table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+      }
+      th, td {
+            border: 1px solid black;
+            padding: 5px;
+            text-align: left;
+      }
+      th {
+            background-color: #f2f2f2;
+            text-align: center;
+      }
+      .question {
+            font-weight: bold;
+      }
+      .center {
+               text-align: center;
+               width: 20px;
+               height: 20px;
+            }
+            .assinatura-container {
+            margin-top: 50px;
+            text-align: center;
+      }
+
+      .linha-assinatura {
+            width: 200px;
+            margin: auto;
+            border-top: 2px solid black;
+            margin-bottom: 5px;
+      }
+
+            .assinatura-texto {
+               font-size: 16px;
+               font-weight: bold;
+            }
+            .image-grid {
+               display: grid;
+               grid-template-columns: repeat(3, auto);
+               grid-template-rows: repeat(3, auto); 
+               gap: 10px; /* Espaço entre as imagens */
+               width: 80%;
+               justify-content: center;
+            }
+            .image-grid img {
+               width: 220px; /* Tamanho fixo */
+               height: 220px; /* Mantendo proporção */
+               object-fit: cover; /* Corta para preencher o espaço */
+               border: 1px solid #000; /* Apenas para visualização */
+               padding: 5px;
+            }
+         </style>
+      </head>
+               
+   <html>
+      <body style="font-family: Arial; padding: 0px; margin: 0px; border: 0px solid #eef2f4; width: 100%;">
+      
+         <!-- Header -->
+            
+         
+         <!-- Informações Gerais -->
+      <table class="info-table">
+            <tr>
+               <th>Unidade</th>
+               <td><apex:outputField value="{!Auditoria_Estrutural_Semanal__c.Unidade__c}"/></td>
+            </tr>
+            <tr>
+               <th>Auditor(a)</th>
+               <td><apex:outputField value="{!Auditoria_Estrutural_Semanal__c.Auditor_a__r.Name}"/></td>
+            </tr>
+            <tr>
+               <th>Data da Auditoria</th>
+               <td><apex:outputField value="{!Auditoria_Estrutural_Semanal__c.Data_Auditoria__c}"/></td>
+            </tr>
+            <tr>
+               <th>Conformidade</th>
+               <td><apex:outputField value="{!Auditoria_Estrutural_Semanal__c.N_o_Conforme__c}"/></td>
+            </tr>
+      </table>
+
+      <!-- Checklist -->
+         <!-- Dados do Prestador de Serviços -->
+      <div style="font-weight: bold; font-size: 16px; margin-top: 20px; border-bottom: 2px solid #000; padding-bottom: 5px;">
+            RECEBIMENTO DO PRODUTO
+      </div>
+
+      <div>
+
+
+      </div>
+
+         <table>
+            <tr>
+               <th>Pergunta</th>
+               <th class="center">C</th>
+               <th class="center">NC</th>
+               <th class="center">N/A</th>
+            </tr>
+            <tr>
+               <td class="question">1. O processo de recebimento está sendo realizado corretamente, de acordo com o procedimento?(incluindo local de armazenamento)</td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta1__c = 'C'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta1__c = 'NC'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta1__c = 'N/A'}"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="4"><strong>Descrição:</strong> {!Auditoria_Estrutural_Semanal__c.d1__c}</td>
+            </tr>
+      </table>
+
+      <table>
+         <tr>
+                  <th>Pergunta</th>
+                  <th class="center">C</th>
+                  <th class="center">NC</th>
+                  <th class="center">N/A</th>
+               </tr>
+            <tr>
+               <td class="question">Os produtos armazenados em quarentena estão identificados e foram inspecionados de 
+                  acordo com o procedimento? </td>
+                  <td class="center">
+                        <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta2__c = 'C'}"/>
+                  </td>
+                  <td class="center">
+                        <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta2__c = 'NC'}"/>
+                  </td>
+                  <td class="center">
+                        <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta2__c = 'N/A'}"/>
+                  </td>
+               </tr>
+               <tr>
+                  <td colspan="4"><strong>Descrição:</strong> {!Auditoria_Estrutural_Semanal__c.d2__c}</td>
+               </tr>
+      </table>
+
+      
+      
+      
+      <!-- Dados do Tomador de Serviços -->
+      <div style="font-weight: bold; font-size: 16px; margin-top: 20px; border-bottom: 2px solid #000; padding-bottom: 5px;">
+            ARMAZENAMENTO
+      </div>
+
+      <table>
+         <tr>
+                  <th>Pergunta</th>
+                  <th class="center">C</th>
+                  <th class="center">NC</th>
+                  <th class="center">N/A</th>
+               </tr>
+            <tr>
+               <td class="question">O sensor está ativo? A Temperatura e Umidade está sendo controlado via Salesforce e está 
+                  seguindo os requisitos estabelecidos? </td>
+                  <td class="center">
+                        <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta3__c = 'C'}"/>
+                  </td>
+                  <td class="center">
+                        <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta3__c = 'NC'}"/>
+                  </td>
+                  <td class="center">
+                        <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta3__c = 'N/A'}"/>
+                  </td>
+               </tr>
+               <tr>
+                  <td colspan="4"><strong>Descrição:</strong> {!Auditoria_Estrutural_Semanal__c.d3__c}</td>
+               </tr>
+      </table>
+
+      <table>
+         <tr>
+                  <th>Pergunta</th>
+                  <th class="center">C</th>
+                  <th class="center">NC</th>
+                  <th class="center">N/A</th>
+               </tr>
+            <tr>
+               <td class="question">O estoque está organizado de maneira que os produtos estão distribuídos de acordo com o 
+                  seu prazo de validade – primeiro que vence- primeiro que sai, e sempre atentando-se 
+                  pelo armazenamento adequado (sob palete/prateleira)? </td>
+                  <td class="center">
+                        <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta4__c = 'C'}"/>
+                  </td>
+                  <td class="center">
+                        <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta4__c = 'NC'}"/>
+                  </td>
+                  <td class="center">
+                        <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta4__c = 'N/A'}"/>
+                  </td>
+               </tr>
+               <tr>
+                  <td colspan="4"><strong>Descrição:</strong> {!Auditoria_Estrutural_Semanal__c.d4__c}</td>
+               </tr>
+      </table>
+
+
+      
+      <table>
+         <tr>
+                  <th>Pergunta</th>
+                  <th class="center">C</th>
+                  <th class="center">NC</th>
+                  <th class="center">N/A</th>
+               </tr>
+            <tr>
+               <td class="question">Os produtos devolvidos estão alocados na área “Não Conforme”?  </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta5__c = 'C'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta5__c = 'NC'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta5__c = 'N/A'}"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="4"><strong>Descrição:</strong> {!Auditoria_Estrutural_Semanal__c.d5__c}</td>
+            </tr>
+      </table>
+      
+      <table>
+         <tr>
+                  <th>Pergunta</th>
+                  <th class="center">C</th>
+                  <th class="center">NC</th>
+                  <th class="center">N/A</th>
+               </tr>
+            <tr>
+               <td class="question">O estoque encontra-se limpo (prateleiras/armários/pisos/balcão)?</td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta6__c = 'C'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta6__c = 'NC'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta6__c = 'N/A'}"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="4"><strong>Descrição:</strong> {!Auditoria_Estrutural_Semanal__c.d6__c}</td>
+            </tr>
+      </table>
+      
+      
+      <table>
+         <tr>
+                  <th>Pergunta</th>
+                  <th class="center">C</th>
+                  <th class="center">NC</th>
+                  <th class="center">N/A</th>
+               </tr>
+            <tr>
+               <td class="question">Existem produtos estranhos no estoque? </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta7__c = 'C'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta7__c = 'NC'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta7__c = 'N/A'}"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="4"><strong>Descrição:</strong> {!Auditoria_Estrutural_Semanal__c.d7__c}</td>
+            </tr>
+      </table>
+
+
+      
+      
+      <table>
+         <tr>
+                  <th>Pergunta</th>
+                  <th class="center">C</th>
+                  <th class="center">NC</th>
+                  <th class="center">N/A</th>
+               </tr>
+            <tr>
+               <td class="question">Há presença de pessoas não autorizadas no estoque?</td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta8__c = 'C'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta8__c = 'NC'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta8__c = 'N/A'}"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="4"><strong>Descrição:</strong> {!Auditoria_Estrutural_Semanal__c.d8__c}</td>
+            </tr>
+      </table>
+
+      <br>
+   </br>
+   <br>
+   </br>
+   <br>
+   </br>
+      
+
+      <table>
+         <tr>
+                  <th>Pergunta</th>
+                  <th class="center">C</th>
+                  <th class="center">NC</th>
+                  <th class="center">N/A</th>
+               </tr>
+            <tr>
+               <td class="question">Os produtos vencidos, violados ou com avarias estão sendo estocados no armário de 
+                  “Produto não Conforme” e registrados no Relatório de Não Conformidade? Possuem 
+                  identificação?</td>
+                  <td class="center">
+                        <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta9__c = 'C'}"/>
+                  </td>
+                  <td class="center">
+                        <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta9__c = 'NC'}"/>
+                  </td>
+                  <td class="center">
+                        <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta9__c = 'N/A'}"/>
+                  </td>
+               </tr>
+               <tr>
+                  <td colspan="4"><strong>Descrição:</strong> {!Auditoria_Estrutural_Semanal__c.d9__c}</td>
+               </tr>
+      </table>
+
+      <table>
+         <tr>
+                  <th>Pergunta</th>
+                  <th class="center">C</th>
+                  <th class="center">NC</th>
+                  <th class="center">N/A</th>
+               </tr>
+            <tr>
+               <td class="question">Todos os produtos que se encontram disponíveis na área de armazenamento estão dentro do
+                prazo de validade?</td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta10__c = 'C'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta10__c = 'NC'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta10__c = 'N/A'}"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="4"><strong>Descrição:</strong> {!Auditoria_Estrutural_Semanal__c.d10__c}</td>
+            </tr>
+      </table>
+      
+      <table>
+         <tr>
+                  <th>Pergunta</th>
+                  <th class="center">C</th>
+                  <th class="center">NC</th>
+                  <th class="center">N/A</th>
+               </tr>
+            <tr>
+               <td class="question">As instalações elétricas estão em bom estado? A Estrutura está adequada e segura ?</td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta11__c = 'C'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta11__c = 'NC'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta11__c = 'N/A'}"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="4"><strong>Descrição:</strong> {!Auditoria_Estrutural_Semanal__c.d11__c}</td>
+            </tr>
+      </table>
+
+
+      <table>
+         <tr>
+                  <th>Pergunta</th>
+                  <th class="center">C</th>
+                  <th class="center">NC</th>
+                  <th class="center">N/A</th>
+               </tr>
+            <tr>
+               <td class="question">Foi notado indícios de presença de roedores, insetos ou outros animais no estoque?</td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta12__c = 'C'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta12__c = 'NC'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta12__c = 'N/A'}"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="4"><strong>Descrição:</strong> {!Auditoria_Estrutural_Semanal__c.d12__c}</td>
+            </tr>
+      </table>
+
+
+      <table>
+         <tr>
+                  <th>Pergunta</th>
+                  <th class="center">C</th>
+                  <th class="center">NC</th>
+                  <th class="center">N/A</th>
+               </tr>
+            <tr>
+               <td class="question">Todos os rótulos estão acoplados na caixa de equipamento?Os rótulos encontram-se sem 
+                  avarias e com todas as informações legíveis? </td>
+                  <td class="center">
+                        <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta13__c = 'C'}"/>
+                  </td>
+                  <td class="center">
+                        <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta13__c = 'NC'}"/>
+                  </td>
+                  <td class="center">
+                        <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta13__c = 'N/A'}"/>
+                  </td>
+               </tr>
+               <tr>
+                  <td colspan="4"><strong>Descrição:</strong> {!Auditoria_Estrutural_Semanal__c.d13__c}</td>
+               </tr>
+      </table>
+
+      <!-- Discriminação dos Serviços -->
+      <div style="font-weight: bold; font-size: 16px; margin-top: 20px; border-bottom: 2px solid #000; padding-bottom: 5px;">
+            SEPARAÇÃO E DISTRIBUIÇÃO 
+      </div>
+
+      <table>
+         <tr>
+                  <th>Pergunta</th>
+                  <th class="center">C</th>
+                  <th class="center">NC</th>
+                  <th class="center">N/A</th>
+               </tr>
+            <tr>
+               <td class="question">A liberação dos produtos está sendo feita de acordo com a ordem cronológica do vencimento? </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta14__c = 'C'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta14__c = 'NC'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta14__c = 'N/A'}"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="4"><strong>Descrição:</strong> {!Auditoria_Estrutural_Semanal__c.d14__c}</td>
+            </tr>
+      </table>
+
+      <table>
+         <tr>
+                  <th>Pergunta</th>
+                  <th class="center">C</th>
+                  <th class="center">NC</th>
+                  <th class="center">N/A</th>
+               </tr>
+            <tr>
+               <td class="question">A separação dos produtos está sendo feita de maneira padronizada utilizando a área correta? </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta15__c = 'C'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta15__c = 'NC'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta15__c = 'N/A'}"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="4"><strong>Descrição:</strong> {!Auditoria_Estrutural_Semanal__c.d15__c}</td>
+            </tr>
+            <tr>
+               <td colspan="4"><strong>Descrição:</strong></td>
+            </tr>
+      </table>
+      
+      <table>
+         <tr>
+                  <th>Pergunta</th>
+                  <th class="center">C</th>
+                  <th class="center">NC</th>
+                  <th class="center">N/A</th>
+               </tr>
+            <tr>
+               <td class="question">As caixas onde são acondicionados os produtos estão em boas condições (estado físico das 
+                  caixas, higiene e limpeza)? </td>
+                  <td class="center">
+                        <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta16__c = 'C'}"/>
+                  </td>
+                  <td class="center">
+                        <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta16__c = 'NC'}"/>
+                  </td>
+                  <td class="center">
+                        <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta16__c = 'N/A'}"/>
+                  </td>
+               </tr>
+               <tr>
+                  <td colspan="4"><strong>Descrição:</strong> {!Auditoria_Estrutural_Semanal__c.d16__c}</td>
+               </tr>
+      </table>
+
+      <table>
+         <tr>
+                  <th>Pergunta</th>
+                  <th class="center">C</th>
+                  <th class="center">NC</th>
+                  <th class="center">N/A</th>
+               </tr>
+            <tr>
+               <td class="question">A área de expedição encontra-se organizada, limpa e as caixas estão acondicionadas em cima 
+                  de paletes?</td>
+                  <td class="center">
+                        <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta17__c = 'C'}"/>
+                  </td>
+                  <td class="center">
+                        <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta17__c = 'NC'}"/>
+                  </td>
+                  <td class="center">
+                        <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta17__c = 'N/A'}"/>
+                  </td>
+               </tr>
+               <tr>
+                  <td colspan="4"><strong>Descrição:</strong> {!Auditoria_Estrutural_Semanal__c.d17__c}</td>
+               </tr>
+      </table>
+   
+   <br>
+   </br>
+   <br>
+   </br>
+   <br>
+   </br>
+   <br>
+   </br>
+   
+   
+      <!-- Informações Adicionais -->
+      <div style="font-weight: bold; font-size: 16px; margin-top: 20px; border-bottom: 2px solid #000; padding-bottom: 5px;">
+            ASSISTÊNCIA TÉCNICA 
+      </div>
+
+      <table>
+         <tr>
+                  <th>Pergunta</th>
+                  <th class="center">C</th>
+                  <th class="center">NC</th>
+                  <th class="center">N/A</th>
+               </tr>
+            <tr>
+               <td class="question">Os equipamentos estão devidamente identificados?</td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta18__c = 'C'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta18__c = 'NC'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta18__c = 'N/A'}"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="4"><strong>Descrição:</strong> {!Auditoria_Estrutural_Semanal__c.d18__c}</td>
+            </tr>
+      </table>
+
+      <table>
+         <tr>
+                  <th>Pergunta</th>
+                  <th class="center">C</th>
+                  <th class="center">NC</th>
+                  <th class="center">N/A</th>
+               </tr>
+            <tr>
+               <td class="question">As áreas estão limpas e organizadas? </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta19__c = 'C'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta19__c = 'NC'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta19__c = 'N/A'}"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="4"><strong>Descrição:</strong> {!Auditoria_Estrutural_Semanal__c.d19__c}</td>
+            </tr>
+      </table>
+
+      <table>
+         <tr>
+                  <th>Pergunta</th>
+                  <th class="center">C</th>
+                  <th class="center">NC</th>
+                  <th class="center">N/A</th>
+               </tr>
+            <tr>
+               <td class="question">Todos os equipamentos estão com O.T? </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta20__c = 'C'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta20__c = 'NC'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta20__c = 'N/A'}"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="4"><strong>Descrição:</strong> {!Auditoria_Estrutural_Semanal__c.d20__c}</td>
+            </tr>
+      </table>
+
+      <!-- Informações Adicionais -->
+      <div style="font-weight: bold; font-size: 16px; margin-top: 20px; border-bottom: 2px solid #000; padding-bottom: 5px;">
+            SAÚDE E SEGURANÇA   
+      </div>
+
+      <table>
+         <tr>
+                  <th>Pergunta</th>
+                  <th class="center">C</th>
+                  <th class="center">NC</th>
+                  <th class="center">N/A</th>
+               </tr>
+            <tr>
+               <td class="question">Todos os colaboradores estão utilizando os EPIs devidos? </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta21__c = 'C'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta21__c = 'NC'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta21__c = 'N/A'}"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="4"><strong>Descrição:</strong> {!Auditoria_Estrutural_Semanal__c.d21__c}</td>
+            </tr>
+      </table>   
+         
+      <table>
+         <tr>
+                  <th>Pergunta</th>
+                  <th class="center">C</th>
+                  <th class="center">NC</th>
+                  <th class="center">N/A</th>
+               </tr>
+            <tr>
+               <td class="question">Os descartes dos resíduos estão conforme PGRSS? Existe local apropriado e laudo ? </td>
+               <td class="center">
+               <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta22__c = 'C'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta22__c = 'NC'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta22__c = 'N/A'}"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="4"><strong>Descrição:</strong> {!Auditoria_Estrutural_Semanal__c.d22__c}</td>
+            </tr>
+      </table> 
+
+      <table>
+        <tr>
+                 <th>Pergunta</th>
+                 <th class="center">C</th>
+                 <th class="center">NC</th>
+                 <th class="center">N/A</th>
+              </tr>
+           <tr>
+              <td class="question">O último projeto aprovado está impresso e na pasta da Qualidade?</td>
+              <td class="center">
+              <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta25__c = 'C'}"/>
+              </td>
+              <td class="center">
+                 <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta25__c = 'NC'}"/>
+              </td>
+              <td class="center">
+                 <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta25__c = 'N/A'}"/>
+              </td>
+           </tr>
+           <tr>
+              <td colspan="4"><strong>Descrição:</strong> {!Auditoria_Estrutural_Semanal__c.d25__c}</td>
+           </tr>
+     </table> 
+
+     <table>
+        <tr>
+                 <th>Pergunta</th>
+                 <th class="center">C</th>
+                 <th class="center">NC</th>
+                 <th class="center">N/A</th>
+              </tr>
+           <tr>
+              <td class="question">Todos os Extintores estão no local adequado com placa e suporte?</td>
+              <td class="center">
+              <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta26__c = 'C'}"/>
+              </td>
+              <td class="center">
+                 <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta26__c = 'NC'}"/>
+              </td>
+              <td class="center">
+                 <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta26__c = 'N/A'}"/>
+              </td>
+           </tr>
+           <tr>
+              <td colspan="4"><strong>Descrição:</strong> {!Auditoria_Estrutural_Semanal__c.d26__c}</td>
+           </tr>
+     </table> 
+
+   
+
+      <!-- Informações Adicionais -->
+      <div style="font-weight: bold; font-size: 16px; margin-top: 20px; border-bottom: 2px solid #000; padding-bottom: 5px;">
+            BACKUP SISTEMAS
+      </div>
+
+      <table>
+         <tr>
+                  <th>Pergunta</th>
+                  <th class="center">C</th>
+                  <th class="center">NC</th>
+                  <th class="center">N/A</th>
+               </tr>
+            <tr>
+               <td class="question">Backup do Salesforce foi realizado pelo Desenvolvimento? </td>
+               <td class="center">
+               <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta23__c = 'C'}"/>          
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta23__c = 'NC'}"/>
+               </td>
+               <td class="center">
+                  <apex:outputText value="X" rendered="{!Auditoria_Estrutural_Semanal__c.pergunta23__c = 'N/A'}"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="4"><strong>Descrição, Local de Armazenamento e Rotulagem do Backup?</strong> {!Auditoria_Estrutural_Semanal__c.d23__c}</td>
+            </tr>
+      </table> 
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+               <th colspan="2" style="text-align: left;">PRODUTOS PARA VERIFICAÇÃO DE REGISTRO ANVISA</th>
+            </tr>
+            <tr>
+               <td style="width: 50%; border-bottom: 1px solid black;">Produto: {!Auditoria_Estrutural_Semanal__c.Produto1__c}</td>
+               <td style="width: 50%; border-bottom: 1px solid black;">RMS: {!Auditoria_Estrutural_Semanal__c.RMS1__c}</td>
+            </tr>
+            <tr>
+               <td style="border-bottom: 1px solid black;">Produto: {!Auditoria_Estrutural_Semanal__c.Produto2__c}</td>
+               <td style="border-bottom: 1px solid black;">RMS: {!Auditoria_Estrutural_Semanal__c.RMS2__c}</td>
+            </tr>
+            <tr>
+               <td style="border-bottom: 1px solid black;">Produto: {!Auditoria_Estrutural_Semanal__c.Produto3__c}</td>
+               <td style="border-bottom: 1px solid black;">RMS: {!Auditoria_Estrutural_Semanal__c.RMS3__c}</td>
+            </tr>
+            <tr>
+               <td style="border-bottom: 1px solid black;">Produto: {!Auditoria_Estrutural_Semanal__c.Produto4__c}</td>
+               <td style="border-bottom: 1px solid black;">RMS: {!Auditoria_Estrutural_Semanal__c.RMS4__c}</td>
+            </tr>
+            <tr>
+               <td style="border-bottom: 1px solid black;">Produto: {!Auditoria_Estrutural_Semanal__c.Produto5__c}</td>
+               <td style="border-bottom: 1px solid black;">RMS: {!Auditoria_Estrutural_Semanal__c.RMS5__c}</td>
+            </tr>
+      </table>
+            <tr>
+               <td colspan="2" style="border-top: 2px solid black; text-align: right;">
+                  <strong>Total de não conformidades:</strong> 
+                  {!Auditoria_Estrutural_Semanal__c.totalNC__c}
+               </td>
+            </tr>
+            <br>
+         </br>
+         <br>
+         </br>
+            
+
+            <div style="font-weight: bold; font-size: 16px; margin-top: 20px; border-bottom: 2px solid #000; padding-bottom: 5px;">
+               IMAGENS
+         </div>
+            <div class="image-grid">
+            <apex:repeat value="{!fileURLs}" var="fileUrl">
+               <apex:image url="{!fileUrl}" width="220px" height="220px" style="object-fit: cover;"/>
+            </apex:repeat>
+      </div>
+            
+ 
+      <div style="padding:0; margin:0; text-align:center;">
+              <div style="padding:0; margin: 0 0 -3px 0; text-align:center;">
+                <apex:image style="padding:0; margin:0 auto -30px; text-align:center;"
+                  value="{! IF(NOT(ISBLANK(Auditoria_Estrutural_Semanal__C.Auditor_a__r.Contact.assinatura__c)), 
+                  Auditoria_Estrutural_Semanal__C.Auditor_a__r.Contact.assinatura__c, 
+                  'https://hospcom--c.na170.content.force.com/servlet/servlet.ImageServer?id=0156e00000Bf8Ui&oid=00Di0000000JVhH&lastMod=1667927109000')}"
+                  width="313" height="88px" />
+              </div>  
+            
+              <p style="padding:0; margin:0 auto;">
+                <div class="underline" style="padding:0; margin: -5px auto 0 auto; width: 50%; border-bottom: 1px solid #0c3557;">
+                </div><br />
+                {!Auditoria_Estrutural_Semanal__C.Auditor_a__r.Name} <br /> Departamento de Qualidade
+              </p>
+       </div>
+                
+         
+    
+
+   </body>
+   </html> 
+</apex:page>

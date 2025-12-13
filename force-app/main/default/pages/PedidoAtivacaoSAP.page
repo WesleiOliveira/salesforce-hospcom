@@ -1,0 +1,187 @@
+<apex:page standardController="Order" extensions="EnviaSAP" action="{!ValidarPedido}" showHeader="false" showChat="false" standardStylesheets="false" docType="html-5.0">
+    
+    <html>
+        <head>
+            <title>Ativação de Pedido</title>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <script src="{!$Resource.JQuery}"></script>
+            <link href="{!URLFOR($Resource.Bootstrap, 'css/bootstrap.css')}" rel="stylesheet"/>
+            <script src="{!URLFOR($Resource.Bootstrap, 'js/bootstrap.min.js')}"></script>
+            
+            <style>
+                /* CABECALHO ================================================== */
+
+                /* cabecalho */
+                .cabecalho{
+                    background-color: #f7f9fb;
+                    padding-top: 6px;
+                    padding-bottom: 3px;
+                }.cabecalho .icone{
+                    width:32px;
+                    padding-right: 8px!important;
+                }.cabecalho .icone .imagem{
+                    width:32px;
+                    height:32px;
+                    background-color: rgb(252, 185, 91);
+                    border-radius:3px;
+                }.cabecalho .nome{
+                    font-size: .8125rem;
+                    color: rgb(90, 90, 90);
+                }.cabecalho .titulo{
+                    font-size: 1.125rem;
+                    font-weight: 400;
+                    line-height: 1.25;
+                }
+                
+                /* CONTEUDO =========================================== */
+                
+                .conteudo .mensagens{
+                    margin-top:6px!important;
+                }.conteudo .mensagens small, .conteudo .mensagens small span.nor{
+                    padding-left:20px;
+                    color:#00a500;
+                }.conteudo .mensagens small span.dif{
+                    border: 1px solid red;
+                    border-radius; 3;
+                    font-weight:bold;
+                    background-color:white!important;
+                    color:red;
+                }.conteudo .mensagens .alert{
+                    padding: 6px!important;
+                    margin-bottom:6px!important;
+                }.conteudo .botoes td{
+                    text-align:center!important;
+                    width:33%!important;
+                }
+                
+                
+            </style>
+            <script>
+                function PrepararEndereco(tipo, valor){
+                    $('button').prop('disabled', true);
+                    end_tipo.value = tipo;
+                    end_valor.value = valor;
+                    SetarEndereco();
+                }
+            </script>
+        </head>
+
+        <body style="margin-top:7px;">
+            <div class="bootstrap-iso">
+                <div class="container-fluid">
+                    <apex:form >
+
+                        <!-- metodos -->
+                        <apex:actionFunction name="ValidarPedido" action="{!ValidarPedido}" rerender="conteudo" oncomplete=""/>
+                        <apex:actionFunction name="VoltarAoPedido" action="{!VoltarAoPedido}" rerender="" oncomplete=""/>
+                        <apex:actionFunction name="EnviarEmail" action="{!EnviarEmail}" rerender="conteudo" oncomplete=""/>
+                        <apex:actionFunction name="SetarEndereco" action="{!SetarEndereco}" rerender="" oncomplete="ValidarPedido();"/>
+                        
+                        <!-- variáveis -->
+                        <apex:inputHidden value="{!tela.end_tipo}" id="end_tipo" />
+                        <apex:inputHidden value="{!tela.end_valor}" id="end_valor" />
+                        <script>
+                            end_tipo = document.getElementById('{!$Component.end_tipo}');
+                            end_valor = document.getElementById('{!$Component.end_valor}');
+                        </script>
+
+                        <!-- cabeçalho -->
+                        <div class="row cabecalho">
+                            <div class="col-xs-100">
+                                <table style="width:100%;" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td rowspan="2" class="icone">
+                                            <img class="imagem" src="{!tela.url_base}/img/icon/t4v35/standard/orders_120.png"/>
+                                        </td>
+                                        <td class="nome">
+                                            Ativação de Pedido
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="titulo">
+                                            Pedido: {!pedido.ordernumber}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- conteudo -->
+                        <apex:outputPanel id="conteudo">
+                            <div class="row conteudo">
+                                <div class='col-xs-100 mensagens'>
+                                
+                                    <!-- erros -->
+                                    <apex:outputText rendered="{!tela.mensagem.erros.size>0}">
+                                        <div class="alert alert-danger">
+                                            <apex:repeat value="{!tela.mensagem.erros}" var="mensagem">
+                                                <i class="glyphicon glyphicon-remove-sign"></i>&nbsp;
+                                                <apex:outputText value="{!mensagem}" escape="false" />
+                                                <br/>
+                                            </apex:repeat>
+                                        </div> 
+                                    </apex:outputText>
+                                    
+                                    <!-- sucessos -->
+                                    <apex:outputText rendered="{!tela.mensagem.sucessos.size>0}">
+                                        <div class="alert alert-success">
+                                            <apex:repeat value="{!tela.mensagem.sucessos}" var="mensagem">
+                                                <i class="glyphicon glyphicon-ok"></i>&nbsp;
+                                                <apex:outputText value="{!mensagem}" escape="false" />
+                                                <br/>
+                                            </apex:repeat>
+                                        </div> 
+                                    </apex:outputText>
+                                    
+                                    <!-- informacaoes -->
+                                    <apex:outputText rendered="{!tela.mensagem.informacoes.size>0}">
+                                        <div class="alert alert-info">
+                                            <apex:repeat value="{!tela.mensagem.informacoes}" var="mensagem">
+                                                <i class="glyphicon glyphicon-info-sign"></i>&nbsp;
+                                                <apex:outputText value="{!mensagem}" escape="false" />
+                                                <br/>
+                                            </apex:repeat>
+                                        </div>
+                                    </apex:outputText>
+                                    
+                                </div>
+                                <div class='col-xs-100 botoes'>
+                                    <table style="width:100%;" cellpadding="0" cellspacing="0" border="0">
+                                        <tr>
+                                            <td>
+                                                <button onclick="VoltarAoPedido()" type="button" class="btn btn-default">
+                                                    <i class="glyphicon glyphicon-arrow-left"></i>
+                                                    Voltar ao pedido
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <apex:outputText rendered="{!tela.mensagem.emails.size>0}">
+                                                    <button onclick="EnviarEmail();$(this).prop('disabled', true);$(this).text('Enviando e-mail, aguarde...');" type="button" class="btn btn-default">
+                                                        <i class="glyphicon glyphicon-envelope"></i>
+                                                        Solicitar cadastros
+                                                    </button>
+                                                </apex:outputtext>
+                                            </td>
+                                            <td>
+                                                <apex:outputText rendered="{!tela.mensagem.erros.size>0}">
+                                                    <button onclick="ValidarPedido();$(this).prop('disabled', true);$(this).text('Tentando, aguarde...');" type="button" class="btn btn-default">
+                                                        <i class="glyphicon glyphicon-repeat"></i>
+                                                        Tentar novamente
+                                                    </button>
+                                                </apex:outputtext>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </apex:outputPanel>
+
+                        
+                        
+                    </apex:form>
+                </div>
+            </div>
+        </body>
+    </html>
+</apex:page>

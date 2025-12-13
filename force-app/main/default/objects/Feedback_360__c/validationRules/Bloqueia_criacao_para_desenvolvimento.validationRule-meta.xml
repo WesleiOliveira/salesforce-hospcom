@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bloqueia_criacao_para_desenvolvimento</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISNEW(),
+    ISPICKVAL(Departamento__c, &apos;Desenvolvimento&apos;),
+    NOT(Acao_interna__c),
+    $Profile.Name &lt;&gt; &apos;Administrador do sistema&apos;
+)</errorConditionFormula>
+    <errorDisplayField>Departamento__c</errorDisplayField>
+    <errorMessage>O Feedback360 para o departamento de Desenvolvimento não está disponível no momento.
+Por favor, entre em contato via nosso WhatsApp: (65) 8170-0029</errorMessage>
+</ValidationRule>

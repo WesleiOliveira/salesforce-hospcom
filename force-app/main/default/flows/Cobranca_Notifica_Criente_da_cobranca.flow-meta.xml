@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>59.0</apiVersion>
+    <assignments>
+        <name>Salva_numero_de_telefone</name>
+        <label>Salva numero de telefone</label>
+        <locationX>1634</locationX>
+        <locationY>276</locationY>
+        <assignmentItems>
+            <assignToReference>variavelmensagem.z0number</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Pedido__r.Telefone_Contato__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>variavelmensagem.message</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Mensagem5diasantes</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>Decisao_gerete_regional</name>
+        <label>Decisão - gerente regional</label>
+        <locationX>446</locationX>
+        <locationY>840</locationY>
+        <defaultConnector>
+            <targetReference>Jackeline_Coelho</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>regiao_leonardo</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Regiao__c</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>Distrito Federal</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Compartilha_com_Leonardo_Mendes</targetReference>
+            </connector>
+            <label>Região Manuel</label>
+        </rules>
+        <rules>
+            <name>Regiao_Odair</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Regiao__c</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>Mato Grosso do Sul</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Regiao__c</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>São Paulo</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Compartilha_com_Odair_Faccioli</targetReference>
+            </connector>
+            <label>Região Orlando</label>
+        </rules>
+        <rules>
+            <name>Regi_o_Luckas</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Regiao__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Região Luckas</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Compartilha_com_Luckas</targetReference>
+            </connector>
+            <label>Região Luckas</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>tem_gerete</name>
+        <label>Tem gerente</label>
+        <locationX>446</locationX>
+        <locationY>492</locationY>
+        <defaultConnector>
+            <targetReference>Decisao_gerete_regional</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>tem_gerente</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Pedido__r.Gerente__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>compartilha_com_gerente</targetReference>
+            </connector>
+            <label>Tem gerente</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Tem_pedido</name>
+        <label>Tem pedido</label>
+        <locationX>908</locationX>
+        <locationY>276</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Com_pedido</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Pedido__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Compartilha_com_vendedor</targetReference>
+            </connector>
+            <label>Com pedido</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>Assuntoemail</name>
+        <dataType>String</dataType>
+        <expression>&quot;Comunicado grupo HOSPCOM&quot;</expression>
+    </formulas>
+    <formulas>
+        <name>body_email_cobranca_5_dias</name>
+        <dataType>String</dataType>
+        <expression>&quot;Olá, &quot; &amp;  {!$Record.Pedido__r.Nome_Contato_Financeiro__c}  &amp;
+{!$Record.Conta__r.FirstName} &amp; &quot;! Tudo bem?&quot; &amp; 
+BR() &amp; 
+&quot;Aqui é da &quot; &amp; {!$Record.Pedido__r.Faturamento_Feito__r.Name} &amp; &quot;.&quot; &amp; 
+BR() &amp; 
+&quot;Estou entrando em contato para lembrar que a sua fatura no valor de R$ &quot; &amp; TEXT({!$Record.Valor_do_recebimento__c}) &amp; 
+&quot; vence no dia: &quot; &amp; &quot;DATA &quot; &amp; &quot; , Faltam 5 dias para o fim do prazo de pagamento.&quot; &amp; 
+&quot; Em caso de dúvidas sobre o pagamento, entre em contato pelo número (62) 3241-5555.&quot; &amp; 
+
+BR()&amp;
+&quot;Caso já tenha efetuado o pagamento, favor, ignorar esta mensagem.&quot;&amp;
+BR() &amp; 
+BR() &amp; 
+&quot;Conte conosco!&quot; &amp; 
+BR() &amp; 
+&quot;Atenciosamente, &quot; &amp; 
+{!$Record.Pedido__r.Faturamento_Feito__r.Name} &amp; &quot;.&quot;</expression>
+    </formulas>
+    <formulas>
+        <name>Mensagem5diasantes</name>
+        <dataType>String</dataType>
+        <expression>&quot;Olá, &quot; &amp;
+{!$Record.Pedido__r.Nome_Contato_Financeiro__c} &amp;
+&quot;.&quot; &amp; 
+BR() &amp; 
+BR() &amp; 
+&quot;Sua fatura &quot; &amp; {!$Record.Pedido__r.Faturamento_Feito__r.Name} &amp; &quot; vence nos próximos 5 dias!&quot; &amp;
+BR() &amp; 
+&quot;Precisa falar conosco?&quot; &amp; 
+BR() &amp; 
+&quot;Você pode responder a esta mensagem com sua dúvida ou ligar para o mesmo número.&quot; &amp; 
+
+BR() &amp; 
+&quot;Caso já tenha efetuado o pagamento, favor, ignorar esta mensagem.&quot;&amp;
+BR() &amp; 
+BR() &amp; 
+&quot;Conte conosco!&quot;</expression>
+    </formulas>
+    <interviewLabel>Cobranca - Notifica Criente da cobranca {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Cobranca - Notifica Criente da cobranca</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>compartilha_com_gerente</name>
+        <label>compartilha com gerente</label>
+        <locationX>182</locationX>
+        <locationY>600</locationY>
+        <connector>
+            <targetReference>Decisao_gerete_regional</targetReference>
+        </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Decisao_gerete_regional</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>AccessLevel</field>
+            <value>
+                <stringValue>Read</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ParentId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>UserOrGroupId</field>
+            <value>
+                <elementReference>$Record.Pedido__r.Gerente__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Cobranca__Share</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Compartilha_com_Leonardo_Mendes</name>
+        <label>Compartilha comManuel</label>
+        <locationX>50</locationX>
+        <locationY>948</locationY>
+        <inputAssignments>
+            <field>AccessLevel</field>
+            <value>
+                <stringValue>Read</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ParentId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>UserOrGroupId</field>
+            <value>
+                <stringValue>005U4000000hRcr</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Cobranca__Share</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Compartilha_com_Luckas</name>
+        <label>Compartilha com Luckas</label>
+        <locationX>578</locationX>
+        <locationY>948</locationY>
+        <inputAssignments>
+            <field>AccessLevel</field>
+            <value>
+                <stringValue>Read</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ParentId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>UserOrGroupId</field>
+            <value>
+                <stringValue>0056e00000CqadR</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Cobranca__Share</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Compartilha_com_Odair_Faccioli</name>
+        <label>Compartilha com Orlando</label>
+        <locationX>314</locationX>
+        <locationY>948</locationY>
+        <inputAssignments>
+            <field>AccessLevel</field>
+            <value>
+                <stringValue>Read</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ParentId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>UserOrGroupId</field>
+            <value>
+                <stringValue>005U4000002p3Ni</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Cobranca__Share</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Compartilha_com_vendedor</name>
+        <label>Compartilha com vendedor</label>
+        <locationX>446</locationX>
+        <locationY>384</locationY>
+        <connector>
+            <targetReference>tem_gerete</targetReference>
+        </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>tem_gerete</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>AccessLevel</field>
+            <value>
+                <stringValue>Read</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ParentId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>UserOrGroupId</field>
+            <value>
+                <elementReference>$Record.Pedido__r.Vendedor__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Cobranca__Share</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Jackeline_Coelho</name>
+        <label>Jackeline Coelho</label>
+        <locationX>842</locationX>
+        <locationY>948</locationY>
+        <inputAssignments>
+            <field>AccessLevel</field>
+            <value>
+                <stringValue>Read</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ParentId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>UserOrGroupId</field>
+            <value>
+                <stringValue>0055A000008puvc</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Cobranca__Share</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <start>
+        <locationX>1145</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Tem_pedido</targetReference>
+        </connector>
+        <object>Cobranca__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <scheduledPaths>
+            <name>x5_dias_antes_do_prazo</name>
+            <connector>
+                <targetReference>Salva_numero_de_telefone</targetReference>
+            </connector>
+            <label>5 dias antes do prazo</label>
+            <offsetNumber>-1</offsetNumber>
+            <offsetUnit>Minutes</offsetUnit>
+            <recordField>Vencimento__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Obsolete</status>
+    <textTemplates>
+        <name>Corpo_do_email_5_dias</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;teste &lt;/p&gt;</text>
+    </textTemplates>
+    <variables>
+        <name>emailRemetente</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>contato@hospcom.net</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>variavelmensagem</name>
+        <apexClass>ExternalService__sendWhatsapp_sendWpp_IN_body</apexClass>
+        <dataType>Apex</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

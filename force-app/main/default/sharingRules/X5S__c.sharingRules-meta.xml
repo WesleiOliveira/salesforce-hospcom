@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>Facilities</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Facilities</label>
+        <sharedTo>
+            <group>Facilities</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Visualiza_o</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Visualização Qualidade</label>
+        <sharedTo>
+            <group>Qualidade</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>X5S</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>5S</label>
+        <sharedTo>
+            <group>X5S</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

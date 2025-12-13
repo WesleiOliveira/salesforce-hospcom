@@ -1,0 +1,36 @@
+<template>
+    <lightning-card>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2 class="slds-text-heading_small">Pedidos e Faturamentos</h2>
+            <lightning-button variant="neutral" onclick={handleAtualizarValores} label="Atualizar Valores"></lightning-button>
+        </div><br/>
+
+        <!-- Componente de filtro -->
+        <div class="slds-p-bottom_medium">
+            <lightning-combobox
+                name="filterOptions"
+                label="Filtrar por"
+                value={selectedFilter}
+                options={filterOptions}
+                onchange={handleFilterChange}
+            ></lightning-combobox>
+        </div>
+
+        <!-- Exibição da tabela -->
+        <template if:true={pedidos}>
+            <lightning-datatable
+                data={pedidos}
+                columns={columns}
+                key-field="Id"
+            >
+            </lightning-datatable>
+        </template>
+        <template if:false={pedidos}>
+            <p>Carregando pedidos...</p>
+        </template>
+        <template if:true={error}>
+            <p>{error}</p>
+        </template>
+    </lightning-card>
+    
+</template>

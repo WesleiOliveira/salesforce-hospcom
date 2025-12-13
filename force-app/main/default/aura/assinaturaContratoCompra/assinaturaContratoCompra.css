@@ -1,0 +1,49 @@
+.THIS .containerPrincipalAssinatura{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 400;
+    padding-top: 10px;
+    border: 1px solid #d4d4d4;
+    border-radius: 5px;
+}
+
+.THIS .divButton{
+    align-items: center;
+    justify-content: end;
+    display: flex;
+}
+
+.THIS .divBotoesAssinando{
+    display: flex;
+    column-gap: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.THIS .modal{
+    padding-top: 100px;
+    opacity: 1!important;
+    background-color: rgb(0 0 17 / 60%);
+}
+
+.THIS ul {
+    margin-bottom: 0px;
+}
+
+.THIS .steps{
+    width: 100%;
+}
+
+.THIS ul.progressbar li.current:before {
+    background: rgb(15 55 92);
+    color: #fff;
+    cursor: pointer
+}
+
+.THIS ul.progressbar li.done:before, .THIS ul.progressbar li.done:after {
+    color: #fff;
+    background: #55cd15;
+}

@@ -1,0 +1,229 @@
+<apex:page standardController="Avaliacao_de_Experiencia__c" applyHtmlTag="false" showHeader="false" renderAs="pdf" >
+         <head>
+        <style type="text/css" media="print">
+            @page {
+                size: 21cm 29.7cm;
+                margin: 100px 40px 60px 40px;
+
+                @top-center {
+                    content: element(header);
+                }
+
+                @bottom-center {
+                    content: element(footer);
+                }
+            }
+
+            *{
+                font-family: sans-serif !important;
+            }
+            
+            @page {
+                size: A4;
+                background:url({!$Resource.TimbradoHospcom});
+                margin: 150px 20px 120px 20px;
+
+                @bottom-center {
+                    content: element(footer);
+                }
+            }
+
+            .pagenumber:before {
+                content: counter(page);
+            }
+
+            .pagecount:before {
+                content: counter(pages);
+            }
+
+            div.header {
+                margin: 0px 0px 0px 0px;
+                padding: 20px 0px 20px 0px;
+                position: running(header);
+                height: 60px;
+            }
+
+            div.footer {
+                margin: 0px 0px 0px 0px;
+                padding: 20px 0px 20px 0px;
+                position: running(footer);
+                height: 20px;
+                text-align: right;
+                font-family: arial, verdana, sans-serif;
+                font-size: 10px;
+                font-weight: normal;
+            }
+            
+            
+        </style>
+        <style type="text/css" media="print">
+         
+            
+            
+            .bordas{
+                border: 1px solid #183e60;                
+                text-transform: uppercase;
+            }
+            tr{
+                page-break-inside: avoid;
+            }
+            td{
+                padding: 8px !important ;
+               
+            }
+            table{
+                border-collapse: collapse;
+            }
+            .center{                
+                text-align: center; 
+            }
+            .dado{
+                font-size: 10px;
+                color: #183e60; 
+                border: 1px solid #626363; 
+            }
+            
+            .titulo{
+                font-size: 11px;
+                font-weight: bold;
+                text-align: center; 
+                color: #fff; 
+                background: #183e60;
+                border: 1px solid #626363; 
+            }
+        </style>
+    </head>
+  
+ <h3 style="text-align:center; font-family:Arial;">Avaliação de Experiência</h3>
+    
+    <div style="font-size: 16px; line-height: 1.4;">
+    <p style="margin: 2px 0;"><b>Colaborador:</b> {!Avaliacao_de_Experiencia__c.Nome_do_Colaborador__r.Name}</p>
+    <p style="margin: 2px 0;"><b>Cargo: </b> {!Avaliacao_de_Experiencia__c.Cargo2__c}</p>
+    <p style="margin: 2px 0;"><b>Departamento: </b>{!Avaliacao_de_Experiencia__c.Departamento__c} </p>
+    <p style="margin: 2px 0;"><b>Período da Avaliação: </b>{!Avaliacao_de_Experiencia__c.Periodo_da_Avaliacao__c} </p>
+    <p style="margin: 2px 0;"><b>Data Final da Avaliação:</b><apex:outputText value="{0,date,dd/MM/yyyy}">
+            <apex:param value="{!Avaliacao_de_Experiencia__c.Data_Fim__c}" />
+        </apex:outputText> </p>
+    </div>
+    <p>
+        
+    </p>
+   
+    <table style="width:100%; border-collapse: collapse; font-family: Arial;" border="1">
+    <thead style="background-color:#f2f2f2;">
+        <tr>
+            <th style="padding: 10px;">Valores</th>
+            <th style="padding: 10px;">Perguntas</th>
+            <th style="padding: 10px;">Respostas</th>
+            <th style="padding: 10px;">Justificativa</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Atitude de Dono -->
+        <tr>
+            <td rowspan="2" style="vertical-align: middle; padding: 10px;"><b>Atitude de Dono</b></td>
+            <td style="padding: 10px;">Demonstrou proatividade, responsabilidade e comprometimento em relação ao seu trabalho?</td>
+            <td style="padding: 10px;">{!Avaliacao_de_Experiencia__c.pergunta_1__c}</td>
+            <td style="padding: 10px;">{!Avaliacao_de_Experiencia__c.Justificativa_1__c}</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px;">Procurou soluções e tomou iniciativas para resolver ou melhorar processos?</td>
+            <td style="padding: 10px;">{!Avaliacao_de_Experiencia__c.pergunta_2__c}</td>
+            <td style="padding: 10px;">{!Avaliacao_de_Experiencia__c.Justificativa_2__c}</td>
+        </tr>
+
+        <!-- Melhoria Contínua -->
+        <tr>
+            <td rowspan="2" style="vertical-align: middle; padding: 10px;"><b>Melhoria Contínua</b></td>
+            <td style="padding: 10px;">Demonstrou abertura e receptividade ao receber críticas ou sugestões de melhoria?</td>
+            <td style="padding: 10px;">{!Avaliacao_de_Experiencia__c.pergunta_3__c}</td>
+            <td style="padding: 10px;">{!Avaliacao_de_Experiencia__c.Justificativa_3__c}</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px;">Teve curiosidade para buscar e aprender o máximo de atividades possíveis?</td>
+            <td style="padding: 10px;">{!Avaliacao_de_Experiencia__c.pergunta_4__c}</td>
+            <td style="padding: 10px;">{!Avaliacao_de_Experiencia__c.Justificativa_4__c}</td>
+        </tr>
+
+        <!-- Respeito -->
+        <tr>
+            <td rowspan="2" style="vertical-align: middle; padding: 10px;"><b>Respeito</b></td>
+            <td style="padding: 10px;">Respeitou as pessoas e os processos sem colocar empecilhos?</td>
+            <td style="padding: 10px;">{!Avaliacao_de_Experiencia__c.pergunta_5__c}</td>
+            <td style="padding: 10px;">{!Avaliacao_de_Experiencia__c.Justificativa_5__c}</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px;">Suas ações foram realizadas com todos com cortesia e respeito?</td>
+            <td style="padding: 10px;">{!Avaliacao_de_Experiencia__c.pergunta_6__c}</td>
+            <td style="padding: 10px;">{!Avaliacao_de_Experiencia__c.Justificativa_6__c}</td>
+        </tr>
+
+        <!-- Sangue no Olho -->
+        <tr>
+            <td style="padding: 10px;"><b>Sangue no Olho</b></td>
+            <td style="padding: 10px;">Teve atitude e arregaçou as mangas para colocar a mão na massa e começar a entregar o resultado?</td>
+            <td style="padding: 10px;">{!Avaliacao_de_Experiencia__c.pergunta_7__c}</td>
+            <td style="padding: 10px;">{!Avaliacao_de_Experiencia__c.Justificativa_7__c}</td>
+        </tr>
+
+        <!-- Honestidade -->
+        <tr>
+            <td style="padding: 10px;"><b>Honestidade</b></td>
+            <td style="padding: 10px;">Demonstrou transparência em suas comunicações e ações no ambiente de trabalho?</td>
+            <td style="padding: 10px;">{!Avaliacao_de_Experiencia__c.pergunta_8__c}</td>
+            <td style="padding: 10px;">{!Avaliacao_de_Experiencia__c.Justificativa_8__c}</td>
+        </tr>
+    </tbody>
+</table>
+
+  
+<!-- Caso a aprovação NÃO esteja finalizada ou o aprovador esteja em branco -->
+<apex:outputPanel rendered="{!OR(
+    NOT(Avaliacao_de_Experiencia__c.Aprovacao_Finalizada__c),
+    ISBLANK(Avaliacao_de_Experiencia__c.Aprovador__c)
+)}">
+    <div style="margin-top: 60px; font-size: 13px;">
+        <span>Assinatura do Colaborador: 
+            <span style="display: inline-block; border-bottom: 1px solid #000; width: 180px;"></span>
+        </span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span>Assinatura do Gestor: 
+            <span style="display: inline-block; border-bottom: 1px solid #000; width: 180px;"></span>
+        </span>
+    </div>
+</apex:outputPanel>
+
+<!-- Caso a aprovação esteja finalizada E o aprovador esteja preenchido -->
+<apex:outputPanel rendered="{!AND(
+    Avaliacao_de_Experiencia__c.Aprovacao_Finalizada__c,
+    NOT(ISBLANK(Avaliacao_de_Experiencia__c.Aprovador__c))
+)}">
+    <div style="margin-top: 60px; font-size: 13px; display: flex; justify-content: space-between; line-height: 1.4;">
+        
+        <!-- Colaborador (Aprovador) -->
+        <div style="display: inline-block; width: 48%; line-height: 1.4;">
+            <p><b>Assinado pelo Colaborador:</b> {!Avaliacao_de_Experiencia__c.Aprovador__r.Name}</p>
+            <p><b>ID do Usuário:</b> {!Avaliacao_de_Experiencia__c.Aprovador__c}</p>
+            <p><b>Data da Assinatura:</b>
+                <apex:outputText value="{0,date,dd/MM/yyyy}">
+                    <apex:param value="{!Avaliacao_de_Experiencia__c.LastModifiedDate}" />
+                </apex:outputText>
+            </p>
+        </div>
+
+        <!-- Gestor (Criador) -->
+        <div style="display: inline-block; width: 48%; line-height: 1.4;">
+            <p><b>Gestor Responsável:</b> {!Avaliacao_de_Experiencia__c.CreatedBy.Name}</p>
+            <p><b>ID do Gestor:</b> {!Avaliacao_de_Experiencia__c.CreatedById}</p>
+            <p><b>Data de Criação:</b>
+                <apex:outputText value="{0,date,dd/MM/yyyy}">
+                    <apex:param value="{!Avaliacao_de_Experiencia__c.CreatedDate}" />
+                </apex:outputText>
+            </p>
+        </div>
+
+    </div>
+</apex:outputPanel>
+
+    
+</apex:page>

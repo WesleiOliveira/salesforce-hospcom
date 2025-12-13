@@ -1,0 +1,83 @@
+<aura:component extends="c.ApexHelper"
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+                access="global">
+    
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="saldo" type="double" default="0.00" />
+    <aura:attribute name="saldoAnimado" type="String" default="0.00"/>
+    <aura:attribute name="transferencias" type="List" default="[]" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <div>
+        <div class="cartaoPrincipal8432">
+            <div class="tituloComponente9357">CARTEIRA DE HOSPCOINS</div>
+            
+            <!-- Exibi mensagem se nehuma carteira foi encontrada -->
+            <div class="carteiraNaoEncontrda351">Nenhuma Carteira ativa foi encontrada</div>
+            
+            <!-- Exibi se alguma carteira foi encontrada -->       
+            <div class="containerElementos9482 fadeInAnimation">
+                <div class="cartaoSaldo1023">
+                    <div class="valorSaldoAnimado">H$ {!v.saldoAnimado}</div>
+                    <div class="rotuloSaldo5843">Hospcoins</div>
+                    <a class="botaoTrocar2920" href="https://wa.me/5562983450139?text=Gostaria%20de%20trocar%20meus%20Hospcoins!" target="_blank">TROCAR</a>
+                </div>
+                
+                <div class="cartaoExtrato5293 fadeInAnimation">
+                    <div class="cabecalhoExtrato1932">
+                        <div>Valor</div>
+                        <div>Programa</div>
+                        <div>Data</div>
+                    </div>
+                    
+                    <!-- Estrato completo -->
+                    <div class="corpoExtrato3748">
+                        
+                        <!-- Se houver transferências -->
+                        <aura:if isTrue="{!not(empty(v.transferencias))}">
+                            <aura:iteration items="{!v.transferencias}" var="t" indexVar="i">
+                                <div class="containerInfos341">
+                                    <div                                   
+                                         class="linhaExtrato9371 linhaExtratoAnimada botaoLinhaExtrato"
+                                         style="{!'animation-delay:' + (i * 100) + 'ms'}"
+                                         >
+                                        <!-- Botão "i" com tooltip -->                                                                              
+                                        <div class="{!t.Quantidade_de_Hospcoins__c >= 0 ? 'valorPositivo1023' : 'valorNegativo7481'}">
+                                            {!t.valorFormatado}
+                                        </div>
+                                        
+                                        <div class="programaDescricao2881">
+                                            {!t.Programa__c}
+                                            <!--     <aura:if isTrue="{!not(empty(t.justificativa))}">
+                                                <div class="justificativa2352">
+                                                    <div class="tooltipWrapper">
+                                                        <span class="tooltipIcon">i</span>
+                                                        <span class="tooltipText">{!t.justificativa}</span> 
+                                            </aura:if>       -->     
+                                        </div>
+                                        <div class="dataExtrato3921">
+                                            {!t.dataFormatada}
+                                        </div>                                        
+                                    </div>
+                                </div>
+                            </aura:iteration>
+                            <aura:set attribute="else">
+                                <!-- Se NÃO houver transferências -->
+                                <div class="nenhumaTransferenciaEncontrada">
+                                    Nenhuma transferência encontrada.
+                                </div>
+                            </aura:set>
+                        </aura:if>
+                        
+                    </div>
+                    
+                    
+                </div>
+            </div>                 
+            
+            <div class="rodapeComponente1342">
+                
+            </div>
+        </div>
+    </div>
+</aura:component>

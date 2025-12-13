@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Regi_o__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Vendedor__c != null, TEXT(Vendedor__r.Regiao__c),
+IF(CONTAINS(UPPER(Name), &apos;JACKELINE&apos;), &quot;Região Jackeline&quot;,
+IF(CONTAINS(UPPER(Name), &apos;LUCKAS&apos;), &quot;Região Luckas&quot;,
+IF(CONTAINS(UPPER(Name), &apos;MANUEL&apos;), &quot;Região Manuel&quot;,
+IF(CONTAINS(UPPER(Name), &apos;DF&apos;), &quot;Região DF&quot;,
+IF(CONTAINS(UPPER(Name), &apos;ODAIR&apos;) || CONTAINS(UPPER(Name), &apos;ORLANDO&apos;) , &quot;Região Orlando&quot;,
+IF(CONTAINS(UPPER(Name), &apos;RJ/ES/SUL&apos;), &quot;Região RJ/ES/Sul&quot;,
+IF(CONTAINS(UPPER(Name), &apos;GO/TO&apos;), &quot;Região GO/TO&quot;,
+IF(CONTAINS(UPPER(Name), &apos;NORTE&apos;), &quot;Região Norte&quot;,
+IF(CONTAINS(UPPER(Name), &apos;REGIÃO SP&apos;), &quot;Região SP&quot;,
+IF(CONTAINS(UPPER(Name), &apos;MT/MS&apos;), &quot;Região MT/MS&quot;,
+IF(CONTAINS(UPPER(Name), &apos;EXCLUSIVA&apos;), &quot;Exclusiva&quot;,
+IF(CONTAINS(UPPER(Name), &apos;COL&apos;), &quot;Colômbia&quot;,
+&quot;&quot;)))))))))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Região</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

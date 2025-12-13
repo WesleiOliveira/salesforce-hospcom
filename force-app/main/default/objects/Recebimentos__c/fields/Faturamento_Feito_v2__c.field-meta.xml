@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Faturamento_Feito_v2__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+	OR(
+		Nota_Fiscal1__r.Faturamento_Feito2__c == &apos;001i00000085QYb&apos;,
+		Nota_Fiscal1__r.Faturamento_Feito2__c == &apos;0015A00001tSrPa&apos;,
+		Nota_Fiscal1__r.Faturamento_Feito2__c == &apos;0015A00001yGbVZ&apos;
+	),
+	&apos;Hospcom&apos;,
+	&apos;Fabricas&apos;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Faturamento Feito</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

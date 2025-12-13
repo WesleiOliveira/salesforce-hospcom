@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validacao_Gestor</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+Owner:User.Gestor__c != null,
+ISCHANGED(Status_do_gestor__c),
+!$User.Ignorar_erros__c,
+$User.Id != Owner:User.Gestor__c, 
+TEXT(Status_do_gestor__c) !=  &apos;NÃO&apos;,
+TEXT(Status_do_gestor__c) !=  &apos;&apos;,
+$User.Id != &apos;005i0000000JFXu&apos;
+)</errorConditionFormula>
+    <errorDisplayField>Status_do_gestor__c</errorDisplayField>
+    <errorMessage>Somente o gestor pode validar a tarefa.</errorMessage>
+</ValidationRule>

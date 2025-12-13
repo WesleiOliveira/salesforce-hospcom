@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Natureza_de_Opera_o</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ ISNEW(),
+ NOT(Acao_interna__c),
+ Ignora_validacao__c == false,
+ ISBLANK(TEXT(Referente_a_Demonstra_o_loca_o__c)),
+ NOT(ISPICKVAL(Natureza_de_Opera_o__c, &apos;DEMONSTRAÇÃO&apos;)),
+ NOT(ISPICKVAL(Natureza_de_Opera_o__c, &apos;LOCAÇÃO&apos;)),
+ RecordTypeId != &apos;0126e000001pMEkAAM&apos;,
+ RecordTypeId != &apos;012U4000000QqxRIAS&apos;,
+ RecordTypeId != &apos;012U4000009MeCvIAK&apos;
+)</errorConditionFormula>
+    <errorDisplayField>Referente_a_Demonstra_o_loca_o__c</errorDisplayField>
+    <errorMessage>Campo Obrigatorio</errorMessage>
+</ValidationRule>

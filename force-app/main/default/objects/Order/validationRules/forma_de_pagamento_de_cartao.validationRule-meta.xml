@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>forma_de_pagamento_de_cartao</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    IF(
+        TEXT(Forma_de_pagamento2__c) = &apos;Cartao Credito / Debito&apos; &amp;&amp;
+        (
+            ISBLANK(valor_comprovante__c) ||
+            ISBLANK(numero_cartao_comprovante__c) ||
+            ISBLANK(data_transacao_comprovante__c) ||
+            ISBLANK(TEXT(Tipo_de_Transa_o__c)) ||
+            ISBLANK(parcelas_comprovante__c) ||
+            ISBLANK(numero_autorizacao_comprovante__c)
+        ),
+        TRUE,
+        FALSE
+    ),
+    ISNEW(),
+    TEXT(Status) &lt;&gt; &apos;Rascunho&apos;  
+)</errorConditionFormula>
+    <errorMessage>Quando a forma de pagamento for &quot;Cartão de Débito / Crédito &quot;, é obrigatório o preenchimento dos campos, contendo os dados do comprovante de recebimento</errorMessage>
+</ValidationRule>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Abertos_Marketing</fullName>
+    <columns>N_do_Feedback__c</columns>
+    <columns>Gravidade__c</columns>
+    <columns>Departamento__c</columns>
+    <columns>T_pico__c</columns>
+    <columns>NAME</columns>
+    <columns>Status__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Departamento__c</field>
+        <operation>equals</operation>
+        <value>Marketing</value>
+    </filters>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Aberto</value>
+    </filters>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>notEqual</operation>
+        <value>Feedback_360__c.Projeto_Co_operar</value>
+    </filters>
+    <label>Abertos Marketing</label>
+</ListView>

@@ -1,0 +1,147 @@
+<apex:page title="Pedidos de Compra" controller="RelatorioDestinacaoComprasContr" standardStylesheets="false"  showHeader="false" docType="html-5.0" >
+    <body style="font-size:11px;">
+    <apex:slds />
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css"/>
+    <style>
+        .table thead th{
+        text-align:center;
+        }
+        .slds-scope td{
+        text-align:center;
+        }
+        .slds-table td{
+        white-space:break-spaces;
+        }
+        .customPopup{
+        background-color: lightgrey;
+        border-style: solid;
+        border-width: 1px;
+        left: 55%;
+        position: fixed;
+        padding: 5px;
+        box-shadow: 0px 3px 7px rgba(1, 1, 1, 5);
+        background: #fff;
+        width: 600px;
+        margin-top: 200px;
+        margin-left: -200px;
+        top: 10px;
+        max-width: 700px;
+        }
+        .customPopup .close{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        transition: all 200ms;
+        font-size: 20px;
+        text-decoration: none;
+        color: #333;
+        }
+        .customPopup .close:hover{
+        color: red;
+        }
+    </style>
+        <!-- popup >
+        <apex:outputPanel styleClass="customPopup" layout="block" rendered="{!displayPopUp}" id="firstpopup">
+            <h1>
+                Buscar itens de Pedido de Compra
+            </h1>
+            <apex:form >
+        <apex:pageBlock >
+            <h1 style="font-size:16px;">
+            </h1><br/>
+            <br/>
+            <div style="text-align:center">  
+                De&nbsp;&nbsp;<apex:input type="date" value="{!dataInicial}"/> 
+                &nbsp;a &nbsp; <apex:input type="date" value="{!dataFinal}"/>
+            </div>
+            <apex:commandButton value="Buscar" />
+    </apex:pageBlock>
+            </apex:form>
+ </apex:outputPanel>
+    <-->
+        <div style="text-align:right">
+            <apex:outputText rendered="{!show}"><button class="button secondary" id="dropdown_toggle_1"><span class="mif-filter"></span> &nbsp;Filtros</button></apex:outputText>            
+        </div>
+    <div class="pos-relative">
+    <div class="bg-grayBlue fg-white"
+            data-role="collapse"
+            data-collapsed="true"
+            data-toggle-element="#dropdown_toggle_1">
+        <p class="p-3 text-center">
+            <!--><a style="color:white; font-size:13px;" onClick="window.location.reload();">
+                <span class="mif-refresh">Limpar filtros</span>
+            </a>
+            <-->
+            <apex:form id="filtros">
+                Ped. Compra <apex:inputText id="pc" onchange="pc();" style="color:black;" value="{!pc}" />
+                Código <apex:inputText id="cod" onchange="cod();" style="color:black;" value="{!cod}" />
+                Produto <apex:inputText id="prod" onchange="prod();" style="color:black;" value="{!prod}" />
+                Marca <apex:inputText id="mar" onchange="marca();" style="color:black;" value="{!marca}" />
+                Modelo <apex:inputText id="mod" style="color:black;" value="{!modelo}" />
+                Ped. Venda <apex:inputText onchange="pv();" id="pv" style="color:black;" value="{!pv}" />
+                Apenas Disponíveis &nbsp; <apex:inputCheckbox id="ap" style="color:black;" value="{!apenasDisp}" />
+                <div style="display:none;">Apenas Destinados &nbsp; <apex:inputCheckbox id="ap2" style="color:black;" value="{!apenasDest}" /></div>
+                Apenas Equipamentos&nbsp; <apex:inputCheckbox id="apDest" style="color:black;" value="{!apenasEquip}" />
+                <br/>
+                <br/>
+                   <div style="text-align:right;"> <apex:commandButton styleClass="button primary outline" value="Pesquisar" style="height:24px; background-color:white;" action="{!pesquisar}" /></div>
+            </apex:form><br/>
+            &nbsp;
+        </p>
+    </div>
+    </div>
+        <apex:variable value="{!0}" var="index"/>
+    <apex:pageBlock id="pb1">
+        <apex:pageMessages id="MSG" />
+        <apex:form id="dados">
+            <div>
+        <apex:pageBlockTable id="tab" rendered="{!show}" styleClass="table cell-border table-border options-table mt-4" style="text-align:center;" value="{!Records}" var="Rec">        
+            <apex:column headerValue="Pedido de Compra">
+            <apex:repeat value="{!Rec.Itens_de_fornecedor__r}" var="IPC">
+                <apex:outputLink value="/{!IPC.Fornecedor__r.Id}">{!IPC.Fornecedor__r.Name}</apex:outputLink><br/>
+                {!IPC.Fornecedor__r.Status_do_PC__c}
+                </apex:repeat>
+            </apex:column>
+            <apex:column headerValue="Código"> 
+                <apex:outputField value="{!Rec.Produto__r.ProductCode}" />
+            </apex:column>
+            <apex:column style="text-align:left;" headerValue="Produto">
+                <apex:outputField value="{!Rec.Produto__c}" /><br/>
+                A receber:&nbsp;<apex:outputText value="{0, number}"><apex:param value="{!Rec.Quantidade_requisitada__c - Rec.Quantidade_recebida__c}"/></apex:outputText>              
+            </apex:column>
+            <apex:column style="text-align:left;" headerValue="Modelo"> 
+                <apex:outputField value="{!Rec.Produto__r.Modelo__c}" />
+            </apex:column>
+            <apex:column headerValue="Marca">
+                <apex:outputField value="{!Rec.Produto__r.Marca__c}"/>
+            </apex:column>
+            <apex:column headerValue="Origem">
+                <apex:outputField value="{!Rec.Pedido_de_compra__r.Origem__c}"/>
+            </apex:column>
+            <apex:column headerValue="Destinações">
+                    <table class="slds-table">
+                        <tr>
+                            <th style="text-align:center"><b>Quantidade Requisitada</b></th>
+                            <th style="text-align:center"><b>Quantidade Disponível</b></th>
+                            <th style="text-align:center"><b>Destino</b></th>
+                            <th style="text-align:center"><b>Cliente</b></th>
+                        </tr>
+                                    <apex:repeat value="{!Rec.Requisicoes_de_Itens__r}"  var="Reqs">
+                                    <apex:outputText rendered="{!IF((apenasDisp == true && Reqs.Item_de_pedido_de_venda__c == null && Reqs.Quantidade_Disponivel__c > 0) || apenasDisp == false, true, false)}">
+                        <tr>
+                            <td style="text-align:center"><apex:outputText rendered="{!IF(Reqs.RecordTypeId != '0126e000001YbImAAK', true, false)}" value="{!Reqs.Quantidade_requisitada__c}" /><apex:outputText rendered="{!IF(Reqs.RecordTypeId = '0126e000001YbImAAK', true, false)}" value="—" /></td>
+                            <td style="text-align:center"><apex:outputField rendered="{!IF(Reqs.RecordTypeId = '0126e000001YbImAAK', true, false)}" value="{!Reqs.Quantidade_Disponivel__c}" /><apex:outputText value="—" rendered="{!IF(Reqs.Item_de_pedido_de_venda__c != null, true, false)}" /><apex:outputText rendered="{!IF(Reqs.RecordTypeId = '0125A000001QVQCQA4', true, false)}" value="{!Reqs.Quantidade_requisitada__c}" /></td>
+                            <td style="text-align:center"><apex:outputField rendered="{!IF(Reqs.Item_de_pedido_de_venda__r.Order.OrderNumber != null, true,false)}" value="{!Reqs.Item_de_pedido_de_venda__r.OrderId}" /><apex:outputText value="Estoque" rendered="{!IF(Reqs.Item_de_pedido_de_venda__r.Order.OrderNumber == null, true,false)}" /></td>                            
+                            <td style="text-align:center; white-space:break-spaces"><apex:outputText value="{!IF(Reqs.Item_de_pedido_de_venda__c == null, 'SPV', null)}"/> <apex:outputField rendered="{!IF(Reqs.Item_de_pedido_de_venda__c != null, true, false)}" value="{!Reqs.Item_de_pedido_de_venda__r.Order.AccountId}" /></td>
+                        </tr>
+                                    </apex:outputText>
+                                    </apex:repeat>
+                    </table>
+                </apex:column>
+            </apex:pageBlockTable><br/>
+            </div>
+        </apex:form>
+    </apex:pageBlock>
+                <script src="https://cdn.metroui.org.ua/v4.3.2/js/metro.min.js"></script>       
+    </body>   
+    </apex:page>

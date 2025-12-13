@@ -1,0 +1,327 @@
+<apex:page standardController="Fornecedor__c" extensions="AssistentePedidoCompraPDF" renderAs="pdf" applyHtmlTag="false" showHeader="false">
+
+    <head>
+        <style type="text/css" media="print">
+            @page {
+                size:21cm 29.7cm;
+                margin:100px 40px 60px 40px;
+                @top-center {
+                    content:element(header);
+                }
+                @bottom-center {
+                    content:element(footer);
+                }
+            }
+            .pagenumber:before {
+                content:counter(page);
+            }
+            .pagecount:before {
+                content:counter(pages);
+            }
+            div.header {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(header);
+                height:60px;
+            }
+            div.content {
+            }
+            div.footer {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(footer);
+                height:20px;
+                text-align:right;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                font-weight:normal;
+            }
+        </style>
+        <style type="text/css">
+            .titulo{
+                font-family:arial, verdana, sans-serif;
+                font-size:15px;
+                text-align:center;
+                font-weight:bold; 
+                width:100%;
+            }
+            .tabela_geral{
+                border-collapse:collapse;
+                width:100%;
+            }
+            table.print-friendly tr td, table.print-friendly tr th {
+                page-break-inside: avoid;
+            }
+            .cabecalho{
+                font-family:arial, verdana, sans-serif;
+                font-size:11px;
+                font-weight:bold; 
+                vertical-align:top;
+                background-color: #c3c3c3;
+                padding: 3px;
+            }
+            .celula{
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                text-transform: uppercase;
+                vertical-align:top;
+                line-height:120%;
+                padding: 3px;
+                border: 1px solid #c3c3c3;
+            }
+            .clausula_texto{
+                font-family:arial, verdana, sans-serif;
+                font-size:11.5px;
+                text-align:justify;
+                text-justify:inter-word;
+                line-height:120%;
+                text-indent:50px;
+                vertical-align:top;
+            }
+            .infos_texto{
+                font-family:arial, verdana, sans-serif;
+                font-size:11.5px;
+                text-align:justify;
+                text-justify:inter-word;
+                line-height:120%;
+                vertical-align:top;
+            }
+            .pre_texto{
+                white-space: pre;
+            }
+            .maiuscula{
+                text-transform: uppercase;
+            }
+            .zebra{
+                background-color: #f3f3f3;
+            }
+        </style>
+    </head>
+    
+    <apex:variable var="empresa_nome"   value="{!''}"/>
+    <apex:variable var="empresa_logo"   value="{!''}"/>
+    <apex:variable var="empresa_dados"  value="{!''}"/>
+    <apex:outputText rendered="{!IF(fornecedor.Comprador__r.Id == '0015A00001yGbVZQA0',true,false)}" >
+        <apex:variable var="empresa_nome"   value="{!'GDB COMÉRCIO E SERVIÇOS - EIRELI - EPP'}"/>
+        <apex:variable var="empresa_logo"   value="{!'/servlet/servlet.FileDownload?file=0155A000009LNyN'}"/>
+        <apex:variable var="empresa_dados"  value="{!', inscrita no CNPJ sob n° 23.813.386/0001-56, sediada na Rua Antônio Viera, N° 76, Jardim Bela Vista, Campo Grande - MS, CEP 79003-071'}"/>
+    </apex:outputText>    
+    <apex:outputText rendered="{!IF(fornecedor.Comprador__r.Id == '0015A00001tSrPaQAK',true,false)}" >
+        <apex:variable var="empresa_nome"   value="{!'HEALTH SOLUTION COMERCIO E SERIVÇOS - EIRELE - ME'}"/>
+        <apex:variable var="empresa_logo"   value="{!'/servlet/servlet.FileDownload?file=0155A000009LWSQ'}"/>
+        <apex:variable var="empresa_dados"  value="{!', inscrita no CNPJ sob n° 27.476.124/0001-02, sediada na Rua 89, Nº 717, Qd. F45A, Lt. 81/83, Setor Sul, Goiânia - GO, CEP 74093-140'}"/>
+    </apex:outputText>
+    <apex:outputText rendered="{!IF(AND(fornecedor.Comprador__r.Id != '0015A00001yGbVZQA0',fornecedor.Comprador__r.Id != '0015A00001tSrPaQAK'),true,false)}" >
+        <apex:variable var="empresa_nome"   value="{!'HOSPCOM EQUIPAMENTOS HOSPITALARES - EIRELI'}"/>
+        <apex:variable var="empresa_logo"   value="{!'/servlet/servlet.FileDownload?file=015310000099Yg1'}"/>
+        <apex:variable var="empresa_dados"  value="{!', inscrita no CNPJ sob n° 05.743.288/0001-08, sediada na Rua 104, N° 74, Setor Sul, Goiânia - GO, CEP 74083-300'}"/>
+    </apex:outputText>
+    
+    <html>
+        <body style="font-family:Arial; padding:0px; margin:0px; border:0px solid #eef2f4; width:*;">
+
+            <!-- cabeçalho -->
+            <div class="header">
+                <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                    <tr>
+                        <td style="width:42%; text-align:center;">
+                            <img src="/servlet/servlet.FileDownload?file=015310000099Yfw" width="234px" height="60px"/>
+                        </td>
+                        <td style="width:58%; text-align:center; vertical-align:middle;">                                
+                            <img src="{!empresa_logo}" width="324px" height="55px"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- rodapé -->
+            <div class="footer">
+                Página <span class="pagenumber"/> de <span class="pagecount"/>
+            </div>
+
+
+            <!-- inicio -->
+            <div class="content">
+                
+                <!-- cabeçalho -->
+                <div class="titulo">Pedido de Compra Nº. {!fornecedor.Name}</div>
+                <div class="titulo">Documento Aprovado Eletronicamente</div>
+                <div class="infos_texto" style="text-align:center !important">Data da Aprovação do Pedido:&nbsp;<apex:outputField value="{!Fornecedor__c.Data_de_aprova_o_da_cota_o__c}"/></div>
+                <div class="infos_texto" style="text-align:center !important">Aprovador: Daniel Alencar Coelho</div>
+                <br/>
+                
+                <!-- dados comprador -->
+                <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px">Informações do Comprador</div>
+                <table style="page-break-inside:avoid;width:100%;">
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:30px;">Nome:</td>
+                        <td colspan="3" class="infos_texto" style="text-indent:0px;">{!fornecedor.Comprador__r.Raz_o_Social__c}<b>, CNPJ: </b>{!fornecedor.Comprador__r.CNPJ__c}</td>
+                    </tr>
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px;">Endereço:</td>
+                        <td colspan="3" class="infos_texto maiuscula" style="text-indent:0px;">
+                            <apex:outputField value="{!fornecedor.Pedido_de_compra__r.Entrega_Rua__c}"/>,&nbsp;
+                            <apex:outputField value="{!fornecedor.Pedido_de_compra__r.Entrega_Cidade__c}"/>&nbsp;-&nbsp;
+                            <apex:outputField value="{!fornecedor.Pedido_de_compra__r.Entrega_Estado__c}"/>,&nbsp;
+                  CEP:&nbsp;<apex:outputField value="{!fornecedor.Pedido_de_compra__r.Entrega_CEP__c}"/>,&nbsp;
+                            <apex:outputField value="{!fornecedor.Pedido_de_compra__r.Entrega_Pais__c}"/>.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:30px;">Email:</td>
+                        <td class="infos_texto" style="text-indent:0px;">{!Fornecedor__c.CreatedBy.Email}</td>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:30px;">Telefone:</td>
+                        <td class="infos_texto" style="text-indent:0px;">{!Fornecedor__c.CreatedBy.MobilePhone}</td>
+                    </tr>
+                </table>
+                <br/>
+                
+                <!-- dados fornecedor -->
+                <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px">Informações do Fornecedor</div>
+                <table style="page-break-inside:avoid; width:100%;">
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:30px;">Nome:</td>
+                        <td class="infos_texto" style="text-indent:0px;">{!fornecedor.Fornecedor__r.Raz_o_Social__c}<b>, CNPJ: </b>{!fornecedor.Fornecedor__r.CNPJ__c}</td>
+                    </tr>
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px;">Endereço:</td>
+                        <td class="infos_texto maiuscula" style="text-indent:0px;">
+                            <apex:outputField value="{!fornecedor.Fornecedor__r.BillingStreet}"/>,&nbsp;
+                            <apex:outputField value="{!fornecedor.Fornecedor__r.BillingCity}"/>&nbsp;-&nbsp;
+                            <apex:outputField value="{!fornecedor.Fornecedor__r.BillingState}"/>,&nbsp;
+                  CEP:&nbsp;<apex:outputField value="{!fornecedor.Fornecedor__r.BillingPostalCode}"/>,&nbsp;
+                            <apex:outputField value="{!fornecedor.Fornecedor__r.BillingCountry}"/>.
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                
+                <!-- lista de produtos -->
+                <table class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+                    <tr>
+                        <td class="cabecalho" style="width:10px;">#</td>
+                        <td class="cabecalho" style="width:55px;">Código</td>
+                        <td class="cabecalho" style="width:*;">Produto</td>
+                        <td class="cabecalho" style="width:130px;">Modelo</td>
+                        <td class="cabecalho" style="width:100px;">Fabricante</td>
+                        <td class="cabecalho" style="width:75px;">Valor Unit.</td>
+                        <td class="cabecalho" style="width:30px;">Qtd.</td>
+                        <td class="cabecalho" style="width:30px;">Und.</td>
+                        <td class="cabecalho" style="width:75px;">Valor Total</td>
+                    </tr>
+                    
+                    <apex:variable var="cont" value="{!0}"/>
+                    <apex:variable var="zebra" value="{!''}"/>
+                    <apex:variable var="span" value="{!1}"/>
+                    <apex:repeat value="{!itens_fornecedor}" var="item_fornecedor">
+                        <apex:variable var="cont" value="{!cont+1}"/>
+                        
+                        <!-- zebrado -->
+                        <apex:outputText rendered="{!IF(MOD(cont,2) == 0,true,false)}">
+                            <apex:variable var="zebra" value="{!'zebra'}"/>
+                        </apex:outputText>
+                        <apex:outputText rendered="{!IF(MOD(cont,2) == 1,true,false)}">
+                            <apex:variable var="zebra" value="{!''}"/>
+                        </apex:outputText>
+
+                        <!-- span -->
+                        <apex:outputText rendered="{!IF(item_fornecedor.Item_de_pedido_de_compra__r.Descri_o_da_linha__c != '',true,false)}">
+                            <apex:variable var="span" value="{!2}"/>
+                        </apex:outputText>
+                        <apex:outputText rendered="{!IF(item_fornecedor.Item_de_pedido_de_compra__r.Descri_o_da_linha__c == '',true,false)}">
+                            <apex:variable var="span" value="{!1}"/>
+                        </apex:outputText>
+
+                        <tr class="{!zebra}">
+                            <td class="celula" rowspan="{!span}">{!cont}</td>
+                            <td class="celula" rowspan="{!span}"><apex:outputField value="{!item_fornecedor.Codigo_do_produto__c}"/></td>
+                            <td class="celula"><apex:outputField value="{!item_fornecedor.Produto__c}"/></td>
+                            <td class="celula"><apex:outputField value="{!item_fornecedor.Modelo__c}"/></td>
+                            <td class="celula"><apex:outputField value="{!item_fornecedor.Marca__c}"/></td>
+                            <td class="celula"><apex:outputField value="{!item_fornecedor.Valor_unitario__c}"/></td>
+                            <td class="celula"><apex:outputField value="{!item_fornecedor.Quantidade__c}"/></td>
+                            <td class="celula"><apex:outputField value="{!item_fornecedor.Unidade_de_medida__c}"/></td>
+                            <td class="celula"><apex:outputField value="{!item_fornecedor.Valor_total__c}"/></td>
+                        </tr>
+                        <apex:outputText rendered="{!IF(item_fornecedor.Item_de_pedido_de_compra__r.Descri_o_da_linha__c != '',true,false)}">
+                            <tr class="{!zebra}">
+                                <td class="celula" colspan="7"><apex:outputField value="{!item_fornecedor.Item_de_pedido_de_compra__r.Descri_o_da_linha__c}"/></td>
+                            </tr>
+                        </apex:outputText>
+                    </apex:repeat>
+                </table>
+                <br/>
+                        <!--div class="infos_texto" style="text-indent:0px; text-align:right !important"><b>Valor Mercadoria</b>:&nbsp;<apex:outputField value="{!fornecedor.Valor_total_comprado__c}"/></div><-->
+                
+                <!-- informações adicionais -->
+                <table style="page-break-inside:avoid;width:100%;">
+                    <tr>
+                        <td class="infos_texto" style=";text-indent:0px; width:16px;"><b>Total Itens Pedido</b>:&nbsp;<apex:outputField value="{!fornecedor.Itens_total__c}"/></td>
+                    </tr>
+                    <tr>
+                        <td class="infos_texto" style="text-indent:0px; width:16%;"><b>Valor Mercadoria:</b>&nbsp;<apex:outputField value="{!fornecedor.Valor_total_comprado__c}"/></td>
+                    </tr>
+                    <tr>
+                        <td class="infos_texto" style="text-indent:0px; width:16%;"><b>Frete por conta:</b>&nbsp;
+                            <apex:outputText rendered="{!IF(fornecedor.Tipo_de_Frete__c == 'CIF',true,false)}">
+                                Emitente (CIF)
+                            </apex:outputText>
+                            <apex:outputText rendered="{!IF(fornecedor.Tipo_de_Frete__c == 'FOB',true,false)}">
+                                Destinatário (FOB)<br/>
+                                <tr class="infos_texto"><td><b>Transportadora:</b> {!Fornecedor__c.Transportadora__r.Raz_o_Social__c}, <b>Endereço:</b> {!Fornecedor__c.Transportadora__r.BillingStreet}, {!Fornecedor__c.Transportadora__r.BillingCity} - {!Fornecedor__c.Transportadora__r.BillingState}, <b>Telefone:</b> {!Fornecedor__c.Transportadora__r.Phone}</td></tr>
+                            </apex:outputText>
+                        
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td class="infos_texto" style="text-indent:0px; width:16%;"><b>Data de Entrega acordada com Fornecedor:</b>&nbsp;<apex:outputField value="{!fornecedor.Prazo_de_recebimento__c}"/></td>
+                            
+                    </tr>
+                    <tr>
+                        <td class="infos_texto" style="text-indent:0px; width:16%;"><b>Condições de pagamento</b>:&nbsp;<apex:outputText value="{!fornecedor.Forma_de_pagamento__c}"/>,&nbsp;<apex:outputText value="{!fornecedor.Descricao_do_pagamento__c}"/></td>
+
+                    </tr>
+                    <tr>
+                        <td class="infos_texto" style="text-indent:0px; width:16%;"><b>Envio de NFE ou CTE:</b> nfecompras@gestcombpo.com.br</td>
+                    </tr>
+                    <tr>
+                        <td class="infos_texto" style="text-indent:0px; width:16%;"><b>Nome do Comprador:</b> {!Fornecedor__c.CreatedBy.FirstName}&nbsp;{!Fornecedor__c.CreatedBy.LastName}</td>
+                    </tr>
+                </table>
+                <br/>
+                
+                <!-- clausulas adicionais -->
+                <div class="infos_texto" style="text-indent:0px;font-size:15px"><b><u>TERMOS E CONDIÇÕES COMERCIAIS DE FORNECIMENTO</u></b>:</div><br/>
+                <div class="infos_texto" style="text-indent:0px;">1) Informamos que <b><u>SOMOS</u></b> CONTRIBUINTE DO ICMS.</div>
+                <div class="infos_texto" style="text-indent:0px;">2) Obrigatório constar em sua nota fiscal o número do nosso pedido e boleto bancário. </div>
+                <div class="infos_texto" style="text-indent:0px;">3) Não nos responsabilizamos pelo frete, caso não seja respeitada a empresa indicada.</div>
+                <div class="infos_texto" style="text-indent:0px;">4) Faturamento/Entrega/Cobrança: Endereço acima.</div>
+                <div class="infos_texto" style="text-indent:0px;">5) O Fornecedor se compromete a notificar a Hospcom de qualquer alteração no produto ou serviço, de modo que a Hospcom possa determinar se a alteração afeta a qualidade do produto acabado.</div>
+                <div class="infos_texto" style="text-indent:0px;">6) O prazo de pagamento negociado deverá ser computado a partir do faturamento da Nota ou documento fiscal na obra.</div>
+                <div class="infos_texto" style="text-indent:0px;">7) Desconto de títulos via facture em nome da Hoscom <b><u>somente</u></b> com anuência formal da área de Compras.</div>
+                <div class="infos_texto" style="text-indent:0px;">8) Devolução de Mercadoria: o comprador se reserva o direito de devolver as mercadorias, caso não estejam em condições de uso, qualidade, validade ou que contenha vícios ou defeitos ocultos, que não puderem ser constatados quando do seu recebimento. Toda e qualquer devolução correrá por conta e risco do fornecedor.</div>
+                <div class="infos_texto" style="text-indent:0px;">9) Não será permitido o faturamento e entrega de materiais parciais (casos excepcionais deverão serem alinhados com a área de Compras previamente para avaliação/ aprovação).</div>
+                <div class="infos_texto" style="text-indent:0px;">10) Para cada pedido de compra deverá ser emitida uma nota fiscal individual (não será permitido unificação de vários pedidos em única Nfe). Cada Nfe deverá ser espelho do pedido de compra.</div>
+                <div class="infos_texto" style="text-indent:0px;">11) Em caso de descumprimento, pela FORNECEDORA das suas obrigações estabelecidas neste PC, <u>especialmente com relação a data de entrega</u>, a FORNECEDORA ficará sujeita ao pagamento à COMPRADORA de multa diária não compensatória no valor de 1% (Um por cento) do valor total do pedido de compra recebida, desde a data do recebimento da comunicação enviada pela COMPRADORA nesse sentido, até o efetivo cumprimento da obrigação inadimplida ou correção da falta em que a FORNECEDORA tenha incorrido, bem como eventuais perdas e danos.</div>
+                <br/>
+                <br/>
+
+                <!-- transporte, pagamento, observações-->
+                <table style="page-break-inside:avoid;width:100%;">
+                    
+                    <apex:outputText rendered="{!IF(fornecedor.Observacoes_Compra__c != '',true,false)}" >
+                        <tr>
+                            <td class="infos_texto" style="font-weight:bold;text-indent:0px;width:23%;">Observações:</td>
+                            <td class="infos_texto" style="text-indent:0px;text-align:left;white-space: pre;"><apex:outputField value="{!fornecedor.Observacoes_Compra__c}"/></td>
+                        </tr>
+                    </apex:outputText>    
+                </table>
+                <br/>
+                
+                
+                
+            </div> <!-- fim de: conteúdo -->
+        </body>
+    </html>
+</apex:page>

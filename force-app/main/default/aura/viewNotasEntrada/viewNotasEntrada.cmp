@@ -1,0 +1,57 @@
+<aura:component controller="ItemCotacao" extends="c.ApexHelper"
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+    access="global">
+    
+    <!-- attributes -->
+    <aura:attribute name="columns" type="List" default="[]"/>
+    <aura:attribute name="data" type="List" default="[]"/>
+    <aura:attribute name="keyField" type="String" default="id"/>
+    <aura:attribute name="hideCheckboxColumn" type="Boolean" default="false"/>
+    <aura:attribute name="selectedRowsCount" type="Integer" default="0"/>
+    <aura:attribute name="isLoading" type="Boolean" default="false"/>
+    <aura:attribute name="resizeColumnDisabled" type="Boolean" default="false"/>
+    <aura:attribute name="minColumnWidth" type="Integer"/>
+    <aura:attribute name="maxColumnWidth" type="Integer"/>
+    <aura:attribute name="sortedBy" type="String"/>
+    <aura:attribute name="sortedDirection" type="String"/>
+    <aura:attribute name="defaultSortDirection" type="String"/>
+    <aura:attribute name="showRowNumberColumn" type="Boolean" default="false"/>
+    <aura:attribute name="rowNumberOffset" type="Integer" default="0"/>
+    <aura:attribute name="initialRows" type="Integer" default="10"/>
+    <aura:attribute name="rowsToAdd" type="Integer" default="10"/>
+    <aura:attribute name="dataTableSchema" type="Object"/>
+
+    <!-- handlers-->
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+
+
+    <div class="slds-is-relative">
+
+
+        <!-- the container element determine the height of the datatable -->
+        <div style="height: 300px">
+            <lightning:datatable
+                columns="{! v.columns }"
+                data="{! v.data }"
+                keyField="{! v.keyField }"
+                hideCheckboxColumn="{! v.hideCheckboxColumn }"
+                resizeColumnDisabled="{! v.resizeColumnDisabled }"
+                minColumnWidth="{! v.minColumnWidth }"
+                maxColumnWidth="{! v.maxColumnWidth }"
+                resizeStep="20"
+                sortedBy="{! v.sortedBy }"
+                sortedDirection="{! v.sortedDirection }"
+                defaultSortDirection="{! v.defaultSortDirection }"
+                showRowNumberColumn="{! v.showRowNumberColumn }"
+                rowNumberOffset="{! v.rowNumberOffset }"
+                onrowselection="{! c.updateSelectedText }"
+                onrowaction="{! c.handleRowAction }"
+                onresize="{! c.storeColumnWidths }"
+                onsort="{! c.updateColumnSorting }"
+                />
+        </div>
+        <aura:if isTrue="{! v.isLoading }">
+            <lightning:spinner alternativeText="Loading"/>
+        </aura:if>
+    </div>
+</aura:component>

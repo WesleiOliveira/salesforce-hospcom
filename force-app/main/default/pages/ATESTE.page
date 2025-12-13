@@ -1,0 +1,152 @@
+<apex:page standardController="WorkOrder" showChat="false" showHeader="false" renderAs="pdf">
+
+<head>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"/>
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+</head>
+<!-- Cabeçalho com logotipo da Hospcom -->
+
+    <apex:image style="position:relative; margin-left:-20px" id="theImage" value="https://hospcom--c.na25.content.force.com/servlet/servlet.ImageServer?id=01531000008useP&oid=00Di0000000JVhH&lastMod=1486514655000" width="720" height="120"/>
+
+ <!-- ------------------------------------------------------------------------------------------- -->
+ 
+ 
+ <!-- --------------------------Parte de cima da Ordem de Trabalho------------------------------- -->
+ 
+ <body style="font-family:calibre,sans-serif; font-size:12px;">
+ 
+ <table>
+ <tr>
+ <td style="border:1.5px solid black;text-align:center; padding:2px" width="710px"><b>ORDEM DE SERVIÇO</b></td>
+ </tr>
+ <tr><td heght="1px"></td></tr>
+ <tr style="font-size:10px; text-align:left;">
+ <td style="border:1px solid black;padding: 2px">Nº da OS: <b>{!WorkOrder.WorkOrderNumber}</b>&nbsp;&nbsp;&nbsp;&nbsp;
+ 
+ <b style="position:absolute; right:13px;"> {!WorkOrder.Status}</b>
+ </td>
+ <tr><td heght="1px"></td></tr>
+ </tr>
+  </table>
+<tr style="font-size:10px; text-align:left;">
+ <td>Cliente:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>{!WorkOrder.Account.Name}</b>
+ <b style="position:absolute; right:13px;">Aberta em:&nbsp;<apex:outputField value="{!WorkOrder.CreatedDate}"/></b>
+ </td>
+ <table>
+ <tr style="font-size:10px; text-align:left;">
+ <td>
+ Endereço:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b> <apex:outputField value="{!WorkOrder.Endere_o__c}"/></b>
+ </td>
+ </tr>
+ </table>
+ </tr>
+ <tr style="font-size:10px; text-align:left;">
+ <td width="350px">Tipo da OS:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{!WorkOrder.Tipo_de_Servi_o__c}</b></td>
+ </tr>
+ <table>
+ <tr style="font-size:10px; text-align:left;" width="710px">
+ <td>
+ Assunto: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>{!WorkOrder.Subject}</b>
+ </td>
+ </tr>
+  <tr style="font-size:10px; text-align:left;" width="710px">
+ <td>
+ Problema/Defeito: &nbsp; <b>{!WorkOrder.Subject}</b>
+ </td>
+ </tr>
+ </table>
+<br/>
+<!-- ------------------------------------------------------------------------------------------ -->
+ <div style="border:1px solid black; padding:2px; text-align:center;font-family:Calibri, sans-serif">
+ <b>ATIVOS DA ORDEM DE TRABALHO</b>
+ </div>
+ 
+ 
+ 
+ 
+ 
+ <apex:repeat value="{!WorkOrder.teste__r}" var="IC" >
+ <br/>
+ 
+ <table>
+    <tr>
+        <td><b>Ativo:</b></td><td style="border:1 solid black;">{!IC.Ativo_Relacionado__r.Name}</td>
+     </tr>
+       
+       <tr>
+        <td><b>Marca:</b></td><td style="border:1 solid black;">{!IC.Marca__c}</td>
+     </tr>
+     
+     <tr>
+        <td><b>Modelo:</b></td><td style="border:1 solid black;">{!IC.Modelo__c}</td>
+     </tr>
+     
+     <tr>
+        <td><b>Número de Série:</b></td><td style="border:1 solid black;">{!IC.N_mero_de_S_rie__c}</td>
+     </tr>
+     
+          <tr>
+        <td><b>ID/Tag:</b></td><td style="border:1 solid black;">{!IC.ID_Tag__c}</td>
+     </tr>
+     
+          <tr>
+        <td><b>Patrimônio:</b></td><td style="border:1 solid black;">{!IC.Patrim_nio__c}</td>
+     </tr>
+     <br/>
+         <th style="border:0.5px solid black; text-align:center;padding:2px" width="100px"><b>Código do Item</b></th>
+         <th style="border:0.5px solid black; text-align:center;padding:2px" width="300px"><b>Nome da Peça / Serviço</b></th>
+         <th style="border:0.5px solid black; text-align:center;padding:2px" width="100px"><b>Quantidade</b></th>
+         <th style="border:0.5px solid black; text-align:center;padding:2px" width="100px"><b>Valor Unitário</b></th>
+         <th style="border:0.5px solid black; text-align:center;padding:2px" width="100px"><b>Valor</b></th>
+         
+    <apex:repeat value="{!WorkOrder.Itens_Para_Cota_o__r}" var="IC">
+ <table>
+ 
+    </table>
+</apex:repeat>
+
+
+     
+     
+     
+     <br/>
+ </table>
+ <td>
+ <b>Observações Técnicas:</b>
+ </td>
+ <table>
+ <tr>
+ <td style="border: 0.5px solid black;" width="710px" height="70px"></td>
+ </tr>
+ </table>
+<br/>
+
+ _____________________________________________________________________________________________________________________
+ 
+ 
+ </apex:repeat>
+
+<footer>
+
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+ <div>
+ <b>______________________________</b>
+<b style="position:absolute; right:13px;">
+ ______________________________</b>
+ <b style="position:absolute; right:260px">______________________________</b>
+ <br/>
+ <b style="position:absolute; left:45px">Técnico Responsável</b>
+ <b style="position:absolute; right:32px;">Engenheiro(a) Responsável</b>
+ <b style="position:absolute; right:276px">Colaborador(a) Responsável</b>
+ </div>
+ </footer>
+</body>
+
+
+</apex:page>

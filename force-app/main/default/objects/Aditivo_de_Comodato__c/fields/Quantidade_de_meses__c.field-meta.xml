@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Quantidade_de_meses__c</fullName>
+    <externalId>false</externalId>
+    <formula>CEILING(IF(ISNULL(Nova_data_de_termino_do_comodato__c),  ((Comodato__r.Data_Final__c -  Inicio_da_vigencia__c ) / 30.43685), (  Nova_data_de_termino_do_comodato__c -  Inicio_da_vigencia__c ) / 30.43685))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Quantidade de meses</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

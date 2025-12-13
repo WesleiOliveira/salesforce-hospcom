@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Juros_Base__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Campo usado para calcular juros com base em parcela.</description>
+    <externalId>false</externalId>
+    <label>Juros Base</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Regra_de_aprovacao_de_cotacao__c.Id</field>
+            <operation>equals</operation>
+            <value>a3mU4000000ULobIAG</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Regra_de_aprovacao_de_cotacao__c</referenceTo>
+    <relationshipLabel>Cotações</relationshipLabel>
+    <relationshipName>Cotacoes</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo_de_entrega__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipo de entrega</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Origem__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Marítimo</fullName>
+                <default>false</default>
+                <label>Marítimo</label>
+            </value>
+            <value>
+                <fullName>Aéreo</fullName>
+                <default>false</default>
+                <label>Aéreo</label>
+            </value>
+            <value>
+                <fullName>Terrestre</fullName>
+                <default>false</default>
+                <label>Terrestre</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Nacional</controllingFieldValue>
+            <controllingFieldValue>Internacional</controllingFieldValue>
+            <valueName>Aéreo</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nacional</controllingFieldValue>
+            <controllingFieldValue>Internacional</controllingFieldValue>
+            <valueName>Terrestre</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Internacional</controllingFieldValue>
+            <valueName>Marítimo</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

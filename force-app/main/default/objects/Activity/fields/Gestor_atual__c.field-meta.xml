@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gestor_atual__c</fullName>
+    <externalId>false</externalId>
+    <formula>$User.Id = ID_do_Gestor__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Gestor atual</label>
+    <type>Checkbox</type>
+</CustomField>

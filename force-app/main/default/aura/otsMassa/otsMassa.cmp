@@ -1,0 +1,186 @@
+<aura:component controller="GeraOTs" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <ltng:require
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery)}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    <aura:attribute name="valInputShare" type="String" />
+    <aura:attribute name="valInputContratoRelacionado" type="String" />
+    <aura:attribute name="valTecnicoResponsavel" type="String" />
+
+    
+    <div>
+        <!-- SPINNER DE CARREGAMENTO -->
+        <div id='spinnerDiv' style="display: none">
+            <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+        </div>
+        
+        
+        <div class='divButton'>
+            <button id="criaOtsMassa" onClick="teste" class="buttonCriar slds-button slds-button--brand slds-path__mark-complete stepAction current uiButton">
+                Criar OTs em massa
+            </button>
+        </div>
+        
+        <div id='boxMasterOts' style="z-index: 100; top: 0; height: 100vh; position: fixed; display: none; flex-direction: column; width: 100vw!important; left: calc(-50vw + 50%); justify-content: center">
+            <div class='backgroundNoise'>
+                <div class='boxCriaOts'>
+                    <div class="headerCompartilhaQuadro">
+                        <div class="compartilhaQuadroText" id="compartilhaQuadroText">Criar OTs em Massa</div>
+                        <i class="fa fa-times-circle closePopup" aria-hidden="true" id="closeSharePopup"></i>
+                    </div>
+                    
+                    
+                    
+                    <div class='classColumn'>
+                        <div class="sectionUsersShared" style='width: 50%'>
+                            <div style="width: 100%; position: relative;">
+                                
+                                <div onkeyup="{! c.handleKeyUp }">
+                                    <lightning:input
+                                                     aura:id="enter-search"
+                                                     name="enter-search"
+                                                     value="{!v.valInputShare}"
+                                                     label="Digite o nome da conta e tecle enter para pesquisar"
+                                                     type="search"
+                                                     />
+                                </div>
+                                
+                                <div class="divSearchResults" id="divSearchResults">
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                        <div style="width: 50%">
+                            <label style=" color: #5a5a5a; font-size: 12px; ">Selecione um contato da conta</label>
+                            <select class='criaCustomSelect' id='selectContatos' style='width: 100%'>
+                                <option value="valor1" selected="selected" disabled="disabled">Selecione primeiro uma conta</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class='classColumn'>
+                        
+                        <div style="width: 50%">
+                            <label style=" color: #5a5a5a; font-size: 12px; ">Selecione a empresa de faturamento</label>
+                            <select class='criaCustomSelect' id='selectEmpresaFaturada'>
+                                <option value="valor1" selected="selected" disabled="disabled">Selecione</option>
+                                <option value="001i00000085QYb">HOSPCOM</option>
+                            </select>
+                        </div>
+                        
+                        
+                        <div style="width: 50%; position: relative;">
+                            <div onkeyup="{! c.handleKeyUp3 }">
+                                <lightning:input
+                                                 aura:id="enter-search3"
+                                                 name="enter-search3"
+                                                 value="{!v.valTecnicoResponsavel}"
+                                                 label="Digite o nome Técnico Responsável e tecle enter para pesquisar"
+                                                 type="search"
+                                                 />
+                            </div>
+                            
+                            <div class="divSearchResults3" id="divSearchResults3">
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class='classColumn'>
+                        <!-- <select  class='criaCustomSelect' id='proprietario'>
+                            <option value="valor1" selected="selected" disabled="disabled">Selecione o proprietário</option>
+                        </select> -->
+                        
+                        <select  class='criaCustomSelect' id='status'>
+                            <option value="valor1" selected="selected" disabled="disabled">Status</option>
+                        </select>
+                    </div>
+                    
+                    <div class='classColumn'>
+                        
+                        <select  class='criaCustomSelect' id='tiposRegistro'>
+                            <option value="valor1" selected="selected" disabled="disabled">Tipo de registro</option>
+                        </select>
+                        
+                        <select  class='criaCustomSelect' id='categorias'>
+                            <option value="valor1" selected="selected" disabled="disabled">Categoria</option>
+                        </select>
+                    </div>
+                    
+                    <div class='classColumn'>
+                        <div style=" display: flex; width: 50%; flex-direction: column; ">
+                            <label>Data Agendada para Serviço</label>
+                            <input style="border: 1px solid #d4d4d4; height: 30px; border-radius: 5px" type="date" id="dataAgendamento" />
+                        </div>
+                        
+                        <div style=" display: flex; width: 50%; flex-direction: column; ">
+                            <label>Data Prevista para o Fim do Serviço</label>
+                            <input style="border: 1px solid #d4d4d4; height: 30px; border-radius: 5px" type="date" id="dataFim" />
+                        </div>
+                    </div>
+                    
+                    <div class="sectionUsersShared" style='width: 100%'>
+                        <div style="width: 100%; position: relative;">
+                            
+                            <div onkeyup="{! c.handleKeyUp2 }">
+                                <lightning:input
+                                                 aura:id="enter-search2"
+                                                 name="enter-search2"
+                                                 value="{!v.valInputContratoRelacionado}"
+                                                 label="Contrato de Serviço Relacionado"
+                                                 type="search"
+                                                 />
+                            </div>
+                            
+                            <div class="divSearchResults2" id="divSearchResults2">
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <label for="fname">Local de atendimento</label>
+                    <select  class='criaCustomSelect' id='localAtendimento'>
+                        <option value="valor1" selected="selected" disabled="disabled">Escolha uma opção</option>
+                    </select>
+                    
+                    
+                    
+                    
+                    <label for="fname">Assunto</label>
+                    <input class='criaCustomSelect' type="text" id="assunto"/>
+                    
+                    <label for="fname">Equipamento pertence ao</label>
+                    <input class='criaCustomSelect' type="text" id="eqPertence"/>
+                    
+                    <label for="fname">Problema relatado</label>
+                    <textarea style='min-height: 90px' class='criaCustomSelect' rows="2" id="textProblemaRelatado" placeholder='Problema relatado'>
+                    </textarea>
+                    
+                    <label for="fname">Itens que Acompanham o Equipamento</label>
+                    <textarea style='min-height: 150px' class='criaCustomSelect' rows="4" id="textItensAcompanham" placeholder='Itens que Acompanham o Equipamento'>
+                    </textarea>
+                    
+                    <label for="fname">Números de série</label>
+                    <textarea style='min-height: 150px' class='criaCustomSelect' rows="4" id="textAreaNumerosSerie" placeholder='Digite os números de série por linha'>
+                    </textarea>
+
+                    
+                    <div class='divButton'>
+                        <button id="criarSubmit" onClick="teste" class="buttonCriar slds-button slds-button--brand slds-path__mark-complete stepAction current uiButton">
+                            Criar
+                        </button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+</aura:component>

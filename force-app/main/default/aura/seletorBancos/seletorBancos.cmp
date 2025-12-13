@@ -1,0 +1,30 @@
+<aura:component controller="seletorBanco" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.sortableJs + '/Sortable.js',
+                           $Resource.popper + '/popper.js')}"                     
+                  afterScriptsLoaded="{!c.myAction}" />
+    
+    <div>
+        <div class='seletorBancos349825234'>
+            <div class='tituloComponente'>Seletor de bancos</div>
+            
+            <select name="bancos" id="bancos" class='select483953'>
+                <option disabled='disabled' selected='selected'>Selecione</option>
+                <option value="Cob. Boleto - Banco do Brasil - Ag: 1242-4 Cc: 69869-5 - Hospcom">Cob. Boleto - Banco do Brasil - Ag: 1242-4 Cc: 69869-5 - Hospcom</option>
+                <option value="Cob. Boleto - Banco Sicoob - Ag: 5004-0 Cc: 107431-8 - Hospcom">Cob. Boleto - Banco Sicoob - Ag: 5004-0 Cc: 107431-8 - Hospcom</option>
+            	<option value="Banco Caixa Econômica Federal Ag.2512 C/C 4001-4 - Hospcom">Banco Caixa Econômica Federal Ag.2512 C/C 4001-4 - Hospcom</option>
+            </select>
+            
+            <button id='salvaBanco324985' class='buttonStyle32453'>Salvar</button>
+        </div>
+        
+    </div>
+    
+    
+</aura:component>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Vendedor</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISNEW(),
+!$User.Ignorar_erros__c,
+RecordTypeId == &apos;0126e000001pMEk&apos;,
+$Profile.Id != &apos;00e6e000002B2Or&apos;,
+$Profile.Id != &apos;00e6e000002JQVs&apos;,
+Vendedor__c != $User.Id
+)</errorConditionFormula>
+    <errorDisplayField>Vendedor__c</errorDisplayField>
+    <errorMessage>Não é permitido criar pedidos em nome de outra pessoa.</errorMessage>
+</ValidationRule>

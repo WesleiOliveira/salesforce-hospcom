@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Postura_frente_aos_cuidados_Psicologia__c</fullName>
+    <externalId>false</externalId>
+    <label>Postura frente aos cuidados</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Ativa</fullName>
+                <default>false</default>
+                <label>Ativa</label>
+            </value>
+            <value>
+                <fullName>Colaborativa</fullName>
+                <default>false</default>
+                <label>Colaborativa</label>
+            </value>
+            <value>
+                <fullName>Passiva</fullName>
+                <default>false</default>
+                <label>Passiva</label>
+            </value>
+            <value>
+                <fullName>Pouco participativa</fullName>
+                <default>false</default>
+                <label>Pouco participativa</label>
+            </value>
+            <value>
+                <fullName>Não se aplica</fullName>
+                <default>false</default>
+                <label>Não se aplica</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

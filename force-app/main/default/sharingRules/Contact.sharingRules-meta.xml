@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Compartilha_SKA</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Compartilha SKA</label>
+        <sharedTo>
+            <group>Gerente_de_Contas_Chave</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Contato_SKA__c</field>
+            <operation>equals</operation>
+            <value>Verdadeiro</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>Compartilha_todos</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Compartilha todos</label>
+        <sharedTo>
+            <group>Sistema_todos</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

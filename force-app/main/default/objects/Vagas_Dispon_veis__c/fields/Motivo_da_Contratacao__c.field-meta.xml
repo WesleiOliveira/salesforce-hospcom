@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Motivo_da_Contratacao__c</fullName>
+    <externalId>false</externalId>
+    <label>Motivo da Contratação</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Substituição</fullName>
+                <default>false</default>
+                <label>Substituição</label>
+            </value>
+            <value>
+                <fullName>Aumento de Quadro</fullName>
+                <default>false</default>
+                <label>Aumento de Quadro</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

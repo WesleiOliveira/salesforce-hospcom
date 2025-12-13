@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Caracteres_especiais_endereco</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+!$User.Ignorar_erros__c,
+OR(
+CONTAINS(BillingCity, &apos;á&apos;),
+CONTAINS(BillingCity, &apos;â&apos;),
+CONTAINS(BillingCity, &apos;ã&apos;),
+CONTAINS(BillingCity, &apos;é&apos;),
+CONTAINS(BillingCity, &apos;ê&apos;),
+CONTAINS(BillingCity, &apos;í&apos;),
+CONTAINS(BillingCity, &apos;ó&apos;),
+CONTAINS(BillingCity, &apos;ô&apos;),
+CONTAINS(BillingCity, &apos;Á&apos;),
+CONTAINS(BillingCity, &apos;Ã&apos;),
+CONTAINS(BillingCity, &apos;Â&apos;),
+CONTAINS(BillingCity, &apos;É&apos;),
+CONTAINS(BillingCity, &apos;Ê&apos;),
+CONTAINS(BillingCity, &apos;Õ&apos;),
+CONTAINS(BillingCity, &apos;Ô&apos;),
+CONTAINS(BillingCity, &apos;Í&apos;),
+CONTAINS(BillingCity, &apos;Ó&apos;),
+CONTAINS(BillingCity, &apos;Ú&apos;),
+CONTAINS(BillingCity, &apos;Ç&apos;),
+CONTAINS(BillingCity, &apos;ç&apos;)
+))</errorConditionFormula>
+    <errorDisplayField>BillingCity</errorDisplayField>
+    <errorMessage>Cidade de cobrança não pode conter caracteres especiais.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,140 @@
+<apex:page standardController="Contrato_de_Servi_o__c" docType="html-5.0"   >
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css"/>
+
+    <h3>
+    Editor de Cláusulas do Contrato (Locação)
+    </h3>
+    
+    <br/>
+    <br/>
+    
+    <div >
+        <apex:form >
+                    
+                    <apex:outputLabel style="font-size:14px;" value="Qualificação Editada" />
+                    <apex:inputField value="{!Contrato_de_Servi_o__c.Qualificacao_Editada__c}" />
+                    <apex:inputTextarea richText="true" value="{!Contrato_de_Servi_o__c.Qualificacao__c}" />
+                    <br/>
+                    
+                    <apex:outputLabel style="font-size:14px;" value="Cláusulas Especiais Editadas" />
+                    <apex:inputField value="{!Contrato_de_Servi_o__c.Clausulas_Especiais_Editadas__c}" />
+                    <apex:inputTextarea richText="true" value="{!Contrato_de_Servi_o__c.Clausulas_Especiais__c}" />
+                    <br/>
+                    
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 1 Editada" />
+                    <apex:inputField value="{!Contrato_de_Servi_o__c.Cl_usula_Primeira_Editada__c}" />
+                    <apex:inputTextarea richText="true" value="{!Contrato_de_Servi_o__c.Cl_usula_Primeira__c}" />
+                    <br/>
+                    
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 2 Editada" />
+                    <apex:inputField value="{!Contrato_de_Servi_o__c.Cl_usula_Segunda_Editada__c}" />
+                    <apex:inputTextarea richText="true" id="Clausula_2__c" value="{!Contrato_de_Servi_o__c.Cl_usula_Segunda__c}" />
+                    <br/>
+
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 3 Editada" />
+                    <apex:inputField value="{!Contrato_de_Servi_o__c.Cl_usula_Terceira_Editada__c}" />
+                    <apex:inputTextarea richText="true" id="Clausula_3__c" value="{!Contrato_de_Servi_o__c.Cl_usula_Terceira__c}" />
+                    <br/>
+
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 4 Editada" />
+                    <apex:inputField value="{!Contrato_de_Servi_o__c.Cl_usula_Quarta_Editada__c}" />
+                    <apex:inputTextarea richText="true" id="Clausula_4__c" value="{!Contrato_de_Servi_o__c.Cl_usula_Quarta__c}" />
+                    <br/>
+
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 5 Editada" />
+                    <apex:inputField value="{!Contrato_de_Servi_o__c.Cl_usula_Quinta_Editada__c}" />
+                    <apex:inputTextarea richText="true" id="Clausula_5__c" value="{!Contrato_de_Servi_o__c.Cl_usula_Quinta__c}" />
+                    <br/>
+
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 6 Editada" />
+                    <apex:inputField value="{!Contrato_de_Servi_o__c.Cl_usula_Sexta_Editada__c}" />
+                    <apex:inputTextarea richText="true" id="Clausula_6__c" value="{!Contrato_de_Servi_o__c.Cl_usula_Sexta__c}" />
+                    <br/>
+
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 7 Editada" />
+                    <apex:inputField value="{!Contrato_de_Servi_o__c.Cl_usula_S_tima_Editada__c}" />
+                    <apex:inputTextarea richText="true" id="Clausula_7__c" value="{!Contrato_de_Servi_o__c.Cl_usula_S_tima__c}" />
+                    <br/>
+
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 8 Editada" />
+                    <apex:inputField value="{!Contrato_de_Servi_o__c.Cl_usula_Oitava_Editada__c}" />
+                    <apex:inputTextarea richText="true" id="Clausula_8__c" value="{!Contrato_de_Servi_o__c.Cl_usula_Oitava__c}" />
+                    <br/>
+
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 9 Editada" />
+                    <apex:inputField value="{!Contrato_de_Servi_o__c.Cl_usula_Nona_Editada__c}" />
+                    <apex:inputTextarea richText="true" id="Clausula_9__c" value="{!Contrato_de_Servi_o__c.Cl_usula_Nona__c}" />
+                    <br/>
+
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 10 Editada" />
+                    <apex:inputField value="{!Contrato_de_Servi_o__c.Cl_usula_D_cima_Editada__c}" />
+                    <apex:inputTextarea richText="true" id="Clausula_10__c" value="{!Contrato_de_Servi_o__c.Cl_usula_D_cima__c}" />
+                    <br/>
+                    
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 11 Editada" />
+                    <apex:inputField value="{!Contrato_de_Servi_o__c.Cl_usula_D_cima_Primeira_Editada__c}" />
+                    <apex:inputTextarea richText="true" id="Clausula11__c" value="{!Contrato_de_Servi_o__c.Cl_usula_D_cima_Primeira__c}" />
+                    <br/>
+                    
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 12 Editada" />
+                    <apex:inputField value="{!Contrato_de_Servi_o__c.Cl_usula_D_cima_Segunda_Editada__c}" />
+                    <apex:inputTextarea richText="true" id="Clausula12__c" value="{!Contrato_de_Servi_o__c.Cl_usula_D_cima_Segunda__c}" />
+                    <br/>
+                    
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 13 Editada" />
+                    <apex:inputField value="{!Contrato_de_Servi_o__c.Cl_usula_D_cima_Terceira_Editada__c}" />
+                    <apex:inputTextarea richText="true" id="Clausula13__c" value="{!Contrato_de_Servi_o__c.Cl_usula_D_cima_Terceira__c}" />  
+                    <br/>
+                    
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 14 Editada" />
+                    <apex:inputField value="{!Contrato_de_Servi_o__c.Cl_usula_D_cima_Quarta_Editada__c}" />
+                    <apex:inputTextarea richText="true" value="{!Contrato_de_Servi_o__c.Cl_usula_D_cima_Quarta__c}" />  
+                    <br/>
+                    
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 15 Editada" />
+                    <apex:inputField value="{!Contrato_de_Servi_o__c.Cl_usula_D_cima_Quinta_Editada__c}" />
+                    <apex:inputTextarea richText="true" value="{!Contrato_de_Servi_o__c.Cl_usula_D_cima_Quinta__c}" />  
+                    <br/>
+                    
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 16 Editada" />
+                    <apex:inputField value="{!Contrato_de_Servi_o__c.Cl_usula_D_cima_Sexta_Editada__c}" />
+                    <apex:inputTextarea richText="true" value="{!Contrato_de_Servi_o__c.Cl_usula_D_cima_Sexta__c}" />  
+                    <br/>
+                    
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 17 Editada" />
+                    <apex:inputField value="{!Contrato_de_Servi_o__c.Cl_usula_D_cima_S_tima_Editada__c}" />
+                    <apex:inputTextarea richText="true" value="{!Contrato_de_Servi_o__c.Cl_usula_D_cima_S_tima__c}" />  
+                    <br/>
+                    
+                    <h3>
+                    Configurações adicionais
+                    </h3><br/><br/>
+                    
+                    <table style="border-spacing: 20px !important;">
+                  
+                    <br/>
+
+                    <tr>
+                    <td>
+                    <apex:outputLabel style="font-size:14px;" value="Local da assinatura" /><br/>
+                    <apex:inputField style="width:500px;" value="{!Contrato_de_Servi_o__c.Local_de_assinatura__c}" />  
+                    <br/>
+                    <br/>
+                    </td>
+                    <td>
+                        <apex:outputLabel style="font-size:14px;" value="Data da assinatura" /><br/>
+                        <apex:inputField value="{!Contrato_de_Servi_o__c.Data_de_assinatura__c}" />  
+                        <br/>
+                        <br/>
+                    </td>                   
+                    <td></td>
+                    </tr>
+                    </table>
+                 <br/>
+                    <div style="text-align:center">
+                        <apex:commandButton action="{!save}" value="Salvar" />
+                    </div>
+                    <br/>
+</apex:form>
+</div>
+</apex:page>

@@ -1,0 +1,182 @@
+<aura:component controller="OportunidadeBotoes" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId">
+    
+    <aura:attribute name="recordId" type="Id"/>
+    
+    <aura:attribute name="modal_clone_oportunidade" type="boolean" default="false"/>
+    <aura:attribute name="clone_de_acordo" type="boolean" default="false"/>
+    <aura:attribute name="proprietarios" type="List"/>
+    <aura:attribute name="produtos" type="List"/>
+    <aura:attribute name="nome" type="String" default=""/>
+    <aura:attribute name="proprietario" type="String" default=""/>
+    <aura:attribute name="produto" type="String" default=""/>
+    
+    <aura:attribute name="modal_altera_catalogo" type="boolean" default="false"/>
+    <aura:attribute name="catalogos" type="List"/>
+    <aura:attribute name="pendencias" type="List"/>
+    <aura:attribute name="catalogo" type="String" default=""/>
+    <aura:attribute name="catalogo_atual" type="String" default=""/>
+    <aura:attribute name="pendencia" type="String" default=""/>
+    <aura:attribute name="catalogo_alerta" type="String" default=""/>
+    
+    <aura:attribute name="modal_altera_proprietario" type="boolean" default="false"/>
+    <aura:attribute name="proprietarios2" type="List"/>
+    <aura:attribute name="proprietario2" type="String" default=""/>
+    <aura:attribute name="proprietario_atual" type="String" default=""/>
+    
+    <aura:attribute name="loading" type="Boolean" default="false"/>
+
+<aura:if isTrue="{!v.loading}">
+    <lightning:spinner alternativeText="Clonando oportunidade..." size="medium"/>
+</aura:if>
+    
+    <div class="slds-m-around_x-small">
+        
+        <!-- botões -->
+        <lightning:buttonGroup class="slds-button_stretch">
+            <lightning:button variant="base" class="slds-button_stretch" label="Clonar com produtos" title="Clonar com produtos" onclick="{!c.AbrirCloneOportunidade}" />
+            <lightning:button variant="base" class="slds-button_stretch" label="Alterar catálogo com produtos" title="Alterar catálogo com produtos" onclick="{!c.AbrirAlteraCatalogo}" />
+            <lightning:button variant="base" class="slds-button_stretch" label="Alterar proprietário" title="Alterar proprietário" onclick="{!c.AbrirAlteraProprietario}" />
+        </lightning:buttonGroup>
+        
+        <!-- modal clone oportunidade -->
+        <!-- #### colocar cama extra com aviso para criar cotação #### -->
+        <aura:if isTrue="{!v.modal_clone_oportunidade}">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    
+                    <!-- cabeçalho -->
+                    <header class="modal-header slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close" onclick="{!c.FecharCloneOportunidade}" alternativeText="close" variant="bare-inverse" class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Clonar com produtos</h2>
+                    </header>
+                    
+                    <!-- corpo -->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <aura:if isTrue="{!v.clone_de_acordo==false}">
+                            <div style="background-color:red; color:white; width:100%; text-align:center; font-size:16px;">
+                                <b>
+                                    ATENÇÃO
+                                    <br/><br/>Considere a criação de uma nova COTAÇÃO, em vez de clonar a oportunidade. Diferentes configurações de propostas referentes a uma única venda em oportunidades distintas/clonadas contaminam relatórios e indicadores com números não aplicáveis.
+                                    <br/><br/>Prossiga com o clone apenas se a nova oportunidade for para uma nova venda.
+                                </b>
+                            </div>
+                        </aura:if>
+                        <aura:if isTrue="{!v.clone_de_acordo}">
+                            <lightning:input name="nome" label="Nome" value="{!v.nome}" required="true"/>
+                            <br/>
+                            <lightning:radioGroup name="proprietario" label="Proprietário" options="{!v.proprietarios}" value="{!v.proprietario}" type="radio" required="true"/>
+                            <br/>
+                            <lightning:radioGroup name="produtos" label="Produtos" options="{!v.produtos}" value="{!v.produto}" type="radio" required="true"/>
+                            <br/>
+                            <b><i>OBS: Somente a oportunidade e produtos podem ser clonados. Cotações, pedidos, anexos, e-mails, históricos e demais itens associados não são clonados.</i></b>
+                        </aura:if >
+                    </div>
+                    
+                    <!-- rodape -->
+                    <footer class="slds-modal__footer">
+                        <lightning:button variant="neutral" label="Cancelar" title="Cancelar" onclick="{!c.FecharCloneOportunidade}"/>
+                        <aura:if isTrue="{!v.clone_de_acordo==false}">
+                            <lightning:button variant="brand" label="Entendo, prossiga" title="Entendo, prossiga." onclick="{!c.ConcordarCloneOportunidade}"/>
+                        </aura:if >
+                        <aura:if isTrue="{!v.clone_de_acordo}">
+                            <lightning:button variant="brand" label="Clonar" title="Clonar" onclick="{!c.ClonarOportunidade1}"/>							
+                        </aura:if >
+                    </footer>
+                    
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>			
+        </aura:if>	
+        
+        <!-- modal altera catalogo -->
+        <aura:if isTrue="{!v.modal_altera_catalogo}">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    
+                    <!-- cabeçalho -->
+                    <header class="modal-header slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close" onclick="{!c.FecharAlteraCatalogo}" alternativeText="close" variant="bare-inverse" class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Alterar catálogo com produtos</h2>
+                    </header>
+                    
+                    <!-- corpo -->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        
+                        <aura:if isTrue="{!v.catalogo_alerta!=''}">
+                            <div style="background-color:red; color:white; width:100%; text-align:center; font-size:16px;">
+                                <b>
+                                    ATENÇÃO
+                                    <br/><br/>{!v.catalogo_alerta}
+                                </b>
+                            </div>
+                        </aura:if>
+                        
+                        <aura:if isTrue="{!v.catalogo_alerta==''}">
+                            Catálogo atual: <b>{!v.catalogo_atual}</b>
+                            <br/>
+                            <br/>
+                            <lightning:select name="catalogos" label="Catalogos" value="{!v.catalogo}" onchange="{!c.AlterarAlteraCatalogo}" required="true">
+                                <aura:iteration items="{!v.catalogos}" var="item">
+                                    <option text="{!item.label}" value="{!item.value}"/>
+                                </aura:iteration>
+                            </lightning:select>
+                            <aura:if isTrue="{!v.pendencia!=''}">
+                                <br/>
+                                <b><i>{!v.pendencia}</i></b>
+                            </aura:if>
+                        </aura:if>
+                        
+                    </div>
+                    
+                    <!-- rodape -->
+                    <footer class="slds-modal__footer">
+                        <lightning:button variant="neutral" label="Cancelar" title="Cancelar" onclick="{!c.FecharAlteraCatalogo}"/>
+                        
+                        <aura:if isTrue="{!v.catalogo_alerta==''}">
+                            <lightning:button variant="brand" label="Alterar catálogo" title="Alterar catálogo" onclick="{!c.AlterarCatalogo1}"/>
+                        </aura:if>
+                        
+                    </footer>
+                    
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>			
+        </aura:if>	
+        
+        <!-- modal altera proprietario -->
+        <aura:if isTrue="{!v.modal_altera_proprietario}">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    
+                    <!-- cabeçalho -->
+                    <header class="modal-header slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close" onclick="{!c.FecharAlteraProprietario}" alternativeText="close" variant="bare-inverse" class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Alterar proprietário</h2>
+                    </header>
+                    
+                    <!-- corpo -->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        Proprietário atual: <b>{!v.proprietario_atual}</b>
+                        <br/>
+                        <br/>
+                        <lightning:select name="proprietarios2" label="Usuarios" value="{!v.proprietario2}" required="true">
+                            <aura:iteration items="{!v.proprietarios2}" var="item">
+                                <option text="{!item.label}" value="{!item.value}"/>
+                            </aura:iteration>
+                        </lightning:select>
+                    </div>
+                    
+                    <!-- rodape -->
+                    <footer class="slds-modal__footer">
+                        <lightning:button variant="neutral" label="Cancelar" title="Cancelar" onclick="{!c.FecharAlteraProprietario}"/>
+                        <lightning:button variant="brand" label="Alterar proprietário" title="Alterar proprietário" onclick="{!c.AlterarProprietario1}"/>
+                    </footer>
+                    
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>			
+        </aura:if>	
+        
+    </div>
+    
+</aura:component>

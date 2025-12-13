@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo_de_a_o_corretiva__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipo de ação corretiva</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Corretiva</fullName>
+                <default>false</default>
+                <label>Corretiva</label>
+            </value>
+            <value>
+                <fullName>Preventiva</fullName>
+                <default>false</default>
+                <label>Preventiva</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

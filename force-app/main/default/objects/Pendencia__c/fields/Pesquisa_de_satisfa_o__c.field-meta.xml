@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pesquisa_de_satisfa_o__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Pesquisa de satisfação</label>
+    <referenceTo>Pesquisa_Formulario_Cliente__c</referenceTo>
+    <relationshipLabel>Pendências</relationshipLabel>
+    <relationshipName>Pend_ncias</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

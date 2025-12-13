@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_validado__c</fullName>
+    <externalId>false</externalId>
+    <label>Total validado</label>
+    <summarizedField>Transacao__c.Valor_valido__c</summarizedField>
+    <summaryForeignKey>Transacao__c.Viagem__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

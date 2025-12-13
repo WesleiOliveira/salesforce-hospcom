@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>justifica_diferenca_preencher</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+	!$User.Ignorar_erros__c,
+	Justificativa_diferenca__c == null,
+	NOT(ISBLANK(Valor_valido__c)),
+	Valor_valido__c != (Valor__c)
+)</errorConditionFormula>
+    <errorDisplayField>Justificativa_diferenca__c</errorDisplayField>
+    <errorMessage>A justificativa deve ser preenchida quando o valor da transação e valor válido não forem equivalentes.</errorMessage>
+</ValidationRule>

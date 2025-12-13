@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Alerta_de_vaga_aprovada</fullName>
+        <description>Alerta de vaga aprovada</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>nayara.moco@gestcombpo.com.br</recipient>
+            <type>partnerUser</type>
+        </recipients>
+        <senderAddress>desenvolvimento@hospcom.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Vaga_aprovada</template>
+    </alerts>
+    <alerts>
+        <fullName>Alerta_de_vaga_criada</fullName>
+        <description>Alerta de vaga criada</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>administrativo@hospcom.net</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Aprovacao_de_vaga</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Divulga_o</fullName>
+        <field>Status__c</field>
+        <literalValue>Divulgação da Vaga</literalValue>
+        <name>Divulgação</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_cancelado</fullName>
+        <field>Status__c</field>
+        <literalValue>Cancelada</literalValue>
+        <name>Status cancelado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Vaga_aprovada</fullName>
+        <field>Status__c</field>
+        <literalValue>Divulgação da Vaga</literalValue>
+        <name>Vaga aprovada</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+</Workflow>

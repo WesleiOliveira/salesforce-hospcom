@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>valor_preencher</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+	!$User.Ignorar_erros__c,
+	ISBLANK(Valor__c),
+	TEXT(Categoria__c) != &apos;KM rodado&apos;
+)</errorConditionFormula>
+    <errorDisplayField>Valor__c</errorDisplayField>
+    <errorMessage>O Valor deve ser preenchido em transação diferente de Km rodado.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Regiao__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+AND(
+Pedido__r.OpportunityId != &apos;006U4000003toGz&apos;,
+Pedido__r.OpportunityId != &apos;006U40000052kwj&apos;,
+Pedido__r.OpportunityId != &apos;006U4000005yCoD&apos;,
+Pedido__r.OpportunityId != &apos;006U4000003uLo1&apos;,
+Pedido__r.OpportunityId != &apos;006U4000008Uw1x&apos;
+,
+OR(
+Pedido__r.BillingState = &quot;Mato Grosso do Sul&quot;,
+Pedido__r.BillingState = &quot;São Paulo&quot;
+)
+), &quot;Região SP/MS&quot;,
+IF(
+OR(
+Pedido__r.BillingState == &quot;Acre&quot;,
+Pedido__r.BillingState == &quot;Amazonas&quot;,
+Pedido__r.BillingState == &quot;Amapá&quot;,
+Pedido__r.BillingState == &quot;Pará&quot;,
+Pedido__r.BillingState == &quot;Rondônia&quot;,
+Pedido__r.BillingState == &quot;Roraima&quot;,
+Pedido__r.OpportunityId == &apos;006U4000003toGz&apos;,
+Pedido__r.OpportunityId == &apos;006U4000005rhLj&apos;,
+Pedido__r.OpportunityId == &apos;006U40000052kwj&apos;,
+Pedido__r.OpportunityId == &apos;006U4000005yCoD&apos;,
+Pedido__r.OpportunityId == &apos;006U4000003uLo1&apos;,
+Pedido__r.OpportunityId == &apos;006U4000008Uw1x&apos;
+), &quot;Região Norte&quot;,
+IF(
+OR(
+Pedido__r.BillingState = &quot;Rio de Janeiro&quot;,
+Pedido__r.BillingState = &quot;Espírito Santo&quot;,
+Pedido__r.BillingState = &quot;Paraná&quot;,
+Pedido__r.BillingState = &quot;Santa Catarina&quot;,
+Pedido__r.BillingState = &quot;Rio Grande do Sul&quot;
+), &quot;Região RJ/ES/Sul&quot;,
+IF(
+Pedido__r.BillingState = &quot;Distrito Federal&quot;,
+&quot;Região DF&quot;,
+IF(
+OR(
+Pedido__r.BillingState = &quot;Minas Gerais&quot;,
+Pedido__r.BillingState = &quot;Ceará&quot;,
+Pedido__r.BillingState = &quot;Piauí&quot;,
+Pedido__r.BillingState = &quot;Rio Grande do Norte&quot;,
+Pedido__r.BillingState = &quot;Piauí&quot;,
+Pedido__r.BillingState = &quot;Paraíba&quot;,
+Pedido__r.BillingState = &quot;Pernambuco&quot;,
+Pedido__r.BillingState = &quot;Sergipe&quot;,
+Pedido__r.BillingState = &quot;Maranhão&quot;,
+Pedido__r.BillingState = &quot;Bahia&quot;,
+Pedido__r.BillingState = &quot;Alagoas&quot;
+), &quot;Região NE/MG&quot;,
+&quot;Região GO/MT/TO&quot;
+)))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Região</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,772 @@
+.THIS * {
+    padding:0;
+    margin:0;
+}
+.THIS #container-empresas{
+    display: flex;
+    padding: 20px 5px;
+    width: 40%;
+    flex-direction: column;
+    overflow: overlay;
+    border-radius: 5px;
+    right: 20px;
+    top: 0;
+    height: 98%;
+    position: absolute;
+    
+    margin:0 0 0 5px;
+}
+.THIS #bar-empresas{
+    padding: 5px;
+    margin: 5px 0;
+    background: #fff;
+    box-shadow: 0 0 2px 1px #adadad;
+    width: 90%;
+    border-radius: 3px;
+    position: relative;
+    cursor: pointer;
+    transition: .7s;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    right: 15px;
+    text-align:center;
+}
+
+.THIS .container{
+    display: flex;
+    gap: 10px;
+    position: relative;
+    background: #fff;
+}
+
+.THIS .dropdown{
+    width: 30%;
+}
+
+.THIS .btn-light{
+    color: #1a365f!important;
+    border-color: #1a365f!important;
+    border-radius: 15px!important;
+    height: 100%!important;
+}
+
+.THIS .divSelects{
+    display: flex;
+    justify-content: center;
+    column-gap: 20px;
+}
+
+.THIS .divFiltrosFull{
+        display: flex;
+ 
+    width: 100%;
+    column-gap: 10px;
+}
+
+.THIS .dropdown-toggle::after {
+    margin-right: 10px;
+}
+
+.THIS .bootstrap-select .dropdown-toggle .filter-option {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+
+.THIS .empresas {
+    display: flex;
+    padding: 20px 5px;
+    width: 90%;
+    flex-direction: column;
+    overflow: overlay;
+    border-radius: 5px;
+    right: 20px;
+    top: 45px;
+    position: absolute;
+    max-height: calc(100% - 50px);
+    transition: .7s;
+}
+
+.THIS .empresas::-webkit-scrollbar {
+    width: 6px;               /* width of the entire scrollbar */
+}
+
+.THIS .empresas::-webkit-scrollbar-track {
+    background: #fff;        /* color of the tracking area */
+}
+
+.THIS .empresas::-webkit-scrollbar-thumb {
+    background-color: #1a365f;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid #1a365f;  /* creates padding around scroll thumb */
+}
+
+.THIS .divCidadeSearch{
+    color: gray;
+    padding-top: 10px;
+}
+
+.THIS .endereco{
+    padding-top: 10px;
+    font-size: 0.9em;
+}
+
+.THIS .estado{
+    font-size: 0.9em;
+}
+
+.THIS #mapa{
+    width: 100%;
+    height:700px important;
+    position: relative;
+}
+
+.THIS .nome{
+    color: #0c3557;
+    font-weight: 600;
+}
+
+.THIS .empresa{    
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    margin: 5px 0;
+    background: #fff;
+    box-shadow: 0px 0px 5px 1px #adadad;
+    width: 95%;
+    position:relative;
+    cursor:pointer;
+    transition: 0.7s;
+    
+}
+.THIS .empresa:hover{
+    box-shadow: 0px 0px 5px 3px #a3a3a3;
+    cursor:pointer!important;
+    transition: 0.3s;
+}
+
+.THIS .sigla{
+    width: 0%;
+    margin: 0 10px;
+    font-size: 2.5rem;
+    text-align: center;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.THIS .dados-da-empresa{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 10px;
+    width: 80%;
+}
+
+.THIS .content-whatsapp{
+    
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.THIS .telefone{
+    color: #fff;
+    background: #1a365f ;
+    padding: 5px 10px;
+    /*margin:10px auto 2px;*/
+    border-radius:10px;
+    width:100%;
+    transition: 0.3s;
+    z-index:3;
+    border: 0px solid;
+}
+
+.THIS .whatsapp{
+    color: #fff;
+    background: #1a365f;
+    padding: 5px 10px;
+    border-radius: 10px;
+    /* width: auto;*/
+    text-decoration: none;
+}
+
+
+.THIS .emailbtn{
+    color: #fff;
+    background: #1a365f;
+    padding: 5px 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    width: -webkit-fill-available;
+}
+
+.THIS .telefones-container{
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    right: 10px;
+    background: #fff;
+    box-shadow: 0 0 6px 1px #7e7e7e;
+    padding: 10px;
+    border-radius: 5px;
+    top: 15px;
+    width: 50%;
+    justify-content: center;
+    z-index:20;
+}
+
+
+
+.THIS .container-email{
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    right: 10px;
+    background: #fff;
+    box-shadow: 0 0 6px 1px #7e7e7e;
+    padding: 10px;
+    border-radius: 5px;
+    top: 15px;
+    width: 50%;
+    justify-content: center;
+    z-index:20;
+}
+
+.THIS .maisInfo{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.THIS .container-whatsapp{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.THIS .container-emails{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.THIS .container-emails{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.THIS .close{
+    display: flex;
+    padding: 0 0 10px;
+    justify-content: flex-end;
+}
+
+.THIS .color{
+    cursor:pointer;
+    color:#1a365f;
+}
+
+.THIS .divButton{
+    display: flex;
+    width: 40%;
+}
+
+.THIS .tituloComponente {
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    /* width: 100%; */
+    /* height: 100%; */
+    font-size: 20px;
+    color: #00345c;
+    /* padding-bottom: 30px; */
+    font-weight: bold;
+    text-align: center;
+}
+
+.THIS .form-inline{
+    display: flex;
+    flex-direction: initial;;
+    gap: 5px;
+    width: 100%;
+    margin: auto;
+    padding: 10px;
+    top: 0px;
+    padding: 20px 100px;
+    z-index: 4;
+    justify-content: space-between;
+}
+
+.THIS #cidade{
+    padding: 10px 5px;
+    width: 80%;
+    transition: .3s;
+}
+.THIS #pesquisar{
+    color: white;
+    background: #0c3557;
+    padding: 0 12px;
+    transition: 0.3s;
+    width: 20%;
+    min-width:fit-content;
+    border-radius: 0px 10px 10px 0px;
+}
+
+.THIS #pesquisar:hover{
+    color: white;
+    background: #00c90d;
+    padding: 0 15px;
+    
+}
+
+.THIS .telefone:hover{
+    color: white;
+    background: #00c90d;    
+}
+
+.THIS .nsei{
+    display: flex;
+    gap: 5px;
+    padding: 10px 0 2px;
+}
+
+.THIS .navebarrr{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.THIS #detalhesProduto {
+    top: 0;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    position: absolute;
+    z-index: 4;
+    background: rgb(0 0 0 / 71%);
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+}
+.THIS .relative{
+    position:relative;
+}
+
+.THIS .img-produto{
+    border:1px solid #f2f2f2;
+    border-radius: 10px ;
+}
+
+.THIS .pedido{
+    width: max-content;
+    min-width: 200px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0, rgba(27, 31, 35, 0.15) 0 0 0 1px;
+    margin: 5px;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background: #fefefe;
+    min-height: 350px;
+}
+
+.THIS .produtos-do-pedido{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: baseline;
+} 
+
+.THIS .container-pedidos{
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    width: 95%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    max-height: 400px;
+    padding: 20px 0;
+    border-radius: 10px;
+    overflow-x: overlay;
+    column-gap: 20px;
+    overflow-y: hidden;
+} 
+
+.THIS .container-pedidos::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;               /* width of the entire scrollbar */
+}
+
+.THIS .container-pedidos::-webkit-scrollbar-track {
+    background: #f2f2f2;        /* color of the tracking area */
+}
+
+.THIS .container-pedidos::-webkit-scrollbar-thumb {
+    background-color: #1a365f;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid #1a365f;  /* creates padding around scroll thumb */
+}
+
+
+.THIS .container-linhas{
+    display: flex;
+    flex-direction: row;
+    /*background-color: #f2f2f2;*/
+    width: 95%;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-height: 500px;
+    padding: 20px 0;
+    border-radius: 10px;
+}
+.THIS .linhas{
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    width: -webkit-fill-available;
+    padding: 0 15px;
+}
+
+
+.THIS .tituloProd{
+    padding: 25px 0 10px;
+}
+
+.THIS .linha{
+    color: #fff;
+    background: #0f375c;
+    padding: 4px 8px;
+    border-radius: 5px;
+}
+
+
+.THIS .container{
+    display: flex;
+    background: #fff;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 33px 0;
+    bottom: 20px;
+    width: 90%;
+    right: 0;
+    margin: auto;
+}
+.THIS .dados-do-pedido{
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.THIS .titulo{
+    font-size:1.3rem;
+}
+
+.THIS .Cliente_novo{
+    background: #1a365f;
+    color: #fff;
+}
+
+.THIS .Cliente_novo_Border{
+    border: 1px solid red;
+}
+.THIS .Cliente_novo_vet_Border{
+    border: 1px solid green;
+}
+
+.THIS .Cliente_Antigo{
+    display: none;
+}
+
+.THIS .Cliente_Antigo_Border{
+
+}
+
+.THIS .botao{
+    background: #1a365f;
+    color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.THIS .botao:hover{
+    background: #24a52d;
+    padding: 16px;
+    transition: 300ms;
+    cursor: pointer;
+}
+
+.THIS .botao_desativado{
+    background: #b1b1b1;
+    color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+    transition: 500ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.THIS .botao_desativado:hover{
+	background: #7b7b7b;
+    /* padding: 10px; */
+    transition: 300ms;
+    /* cursor: pointer;*/
+    
+}
+.THIS .container_botao{
+    width: 100%;
+    display: flex;
+    gap: 15px;
+}
+
+
+
+
+
+
+
+
+
+.THIS .popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.THIS .popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    text-align: center;
+}
+
+.THIS .popup-content h2 {
+    margin-top: 0;
+}
+
+.THIS .popup-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.THIS .popup-content li {
+    margin-bottom: 10px;
+}
+.THIS .whatsapp_container {
+  background: #fff;
+    box-shadow: 0 0 5px 3px #a3a3a3;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    z-index:5;
+}
+
+.THIS .close {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.THIS .close span:last-child {
+    /*margin-left: 5px;*/
+}
+
+.THIS .close i {
+    cursor: pointer;
+    color: #ff4444;
+}
+
+.THIS .numero_container {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: 5px 10px;
+    box-shadow: 0 0 2px 1px #777575;
+    border-radius: 100px;
+    background: #1fc91a;
+}
+
+.THIS .numero_container i {
+    margin-right: 10px;
+    color: #ffffff;
+}
+
+.THIS .numero_container a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s;
+    background: #1fc91a;
+}
+
+.THIS .numero_container:hover {
+    scale: 1.02;
+}
+.THIS #containerDoSpinner{
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    background: rgb(33 33 33 / 20%);
+    justify-content: center;
+    align-items: center;
+
+}
+
+.THIS #containerDoSpinner2{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    background: rgb(33 33 33 / 20%);
+    justify-content: center;
+    align-items: center;
+
+}
+.THIS #containerDoSpinner3{
+    display: none;
+   
+    position: absolute;
+    width:100%;
+     height:100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    background: rgb(33 33 33 / 20%);
+    justify-content: center;
+    align-items: center;
+
+}
+.THIS .marketshere{
+        position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 1rem;
+    background: rgb(255, 255, 255, 0.8);
+    margin: 0.5rem;
+    border-radius: 1rem;
+    text-align: center;
+    font-size: 1.5rem;
+    box-shadow: #a5a4a4 0 0 4px 2px;
+}
+.THIS .valorMTS{
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+
+/* Estilo para dispositivos móveis (ex. smartphones) */
+@media only screen and (max-width: 600px) {
+   
+    .THIS .divFiltrosFull{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        column-gap: 10px;
+        justify-content: center;
+        gap: 10px;
+        align-items: center;
+    }
+    
+    .THIS .divButton{
+        display: flex;
+        width: 100%;
+        
+    }
+    
+    .THIS #cidade {
+    padding: 10px;
+    width: 80%;
+    transition: .3s;
+    margin: 0;
+}
+    
+    
+    .THIS #pesquisar {
+        color: white;
+        background: #0c3557;
+        padding: 0 12px;
+        transition: .3s;
+        width: 20%;
+        height: 100%;
+        min-width: fit-content;
+        border-radius: 0 10px 10px 0;
+    }   
+    
+    .THIS #pesquisar:hover {
+        color: white;
+        background: #00c90d;
+        scale: 1.02;
+    }
+    
+    .THIS .dropdown {
+    width: 100%;
+}
+    .THIS  #container-empresas{
+       width:80%;
+    }
+    
+}
+
+/* Estilo para iPads e tablets em modo paisagem 
+@media only screen and (min-width: 800px) and (max-width: 1100px) and (orientation: landscape) {
+
+}
+*/
+/*Estilo para iPads e tablets em modo retrato 
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  /*.THIS .container {
+    background: #852424;
+  }
+}*/

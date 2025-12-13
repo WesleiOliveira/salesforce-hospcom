@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Termino_do_contrato</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ TEXT(Tipo_de_dura_o__c) != &apos;Indeterminado&apos;,
+ISBLANK( Final_do_contrato__c )
+)</errorConditionFormula>
+    <errorDisplayField>Final_do_contrato__c</errorDisplayField>
+    <errorMessage>Preencha a data de término</errorMessage>
+</ValidationRule>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>N_da_Autor_do_Org_o_Metrol_gico__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(	
+	OR(
+		CONTAINS(LOWER(Asset.Name), &quot;balança&quot;),
+		CONTAINS(LOWER(TEXT(Asset.Nome_do_Ativo__c)),&quot;balança&quot;),
+		CONTAINS(LOWER(Asset.Name), &quot;balanca&quot;),
+		CONTAINS(LOWER(TEXT(Asset.Nome_do_Ativo__c)), &quot;balanca&quot;),
+		CONTAINS(LOWER(Asset.Name), &quot;esfigmomanômetro&quot;),
+		CONTAINS(LOWER(TEXT(Asset.Nome_do_Ativo__c)), &quot;esfigmomanômetro&quot;),	
+		CONTAINS(LOWER(Asset.Name), &quot;esfigmomanometro&quot;),
+		CONTAINS(LOWER(TEXT(Asset.Nome_do_Ativo__c)), &quot;esfigmomanometro&quot;)
+	)
+	,&quot;50000118&quot;
+	,&quot;&quot;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Nº da Autor. Orgão Metrológico</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

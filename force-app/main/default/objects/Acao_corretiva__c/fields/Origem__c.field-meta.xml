@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Origem__c</fullName>
+    <externalId>false</externalId>
+    <label>Origem</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>Auditoria</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Auditoria</label>
+            </value>
+            <value>
+                <fullName>AUDITORIA INTERNA</fullName>
+                <default>false</default>
+                <label>AUDITORIA INTERNA</label>
+            </value>
+            <value>
+                <fullName>Material</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Material</label>
+            </value>
+            <value>
+                <fullName>OCORRÊNCIA</fullName>
+                <default>false</default>
+                <label>OCORRÊNCIA</label>
+            </value>
+            <value>
+                <fullName>Outros</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Outros</label>
+            </value>
+            <value>
+                <fullName>PROCESSO</fullName>
+                <default>false</default>
+                <label>PROCESSO</label>
+            </value>
+            <value>
+                <fullName>PRODUTO</fullName>
+                <default>false</default>
+                <label>PRODUTO</label>
+            </value>
+            <value>
+                <fullName>RECLAMAÇÃO DE CLIENTE</fullName>
+                <default>false</default>
+                <label>RECLAMAÇÃO DE CLIENTE</label>
+            </value>
+            <value>
+                <fullName>SERVIÇO</fullName>
+                <default>false</default>
+                <label>SERVIÇO</label>
+            </value>
+            <value>
+                <fullName>SISTEMA DA QUALIDADE</fullName>
+                <default>false</default>
+                <label>SISTEMA DA QUALIDADE</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

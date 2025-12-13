@@ -1,0 +1,11 @@
+<aura:component controller="ApexHelperController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="avaliacoes" type="Avaliacao_de_Desempenho__c[]" />
+    <aura:attribute name="chartData" type="Object" />
+    <ltng:require scripts="{!$Resource.chart}" afterScriptsLoaded="{!c.afterScriptsLoaded}" />
+
+    <div>
+        <canvas id="myChart" width="400" height="200"></canvas>
+    </div>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+</aura:component>

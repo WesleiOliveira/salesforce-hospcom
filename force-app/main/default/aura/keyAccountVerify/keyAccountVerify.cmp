@@ -1,0 +1,11 @@
+<aura:component controller="GeraOTs" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+
+    <ltng:require
+                  scripts="{!join(',',
+                           $Resource.JQuery)}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    <div style="align-items: center; justify-content: center; display: flex">
+        <div class="golden-btn" style="font-size:1.3em; display: none" id="keyAccountVerify">🜲 CONTA CHAVE 🜲</div>
+    </div>	
+    
+</aura:component>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Vinculo_a_cotacao</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+TEXT(Pedido_da_Linha_de_OPME__c) = &apos;NÃO&apos;,
+ISNULL(QuoteId),
+TEXT( Natureza_de_Opera_o__c ) = &apos;VENDA&apos;
+)</errorConditionFormula>
+    <errorDisplayField>QuoteId</errorDisplayField>
+    <errorMessage>Vincule o pedido a uma cotação.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sem_nomes</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+	!$User.Ignorar_erros__c,
+	IsConverted == true,
+	OR(
+		FirstName == null,
+		LastName == null
+	)
+)</errorConditionFormula>
+    <errorMessage>Preencha ao menos o primeiro e o ultimo nome antes da conversão.</errorMessage>
+</ValidationRule>

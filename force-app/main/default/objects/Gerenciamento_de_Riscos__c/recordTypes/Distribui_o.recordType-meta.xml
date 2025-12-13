@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Distribui_o</fullName>
+    <active>true</active>
+    <label>Distribuição</label>
+    <picklistValues>
+        <picklist>Fases_do_Processo__c</picklist>
+        <values>
+            <fullName>Armazenamento</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Demais Etapas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Embalagem e Identificação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Expedição e Transporte</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Faturamento</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Locação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Recebimento Fisico%2FFiscal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Verificação de Recebimento</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Aprovado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pendente</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Reprovado</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

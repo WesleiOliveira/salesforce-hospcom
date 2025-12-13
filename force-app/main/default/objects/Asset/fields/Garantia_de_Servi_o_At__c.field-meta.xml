@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Garantia_de_Servi_o_At__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Campo de Relacionamento com ordem de trabalho, para que o campo formula seja válido.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Campo de Relacionamento com ordem de trabalho, para que o campo formula seja válido.</inlineHelpText>
+    <label>Campo de Relacionamento com O.T</label>
+    <referenceTo>WorkOrder</referenceTo>
+    <relationshipLabel>Ativos</relationshipLabel>
+    <relationshipName>Ativos</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

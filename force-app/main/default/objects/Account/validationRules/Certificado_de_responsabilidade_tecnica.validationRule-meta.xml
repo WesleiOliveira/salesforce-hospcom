@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Certificado_de_responsabilidade_tecnica</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(registroEmpresaConselho__c	 = true, 
+ISBLANK( Venc_Certificado_de_respons_bilidade__c ))</errorConditionFormula>
+    <errorDisplayField>Venc_Certificado_de_respons_bilidade__c</errorDisplayField>
+    <errorMessage>Obrigatório</errorMessage>
+</ValidationRule>

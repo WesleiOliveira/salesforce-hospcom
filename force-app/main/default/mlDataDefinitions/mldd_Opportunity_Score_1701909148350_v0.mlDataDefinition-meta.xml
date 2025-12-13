@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MLDataDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <developerName>mldd_Opportunity_Score_1701909148350_v0</developerName>
+    <entityDeveloperName>Opportunity</entityDeveloperName>
+    <includedFields>Opportunity.Departamento__c</includedFields>
+    <includedFields>Opportunity.Estado__c</includedFields>
+    <includedFields>Opportunity.StageName</includedFields>
+    <includedFields>Opportunity.Sub_Fase__c</includedFields>
+    <includedFields>Opportunity.Tempo_em_Aberto__c</includedFields>
+    <includedFields>Opportunity.Total_Faturado__c</includedFields>
+    <parentDefinitionDevName>mlpd_Opportunity_Score_1701909131997_v0</parentDefinitionDevName>
+    <scoringFilter>
+        <filterName>574accbf-3e9e-4ec2-a8b1-182e3e5ed247</filterName>
+        <lhFilter>
+            <filterName>8aeb2830-7bf1-453e-bc5a-60e4857f8f62</filterName>
+            <lhPredictionField>Opportunity.Amount</lhPredictionField>
+            <operation>IsNull</operation>
+            <rhType>Boolean</rhType>
+            <rhValue>false</rhValue>
+        </lhFilter>
+        <operation>Not</operation>
+    </scoringFilter>
+    <trainingFilter>
+        <filterName>06f1a85b-407b-48e7-955b-5bb1245fd697</filterName>
+        <lhPredictionField>Opportunity.Amount</lhPredictionField>
+        <operation>IsNull</operation>
+        <rhType>Boolean</rhType>
+        <rhValue>false</rhValue>
+    </trainingFilter>
+    <type>Prediction</type>
+</MLDataDefinition>

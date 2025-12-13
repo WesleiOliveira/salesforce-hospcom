@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Equipamentos_Divergentes</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF(TEXT(Equipamento_Ofertado__c) !=  TEXT(Equipamento__c), true, false)</errorConditionFormula>
+    <errorMessage>O Equipamento ofertado não pode ser diferente do equipamento concorrente</errorMessage>
+</ValidationRule>

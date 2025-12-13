@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validar_Contato_Substituicao</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISNEW(),
+    ISPICKVAL(Motivo_da_Contratacao__c, &quot;Substituição&quot;),
+    ISBLANK(Contato__c)
+)</errorConditionFormula>
+    <errorMessage>O campo Contato deve ser preenchido quando o Motivo da Contratação for &quot;Substituição&quot;</errorMessage>
+</ValidationRule>

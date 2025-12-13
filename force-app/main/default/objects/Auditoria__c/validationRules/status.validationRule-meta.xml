@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>status</fullName>
+    <active>true</active>
+    <errorConditionFormula>TEXT( Status__c ) == &quot;EM ANDAMENTO&quot; &amp;&amp; ISCHANGED(Status__c )</errorConditionFormula>
+    <errorMessage>DEPOIS DE CONCLUIDO, VOCÊ NÃO PODE ALTERAR A RNC</errorMessage>
+</ValidationRule>

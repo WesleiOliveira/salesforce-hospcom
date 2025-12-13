@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Forma_de_pagamento__c</fullName>
+    <externalId>false</externalId>
+    <label>Forma de pagamento (old)</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>A VISTA NO PEDIDO</fullName>
+                <default>false</default>
+                <label>A VISTA NO PEDIDO</label>
+            </value>
+            <value>
+                <fullName>A VISTA CONTRA EMBARQUE</fullName>
+                <default>false</default>
+                <label>A VISTA CONTRA EMBARQUE</label>
+            </value>
+            <value>
+                <fullName>FINANCIAMENTO BANCÁRIO</fullName>
+                <default>false</default>
+                <label>FINANCIAMENTO BANCÁRIO</label>
+            </value>
+            <value>
+                <fullName>OPEN ACCOUNT</fullName>
+                <default>false</default>
+                <label>OPEN ACCOUNT</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

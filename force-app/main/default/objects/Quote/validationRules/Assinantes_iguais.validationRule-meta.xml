@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Assinantes_iguais</fullName>
+    <active>false</active>
+    <errorConditionFormula>OR(
+Assinante2__c = Testemunha__c,
+Assinante2__c = ContactId,
+Assinante2__c = Validador__c,
+Assinante2__c = Validador2__c,
+Validador__c = Validador2__c,
+Contact.Id =  Validador__c,
+Testemunha__c = Validador__c,
+Contact.Id =  Validador2__c,
+Testemunha__c = Validador2__c
+)</errorConditionFormula>
+    <errorMessage>Existem contatos repetidos de assinantes.</errorMessage>
+</ValidationRule>

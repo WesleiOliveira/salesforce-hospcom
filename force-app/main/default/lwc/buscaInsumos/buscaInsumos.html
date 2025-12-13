@@ -1,0 +1,45 @@
+<template>
+    <lightning-card title="Busca de Produtos">
+        <div style="display: flex;justify-content: space-between;align-items: end;gap: 10px;">
+            <lightning-input style="width:100%" label="Código do Produto" value={productCode} onchange={handleInputChange}></lightning-input>
+            <lightning-button label="Buscar" onclick={handleSearch} class="slds-m-top_small" style="margin: 2.5px 0;"></lightning-button>
+        </div>
+    </lightning-card>
+    
+    <!-- Exibição dos produtos selecionados -->
+    <div class="secao">
+        <template if:true={selectedProducts.length}>
+            <lightning-card title="Produtos Selecionados" class="slds-m-top_medium">
+                <template for:each={selectedProducts} for:item="product">
+                    <div key={product.Id} class="slds-box slds-m-bottom_small" style="display: flex; align-items: center; padding: 10px;">
+                        <!-- Imagem do Produto -->
+                        <img src={product.URL_da_Imagem__c} alt={product.Name} class="imagem" />
+                        
+                        <!-- Detalhes do Produto -->
+                        <div style="flex: 1;">
+                            <p><strong>Nome:</strong> {product.Name}</p>
+                            <p><strong>Marca:</strong> {product.Marca__c}</p>
+                            <p><strong>Código do Produto:</strong> {product.ProductCode}</p>
+                            <p><strong>Valor de Venda:</strong> {product.Valor_de_Venda__c}</p>
+                        </div>
+                        <div style="gap: 3px;display: flex;flex-direction: column;">
+                            <!-- Botão Remover -->
+                             <div style="text-align:center">                            
+                                <lightning-button label="Remover" data-id={product.Id} onclick={handleRemove} variant="destructive" style="width: 200%;"></lightning-button>
+                            </div>
+                            <!-- Campos de Quantidade e Valor -->
+                            <div style="display: flex; gap:10px;">
+                                <div style="display:flex;flex-direction:column-reverse"><input type="number" value={product.quantity} data-id={product.Id} onchange={handleQuantityChange} style="width: 90px;"/>Quantidade</div>
+                                <div style="display:flex;flex-direction:column-reverse"><input type="number" value={product.value} data-id={product.Id} onchange={handleValueChange} style="width: 90px;"/>Valor unitário</div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </lightning-card>
+            <div style="margin-top: 15px; text-align:center">            
+                <lightning-button label="Salvar" onclick={handleSubmit}></lightning-button>
+            </div>
+        </template>
+
+    </div>
+</template>

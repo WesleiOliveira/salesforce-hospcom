@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Internacao</fullName>
+    <active>true</active>
+    <label>Internação</label>
+    <picklistValues>
+        <picklist>Classificacao__c</picklist>
+        <values>
+            <fullName>Alta Complexidade</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Baixa Complexidade</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Média Complexidade</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Não elegível para internação domiciliar</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Convenio__c</picklist>
+        <values>
+            <fullName>Unimed</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Riscos__c</picklist>
+        <values>
+            <fullName>Alergia Medicamentosa</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Broncoaspiração</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LPP %E2%80%93 Lesão Por Pressão</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Precaução Por Aerossóis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Precaução Por Contato</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Queda</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Saturação Alvo 88 %E2%80%93 92%25</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Saturação Alvo 93 %E2%80%93 94%25</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Saturação Alvo 95 %E2%80%93 96%25</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TVP %E2%80%93 Trombose Venosa Profunda</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Sexo__c</picklist>
+        <values>
+            <fullName>Feminino</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Masculino</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tipo_de_atendimento__c</picklist>
+        <values>
+            <fullName>Atendimento domiciliar</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Internação domiciliar</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

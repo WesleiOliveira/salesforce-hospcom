@@ -1,0 +1,128 @@
+<aura:component controller="Clicksign" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <!-- <aura:handler name="render" value="{!this}" action="{!c.onRead}"/> -->
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css',
+                          $Resource.jqueryProgressBar + '/jquery.progressbar.css',
+                          $Resource.bootstrapSelect14 + '/docs/docs/dist/css/bootstrap-select.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.jqueryProgressBar + '/jquery.progressbar.js',
+                           $Resource.sortableJs + '/Sortable.js',
+                           $Resource.popper + '/popper.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js',
+                           $Resource.bootstrapSelect14 + '/docs/docs/dist/js/bootstrap-select.min.js')}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    <div style="margin: 8px">
+        
+        <!-- SPINNER DE CARREGAMENTO -->
+        <div id='spinnerDiv' style="display: none">
+            <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+        </div>
+        
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none" id="assinaturaCancelada">
+            <h4 class="alert-heading">Assinatura Recusada!</h4>
+            <p>O documento enviado para assinatura foi recusado em alguma das fases de aprovação.</p>
+            <hr></hr>
+            <p class="mb-0">Recomendamos o cancelamento da assinatura no botão vermelho abaixo.</p>
+            
+        </div>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="modalConfirma">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirme os dados</h5>
+                        <button type="button" class="close" id="closeModal">
+                            <span aria-hidden="true">
+                                ×
+                            </span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="destinatarios">
+                        
+                    </div>
+                    
+                    
+                    <div class="modal-footer">
+                        <div style="width: 100%">
+                            <label for="exampleInputEmail1">Método de envio do contrato</label>
+                            <select class="form-select" aria-label="Default select example" id="selectOptionEnvio">
+                                <option value="1" selected="true">E-mail</option>
+                                <option value="2">Whatsapp</option>
+                            </select>
+                        </div>
+                        
+                        <button style="border: 0px;background-color: #55cd15;width: 100%" type="button" class="btn btn-secondary" id="enviarContrato">
+                            Enviar
+                        </button>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- Modal STATUS -->
+        <div class="modal fade" id="modalStatusFase">
+            <div class="modal-dialog">
+                <div class="modal-content" style="min-width: 500px">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Status da assinatura por fase</h5>
+                        <button type="button" class="close" id="closeModalFase">
+                            <span aria-hidden="true">
+                                ×
+                            </span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="bodyModalFase">
+                        
+                    </div>
+                    
+                    <!--
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="enviarContrato">
+                            Enviar
+                        </button>
+                    </div>
+
+       -->
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class='divButton'>
+            <button id="enviaAssinatura" onClick="teste" class="slds-button slds-button--brand slds-path__mark-complete stepAction current uiButton" style="width:100% !important">
+                Enviar para assinatura digital
+            </button>
+        </div>
+        
+        <div class="containerPrincipalAssinatura">
+            Status da assinatura digital
+            <div id="steps" class="steps"></div>
+            
+            <div class="divBotoesAssinando">
+                <button id="buttonCancela" class="btn btn-danger">
+                    Cancelar assinatura
+                </button>
+                <button id="buttonDownload" disabled="disabled" class="btn btn-success" style="border: 0px;background-color: #55cd15;">
+                    Baixar documento assinado
+                </button>
+            </div>
+            
+            <img style="height: 30px; border-bottom-left-radius: 10px; border-top-left-radius: 10px;" src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000CIVxB&amp;oid=00Di0000000JVhH&amp;lastMod=1686073293000"/>
+            
+        </div>
+        
+    </div>
+    
+</aura:component>

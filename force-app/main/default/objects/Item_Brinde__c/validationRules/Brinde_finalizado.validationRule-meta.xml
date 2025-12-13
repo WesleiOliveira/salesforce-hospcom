@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Brinde_finalizado</fullName>
+    <active>true</active>
+    <description>Não é possível adicionar objetos ou alterar em uma solicitação de binde já aprovada.</description>
+    <errorConditionFormula>AND(
+TEXT(Brinde__r.Status__c) = &apos;Aprovada&apos;,
+OR(
+ISNEW(),
+ISCHANGED(Quantidade__c),
+ISCHANGED(Nome_Brinde__c)
+) 
+)</errorConditionFormula>
+    <errorMessage>Não é possível adicionar objetos em uma solicitação de binde já finalizada.</errorMessage>
+</ValidationRule>

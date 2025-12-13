@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Demo_rapida_dados_do_dliente</fullName>
+    <active>true</active>
+    <errorConditionFormula>(Nome_da_conta__c == null)
+&amp;&amp;
+( Nome_completo__c == NULL &amp;&amp; 
+( CPF__c == NULL ||  CNPJ__c = NULL ))</errorConditionFormula>
+    <errorMessage>É preciso preencher a conta ou pelo menos o NOME COMPLETO e CPF ou CNPJ do cliente</errorMessage>
+</ValidationRule>

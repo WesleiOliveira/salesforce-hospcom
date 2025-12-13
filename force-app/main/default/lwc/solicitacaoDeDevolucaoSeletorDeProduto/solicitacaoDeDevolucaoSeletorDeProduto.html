@@ -1,0 +1,238 @@
+<template>
+    <template if:true={isLoading}>
+        <div class="overlay" style="z-index:100000;">
+            <i class="fa fa-circle-o-notch fa-spin spinner-icon" aria-hidden="true"></i>
+        </div>
+    </template>
+
+    <div class="btn-container">
+        <div class="selecionar-btn" onclick={devolverProdutoBtn}>
+            Devolver produtos
+        </div>
+        <div class="pdf-button-container">
+            <div class="pdf-button" title="Gerar pdf" onclick={throwPdf}><i class="fa fa-file pdf"></i></div>
+        </div>
+    </div>
+
+    <div class={popupContainerClass}>
+        <div class="overlay" onclick={handleOverlayClick} onkeydown={handleKeyDown}>
+            <div class={popupClass}>
+                <div class="head">
+                    <h2>Devolver Produtos</h2>
+                    <button class="close-btn" onclick={fecharPopup}>×</button>
+                </div>
+
+                <div class="body">
+                    <div class="columns-container">
+                        <!-- Coluna 1: OrderItems disponíveis -->
+                        <div class="column">
+                            <div class="column-header">
+                                <div>
+                                    <h3>Itens do Pedido</h3>
+                                    <h1 style="color: #666666;">Buscando produtos: Aguardando conferência, Aguardando
+                                        Coleta, Entregue Cliente e Faturado</h1>
+                                </div><span class="item-count">2</span>
+                            </div>
+                            <div class="items-container">
+                                <template for:each={availableItems} for:item="item">
+                                    <div key={item.id} class="item-card">
+                                        <div class="item-content">
+                                            <div class="item-image">
+                                                <template if:true={item.imagem}>
+                                                    <lightning-formatted-rich-text
+                                                        value={item.imagem}></lightning-formatted-rich-text>
+                                                </template>
+                                                <template if:false={item.imagem}>
+                                                    <div class="no-image">
+                                                        <lightning-icon icon-name="utility:image"
+                                                            size="medium"></lightning-icon>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                            <div class="item-details">
+                                                <h4 class="product-name" title={item.productName}>
+                                                    {item.productNameFormatado}</h4>
+                                                <div class="item-info">
+                                                    <span class="quantity">Qtd: {item.quantity}</span>
+                                                    <span>Número de serie: {item.Description}</span>
+                                                    <span class="price">{item.unitPriceFormatado}</span>
+                                                </div>
+                                                <div class="total-price">Total: {item.totalPriceFormatado}</div>
+                                            </div>
+                                        </div>
+                                        <div class="arrow-container">
+                                            <template if:true={statusIgualANovo}>
+                                                <template if:true={isParcial}>
+                                                    <button class="arrow-btn" onclick={moveToReturn}
+                                                        data-item-id={item.id}>
+                                                        <lightning-icon icon-name="utility:chevronright"
+                                                            size="small"></lightning-icon>
+                                                    </button>
+                                                </template>
+                                                <template if:false={isParcial}>
+                                                    <button class="arrow-btn disabled" disabled data-item-id={item.id}
+                                                        title="Solicitação Parcial">
+                                                        <lightning-icon icon-name="utility:chevronright"
+                                                            size="small"></lightning-icon>
+                                                    </button>
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </template>
+                                <template if:true={isAvailableItemsEmpty}>
+                                    <div class="empty-state">
+                                        <lightning-icon icon-name="utility:info" size="medium"></lightning-icon>
+                                        <p>Todos os itens foram selecionados para devolução</p>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+
+                        <!-- Coluna 2: Itens para devolver -->
+                        <div class="column">
+                            <div class="column-header return-header">
+                                <h3>Itens para Devolver</h3>
+                                <span class="item-count">{returnItemsCount}</span>
+                            </div>
+                            <div class="items-container">
+                                <template for:each={returnItems} for:item="item">
+                                    <div key={item.id} class="item-card return-item">
+                                        <div class="arrow-container">
+
+                                            <template if:true={statusIgualANovo}>
+                                                <template if:true={isParcial}>
+                                                    <button class="arrow-btn return-arrow " onclick={moveToAvailable}
+                                                        data-item-id={item.id}>
+                                                        <lightning-icon icon-name="utility:chevronleft"
+                                                            size="small"></lightning-icon>
+                                                    </button>
+                                                </template>
+                                                <template if:false={isParcial}>
+                                                    <button class="arrow-btn return-arrow disabled" disabled
+                                                        data-item-id={item.id} title="Solicitação Parcial">
+                                                        <lightning-icon icon-name="utility:chevronleft"
+                                                            size="small"></lightning-icon>
+                                                    </button>
+                                                </template>
+                                            </template>
+                                        </div>
+                                        <div class="item-content">
+                                            <div class="item-image">
+                                                <template if:true={item.imagem}>
+                                                    <lightning-formatted-rich-text
+                                                        value={item.imagem}></lightning-formatted-rich-text>
+                                                </template>
+                                                <template if:false={item.imagem}>
+                                                    <div class="no-image">
+                                                        <lightning-icon icon-name="utility:image"
+                                                            size="medium"></lightning-icon>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                            <div class="item-details">
+                                                <h4 class="product-name" title={item.productName}>
+                                                    {item.productNameFormatado}</h4>
+                                                <div class="item-info">
+                                                    <!-- Campo de quantidade editável -->
+                                                    <div class="quantity-container">
+                                                        <!-- <label class="quantity-label">Qtd a devolver:</label> -->
+                                                        <div class="quantity-input-container">
+                                                            <template if:true={statusIgualANovo}>
+                                                                <button class="quantity-btn decrease-btn"
+                                                                    onclick={decreaseQuantity} data-item-id={item.id}
+                                                                    disabled={item.returnQuantityIsMin}>
+                                                                    <lightning-icon icon-name="utility:dash"
+                                                                        size="x-small"></lightning-icon>
+                                                                </button>
+                                                            </template>
+                                                            <template if:true={isParcial}>
+                                                                <template if:true={statusIgualANovo}>
+                                                                    <lightning-input type="number" label="Qtd:"
+                                                                        value={item.returnQuantity} min="1"
+                                                                        max={item.quantity} class="quantity-input"
+                                                                        data-item-id={item.id}
+                                                                        onchange={handleQuantityChange}
+                                                                        variant="standard">
+                                                                    </lightning-input>
+                                                                </template>
+                                                            </template>
+                                                            <template if:false={statusIgualANovo}>
+                                                                <template if:false={isParcial}>
+                                                                    <span class="quantity">Qtd: {item.quantity}</span>
+                                                                </template>
+                                                            </template>
+                                                            <template if:true={statusIgualANovo}>
+                                                                <button class="quantity-btn increase-btn"
+                                                                    onclick={increaseQuantity} data-item-id={item.id}
+                                                                    disabled={item.returnQuantityIsMax}>
+                                                                    <lightning-icon icon-name="utility:add"
+                                                                        size="x-small"></lightning-icon>
+                                                                </button>
+                                                            </template>
+                                                        </div>
+                                                        <template if:true={statusIgualANovo}>
+                                                            <template if:true={isParcial}>
+                                                                <lightning-input type="text" label="Nº de Série"
+                                                                    value={item.Description} class="serial-number-input"
+                                                                    data-item-id={item.id}
+                                                                    onchange={handleSerialNumberChange}
+                                                                    variant="standard">
+                                                                </lightning-input>
+                                                            </template>
+                                                        </template>
+                                                        <template if:false={statusIgualANovo}>
+                                                            <span>Número de serie: {item.Description}</span>
+                                                        </template>
+                                                    </div>
+                                                    <span class="max-quantity">de {item.quantity}</span>
+                                                    <span class="price">{item.unitPriceFormatado}</span>
+                                                </div>
+                                                <div class="total-price">Total: {item.totalPriceFormatado}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                                <template if:true={isReturnItemsEmpty}>
+                                    <div class="empty-state">
+                                        <lightning-icon icon-name="utility:add" size="medium"></lightning-icon>
+                                        <p>Selecione os itens que deseja devolver</p>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+
+                    <template if:true={hasReturnItems}>
+                        <div class="summary">
+                            <div class="summary-content">
+                                <span class="summary-label">Total da devolução:</span>
+                                <span class="summary-value">{totalReturnValue}</span>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <footer class="footer">
+                    <template if:true={isParcial}>
+                        <template if:true={statusIgualANovo}>
+                            <button class="cancel-btn" onclick={fecharPopup}>Cancelar</button>
+                            <template if:true={hasReturnItems}>
+                                <button class="confirm-btn" onclick={confirmarDevolucao}>
+                                    Confirmar Devolução ({returnItemsCount})
+                                </button>
+                            </template>
+                            <template if:false={hasReturnItems}>
+                                <button class="confirm-btn disabled" disabled>
+                                    Selecione os itens
+                                </button>
+                            </template>
+                        </template>
+                    </template>
+                </footer>
+            </div>
+        </div>
+
+    </div>
+
+</template>

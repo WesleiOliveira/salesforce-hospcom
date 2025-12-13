@@ -1,0 +1,189 @@
+<apex:page standardController="Instrucao_de_Servico__c" extensions="Listagem_InstrucaoDeServico" applyHtmlTag="false" showHeader="false" renderAs="pdf">
+
+  <head>
+  
+  
+   <style type="text/css" media="print">
+            @page {
+                size:A4;
+                margin: 100px 50px 100px 50px;
+                @top-center {
+                    content:element(header);
+                }
+                @bottom-center {
+                    content:element(footer);
+                }
+            }
+            @page{
+                size:A4;
+                background: url({!$Resource.TimbradoHospcom});
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);}
+            }
+            .pagenumber:before {
+                content:counter(page);
+            }
+            .pagecount:before {
+                content:counter(pages);
+            }
+            div.header {
+                
+                padding:20px 0px 20px 0px;
+                position:running(header);
+                height:60px;
+            }
+            div.content {
+            }
+            div.footer {
+                
+                padding:20px 0px 20px 0px;
+                position:running(footer);
+                height:20px;
+                text-align:right;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                font-weight:normal;
+            }
+        </style>
+  
+  
+  
+  
+  
+    <style type="text/css" media="print">
+    
+
+      * {
+        color: #000;
+        font-family: Arial, sans-serif; /* Usando Arial */
+        font-size: 12px; /* Tamanho de fonte padrão */
+        line-height: 1.5; /* Espaçamento entre linhas */
+      }
+
+      .resposta img {
+        max-width: 100%; /* Faz as imagens se ajustarem ao tamanho do container */
+        height: 500px; /* Mantém a proporção da imagem */
+      }
+
+      .pagenumber:before {
+        content: counter(page);
+      }
+
+      .pagecount:before {
+        content: counter(pages);
+      }
+
+      div.header {
+        margin: 0;
+        padding: 20px 0;
+        height: 60px;
+      }
+
+      div.footer {
+        padding: 20px 0;
+        height: 20px;
+        text-align: center; /* Centralizando a numeração */
+        font-family: Arial, sans-serif;
+        font-size: 10px;
+        font-weight: normal;
+      }
+
+      .content222 {
+        page-break-inside: auto; 
+        width: 100%; /* Tabelas devem ter largura total */
+        border-collapse: collapse; /* Colapsar bordas */
+      }
+
+      .questao {
+        display: flex;
+        flex-direction: row;
+        padding: 10px; /* Aumentando o padding para um recuo melhor */
+        font-weight: 700;
+        page-break-inside: avoid; /* Evitar quebra de página */
+        margin-bottom: 10px; /* Espaçamento entre as questões */
+        
+          font-size: 12px !important;
+      }
+
+      .valor {
+        /* border: #0c3557 1px solid; Removendo a borda */
+      }
+
+
+      .resposta{
+          word-wrap: break-word;
+          font-weight: 400 !important;
+          font-size: 10px !important;
+      }
+      
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        padding: 0;
+        table-layout: fixed;
+        width: 100%; /* Tabelas devem ter largura total */
+      }
+    </style>
+  </head>
+
+  <body class="body">
+  
+  
+  
+
+  
+  
+        <apex:pageBlock >
+        
+          <div class="footer" style="text-align:center !important"><br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Página <span class="pagenumber"></span> de <span class="pagecount"></span> - Emissão em:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{! TODAY() }" /></apex:outputText>
+          </div>
+            
+            <table style="width:100%; border-collapse: collapse; margin-bottom: 20px; font-weight: 700;">
+                <tr>
+                    <td colspan="2" style="border: 1px solid #000;  text-align: center; font-weight: bold; font-size: 16px; padding: 8px; font-weight: 900;">
+                        Instrução de Serviço - {!Instrucao_de_Servico__c.Name}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000; text-align: left; padding: 8px; font-size: 12px; font-weight: 700;">
+                        Departamento: {!Instrucao_de_Servico__c.Departamento__c}
+                    </td>
+                    <td style="border: 1px solid #000; text-align: left; padding: 8px; font-size: 12px; font-weight: 700;">
+                        Cargo: {!Instrucao_de_Servico__c.Cargo__c}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border: 1px solid #000; text-align: left; padding: 8px; font-size: 12px; ">
+                        Resp.: {!Instrucao_de_Servico__c.Responsavel__r.name}
+                    </td>
+                </tr>
+            </table>
+            
+            
+        
+          <apex:repeat value="{!topico_instrucao}" var="topico">
+            <table class="content222">
+              <tr>
+                <td class="sessao-questao" style="page-break-inside: avoid;">
+                  <p>
+                    <span class="questao">{!topico.Numero_do_Topico__c} - {!topico.Name}</span>
+                    <span class="resposta" style="max-width: 500px;">
+                      <!-- Renderiza o conteúdo rich text -->
+                      <apex:outputText value="{!topico.Conteudo__c}" escape="false"/>
+                    </span>
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </apex:repeat>
+        </apex:pageBlock>
+        
+        <div class="footer">
+          Página <span class="pagenumber"></span> de <span class="pagecount"></span>
+        </div>
+  </body>
+
+</apex:page>

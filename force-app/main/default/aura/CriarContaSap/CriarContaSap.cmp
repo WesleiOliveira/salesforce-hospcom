@@ -1,0 +1,26 @@
+<aura:component extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="isLoading" type="Boolean" default="false"/>
+    <aura:attribute name="userId" type="String"/>
+
+    <!-- Mostrar botão só se o user for 005XXXXXXXXXXX -->
+    <div> 
+        <div class="btn-margem-esquerda" >
+    <aura:if isTrue="{!v.showButton}">
+       <lightning:button 
+            variant="brand" 
+            label="Integrar Conta ao Sap" 
+            onclick="{!c.handleClick}" 
+            disabled="{!v.isLoading}"                           
+            />
+    </aura:if>
+
+    <aura:if isTrue="{!v.isLoading}">
+        <lightning:spinner alternativeText="Enviando..." size="small"/>
+    </aura:if>
+</div>
+    </div>
+</aura:component>

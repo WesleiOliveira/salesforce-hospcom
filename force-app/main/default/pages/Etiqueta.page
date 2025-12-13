@@ -1,0 +1,246 @@
+<apex:page standardController="Order" applyHtmlTag="false" showHeader="false" renderAs="pdf">
+  <head>
+  <style type="text/css" media="print">
+
+            @page{
+                size:A4;
+                margin:15px 15px 15px 15px;
+                @bottom-center{content:element(footer);}
+            }
+            .pagenumber:before {
+                content:counter(page);
+            }
+            .pagecount:before {
+                content:counter(pages);
+            }
+            div.header {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(header);
+                height:60px;
+            }
+            div.content {
+            }
+            div.footer {
+                margin:0px 0px 10px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(footer);
+                height:20px;
+                text-align:right;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                font-weight:normal;
+            }
+        </style>
+        <style type="text/css" media="print">
+
+            td{
+            
+            }
+            .titulo{
+                font-family:arial, verdana, sans-serif;
+                font-size:15px;
+                text-align:center;
+                font-weight:bold; 
+                width:100%;
+            }
+            .tabela_geral{
+                border-collapse:collapse;
+                width:100%;
+            }
+            table.print-friendly tr td, table.print-friendly tr th {
+                page-break-inside: avoid;
+            }
+            .cabecalho{
+                font-family:arial, verdana, sans-serif;
+                font-size:11px;
+                font-weight:bold; 
+                vertical-align:top;
+                background-color: #c3c3c3;
+                padding: 3px;
+            }
+            .celula{
+                font-family:arial, verdana, sans-serif;
+                font-size:13px;
+                vertical-align:top;
+                line-height:120%;
+                padding: 3px;
+                border: 1px solid #c3c3c3;
+            }
+            .clausula_texto{
+                font-family:arial, verdana, sans-serif;
+                font-size:11.5px;
+                text-align:justify;
+                text-justify:inter-word;
+                line-height:120%;
+                text-indent:50px;
+                vertical-align:top;
+            }
+            .infos_texto{
+                font-family:arial, verdana, sans-serif;
+                font-size:19px;
+                text-align:justify;
+                text-justify:inter-word;
+                line-height:120%;
+                vertical-align:top;
+            }
+            .pre_texto{
+                white-space: pre;
+            }
+            .maiuscula{
+                text-transform: uppercase;
+            }
+            .zebra{
+                background-color: #f3f3f3;
+            }
+        </style>
+  </head>
+  <body>
+  <div >                                                                                    
+  <apex:pageBlock rendered="{!IF(Order.Opportunity.RecordType.DeveloperName == 'OPME', true, false)}">
+            
+<div style="border:1px solid !important">
+                <table style="page-break-inside:avoid;">
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:150px;"><apex:image url="/servlet/servlet.ImageServer?id=01531000008uM4U&oid=00Di0000000JVhH&lastMod=1487197865000" /></td>
+                        <td colspan="3" class="infos_texto" style="text-indent:70px;"><apex:image url="/servlet/servlet.ImageServer?id=01531000008vEXV&oid=00Di0000000JVhH&lastMod=1496780698000"/></td>
+                    </tr>
+
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:150px;">Hospital:</td>
+                        <td colspan="3" class="infos_texto" style="text-indent:0px;">&nbsp;&nbsp;{!Order.Opportunity.Hospital__r.Name}</td>
+                    </tr>
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px;width:*;">Paciente:</td>
+                        <td class="infos_texto" style="text-indent:0px;width:*;">&nbsp;&nbsp;{!Order.Opportunity.Paciente2__r.Name}</td>
+                    </tr>
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px;width:*;">Médico: </td>
+                        <td class="infos_texto" style="text-indent:0px;width:*;">&nbsp;&nbsp;{!Order.Opportunity.Medico__r.FirstName} {!Order.Opportunity.Medico__r.LastName}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px;">Procedimento: </td>
+                        <td class="infos_texto" style="text-indent:0px;width:*;">&nbsp;&nbsp;{!Order.Opportunity.Tipo_cirurgico__c} </td>
+                    </tr>
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px;"> Data e hora: </td>
+                        <td class="infos_texto" style="text-indent:0px;"> &nbsp;&nbsp;<apex:outputField value="{!Order.Opportunity.Data_e_hora_do_procedimento__c}"/></td>
+                    </tr>
+                </table>
+                <b>&nbsp;____________________________________________________________________________________________</b>
+                <br/>
+                <br/>                
+</div>
+<br/>
+<div style="border:1px solid !important">
+                <table >
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:150px;"><apex:image url="/servlet/servlet.ImageServer?id=01531000008uM4U&oid=00Di0000000JVhH&lastMod=1487197865000" /></td>
+                        <td colspan="3" class="infos_texto" style="text-indent:70px;"><apex:image url="/servlet/servlet.ImageServer?id=01531000008vEXV&oid=00Di0000000JVhH&lastMod=1496780698000"/></td>
+                    </tr>
+
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:150px;">Hospital:</td>
+                        <td colspan="3" class="infos_texto" style="text-indent:0px;">&nbsp;&nbsp;{!Order.Opportunity.Hospital__r.Name}</td>
+                    </tr>
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px;width:*;">Paciente:</td>
+                        <td class="infos_texto" style="text-indent:0px;width:*;">&nbsp;&nbsp;{!Order.Opportunity.Paciente2__r.Name}</td>
+                    </tr>
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px;width:*;">Médico: </td>
+                        <td class="infos_texto" style="text-indent:0px;width:*;">&nbsp;&nbsp;{!Order.Opportunity.Medico__r.FirstName} {!Order.Opportunity.Medico__r.LastName}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px;">Procedimento: </td>
+                        <td class="infos_texto" style="text-indent:0px;width:*;">&nbsp;&nbsp;{!Order.Opportunity.Tipo_cirurgico__c} </td>
+                    </tr>
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px;"> Data e hora: </td>
+                        <td class="infos_texto" style="text-indent:0px;"> &nbsp;&nbsp;<apex:outputField value="{!Order.Opportunity.Data_e_hora_do_procedimento__c}"/></td>
+                    </tr>
+                </table>
+                <b>&nbsp;____________________________________________________________________________________________</b>
+                <br/>
+                <br/>                
+</div>
+<br/>
+<div style="border:1px solid !important">
+                <table style="page-break-inside:avoid;">
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:150px;"><apex:image url="/servlet/servlet.ImageServer?id=01531000008uM4U&oid=00Di0000000JVhH&lastMod=1487197865000" /></td>
+                        <td colspan="3" class="infos_texto" style="text-indent:70px;"><apex:image url="/servlet/servlet.ImageServer?id=01531000008vEXV&oid=00Di0000000JVhH&lastMod=1496780698000"/></td>
+                    </tr>
+
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:150px;">Hospital:</td>
+                        <td colspan="3" class="infos_texto" style="text-indent:0px;">&nbsp;&nbsp;{!Order.Opportunity.Hospital__r.Name}</td>
+                    </tr>
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px;width:*;">Paciente:</td>
+                        <td class="infos_texto" style="text-indent:0px;width:*;">&nbsp;&nbsp;{!Order.Opportunity.Paciente2__r.Name}</td>
+                    </tr>
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px;width:*;">Médico: </td>
+                        <td class="infos_texto" style="text-indent:0px;width:*;">&nbsp;&nbsp;{!Order.Opportunity.Medico__r.FirstName} {!Order.Opportunity.Medico__r.LastName}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px;">Procedimento: </td>
+                        <td class="infos_texto" style="text-indent:0px;width:*;">&nbsp;&nbsp;{!Order.Opportunity.Tipo_cirurgico__c} </td>
+                    </tr>
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px;"> Data e hora: </td>
+                        <td class="infos_texto" style="text-indent:0px;"> &nbsp;&nbsp;<apex:outputField value="{!Order.Opportunity.Data_e_hora_do_procedimento__c}"/></td>
+                    </tr>
+
+                </table>
+                <b>&nbsp;____________________________________________________________________________________________</b>
+                <br/>
+                <br/>
+</div>
+<br/>
+<div style="border:1px solid !important">
+                <table style="page-break-inside:avoid;">
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:150px;"><apex:image url="/servlet/servlet.ImageServer?id=01531000008uM4U&oid=00Di0000000JVhH&lastMod=1487197865000" /></td>
+                        <td colspan="3" class="infos_texto" style="text-indent:70px;"><apex:image url="/servlet/servlet.ImageServer?id=01531000008vEXV&oid=00Di0000000JVhH&lastMod=1496780698000"/></td>
+                    </tr>
+
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:150px;">Hospital:</td>
+                        <td colspan="3" class="infos_texto" style="text-indent:0px;">&nbsp;&nbsp;{!Order.Opportunity.Hospital__r.Name}</td>
+                    </tr>
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px;width:*;">Paciente:</td>
+                        <td class="infos_texto" style="text-indent:0px;width:*;">&nbsp;&nbsp;{!Order.Opportunity.Paciente2__r.Name}</td>
+                    </tr>
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px;width:*;">Médico: </td>
+                        <td class="infos_texto" style="text-indent:0px;width:*;">&nbsp;&nbsp;{!Order.Opportunity.Medico__r.FirstName} {!Order.Opportunity.Medico__r.LastName}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px;">Procedimento: </td>
+                        <td class="infos_texto" style="text-indent:0px;width:*;">&nbsp;&nbsp;{!Order.Opportunity.Tipo_cirurgico__c} </td>
+                    </tr>
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px;"> Data e hora: </td>
+                        <td class="infos_texto" style="text-indent:0px;"> &nbsp;&nbsp;<apex:outputField value="{!Order.Opportunity.Data_e_hora_do_procedimento__c}"/></td>
+                    </tr>
+                </table>
+                <b>&nbsp;____________________________________________________________________________________________</b>
+                <br/>
+                <br/>
+</div>                                      
+               
+ 
+  </apex:pageBlock>
+</div>
+  <apex:outputText rendered="{!IF(Order.Opportunity.RecordType.DeveloperName != 'OPME', true, false)}"> <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px; text-align:center !important; font-size:19px;">Disponível apenas para pedidos vinculados a oportunidades do tipo OPME</div></apex:outputText>
+
+  </body>
+
+</apex:page>

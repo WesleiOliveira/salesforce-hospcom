@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Situacao_do_contrato__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    Vencimento_do_contrato__c &lt;= TODAY() + 30, 
+    &quot;A VENCER EM 30 DIAS&quot;,
+    IF(
+        Vencimento_do_contrato__c &lt;= TODAY() + 60, 
+        &quot;A VENCER EM 60 DIAS&quot;,
+        IF(
+            AND(
+                Fase__c = &quot;null&quot;, 
+                OR(
+                    ISNULL(Data_de_emissao__c), 
+                    ISNULL(Data_da_entrada__c), 
+                    AND(
+                        OR(
+                            CONTAINS(TEXT(Condicao_de_pagamento__c), &quot;/&quot;),
+                            CONTAINS(TEXT(Condicao_de_pagamento__c), &quot;Condição Especial&quot;)
+                        ),
+                        ISNULL(Data_das_demais_parcelas__c)
+                    )
+                )
+            ), 
+            &quot;ERRO&quot;,
+            &quot;VIGENTES&quot;
+        )
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Situação do contrato</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

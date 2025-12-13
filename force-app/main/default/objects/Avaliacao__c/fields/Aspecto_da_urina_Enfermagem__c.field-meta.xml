@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Aspecto_da_urina_Enfermagem__c</fullName>
+    <externalId>false</externalId>
+    <label>Aspecto da urina</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Clara / límpida</fullName>
+                <default>false</default>
+                <label>Clara / límpida</label>
+            </value>
+            <value>
+                <fullName>Concentrada</fullName>
+                <default>false</default>
+                <label>Concentrada</label>
+            </value>
+            <value>
+                <fullName>Hematúrica</fullName>
+                <default>false</default>
+                <label>Hematúrica</label>
+            </value>
+            <value>
+                <fullName>Colúrica</fullName>
+                <default>false</default>
+                <label>Colúrica</label>
+            </value>
+            <value>
+                <fullName>Com sedimentos</fullName>
+                <default>false</default>
+                <label>Com sedimentos</label>
+            </value>
+            <value>
+                <fullName>Modificada por medicamentos</fullName>
+                <default>false</default>
+                <label>Modificada por medicamentos</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

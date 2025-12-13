@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Auditoria</fullName>
+    <active>true</active>
+    <errorConditionFormula>(TEXT(Origem__c)  = &quot;Auditoria&quot; &amp;&amp;
+(
+Fornecedor__c != &quot;&quot; ||
+
+NF2__c != &quot;&quot; ||
+
+Quant2__c != &quot;&quot; ||
+
+Cliente__c != &quot;&quot; ||
+
+TEXT(Motivo__c ) != &quot;&quot; ||
+
+Detalhes_outros__c != &quot;&quot;||
+
+Codigo__c != &quot;&quot; ||
+
+Lote__c != &quot;&quot; ||
+
+NF__c != &quot;&quot; ||
+
+Quant__c != &quot;&quot; ))</errorConditionFormula>
+    <errorMessage>Preencha devidamente os campos da origem &quot;Auditoria&quot; e certifique-se  de não ter preenchido o campo de outra origem.</errorMessage>
+</ValidationRule>

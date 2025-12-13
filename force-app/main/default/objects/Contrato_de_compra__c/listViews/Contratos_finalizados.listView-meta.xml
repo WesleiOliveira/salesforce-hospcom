@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contratos_finalizados</fullName>
+    <columns>NAME</columns>
+    <columns>Nome_do_contrato__c</columns>
+    <columns>Fornecedor__c</columns>
+    <columns>Status__c</columns>
+    <columns>StatusAssinatura__c</columns>
+    <columns>Nesta_fase_desde__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>StatusAssinatura__c</field>
+        <operation>equals</operation>
+    </filters>
+    <label>Contratos assinados</label>
+</ListView>

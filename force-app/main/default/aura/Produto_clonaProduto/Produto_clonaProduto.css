@@ -1,0 +1,124 @@
+.THIS *{
+    padding:0;
+    margin:0;
+}
+
+.THIS .cabecalho{
+    color: #000
+}
+.THIS .item-requisicao, .THIS .item-requisicao-cabecalho {
+    padding: 0;
+    margin: auto;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    font-size: 1.1rem;
+    
+
+}
+
+.THIS #subTitulo{
+    font-size: 1.2rem;
+    text-align: center; 
+    padding: 10px;
+    background: #f9f9f9;
+    border-bottom: 1px solid #cfcfcf;
+    border-top: 1px solid #cfcfcf;
+    color:#7e7e7e;
+}
+
+.THIS .container-geral{
+    display: flex;
+    flex-direction: column;
+    width: 98%;
+    margin: auto;
+    border: 1px solid #aeaeae;
+    padding: 0;
+    border-radius: 5px;
+    overflow: auto;
+}
+.THIS .texto-content{
+    margin: auto;
+    width: 40%;
+    padding: 5px 0 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.THIS .texto{
+    padding: 0px 0 0px;
+    font-family: sans-serif;
+    /*text-transform: ;*/
+    padding: 10px;
+    
+}
+
+.THIS .elaborador__c,.THIS .revisor__c{
+   padding:5px;
+
+}
+
+.THIS .titulo{
+    font-size: 1.5rem;
+    background-color: #f2f7ff;
+    padding: 10px !important;
+    text-align: center;
+    color:#7e7e7e;
+}
+
+.THIS .texto-content{
+    margin: auto;
+    width: 40%;
+    padding: 15px 0 32px;
+    display: flex;
+    flex-direction: column;
+}
+
+.THIS .container-campos{
+    display: flex;
+    max-width: 100%;
+    flex-wrap: wrap;
+}
+.THIS .texto{
+    padding: 0px 0 0px;
+    height:auto;
+    border:none;
+    border-bottom: 1px solid #000;
+}
+.THIS .elaborador__c,.THIS .revisor__c{
+   padding:5px;
+
+}
+
+
+
+.THIS .cont-buttons{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin: 10px;
+}
+
+
+.THIS #next{
+    padding: 5px 10px;
+    background: #1a365f;
+    border:1px solid #1a365f;
+}
+
+
+.THIS .load{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgb(89 89 83 / 53%);
+}
+.THIS .spinner-border{
+    width: 100px;
+    height: 100px;
+}

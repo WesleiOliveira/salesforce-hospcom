@@ -1,0 +1,574 @@
+<apex:page renderAs="pdf" standardController="WorkOrder" extensions="OrdemDeTrabalhoProposta" standardStylesheets="false" cache="false" showHeader="false" sidebar="false" applyHtmlTag="true" applyBodyTag="false">
+    
+    
+    <!-- remover isso depois -->
+    <apex:outputText rendered="{!IF(OR(
+        ordem_de_trabalho.Condicao_de_pagamento__c==null,
+        ordem_de_trabalho.Forma_de_pagamento2__c==null,
+        ordem_de_trabalho.Frete2__c==null,
+        ordem_de_trabalho.Prazo_de_Entrega__c==null, 
+        ordem_de_trabalho.Prazo_de_garantia__c==null,
+        ordem_de_trabalho.Data_de_emissao__c==null,
+        ordem_de_trabalho.Data_de_validade__c==null,
+        ordem_de_trabalho.AccountId==null,
+        ordem_de_trabalho.ContactId==null,
+        ordem_de_trabalho.Faturamento_Feito2__c==null
+    ),true,false)}">
+        Os campos Condição de pagamento, Forma de pagamento, Tipo de envio, Prazo de entrega, Prazo de garantia, Data de emissao
+        Data de validade, Conta, Contato e Faturamento feito devem ser preenchidos para gerar a proposta.
+    </apex:outputText>
+    
+    <apex:outputText rendered="{!IF(OR(
+        ordem_de_trabalho.Condicao_de_pagamento__c==null,
+        ordem_de_trabalho.Forma_de_pagamento2__c==null,
+        ordem_de_trabalho.Frete2__c==null,
+        ordem_de_trabalho.Prazo_de_Entrega__c==null, 
+        ordem_de_trabalho.Prazo_de_garantia__c==null,
+        ordem_de_trabalho.Data_de_emissao__c==null,
+        ordem_de_trabalho.Data_de_validade__c==null,
+        ordem_de_trabalho.AccountId==null,
+        ordem_de_trabalho.ContactId==null,
+        ordem_de_trabalho.Faturamento_Feito2__c==null
+    ),false,true)}">
+
+    <head>
+        <style type="text/css" media="print">
+            
+            /* pdf */
+            @page:first{
+                size:A4;
+                background: url({!documento.sobre});
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(paginacao);}
+            }
+            @page{
+                size:A4;
+                background: url({!documento.timbrado});
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(paginacao);}
+            }
+            .pagina:before{content:counter(page);}
+            .paginas:before{content:counter(pages);}
+            
+            /* paginação */
+            .paginacao{
+                height:120px;
+                position:running(paginacao);
+            }.paginacao .valor{
+                position: absolute;
+                top: 74px;
+                left: 410px;
+                text-align:center;
+                background-color:white;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:600;
+                color:#697f9b;
+            }
+            
+            /* documento */
+            .documento{
+                padding:0px;
+                margin:0px;
+                font-family:arial, verdana, sans-serif;
+            }.bloco{
+                page-break-inside:avoid;
+            }.linha{
+                white-space: nowrap;
+            }
+            
+            /* capa */
+            .capa .titulo{
+                margin-top:505px;
+                width:100%;
+                text-align:center;
+                text-transform:uppercase;
+                font-weight:bold;
+                font-size:20px;
+                white-space:pre;
+            }.capa .numero{
+                margin-top:40px;
+                width:100%;
+                text-align:right;
+                font-size:14px;
+            }.capa .rotulo{
+                margin-top:35px;
+                font-size:15px;
+            }.capa .valor{
+                margin-top:5px;
+                margin-left:20px;
+                font-size:17px;
+                font-weight:bold;
+            }.capa .nota{
+                margin-top:5px;
+                margin-left:20px;
+                font-size:14px;
+            }
+            
+            /* conteudo */
+            .conteudo{
+                page-break-before:always;
+            }.conteudo .titulo{
+                font-size:14px;
+                font-weight:bold;
+                line-height:120%;
+            }.conteudo .paragrafo{
+                font-size:13px;
+                text-align:justify;
+                line-height:120%;
+                text-justify:inter-word;
+            }.conteudo .obsimgs{
+                text-align:right;
+                font-size:11px;
+                font-weight:bold;
+                font-style:italic;
+            }.conteudo .assinatura{
+                width:100%;
+            }.conteudo .assinatura td{
+                width:50%;
+                font-size:13px;
+                line-height:130%;
+            }.conteudo .nota{
+                font-size:13px;
+                text-align:justify;
+                line-height:120%;
+                font-style:italic;
+            }
+            
+            /* listagem */
+            .listagem{ 
+                width:100%;
+            }.listagem table{ 
+                width:100%;
+                border-collapse:collapse;
+            }.listagem td{ 
+                padding:2px 5px;
+                line-height:120%;
+            }.listagem .pre-cabecalho{
+                height:10px;
+            }.listagem .cabecalho td{
+                font-size:12px;
+                font-weight:bold;
+                background-color:#e2e3e3;
+                white-space: nowrap;
+                border-color:#cacecf;
+                border-style:solid;
+                border-width:1px 0px 1px 0px;
+            }.listagem .item-dados .imagem{
+                vertical-align:middle;
+            }.listagem .item-dados.acessorio .imagem{
+                text-align:right;
+            }.listagem .item-dados.equipamento img{
+                width: 80px;
+                height: 80px; 
+            }.listagem .item-dados.acessorio img{
+                width: 55px;
+                height: 55px; 
+            }.listagem .item-dados .valor{
+                border-color:#eef2f4;
+                border-style:solid;
+                border-width:1px 0px 0px 0px;
+            }.listagem .item-dados td{
+                font-size:10px;
+                vertical-align:top;
+            }.listagem .item-descr td{
+                font-size:10px;
+                text-align:justify;
+                vertical-align:top;
+                text-justify:inter-word;
+                border-color:#eef2f4;
+                border-style:solid;
+                border-width:0px 0px 1px 0px;
+            }.listagem .subtotal{
+                font-weight: bold;
+                font-size:10px;
+                white-space: nowrap;
+            }.listagem .subtotal .valor{
+                border-color:#eef2f4;
+                border-style:solid;
+                border-width:0px 0px 1px 0px;
+            }
+        </style>
+    </head>
+    
+    <body class="documento">
+        
+        <!-- paginacao -->
+        <div class="paginacao">
+            <div class="valor" style="margin: -9px -70px">Contrato: {!WorkOrder.WorkOrderNumber} - Página <span class="pagina"/> de <span class="paginas"/></div>
+        </div>
+        
+        <!-- capa -->
+        <div class="capa">
+            <div class="titulo">CONTRATO DE PRESTAÇÃO DE SERVIÇOS</div>
+            <div style="text-align:center; font-size: 14pt"><b>Nº: {!ordem_de_trabalho.WorkOrderNumber}</b></div>
+            
+        </div>
+        
+        <!-- conteudo -->
+        <div class="conteudo">
+            
+            <div class="bloco">
+                <apex:variable var="n1" value="{!0}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+                <div class="paragrafo" style="text-align: justify;"><b>CONTRATADA: </b> <b>{!WorkOrder.Faturamento_Feito2__r.Raz_o_Social__c}</b>{!IF(WorkOrder.Faturamento_Feito2__r.Ownership = 'PUBLICO' , ', pessoa jurídica de direito público',', pessoa jurídica de direito privado')}, inscrita no CPNJ sob n.º: {!WorkOrder.Faturamento_Feito2__r.CNPJ__c}  sediada na {!WorkOrder.Faturamento_Feito2__r.BillingStreet}, {!WorkOrder.Faturamento_Feito2__r.BillingCity} - {!WorkOrder.Faturamento_Feito2__r.BillingState}, CEP: {!WorkOrder.Faturamento_Feito2__r.BillingPostalCode} e, de outro lado,</div>
+                <br/>
+               <apex:outputText rendered="{!IF(WorkOrder.Account.CNPJ__c != null, true, false)}">
+                    <div class="paragrafo" style="text-align: justify;"><b>CONTRATANTE: </b> <b>{!WorkOrder.Account.Raz_o_Social__c}</b>{!IF(WorkOrder.Account.Ownership = 'PUBLICO' , ', pessoa jurídica de direito público',', pessoa jurídica de direito privado')}, inscrita no CNPJ sob n.º: {!WorkOrder.Account.CNPJ__c}, sediada na {!WorkOrder.Account.BillingStreet}, {!WorkOrder.Account.BillingCity}, {!WorkOrder.Account.BillingState}, CEP: {!WorkOrder.Account.BillingPostalCode}.</div>
+                </apex:outputText>
+                <apex:outputText rendered="{!IF(WorkOrder.Account.CNPJ__c == null, true, false)}">
+                    <div class="paragrafo" style="text-align: justify;"><b>CONTRATANTE: </b> <b>{!WorkOrder.Account.Name}</b>, pessoa física inscrita no CPF sob o n.º {!WorkOrder.Account.CPF__pc}, RG n.º {!WorkOrder.Account.RG__pc} residente e domiciliado à {!WorkOrder.Account.BillingStreet}, {!WorkOrder.Account.BillingCity}, {!WorkOrder.Account.BillingState}, CEP: {!WorkOrder.Account.BillingPostalCode}</div>
+                </apex:outputText>
+                <br/>
+                    <div class="paragrafo">Têm entre si justo e acertado o presente contrato de prestação de serviços, que se regerá pelas cláusulas e condições a seguir delineadas.</div>
+                    <br/>
+            </div>
+            
+            <div class="bloco">
+                <apex:variable var="n1" value="{!n1+1}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+                <div class="titulo"><b>1. OBJETO </b></div>
+                <br/>
+                <div class="paragrafo"><b>1.1.</b> Constitui objeto do presente instrumento a prestação de serviços de manutenção e/ ou venda de peças  
+                    <apex:outputText rendered="{!IF(ordem_de_trabalho.AssetId!=null,true,false)}" value="{!', referente ao ativo'}"/> 
+                    <apex:outputText value="{!' '+ordem_de_trabalho.Asset.Name}"/> 
+                    <apex:outputText rendered="{!IF(ordem_de_trabalho.Asset.Marca__c!=null,true,false)}" value="{!', Marca ' + ordem_de_trabalho.Asset.Marca__c}"/> 
+                    <apex:outputText rendered="{!IF(ordem_de_trabalho.Asset.Modelo__c!=null,true,false)}" value="{!', Modelo ' + ordem_de_trabalho.Asset.Modelo__c}"/> 
+                    <apex:outputText rendered="{!IF(ordem_de_trabalho.Asset.SerialNumber!=null,true,false)}" value="{!', Número de série '+ordem_de_trabalho.Asset.SerialNumber}"/> 
+                    <apex:outputText rendered="{!IF(ordem_de_trabalho.Asset.patrimonio__c!=null,true,false)}" value="{!', Patrimônio '+ordem_de_trabalho.Asset.patrimonio__c}"/>.
+                </div>
+                <br/>
+            </div>       
+            
+            <div class="listagem">
+                <apex:variable var="subtotal" value="{!0}"/>
+                
+                <table cellpadding="0px" cellspacing="0px" border="0">
+                    <apex:repeat value="{!produtos}" var="produto">
+                        <tbody class='bloco'>
+
+                            <!-- cabeçalho -->
+                            <apex:outputText rendered="{!IF(produto.cabecalho,true,false)}">
+                                <tr class="pre-cabecalho"><tr cellspacing="7"></tr></tr>
+                                <tr class="cabecalho">
+                                    <td style="visibility:hidden;border:0px;"></td>
+                                    <td>Imagem</td>
+                                    <td>Produto</td>
+                                    <td>Modelo</td>
+                                    <td>Fabricante</td>
+                                    <td>Valor Unit.</td>
+                                    <td>Qtd.</td>
+                                    <td>Valor Total</td>
+                                </tr>
+                            </apex:outputText>
+                            
+                            <!-- item -->
+                            <apex:variable var="tipo" value="{!IF(produto.item.Item_Pai__c==null,'equipamento','acessorio')}"/>
+                            <tr class="item-dados {!tipo}">
+                                <td rowspan="2"><apex:outputText value="{!produto.item.Item__c}" rendered="{!IF(tipo=='equipamento',true,false)}"/></td>
+                                <td rowspan="2" class="imagem"><img src="{!produto.item.Product2.URL_da_Imagem__c}"/></td>
+                                <td class="valor">
+                                    COD: {!produto.item.Product2.StockKeepingUnit}
+                                    <br/>
+                                    {!produto.item.Product2.Name}
+                                </td>
+                                <td class="valor">{!produto.item.Product2.Modelo__c}</td>
+                                <td class="valor">{!produto.item.Product2.Marca__c}</td>
+                                <td class="linha valor"><apex:outputField value="{!produto.item.UnitPrice}"/></td>
+                                <td class="linha valor"><apex:outputField value="{!produto.item.Quantity}"/></td>
+                                <td class="linha valor"><apex:outputField value="{!produto.item.TotalPrice}"/></td>
+                            </tr>
+                            <tr class="item-descr">
+                                <td colspan="6">{!produto.item.Description}</td>
+                            </tr>
+                            
+                            <!-- subtotal -->
+                            <apex:variable var="subtotal" value="{!subtotal+produto.item.TotalPrice}"/>
+                            <apex:outputText rendered="{!IF(produto.subtotal!=null,true,false)}">
+                                <tr class="subtotal">
+                                    <td colspan="2">&nbsp;</td>
+                                    <td colspan="5" class="valor">SUBTOTAL</td>
+                                    <td class="valor">{!produto.subtotal}</td>
+                                </tr>
+                                <apex:variable var="subtotal" value="{!0}"/>
+                            </apex:outputText>
+                        
+                        </tbody>
+                    </apex:repeat>
+                </table>
+            </div>
+            
+            <br/>
+            <div class="obsimgs">Imagens ilustrativas.</div>
+            <br/>
+                            <div class="paragrafo"><b>Valor total: </b> <apex:outputField value="{!WorkOrder.Total_Estimado__c}"/>.</div>
+            <br/>
+            <div class="bloco">
+            <div class="titulo"><b>2. CONDIÇÕES GERAIS DO CONTRATO</b></div>
+            <br/>
+            <div class="paragrafo"><b>2.1. </b> Este instrumento será regido pelas seguintes informações comerciais:</div>
+            <br/>
+            <table cellspacing="0px" style="font-size: 13px">
+                <tr>
+                    <td style="border: 0.5px solid black; padding: 3px" width="170px">
+                    <b>Valor Total</b>               
+                    </td>
+                    <td style="border: 0.5px solid black; padding: 3px" width="*">
+                        <apex:outputField value="{!ordem_de_trabalho.GrandTotal}"/>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td style="border: 0.5px solid black; padding: 3px">
+                    <b>Forma de Pagamento</b>               
+                    </td>
+                    <td style="border: 0.5px solid black; padding: 3px">
+                        <apex:outputField value="{!ordem_de_trabalho.Forma_de_pagamento2__c}"/>
+                    </td>
+                </tr>
+                <apex:outputText rendered="{!IF(ordem_de_trabalho.Forma_de_pagamento2__c='Recebimento via Transferência Bancária',true,false)}"> 
+                <tr>
+                   <td style="border: 0.5px solid black; padding: 3px">
+                    <b>Dados Bancários:</b>               
+                    </td>
+                    <td style="border: 0.5px solid black; padding: 3px">
+                        {!documento.empresa_bancario}.
+                    </td> 
+                </tr>
+                
+                </apex:outputtext>
+                
+                <tr>
+                    <td style="border: 0.5px solid black; padding: 3px">
+                    <b>Condição de Pagamento</b>               
+                    </td>
+                    <td style="border: 0.5px solid black; padding: 3px">
+                        <apex:outputText rendered="{!IF(ordem_de_trabalho.Condicao_de_pagamento__c = 'Condição Especial - Aprovado pela Diretoria', true, false)}">
+                            <apex:outputField value="{!ordem_de_trabalho.Condicao_de_pagamento__c}"/>,&nbsp; <apex:outputField value="{!WorkOrder.Condi_o_especial__c}"/>
+                        </apex:outputText>
+                        <apex:outputText rendered="{!IF(ordem_de_trabalho.Condicao_de_pagamento__c = 'Condição Especial - Aprovado pela Diretoria', false, true)}">
+                            <apex:outputField value="{!ordem_de_trabalho.Condicao_de_pagamento__c}"/>
+                        </apex:outputText>
+                    </td>
+                </tr> 
+                <!--Valor de entrada--> 
+                <apex:outputText rendered="{!IF(WorkOrder.Valor_da_entrada__c != null, true, false)}">
+                <tr>
+                    <td style="border: 0.5px solid black; padding: 3px">
+                    <b>Valor da Entrada</b>               
+                    </td>
+                    <td style="border: 0.5px solid black; padding: 3px">
+                            <apex:outputField value="{!WorkOrder.Valor_da_entrada__c}"/>
+                    </td>
+                </tr> 
+                </apex:outputText>
+                <!-- Número de parcelas -->
+                <apex:outputText rendered="{!IF(WorkOrder.Numero_de_parcelas__c!= null, true, false)}">
+                <tr>
+                    <td style="border: 0.5px solid black; padding: 3px">
+                    <b>Número de parcelas</b>               
+                    </td>
+                    <td style="border: 0.5px solid black; padding: 3px">
+                            <apex:outputField value="{!WorkOrder.Numero_de_parcelas__c}"/>
+                    </td>
+                </tr> 
+                </apex:outputText>  
+                <!-- 1ª parcela -->
+                <apex:outputText rendered="{!IF(WorkOrder.Data_da_primeira_parcela__c != null, true, false)}">
+                <tr>
+                    <td style="border: 0.5px solid black; padding: 3px">
+                    <b>Data da primeira parcela</b>               
+                    </td>
+                    <td style="border: 0.5px solid black; padding: 3px">
+                            <apex:outputField value="{!WorkOrder.Data_da_primeira_parcela__c}"/>
+                    </td>
+                </tr> 
+                </apex:outputText>  
+                
+                <tr>
+                    <td style="border: 0.5px solid black; padding: 3px">
+                    <b>Prazo de Entrega</b>               
+                    </td>
+                    <td style="border: 0.5px solid black; padding: 3px">
+                        
+                        {!ordem_de_trabalho.Prazo_de_entrega__c}, 
+                        <apex:variable var="frete" value="{!IF(ordem_de_trabalho.Frete2__c=='Sem frete','','frete')}"/>
+                        {!LOWER(ordem_de_trabalho.Frete2__c)}.
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td style="border: 0.5px solid black; padding: 3px">
+                    <b>Frete</b>               
+                    </td>
+                    <td style="border: 0.5px solid black; padding: 3px">                       
+                        <apex:variable var="frete" value="{!IF(ordem_de_trabalho.Frete2__c=='Sem frete','Sem Frete','frete')}"/>
+                        {!LOWER(ordem_de_trabalho.Frete2__c)}.
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td style="border: 0.5px solid black; padding: 3px">
+                    <b>Endereço de Faturamento</b>               
+                    </td>
+                    <td style="border: 0.5px solid black; padding: 3px">
+                        <apex:outputText rendered="{!IF(ordem_de_trabalho.Account.BillingStreet != null,true,false)}" > {!ordem_de_trabalho.Account.BillingStreet}</apex:outputText>
+                        <apex:outputText rendered="{!IF(ordem_de_trabalho.Account.BillingCity != null,true,false)}" >, {!ordem_de_trabalho.Account.BillingCity}</apex:outputText>
+                        <apex:outputText rendered="{!IF(ordem_de_trabalho.Account.BillingStateCode != null,true,false)}" >-{!ordem_de_trabalho.Account.BillingStateCode}</apex:outputText>
+                        <apex:outputText rendered="{!IF(ordem_de_trabalho.Account.BillingPostalCode != null,true,false)}" >, CEP: {!ordem_de_trabalho.Account.BillingPostalCode}</apex:outputText>                       
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td style="border: 0.5px solid black; padding: 3px">
+                    <b>Endereço de Entrega</b>               
+                    </td>
+                    <td style="border: 0.5px solid black; padding: 3px">
+                        <apex:outputText rendered="{!IF(ordem_de_trabalho.Account.ShippingStreet != null,true,false)}" > {!ordem_de_trabalho.Account.ShippingStreet}</apex:outputText>
+                        <apex:outputText rendered="{!IF(ordem_de_trabalho.Account.ShippingCity != null,true,false)}" >, {!ordem_de_trabalho.Account.ShippingCity}</apex:outputText>
+                        <apex:outputText rendered="{!IF(ordem_de_trabalho.Account.ShippingStateCode != null,true,false)}" >-{!ordem_de_trabalho.Account.ShippingStateCode}</apex:outputText>
+                        <apex:outputText rendered="{!IF(ordem_de_trabalho.Account.ShippingPostalCode != null,true,false)}" >, CEP: {!ordem_de_trabalho.Account.ShippingPostalCode}</apex:outputText>
+                    </td>
+                </tr>
+            </table>
+            <br/>
+            </div>
+            <div class="paragrafo"><b>2.2.</b> As informações comerciais contidas neste instrumento serão válidas até a data de&nbsp;<apex:outputField value="{!WorkOrder.Data_de_validade__c}"/> e em caso de assinatura do contrato pela <b>CONTRATADA</b> serão ratificadas pelo tempo que perdurar o contrato.</div>
+            <br/>
+            <div class="paragrafo"><b>2.3.</b> O preço acima descrito, constitui a venda em sua totalidade, ou seja, estão embutidos no preço todos os impostos de responsabilidade da <b>CONTRATADA</b>. Quaisquer valores excedentes ao preço ora estipulado deverão ser arcados em sua totalidade pelo(a) <b>CONTRATANTE</b>.</div>
+            <br/>
+            <div class="paragrafo"><b>Parágrafo Único</b>. A menos que o(a) <b>CONTRATANTE</b> forneça à <b>CONTRATADA</b> o respectivo certificado de isenção, com antecedência razoável à data em que o(s) equipamento(s) for(em) disponibilizado(s) para entrega, a <b>CONTRATADA</b> faturará o produto a ser entregue ao(a) <b>CONTRATANTE</b> com a inclusão dos impostos relativos à venda e o(a) <b>CONTRATANTE</b> pagará os impostos de acordo com os termos da fatura.</div>
+            <br/>
+            <div class="titulo"><b>3. DOS ENCARGOS MORATÓRIOS</b></div>
+            <br/>
+            <div class="bloco">
+                <div class="paragrafo"><b>3.1</b> Fica certo e ajustado que caso o(a) <b>CONTRATANTE</b> não efetue o pagamento até a data de vencimento serão aplicadas as seguintes sanções, calculadas sempre sobre o valor total da obrigação e até o seu efetivo pagamento: </div>
+            <br/>
+            <div class="paragrafo" style="margin-left:150px;"><b>3.1.1.</b> Juros de mora a razão de 1% (um por cento) ao mês;</div><br/>
+            <div class="paragrafo" style="margin-left:150px;"><b>3.1.2.</b> Multa moratória de 2% (dois por cento) sobre o valor total da obrigação em atraso;</div><br/>  
+            <div class="paragrafo" style="margin-left:150px;"><b>3.1.3.</b> Correção monetária, <i>"pró rata tempore"</i>,com base na variação do valor do IGPM/FGV (Índice Geral de Preços de Mercado da Fundação Getúlio Vargas);</div><br/>    
+            <div class="paragrafo" style="margin-left:150px;"><b>3.1.4.</b> Todas as despesas de cobrança, custas judiciais, extrajudiciais e honorários advocatícios na monta de 10% sobre o valor total do débito;</div>    
+            <br/>
+            <div class="paragrafo"><b>Parágrafo Único:</b> em caso de pagamento de forma parcelada e inadimplemento de uma das parcelas aqui acordadas, ocorrerá o vencimento antecipado de todas as outras parcelas, com a consequente aplicação dos encargos contratuais mencionados acima. </div>    
+            <div class="bloco">
+            <br/>
+            <div class="titulo"><b>4. DA FORMA DE PRESTAÇÃO DE SERVIÇOS E OBRIGAÇÕES DA CONTRATADA</b></div>
+            <br/>
+            <div style="font-size:14px; text-align: justify"><b>4.1.</b> A prestação dos serviços de manutenção será realizada de segunda à sexta-feira, das 08h às 18h, salvo feriados, em local previamente estipulado entre as partes. Em caso de necessidade manifestada pela <b>CONTRATANTE</b> de que sejam prestados os serviços em referência fora do horário comercial ou local ora estipulado, as despesas de atendimento extraordinário serão cobradas pela <b>CONTRATADA</b>, em valores a serem estipulados entre <b>CONTRATADA</b> e <b>CONTRATANTE</b>.</div>    
+            <br/>            
+            <div class="paragrafo"><b>Parágrafo Único:</b> A <b>CONTRATANTE</b> fica obrigada, após a prestação dos serviços, satisfazer às suas próprias custas, a todas e quaisquer intimações dos poderes competentes a que der causa, mesmo que expedidas em nome da <b>CONTRATADA.</b> </div>    
+            <br/>
+            <div class="paragrafo"><b>4.2.</b> Quando da liberação do(s) equipamento(s) pela <b>CONTRATADA</b>, esta emitirá nota referente à ordem de trabalho, o que acompanhará o(s) equipamento(s) no momento de entrega ao(à) <b>CONTRATANTE</b>, na qual, desde já, o(a) <b>CONTRATANTE</b> dá seu aceite, ficando certo que em caso de ausência de assinatura da referida nota referente à ordem de trabalho no momento da entrega, o referido aceite substituirá a assinatura da nota mencionada. </div>    
+            <br/>
+            <div class="paragrafo"><b>4.3.</b> A forma de pagamento estabelecida no item 2.1, não poderá ser alterada sem que para isso exista uma prévia e expressa aprovação da <b>CONTRATADA</b>, ficando a <b>CONTRATANTE</b>, desde já, fica ciente que qualquer pagamento realizado de forma divergente do acordado, poderá ocasionar na cobrança de encargos moratórios e da multa contratual pactuada no item 3.1.</div>
+            </div> 
+            <br/>
+            <div class="titulo"><b>5. CONDIÇÕES DE ENTREGA</b></div>
+            <br/>
+            <div class="paragrafo"><b>5.1.</b> Cabe ao(a) <b>CONTRATANTE</b> preparar o local de entrega e instalação, sendo que as partes no ato de assinatura deste instrumento consideram que o local de instalação já esteja disponível e pronto para tanto</div>
+            <br/>
+            <div class="paragrafo"><b>5.2.</b> Caso o(a) <b>CONTRATANTE</b> tenha a necessidade de prorrogar a data de liberação do local de instalação do(s) equipamento(s) acima informado, deverá comunicar à CONTRATADA seu interesse por escrito, sendo que referida prorrogação deverá ser regulada por meio de aditamento a este documento, sendo que essa prorrogação poderá ser requerida uma única vez e o prazo de prorrogação não poderá ser superior a 30 (trinta) dias corridos.</div>
+            <br/>
+            <div class="paragrafo"><b>5.3.</b> Caso no momento de entrega o(a) <b>CONTRATANTE</b> tenha a necessidade de prorrogar a data de liberação do local de instalação do(s) equipamento(s) acima informado, deverá comunicar à <b>CONTRATADA</b> seu interesse por escrito, sendo que referida prorrogação deverá ser regulada por meio de aditamento a este documento, sendo que essa prorrogação poderá ser requerida uma única vez e o prazo de prorrogação não poderá ser superior a 30 (trinta) dias corridos. </div>
+            <br/>
+            <div class="titulo"><b>6. OBRIGAÇÕES DAS PARTES</b></div>
+            <br/>
+            <div class="paragrafo"><b>6.1. </b> É obrigação da <b>CONTRATANTE</b> executar os serviços objeto deste instrumento, por meio de técnicos devidamente qualificados e identificados com crachá e uniforme, usando equipamentos de proteção individual de segurança, fornecidos exclusivamente pela <b>CONTRATADA</b>, executando os serviços de acordo com as necessidades de cada ambiente e as normativas em vigor</div>
+            <br/>
+            <div class="paragrafo"><b>6.2. </b> É obrigação da <b>CONTRATADA</b> oferecer atendimento habilitado para responder, por telefone, e-mail ou, quando estritamente necessário, responder pessoalmente aos questionamentos que envolvam o objeto deste contrato.</div>  
+            <br/>
+            <div class="paragrafo"><b>6.3. </b> É obrigação da <b>CONTRATANTE</b> efetivar o pagamento do serviço e/ou peças contratadas no prazo acordado e, em caso de pagamento à vista (paga e retira), fica autorizada a retenção do equipamento pela <b>CONTRATADA</b>, até que seja efetuado o pagamento na forma acordada pela <b>CONTRATANTE</b>.</div>
+            <br/>
+            <div class="titulo"><b>7. GARANTIA</b></div>
+            <br/>
+            <div class="paragrafo"><b>7.1. </b> O(s) serviço(s) e peças objeto deste instrumento é(são) garantido(s) por 90 (noventa) dias, salvo o mau uso comprovado pela <b>CONTRATANTE</b>, prazo que será contado da data de assinatura do presente instrumento.</div>
+            <br/>
+            <div class="paragrafo"><b>Parágrafo Único: </b> Qualquer acionamento de garantia do equipamento que se faça necessário durante o período de garantia acima informado deverá ser solicitado pelo(a) <b>CONTRATANTE</b> ao time de serviços da <b>CONTRATADA</b>. Solicitações de atendimento feitas através de qualquer outro canal não serão consideradas válidas, ficando o(a) <b>CONTRATADA</b> isento de responsabilidade pelo não atendimento.</div>
+            <br/>
+            <div class="titulo"><b>8. DA RESCISÃO ANTECIPADA</b></div>
+            <br/>
+            <div class="paragrafo"><b>8.1.</b> Em razão dos custos despendidos pela <b>CONTRATADA</b> para a conclusão e fechamento do negócio, fica resguardado seu direito a cobrança de multa penal que será calculada na monta de 10% do valor total do contrato, em caso de manifesta vontade de rescindir antecipadamente ou em razão de desistência do negócio por parte do <b>CONTRATANTE</b> após assinatura do presente contrato de compra e venda.</div>
+            <br/>
+            <div class="titulo"><b>9. DAS PRÁTICAS ANTICORRUPÇÃO</b></div>
+            <br/>
+            <div class="paragrafo"><b>9.1.</b> As partes obrigam-se a observar, cumprir e/ou fazer cumprir, por si, suas afiliadas (entidades controladoras, controladas, coligadas ou sob controle comum) e representantes (diretores, membros do conselho de administração, quaisquer terceiros, incluindo assessores ou prestadores de serviços) toda e qualquer lei anticorrupção, em especial a Lei Federal nº 12.846/13, conforme aplicável.</div>
+            <br/>
+            <div class="paragrafo"><b>9.2.</b> Na vigência deste contrato, o(a) <b>CONTRATANTE</b> reconhece que nem ela, nem quaisquer de seus administradores, empregados, agentes, representantes, sócios ou acionistas deve dar, oferecer, pagar, prometer pagar, ou autorizar o pagamento, direta ou indiretamente, qualquer dinheiro ou coisa de valor a qualquer autoridade governamental, consultor, representante, parceiro, ou qualquer terceiro, com a finalidade de influenciar qualquer ato ou decisão de agentes ou entes governamentais (assim definidos nas Leis Anticorrupção Brasileiras), ou com objetivo de assegurar qualquer vantagem indevida ou direcionar negócios em violação às Leis Anticorrupção Brasileiras. </div>
+            <br/>
+            <div class="paragrafo"><b>9.3.</b> O(A) <b>CONTRATANTE</b>, se obriga a, em caso de eventual violação às Leis Anticorrupção Brasileiras, indenizar a <b>CONTRATADA</b> por todos e quaisquer danos, incluindo multas, custos, obrigações de reparação de danos, taxas, juros, honorários advocatícios ou outras responsabilidades cíveis, criminais e/ou administrativas que sejam decorrentes de: (i) investigações sobre eventual quebra de integridade e/ou ato ilícito pela <b>CONTRATADA</b> ou de seus funcionários e prestadores de serviços e, (ii) qualquer litígio ou outro procedimento judicial ou administrativo envolvendo violação das Leis Anticorrupção Brasileiras em face da(s) <b>CONTRATADA</b> e que tenha sido originado a partir de qualquer ação ou omissão do(a) <b>CONTRATANTE</b> seja diretamente ou por meio de seus administradores, empregados, agentes, representantes, terceiros e/ou sócios.</div>
+            <br/>
+            <div class="titulo"><b>10.  DA NECESSIDADE DE APROVAÇÃO EM ANÁLISE DE CRÉDITO</b></div>
+            <br/>
+            <div class="paragrafo"><b>10.1.</b> Declara o(a) <b>CONTRATANTE</b> a ciência de que estas tratativas comerciais somente perdurarão mediante aprovação da <b>CONTRATANTE</b> em análise de crédito a ser realizada pela <b>CONTRATADA</b> e, ainda, tão somente mediante assinatura do presente instrumento por parte de pessoa com poderes para assinar pela <b>CONTRATADA</b>.</div>
+            <br/>
+            <div class="titulo"><b>11.</b>  DA ASSINATURA ELETRÔNICA </div>
+            <br/>
+            <div class="paragrafo"><b> 11.1.</b> Caso o presente instrumento seja assinado de forma digital ou eletronicamente, cada parte declara e garante que sua assinatura digital ou eletrônica tem o mesmo efeito vinculativo que teria a assinatura manuscrita, possuindo caráter irrevogável e irretratável, sendo realizada através de plataforma de conhecida confiabilidade, estando as partes atentas ao disposto na Medida Provisória 2.200-2/2001 ou em outra legislação que venha a substituí-la.</div>
+            <br/>
+            <div class="titulo"><b>12.</b> DA PROTEÇÃO DE DADOS </div>
+            <br/>
+            <div class="paragrafo"><b>12.1.</b> As partes, por si e por seus colaboradores, obrigam-se a atuar no presente Contrato em conformidade com a Legislação vigente sobre Proteção de Dados Pessoais e as determinações de órgãos reguladores/fiscalizadores sobre a matéria, tudo conforme o que rege a Lei 13.709/2018. No que tange à utilização dos dados as partes deverão:</div>  
+            <br/>
+            <div class="bloco">
+                <div class="paragrafo" style="margin-left:150px;">i. &nbsp;&nbsp; Tratar os dados pessoais a que tiver acesso de acordo com o que a outra parte lhe direcionar sempre em conformidade com estas cláusulas. Para os casos em que for obrigada e não mais puder cumprir estas obrigações, por qualquer razão, concorda em informar de modo formal este fato à outra parte. </div>
+                <br/>
+                <div class="paragrafo" style="margin-left:150px;">ii. &nbsp;&nbsp; Manter e utilizar medidas de segurança para que possa proteger a confidencialidade e integridade de todos os dados pessoais mantidos ou transmitidos eletronicamente, a fim de que possa garantir a proteção desses dados contra acesso não autorizado, destruição, uso, modificação, divulgação ou perda acidental ou indevida.</div>
+                <br/>
+                <div class="paragrafo" style="margin-left:150px;">iii. &nbsp;&nbsp; Acessar os dados dentro de seu escopo e na medida abrangida pela autorização da outra parte, não podendo estes serem modificados sem expressa autorização da outra parte. </div>
+                <br/>
+                <div class="paragrafo" style="margin-left:150px;">iv. &nbsp;&nbsp; Garantir, por si própria ou quaisquer de seus empregados, prepostos, sócios, diretores, representantes ou terceiros contratados, a confidencialidade dos dados processados, bem como a manter quaisquer Dados Pessoais estritamente confidenciais e de não os utilizar para outros fins, com exceção da prestação de serviços à outra parte.</div>
+            </div>
+            <br/>
+            <div class="bloco">
+            <div class="titulo"><b>13.</b> DO FORO DO CONTRATO </div>
+            <br/>
+            <div class="paragrafo"><b>13.1.</b> Fica eleito como competente o foro da Comarca de Goiânia, Estado de Goiás, para solução de quaisquer dúvidas ou litígios decorrentes deste contrato, renunciando os contratantes a qualquer outro que tenham ou venham a ter, por mais privilegiado que seja.</div>
+                <br/>
+            
+            <div style="font-size:14px; text-align: justify">E assim, justo e contratado, firmam o presente instrumento em 02 (duas) vias de igual teor, e forma, na presença das 02 (duas) testemunhas abaixo assinadas.</div>       
+    <br/>
+            
+                <table class="assinatura" style = "font-size: 12px">
+                <tr>
+                    <td>
+                    
+                    </td>
+                    <td style="text-align:right">
+                    Goiânia, ____/____/________
+                    </td>
+                </tr>
+                    <tr>
+                        <td>
+                            <br/><br/>____________________________________
+                            <br/>{!WorkOrder.Faturamento_Feito2__r.Raz_o_Social__c}
+                            <br/>Data da assinatura: 
+                        </td>
+                        <td>
+                            <br/><br/>____________________________________
+                            <br/>{!WorkOrder.Account.Name}
+                            <br/>Nome: 
+                             
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br/><br/>____________________________________
+                            <br/>Testemunha 1
+                            <br/>Nome: 
+                            <br/>CPF: 
+                        </td>
+                        <td>
+                            <br/><br/>____________________________________
+                            <br/>Testemunha 2
+                            <br/>Nome: 
+                            <br/>CPF: 
+                        </td>
+                    </tr>
+                </table>
+                </div>
+                <br/>
+                            
+           </div>            
+        </div>
+        
+    </body>
+    </apex:outputText>
+</apex:page>

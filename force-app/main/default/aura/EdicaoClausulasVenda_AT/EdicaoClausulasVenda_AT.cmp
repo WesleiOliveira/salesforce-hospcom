@@ -1,0 +1,83 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global" >      
+    <h1> Edição de cláusulas
+    </h1><br/>
+    <lightning:recordEditForm density="comfy" objectApiName="WorkOrder" recordId="{!v.recordId}" onsuccess="{!c.handleSuccess}">
+        
+        <div class="slds-form-element" style="position:relative">
+          	<div>
+                <lightning:inputField fieldName="Qualificacao_Venda_Editada__c" />                
+                <lightning:inputField fieldName="Qualificacao_Venda__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="V_ClausulaEditada1__c" />                
+                <lightning:inputField fieldName="V_Clausula1__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="V_ClausulaEditada2__c" />                
+                <lightning:inputField fieldName="V_Clausula2__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="V_ClausulaEditada3__c" />                
+                <lightning:inputField fieldName="V_Clausula3__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="V_ClausulaEditada4__c" />
+                <lightning:inputField fieldName="V_Clausula4__c" />                
+          	</div>
+            <div>
+                <lightning:inputField fieldName="V_ClausulaEditada5__c" />                
+                <lightning:inputField fieldName="V_Clausula5__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="V_ClausulaEditada6__c" />                
+                <lightning:inputField fieldName="V_Clausula6__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="V_ClausulaEditada7__c" />                
+                <lightning:inputField fieldName="V_Clausula7__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="V_ClausulaEditada8__c" />                
+                <lightning:inputField fieldName="V_Clausula8__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="V_ClausulaEditada9__c" />                
+                <lightning:inputField fieldName="V_Clausula9__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="V_ClausulaEditada10__c" />
+                <lightning:inputField fieldName="V_Clausula10__c" />                
+          	</div>
+            <div>
+                <lightning:inputField fieldName="V_ClausulaEditada11__c" />
+                <lightning:inputField fieldName="V_Clausula11__c" />                
+          	</div>
+            <div>
+                <lightning:inputField fieldName="V_ClausulaEditada12__c" />
+                <lightning:inputField fieldName="V_Clausula12__c" />                
+          	</div>
+            <div>
+                <lightning:inputField fieldName="V_ClausulaEditada13__c" />
+                <lightning:inputField fieldName="V_Clausula13__c" />                
+          	</div>
+            <div>
+                <lightning:inputField fieldName="V_ClausulaEditada14__c" />
+                <lightning:inputField fieldName="V_Clausula14__c" />                
+          	</div>
+            <div>
+                <lightning:inputField fieldName="V_ClausulaEditada15__c" />
+                <lightning:inputField fieldName="V_Clausula15__c" />                
+          	</div>
+            <div>
+                <lightning:inputField fieldName="V_ClausulaEditada16__c" />
+                <lightning:inputField fieldName="V_Clausula16__c" />                
+          	</div>            
+        	<div width="100%" style="position:fixed;bottom:10px;left:50%">
+                <lightning:button class="slds-button slds-button_brand"  type="submit" label="Salvar" />
+            </div>
+        </div>
+    </lightning:recordEditForm>
+    <aura:attribute name="recordId" type="String" />      
+
+    
+</aura:component>

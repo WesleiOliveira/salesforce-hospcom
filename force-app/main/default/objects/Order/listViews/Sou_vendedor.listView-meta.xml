@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sou_vendedor</fullName>
+    <columns>ORDERS.ORDER_NUMBER</columns>
+    <columns>SALES.ACCOUNT.NAME</columns>
+    <columns>ORDERS.STATUS</columns>
+    <columns>ORDERS.EFFECTIVE_DATE</columns>
+    <columns>Prazo_de_entrega__c</columns>
+    <columns>ORDERS.TOTAL_AMOUNT</columns>
+    <columns>Departamento3__c</columns>
+    <columns>Vendedor__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>E_Vendedor__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Sou vendedor</label>
+</ListView>

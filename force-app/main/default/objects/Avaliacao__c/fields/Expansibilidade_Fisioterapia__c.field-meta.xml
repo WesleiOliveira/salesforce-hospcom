@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Expansibilidade_Fisioterapia__c</fullName>
+    <externalId>false</externalId>
+    <label>Expansibilidade</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Normal</fullName>
+                <default>false</default>
+                <label>Normal</label>
+            </value>
+            <value>
+                <fullName>Diminuída</fullName>
+                <default>false</default>
+                <label>Diminuída</label>
+            </value>
+            <value>
+                <fullName>Simétrica</fullName>
+                <default>false</default>
+                <label>Simétrica</label>
+            </value>
+            <value>
+                <fullName>Assimétrica</fullName>
+                <default>false</default>
+                <label>Assimétrica</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

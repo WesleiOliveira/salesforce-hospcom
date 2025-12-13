@@ -1,0 +1,179 @@
+<aura:component controller="ItemPedido" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.jqueryui + '/jquery-ui.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.sortableJs + '/Sortable.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.bundle.js',
+                           $Resource.maskPlugin + '/jquery.mask.min.js',
+                           $Resource.jqueryui + '/jquery-ui.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js')}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    
+    
+    <div class="row" style="margin-top: 100px;">
+        
+        <div class="col-md-3">
+            <div class='containerSidebar'>
+                <div class='tituloCabecalho' id='tituloCabecalhoSidebar'>Filtros</div>
+                <div class='bodySidebar'>
+                    
+                    <div style='display: flex; width: 100%; height: 10%; flex-direction: column;'>
+                        <label for="exampleInputPassword1">Departamento</label>
+                        <select class="form-select" aria-label="Default select example" id="departamentoFilter">
+                            <option selected='true'>Selecione uma opção</option>
+                            <option value="">Departamento 1</option>
+                            <option value="">Departamento 2</option>
+                        </select>   
+                    </div>
+                    
+                    
+                    <div style='display: flex; width: 100%; height: 10%; flex-direction: column;'>
+                        <label for="exampleInputPassword1">Data Inicial</label>
+                        <input type="text" id="calendario" class="form-control" />
+                    </div>
+                    
+                    <div style='display: flex; width: 100%; height: 10%; flex-direction: column;'>
+                        <label for="exampleInputPassword1">Data Final</label>
+                        <input type="text" id="calendario2" class="form-control" />
+                    </div>
+                    
+                    <div style='display: flex; width: 100%; height: 10%; flex-direction: column;'>
+                        <label for="exampleInputPassword1">Operação</label>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected='true'>Selecione uma opção</option>
+                            <option value="IdVendedor">Venda</option>
+                            <option value="IdVendedor">Serviço</option>
+                            <option value="IdVendedor">Locação</option>
+                        </select>   
+                    </div>
+
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        
+        
+        <div class="col-md-9">
+            <div class='containerViewer'>
+                <div class='tituloCabecalho'>Premiações por departamento</div>
+                
+                <div class='bodyContainer containerTabela'>
+                    <table class="table table-striped " id='tabelaComissoes'>
+                        
+                        <!-- CABEÇALHO DA TABELA -->
+                        <thead>
+                            <tr>
+                                <th scope="col" width="5%"><input class="form-check-input" type="checkbox"></input></th>
+                                <th>Pedido Sales</th>
+                                <th>Título</th>
+                                <th>Nome Cliente</th>
+                                <th>Valor Vendido</th>
+                                <th>Valor Recebido</th>
+                                <th>Data Recebimento</th>
+                                <th>%</th>
+                                <th>Comissão</th>
+                                
+                            </tr>
+                        </thead>
+                        <!-- CABEÇALHO DA TABELA -->
+                        
+                        <!-- CORPO DA TABELA -->
+                        <tbody>
+                            <tr>
+                                <th scope="row"><input class="form-check-input" type="checkbox"></input></th>
+                                <td><a href='#'>00011077</a></td>
+                                <td><a href='#'>19636</a></td>
+                                <td>ETI - EQUIPE DE TERM...</td>
+                                <td>R$ 123.200,00</td>
+                                <td>R$ 20.200,00</td>
+                                <td>27/06/2022</td>
+                                <td>1%</td>
+                                <td>R$ 205,33</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><input class="form-check-input" type="checkbox"></input></th>
+                                <td><a href='#'>00011077</a></td>
+                                <td><a href='#'>19636</a></td>
+                                <td>ETI - EQUIPE DE TERM...</td>
+                                <td>R$ 123.200,00</td>
+                                <td>R$ 20.200,00</td>
+                                <td>27/06/2022</td>
+                                <td>1%</td>
+                                <td>R$ 205,33</td>
+                            </tr>
+                            
+                        </tbody>
+                        <!-- CORPO DA TABELA -->
+                        
+                    </table>
+                </div>
+                
+                <div class='bodyContainer2 containerTabela'>
+                    <table class="table table-striped " id='tabelaComissoes'>
+                        
+                        <!-- CABEÇALHO DA TABELA -->
+                        <thead>
+                            <tr>
+                                <th scope="col" width="5%"><input class="form-check-input" type="checkbox"></input></th>
+                                <th>Pedido Sales</th>
+                                <th>Título</th>
+                                <th>Nome Cliente</th>
+                                <th>Valor Vendido</th>
+                                <th>Valor Recebido</th>
+                                <th>Data Recebimento</th>
+                                <th>%</th>
+                                <th>Comissão</th>
+                                
+                            </tr>
+                        </thead>
+                        <!-- CABEÇALHO DA TABELA -->
+                        
+                        <!-- CORPO DA TABELA -->
+                        <tbody>
+                            <tr>
+                                <th scope="row"><input class="form-check-input" type="checkbox"></input></th>
+                                <td><a href='#'>00011077</a></td>
+                                <td><a href='#'>19636</a></td>
+                                <td>ETI - EQUIPE DE TERM...</td>
+                                <td>R$ 123.200,00</td>
+                                <td>R$ 20.200,00</td>
+                                <td>27/06/2022</td>
+                                <td>1%</td>
+                                <td>R$ 205,33</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><input class="form-check-input" type="checkbox"></input></th>
+                                <td><a href='#'>00011077</a></td>
+                                <td><a href='#'>19636</a></td>
+                                <td>ETI - EQUIPE DE TERM...</td>
+                                <td>R$ 123.200,00</td>
+                                <td>R$ 20.200,00</td>
+                                <td>27/06/2022</td>
+                                <td>1%</td>
+                                <td>R$ 205,33</td>
+                            </tr>
+                            
+                        </tbody>
+                        <!-- CORPO DA TABELA -->
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    
+    
+</aura:component>

@@ -1,0 +1,62 @@
+@keyframes growIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.THIS .container435 {
+  padding: 1rem;
+}
+
+
+.THIS .cards-list6435 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.THIS .p5 {
+  border: 2px solid red;
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: #fffcf3;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+ 
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.THIS .p5:hover {
+  transform: scale(1.02);
+}
+
+.THIS .title123 {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+  color: #333;
+}
+
+
+
+.THIS .subject12 {
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.THIS .subject12:hover {
+  color: #0056b3;
+}
+
+.THIS .desc534 {
+  color: #666;
+  font-size: 0.9rem;
+}

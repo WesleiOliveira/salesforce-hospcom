@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Emprestimo_para_demos_rapidas</fullName>
+    <active>true</active>
+    <compactLayoutAssignment>Demo_rapida</compactLayoutAssignment>
+    <description>Utilizar para empréstimo de equipamentos utilizados em demonstrações rápidas</description>
+    <label>Empréstimo para demos rápidas</label>
+    <picklistValues>
+        <picklist>Condi_o_de_pagamento__c</picklist>
+        <values>
+            <fullName>10x 30%2F60%2F90%2F120%2F150%2F180%2F210%2F240%2F270%2F300 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>11x 30%2F60%2F90%2F120%2F150%2F180%2F210%2F240%2F270%2F300%2F330 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>12x 30%2F60%2F90%2F120%2F150%2F180%2F210%2F240%2F270%2F300%2F330%2F360 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>15 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>15%2F30 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>21 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2x 30%2F60 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>30 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3x 30%2F60%2F90 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>45 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4x 30%2F60%2F90%2F120 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5x 30%2F60%2F90%2F120%2F150 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>6x 30%2F60%2F90%2F120%2F150%2F180 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>7x 30%2F60%2F90%2F120%2F150%2F180%2F210 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>8x 30%2F60%2F90%2F120%2F150%2F180%2F210%2F240 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>9x 30%2F60%2F90%2F120%2F150%2F180%2F210%2F240%2F270 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cruzamento de Saldos %28Permuta%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financiamento Bancário</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Renegociação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sem Mov%2E Financeiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>À Vista</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Departamento__c</picklist>
+        <values>
+            <fullName>Comercial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Controladoria</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Diretoria de B%2EI e Growth</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Educação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Governo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Locação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Logística</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Serviço</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Estado__c</picklist>
+        <values>
+            <fullName>Acre</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Alagoas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Amapá</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Amazonas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bahia</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ceará</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Distrito Federal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Espírito Santo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Goiás</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Maranhão</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mato Grosso</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mato Grosso do Sul</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Minas Gerais</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Paraná</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Paraíba</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pará</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pernambuco</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Piauí</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rio Grande do Norte</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rio Grande do Sul</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rio de Janeiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rondônia</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Roraima</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Santa Catarina</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sergipe</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>São Paulo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tocantins</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Forma_de_pagamento__c</picklist>
+        <values>
+            <fullName>Boleto Banco Itaú CC 98357-1 Contas  a Receber - HOSPCOM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boleto Banco Itaú Contas  a Receber - GDB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boleto Banco Safra CC 585288-2 Contas  a Receber - HOSPCOM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boleto Banco Santander Contas a Receber - GDB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boleto Bancário</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cob%2E Boleto - Banco Sicoob - Ag%3A 5004-0 Cc%3A 107431-8 - Hospcom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cob%2E Boleto - Banco do Brasil - Ag%3A 1242-4 Cc%3A 47391-X - Health</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cob%2E Boleto - Banco do Brasil - Ag%3A 1242-4 Cc%3A 48068-1 - ABC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cob%2E Boleto - Banco do Brasil - Ag%3A 1242-4 Cc%3A 69869-5 - Hospcom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cob%2E Boleto - Banco do Brasil - Ag%3A 1610-1 Cc%3A 128057-0 - GDB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cruzamento de Saldos %28Permuta%29 Recebido</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dinheiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>E-commerce</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pix</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sem Mov%2E Financeiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transferência Bancária</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Aprovado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cancelado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Em aprovação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Em comodato</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Finalizado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rascunho</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Reprovado</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tipo__c</picklist>
+        <values>
+            <fullName>Comercial</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Transporte</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

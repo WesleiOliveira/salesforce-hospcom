@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <customErrors>
+        <name>Contato_invalido</name>
+        <label>Contato inválido</label>
+        <locationX>50</locationX>
+        <locationY>395</locationY>
+        <customErrorMessages>
+            <errorMessage>O contato inserido está inválido, verifique CPF, email e se o mesmo pertence à mesma conta do pedido.</errorMessage>
+            <isFieldError>false</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <decisions>
+        <name>Valida_contato</name>
+        <label>Valida contato</label>
+        <locationX>182</locationX>
+        <locationY>287</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Resultado_1_de_Valida_contato</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.ShipToContact.CPF__c</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.ShipToContact.Email</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.ShipToContact.AccountId</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record.AccountId</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Contato_invalido</targetReference>
+            </connector>
+            <label>Inválido</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <interviewLabel>Pedido — Valida Contato de Destino {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Pedido — Valida Contato de Destino</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Valida_contato</targetReference>
+        </connector>
+        <filterFormula>AND(
+{!$Record.ShipToContactId} != &apos;&apos;,
+OR(
+ISNEW(),
+ISCHANGED({!$Record.ShipToContactId})
+)
+)</filterFormula>
+        <object>Order</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Draft</status>
+</Flow>

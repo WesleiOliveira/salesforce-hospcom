@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo_de_Layout__c</fullName>
+    <description>Tipo de layout da nota fiscal faturamento automático</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Tipo de layout da nota fiscal faturamento automático</inlineHelpText>
+    <label>Tipo de Layout</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>FATURA DE LOCAÇÃO</fullName>
+                <default>false</default>
+                <label>FATURA DE LOCAÇÃO</label>
+            </value>
+            <value>
+                <fullName>NOTA DE DÉBITO LOCAÇÃO</fullName>
+                <default>false</default>
+                <label>NOTA DE DÉBITO LOCAÇÃO</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

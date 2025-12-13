@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_incompativel</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+	!$User.Ignorar_erros__c,
+	RecordType.NamespacePrefix == &apos;Hospcom&apos;,
+	OR(
+		AND(
+			Ordem_de_trabalho__c != null,
+			OR(
+				TEXT(Status) == &apos;Entregue Parcial&apos;,
+				TEXT(Status) == &apos;Entregue Total&apos;
+			)
+		),
+		AND(
+			Ordem_de_trabalho__c == null,
+			OR(
+				TEXT(Status) == &apos;Atendido Parcial&apos;,
+				TEXT(Status) == &apos;Atendido Total&apos;,
+				TEXT(Status) == &apos;Aguardando Faturamento Cliente&apos;,
+				TEXT(Status) == &apos;Faturado&apos;,
+				TEXT(Status) == &apos;Entregue&apos;
+			)
+		)
+	)
+)</errorConditionFormula>
+    <errorDisplayField>Status</errorDisplayField>
+    <errorMessage>O Status deve ser compatível ao tipo de vínculo pai.</errorMessage>
+</ValidationRule>

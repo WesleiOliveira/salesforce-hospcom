@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Horas_Trabalhadas_Real__c</fullName>
+    <externalId>false</externalId>
+    <formula>TEXT(
+	FLOOR(Horas_Trabalhadas_Real_Copia__c/24)
+)  
+&amp; &quot; Dias &quot; &amp;
+TEXT(
+	FLOOR(
+		MOD(
+			(Horas_Trabalhadas_Real_Copia__c/24)*24,
+			24
+		)
+	)
+)  
+&amp;&quot; Horas &quot; &amp;
+TEXT(
+	FLOOR(
+		MOD(
+			(Horas_Trabalhadas_Real_Copia__c/24)*1440,
+			60
+		)
+	)
+) 
+&amp;&quot; Minutos &quot;</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Horas Trabalhadas Real</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

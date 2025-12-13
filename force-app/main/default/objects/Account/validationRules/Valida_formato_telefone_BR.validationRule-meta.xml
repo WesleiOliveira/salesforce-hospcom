@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valida_formato_telefone_BR</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+    BillingCountry = &quot;Brasil&quot;,
+    NOT(
+        REGEX(
+            Phone, 
+            &quot;\\(\\d{2}\\) \\d{4}-\\d{4}|\\(\\d{2}\\) \\d{5}-\\d{4}&quot;
+        )
+    )
+)</errorConditionFormula>
+    <errorMessage>O número de telefone deve estar no formato (xx) xxxx-xxxx ou (xx) xxxxx-xxxx</errorMessage>
+</ValidationRule>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>CNPJ_Fornecedor_Formatado__c</columns>
+    <columns>Nome_do_Fornecedor__c</columns>
+    <columns>Data_de_emissao__c</columns>
+    <columns>Natureza_de_Operacao__c</columns>
+    <columns>UF__c</columns>
+    <columns>Valor_da_nota__c</columns>
+    <columns>Comprador__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Natureza_de_Operacao__c</field>
+        <operation>notContain</operation>
+        <value>DEMONSTRAÇÃO,REMESSA,DEMONSTRACAO</value>
+    </filters>
+    <label>Tudo</label>
+</ListView>

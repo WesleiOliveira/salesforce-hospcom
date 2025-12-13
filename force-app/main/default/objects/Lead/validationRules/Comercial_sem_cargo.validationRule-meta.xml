@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Comercial_sem_cargo</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+	!$User.Ignorar_erros__c,
+	IsConverted == true,
+	Company != null,
+	Title == null
+)</errorConditionFormula>
+    <errorDisplayField>Title</errorDisplayField>
+    <errorMessage>O cargo deve ser informado antes da conversão, para lead de conta comercial.</errorMessage>
+</ValidationRule>

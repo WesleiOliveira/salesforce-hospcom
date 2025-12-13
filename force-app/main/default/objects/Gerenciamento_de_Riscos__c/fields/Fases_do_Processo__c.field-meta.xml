@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fases_do_Processo__c</fullName>
+    <externalId>false</externalId>
+    <label>Fases do Processo</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Recebimento Fisico/Fiscal</fullName>
+                <default>false</default>
+                <label>Recebimento Fisico/Fiscal</label>
+            </value>
+            <value>
+                <fullName>Verificação de Recebimento</fullName>
+                <default>false</default>
+                <label>Verificação de Recebimento</label>
+            </value>
+            <value>
+                <fullName>Armazenamento</fullName>
+                <default>false</default>
+                <label>Armazenamento</label>
+            </value>
+            <value>
+                <fullName>Faturamento</fullName>
+                <default>false</default>
+                <label>Faturamento</label>
+            </value>
+            <value>
+                <fullName>Embalagem e Identificação</fullName>
+                <default>false</default>
+                <label>Embalagem e Identificação</label>
+            </value>
+            <value>
+                <fullName>Expedição e Transporte</fullName>
+                <default>false</default>
+                <label>Expedição e Transporte</label>
+            </value>
+            <value>
+                <fullName>Demais Etapas</fullName>
+                <default>false</default>
+                <label>Demais Etapas</label>
+            </value>
+            <value>
+                <fullName>Locação</fullName>
+                <default>false</default>
+                <label>Locação</label>
+            </value>
+            <value>
+                <fullName>Atendimento - Chamado Técnico</fullName>
+                <default>false</default>
+                <label>Atendimento - Chamado Técnico</label>
+            </value>
+            <value>
+                <fullName>Atendimento - instalação</fullName>
+                <default>false</default>
+                <label>Atendimento - instalação</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

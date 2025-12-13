@@ -1,0 +1,304 @@
+<apex:page standardController="Rota_de_Viagem__c" renderAs="pdf" applyHtmlTag="false" showHeader="false">
+    <head>
+        <style type="text/css" media="print">
+            @page {
+                size:29.7cm 21cm;
+                margin:100px 40px 60px 25px;
+                @top-center {
+                    content:element(header);
+                }
+                @bottom-center {
+                    content:element(footer);
+                }
+            }
+            .pagenumber:before {
+                content:counter(page);
+            }
+            .pagecount:before {
+                content:counter(pages);
+            }
+            div.header {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(header);
+                height:60px;
+            }
+            div.content {
+            }
+            div.footer {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(footer);
+                height:20px;
+                text-align:right;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                font-weight:normal;
+            }
+        </style>
+        <style type="text/css">
+            .titulo{
+                width:100%;
+                font-family:arial, verdana, sans-serif;
+                font-size:15px;
+                font-weight:bold; 
+                text-align:center;
+                margin-bottom:15px;
+            }
+            .tabela_geral tr{
+                //-fs-table-paginate:paginate;
+                page-break-inside:avoid;
+            }
+            .tabela_item{
+                table-layout: fixed;
+                page-break-inside:avoid;
+                border-collapse: collapse;
+            }
+            .tabela_item tr{
+                table-layout: fixed;
+            }
+            .incolor{
+                //padding-right: 10px;
+                padding-top: 4px;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                vertical-align:top;
+                text-align:right;
+            }
+            .invisivel{
+                padding: 0;
+            }
+            .cabecalho{
+                padding: 3px;
+                font-family:arial, verdana, sans-serif;
+                font-size:11px;
+                font-weight:bold; 
+                vertical-align:top;
+                background-color: #c3c3c3;
+                border-right: 1px solid #c3c3c3;
+                border-bottom: 1px solid #c3c3c3;
+                border-top: 1px solid #c3c3c3;
+                border-left: 1px solid #c3c3c3
+
+            }
+            .cab_esq{
+                border-left: 1px solid #c3c3c3
+            }
+            .celula{
+                padding: 3px;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                vertical-align:top;
+                border-top: 1px solid #c3c3c3;
+                border-right: 1px solid #c3c3c3;
+                border-bottom: 1px solid #c3c3c3;
+                line-height:120%;
+                //word-wrap: break-word;
+                overflow: hidden;
+                text-transform: uppercase;
+            }
+            .cel_esq{
+                border-left: 1px solid #c3c3c3;
+            }
+            .descricao{
+                text-align: justify;
+                font-family:arial, verdana, sans-serif;
+                font-size:15px;
+                //white-space:pre-wrap;
+            }
+            .total{
+                border-left: 1px solid #c3c3c3;
+            }
+            .destaque{
+                font-weight: bold;
+            }
+            .clausula_texto{
+                font-family:arial, verdana, sans-serif;
+                font-size:11.5px;
+                text-align:justify;
+                text-justify:inter-word;
+                line-height:120%;
+                text-indent:50px;
+                vertical-align:top;
+            }
+            .maiuscula{
+                text-transform: uppercase;
+            }
+            .zebra{
+                background-color: #f3f3f3;
+            }
+        </style>
+    </head>
+
+    
+    <html>
+        <body style="font-family:Arial; padding:0px; margin:0px; border:0px solid #eef2f4; width:*;">
+
+            <!-- cabeçalho -->
+            <div class="header">
+                <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                    <tr>
+                        <td style="width:42%; text-align:center;">
+                            <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=015310000099Yfw&oid=00Di0000000JVhH&lastMod=1500637924000" width="234px" height="60px"/>
+                        </td>
+                        <td style="width:58%; text-align:center; vertical-align:middle;">                                
+                            <!--img src="{!empresa_logo}" width="324px" height="55px"/-->
+                            
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- rodapé -->
+            <div class="footer">
+                Página <span class="pagenumber"/> de <span class="pagecount"/>
+            </div>
+
+
+            <!-- conteúdo -->
+            <div class="content">
+                <div style="page-break-before:always" />
+                
+                <div class="titulo"> Rota de Viagem {!Rota_de_Viagem__c.Name} </div>
+                
+                <!-- informações iniciais -->
+                <table style="page-break-inside:avoid;width:100%;padding-left:24px;">
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:110px;">
+                            Responsável:
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            {!IF(Rota_de_Viagem__c.Transportadora__c == null, Rota_de_Viagem__c.Motorista__r.Name, Rota_de_Viagem__c.Transportadora__r.Raz_o_Social__c)}
+                        </td>                        
+                    </tr>
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:110px;">
+                            Veículo:
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            {!IF(Rota_de_Viagem__c.Ve_culo__c != null, Rota_de_Viagem__c.Ve_culo__r.Name + ' PLACA: ' + Rota_de_Viagem__c.Ve_culo__r.Placa__c, Rota_de_Viagem__c.Veiculo__c)} 
+                        </td>                        
+                    </tr>
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:110px;">
+                            Data de Saída:
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            <apex:outputField value="{!Rota_de_Viagem__c.Data_de_saida__c}"/>
+                        </td>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:180px;">
+                            Previsão de chegada:
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            <apex:outputField value="{!Rota_de_Viagem__c.Previsao_de_chegada__c}"/>
+                        </td>                          
+                    </tr>
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:110px;">
+                            Origem:
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            {!Rota_de_Viagem__c.Origem__c}
+                        </td>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:110px;">
+                            Destino:
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            {!Rota_de_Viagem__c.Destino__c}
+                        </td>                          
+                    </tr>
+                    
+                </table>
+                
+                
+                <br/>
+                
+                <!-- lista de item -->
+                <table class="tabela_geral" cellpadding="0px" cellspacing="0px" style="width:100%;">
+                
+                    <apex:variable var="ultimo_reg" value="{!''}"/>
+                    
+                    <apex:variable var="cont_reg" value="{!0}"/>
+                    <apex:variable var="classe" value="{!''}"/>
+                    
+                    <apex:variable var="span_desc" value="{!0}"/>
+                    <apex:variable var="span_equi" value="{!0}"/>
+                    <apex:variable var="span_fim" value="{!0}"/>
+                    <apex:variable var="cont_col_add" value="{!0}"/> 
+                    <apex:variable var="item_cont"   value="{!0}"/> 
+                    
+                    <apex:repeat value="{!Rota_de_Viagem__c.Em_rotas_Pedidos__r}" var="nota">
+                        <!--apex:variable var="item_cont"   value="{!item_cont+1}"/-->
+                        
+                        <!-- item -->
+                        <tr>
+                            <td>
+                                <table class="tabela_item" cellpadding="0px" cellspacing="0px" style="width:100%;">
+                                    
+                                    <apex:outputText >
+                                        
+                                        <!-- linha: cabeçalho -->
+                                        <apex:outputText >                                            
+                                            <tr>
+                                                <!--td class="invisivel" style="width:25px;"></td> -->
+                                                <td class="cabecalho" style="width:40px;">NOTA</td>
+                                                <td class="cabecalho" style="width:40px;">PV</td>
+                                                <td class="cabecalho" style="width:25px;">VOLUMES</td>
+                                                <td class="cabecalho" style="width:330px;">CLIENTE</td>
+                                                <td class="cabecalho" style="width:180px;">RESPONSÁVEL PELA ENTREGA</td>
+                                                <td class="cabecalho" style="width:200px;">ASSINATURA</td>
+                                            </tr>
+                                            <apex:variable var="cont_reg" value="{!0}"/>
+                                        </apex:outputText>
+                                        <apex:variable var="cont_reg" value="{!cont_reg+1}"/>
+
+                                        
+                                        
+                                        
+                                        <tr>
+                                        
+                                            
+                                            <!-- linha: item - pt2 - geral -->
+                                            
+                                            <td class="celula {!classe}">{!nota.Nota_Fiscal__r.Name}</td>
+                                            <td class="celula {!classe}">{!nota.Nota_Fiscal__r.Pedido__r.OrderNumber}</td>
+                                            <td class="celula {!classe}"><apex:outputField value="{!nota.Nota_Fiscal__r.Quantidade_de_volumes__c}"/></td>
+                                            <td class="celula {!classe}">{!nota.Cliente__c}</td>
+                                            <td class="celula {!classe}">{!IF(nota.Responsavel__c != Rota_de_Viagem__c.Motorista__c,nota.Responsavel__r.Name, ' ')} </td>
+                                            <td class="celula {!classe}"></td>
+                                        </tr>
+                                        
+                                        
+                                        
+                                    </apex:outputText> 
+                                    
+                                    
+                                    
+                                    
+                                </table>
+                                
+                            </td>
+                        </tr>
+
+                    </apex:repeat>
+                </table>
+                <br/><br/>
+            </div> <!-- fim de: conteúdo -->
+            <div>
+                <p class="descricao"  style="text-align: center">
+                    <apex:outputText rendered="{!IF(Rota_de_Viagem__c.Motorista__c != null,true,false)}">
+                     Eu, {!Rota_de_Viagem__c.Motorista__r.Name}, declaro que saí de posse das notas fiscais acima relacionadas para realização de entregas.
+                     <br/>
+                     <br/>
+                     <br/>
+                     <br/>
+                     <br/>
+                     <br/>
+                     __________________________________________<br/>
+                     <b>{!Rota_de_Viagem__c.Motorista__r.Name}</b>
+                     </apex:outputText>
+                </p>
+            </div>
+        </body>
+    </html>
+</apex:page>

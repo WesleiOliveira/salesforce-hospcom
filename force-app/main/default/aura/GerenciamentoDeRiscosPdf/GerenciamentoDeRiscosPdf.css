@@ -1,0 +1,39 @@
+.THIS .block {
+  justify-self: center;
+    display: flex;
+    gap: 20px;
+    margin-bottom: 2px;
+}
+.THIS h1{
+    font-weight: 900;
+    justify-self: center;
+    padding: 10px;
+    font-size: large;
+    margin-bottom: 10px;
+}
+
+.THIS .btn {
+       background-color: #ff7416;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color .3s ease, transform .2s ease;
+    justify-self: center;
+    width: 634px;
+    
+}
+
+.THIS .btn:hover {
+    background-color: #ff1616;
+    transform: scale(1.01);
+}
+.THIS .tooltip-text{
+    font-weight: 100;
+    justify-self: center;
+    font-size: small;
+    margin-bottom: 15px;
+}

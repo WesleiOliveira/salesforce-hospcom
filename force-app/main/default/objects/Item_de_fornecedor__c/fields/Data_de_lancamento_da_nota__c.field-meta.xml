@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Data_de_lancamento_da_nota__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(!ISNULL(Fornecedor__r.DATA_DO_LAN_AMENTO_DA_Nfe__c ),
+IF(
+DAY(Fornecedor__r.DATA_DO_LAN_AMENTO_DA_Nfe__c ) &lt; 10,
+&apos;0&apos; &amp; TEXT(DAY(Fornecedor__r.DATA_DO_LAN_AMENTO_DA_Nfe__c )),
+TEXT(DAY(Fornecedor__r.DATA_DO_LAN_AMENTO_DA_Nfe__c ))
+)
++ &quot;/&quot; +
+IF(
+MONTH(Fornecedor__r.DATA_DO_LAN_AMENTO_DA_Nfe__c ) &lt; 10,
+&apos;0&apos; &amp; TEXT(MONTH(Fornecedor__r.DATA_DO_LAN_AMENTO_DA_Nfe__c )),
+TEXT(MONTH(Fornecedor__r.DATA_DO_LAN_AMENTO_DA_Nfe__c ))
+)
++ &quot;/&quot; +
+TEXT(YEAR(Fornecedor__r.DATA_DO_LAN_AMENTO_DA_Nfe__c )),
+&apos;Não lançada&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Data de lançamento da nota</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

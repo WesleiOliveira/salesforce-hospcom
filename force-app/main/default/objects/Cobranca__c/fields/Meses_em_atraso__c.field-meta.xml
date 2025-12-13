@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Meses_em_atraso__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    TODAY() &gt; Vencimento__c,
+    12 * (YEAR(TODAY()) - YEAR(Vencimento__c)) + (MONTH(TODAY()) - MONTH(Vencimento__c)),
+    0
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Meses em atraso</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

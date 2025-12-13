@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pessoal_sem_cpf</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+	!$User.Ignorar_erros__c,
+	IsConverted == true,
+	Company == null,
+	CPF__c == null
+)</errorConditionFormula>
+    <errorDisplayField>CPF__c</errorDisplayField>
+    <errorMessage>O CPF deve ser informado antes da conversão, para lead de conta pessoal.</errorMessage>
+</ValidationRule>

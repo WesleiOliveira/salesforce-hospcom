@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Novo_valor_periodico_proposta__c</fullName>
+    <externalId>false</externalId>
+    <formula>Valor_adicionado_subtraido_proposta__c +  Contrato_de_Servi_o_Relacionado__r.Valor_Mensal_do_Contrato__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Novo valor periódico proposta</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

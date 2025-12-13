@@ -1,0 +1,15 @@
+<aura:component  extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+
+    <ltng:require afterScriptsLoaded="{!c.onRender}"/>
+    
+    <div class="flexipageComponent">
+        <div class="tabset slds-tabs_card uiTabset--base uiTabset--default uiTabset--dense uiTabset flexipageTabset">
+            <center>
+                <button id="integracaoSAP" onClick="teste" class="slds-button slds-button--brand slds-path__mark-complete stepAction current uiButton">
+                    Integrar ao SAP
+                </button>
+            </center>
+        </div>
+    </div>
+    
+</aura:component>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Envia_para_vendedor</name>
+        <label>Envia para vendedor</label>
+        <locationX>242</locationX>
+        <locationY>492</locationY>
+        <actionName>sendWhatsapp.sendWpp</actionName>
+        <actionType>externalService</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>body</name>
+            <value>
+                <elementReference>variaveis</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>sendWhatsapp.sendWpp</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>60.0</apiVersion>
+    <assignments>
+        <name>Define_variaveis</name>
+        <label>Define variaveis</label>
+        <locationX>242</locationX>
+        <locationY>384</locationY>
+        <assignmentItems>
+            <assignToReference>variaveis.message</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>textoNotificacao</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>variaveis.z0number</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Pedido__r.Vendedor__r.Contact.MobilePhone</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Envia_para_vendedor</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>Verifica_se_campo_est_nulo</name>
+        <label>Verifica se campo está nulo</label>
+        <locationX>374</locationX>
+        <locationY>276</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Resultado_1_de_Decis_o_1</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.URL_Anexo__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Define_variaveis</targetReference>
+            </connector>
+            <label>não</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>parcialtotal</name>
+        <dataType>String</dataType>
+        <expression>IF ( ({!$Record.Valor_real__c} / {!$Record.Pedido__r.TotalAmount} ) &lt; 1, &quot;parcial&quot;, &quot;total&quot;)</expression>
+    </formulas>
+    <interviewLabel>Faturamento — Envia para vendedor {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Faturamento — Envia para vendedor</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <object>Faturamento__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <scheduledPaths>
+            <name>X1_min</name>
+            <connector>
+                <targetReference>Verifica_se_campo_est_nulo</targetReference>
+            </connector>
+            <label>1 min</label>
+            <offsetNumber>1</offsetNumber>
+            <offsetUnit>Minutes</offsetUnit>
+            <recordField>LastModifiedDate</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>textoNotificacao</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Prezado, a nota fiscal nº {!$Record.Name}, de valor R$ {!$Record.Valor_Faturado__c}, faturamento {!parcialtotal} do pedido {!$Record.Pedido__r.OrderNumber} — {!$Record.Pedido__r.Nome_da_conta__c} já está disponível e pode ser acessada em {!$Record.URL_Anexo__c}</text>
+    </textTemplates>
+    <variables>
+        <name>variaveis</name>
+        <apexClass>ExternalService__sendWhatsapp_sendWpp_IN_body</apexClass>
+        <dataType>Apex</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

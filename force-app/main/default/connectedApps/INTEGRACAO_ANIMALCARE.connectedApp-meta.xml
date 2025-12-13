@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>desenvolvimento@hospcom.net</contactEmail>
+    <label>INTEGRACAO_ANIMALCARE</label>
+    <oauthConfig>
+        <callbackUrl>https://animalcare.hospcom.net/wp-admin/options-general.php?page=object-sync-salesforce-admin&amp;tab=authorize</callbackUrl>
+        <consumerKey>3MVG9A2kN3Bn17huyuwmA0hJqorxasjggCFPuFRMwD0ze0VmwkHbHl_HgAYKsYW8KY1yknD6ED5KsZPo7h9k4</consumerKey>
+        <isAdminApproved>false</isAdminApproved>
+        <isClientCredentialEnabled>false</isClientCredentialEnabled>
+        <isCodeCredentialEnabled>false</isCodeCredentialEnabled>
+        <isCodeCredentialPostOnly>false</isCodeCredentialPostOnly>
+        <isConsumerSecretOptional>false</isConsumerSecretOptional>
+        <isIntrospectAllTokens>false</isIntrospectAllTokens>
+        <isNamedUserJwtEnabled>false</isNamedUserJwtEnabled>
+        <isPkceRequired>false</isPkceRequired>
+        <isSecretRequiredForRefreshToken>true</isSecretRequiredForRefreshToken>
+        <scopes>Full</scopes>
+        <scopes>RefreshToken</scopes>
+    </oauthConfig>
+    <oauthPolicy>
+        <ipRelaxation>ENFORCE</ipRelaxation>
+        <refreshTokenPolicy>infinite</refreshTokenPolicy>
+    </oauthPolicy>
+</ConnectedApp>

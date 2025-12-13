@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <submitter>Sistema_todos</submitter>
+        <type>group</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>OrderNumber</field>
+        <field>Account</field>
+        <field>TotalAmount</field>
+        <field>EffectiveDate</field>
+        <field>Prazo_de_entrega__c</field>
+        <field>Faturamento_Feito__c</field>
+        <field>Forma_de_pagamento2__c</field>
+        <field>Condicao_de_pagamento__c</field>
+        <field>Frete__c</field>
+        <field>Opportunity</field>
+        <field>Ordem_de_trabalho__c</field>
+        <field>Owner</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>assistencia1@hospcom.net</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <formula>AND(
+
+    Owner:User.CommunityNickname != &apos;Alberth Oliveira&apos;
+)</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>ApproveRecord</ifCriteriaNotMet>
+        <label>Comercial</label>
+        <name>Comercial</name>
+    </approvalStep>
+    <emailTemplate>unfiled$public/Aprova_o_de_pedido</emailTemplate>
+    <enableMobileDeviceAccess>true</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>AND(
+TEXT(Status) == &apos;Aguardando Aprovação Comercial&apos;,
+
+    TEXT(Condicao_de_pagamento__c) != null,
+    TEXT(Forma_de_pagamento2__c) != null,
+    TEXT(Departamento3__c) == &apos;Serviço&apos;,
+    TEXT(Natureza_de_Opera_o__c) != &apos;BONIFICAÇÃO&apos;,
+TEXT(Natureza_de_Opera_o__c) != &apos;REMESSA DE TROCA&apos;,
+    Demonstracao__c == null, 
+    RecordType.Name != &quot;Representação&quot;,
+    RecordType.Name != &quot;Demonstração&quot;
+)</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>A_o_interna_verdadeiro</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Aprovado2</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>A_o_interna_verdadeiro</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Pedido_reprovado</name>
+            <type>Alert</type>
+        </action>
+        <action>
+            <name>Status_Reprovado</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>A_o_interna_verdadeiro</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Enviar_falso</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Status_Aguardando_Apr_Comercial</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Comercial dpto. serviço</label>
+    <processOrder>7</processOrder>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

@@ -1,0 +1,159 @@
+<apex:page title="Alterar Destinação" standardStylesheets="false" standardController="Requisicao_de_item__c" extensions="RequisicaoController" showHeader="false" >
+    <body>
+    <apex:slds />
+            <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css"/>
+    <style>        
+        .slds-scope td, .slds-scope th{
+        text-align:center;
+        }
+        .table thead th {
+        text-align:center;
+        }
+        .messageText{
+        font-size:20px;
+        }
+        .customPopup{
+        background-color: lightgrey;
+        border-style: solid;
+        border-width: 1px;
+        left: 55%;
+        position: fixed;
+        padding: 5px;
+        box-shadow: 0px 3px 7px rgba(1, 1, 1, 5);
+        background: #fff;
+        width: 600px;
+        margin-top: 200px;
+        margin-left: -200px;
+        top: 10px;
+        max-width: 700px;
+        }
+        .customPopup .close{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        transition: all 200ms;
+        font-size: 20px;
+        text-decoration: none;
+        color: #333;
+        }
+        .customPopup .close:hover{
+        color: red;
+        }
+    </style>
+        <apex:form id="form">
+    <apex:pageBlock id="pgb">
+        <p style="font-size:20px;">
+            Requisição de Item <a style="float:right" href="https://hospcomhospitalar.force.com/Sales/s/fornecedor/{!ItemPc.Fornecedor__r.Id}/tabset-a8eaa=aa760&isdtp=p1">Pedido de Compra  {!ItemPC.Fornecedor__r.Name} </a>
+
+        </p>
+        <apex:pageMessages id="MSG" /><br/>
+        <div>
+            <table class="table table-border">
+                <tr>
+                    <th>Código</th>                    
+                    <th>Produto</th>
+                    <th>Modelo</th>
+                    <th>Marca</th>
+                    <th>Tipo</th>
+                </tr>
+                <tr>
+                    <td style="width:270px;"><apex:outputField value="{!Requisicao_de_item__c.Item_de_Pedido_de_compra__r.Produto__r.ProductCode}"/></td>                    
+                    <td style="width:270px;"><apex:outputField value="{!Requisicao_de_item__c.Item_de_Pedido_de_compra__r.Produto__r.name}"/></td>
+                    <td style="width:270px;"><apex:outputField value="{!Requisicao_de_item__c.Item_de_Pedido_de_compra__r.Produto__r.Modelo__c}"/></td>            
+                    <td style="width:270px;"><apex:outputField value="{!Requisicao_de_item__c.Item_de_Pedido_de_compra__r.Produto__r.Marca__c}"/></td>
+                    <td style="width:270px;"><apex:outputField id="rectype" label="Registro" value="{!Requisicao_de_item__c.RecordTypeId}"/></td>
+                    <td style="width:270px;"><apex:outputField value="{!Requisicao_de_item__c.Item_de_Pedido_de_compra__r.Produto__r.Imagem__c}"/></td>
+                </tr>
+            </table><br/>
+        </div>
+        <div>
+            <table class="table table-border">
+                <tr>
+                    <th>Quantidade Requisitada</th>
+                    <th>Quantidade Direcionada</th> 
+                    <th>Quantidade Disponível</th>
+                    <th>Quantidade Recebida</th>
+                    <th>Data de Requisição</th>
+                    <th>Data de Recebimento</th>
+                </tr>
+                <tr>
+                    <td style="width:270px;"><apex:outputField label="Quantidade Requisitada" value="{!Requisicao_de_item__c.Quantidade_requisitada__c}"/></td>
+                    <td style="width:270px;"><apex:outputField label="Quantidade Direcionada" value="{!Requisicao_de_item__c.Quantidade_direcionada__c}"/></td>                      
+                    <td style="width:270px;"><apex:outputText rendered="{!IF(Requisicao_de_item__c.Quantidade_Disponivel__c >= 1, true, false)}" style="color:green;" label="Quantidade Disponível" value="{!Requisicao_de_item__c.Quantidade_Disponivel__c}"/>
+                        <apex:outputText rendered="{!IF(Requisicao_de_item__c.Quantidade_Disponivel__c <  1, true, false)}" style="color:red;" label="Quantidade Disponível" value="{!Requisicao_de_item__c.Quantidade_Disponivel__c}"/></td>                      
+                    <td style="width:270px;"><apex:inputField label="Quantidade Recebida" value="{!Requisicao_de_item__c.Quantidade_recebida__c}"/></td>                      
+                    <td style="width:270px;"><apex:outputField style="width:89px;" label="Data de Requisição" value="{!Requisicao_de_item__c.Data_de_requisicao__c}"/></td>                      
+                    <td style="width:270px;"><apex:inputField label="Data de Recebimento" value="{!Requisicao_de_item__c.Data_de_recebimento__c}"/></td>                                                         
+                </tr>
+                </table>
+        </div><br/>
+    </apex:pageBlock>
+    </apex:form>
+    <apex:pageBlock id="pbPv">
+            <apex:form id="formPv" >
+            <apex:pageBlockSection >
+            <h1 style="font-size:16px;">
+            Produtos de Pedidos de Venda
+                </h1><br/>
+                <apex:commandButton style="float:right;" rendered="{!filtros}" styleClass="slds-button slds-button_brand" value="Filtros" action="{!filtros}" />
+                <apex:commandButton style="float:right;" rendered="{!fecharfiltros}" styleClass="slds-button slds-button_brand" value="Fechar" action="{!filtroscl}" />
+                <apex:pageBlockSection rendered="{!show}">
+                    <apex:inputText styleClass="metro-input" value="{!pedido}" label="Pedido de Venda" />
+                    <apex:inputText styleClass="metro-input" value="{!COD}" label="Código" />
+                    <apex:inputText styleClass="metro-input" value="{!nome}" label="Nome do Produto" />
+                    <apex:inputText styleClass="metro-input" value="{!modelo}" label="Modelo do Produto"/>
+                    <apex:inputText styleClass="metro-input" value="{!marca}" label="Marca" /><br/>
+                </apex:pageBlockSection><br/>
+                    <apex:commandButton rendered="{!show}" style="float:right;" styleClass="slds-button slds-button_neutral" action="{!search}" value="Buscar" />
+            </apex:pageBlockSection>
+            <apex:pageBlockTable styleClass="table table-border striped" id="pbtPv" value="{!ProdPedVenda}" var="pvenda">
+            <apex:column value="{!pvenda.Order.OrderNumber}" />
+            <apex:column value="{!pvenda.Order.Prazo_de_entrega__c}" />
+            <apex:column value="{!pvenda.Order.Account.Name}" />
+            <apex:column value="{!pvenda.PriceBookEntry.Product2.ProductCode}" />
+            <apex:column value="{!pvenda.PriceBookEntry.Product2.Name}" />
+            <apex:column value="{!pvenda.PriceBookEntry.Product2.Modelo__c}" />                
+            <apex:column value="{!pvenda.PriceBookEntry.Product2.Marca__c}" />
+            <apex:column value="{!pvenda.Quantity}" />                
+            <apex:column value="{!pvenda.Quantidade_falta_requisitar__c}" />
+            <apex:column value="{!pvenda.Status__c}" /> 
+            <apex:column rendered="{!IF(Requisicao_de_item__c.Quantidade_Disponivel__c >= 1, true, false)}" >    
+                <apex:commandLink action="{!pegarpvendaid}" > 
+                     <apex:param name="rowId" assignTo="{!pvendaId}" value="{!pvenda.Id}"/>
+                     <b>Atender Pedido</b>             
+                </apex:commandLink>
+            </apex:column>
+            </apex:pageBlockTable>
+                <apex:outputPanel id="popup">
+    <apex:outputPanel styleClass="customPopup" layout="block" rendered="{!displayPopUp}" id="firstpopup">
+        <apex:pageBlock >
+            <h1 style="font-size:16px;">
+                Atender Pedido <b>{!ProdutoDoPedido.Order.OrderNumber}</b>
+            </h1><br/>
+       <table>
+           <tr>
+               <td><apex:outputText value="Quantidade a requisitar: "/></td>
+               <td>{!ProdutoDoPedido.Quantidade_falta_requisitar__c}</td>
+           </tr>
+           <p style="text-align:center">
+               {!ProdutoDoPedido.Order.Account.Name}
+           </p><br/>
+           <tr>
+               <td>&nbsp;</td></tr>
+           <tr>
+               <td>Quantidade a destinar</td>
+               <td><apex:inputText styleClass="metro-input" rendered="{!IF(Requisicao_de_item__c.Quantidade_Disponivel__c >= 1, true, false)}" style="width:200px;" value="{!quantidadedirec}" /></td>
+           </tr>
+        </table>
+            <br/>
+            <div style="text-align:center">               
+                <apex:commandButton value="Confirmar" action="{!novarequisicao}" />
+            </div>
+    </apex:pageBlock>
+    <apex:commandLink value="X" action="{!closePopup}" styleClass="close" rerender="popup"/>
+ </apex:outputPanel>
+ </apex:outputPanel>       
+        </apex:form>
+            </apex:pageBlock>
+    </body>
+</apex:page>

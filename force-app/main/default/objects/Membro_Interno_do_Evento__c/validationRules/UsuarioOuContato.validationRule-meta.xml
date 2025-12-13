@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UsuarioOuContato</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISNEW(),
+Usuario__c != null,
+Contato__c != null
+)</errorConditionFormula>
+    <errorMessage>Preencha somente um dos campos Contato e Usuário.</errorMessage>
+</ValidationRule>

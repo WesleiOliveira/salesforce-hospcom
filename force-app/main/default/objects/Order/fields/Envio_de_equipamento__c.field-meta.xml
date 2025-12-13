@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Envio_de_equipamento__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+OR(
+TEXT(Status) == &apos;Aguardando Aprovação Locação&apos;,
+TEXT(Status) == &apos;Ativo&apos;,
+TEXT(Status) == &apos;Agendado&apos;
+),
+IF(
+    Data_de_envio_dos_equipamentos__c - TODAY() = 1 || Data_de_envio_dos_equipamentos__c = TODAY(), 
+    IMAGE(&quot;https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=015U4000007jbsF&amp;oid=00Di0000000JVhH&amp;lastMod=1719775998000&quot;, &quot;Vermelho&quot;, 30, 120), 
+    IF(
+        Data_de_envio_dos_equipamentos__c - TODAY() &lt;= 3, 
+        IMAGE(&quot;https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=015U4000007jc6l&amp;oid=00Di0000000JVhH&amp;lastMod=1719776548000&quot;, &quot;Laranja&quot;, 30, 120), 
+        IF(
+            Data_de_envio_dos_equipamentos__c - TODAY() &lt;= 7, 
+            IMAGE(&quot;https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=015U4000007jc3Y&amp;oid=00Di0000000JVhH&amp;lastMod=1719776417000&quot;, &quot;Amarelo&quot;, 30, 120), 
+            IMAGE(&quot;https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=015U4000007jgdN&amp;oid=00Di0000000JVhH&amp;lastMod=1719776738000&quot;, &quot;Verde&quot;, 30, 120)
+        )
+    )
+),
+&apos;&apos;)</formula>
+    <label>Envio de equipamento</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

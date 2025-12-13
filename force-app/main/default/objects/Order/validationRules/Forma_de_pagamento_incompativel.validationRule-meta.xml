@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Forma_de_pagamento_incompativel</fullName>
+    <active>true</active>
+    <description>Forma de pagamento incompatível com o faturamento</description>
+    <errorConditionFormula>OR(
+AND(
+Faturamento_Feito__r.CNPJ__c == &apos;27.476.124/0001-02&apos;,
+OR(TEXT(Forma_de_pagamento2__c) == &apos;Cob. Boleto - Banco do Brasil - Ag: 1242-4 Cc: 69869-5 - Hospcom&apos;,
+TEXT(Forma_de_pagamento2__c) == &apos;Cob. Boleto - Banco do Brasil - Ag: 1610-1 Cc: 128057-0 - GDB&apos;,
+TEXT(Forma_de_pagamento2__c) == &apos;Cob. Boleto - Banco do Brasil - Ag: 1242-4 Cc: 48068-1 - ABC&apos;,
+TEXT(Forma_de_pagamento2__c) == &apos;Recebimento via Finaciamento Santander&apos;)
+),
+AND(Faturamento_Feito__r.CNPJ__c == &apos;23.813.386/0001-56&apos;,
+OR(TEXT(Forma_de_pagamento2__c) == &apos;Cob. Boleto - Banco do Brasil - Ag: 1242-4 Cc: 69869-5 - Hospcom&apos;,
+TEXT(Forma_de_pagamento2__c) == &apos;Cob. Boleto - Banco do Brasil - Ag: 1242-4 Cc: 47391-X - Health&apos;,
+TEXT(Forma_de_pagamento2__c) == &apos;Cob. Boleto - Banco do Brasil - Ag: 1242-4 Cc: 48068-1 - ABC&apos;,
+TEXT(Forma_de_pagamento2__c) == &apos;Recebimento via Finaciamento Santander&apos;
+)),
+AND(Faturamento_Feito__r.CNPJ__c == &apos;05.743.288/0001-08&apos;,
+OR(TEXT(Forma_de_pagamento2__c) == &apos;Cob. Boleto - Banco do Brasil - Ag: 1242-4 Cc: 47391-X - Health&apos;,
+TEXT(Forma_de_pagamento2__c) == &apos;Cob. Boleto - Banco do Brasil - Ag: 1610-1 Cc: 128057-0 - GDB&apos;,
+TEXT(Forma_de_pagamento2__c) == &apos;Cob. Boleto - Banco do Brasil - Ag: 1242-4 Cc: 48068-1 - ABC&apos;
+),
+AND(Faturamento_Feito__r.CNPJ__c == &apos;40.014.621/0001-49&apos;,
+OR(TEXT(Forma_de_pagamento2__c) == &apos;Cob. Boleto - Banco do Brasil - Ag: 1242-4 Cc: 47391-X - Health&apos;,
+TEXT(Forma_de_pagamento2__c) == &apos;Cob. Boleto - Banco do Brasil - Ag: 1610-1 Cc: 128057-0 - GDB&apos;,
+TEXT(Forma_de_pagamento2__c) == &apos;Cob. Boleto - Banco do Brasil - Ag: 1242-4 Cc: 69869-5 - Hospcom&apos;,
+TEXT(Forma_de_pagamento2__c) == &apos;Recebimento via Finaciamento Santander&apos;
+)
+)))</errorConditionFormula>
+    <errorDisplayField>Forma_de_pagamento2__c</errorDisplayField>
+    <errorMessage>Forma de pagamento incompatível com o faturamento.</errorMessage>
+</ValidationRule>

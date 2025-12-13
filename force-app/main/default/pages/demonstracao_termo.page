@@ -1,0 +1,367 @@
+<apex:page renderAs="pdf" standardController="Order" extensions="DemonstracaoContrato2" standardStylesheets="false" cache="false" showHeader="false" sidebar="false" applyHtmlTag="true" applyBodyTag="false">
+    <head>
+        <style type="text/css" media="print">
+            /* pdf */
+            @page{
+                size:A4;
+                background: url({!documento.timbrado});
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(paginacao);}
+            }
+            .pagina:before{content:counter(page);}
+            .paginas:before{content:counter(pages);}
+            
+            /* paginação */
+            .paginacao{
+                height:120px;
+                position:running(paginacao);
+            }.paginacao .valor{
+                position: absolute;
+                top: 74px;
+                left: 410px;
+                text-align:center;
+                background-color:white;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:600;
+                color:#697f9b;
+            }.paginacao .valor-2{
+                position: absolute;
+                top: 95px;
+                left: -3px;
+                text-align:left;
+                background-color:white;
+                font-family:arial, verdana, sans-serif;
+                font-size:9px;
+                font-weight:600;
+                color:#697f9b;
+            }
+            
+            /* documento */
+            .documento{
+                padding:0px;
+                margin:0px;
+                font-family:arial, verdana, sans-serif;
+            }.bloco{
+            }.linha{
+                white-space: nowrap;
+            }
+            
+            /* conteudo */
+            .conteudo{
+                page-break-before:always;
+            }.conteudo .titulo{
+                font-size:14px;
+                font-weight:bold;
+                line-height:120%;
+            }.conteudo .paragrafo{
+                font-size:13px;
+                text-align:justify;
+                line-height:120%;
+                text-justify:inter-word;
+                text-indent:100px;
+            }.conteudo .paragrafo2{
+                font-size:13px;
+                text-align:justify;
+                line-height:120%;
+                text-justify:inter-word;
+            }.conteudo .obsimgs{
+                text-align:right;
+                font-size:11px;
+                font-weight:bold;
+                font-style:italic;
+            }.conteudo .assinatura{
+                width:100%;
+            }.conteudo .assinatura td{
+                width:50%;
+                font-size:12px;
+                line-height:130%;
+                vertical-align:top;
+                text-align:center;
+            }.conteudo .nota{
+                font-size:13px;
+                text-align:justify;
+                line-height:120%;
+                font-style:italic;
+            }
+            
+            /* listagem */
+            .listagem{ 
+                width:100%;
+            }.listagem table{ 
+                width:100%;
+                border-collapse:collapse;
+            }.listagem td{ 
+                padding:1px 0px;
+                line-height:120%;
+            }.listagem .pre-cabecalho{
+                height:10px;
+            }.listagem .cabecalho td{
+                font-size:12px;
+                font-weight:bold;
+                background-color:#e2e3e3;
+                white-space: nowrap;
+                border-color:#cacecf;
+                border-style:solid;
+                border-width:1px 0px 1px 0px;
+            }.listagem .item-dados {
+                width: 100%;
+            }
+            
+            .listagem .item-dados .imagem{
+                vertical-align:middle;
+            }.listagem .item-dados.acessorio .imagem{
+                text-align:right;
+            }.listagem .item-dados.equipamento img{
+                width: 80px;
+                height: 80px; 
+            }.listagem .item-dados.acessorio img{
+                width: 55px;
+                height: 55px; 
+            }.listagem .item-dados .valor{
+                border-color:#eef2f4;
+                border-style:solid;
+                border-width:1px 0px 0px 0px;
+            }.listagem .item-dados td{
+                font-size:10px;
+                vertical-align:top;
+            }.listagem .item-descr td{
+                font-size:10px;
+                text-align:justify;
+                vertical-align:top;
+                text-justify:inter-word;
+                border-color:#eef2f4;
+                border-style:solid;
+                border-width:0px 0px 1px 0px;
+            }.listagem .subtotal{
+                font-weight: bold;
+                font-size:10px;
+                white-space: nowrap;
+            }.listagem .subtotal .valor{
+                border-color:#eef2f4;
+                border-style:solid;
+                border-width:0px 0px 1px 0px;
+            }
+        </style>
+    </head>
+
+        <body class="documento">
+        
+         
+        <!-- paginacao -->
+        <div class="paginacao">
+
+            <div class="valor">Página <span class="pagina"/> de <span class="paginas"/></div>
+            <div class="valor-2">Rev: 000 | Data Rev: 28/11/2019</div>
+        </div>
+        
+        <!-- conteudo -->
+        <div class="conteudo">
+        
+        <table width='100%'>
+            <apex:repeat value="{!documentos}" var="doc"> 
+                <apex:outputText rendered="{!if(doc.Documento__c = 'Contrato de Demonstração e Empréstimo', true, false)}" >
+                    <apex:outputText rendered="{!if(doc.Empresa__c = 'HOSPCOM - MT', true, false)}" >
+                        
+                        <tr style='display: flex;  font-weight: 900;' >
+                            <td class = "valor">
+                            emissão: <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{! doc.Data_de_criacao__c }" /></apex:outputText>
+                            </td >
+                            
+                            <td class = "valor" style='text-align: right'>
+                            revisão do documento: <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!doc.Revisao__c}" /></apex:outputText>
+                            </td>
+                        </tr>
+                    
+                    </apex:outputText>
+                </apex:outputText>
+            </apex:repeat>
+        </table>
+        
+        <br/><br/><br/><br/>
+            
+            <div class="titulo" style="text-align:center;">
+                CONTRATO DE&nbsp;
+                <apex:outputText value="{!IF(Order.Natureza_de_Opera_o__c =='DEMONSTRAÇÃO','DEMONSTRAÇÃO','COMODATO') }"/>&nbsp;Nº
+                <apex:outputText value="{!Order.Numero_do_Pedido__c}"/>
+            </div>  
+            
+            <br/>
+            
+            <div class="bloco">
+                <apex:variable var="n1" value="{!0}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+                
+                <apex:outputText rendered="{!!Order.Qualificacao_Editada__c}">
+                <br/><br/>
+                <div class="paragrafo2">{!Order.Faturamento_feito__r.Raz_o_Social__c}, pessoa jurídica de direito privado, inscrita no CNPJ sob n.º {!Order.Faturamento_feito__r.CNPJ__c}, sediada na {!order.Faturamento_feito__r.BillingStreet}, {!order.Faturamento_feito__r.BillingCity} - {!order.Faturamento_feito__r.BillingState}, CEP: {!order.Faturamento_feito__r.BillingPostalCode}, doravante denominada simplesmente {!order.Faturamento_feito__r.Name} e, de outro lado, </div><br/>
+                
+                <div class="paragrafo2"><apex:outputText rendered="{!IF(Order.Account.CNPJ__c != null, true, false)}">{!order.Account.Raz_o_Social__c}, pessoa jurídica de direito {!LOWER(order.Account.Ownership)}, inscrita no CNPJ sob n.º {!Order.Account.CNPJ__c}, sediada no endereço: {!order.Account.BillingStreet}, {!order.Account.BillingCity} - {!order.Account.BillingState}, CEP: {!order.Account.BillingPostalCode}, doravante denominada(o) simplesmente CLIENTE. </apex:outputText></div>
+                
+                <br/>
+                
+                <div class="paragrafo2">Têm entre si justo e acertado os presentes termos e condições de remessa gratuita de equipamento para &nbsp;<b><u><apex:outputText value="{!if(Order.Natureza_de_Opera_o__c =='DEMONSTRAÇÃO','demonstração','empréstimo') }"/></u></b>, que se regerá pelas cláusulas e condições a seguir delineadas.</div>
+                <br/>
+                </apex:outputText>
+                <apex:outputText rendered="{!Order.Qualificacao_Editada__c}">
+                    <div class="paragrafo2">
+                        <apex:outputField value="{!Order.Qualificacao__c}"/>
+                    </div>
+                </apex:outputText>
+            </div>
+            
+            <apex:variable var="n1" value="{!n1+1}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+            <apex:variable var="n_itens" value="{!n1}"/>
+            <div class="paragrafo2"><apex:outputField value="{!order.Demo_Clausula1__c}"/></div>
+            
+            <div class="listagem"  style='width: 95%'>
+                <apex:variable var="subtotal" value="{!0}"/>
+                
+                <table style=" width:95%; padding:0;margin:0;" cellpadding="0px" cellspacing="0px" border="0">
+                    <apex:repeat value="{!produtos}" var="produto">
+                        <tbody class='bloco'>
+
+                            <!-- cabeçalho -->
+                            <apex:outputText rendered="{!IF(produto.cabecalho,true,false)}">
+                                <tr width ='1px' class="pre-cabecalho"><tr cellspacing="7"></tr></tr>
+                                <tr  class="cabecalho">
+                                    <td style="visibility:hidden;border:0px;"></td>
+                                    <td>Imagem</td>
+                                    <td>Produto</td>
+                                    <td>Modelo</td>
+                                    <td>Fabricante</td>
+                                    <td>Nº de Série.</td>
+                                    <td style="width:5px!important;">Qtd.</td>
+                                    <td>Valor</td>
+                                </tr>
+                            </apex:outputText>
+                            
+                            <!-- item -->
+                            <apex:variable var="tipo" value="{!IF(produto.item.Item_Pai__c==null,'equipamento','acessorio')}"/>
+                            <tr class="item-dados {!tipo}">
+                                <td rowspan="2"><apex:outputText value="{!produto.item.Item__c}" rendered="{!IF(tipo=='equipamento',true,false)}"/></td>
+                                <td rowspan="2" ><img src="{!produto.item.Product2.URL_da_Imagem__c}"/></td>
+                                <td style="width:10px!important;">
+                                    COD: {!produto.item.Product2.StockKeepingUnit}
+                                    <br/>{!produto.item.Product2.Name}
+                                </td>
+                                <td style="width:10px!important;">{!produto.item.Product2.Modelo__c}</td>
+                                <td style="width:10px!important;">{!produto.item.Product2.Marca__c}</td>
+                                <td style="width:10px!important;">{!produto.item.Description}</td>
+                                <td style="width:5px!important;"><apex:outputField value="{!produto.item.Quantity}"/></td>
+                                <td width='15px' style="width:15px!important;"><apex:outputField value="{!produto.item.TotalPrice}"/></td>
+                            </tr>
+                            <tr width ='1px'  class="item-descr">
+                                <td colspan="5">{!produto.item.Descricao_da_linha__c}</td>
+                            </tr>
+                            
+                            <!-- subtotal -->
+                            <apex:variable var="subtotal" value="{!subtotal+produto.item.Product2.Valor_de_Venda__c}"/>
+                            <apex:outputText rendered="{!IF(produto.subtotal!=null,true,false)}">
+                                <tr class="subtotal">
+                                    <td colspan="2">&nbsp;</td>
+                                    <td colspan="4"  class="valor">SUBTOTAL</td>
+                                    <td class="valor" width='15px' colspan="2">{!produto.subtotal}</td>
+                                </tr>
+                                <apex:variable var="subtotal" value="{!0}"/>
+                            </apex:outputText>
+                        
+                        </tbody>
+                    </apex:repeat>
+                </table>
+            </div>
+            <br/>
+            <div class="obsimgs">Imagens ilustrativas.</div>
+            <br/>           
+            <div class="paragrafo2"><apex:outputField value="{!order.Demo_Clausula2__c}"/></div>
+            <br/>            
+            <div class="paragrafo2"><b>3.</b> O valor dos equipamentos perfaz o total de <b> <apex:outputField value="{!Order.TotalAmount}"/></b>, referente aos itens declarados no item {!n_itens} destes termos e condições para&nbsp;<apex:outputText value="{!if(Order.Natureza_de_Opera_o__c =='DEMONSTRAÇÃO','demonstração','comodato') }"/>.</div>
+            <br/>            
+            <div class="paragrafo2"><apex:outputField value="{!order.Demo_Clausula4__c}"/></div>
+            <br/>            
+            <div class="paragrafo2"><apex:outputField value="{!order.Demo_Clausula5__c}"/></div>
+            <br/>            
+            <div class="paragrafo2"><apex:outputField value="{!order.Demo_Clausula6__c}"/></div>
+            <br/>
+            <div class="paragrafo2"><apex:outputField value="{!order.Demo_Clausula7__c}"/></div>
+            <br/>
+            <div class="paragrafo2"><apex:outputField value="{!order.Demo_Clausula8__c}"/></div>
+            <br/>
+            <div class="paragrafo2"><apex:outputField value="{!order.Demo_Clausula9__c}"/></div>
+            <br/>            
+            <div class="paragrafo2"><apex:outputField value="{!order.Demo_Clausula10__c}"/></div>
+            <br/>
+            <div class="paragrafo2"><apex:outputField value="{!order.Demo_Clausula11__c}"/></div>
+            <br/>            
+            <div class="paragrafo2"><apex:outputField value="{!order.Demo_Clausula12__c}"/></div>
+            <br/>
+            <div class="paragrafo2"><apex:outputField value="{!order.Demo_Clausula13__c}"/></div>
+            <br/>
+            <br/>
+            <br/>
+
+            
+            <div class="bloco">
+                <div class="paragrafo" style="text-align:right;">{!Order.Faturamento_feito__r.BillingCity},____/____/________.</div>
+                <br/>
+                
+                <br/>
+                
+                <table class="assinatura">
+                    <tr>
+                        <td>
+                            <br/><br/>_____________________________________________
+                            <br/>{!order.Faturamento_feito__r.Raz_o_Social__c} 
+                            <br/>CNPJ: {!order.Faturamento_feito__r.CNPJ__c} 
+                        </td>
+                        <td>
+                            <br/><br/>_____________________________________________
+                            <apex:outputText rendered="{!if(order.Account.RecordType.Name == 'Conta comercial',true,false)}">
+                                <br/>{!order.Account.Raz_o_Social__c} 
+                                <br/>CNPJ: {!order.Account.CNPJ__c} 
+                            </apex:outputText>
+                            <apex:outputText rendered="{!if(order.Account.RecordType.Name != 'Conta comercial',true,false)}">
+                                <br/>NOME: {!order.Account.Name}
+                                <br/>CPF: {!order.Account.CPF__pc}
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                   <apex:outputText rendered="{!if(order.Account.RecordType.Name == 'Conta comercial',true,false)}">
+                    <tr>
+                             <td>
+                             </td>
+                             <td style="text-align:left !important;">
+                               <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NOME:
+                               <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CPF: 
+                               <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CARGO:
+                              </td>
+                    </tr> 
+                    </apex:outputText>
+                    <tr>
+                        <td>
+                            <br/><br/>_____________________________________________
+                            <br/>Testemunha 1
+                        </td>
+                        <td>
+                            <br/><br/>_____________________________________________
+                            <br/>Testemunha 2
+                        </td>
+                        <tr>
+                        <td style="text-align:left !important;">
+                            <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nome: 
+                            <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CPF:
+                        </td>
+                        <td style="text-align:left !important;">
+                            <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nome: 
+                            <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CNPJ:
+                        </td>
+                        </tr>
+                    </tr>
+                </table>
+            </div>
+
+            
+                
+        </div>
+
+    </body>
+</apex:page>

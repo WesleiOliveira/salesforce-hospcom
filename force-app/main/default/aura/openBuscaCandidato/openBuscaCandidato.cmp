@@ -1,0 +1,20 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global" >  
+    <lightning:button label="Buscar com Filtros"
+                      iconName="action:filter"
+                      iconPosition="left"
+                      variant="neutral"
+                      onclick="{!c.showPopup}" />
+    <div role="dialog" tabindex="-1" aria-labelledby="header43" aura:id="Modalbox" class="slds-modal slds-modal_large ">
+        <div class="slds-modal__container" style="width: 90%;">
+            <div class="slds-modal__header">
+                <p><b>Relação de Inscritos</b></p>
+            </div>
+            <div class="slds-modal__content slds-p-around--medium">  
+                <iframe src="{!'https://hospcom--c.na49.visual.force.com/apex/BuscaCandidato'}" width="100%" height="1000px;" frameBorder="0"/>
+            </div>
+            <div class="slds-modal__footer">
+                <lightning:button variant="brand" label="Fechar" onclick="{!c.closeModal}" />
+            </div>
+        </div>
+    </div>
+</aura:component>

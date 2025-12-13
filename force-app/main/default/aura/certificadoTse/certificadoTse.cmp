@@ -1,0 +1,98 @@
+<aura:component controller="ItemPedido" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <!-- <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> -->
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.bootstrap5 + '/js/bootstrap.bundle.js',
+                           $Resource.html2pdf + '/html2pdf.bundle.js',
+                           $Resource.html2pdf + '/html2pdf.bundle.min.js',
+                           $Resource.html2canvas + '/html2canvas.js',
+                           $Resource.html2canvas + '/jquery.plugin.html2canvas.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js')}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    <div>
+        <div id="element-to-print">
+            
+            
+            <!-- Sample Table -->
+            <form class="form">
+                
+                <h2>Hello</h2>  
+                <h3>a bit about this Project:</h3>  
+                <p>  
+                    I will demonstrate how to generate PDF file of your HTML page with CSS using JavaScript and J query.  
+                </p>  
+                <table>  
+                    <tbody>  
+                        <tr>  
+                            <th>Company</th>  
+                            <th>Contact</th>  
+                            <th>Country</th>  
+                        </tr>  
+                        <tr>  
+                            <td>Alfreds Futterkiste</td>  
+                            <td>Maria Anders</td>  
+                            <td>Germany</td>  
+                        </tr>  
+                        <tr>  
+                            <td>Centro comercial Moctezuma</td>  
+                            <td>Francisco Chang</td>  
+                            <td>Mexico</td>  
+                        </tr>  
+                        <tr>  
+                            <td>Ernst Handel</td>  
+                            <td>Roland Mendel</td>  
+                            <td>Austria</td>  
+                        </tr>  
+                        <tr>  
+                            <td>Island Trading</td>  
+                            <td>Helen Bennett</td>  
+                            <td>UK</td>  
+                        </tr>  
+                        <tr>  
+                            <td>Laughing Bacchus Winecellars</td>  
+                            <td>Yoshi Tannamuri</td>  
+                            <td>Canada</td>  
+                        </tr>  
+                        <tr>  
+                            <td>Magazzini Alimentari Riuniti</td>  
+                            <td>Giovanni Rovelli</td>  
+                            <td>Italy</td>  
+                        </tr>  
+                    </tbody>  
+                </table>  
+                
+            </form> 
+            <!-- Sample Progressbar -->
+            <div>
+                <h2 id="titulo" >Basic Progress Bar</h2>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+                        <span class="sr-only">70% Complete</span>
+                    </div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
+                         aria-valuemin="0" aria-valuemax="100" style="width:40%">
+                        <span class="sr-only">40% Complete (success) </span>
+                    </div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="40"
+                         aria-valuemin="0" aria-valuemax="100" style="width:60%">
+                        <span class="sr-only">40% Complete (success) </span>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        
+    </div>
+    
+</aura:component>

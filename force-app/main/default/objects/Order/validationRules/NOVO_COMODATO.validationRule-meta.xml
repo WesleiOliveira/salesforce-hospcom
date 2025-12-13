@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NOVO_COMODATO</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+ISNEW(),
+ISNULL(Demonstracao__c),
+TEXT(Natureza_de_Opera_o__c) = &apos;REMESSA DE COMODATO&apos;
+)</errorConditionFormula>
+    <errorMessage>Para COMODATO acesse o menu vendas e clique em COMODATO.</errorMessage>
+</ValidationRule>

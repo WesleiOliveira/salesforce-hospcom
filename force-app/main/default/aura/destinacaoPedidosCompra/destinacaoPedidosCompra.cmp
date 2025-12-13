@@ -1,0 +1,102 @@
+<aura:component controller="AssistenteCompras" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css',
+                          $Resource.bootstrapSelect14 + '/docs/docs/dist/css/bootstrap-select.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.sortableJs + '/Sortable.js',
+                           $Resource.popper + '/popper.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js',
+                           $Resource.bootstrapSelect14 + '/docs/docs/dist/js/bootstrap-select.min.js')}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    <div class="container" style="position: relative; max-width: 1500px!important;" id="containerPrincipal">
+        
+        <div class="row" style="border: 1px solid #00345c; min-height: 100vh; border-radius: 15px; margin-top: 10px;">
+            
+            <!-- PRIMEIRA COLUNA DO CONTAINER -->
+            <div class="col-md-12" style="display:flex; flex-direction: column; padding: 0px">
+                
+                <!-- SPINNER DE CARREGAMENTO -->
+                <div id='spinnerDiv' style="display: none">
+                    <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+                </div>
+                
+                
+                <!--- POPUP DESTINACAO -->
+                <div class='divPaiPopup' id='divPaiPopup'> 
+                    <div class='divPopup'> 
+                        <!-- <div class='headerPopup'> 
+                        	<div class='titlePopup'>QUANTIDADE A DESTINAR</div>
+                        </div> -->
+                        	
+                        <div class='bodyPopup'> 
+                            <div class="col-auto">
+                                <label class="sr-only" for="inlineFormInputGroup">Quantidade</label>
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">Quantidade a destinar</div>
+                                    </div>
+                                    <input id="inputPopupQuantidade" type="number" min="0" class="form-control" placeholder="0"/>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        <div class='footerPopup'>
+                            <button id="cancelarPopupButton" style="border-radius: 10px; width: 50%; display: flex;align-items: center;justify-content: center;" type="button" class="btn btn-secondary btn-lg">Cancelar</button>
+                            <button id="confirmaPopupButton" style="border-radius: 10px; width: 50%; display: flex;align-items: center;justify-content: center;" type="button" class="btn btn-primary btn-lg">Confirmar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- PRIMEIRA LINHA COM OS BOTÕES PESQUISE E MARKETING -->
+                <div style="width: 100%; height: 6%; display: flex">
+                    
+                    <!-- DIV DO BOTÃO PLATAFORMA DE MARKETING -->
+                    <div style="width: 100%; height: 100%; display: flex; padding: 4px">
+                        <a style="width: 100%;" class="customAUnderline"><div id="buttonPlataformaMarketing" style="opacity: 40%;" class="buttonOne secondaryBackgroundColor textContainer">ITENS DE PEDIDOS DE VENDA AGUARDANDO COMPRA</div></a>
+                    </div>
+                </div>
+                
+                <!--  -->
+                <div id="divPlataformaMkt" style="display: none; flex-direction: column; width: 100%; height: 94%; padding: 5px">
+                    
+                    <div class='containerFiltros'>
+                        <select class='selectpicker' id='selectMarcaPv'>
+                            <option disabled='true' value='default' selected='selected'>Marca</option>
+                            <option  value='NENHUM' >NENHUM</option>
+                        </select>
+                        
+                        <select class='selectpicker' id='selectTipoPv'>
+                            <option disabled='true' value='default' selected='selected'>Tipo</option>
+                            <option  value='NENHUM' >NENHUM</option>
+                        </select>
+                        
+                        
+                        <select class='selectpicker' id='selectNumeroPedidoPv' data-live-search="true">
+                            <option disabled='true' value='default' selected='selected'>Nº do Pedido</option>
+                            <option  value='NENHUM' >NENHUM</option>
+                        </select>
+                    </div>
+                    
+                    <div style="width: 100%; height: 95%" id="divColunaScrollParent">
+                        <div id="colunaPlataformaMkt" class="colunaScroll">
+                            
+                            <!-- APPEND DOS ITENS ATRAVÉS DO JS NO HELPER-->
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+        
+        <div class='about'>Versão: 1.1.0</div>
+    </div>
+</aura:component>

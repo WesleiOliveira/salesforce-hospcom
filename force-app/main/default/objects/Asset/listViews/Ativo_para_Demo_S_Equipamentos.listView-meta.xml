@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ativo_para_Demo_S_Equipamentos</fullName>
+    <booleanFilter>1  AND 2</booleanFilter>
+    <columns>ASSET.NAME</columns>
+    <columns>Modelo__c</columns>
+    <columns>ASSET.SERIAL_NUMBER</columns>
+    <columns>Situacao__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Disponivel_p_contratos__c</field>
+        <operation>includes</operation>
+        <value>Demonstração</value>
+    </filters>
+    <filters>
+        <field>ASSET.PARENT</field>
+        <operation>equals</operation>
+    </filters>
+    <label>Ativo para Demo (Só Equipamentos)</label>
+</ListView>

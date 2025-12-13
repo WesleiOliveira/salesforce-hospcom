@@ -1,0 +1,33 @@
+<template>
+    <lightning-card title="Anexar Impostos">
+        <div class="slds-p-around_medium">
+            <lightning-combobox
+                name="tipo"
+                label="Tipo de Imposto"
+                value={tipoSelecionado}
+                options={tipoOptions}
+                onchange={handleTipoChange}>
+            </lightning-combobox>
+
+            <lightning-input 
+                type="file"
+                label="Selecione o arquivo"
+                onchange={handleFileChange}>
+            </lightning-input>
+
+            <lightning-button 
+                label="Enviar"
+                variant="brand"
+                class="slds-m-top_medium"
+                onclick={handleUpload}>
+            </lightning-button>
+        </div>
+
+        <template if:true={isLoading}>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+            <div class="slds-spinner_container">
+                <lightning-spinner alternative-text="Carregando..." size="medium"></lightning-spinner>
+            </div>
+        </template>
+    </lightning-card>
+</template>

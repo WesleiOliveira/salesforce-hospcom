@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Veiculo__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipo de Veículo</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Caminhão</fullName>
+                <default>false</default>
+                <label>Caminhão</label>
+            </value>
+            <value>
+                <fullName>Van</fullName>
+                <default>false</default>
+                <label>Van</label>
+            </value>
+            <value>
+                <fullName>Utilitário</fullName>
+                <default>false</default>
+                <label>Utilitário</label>
+            </value>
+            <value>
+                <fullName>Picape</fullName>
+                <default>false</default>
+                <label>Picape</label>
+            </value>
+            <value>
+                <fullName>Carro de passeio</fullName>
+                <default>false</default>
+                <label>Carro de passeio</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

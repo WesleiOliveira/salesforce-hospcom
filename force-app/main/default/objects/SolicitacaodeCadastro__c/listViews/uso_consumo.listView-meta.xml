@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>uso_consumo</fullName>
+    <columns>NAME</columns>
+    <columns>C_d_Fabricante__c</columns>
+    <columns>Nome__c</columns>
+    <columns>Modelo__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>Status__c</columns>
+    <columns>Aprovado__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Tipo_de_Produto__c</field>
+        <operation>notEqual</operation>
+        <value>REVENDA</value>
+    </filters>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>greaterThan</operation>
+        <value>6/1/2025 12:00 AM</value>
+    </filters>
+    <label>Solicitações de Uso e Consumo</label>
+</ListView>

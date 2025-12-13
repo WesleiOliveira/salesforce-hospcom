@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Community xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <emailNotificationUrl>https://hospcom.my.salesforce.com/_ui/chatter/service/ChatterAnswersUi?id={!entityId}&amp;fromEmail=1</emailNotificationUrl>
+    <enableChatterAnswers>true</enableChatterAnswers>
+    <enablePrivateQuestions>true</enablePrivateQuestions>
+    <reputationLevels>
+        <chatterAnswersReputationLevels>
+            <name>Novato</name>
+            <value>0</value>
+        </chatterAnswersReputationLevels>
+        <chatterAnswersReputationLevels>
+            <name>Experiente</name>
+            <value>500</value>
+        </chatterAnswersReputationLevels>
+        <chatterAnswersReputationLevels>
+            <name>Profissional</name>
+            <value>2000</value>
+        </chatterAnswersReputationLevels>
+        <chatterAnswersReputationLevels>
+            <name>Especialista</name>
+            <value>5000</value>
+        </chatterAnswersReputationLevels>
+        <ideaReputationLevels>
+            <name>Observador</name>
+            <value>0</value>
+        </ideaReputationLevels>
+        <ideaReputationLevels>
+            <name>Contribuidor</name>
+            <value>100</value>
+        </ideaReputationLevels>
+        <ideaReputationLevels>
+            <name>Influenciador</name>
+            <value>400</value>
+        </ideaReputationLevels>
+        <ideaReputationLevels>
+            <name>Formador de opinião</name>
+            <value>1500</value>
+        </ideaReputationLevels>
+    </reputationLevels>
+</Community>

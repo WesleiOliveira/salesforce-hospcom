@@ -1,0 +1,64 @@
+<aura:component controller="ConfirmaLeitura" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery)}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    
+    <aura:attribute name="popupSubtitle" type="String" />
+    <aura:attribute name="popupTitle" type="String" />
+    <aura:attribute name="popupDate" type="String" />
+    <aura:attribute name="myVal" type="String" />
+
+    
+    <div>
+          
+        <div class='overlay' id='overlay124567'></div>  
+        <div class='popupComunicado'  id='popupComunicado'>
+            <div class='comunicadosTitle textPopup'>{!v.popupTitle}</div>
+            <div class='comunicadosSubTitle textPopup'>{!v.popupSubtitle}</div>
+            <div class='comunicadosDate textPopup'>{!v.popupDate}</div>
+            <div class='corpoComunicado32423' style='height: 75%; overflow: auto; padding: 20px; text-align: left'>
+                <lightning:formattedRichText value="{!v.myVal}" />
+            </div>
+            
+            <div class='buttonPopupComunicado'>
+                <button class='popupButtonComunicado43543' id='popupButtonComunicado43543'>Fechar</button>
+            </div>
+            
+        </div>
+        
+        <div class='main43534587'>
+            <div class='headerComunicado45343453'>
+                
+                <div class='headerLeft342342'>
+                    <i class="fa" id="iconEnvelopeComunicado" aria-hidden="true"></i>
+                </div>
+                
+                <div class='headerMiddle342342'>
+                    Comunicados
+                </div>
+                
+                <div class='headerRight342342'>
+                    <i class="fa comunicadominimezeclass" id="iconeMinimize" aria-hidden="true"></i>
+                </div>
+                
+            </div>
+            
+            
+            <div class='bottomComunicado45343453' id='bottomComunicado45343453'>
+            	
+                
+                
+            </div>
+            
+            
+        </div>
+    
+    </div>
+	
+</aura:component>

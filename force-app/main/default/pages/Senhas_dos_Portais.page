@@ -1,0 +1,465 @@
+<apex:page standardController="Opportunity" showHeader="false" applyHtmlTag="false">
+  <div style="font-size: 9pt; color: black;">
+  <apex:outputText rendered="{!IF(Opportunity.Faturamento_Feito2__r.Name='HOSPCOM', TRUE, FALSE)}"> <!-- HOSPCOM -->
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='COMPRASNETGOV', TRUE, FALSE)}">
+          Site: <a>www.comprasgovernamentais.gov.br</a>
+          <br/>
+          Login: wever
+          <br/>
+          Senha: NOVA9390
+      </apex:outputText>      
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='PUBLINEXO', TRUE, FALSE)}">
+          Site: <a>www.bionexo.com/br/solucoes/publinexo</a>
+          <br/>
+          Login: hoscpom
+          <br/>
+          Senha: HOSP3241
+      </apex:outputText>     
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='LICITAÇÕES-E', TRUE, FALSE)}">
+          Site: <a>www.licitacoes-e.com.br</a>
+          <br/>
+          Login: J2426361
+          <br/> 
+          Senha: HOSP3241
+      </apex:outputText>      
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='COMPRASNETGO', TRUE, FALSE)}">
+          Site: <a>www.comprasnet.go.gov.br</a>
+          <br/>
+          Login: 05743288000108
+          <br/> 
+          Senha: 32415555hosp
+      </apex:outputText>      
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='CONLICITAÇÃO', TRUE, FALSE)}">
+          Site: <a>portal.conlicitacao.com.br</a>
+          <br/>
+          Login: leticia.donato@hospcom.net
+          <br/> 
+          Senha: hosp3241
+      </apex:outputText>      
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='SLICX', TRUE, FALSE)}">
+          Site: <a>https://www.slicx.com.br/login/</a>
+          <br/>
+          Login: hospcom
+          <br/> 
+          Senha: hosp32415555
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='JUCEG', TRUE, FALSE)}">
+          Site: <a>www.juceg.go.gov.br</a>
+          <br/>
+          Login: 63340356149
+          <br/> 
+          Senha: 324155
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='BLL', TRUE, FALSE)}">
+          Site: <a>http://bll.org.br/</a>
+          <br/>
+          Login: licitacao1@hospcom.net
+          <br/> 
+          Senha: 190346
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='CENTRAL DE COMPRAS - MS', TRUE, FALSE)}">
+          Site: <a>http://www.centraldecompras.ms.gov.br/</a>
+          <br/>
+          Login: hosp3241
+          <br/>
+          Senha: 32415555HOSP
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='SISTEMA FIEG', TRUE, FALSE)}">
+          Site: <a>http://www.sistemafieg.org.br/</a>
+          <br/>
+          Login: hospcom
+          <br/> 
+          Senha: 12345
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='FUNDAÇÃO UNISELVA', TRUE, FALSE)}">
+          Site: <a>http://licitacoes.fundacaouniselva.org.br/</a>
+          <br/>
+          Login: licitacao.hospcom
+          <br/> 
+          Senha: licita5555
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='TRÊS LAGOAS', TRUE, FALSE)}">
+          Site: <a>  </a>
+          <br/>
+          Login: SPE
+          <br/> 
+          Senha: hosplicita
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='IBAMA', TRUE, FALSE)}">
+          Site: <a>https://servicos.ibama.gov.br/ctf/sistema.php</a>
+          <br/>
+          Login: 05.743.288/0001-08
+          <br/>
+          Senha: 24118250
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='SICAF', TRUE, FALSE)}">
+          Site: <a>  </a>
+          <br/>
+          Login: 63340356149
+          <br/> 
+          Senha: NOVA9390
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='SIAG MT', TRUE, FALSE)}">
+          Site: <a>http://aquisicoes.gestao.mt.gov.br</a>
+          <br/>
+          Login: hospcom
+          <br/> 
+          Senha: j7mr2mlqbq
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='GOIASCOMPRAS', TRUE, FALSE)}">
+          Site: <a>https://www.goiascompras.com.br</a>
+          <br/>
+          Login: hospcom
+          <br/> 
+          Senha: w3sug3
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='LICITANET', TRUE, FALSE)}">
+          Site: <a>https://licitanet.com.br/pe/index.php</a>
+          <br/>
+          Login: HOSPCOM
+          <br/> 
+          Senha: e746476
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='BIONEXO', TRUE, FALSE)}">
+          Site: <a>  </a>
+          <br/>
+          Login: claudia.letticia@hospcom.net
+          <br/>
+          Senha: Hosp32415555
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='PORTAL DE COMPRAS PUBLICAS', TRUE, FALSE)}">
+          Site: <a>https://www.portaldecompraspublicas.com.br/6/Dashboard/</a>
+          <br/>
+          Login: hospcom
+          <br/>
+          Senha: 7js6gj
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='E-COMPRAS AM', TRUE, FALSE)}">
+          Site: <a>https://www.e-compras.am.gov.br</a>
+          <br/>
+          Login: F1EQUIP21760
+          <br/> 
+          Senha: Hosp3241
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='BNC', TRUE, FALSE)}">
+          Site: <a>http://bnccompras.cloudapp.net/#/Home</a>
+          <br/>
+          Login: licitacao@hospcom.net
+          <br/> 
+          Senha: 324155
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='BBM NET', TRUE, FALSE)}">
+          Site: <a>https://www.bbmnet.com.br/#</a>
+          <br/>
+          Login: wlcoelho
+          <br/>
+          Senha: EL1B8PH4
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='COMPRAS BR', TRUE, FALSE)}">
+          Site: <a>https://comprasbr.com.br/</a>
+          <br/>
+          Login: claudia.letticia@hospcom.net
+          <br/>
+          Senha: Hosp3241
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='COMPRAS MS', TRUE, FALSE)}">
+          Site: <a>http://ww3.centraldecompras.ms.gov.br/sgc/faces/priv/comum/PrincipalAreaLicitante.jsp</a>
+          <br/>
+          Login: hosp3241
+          <br/>
+          Senha: 32415555HOSP
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='SIGA.TO.GOV.BR', TRUE, FALSE)}">
+          Site: <a>http://www.siga.to.gov.br/</a>
+          <br/>
+          Login:
+          <br/>
+          Senha: 
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='COMPRAS MANAUS', TRUE, FALSE)}">
+          Site: <a href="https://compras.manaus.am.gov.br/publico/" target="_blank" rel="noopener">https://compras.manaus.am.gov.br/publico/</a>
+          <br/>
+          Login: F1HOSPC21311
+          <br/>
+          Senha: Hosp3241
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='COMPRAS CAMPO GRANDE', TRUE, FALSE)}">
+          Site: <a>http://compras.campogrande.ms.gov.br/sgc/faces/priv/comum/PrincipalAreaLicitante.jsp</a>
+          <br/>
+          Login: claudia.letticia@hospcom.net
+          <br/>
+          Senha: Hosp32415555
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='SIGA AP', TRUE, FALSE)}">
+          Site: <a>http://siga.ap.gov.br/sgc/faces/pub/comum/PrincipalAreaPublica.jsp
+</a>
+          <br/>
+          Login: licitacao@hospcom.net
+          <br/>
+          Senha: Hosp@3241
+      </apex:outputText>
+  </apex:outputText>
+  
+  
+  
+  <apex:outputText rendered="{!IF(Opportunity.Faturamento_Feito2__c='0015A00001tSrPa', TRUE, FALSE)}"> <!-- HEALTH -->
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='COMPRASNETGOV', TRUE, FALSE)}">
+          Site: https://www.gov.br/compras/pt-br/
+          <br/>
+          Login: HEALTHS
+          <br/>
+          Senha: NOVA2440
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='PORTAL DE COMPRAS PUBLICAS', TRUE, FALSE)}">
+          Site:  https://www.portaldecompraspublicas.com.br/6/Dashboard/
+          <br/>
+          Login: claudia.letticia@hospcom.net
+          <br/>
+          Senha: 2te2qt
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='LICITAÇÕES-E', TRUE, FALSE)}">
+          Site:  www.licitacoes-e.com.br
+          <br/>
+          Login: JC089696
+          <br/>  
+          Senha: hel55324
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='COMPRASNETGO', TRUE, FALSE)}">
+          Site:  www.comprasnet.go.gov.br
+          <br/>
+          Login: 27476124000102
+          <br/>
+          Senha: health123
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='BLL', TRUE, FALSE)}">
+          Site:  http://bll.org.br/
+          <br/>
+          Login: hugo.rocha@hospcom.net
+          <br/>
+          Senha: 324155
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='LICITANET', TRUE, FALSE)}">
+          Site:  https://licitanet.com.br/pe/index.php
+          <br/>
+          Login: HEALTH
+          <br/>
+          Senha: Health3241
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='BNC', TRUE, FALSE)}">
+          Site:  http://bnccompras.cloudapp.net/#/Home
+          <br/>
+          Login: jackeline.coelho@hospcom.net
+          <br/>
+          Senha: 32415555
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='JUCEG', TRUE, FALSE)}">
+          Site:  http://www.juceg.go.gov.br/
+          <br/>
+          Login: 03522684176
+          <br/>
+          Senha: hosp32415555
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='SICAF', TRUE, FALSE)}">
+          Site:  
+          <br/>
+          Login: 04617694170
+          <br/>
+          Senha: 2509
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='BEC', TRUE, FALSE)}">
+          Site:
+          <br/>
+          Login: 3522684176
+          <br/>
+          Senha: health3241
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='PE INTEGRADO', TRUE, FALSE)}">
+          Site:
+          <br/>
+          Login: x0v37oco
+          <br/>
+          Senha: health3241
+      </apex:outputText>   
+      
+  </apex:outputText>
+  
+  
+  
+  <apex:outputText rendered="{!IF(Opportunity.Faturamento_Feito2__c='0015A00001yGbVZ', TRUE, FALSE)}"> <!-- GDB-->
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='', TRUE, FALSE)}">
+          Site:
+          <br/>
+          Login: 
+          Senha: 
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='', TRUE, FALSE)}">
+          Site:
+          <br/>
+          Login: 
+          Senha: 
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='', TRUE, FALSE)}">
+          Site:
+          <br/>
+          Login: 
+          Senha: 
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='', TRUE, FALSE)}">
+          Site:
+          <br/>
+          Login: 
+          Senha: 
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='', TRUE, FALSE)}">
+          Site:
+          <br/>
+          Login: 
+          Senha: 
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='', TRUE, FALSE)}">
+          Site:
+          <br/>
+          Login: 
+          Senha: 
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='', TRUE, FALSE)}">
+          Site:
+          <br/>
+          Login: 
+          Senha: 
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='', TRUE, FALSE)}">
+          Site:
+          <br/>
+          Login: 
+          Senha: 
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='', TRUE, FALSE)}">
+          Site:
+          <br/>
+          Login: 
+          Senha: 
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='', TRUE, FALSE)}">
+          Site:
+          <br/>
+          Login: 
+          Senha: 
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='', TRUE, FALSE)}">
+          Site:
+          <br/>
+          Login: 
+          Senha: 
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='', TRUE, FALSE)}">
+          Site:
+          <br/>
+          Login: 
+          Senha: 
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='', TRUE, FALSE)}">
+          Site:
+          <br/>
+          Login: 
+          Senha: 
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='', TRUE, FALSE)}">
+          Site:
+          <br/>
+          Login: 
+          Senha: 
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='', TRUE, FALSE)}">
+          Site:
+          <br/>
+          Login: 
+          Senha: 
+      </apex:outputText>
+      
+  </apex:outputText>
+  
+  
+  
+  <apex:outputText rendered="{!IF(Opportunity.Faturamento_Feito2__r.Name='ABC EQUIPAMENTOS HOSPITALARES EIRELI', TRUE, FALSE)}"> <!-- ABC-->
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='BLL', TRUE, FALSE)}">
+          Site:  
+          <br/>
+          Login: licitacao@hospcom.net
+          <br/>
+          Senha: 324155
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='COMPRAS BR', TRUE, FALSE)}">
+          Site:  https://comprasbr.com.br/
+          <br/>
+          Login: leticia.donato@hospcom.net
+          <br/>
+          Senha: 35226941399466
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='BNC', TRUE, FALSE)}">
+          Site:  https://bnccompras.com/Home/Login
+          <br/>
+          Login: leticia.donato@hospcom.net
+          <br/>
+          Senha: 324155
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='COMPRASNETGOV', TRUE, FALSE)}">
+          Site:  https://www.gov.br/compras/pt-br
+          <br/>
+          Login: ABCEQUIP
+          <br/>
+          Senha: NOVA9440
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='COMPRASNETGO', TRUE, FALSE)}">
+          Site:  https://www.comprasnet.go.gov.br/
+          <br/>
+          Login: 40014621000149
+          <br/>
+          Senha: ABC3241
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='COMPRAS MS', TRUE, FALSE)}">
+          Site:  http://ww3.centraldecompras.ms.gov.br/sgc/faces/priv/comum/PrincipalAreaLicitante.jsp
+          <br/>
+          Login: leticia.donato@hospcom.net
+          <br/>
+          Senha: ABC32415555
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='LICITANET', TRUE, FALSE)}">
+          Site:  https://licitanet.com.br/pe/index.php
+          <br/>
+          Login: ABCHOSP
+          <br/>
+          Senha: abc3241
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='PORTAL DE COMPRAS PUBLICAS', TRUE, FALSE)}">
+          Site:  https://www.portaldecompraspublicas.com.br/6/Dashboard/
+          <br/>
+          Login: licitacao@hospcom.net
+          <br/>
+          Senha: sfoqc1
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='LICITAÇÕES-E', TRUE, FALSE)}">
+          Site:  www.licitacoes-e.com.br
+          <br/>
+          Login: JE641334
+          <br/>
+          Senha: abc53245
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='PUBLINEXO', TRUE, FALSE)}">
+          Site:  https://www.publinexo.com.br/publinexo/login
+          <br/>
+          Login: ABCEQUIP
+          <br/>
+          Senha: 324155@Hosp
+      </apex:outputText>
+      <apex:outputText rendered="{!IF(Opportunity.Local__c='', TRUE, FALSE)}">
+          Site:  https://www.compras.rs.gov.br/
+          <br/>
+          Login: 3522694139
+          <br/>
+          Senha: 190346
+      </apex:outputText>
+      
+  </apex:outputText>
+  </div>
+</apex:page>

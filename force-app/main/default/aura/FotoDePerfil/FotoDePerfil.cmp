@@ -1,0 +1,19 @@
+<aura:component controller="FotoDePerfilController"
+                implements="forceCommunity:availableForAllPageTypes,force:hasRecordId,flexipage:availableForAllPageTypes">
+     
+    <!-- Id of the Record the page hosting this component is showing -->
+    <aura:attribute name="recordId" type="Id"/>
+ 
+    <aura:attribute name="pictureSrc" type="String"/>
+ 
+    <aura:attribute name="message" type="String" default="Arraste e solte a foto aqui"/>
+ 
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}" />
+    
+    <lightning:card>
+    <div ondragover="{!c.onDragOver}" ondrop="{!c.onDrop}">
+        <img src="{!v.pictureSrc}"/>
+        <p>{!v.message}</p>
+    </div>
+    </lightning:card>
+</aura:component>

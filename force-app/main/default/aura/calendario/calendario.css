@@ -1,0 +1,494 @@
+/* CSS APLICADO EM DISPOSITIVOS MÓVEIS */
+@media screen
+    and (max-device-width: 480px)
+    and (orientation: portrait){
+    .THIS .divCalendario{
+        display: none;
+    }
+    
+    .THIS .divMenu{
+        width: 100%!important;
+    }
+    
+    .THIS .divPopup{
+        width: 27em;
+    }
+    
+    .THIS .divPopup{
+        width: 27em;
+    }
+    
+    .THIS .divAuxiliarData{
+        right: 260px!important;
+    }
+    
+}
+
+.THIS h2 {
+    font-size: 1rem;
+}
+
+.THIS .usersCalendar{
+    margin-right: 5px;
+}
+
+.THIS .divMestre{
+    width: 100%;
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+    justify-content: center;
+    height: 800px;
+    padding-top: 30px;
+    margin-bottom: 30px;
+}
+
+.THIS .justificativaInputCheckout{
+    height: 3em;
+    border-color: gray;
+    border-radius: 10px;
+    font-size: 1.2em;
+    display: none;
+}
+
+.THIS .contatoTratadoInput{
+    height: 3em;
+    border-color: gray;
+    border-radius: 10px;
+    font-size: 1.2em;
+    display: flex;
+}
+
+.THIS .selectCalendarios{
+    height: 3em;
+    border-color: gray;
+    border-radius: 10px;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    display: flex;
+    margin: 10px;
+}
+
+.THIS .feedbackCompromissoInput{
+    height: 100%;
+    border-color: gray;
+    border-radius: 10px;
+    font-size: 1.2em;
+    border: 1px solid gray;
+    padding: 10px;
+}
+
+.THIS .divMenu{
+    display: flex;
+    width: 30%;
+    height: 100%;
+    flex-direction: column;
+    border-radius: 30px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.THIS .divCalendario{
+    width: 70%;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.THIS .inputCamera{
+    padding-bottom: 10px;
+}
+
+.THIS .tituloMenu{
+    display: flex;
+    width: 100%;
+    height: 10%;
+    align-items: center;
+    font-size: 1.6em;
+    justify-content: center;
+    color: #616A83;
+    font-weight: 600;
+    border-bottom: 1px solid #dddddd;
+}
+
+.THIS .bodyMenu{
+    display: flex;
+    width: 100%;
+    height: 95%;
+    flex-direction: column;
+}
+
+.THIS .divSmallCalendar{
+    width: 100%;
+    height: 50%;
+    padding: 15px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.THIS .divProximosCompromissos{
+    width: 100%;
+    height: 50%;
+    max-height: 400px;
+    padding: 15px;
+    background-color: #f8f8f8;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.THIS .divMestreCompromisso{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    position: relative;
+    justify-content: flex-end;
+    transition: all .2s ease-in-out;
+}
+
+.THIS .divMestreCompromisso:hover{
+    transform: scale(1.04);
+    cursor: pointer;
+}
+
+.THIS .tipoCompromisso{
+    display: flex;
+    font-size: 1.6em;
+    color: #3D3D3D;
+}
+
+.THIS .dataCompromisso{
+    color: #ACACAC;
+}
+
+.THIS .locationCompromisso{
+    color: #ACACAC;
+}
+
+.THIS .relativoCompromisso{
+    color: #ACACAC;
+}
+
+
+.THIS .fc-button{
+    border: 0px white!important;
+    background: white!important;
+    box-shadow: none!important;
+}
+
+.THIS .divAuxiliarData{
+    display: flex;
+    background-color: #0f375c;
+    width: 20%;
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    position: absolute;
+    top: 10px;
+    right: 330px;
+    color: white;
+    font-size: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 10px;
+    font-weight: 600;
+}
+
+
+.THIS .divDadosCompromisso{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding-left: 40px;
+    justify-content: center;
+    height: inherit;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0 0 0 1px;
+}
+
+.THIS .divNewCompromisso{
+    display: flex;
+    background-color: #0f375c;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    bottom: 35px;
+    right: 25px;
+    z-index: 20;
+    border-radius: 100%;
+    color: white;
+    font-size: 2em;
+    justify-content: center;
+    align-items: center;
+    transition: all .1s ease-in-out;
+    box-shadow: rgba(50, 50, 93, 0.25) 0 6px 12px -2px, rgba(0, 0, 0, 0.3) 0 3px 7px -3px;
+}
+
+.THIS .divNewCompromisso:hover{
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.THIS .fc-button:hover{
+    border: 1px solid gray!important;
+}
+
+.THIS .fc-button-group{
+    column-gap: 5px;
+    display: flex;
+}
+
+.THIS .divProximosCompromissos::-webkit-scrollbar {
+    width: 6px;
+}
+
+.THIS .divProximosCompromissos::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+.THIS .divProximosCompromissos::-webkit-scrollbar-thumb {
+    background-color: #a0bb31;
+    border-radius: 38px;
+    border: 0px none #ffffff;
+}
+
+.THIS .fc-scroller::-webkit-scrollbar {
+    width: 6px;
+}
+
+.THIS .fc-scroller::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+.THIS .fc-scroller::-webkit-scrollbar-thumb {
+    background-color: #a0bb31;
+    border-radius: 38px;
+    border: 0px none #ffffff;
+}
+
+
+.THIS .divPaiPopup{
+    border-radius: 30px;
+    z-index: 50;
+    position: absolu	te;
+    width: 100%;
+    display: flex;
+    height: 100%;
+    background-color: rgb(0 0 0 / 48%);
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    display: none;
+}
+
+.THIS .divPopup {
+    width: 60em;
+    background-color: #1a365f;
+    height: 50em;
+    border-radius: 30px;
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.THIS .titlePopup{
+    width: 100%;
+    height: auto;
+    font-size: 1.1rem;
+    color: #00345c;
+    display: flex;
+    font-weight: bold;
+    justify-content: center;
+}
+
+.THIS .headerPopup{
+    display: flex;
+    height: 20%;
+    padding: 20px;
+    flex-direction: column;
+}
+
+.THIS .bodyPopup{
+    flex-direction: column;
+    display: flex;
+    height: 80%;
+    background-color: white;
+    border-radius: 30px;
+    padding: 20px;
+    overflow: auto;
+}
+
+.THIS .footerPopup{
+    display: flex;
+    height: 30%;
+    width: 100%;
+    column-gap: 10px;
+}
+
+.THIS .topoHeaderPopup{
+    display: flex;
+    width: 100%;
+    height: 40%;
+    justify-content: space-between;
+}
+
+.THIS .meioHeaderPopup{
+    display: flex;
+    width: 100%;
+    height: 60%;
+    color: white;
+    opacity: 0.6;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.THIS .buttonTopoPopup{
+    color: white;
+    font-size: 1.5rem;
+    transition: all .1s ease-in-out;
+    opacity: 0.6;
+}
+
+.THIS .buttonTopoPopup:hover{
+	transform: scale(1.2);
+    cursor: pointer;
+}
+
+.THIS .localizacaoCompromissoBody{
+    display: flex;
+    padding-bottom: 10px;
+}
+
+.THIS .referenteCompromissoBody{
+    display: flex;
+}
+
+.THIS .descricaoCompromissoPopup{
+    padding-bottom: 10px;
+}
+
+.THIS .tipoCompromissoBody{
+    display: flex;
+    font-size: 2.3rem;
+    font-weight: 600;
+    color: #222222;
+    font-family: system-ui;
+}
+
+.THIS .divLocalizacoesPopup{
+    display: flex;
+    width: 100%;
+    column-gap: 10px;
+    height: 300px;
+    flex-direction: column;
+}
+
+.THIS .mapaLocalizacaoAtual{
+    display: flex;
+    width: 50%;
+}
+
+.THIS .checkOutButton{
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    background-color: #1a365f;
+    height: 50px;
+    color: white;
+    font-size: 1.1rem;
+    transition: all .1s ease-in-out;
+}
+
+.THIS .checkOutButton:hover{
+    transform: scale(1.02);
+    cursor: pointer;
+    
+}
+
+.THIS .confirmaCheckout{
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    background-color: #1a365f;
+    height: 50px;
+    color: white;
+    font-size: 1.1rem;
+    transition: all .1s ease-in-out;
+}
+
+.THIS .confirmaCheckout:hover{
+    transform: scale(1.02);
+    cursor: pointer;
+    
+}
+
+.THIS .mapaLocalizacaoCompromisso{
+    height: inherit;
+    padding-bottom: 10px;
+    display: flex;
+    width: 100%;
+}
+
+
+
+
+.THIS .selectMulti{
+    height: 35px;
+    border-radius: 10px;
+}
+
+.THIS .multiselect {
+    width: 100%;
+    padding: 10px;
+    position: relative;
+}
+
+.THIS .selectBox {
+  position: relative;
+}
+
+.THIS .selectBox select {
+    width: 100%;
+    border: 1px solid #dadada;
+    color: #616a83;
+    font-weight: 500;
+}
+
+.THIS .overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.THIS #checkboxes {
+    display: none;
+    height: 200px;
+    overflow: auto;
+    width: calc(100% - 20px);
+    background-color: white;
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 10px;
+    flex-direction: column;
+    row-gap: 5px;
+    position: absolute;
+    z-index: 300;
+    border: 1px solid #dadada;
+}
+
+.THIS #checkboxes label {
+  display: block;
+}
+
+.THIS #checkboxes label:hover {
+  background-color: #1e90ff;
+}

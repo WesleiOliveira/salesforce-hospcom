@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MktDataTranObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <connector>SAP_IRO</connector>
+    <creationType>Custom</creationType>
+    <dataSource>SAPHana_SAP_IRO</dataSource>
+    <dataSourceObject>OINV_SAP_IRO</dataSourceObject>
+    <masterLabel>OINV SAP IRO</masterLabel>
+    <mktDataTranFields>
+        <fullName>DataSource</fullName>
+        <creationType>Custom</creationType>
+        <datatype>S</datatype>
+        <externalName>DataSource</externalName>
+        <isDataRequired>false</isDataRequired>
+        <length>0</length>
+        <masterLabel>DataSource</masterLabel>
+        <precision>0</precision>
+        <primaryIndexOrder>0</primaryIndexOrder>
+        <scale>0</scale>
+        <sequence>72</sequence>
+    </mktDataTranFields>
+    <mktDataTranFields>
+        <fullName>DocEntry</fullName>
+        <creationType>Custom</creationType>
+        <datatype>N</datatype>
+        <externalName>DocEntry</externalName>
+        <isDataRequired>false</isDataRequired>
+        <length>0</length>
+        <masterLabel>DocEntry</masterLabel>
+        <precision>0</precision>
+        <primaryIndexOrder>0</primaryIndexOrder>
+        <scale>0</scale>
+        <sequence>0</sequence>
+    </mktDataTranFields>
+    <mktDataTranFields>
+        <fullName>UpdateDate</fullName>
+        <creationType>Custom</creationType>
+        <datatype>F</datatype>
+        <dateFormat>MM/dd/yyyy HH:mm:ss.SSS</dateFormat>
+        <externalName>UpdateDate</externalName>
+        <isDataRequired>false</isDataRequired>
+        <length>0</length>
+        <masterLabel>UpdateDate</masterLabel>
+        <precision>0</precision>
+        <primaryIndexOrder>0</primaryIndexOrder>
+        <scale>0</scale>
+        <sequence>62</sequence>
+    </mktDataTranFields>
+    <objectCategory>Salesforce_SFDCReferenceModel_0_93.Profile</objectCategory>
+</MktDataTranObject>

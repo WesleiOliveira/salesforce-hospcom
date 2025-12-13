@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Acentos</fullName>
+    <active>false</active>
+    <errorConditionFormula>NOT(REGEX(BillingCity, &quot;[^a-zA-Z0-9\\s]&quot;))</errorConditionFormula>
+    <errorDisplayField>BillingCity</errorDisplayField>
+    <errorMessage>Não são aceitos caracteres especiais no campo Cidade de cobrança</errorMessage>
+</ValidationRule>

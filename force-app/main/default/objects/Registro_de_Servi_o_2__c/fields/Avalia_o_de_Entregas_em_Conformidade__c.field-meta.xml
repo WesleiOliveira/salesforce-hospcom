@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Avalia_o_de_Entregas_em_Conformidade__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(AND( Acumul_das_Notas_de_Ent_em_Conformidad__c  / Quantidade_de_ACF_s__c &lt; 0.8, Acumul_das_Notas_de_Ent_em_Conformidad__c/ Quantidade_de_ACF_s__c &gt; 0.7),
+ TEXT(Acumul_das_Notas_de_Ent_em_Conformidad__c / Quantidade_de_ACF_s__c*100) &amp; &quot;%&quot; &amp; &quot; &quot; &amp; IMAGE(&quot;https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=01531000008stS6&amp;oid=00Di0000000JVhH&amp;lastMod=1502730193000&quot;, &quot;&quot; , 12, 12) &amp; &quot; &quot; &amp; &quot;ATENÇÃO&quot; , 
+
+IF(Acumul_das_Notas_de_Ent_em_Conformidad__c / Quantidade_de_ACF_s__c &gt;= 0.8,TEXT(Acumul_das_Notas_de_Ent_em_Conformidad__c / Quantidade_de_ACF_s__c*100) &amp; &quot;%&quot; &amp; &quot; &quot; &amp; IMAGE(&quot;https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=01531000008stOs&amp;oid=00Di0000000JVhH&amp;lastMod=1502730159000&quot; , &quot;&quot; , 12, 12) &amp; &quot; &quot; &amp; &quot;QUALIFICADO&quot;, TEXT(Acumul_das_Notas_de_Ent_em_Conformidad__c/ Quantidade_de_ACF_s__c*100) &amp; &quot;%&quot; &amp; &quot; &quot; &amp; IMAGE(&quot;https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=01531000008stX6&amp;oid=00Di0000000JVhH&amp;lastMod=1502729868000&quot; , &quot;&quot; , 12, 12) &amp; &quot; &quot; &amp; &quot;DESQUALIFICADO&quot; 
+) 
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Avaliação de Entregas em Conformidade</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

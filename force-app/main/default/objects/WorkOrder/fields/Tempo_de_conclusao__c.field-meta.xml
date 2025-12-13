@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tempo_de_conclusao__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+OR(
+TEXT(Status) == &apos;FECHADO CONCLUÍDO&apos;,
+TEXT(Status) == &apos;FECHADO CONCLU�DO&apos;)
+,
+EndDate - StartDate,0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Tempo de conclusão</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

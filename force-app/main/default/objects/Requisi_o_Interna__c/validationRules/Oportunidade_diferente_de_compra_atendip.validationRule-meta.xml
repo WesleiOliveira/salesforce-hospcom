@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Oportunidade_diferente_de_compra_atendip</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+  ISNEW(),
+NOT(ISBLANK(Oportunidade__c)),
+  Oportunidade__r.Recomenda_se_compra_antecipada__c = false
+)</errorConditionFormula>
+    <errorDisplayField>Oportunidade__c</errorDisplayField>
+    <errorMessage>❌ Não é permitido criar uma nova Requisição de Compra quando a oportunidade não recomenda compra antecipada.</errorMessage>
+</ValidationRule>

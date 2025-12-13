@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Chamados_Abertos</fullName>
+    <booleanFilter>NOT(1 OR 2)</booleanFilter>
+    <columns>NAME</columns>
+    <columns>Assunto__c</columns>
+    <columns>Ativo__c</columns>
+    <columns>ID_Tag__c</columns>
+    <columns>Setor_do_Equipamento__c</columns>
+    <columns>Status_do_Chamado__c</columns>
+    <columns>Prioridade__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status_do_Chamado__c</field>
+        <operation>equals</operation>
+        <value>FINALIZADO (CONCLUÍDO)</value>
+    </filters>
+    <filters>
+        <field>Status_do_Chamado__c</field>
+        <operation>equals</operation>
+        <value>CANCELADO</value>
+    </filters>
+    <label>Chamados Abertos</label>
+    <sharedTo>
+        <allPartnerUsers></allPartnerUsers>
+    </sharedTo>
+</ListView>

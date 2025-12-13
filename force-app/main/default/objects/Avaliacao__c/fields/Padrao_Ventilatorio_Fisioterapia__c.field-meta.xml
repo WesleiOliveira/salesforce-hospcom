@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Padrao_Ventilatorio_Fisioterapia__c</fullName>
+    <externalId>false</externalId>
+    <label>Padrão Ventilatório</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Eupneico</fullName>
+                <default>false</default>
+                <label>Eupneico</label>
+            </value>
+            <value>
+                <fullName>Dispneico</fullName>
+                <default>false</default>
+                <label>Dispneico</label>
+            </value>
+            <value>
+                <fullName>Taquipneico</fullName>
+                <default>false</default>
+                <label>Taquipneico</label>
+            </value>
+            <value>
+                <fullName>Bradipneico</fullName>
+                <default>false</default>
+                <label>Bradipneico</label>
+            </value>
+            <value>
+                <fullName>Outro</fullName>
+                <default>false</default>
+                <label>Outro</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

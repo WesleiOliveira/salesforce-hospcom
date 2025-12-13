@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tudo_menos_Finalizadas_e_Canceladas</fullName>
+    <columns>NAME</columns>
+    <columns>Conta__c</columns>
+    <columns>Solicitante__c</columns>
+    <columns>Situacao__c</columns>
+    <columns>Status__c</columns>
+    <columns>Cidade__c</columns>
+    <columns>Estado__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Finalizado,Cancelado</value>
+    </filters>
+    <label>Tudo menos Finalizadas e Canceladas</label>
+</ListView>

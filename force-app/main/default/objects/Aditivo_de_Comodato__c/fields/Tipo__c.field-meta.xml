@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipo</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Adição de prazo</fullName>
+                <default>false</default>
+                <label>Adição de prazo</label>
+            </value>
+            <value>
+                <fullName>Adição de equipamento</fullName>
+                <default>false</default>
+                <label>Adição de equipamento</label>
+            </value>
+            <value>
+                <fullName>Adição de prazo e adição de equipamento</fullName>
+                <default>false</default>
+                <label>Adição de prazo e adição de equipamento</label>
+            </value>
+            <value>
+                <fullName>Adição de prazo e supressão de equipamento</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Adição de prazo e supressão de equipamento</label>
+            </value>
+            <value>
+                <fullName>Supressão de equipamento</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Supressão de equipamento</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

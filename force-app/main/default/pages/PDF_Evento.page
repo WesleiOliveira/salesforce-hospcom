@@ -1,0 +1,389 @@
+<apex:page standardController="campaign" extensions="pdfEvento" applyHtmlTag="false" showHeader="false" renderAs="pdf">
+    <head>
+    <style type="text/css" media="print">
+                @page {
+                    size:21cm 29.7cm;
+                    margin:100px 40px 60px 40px;
+                    @top-center {
+                        content:element(header);
+                    }
+                    @bottom-center {
+                        content:element(footer);
+                    }
+                }
+                @page{
+                    size:A4;
+                    background: url({!IF(Campaign.Local_Empresa__c == 'HEALTH SOLUTION',$Resource.TimbradoHealth,IF(Campaign.Local_Empresa__c == 'HOSPCOM GO',$Resource.TimbradoHospcom,IF(Campaign.Local_Empresa__c == 'GDB',$Resource.TimbradoGDB,IF(Campaign.Local_Empresa__c == 'ABC TO',$Resource.TimbradoABC,$Resource.TimbradoGenerico))))});
+                    margin:150px 50px 120px 50px;
+                    @bottom-center{content:element(footer);}
+                }
+                .pagenumber:before {
+                    content:counter(page);
+                }
+                .pagecount:before {
+                    content:counter(pages);
+                }
+                div.header {
+                    margin:0px 0px 0px 0px;
+                    padding:20px 0px 20px 0px;
+                    position:running(header);
+                    height:60px;
+                }
+                div.content {
+                }
+                div.footer {
+                    margin:0px 0px 0px 0px;
+                    padding:20px 0px 20px 0px;
+                    position:running(footer);
+                    height:20px;
+                    text-align:right;
+                    font-family:arial, verdana, sans-serif;
+                    font-size:10px;
+                    font-weight:normal;
+                }
+            </style>
+            <style type="text/css" media="print">
+            /*
+                @page:first{
+                    size:A4;
+                    background: url($Resource.SobreHealth);
+                    margin:150px 50px 120px 50px;
+                    @bottom-center{content:element(footer);
+                    }
+                }
+                
+                @page{
+                    size:A4;
+                    background: url($Resource.TimbradoHealth);
+                    margin:150px 50px 120px 50px;
+                    @bottom-center{content:element(footer);}
+                }
+    */
+                td{
+                
+                }
+                .titulo{
+                    font-family:arial, verdana, sans-serif;
+                    font-size:15px;
+                    text-align:center;
+                    font-weight:bold; 
+                    width:100%;
+                }
+                .tabela_geral{
+                    border-collapse:collapse;
+                    width:100%;
+                }
+                table.print-friendly tr td, table.print-friendly tr th {
+                    page-break-inside: avoid;
+                }
+                .cabecalho{
+                    font-family:arial, verdana, sans-serif;
+                    font-size:11px;
+                    font-weight:bold; 
+                    vertical-align:top;
+                    background-color: #c3c3c3;
+                    padding: 3px;
+                }
+                .celula{
+                    font-family:arial, verdana, sans-serif;
+                    font-size:13px;
+                    vertical-align:top;
+                    line-height:120%;
+                    padding: 3px;
+                    border: 1px solid #c3c3c3;
+                }
+                .clausula_texto{
+                    font-family:arial, verdana, sans-serif;
+                    font-size:11.5px;
+                    text-align:justify;
+                    text-justify:inter-word;
+                    line-height:120%;
+                    text-indent:50px;
+                    vertical-align:top;
+                }
+                .infos_texto{
+                    font-family:arial, verdana, sans-serif;
+                    font-size:11.5px;
+                    text-align:justify;
+                    text-justify:inter-word;
+                    line-height:120%;
+                    vertical-align:top;
+                }
+                .pre_texto{
+                    white-space: pre;
+                }
+                .maiuscula{
+                    text-transform: uppercase;
+                }
+                .zebra{
+                    background-color: #f3f3f3;
+                }
+                .subtitulo{
+                    font-family:arial, verdana, sans-serif;
+                    font-size: 12px;
+                    color: #666;
+                    text-align: center;
+                    padding: 2px;
+                }
+            </style>
+    </head>
+    <body>
+    <apex:pageBlock >
+    <apex:outputText rendered="{!contido}">
+                <div class="footer" style="text-align:center !important">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <apex:outputPanel rendered="{!Campaign.treinamento__c}">
+                        Título do documento: RTC-{!Campaign.Contagem_Eventos_de_Treinamento__c}
+                    </apex:outputPanel>
+                    <br/>
+                    
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Página <span class="pagenumber"/> de <span class="pagecount"/> - Emissão em:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{! TODAY() }" /></apex:outputText>
+                </div>
+
+                <table width="100%" > 
+                    
+                    
+                    <apex:repeat value="{!documentos}" var="doc">
+                        <apex:outputText rendered="{!if(doc.Documento__c = 'Ata de Reunião'  && campaign.RecordTypeID = '0126e000001pMTQAA2', true, false)}" >
+                            <apex:outputText rendered="{!if(doc.Empresa__c = campaign.Local_Empresa__c , true, false)}" >
+                            
+                                <tr  colspan="2" width="100%" >
+                                    <td width="50%" style='font-size:13px; font-weight:bold;' >
+                                        emissão:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{! doc.Data_de_criacao__c }" /></apex:outputText>
+                                    </td>
+                                    
+                                    <td style="text-align: right;
+                                        font-size:13px;
+                                        font-weight:bold; ">
+                                        última rev. doc.:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!doc.Revisao__c}" /></apex:outputText>
+                                    </td>
+                                </tr>
+                            
+                            </apex:outputText>
+                        </apex:outputText>
+                    </apex:repeat>
+                    
+                    <apex:repeat value="{!documentos}" var="doc1">
+                        <apex:outputText rendered="{!if(doc1.Documento__c = 'Registro de Treinamento Corporativo' && campaign.RecordTypeID = '0125A000001dweWQAQ' , true, false)}" >
+                            <apex:outputText rendered="{!if(doc1.Empresa__c = campaign.Local_Empresa__c , true, false)}" >
+                            
+                                <tr  colspan="2" width="100%" >
+                                    <td width="50%" style='font-size:13px; font-weight:bold;' >
+                                        emissão:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{! doc1.Data_de_criacao__c }" /></apex:outputText>
+                                    </td>
+                                    
+                                    <td style="text-align: right;
+                                        font-size:13px;
+                                        font-weight:bold; ">
+                                        última rev. doc1.:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!doc1.Revisao__c}" /></apex:outputText>
+                                    </td>
+                                </tr>
+                            
+                            </apex:outputText>
+                        </apex:outputText>
+                    </apex:repeat>
+                </table>
+                
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                
+                <div>
+                
+                
+                  <apex:outputText >
+                  <div class="titulo">
+                     <apex:outputText rendered="{!Campaign.RecordTypeId == '0125A000001dweWQAQ' && Campaign.treinamento__c}">
+                           Registro de Treinamento Corporativo Interno
+                     </apex:outputText>
+                     <apex:outputText rendered="{!Campaign.RecordTypeId == '0125A000001dweWQAQ' && !Campaign.treinamento__c}">
+                           Registro de Evento Interno
+                     </apex:outputText>
+                     <apex:outputText rendered="{!Campaign.RecordTypeId != '0125A000001dweWQAQ'}">
+                           Registro de Evento
+                     </apex:outputText>
+                  </div>
+                  <div class="subtitulo">
+                     {!Campaign.Type}
+                  </div>
+                  <br/>     
+
+    <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px; font-size:13px;">Informações</div>
+                    <table style="page-break-inside:avoid;width:100%;">
+                        <tr>
+                            <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:30px;">Nome:</td>
+                            <td colspan="3" class="infos_texto" style="text-indent:0px;">{!campaign.Name}</td>
+                        </tr>
+                        <tr>
+                            <td class="infos_texto" style="font-weight:bold;text-indent:0px;width:100px;">Data </td>
+                            <td class="infos_texto" style="text-indent:0px;width:600px;"><apex:outputField value="{!Campaign.Inicio__c}"/>  —  <apex:outputField value="{!Campaign.Termino__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="infos_texto" style="font-weight:bold;text-indent:0px;width:100px;">Carga horária: </td>
+                            <td class="infos_texto" style="text-indent:0px;"><apex:outputField value="{!Campaign.Carga_horaria__c}"/>h </td>
+                        </tr>
+                        <tr>
+                            <td class="infos_texto" style="font-weight:bold;text-indent:0px;width:100px;">Local: </td>
+                            <td class="infos_texto" style="text-indent:0px;">{!IF(Campaign.Local_Empresa__c != null, Campaign.Local_Empresa__c, Campaign.Cidade__c + ' - ' + Campaign.Estado__c)} </td>
+                        </tr>
+                        <tr>
+                            <td class="infos_texto" style="font-weight:bold;text-indent:0px;">Instrutor: </td>
+                            <td class="infos_texto" style="text-indent:0px;width:200px;">{!Campaign.Instrutor__r.FirstName} {!Campaign.Instrutor__r.LastName} </td>
+                        </tr>
+                        <tr>
+                            <td class="infos_texto" style="font-weight:bold;text-indent:0px;">{!IF(Campaign.Type = 'Treinamento' || Campaign.Type = 'Boas práticas', 'Conteúdo', 'Descrição')}: </td>
+                            <td class="infos_texto" style="text-indent:0px;">{!Campaign.Description} </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    </apex:outputText>
+                    </div>
+                    <div >
+                    <!-- CABEÇALHO DA REUNIÃO-->
+    <apex:outputPanel rendered="{!IF(Campaign.RecordTypeId == '0126e000001pMTQAA2', true,false)}"><div class="titulo">Ata de Reunião Nº {!campaign.Ata_N__c} </div><br/>
+
+    <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px; font-size:13px;">Informações</div>
+                    <table style="page-break-inside:avoid;width:100%;">
+                        <tr>
+                            <td class="infos_texto" style="font-weight:bold;text-indent:0px;width:100px;">Data e hora </td>
+                            <td class="infos_texto" style="text-indent:0px;width:600px;"><apex:outputField value="{!Campaign.Inicio__c}"/> às&nbsp;<apex:outputField value="{!Campaign.Termino__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="infos_texto" style="font-weight:bold;text-indent:0px;width:100px;">Duração: </td>
+                            <td class="infos_texto" style="text-indent:0px;"><apex:outputField value="{!Campaign.Duracao__c}"/>h </td>
+                        </tr>
+                        <tr>
+                            <td class="infos_texto" style="font-weight:bold;text-indent:0px;width:100px;">Local: </td>
+                            <td class="infos_texto" style="text-indent:0px;">{!IF(Campaign.Local_Empresa__c != null, Campaign.Local_Empresa__c, Campaign.Cidade__c + ' - ' + Campaign.Estado__c)} </td>
+                        </tr>
+                        <tr>
+                            <td class="infos_texto" style="font-weight:bold;text-indent:0px;">Coordenador: </td>
+                            <td class="infos_texto" style="text-indent:0px;width:200px;">{!Campaign.Coordenador__r.FirstName} {!Campaign.Coordenador__r.LastName} </td>
+                        </tr>
+                        <tr>
+                            <td class="infos_texto" style="font-weight:bold;text-indent:0px;">Pauta: </td>
+                            <td class="infos_texto" style="text-indent:0px;">{!Campaign.Description} </td>
+                        </tr>
+                        
+                        <apex:outputPanel rendered="{!Campaign.FORECAST__c}">
+                            <tr>
+                                <td class="infos_texto" style="font-weight:bold;text-indent:0px;">Forecast:</td>
+                                <td class="infos_texto" style="text-indent:48px;">
+                                    Valor garantido: <apex:outputField value="{!Campaign.GARANTIDO__c}"/> |
+                                    Valor previsto: <apex:outputField value="{!Campaign.Forecast_moeda__c}"/> |
+                                    Valor de risco: <apex:outputField value="{!Campaign.Risco__c}"/>
+                                </td>
+                            </tr>
+                      
+                    </apex:outputPanel>
+                </table>
+                    <br/>
+                    </apex:outputPanel>
+                    </div>
+                            
+
+                    <div>
+    <apex:outputText id="geral" >
+    <div class="titulo">Participantes</div><br/>
+    <!--TABELA DOS PARTICIPANTES DOS EVENTOS INTERNOS E EXTERNOS-->
+    <apex:outputText rendered="{!IF(Campaign.RecordTypeId != '0126e000001pMTQAA2', true,false)}">
+    <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+        <tr>
+            <td class="celula" width="3px;"><b>Nº</b></td>
+            <td class="celula" ><b>Nome</b></td> 
+            <td class="celula" ><b>Empresa</b></td>
+        </tr>
+        <apex:variable value="{!1}" var="count"/> 
+    <apex:repeat var="cases" value="{!Campaign.Membros_da_Equipe_do_Evento__r}">
+        
+        <tr>
+        <td class="celula"><b>{!FLOOR(count)} </b></td>
+        <td class="celula"><apex:outputText value="{!IF(cases.Usuario__c != null, cases.Usuario__r.FirstName + ' ' + cases.Usuario__r.LastName , cases.Contato__r.FirstName + ' ' + cases.Contato__r.LastName)}"/></td>
+        <td class="celula">{!cases.Empresa__r.Name}</td>
+        </tr>
+            <apex:variable var="count" value="{!count+ 1}"/>
+    </apex:repeat> 
+    <br/>    
+        </table>
+        <br/>
+    </apex:outputText>
+    <!--TABELA DOS PARTICIPANTES DA REUNIAO-->
+    <apex:outputText rendered="{!IF(Campaign.RecordTypeId == '0126e000001pMTQAA2', true,false)}">
+    <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+        <tr>
+            <td class="celula" width="3px;"><b>Nº</b></td>
+            <td class="celula" ><b>Nome</b></td> 
+            <td class="celula" ><b>Empresa</b></td>
+            <td class="celula" ><b>Departamento</b></td>
+        </tr>
+        <apex:variable value="{!1}" var="count"/> 
+    <apex:repeat var="cases" value="{!Campaign.Membros_da_Equipe_do_Evento__r}">
+        
+        <tr>
+        <td class="celula"><b>{!FLOOR(count)} </b></td>
+        <td class="celula"><apex:outputText value="{!IF(cases.Usuario__c != null, cases.Usuario__r.FirstName + ' ' + cases.Usuario__r.LastName , cases.Contato__r.FirstName + ' ' + cases.Contato__r.LastName)}"/></td>
+        <td class="celula">{!cases.Empresa__r.Name}</td>
+        <td class="celula"><apex:outputText value="{!IF(cases.Usuario__c != null, cases.Usuario__r.Department, 'Não informado')}"/></td>
+        </tr>
+            <apex:variable var="count" value="{!count+ 1}"/>
+    </apex:repeat> 
+    <br/>    
+        </table>
+        <br/>
+    </apex:outputText>
+    <!--TABELA De ASSUNTOS DA REUNIAO-->
+    <apex:outputText rendered="{!IF(Campaign.RecordTypeId == '0126e000001pMTQAA2', true,false)}">
+        <div class="titulo">Assuntos Tratados</div><br/>
+    <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+        <tr>
+            <td class="celula" width="600px;"><apex:outputField value="{!Campaign.Assuntos_tratados__c}"/></td>
+
+        </tr>
+    <br/>    
+        </table>
+        <br/>
+    </apex:outputText>
+    <!--TABELA DAS PENDENCIAS DA REUNIAO-->
+    <apex:outputText rendered="{!IF(Campaign.RecordTypeId == '0126e000001pMTQAA2', true,false)}">
+        <div class="titulo">Ações/Pendências</div><br/>
+    <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+        <tr>
+            <td class="celula" ><b>Assunto</b></td> 
+            <td class="celula" ><b>Responsável</b></td>
+            <td class="celula" ><b>Prazo</b></td>
+        </tr>
+    <apex:repeat var="pendencias" value="{!Campaign.Tasks}">   
+        <tr>
+        <td class="celula"><apex:outputText value="{!pendencias.Subject}"/></td>
+        <td class="celula">{!pendencias.Owner.Name}</td>
+        <td class="celula"><apex:outputField value="{!pendencias.ActivityDate}"/></td>
+        </tr>
+        
+    </apex:repeat>
+    <apex:repeat var="scrum" value="{!Campaign.Atividades__r}">   
+        <tr>
+        <td class="celula"><apex:outputText value="{!scrum.Name}"/></td>
+        <td class="celula">{!scrum.Owner.Name}</td>
+        <td class="celula"><apex:outputField value="{!scrum.Prazo__c}"/></td>
+        </tr>
+    </apex:repeat> 
+    <br/>    
+        </table>
+        <br/>
+    </apex:outputText>
+    </apex:outputText>
+                
+    </div>
+    </apex:outputText> 
+        <apex:outputText rendered="{!!contido}">
+        Apenas membros do evento podem emitir a ata.
+        </apex:outputText>          
+    </apex:pageBlock>
+
+    </body>
+
+    </apex:page>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <submitter>Locacao</submitter>
+        <type>group</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>Sistema_todos</submitter>
+        <type>group</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>Administrador_do_sistema</submitter>
+        <type>role</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>OrderNumber</field>
+        <field>Account</field>
+        <field>Demonstracao__c</field>
+        <field>TotalAmount</field>
+        <field>EffectiveDate</field>
+        <field>Prazo_de_entrega__c</field>
+        <field>Natureza_de_Opera_o__c</field>
+        <field>Owner</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>mario.filho@hospcom.net</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <label>Locacao</label>
+        <name>Locacao</name>
+    </approvalStep>
+    <emailTemplate>unfiled$public/Aprova_o_de_pedido</emailTemplate>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>AND(
+OR(
+TEXT(Status) == &apos;Aguardando Aprovação Locação&apos;,
+TEXT(Status) == &apos;Pendente&apos;
+),
+OR(
+TEXT(Natureza_de_Opera_o__c) == &apos;DEMONSTRAÇÃO&apos;,
+TEXT(Natureza_de_Opera_o__c) == &apos;EMPRÉSTIMO&apos;
+),
+RecordType.Name != &quot;Representação&quot;
+)</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>A_o_interna_verdadeiro</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Aprovado</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Pedido_aprovado</name>
+            <type>Alert</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Acao_interna_verdadeiro</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Pedido_reprovado</name>
+            <type>Alert</type>
+        </action>
+        <action>
+            <name>Status_Reprovado</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>A_o_interna_verdadeiro</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Enviar_falso</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Status_Ag_Apr_Locacao</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Locação - Pedido de Demo</label>
+    <processOrder>17</processOrder>
+    <recallActions>
+        <action>
+            <name>Acao_interna_verdadeiro</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Status_Rascunho</name>
+            <type>FieldUpdate</type>
+        </action>
+    </recallActions>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

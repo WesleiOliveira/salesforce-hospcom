@@ -1,0 +1,88 @@
+/* consumiveisComodato.css */
+.container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.table-wrapper {
+    flex: 1;
+    margin: 10px;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1em;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.styled-table thead tr {
+    background-color: #00345c;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th, .styled-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #00345c;
+}
+
+.styled-table tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+.styled-button {
+    background-color: #00345c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+.styled-button:hover {
+    background-color: #3799e4;
+}
+
+.button-wrapper {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.quantity-input-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.quantity-input-wrapper label {
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+.quantity-input-wrapper input {
+    width: 60px;
+    padding: 5px;
+}

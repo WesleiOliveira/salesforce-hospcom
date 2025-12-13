@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Boleto_cancelado</fullName>
+    <active>false</active>
+    <errorConditionFormula>OR(
+    AND(
+        ISNEW(),
+        Boleto_cancelado__c = TRUE
+    ),
+ 
+    AND(
+        NOT(ISNEW()),
+        ISCHANGED(Boleto_cancelado__c),
+        Boleto_cancelado__c = TRUE,
+        TEXT(Status__c) &lt;&gt; &quot;Aguardando cancelamento do boleto&quot;
+    )
+)</errorConditionFormula>
+    <errorDisplayField>Boleto_cancelado__c</errorDisplayField>
+    <errorMessage>Para cancelar um boleto, o status deve estar como &apos;Aguardando cancelamento do boleto&apos;.</errorMessage>
+</ValidationRule>

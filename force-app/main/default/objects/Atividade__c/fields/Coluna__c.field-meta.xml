@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Coluna__c</fullName>
+    <externalId>false</externalId>
+    <label>Coluna</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Lista de Entrega</fullName>
+                <default>false</default>
+                <label>Lista de Entrega</label>
+            </value>
+            <value>
+                <fullName>Sprint</fullName>
+                <default>false</default>
+                <label>Sprint</label>
+            </value>
+            <value>
+                <fullName>Executando</fullName>
+                <default>false</default>
+                <label>Executando</label>
+            </value>
+            <value>
+                <fullName>Paralisado</fullName>
+                <default>false</default>
+                <label>Paralisado</label>
+            </value>
+            <value>
+                <fullName>Concluído</fullName>
+                <default>false</default>
+                <label>Concluído</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

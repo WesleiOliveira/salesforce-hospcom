@@ -1,0 +1,47 @@
+<aura:component extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery)}"                     
+                  afterScriptsLoaded="{!c.myAction}" />   
+    <aura:attribute name="popupSubtitle" type="String" />
+    <aura:attribute name="popupTitle" type="String" />
+    <aura:attribute name="popupDate" type="String" />
+    <aura:attribute name="myVal" type="String" />
+    
+    <div>
+        <div class="titleBox325094573">USO DA VERBA POR LINHA</div>
+        
+        <div class='principalDiv347236482' id='divPrincipal32847y2374784'>
+            
+
+        </div>
+        
+    </div>
+    
+     <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery)}"                     
+                  afterScriptsLoaded="{!c.myAction2}" />   
+    <aura:attribute name="popupSubtitle2" type="String" />
+    <aura:attribute name="popupTitle2" type="String" />
+    <aura:attribute name="popupDate2" type="String" />
+    <aura:attribute name="myVal2" type="String" />
+    
+    <div>
+        <div class="titleBox325094573">USO DA VERBA DE LOCAÇÃO POR LINHA</div>
+        
+        <div class='principalDiv347236482' id='divSecundaria32847y2374784'>
+            
+
+        </div>
+        
+    </div>
+    
+</aura:component>

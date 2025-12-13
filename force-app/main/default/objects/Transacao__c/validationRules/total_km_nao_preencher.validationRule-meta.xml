@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>total_km_nao_preencher</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+	!$User.Ignorar_erros__c,
+	NOT(ISBLANK(Total_de_Km__c)),
+	TEXT(Categoria__c) != &apos;KM rodado&apos;
+)</errorConditionFormula>
+    <errorDisplayField>Total_de_Km__c</errorDisplayField>
+    <errorMessage>O Total de Km deve ser preenchido apenas em requisição de Km rodado.</errorMessage>
+</ValidationRule>

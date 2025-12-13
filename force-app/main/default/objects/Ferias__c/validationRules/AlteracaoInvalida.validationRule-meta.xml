@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AlteracaoInvalida</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    TEXT(Status__c) != &apos;Rascunho&apos;,
+    !$User.Ignorar_erros__c,
+    $User.Id != &apos;005U400000Bng9R&apos;,
+    $User.Id != &apos;005U4000003S8x0&apos;,
+    !ISNEW(),
+    OR(
+        ISCHANGED(Data_Inicial__c),
+        ISCHANGED(Data_Final__c)
+    )
+)</errorConditionFormula>
+    <errorMessage>Alterações indevidas.</errorMessage>
+</ValidationRule>

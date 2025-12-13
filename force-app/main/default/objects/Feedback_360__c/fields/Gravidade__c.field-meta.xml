@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gravidade__c</fullName>
+    <externalId>false</externalId>
+    <label>Gravidade</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Gravidade 1 - Funcionalidade principal, impacta o fluxo operacional</fullName>
+                <default>false</default>
+                <label>Gravidade 1 - Funcionalidade principal, impacta o fluxo operacional</label>
+            </value>
+            <value>
+                <fullName>Gravidade 2 - Funcionalidade secundária, não impacta o fluxo operacional</fullName>
+                <default>false</default>
+                <label>Gravidade 2 - Funcionalidade secundária, não impacta o fluxo operacional</label>
+            </value>
+            <value>
+                <fullName>Gravidade 3 - Consulta geral, introdução, problema técnico de rotina ou sugestão</fullName>
+                <default>false</default>
+                <label>Gravidade 3 - Consulta geral, introdução, problema técnico de rotina ou sugestão</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

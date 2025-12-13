@@ -1,0 +1,207 @@
+<apex:page standardController="Order" applyHtmlTag="false" showHeader="false" renderAs="pdf">
+    <style type="text/css" media="print">
+      @page {
+        size: 21cm 29.7cm;
+        margin: 100px 40px 60px 40px;
+
+        @top-center {
+          content: element(header);
+        }
+
+        @bottom-center {
+          content: element(footer);
+        }
+      }
+
+      @page {
+        size: A4;
+        background: url({!$Resource.TimbradoHospcom});
+        margin: 150px 50px 120px 50px;
+
+        @bottom-center {
+          content: element(footer);
+        }
+      }
+
+      .pagenumber:before {
+        content: counter(page);
+      }
+
+      .pagecount:before {
+        content: counter(pages);
+      }
+
+      div.header {
+        margin: 0px 0px 0px 0px;
+        padding: 20px 0px 20px 0px;
+        position: running(header);
+        height: 60px;
+      }
+
+      div.content {}
+
+      div.footer {
+        margin: 0px 0px 0px 0px;
+        padding: 20px 0px 20px 0px;
+        position: running(footer);
+        height: 20px;
+        text-align: right;
+        font-family: arial, verdana, sans-serif;
+        font-size: 10px;
+        font-weight: normal;
+      }
+       /*
+        @page:first{
+            size:A4;
+            background: url($Resource.SobreHealth);
+            margin:150px 50px 120px 50px;
+            @bottom-center{content:element(footer);
+            }
+        }
+        
+        @page{
+            size:A4;
+            background: url($Resource.TimbradoHealth);
+            margin:150px 50px 120px 50px;
+            @bottom-center{content:element(footer);}
+        }
+        body {
+            font-size: 16px;
+        }
+
+        table {
+        
+        
+            border-collapse: collapse ;
+        }
+
+       
+       
+        td {
+            padding: 10px !important;
+            text-align: left;
+            font-size:12px;
+        }
+
+        .meio, .fotter {
+                    margin: auto;
+                    
+        }
+
+
+        .fotter {
+            page-break-inside: avoid;
+            margin: auto;
+        }
+        
+    </style>
+    
+    
+
+    <div style="  font-size:12px; ">
+        <table style="border-collapse: collapse;  width:100%;">
+        
+          <tr style="" >
+              <td colspan="2" style="font-size:18px; font-weight: 700;  text-align:center;"> <span style="">Termo de Autorização - Demonstração </span> <br/><br/><br/></td> 
+          </tr>
+                    
+        
+    <tr style="">
+    <td style=""> <span style="font-weight: 700">Nome do cliente: </span> {!Order.Nome_da_conta__c}</td>
+    
+    <td style=""><span style="font-weight: bold;">CNPJ: </span> {!Order.CPF_CNPJ__c}</td>                
+</tr>
+
+<tr style="">
+    <td style=""><span style="font-weight: 700">Início da demonstração: </span>
+     <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!Order.Data_da_demonstracao__c}" /></apex:outputText>                 
+     </td>  
+                 
+    <td style=""><span style="font-weight: 700">Término da demonstração: </span>
+        <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!Order.dataTerminoDemonstracao__c}" /></apex:outputText>
+    </td>
+</tr>
+
+<tr>
+    <td style="padding:1px 0 0 0;" colspan="2">
+        <span style="font-weight: 700">Endereço do equipamento:</span> 
+        {!Order.BillingStreet}, {!Order.BillingCity}-{!Order.BillingState}
+    </td>
+</tr>
+
+<tr>
+    <td style="padding:5px 0 0 0;" colspan="2">
+        <span style="font-weight: 900 !important">Tipo de Frete: </span>{!Order.Frete__c}
+    </td>
+</tr>
+
+            
+             </table>
+             
+             <br/>
+               
+               
+               <table style="border: 1px solid black !important; width:100%;   border-collapse: collapse;">
+               
+               <tr>
+                   <td style="border: 1px solid black !important; text-align:center; padding: 10px !important;">
+                   Produto
+                   </td>
+                   
+                   <td style="border: 1px solid black !important; text-align:center;  padding: 10px !important;">
+                   Código
+                   </td>
+                   
+                   <td style="border: 1px solid black !important; text-align:center;  padding: 10px !important;">
+                   Preço
+                   </td>
+               </tr>
+               
+                <apex:repeat value="{!Order.OrderItems}" var="produtoPedido">
+                    <tr>
+                        <td style="font-size: 12px; border: 1px solid black !important;  padding: 10px !important;">{!produtoPedido.Product2.Name}</td>
+                        <td style="font-size: 12px; border: 1px solid black !important;  padding: 10px !important;" >{!produtoPedido.C_d_de_F_brica__c}</td>
+                        <td style="font-size: 12px; border: 1px solid black !important;  padding: 10px !important; text-align:center; ">R${!produtoPedido.UnitPrice}</td>
+                    </tr>
+                </apex:repeat>
+                
+           
+            </table>
+            
+               
+
+        <div class="meio" >
+            <p>Considerando que o cliente manifestou interesse na demonstração do(s) equipamento(s) acima referenciado(s), que será(ão) disponibilizado(s) pela HOSPCOM EQUIPAMENTOS HOSPITALARES, as partes resolvem ajustar o presente Termo de Autorização para Demonstração, que será registrado pelos termos e condições abaixo aduzidos.</p>
+        </div>
+
+        <table style="border: 1px solid black !important;">
+            <tr>
+                <td colspan="2">1. A demonstração poderá ser efetivada através do acompanhamento e instrução de um representante da HOSPCOM ou através da disponibilização do(s) equipamento(s) para uso do cliente durante o prazo acima acordado.</td>
+            </tr>
+            <tr>
+                <td colspan="2">2. A partir do ato de retirada ou recebimento dos produtos, o destinatário assume a posse do bem e todos os riscos referentes a danos e perecimento, isentando a HOSPCOM de responsabilidades em quaisquer ressarcimentos ou reparos.</td>
+            </tr>
+            <tr>
+                <td colspan="2">3. O CLIENTE deverá utilizar o(s) equipamento(s) de acordo com as instruções técnicas fornecidas pela HOSPCOM. Qualquer uso inadequado será de inteira responsabilidade do CLIENTE.</td>
+            </tr>
+            <tr>
+                <td colspan="2">4. Os acessórios não descartáveis deverão ser devolvidos em perfeitas condições. Acessórios descartáveis não consumidos deverão ser devolvidos.</td>
+            </tr>
+            <tr>
+                <td colspan="2">5. Em caso de danos irreparáveis, será cobrado o valor total de venda. Atrasos na devolução implicam cobrança de aluguel diário.</td>
+            </tr>
+            <tr>
+                <td colspan="2">6. A manutenção deve ser realizada apenas por técnicos autorizados pela HOSPCOM. Manutenções não autorizadas poderão resultar na perda da garantia.</td>
+            </tr>
+            <tr>
+                <td colspan="2">7. O CLIENTE não poderá ceder, locar, sublocar ou transferir o(s) equipamento(s) para terceiros sem autorização.</td>
+            </tr>
+        </table>
+
+<br/><br/><br/><br/><br/><br/>
+        <div class="fotter">
+            <p>CLIENTE: ______________________________________________ &nbsp;&nbsp;&nbsp; Data: ____ /____ /____ </p> <br/>
+            <p>HOSPCOM: _____________________________________________ </p>
+        </div>
+    </div>
+</apex:page>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Somente_central_lanca</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISCHANGED(Lancada__c),
+Lancada__c == true,
+$User.ProfileId != &apos;00e5A000001uF6X&apos;
+)</errorConditionFormula>
+    <errorMessage>Somente a Central de Notas de Entrada pode realizar o lançamento da nota.</errorMessage>
+</ValidationRule>

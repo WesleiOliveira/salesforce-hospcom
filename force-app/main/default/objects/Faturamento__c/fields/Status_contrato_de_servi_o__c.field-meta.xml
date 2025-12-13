@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_contrato_de_servi_o__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(
+    Contrato_de_servico__r.Status_do_Contrato__c,
+    &quot;AGUARDANDO ACEITAÇÃO DA PROPOSTA&quot;, &quot;🔵 Aguardando Aceitação&quot;,
+    &quot;AGUARDANDO ASSINATURA DO CONTRATO&quot;, &quot;✍️ Aguardando Assinatura&quot;,
+    &quot;CANCELADO&quot;, &quot;❌ Cancelado&quot;,
+    &quot;CONCLUÍDO&quot;, &quot;✅ Concluído&quot;,
+    &quot;CONCLUÍDO (COM PENDENCIAS)&quot;, &quot;⚠️ Concluído (Pendências)&quot;,
+    &quot;CONTRATO VIGENTE&quot;, &quot;📄 Contrato Ativo&quot;,
+    &quot;PERDIDO&quot;, &quot;🔴 Perdido&quot;,
+    &quot;SEPARAÇÃO/ENTREGA&quot;, &quot;📦 Separação/Entrega&quot;,
+    &quot;EM CALIBRAÇÃO&quot;, &quot;🛠️ Em Calibração&quot;,
+    &quot;AGUARDANDO DOCUMENTAÇÕES ASSINADAS&quot;, &quot;📜 Aguardando Documentos&quot;,
+    &quot;❓ Status Desconhecido&quot;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Status contrato de serviço</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

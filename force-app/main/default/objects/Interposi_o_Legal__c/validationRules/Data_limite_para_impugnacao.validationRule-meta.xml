@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Data_limite_para_impugnacao</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISNEW(),
+!$User.Ignorar_erros__c,
+(TEXT(Tipo__c) == &apos;Impugnação&apos;),
+(NOW() &gt; Oportunidade_relacionada__r.Data_limite_para_impugnacao__c)
+)</errorConditionFormula>
+    <errorMessage>O prazo limite para impugnação expirou.</errorMessage>
+</ValidationRule>

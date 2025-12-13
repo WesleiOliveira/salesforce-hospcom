@@ -1,0 +1,624 @@
+<apex:page renderAs="pdf" standardController="Opportunity" extensions="NovaPropostaGoverno" standardStylesheets="false" cache="false" showHeader="false" sidebar="false" applyHtmlTag="true" applyBodyTag="false">
+    <head>
+        <style type="text/css" media="print">
+            
+            /* pdf */
+            @page:first{
+            size:A4;
+            background: url({!documento.sobre});
+            margin:150px 50px 120px 50px;
+            @bottom-center{content:element(paginacao);}
+            }
+            @page{
+            size:A4;
+            background: url({!documento.timbrado});
+            margin:150px 50px 120px 50px;
+            @bottom-center{content:element(paginacao);}
+            }
+            .pagina:before{content:counter(page);}
+            .paginas:before{content:counter(pages);}
+            
+            /* paginação */
+            .paginacao{
+            height:120px;
+            position:running(paginacao);
+            }.paginacao .valor{
+            position: absolute;
+            top: 74px;
+            left: 410px;
+            text-align:center;
+            background-color:white;
+            font-family:arial, verdana, sans-serif;
+            font-size:12px;
+            font-weight:600;
+            color:#697f9b;
+            }
+            
+            /* documento */
+            .documento{
+            padding:0px;
+            margin:0px;
+            font-family:arial, verdana, sans-serif;
+            }.bloco{
+            <!--page-break-inside:avoid;-->
+            }.linha{
+            white-space: nowrap;
+            }
+            
+            /* capa */
+            .capa .titulo{
+            margin-top:505px;
+            width:100%;
+            text-align:center;
+            text-transform:uppercase;
+            font-weight:bold;
+            font-size:20px;
+            white-space:pre;
+            }.capa .titulo2{
+            margin-top:505px;
+            text-align:center;
+            text-transform:uppercase;
+            font-weight:bold;
+            font-size:20px;
+            color:red;
+            }.capa .numero{
+            margin-top:40px;
+            width:100%;
+            text-align:right;
+            font-size:14px;
+            }.capa .rotulo{
+            margin-top:35px;
+            font-size:15px;
+            }.capa .valor{
+            margin-top:5px;
+            margin-left:20px;
+            font-size:17px;
+            font-weight:bold;
+            }.capa .nota{
+            margin-top:5px;
+            margin-left:20px;
+            font-size:14px;
+            }
+            
+            /* conteudo */
+            .conteudo{
+            page-break-before:always;
+            }.conteudo .titulo{
+            font-size:14px;
+            font-weight:bold;
+            line-height:120%;
+            }.conteudo .paragrafo{
+            font-size:13px;
+            text-align:justify;
+            line-height:120%;
+            text-justify:inter-word;
+            text-indent:50px;
+            }.conteudo .obsimgs{
+            text-align:right;
+            font-size:11px;
+            font-weight:bold;
+            font-style:italic;
+            }.conteudo .assinatura{
+            width:100%;
+            }.conteudo .assinatura td{
+            width:50%;
+            font-size:13px;
+            line-height:130%;
+            vertical-align:top;
+            }.conteudo .nota{
+            font-size:13px;
+            text-align:justify;
+            line-height:120%;
+            font-style:italic;
+            }
+            
+            /* listagem */
+            .listagem{ 
+            width:100%;
+            }.listagem table{ 
+            width:100%;
+            border-collapse:collapse;
+            }.listagem td{ 
+            padding:2px 5px;
+            line-height:120%;
+            }.listagem .pre-cabecalho{
+            height:10px;
+            }.listagem .cabecalho td{
+            font-size:12px;
+            font-weight:bold;
+            background-color:#e2e3e3;
+            white-space: nowrap;
+            border-color: black;
+            border-style:solid;
+            border-width:1px 0px 1px 0px;
+            }.listagem .item-dados .imagem{
+            vertical-align:top;
+            }.listagem .item-dados.acessorio .imagem{
+            text-align:right;
+            }.listagem .item-dados.equipamento img{
+            width: 80px;
+            height: 80px; 
+            }.listagem .item-dados.acessorio img{
+            width: 55px;
+            height: 55px; 
+            }.listagem .item-dados .valor{
+            border-color: black;
+            border-style:solid;
+            border-width:1px 0px 0px 0px;
+            }.listagem .item-dados td{
+            font-size:10px;
+            vertical-align:top;
+            }.listagem .item-descr td{
+            font-size:10px;
+            width: 300px;
+            word-spacing: -2px;
+            vertical-align:top;
+            white-space: pre-line;
+            text-align: justify;
+            -moz-text-align-last: justify;
+            text-align-last: justify;
+            <!-- text-justify:inter-word;-->
+            border-color:#eef2f4;
+            border-style:solid;
+            border-width:0px 0px 1px 0px;
+            }.listagem .subtotal{
+            font-weight: bold;
+            font-size:10px;
+            white-space: nowrap;
+            }.listagem .subtotal .valor{
+            border-color:#eef2f4;
+            border-style:solid;
+            border-width:0px 0px 1px 0px;
+            }
+        </style>
+    </head>
+    
+    <body class="documento">
+
+        <apex:outputText rendered="{!!Opportunity.Proposta_valida__c}">
+            <div class="capa">
+                <div class="titulo2">PREENCHA TODOS OS CAMPOS DA SEÇÃO PROPOSTA PARA GERAR O DOCUMENTO</div>                
+            </div>
+        </apex:outputText>
+
+        <apex:outputText rendered="{!Opportunity.Proposta_valida__c}">
+            
+            <!-- paginacao -->
+            <div class="paginacao">
+                <div class="valor">Página <span class="pagina"/> de <span class="paginas"/></div>
+            </div>
+            
+            <!-- capa -->
+            <div class="capa">
+                <div class="titulo">{!documento.titulo}</div>
+                <div class="numero">Nº: {!oportunidade.Numero_OP__c}</div>
+                <apex:outputText rendered="{!IF(oportunidade.Account.RecordType.Name=='Conta comercial',true,false)}">
+                    <div class="rotulo" style="margin-top:20px;">À</div>
+                    <div class="valor">{!oportunidade.Account.Name}</div>
+                    <div class="nota">CNPJ: {!oportunidade.Account.CNPJ__c}</div>            
+                </apex:outputText>
+                <apex:outputText rendered="{!IF(AND(oportunidade.RecordType.Name=='Comercial',oportunidade.Contato__c=null),true,false)}">
+                    <div class="rotulo">Aos cuidados de</div>
+                    <div class="valor">{!oportunidade.Contato__r.Name}</div>
+                    <apex:outputText rendered="{!IF(oportunidade.Contato__r.CPF__c!=null,true,false)}">
+                        <div class="nota">CPF: {!oportunidade.Contato__r.CPF__c}</div>          
+                    </apex:outputText>
+                </apex:outputText>
+                <apex:outputText rendered="{!IF(oportunidade.RecordType.Name=='Licitação',true,false)}">
+                    <div class="rotulo">{!oportunidade.Modalidade__c}</div>
+                    <div class="valor">{!oportunidade.Name}</div>
+                    <apex:OutputText rendered="{!If(oportunidade.Processo__c!=null,true,false)}">
+                        <div class="nota">Nº. Processo: {!oportunidade.Processo__c}</div>            
+                    </apex:OutputText>
+                </apex:outputText>
+            </div>
+            
+            <!-- conteudo -->
+            <div class="conteudo">
+                
+                <div class="bloco">
+                    <apex:variable var="n1" value="{!0}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+                    <div class="titulo">Prezados Senhores,</div>
+                    <br/>
+                    <div class="paragrafo">A empresa {!Opportunity.Faturamento_Feito2__r.Raz_o_Social__c}, inscrita no CNPJ sob o Nº {!Opportunity.Faturamento_Feito2__r.CNPJ__c} sediada na {!Opportunity.Faturamento_Feito2__r.BillingStreet}, {!Opportunity.Faturamento_Feito2__r.BillingCity} - {!Opportunity.Faturamento_Feito2__r.BillingState}, CEP: {!Opportunity.Faturamento_Feito2__r.BillingPostalCode} tem a satisfação de transmitir-lhes a seguinte proposta de fornecimento, condições de venda e pagamento.</div>
+                    <br/>
+                </div>
+                
+                <div class="bloco">
+                    <apex:variable var="n1" value="{!n1+1}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+                    <div class="titulo">{!n1}. Objeto da proposta</div>
+                    <br/>
+                    
+                    <apex:outputText rendered="{!IF(Opportunity.RecordType.DeveloperName != 'OPME' && Opportunity.RecordType.DeveloperName != 'OPME_Baumer', true, false)}">
+                        <div class="paragrafo">Constitui objeto da presente proposta o fornecimento do(s) equipamento(s) médico-hospitalar(es), descrito(s) em detalhes no item 2.1 (“Produtos(s)”), que será(ão) fornecido(s) pela Hospcom. Os serviços de instalação e assistência técnica em garantia se estiverem inclusos serão prestados pela Hospcom ou por outra empresa por ela designada, conforme condições explicitadas na presente proposta e em seus anexos. A definição do estabelecimento vendedor, matriz ou filial da Hospcom, será indicada na Nota Fiscal de Faturamento.</div>
+                    </apex:outputText>
+                    
+                    <apex:outputText rendered="{!IF(Opportunity.RecordType.DeveloperName ==  'OPME' || Opportunity.RecordType.DeveloperName ==  'OPME_Baumer', true, false)}">
+                        <div class="paragrafo">Constitui objeto da presente proposta o fornecimento de OPME (Órteses, Próteses e Materiais Especiais) descrito(s) em detalhes no item 2.1, sendo respeitadas as definições e direcionamentos abaixo.
+                            <br/>
+                            <br/>
+                            <div>Paciente: {!Opportunity.Paciente2__r.Name}</div><br/>
+                            
+                            <div>Médico: {!Opportunity.Medico__r.FirstName} {!Opportunity.Medico__r.LastName}</div>
+                        </div>
+                        
+                    </apex:outputText>
+                    <br/>
+                </div>
+                
+                <div class="bloco">
+                    <apex:variable var="n1" value="{!n1+1}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+                    <div class="titulo">{!n1}. Condições gerais de venda</div>
+                    <br/>
+                    
+                    <apex:variable var="n2" value="{!n2+1}"/><apex:variable var="n3" value="{!0}"/>
+                    <div class="paragrafo"><b>{!n1}.{!n2}</b>. O objeto da presente proposta é(são) a(s) venda(s) do(s) Equipamento(s)</div>
+                    <br/>
+                </div>
+                
+                <!-- COMEÇA PDF AQUI -->
+                <div class="listagem" style="
+                                             border: 2px solid #00345C; 
+                                             border-radius: 360px!important; 
+                                             padding: 10px;
+                                             width: 95%; 
+                                             display: flex!important;
+                                             justify-content: center!important;
+                                             align-items: center!important;
+                                             ">
+                    
+                    
+                    <apex:variable var="subtotal" value="{!0}"/>
+                    
+                    <table cellpadding="0px" cellspacing="0px" style="border: 1px solid black">
+                        <!-- cabeçalho -->
+                        <tr class="pre-cabecalho"><tr cellspacing="7"></tr></tr>
+                    <tr class="cabecalho">
+                        <td style="visibility:hidden;border:0px;"></td>
+                        <td>Imagem</td>
+                        <td>Produto</td>
+                        <td>Modelo</td>
+                        <td>Fabricante</td>
+                        <td>Valor Unit.</td>
+                        <td>Qtd.</td>
+                        <td>Valor Total</td>
+                    </tr>
+                    <apex:repeat value="{!produtos}" var="produto">
+                        <apex:variable var="subtotal1" value="{!0}"/>
+                        <apex:variable var="subtotal2" value="{!0}"/>
+                        <apex:outputText rendered="{!IF(produto.item.Item_Pai__c==null && produto.item.Perdido__c == false,true,false)}">
+                            <tbody class='bloco'>
+                                
+                                
+                                
+                                <!-- ITEM -->
+                                <tr class="item-dados equipamento" rendered="{!ISNULL(produto.item.Item_Pai__c)}">
+                                    <td rowspan="2"><apex:outputText value="{!produto.item.Item_do_edital__c}"/></td>
+                                    <td rowspan="2" class="imagem"><img src="{!produto.item.Product2.URL_da_Imagem__c}"/></td>
+                                    <td class="valor">
+                                        COD: {!produto.item.Product2.StockKeepingUnit}
+                                        <apex:outputText value="{!', LOTE: '+produto.item.Lote__c}" rendered="{!IF(produto.item.Lote__c!=null,true,false)}" />
+                                        <br/>
+                                        {!produto.item.Product2.Name}
+                                    </td>
+                                    <td class="valor">{!produto.item.Product2.Modelo__c}</td>
+                                    <td class="valor">{!produto.item.Product2.Marca__c}</td>
+                                    
+                                    <apex:outputText rendered="{!Opportunity.Proposta_detalhada__c}">
+                                        <td class="valor">
+                                            <apex:outputField value="{!produto.item.UnitPrice}"/>
+                                        </td>
+                                    </apex:outputText>
+                                    
+                                    <apex:outputText rendered="{!!Opportunity.Proposta_detalhada__c}">
+                                        <td class="valor">
+                                            <apex:outputText rendered="{!IF(produto.item.Item__c != null,true, false)}" style="text-align: right;">
+                                                <apex:outputField value="{!produto.item.Subtotal_Unit__c}"/>
+                                            </apex:outputText>
+                                        </td>
+                                    </apex:outputText>
+                                    
+                                    <td class="valor"><apex:outputField value="{!produto.item.Quantity}"/></td>
+                                    <apex:outputText rendered="{!Opportunity.Proposta_detalhada__c}">
+                                        
+                                        <td class="valor"><apex:outputField value="{!produto.item.TotalPrice}"/></td>
+                                        
+                                    </apex:outputText>
+                                    
+                                    <apex:outputText rendered="{!!Opportunity.Proposta_detalhada__c}">
+                                        
+                                        <td class="valor">
+                                            <apex:outputText rendered="{!IF(produto.item.Item__c != null,true, false)}" style="text-align: right;">
+                                                <apex:outputField value="{!produto.item.Subtotal__c}" rendered="{!IF(produto.item.Subtotal__c != null, true, false)}"/><apex:outputField value="{!produto.item.TotalPrice}" rendered="{!IF(produto.item.Subtotal__c == null, true, false)}"/>
+                                            </apex:outputText>
+                                        </td>
+                                    </apex:outputText>
+                                </tr>
+                                
+                                <apex:outputtext rendered="{!IF(oportunidade.RecordType.Name!='Licitação',true,false)}">
+                                    <tr class="item-descr" rendered="{!ISBLANK(produto.item.Item_Pai__c)}">
+                                        <td colspan="8">
+                                            <apex:outputText rendered="{!if(produto.item.Descricao_do_Especialista__c!=null,true,false)}">
+                                                <apex:outputfield value="{!produto.item.Descricao_do_Especialista__c}"/>.
+                                            </apex:outputText>
+                                            <apex:outputText rendered="{!if(produto.item.Product2.Numero_Anvisa__c!=null,true,false)}">
+                                                Nº. ANVISA: {!produto.item.Product2.Numero_Anvisa__c}.
+                                            </apex:outputText>
+                                        </td>                               
+                                    </tr>
+                                </apex:outputtext>
+                                
+                                <apex:outputtext rendered="{!IF(oportunidade.RecordType.Name=='Licitação',true,false)}">
+                                    <tr class="item-descr" style="text-align:justify; text-justify:inter-word;" rendered="{!ISBLANK(produto.item.Item_Pai__c)}">
+                                        <td colspan="8">
+                                            <apex:outputText rendered="{!if(produto.item.Descricao_do_Especialista__c!=null,true,false)}">
+                                                <apex:outputfield value="{!produto.item.Descricao_do_Especialista__c}"/>.
+                                            </apex:outputText>
+                                            <apex:outputText rendered="{!if(produto.item.Product2.Numero_Anvisa__c!=null,true,false)}">
+                                                Nº. ANVISA: {!produto.item.Product2.Numero_Anvisa__c}.
+                                            </apex:outputText>
+                                        </td>                               
+                                    </tr>
+                                </apex:outputtext>
+                                <!-- ITEM -->
+                                
+                                <!-- SUBTOTAL -->
+                                <apex:variable var="subtotal" value="{!subtotal+produto.item.TotalPrice}"/>
+                                <!-- SUBTOTAL -->
+                            </tbody>    
+                        </apex:outputText>                  
+                    </apex:repeat>
+                </table>
+                
+            </div>
+            
+            <br/>
+            <div class="obsimgs">Imagens ilustrativas.</div>
+            <br/>
+            
+            <div class="bloco">
+                <apex:outputText rendered="{!IF(oportunidade.Nome_de_destino__c!=null,true,false)}">
+                    <div class="paragrafo"><b>Envio e manuseio: </b> <apex:outputField value="{!oportunidade.Nome_de_destino__c}"/>.</div>
+                    <br/>
+                </apex:outputText>
+                <div class="paragrafo"><b>Valor total: </b> <apex:outputField value="{!oportunidade.Amount}"/>.</div>
+                <br/>
+                <apex:outputText rendered="{!IF(oportunidade.RecordType.Name=='Licitação',false,true)}">
+                    <div class="paragrafo"><b>Frete: </b> <apex:outputField value="{!oportunidade.Frete__c}"/>.</div>
+                    <div class="paragrafo"><b>Prazo de entrega: </b> <apex:outputField value="{!oportunidade.Prazo_de_entrega__c}"/>.</div>
+                    <apex:outputText rendered="{!IF(Opportunity.RecordType.DeveloperName != 'OPME' && Opportunity.RecordType.DeveloperName != 'OPME_Baumer', true, false)}">
+                        <div class="paragrafo"><b>Prazo de Garantia: </b><apex:outputField value="{!Opportunity.Prazo_de_garantia_dos_equipamentos__c}"/> para equipamentos, e para acessórios&nbsp;<apex:outputField value="{!Opportunity.Prazo_de_garantia_acessorios__c}"/>.</div>
+                    </apex:outputText>
+                    <br/>
+                </apex:outputtext>
+                <br/>
+                
+                
+            </div>
+            <apex:outputPanel rendered="{!IF(oportunidade.RecordType.Name=='Licitação',true,false)}">
+                <br/>
+                <div class="paragrafo">O preço acima inclui o ICMS, II, IPI, PIS e COFINS às alíquotas vigentes na data de emissão desta proposta. Qualquer tributo que seja criado ou majorado no futuro correrá por conta exclusiva da COMPRADORA.</div>
+                <br/>
+                <div class="paragrafo">A menos que a COMPRADORA forneça a Hospcom o respectivo certificado de isenção, com antecedência razoável à data em que o(s) Equipamento(s) for(em) disponibilizado(s) para entrega, a Hospcom faturará a COMPRADORA com relação aos impostos relativos, e a COMPRADORA pagará os impostos de acordo com os termos da fatura.</div>
+                <br/>
+            </apex:outputPanel>
+            <apex:variable var="n2" value="{!n2+1}"/><apex:variable var="n3" value="{!0}"/>
+            <div class="titulo">{!n1}.{!n2}. Forma de pagamento</div>
+            <br/>
+            <apex:outputPanel rendered="{!IF(oportunidade.RecordType.Name=='Licitação',true,false)}">
+                <div class="paragrafo">A condição de pagamento deverá ser assinalada conforme acordado entre Vendedora e Compradora.</div>
+                <br/>
+                <apex:outputText rendered="{!IF(oportunidade.RecordType.Name=='Comercial',true,false)}">
+                    <div class="paragrafo">O Faturamento mínimo aceito pela empresa sera de R$ 200,00 (Duzentos Reais) inclusive para parcelas, sujeito a analise de crédito.</div>
+                    <br/>           
+                </apex:outputText>
+            </apex:outputPanel>
+            <div class="paragrafo">
+                <b>Condições de pagamento: </b>
+                <apex:outputText value="{!' '+SUBSTITUTE(oportunidade.Forma_de_pagamento2__c, 'Recebimento', 'Pagamento')}"/> em 
+                <apex:outputText value="{!' '+IF(oportunidade.Numero_de_prestacoes__c!=null,oportunidade.Numero_de_prestacoes__c + ' parcela(s)', oportunidade.Condicao_de_pagamento__c)}"/>.
+            </div>
+            <br/>
+            <apex:outputPanel rendered="{!IF(oportunidade.RecordType.Name=='Licitação',true,false)}">
+                <apex:variable var="n3" value="{!n3+1}"/>
+                <div class="paragrafo"><b>{!n1}.{!n2}.{!n3}.</b> Quando da liberação do(s) Equipamento(s) pela VENDEDORA, esta emitirá Nota Fiscal de Faturamento, nota esta que acompanhará o(s) Equipamento(s) no momento de entrega à COMPRADORA, na forma do presente. </div>
+                <br/>
+                
+                <apex:variable var="n3" value="{!n3+1}"/>
+                <div class="paragrafo"><b>{!n1}.{!n2}.{!n3}.</b> A forma de pagamento estabelecida acima, não poderá ser alterada sem que para isso exista uma prévia e expressa aprovação da VENDEDORA. A COMPRADORA, desde já, fica ciente e de acordo que qualquer alteração na forma de pagamento poderá ocasionar a revisão/reajuste do Preço de Compra do(s) Equipamento(s), quando o caso.</div>
+                <br/>
+                
+                <apex:outputText rendered="{!IF(oportunidade.RecordType.Name=='Comercial',true,false)}">
+                    <apex:variable var="n3" value="{!n3+1}"/>
+                    <div class="paragrafo"><b>{!n1}.{!n2}.{!n3}.</b> O atraso de pagamento acarretará a aplicação de multa de 2% (dois) por cento do saldo devido, acrescida de juros de mora de 1% (um porcento) ao mês, pro rata dia, e correção monetária, calculados considerando a variação acumulada do IGPM/FGV entre a data de vencimento até o efetivo pagamento. Sujeito a protesto após 5 dias de vencimento.</div>
+                    <br/>
+                </apex:outputText>
+                
+                <apex:variable var="n3" value="{!n3+1}"/>
+                <div class="paragrafo"><b>{!n1}.{!n2}.{!n3}.</b> A VENDEDORA envidará seus melhores esforços para entregar o(s) Equipamento (s) dentro do prazo acordado na presente proposta.</div>
+                <br/>
+                
+                <div class="bloco">
+                    <apex:variable var="n2" value="{!n2+1}"/><apex:variable var="n3" value="{!0}"/>
+                    <div class="titulo">{!n1}.{!n2}. Condições de entrega</div>
+                    <br/>
+                    
+                    <apex:variable var="n3" value="{!n3+1}"/>
+                    <div class="paragrafo"><b>{!n1}.{!n2}.{!n3}.</b> Cabe à COMPRADORA preparar o Local de Instalação. A VENDEDORA considerará que o local de Instalação já esteja disponível no ato da assinatura da presente, e contar-se-á desta data o prazo para entrega da VENDEDORA, conforme abaixo mencionado no item 2.3.2.</div>
+                    <br/>
+                </div>
+                
+                <apex:variable var="n3" value="{!n3+1}"/>
+                <div class="paragrafo"><b>{!n1}.{!n2}.{!n3}.</b> Caso a COMPRADORA tenha a necessidade de prorrogar a data de liberação do local de instalação do(s) Equipamento (s) acima informada, esta deverá comunicar à VENDEDORA seu interesse por escrito, sendo que referida prorrogação deverá ser regulada por meio de aditamento a este documento, sendo certo ainda que essa prorrogação poderá ser requerida uma única vez e o prazo de prorrogação em nenhuma hipótese poderá ser superior a 30 (trinta) dias corridos.</div>
+                <br/>
+                
+                <apex:outputText rendered="{!IF(oportunidade.RecordType.Name=='Comercial',true,false)}">
+                    <apex:variable var="n3" value="{!n3+1}"/>
+                    <div class="paragrafo"><b>{!n1}.{!n2}.{!n3}.</b> Caso no momento da entrega a COMPRADORA não esteja com o Site pronto, as despesas de armazenagem passarão a correr por conta exclusiva dela, COMPRADORA. Se a COMPRADORA não assumir os custos de armazenagem, a VENDEDORA poderá efetuar os pagamentos devidos, repassando as despesas à COMPRADORA. para reembolso por esta no prazo de até 10 (dez) dias contados do recebimento de comunicado escrito da VENDEDORA nesse sentido. Fica desde já consignado que a presente proposta constitui título executivo para todos os fins de direito.</div>
+                    <br/>
+                    
+                    <apex:variable var="n3" value="{!n3+1}"/>
+                    <div class="paragrafo"><b>{!n1}.{!n2}.{!n3}.</b> É de responsabilidade exclusiva da COMPRADORA, a devida preparação de suas instalações, em especial do local onde o(s) Equipamento (s) será(ão) instalado(s), bem como assegurar a regularidade da documentação que venha a ser solicitada pela VENDEDORA.</div>
+                    <br/>
+                </apex:outputText>
+                
+                <div class="paragrafo">
+                    <b>Prazo de entrega </b> de {!oportunidade.Prazo_de_entrega__c}, {!oportunidade.Frete__c}.
+                </div>
+                <br/>
+                <apex:outputText rendered="{!IF(oportunidade.Nome_da_Referencia_de_Faturamento__c!=null,true,false)}">
+                    <div class="paragrafo"><b>Endereço de Faturamento: </b> {!oportunidade.Nome_da_Referencia_de_Faturamento__c}
+                        <apex:outputText rendered="{!IF(oportunidade.Account.BillingStreet != null,true,false)}" >, {!oportunidade.Account.BillingStreet}</apex:outputText>
+                        <apex:outputText rendered="{!IF(oportunidade.Account.BillingCity != null,true,false)}" >, {!oportunidade.Account.BillingCity}</apex:outputText>
+                        <apex:outputText rendered="{!IF(oportunidade.Account.BillingStateCode != null,true,false)}" >-{!oportunidade.Account.BillingStateCode}</apex:outputText>
+                        <apex:outputText rendered="{!IF(oportunidade.Account.BillingPostalCode != null,true,false)}" >, CEP: {!oportunidade.Account.BillingPostalCode}</apex:outputText>
+                        <apex:outputText rendered="{!IF(oportunidade.Account.BillingCountry != null,true,false)}" >, {!oportunidade.Account.BillingCountry}</apex:outputText>.
+                    </div>
+                    <br/>
+                </apex:outputText>
+                <apex:outputText rendered="{!IF(oportunidade.Nome_de_destino__c !=null,true,false)}">
+                    <div class="paragrafo"><b>Endereço de Entrega: </b> {!oportunidade.Nome_de_destino__c}
+                        <apex:outputText rendered="{!IF(oportunidade.Account.ShippingStreet != null,true,false)}" >, {!oportunidade.Account.ShippingStreet}</apex:outputText>
+                        <apex:outputText rendered="{!IF(oportunidade.Account.ShippingCity != null,true,false)}" >, {!oportunidade.Account.ShippingCity}</apex:outputText>
+                        <apex:outputText rendered="{!IF(oportunidade.Account.ShippingStateCode != null,true,false)}" >-{!oportunidade.Account.ShippingStateCode}</apex:outputText>
+                        <apex:outputText rendered="{!IF(oportunidade.Account.ShippingPostalCode != null,true,false)}" >, CEP: {!oportunidade.Account.ShippingPostalCode}</apex:outputText>
+                        <apex:outputText rendered="{!IF(oportunidade.Account.ShippingCountry != null,true,false)}" >, {!oportunidade.Account.ShippingCountry}</apex:outputText>.
+                    </div>
+                    <br/>
+                </apex:outputText>
+                
+                <div class="bloco">
+                    <apex:variable var="n1" value="{!n1+1}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+                    <div class="titulo">{!n1}. Garantia</div>
+                    <br/>
+                    <div class="paragrafo">
+                        O(s) item(s) objeto desta proposta é(são) garantido(s) exclusivamente contra defeitos de fabricação pelo período de {!oportunidade.Prazo_de_garantia_dos_equipamentos__c} para equipamentos, {!oportunidade.Prazo_de_garantia_acessorios__c} para acessórios.
+                    </div>
+                    <br/>
+                </div>
+                
+                <div class="paragrafo">Qualquer serviço relacionado à garantia do(s) item(s) que se faça necessário durante o período de garantia acima informado deverá ser solicitado pela COMPRADORA para o time de serviços da HOSPCOM. Solicitações de atendimento feitas através de qualquer outro canal não serão consideradas válidas, isentando-se a HOSPCOM de responsabilidade pelo não atendimento.</div>
+                <br/>
+                
+                <div class="bloco">
+                    <apex:variable var="n1" value="{!n1+1}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+                    <div class="titulo">{!n1}. Assistência técnica</div>
+                    <br/>
+                    <div class="paragrafo">Com o objetivo de garantir a disponibilidade operacional e, conseqüentemente, manter a produtividade do(s) Equipamento (s), desde já fica facultado à COMPRADORA a opção de negociar e assinar com a INSTALADORA contrato de manutenção para o(s) Equipamento (s) após o término do período de garantia dada pelo fabricante.</div>
+                    <br/>
+                </div>
+            </apex:outputPanel>
+            <div class="bloco">
+                <apex:variable var="n1" value="{!n1+1}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+                <div class="titulo">{!n1}. Validade da proposta</div>
+                <br/>
+                <div class="paragrafo">A validade desta proposta abaixo, devendo ser assinada e devolvida à Hospcom dentro deste mesmo prazo. Após o termino do prazo a Hospcom não garantira a manutenção dos preços estabelecidos  bem como a disponibilidade do material e do serviço na forma descrita nesse documento.</div>
+                <br/>
+                <apex:outputText rendered="{!IF(AND(oportunidade.RecordType.Name=='Comercial',oportunidade.Data_de_emissao__c!=null),true,false)}">
+                    <div class="paragrafo"><b>Data de emissão: </b><apex:outputField value="{!oportunidade.Data_de_emissao__c}"/>.</div>
+                    <br/>
+                </apex:outputText>
+                <apex:outputText rendered="{!IF(oportunidade.RecordType.Name=='Licitação',true,false)}">
+                    <div class="paragrafo"><b>Data de abertura: </b><apex:outputField value="{!oportunidade.Data_da_Abertura__c}"/>.</div>
+                    <br/>
+                </apex:outputText>
+                <div class="paragrafo"><b>Data de validade: </b><apex:outputField value="{!oportunidade.Data_de_Validade__c}"/>.</div>
+                <br/>
+            </div>
+            
+            <div class="bloco">
+                <apex:variable var="n1" value="{!n1+1}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+                <apex:outputText rendered="{!IF(documento.empresa_bancario!=null,true,false)}">
+                    <div class="titulo">{!n1}. Dados bancários</div>
+                    <br/>
+                    <div class="paragrafo">{!documento.empresa_bancario}.</div>
+                    <br/>
+                </apex:outputText>
+                <apex:outputText rendered="{!IF(documento.empresa_bancario==null,true,false)}">
+                    <div class="titulo">{!n1}. Informações financeiras</div>
+                    <br/>
+                    <div class="paragrafo">Faturamento feito por {!oportunidade.Faturamento_Feito2__r.Raz_o_Social__c}, CNPJ: {!oportunidade.Faturamento_Feito2__r.CNPJ__c}.</div>
+                    <br/>
+                </apex:outputText>
+            </div>
+            
+            <apex:outputText rendered="{!IF(oportunidade.Declara_es__c!=null,true,false)}">
+                <apex:variable var="n1" value="{!n1+1}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+                <div class="titulo">{!n1}. Declarações</div>
+                <br/>
+                <div class="paragrafo">{!oportunidade.Declara_es__c}</div>
+                <br/>
+            </apex:outputText>  
+            
+            <apex:outputText rendered="{!IF(oportunidade.RecordType.Name=='Comercial',true,false)}">
+                <div class="bloco">
+                    <div class="titulo">Documento criado por </div>
+                    <div class="paragrafo">
+                        <b>{!oportunidade.Owner.Name}</b>
+                        <apex:outputText rendered="{!IF(oportunidade.Owner.Title!=null,true,false)}">
+                            ({!oportunidade.Owner.Title})
+                        </apex:outputText>
+                    </div>
+                    <apex:outputText rendered="{!IF(oportunidade.Owner.Email!=null,true,false)}">
+                        <div class="paragrafo">Email:&nbsp;{!oportunidade.Owner.Email}</div>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(oportunidade.Owner.Phone!=null,true,false)}">
+                        <div class="paragrafo">Telefone:&nbsp;{!oportunidade.Owner.Phone}</div>
+                    </apex:outputText>
+                </div>
+            </apex:outputText>
+            
+            <div class="bloco">
+                <apex:variable var="n1" value="{!n1+1}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+                <apex:outputPanel rendered="{!IF(oportunidade.RecordType.Name=='Licitação',true,false)}">
+                    <div class="titulo">{!n1}. Termo de aceite</div>
+                    <br/>
+                    <div class="paragrafo">Caso a presente conte com a aprovação de V.Sas., solicitamos a gentileza de nos devolver a segunda via desta, devidamente assinada por seu(s) representante(s) legal(is), incluindo, mas não se limitando ao Item abaixo, rubricando todas as paginas.</div>
+                    <br/>
+                </apex:outputPanel>
+                
+                <apex:outputText rendered="{!IF(oportunidade.RecordType.Name=='Comercial',true,false)}">
+                    <table class="assinatura" style="text-align:center">
+                        <tr>
+                            <td>
+                                <br/><br/>____________________________________
+                                <br/>{!Opportunity.Faturamento_feito2__r.Raz_o_Social__c} 
+                                <br/>CNPJ: {!Opportunity.Faturamento_feito2__r.CNPJ__c} 
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                </apex:outputText>
+                
+                <apex:outputText rendered="{!IF(oportunidade.RecordType.Name=='Licitação',true,false)}">
+                    <table class="assinatura">
+                        <tr>
+                            <td>
+                                <br/><br/>____________________________________
+                                <br/>Nome: {!documento.ass_nome} 
+                                <br/>RG: {!documento.ass_rg} 
+                                <br/>CPF: {!documento.ass_cpf} 
+                                <br/>E-mail: licitacao@hospcom.net
+                                <br/>Telefone: (62) 3241-5555
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                </apex:outputText>
+                <apex:outputPanel rendered="{!IF(oportunidade.RecordType.Name=='Licitação',true,false)}">
+                    <div class="titulo">Notas</div>
+                    <br/>
+                    <div class="nota"><i>1. Esta proposta foi emitida em duas vias iguais;</i></div>
+                    <div class="nota"><i>2. Os signatários acima deverão rubricar todas as páginas da proposta;</i></div>
+                    <div class="nota"><i>3. Todos os campos do quadro acima são de preenchimento obrigatório pela COMPRADORA, sob pena de invalidade da proposta;</i></div>
+                    <div class="nota"><i>4. Não serão aceitas rasuras neste documento.</i></div>
+                    
+                </apex:outputPanel>
+            </div>
+            
+            
+        </div>
+        
+    </apex:outputText>
+</body>
+</apex:page>

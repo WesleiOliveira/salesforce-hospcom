@@ -1,0 +1,126 @@
+<template>
+
+
+    <!-- Spinner Overlay -->
+    <template if:true={isLoading}>
+        <lightning-spinner style="z-index: 10000000;" alternative-text="Loading" size="medium"></lightning-spinner>
+    </template>
+
+    <!-- Botão inicial -->
+    <template if:true={disponivelParaAuditar}>
+        <div onclick={iniciarAuditoria} class="iniciar-auditoria-btn">
+            Iniciar Auditoria
+        </div>
+    </template>
+
+      <!-- Botão inicial -->
+    <template if:false={disponivelParaAuditar}>
+        <div title="Confira os campos antes de Auditar" class="iniciar-auditoria-btn" style="color: black;background-color:grey;cursor:not-allowed">
+            Iniciar Auditoria
+        </div>
+    </template>
+
+
+    <template if:true={modal}>
+        <!-- Overlay escuro -->
+        <div class="overlay" id="overlay" onclick={fecharModal}></div>
+
+        <!-- Modal de formulário -->
+        <div class="modal" id="corpoModal">
+
+            <!-- Header -->
+            <div class="modal-header" id="modalHeader">
+                <div class="header-content">
+                    <div class="audit-meta">
+                        <span class="audit-number">{auditoria.Nome}</span>
+                        <span class="audit-separator">•</span>
+                        <span class="info-value">{auditoria.dataAuditoriaFormatada}</span>
+                    </div>
+                    <div class="audit-info collapsible-content">
+                        <div class="info-row">
+                            <span class="info-label">Empresa:</span>
+                            <span class="info-value">{auditoria.empresaAuditadaNome}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Auditado:</span>
+                            <span class="info-value">{auditoria.auditadoNome}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Responsável:</span>
+                            <span class="info-value">{auditoria.responsavelNome}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Planejamento:</span>
+                            <span class="info-value">{auditoria.nomePlanejamento}</span>
+                        </div>
+                    </div>
+                    <template if:true={temObservacao}>
+                        <div class="audit-plan collapsible-content">
+                            <div class="obs">{auditoria.observacao}</div>
+                        </div>
+                    </template>
+                </div>
+                <button class="close-btn" onclick={fecharModal}>✕</button>
+                <button class="toggle-header-btn" onclick={toggleHeader}>
+                    <span class="arrow-icon">▲</span>
+                </button>
+            </div>
+
+            <!-- Body -->
+            <div class="modal-body">
+
+
+                <div id="formulario-container">
+                    <!-- Loop por seções -->
+                    <template for:each={secaoComPerguntas} for:item="secao" for:index="indexSecao">
+                        <div key={secao.nome}>
+                            <!-- Título da Seção -->
+                            <div class="secao">
+                                {secao.numeroSecao}. {secao.nome}
+                            </div>
+
+                            <!-- Loop por perguntas da seção -->
+                            <template for:each={secao.perguntas} for:item="pergunta">
+                                <div key={pergunta.id} class="card-pergunta" data-id={pergunta.id}>
+                                    <!-- ID da pergunta -->
+                                    <div class="pergunta-id">
+                                        {pergunta.name} - {pergunta.tipo}
+                                    </div>
+
+                                    <!-- Texto e respostas -->
+                                    <div class="pergunta-texto">
+                                        {pergunta.pergunta}
+                                        <div class="pergunta-resposta">
+                                            <!-- Opção C -->
+                                            <label class="radio-option">
+                                                <input type="radio" name={pergunta.radioName} value="C"
+                                                    data-pergunta-id={pergunta.id} onchange={handleRadioChange} />
+                                                <span class="radio-label conforme">C</span>
+                                            </label>
+
+                                            <!-- Opção NC -->
+                                            <label class="radio-option">
+                                                <input type="radio" name={pergunta.radioName} value="NC"
+                                                    data-pergunta-id={pergunta.id} onchange={handleRadioChange} />
+                                                <span class="radio-label nao-conforme">NC</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <button class="btn-secondary" onclick={fecharModal}>Cancelar</button>
+                    <button class="btn-primary" onclick={confirmarAuditoria}>Confirmar</button>
+                </div>
+            </div>
+
+
+        </div>
+    </template>
+
+</template>

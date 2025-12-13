@@ -1,0 +1,344 @@
+<apex:page standardController="WorkOrder" renderAs="pdf">
+  <html>
+      <body style="font-family: calibri, sans-serif; font-size: 7pt">
+          <table style="border: 1px solid #000080" width="525px">
+              <tr>
+                  <td width="63%">
+                      <table style="border: 1px solid #000080; padding: 10px;" cellspacing="0">
+                          <tr>
+                              <td width="70px" rowspan="2">
+                                  <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEYo&oid=00Di0000000JVhH&lastMod=1543856299000" width="60px" height="60px"/>
+                              </td>
+                              <td width="40px" style="border-bottom: 1px solid #000080; vertical-align: bottom; color: #000080" height="40px">
+                                  <b>OS Nº</b>
+                              </td>
+                              <td style="border-bottom-color:#000080 ;border-bottom: 1px solid; color: #000080; vertical-align: bottom" width="80px">
+                                  {!WorkOrder.WorkOrderNumber}
+                              </td>
+                              
+                              <td width="25px" style="border-bottom: 1px solid #000080; vertical-align:bottom; color: #000080">
+                                  <b>Data:</b>
+                              </td>
+                              <td width="100px" style="border-bottom: 1px solid #000080; vertical-align:bottom; color: #000080">
+                                  <apex:outputField value="{!WorkOrder.CreatedDate}" />
+                              </td>
+                          </tr>
+                          
+                          <tr>
+                              <td colspan ="5">
+                                  <table cellspacing="0">
+                                      <tr>
+                                          <td style="border-bottom: 1px solid #000080; vertical-align:center; color: #000080; vertical-align: bottom" height="20px" width="35px">
+                                              <b>Técnico:</b>
+                                          </td>
+                                          <td style="border-bottom: 1px solid #000080; vertical-align:center; color: #000080; vertical-align: bottom" width="220px">
+                                              {!IF(WorkOrder.T_cnico_Respons_vel__c!=NULL, WorkOrder.T_cnico_Respons_vel__c,null)}
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td colspan="5">
+                                  <table cellspacing="0">
+                                      <tr>
+                                          <td style="border-bottom: 1px solid #000080; vertical-align:center; color: #000080; vertical-align: bottom" height="20px" width="35px">
+                                              <b>Cliente:</b>
+                                          </td>
+                                          
+                                          <td style="border-bottom: 1px solid #000080; vertical-align:center; color: #000080; vertical-align: bottom" height="20px" width="296px">
+                                              {!IF(WorkOrder.Account.Name!= NULL, WorkOrder.Account.Name, NULL)}
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td colspan="5">
+                                  <table cellspacing="0">
+                                      <tr>
+                                          <td style="border-bottom: 1px solid #000080; vertical-align:center; color: #000080; vertical-align: bottom" height="20px" width="30px">
+                                              <b>Contato:</b>
+                                          </td>
+                                          
+                                          <td style="border-bottom: 1px solid #000080; vertical-align:center; color: #000080; vertical-align: bottom" height="20px" width="115px">
+                                              {!IF(WorkOrder.Contact.Name!= NULL,WorkOrder.Contact.Name,NULL)}
+                                          </td>
+                                          
+                                          <td style="border-bottom: 1px solid #000080; vertical-align:center; color: #000080; vertical-align: bottom" height="20px" width="30px">
+                                              <b>Telefone:</b>
+                                          </td>
+                                          
+                                          <td style="border-bottom: 1px solid #000080; vertical-align:center; color: #000080; vertical-align: bottom" height="20px" width="132px">
+                                              {!IF(WorkOrder.Contact.Phone!= NULL,WorkOrder.Contact.Phone,NULL)}
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td colspan="5">
+                                  <table cellspacing="0">
+                                      <tr>
+                                          <td style="border-bottom: 1px solid #000080; vertical-align:center; color: #000080; vertical-align: bottom" height="20px" width="40px">
+                                              <b>Equipamento:</b>
+                                          </td>
+                                          
+                                          <td style="border-bottom: 1px solid #000080; vertical-align:center; color: #000080; vertical-align: bottom" height="20px" width="269px">
+                                              {!IF(WorkOrder.Asset.Name!=NULL,WorkOrder.Asset.Name,NULL)}
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td colspan="5">
+                                  <table cellspacing="0">
+                                      <tr>
+                                          <td style="border-bottom: 1px solid #000080; vertical-align:center; color: #000080; vertical-align: bottom" height="20px" width="60px">
+                                              <b>Nº de Série:</b>
+                                          </td>
+                                          
+                                          <td style="border-bottom: 1px solid #000080; vertical-align:center; color: #000080; vertical-align: bottom" height="20px" width="270px">
+                                              {!IF(WorkOrder.Numero_de_Serie__c!=NULL,WorkOrder.Numero_de_Serie__c,NULL)}
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </td>
+                          </tr>
+                          
+                          <tr>
+                              <td colspan="5">
+                                 <table cellspacing="0">
+                                     <tr>
+                                         <td style="border-bottom: 1px solid #000080; text-align:center; color: #000080; vertical-align: bottom" height="20px" width="333px">
+                                              <b>ACESSÓRIOS QUE ACOMPANHAM O EQUIPAMENTO</b>
+                                          </td>
+                                     </tr>
+                                 </table> 
+                              </td>
+                          </tr>
+                         
+                          <tr>
+                              <td colspan="5">
+                                  <table cellspacing="0">
+                                      <tr>
+                                          <td style="border-bottom: 1px solid #000080; vertical-align:center; color: #000080; vertical-align: top;  word-wrap:break-word;" height="40px" width="330px" rowspan="2">
+                                              {!IF(WorkOrder.Acess_rios_que_Acompanham_o_Equipamento__c != null,WorkOrder.Acess_rios_que_Acompanham_o_Equipamento__c, null)}
+                                          </td>
+                                        </tr>
+                                                                                             
+                                  </table>
+                              </td>
+                          </tr>
+                          
+                          <tr>
+                              <td height="10px">
+                              </td>
+                          </tr>
+                          
+                          <tr>
+                              <td colspan="6">
+                                  <table cellspacing="0">
+                                      <tr>
+                                          <td width="90px" style="color: #000080; ">
+                                              <b>TIPO DE SERVIÇO:</b>
+                                          </td>
+                                          <td style="color: #000080; text-align: left;" width="30px">
+                                          
+                                            <apex:outputPanel rendered="{!IF(OR(WorkOrder.RecordType.Id =='01231000000tb5bAAA', WorkOrder.RecordType.Id =='01231000000tb5WAAQ'), true, false)}">
+                                                <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEZm&oid=00Di0000000JVhH&lastMod=1543868257000" width="15px" height="15px"/>
+                                            </apex:outputPanel>
+                                            
+                                            <apex:outputPanel rendered="{!IF(NOT(OR(WorkOrder.RecordType.Id == '01231000000tb5bAAA', WorkOrder.RecordType.Id == '01231000000tb5WAAQ')), true, false)}">
+                                                <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEZX&oid=00Di0000000JVhH&lastMod=1543866400000" width="18px" height="18px"/>
+                                            </apex:outputPanel>
+                                          </td>
+                                          
+                                          <td width="30px" style="color: #000080;">
+                                              MP
+                                          </td>
+                                          <td style="color: #000080; text-align: left;" width="30px">
+                                              <apex:outputPanel rendered="{!IF(OR(WorkOrder.RecordType.Id =='01231000000tb6FAAQ', WorkOrder.RecordType.Id =='01231000000tb6AAAQ'), true, false)}">
+                                                <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEZm&oid=00Di0000000JVhH&lastMod=1543868257000" width="15px" height="15px"/>
+                                            </apex:outputPanel>
+                                            
+                                            <apex:outputPanel rendered="{!IF(NOT(OR(WorkOrder.RecordType.Id == '01231000000tb6FAAQ', WorkOrder.RecordType.Id == '01231000000tb6AAAQ')), true, false)}">
+                                                <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEZX&oid=00Di0000000JVhH&lastMod=1543866400000" width="18px" height="18px"/>
+                                            </apex:outputPanel>
+                                          </td>
+                                          
+                                          <td width="30px" style="color: #000080;">
+                                              MC
+                                          </td>
+                                          <td style="color: #000080; text-align: left;" width="30px">
+                                              <apex:outputPanel rendered="{!IF(WorkOrder.RecordType.Id =='01231000000tbLLAAY', true, false)}">
+                                                <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEZm&oid=00Di0000000JVhH&lastMod=1543868257000" width="15px" height="15px"/>
+                                            </apex:outputPanel>
+                                            
+                                            <apex:outputPanel rendered="{!IF(NOT(WorkOrder.RecordType.Id == '01231000000tbLLAAY'), true, false)}">
+                                                <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEZX&oid=00Di0000000JVhH&lastMod=1543866400000" width="18px" height="18px"/>
+                                            </apex:outputPanel>
+                                          </td>
+                                          
+                                          <td width="81px" style="color: #000080; solid #000080">
+                                              VF
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </td>
+                          </tr>
+                      </table>
+                  </td>
+
+
+                  
+                  
+                  
+                  
+                  
+                  <td width="30%"  height="270px">
+                      <table style="border:1px solid #000080; margin-left:-5px" cellspacing="0"  height="270px">
+                          <tr>
+                              <td width="200px" style="border-bottom: 1px solid #000080; vertical-align:middle; text-align:center ; color: #000080;" colspan="2" height="21px">
+                                  <b>STATUS DA OS.</b>
+                              </td>
+                          </tr>
+                          
+                          <tr>
+                              <td style="vertical-align:center; color: #000080; text-align: center; padding:4px 0px 4px 0px" width="15px" height="20px">
+                                   <apex:outputText rendered="{!IF(OR(WorkOrder.Status = 'AGUARDANDO ATENDIMENTO',WorkOrder.Status = 'AGUARDANDO ENVIO DA PROPOSTA',WorkOrder.Status = 'AGUARDANDO AUTORIZAÇÃO',WorkOrder.Status = 'AUTORIZADO',WorkOrder.Status = 'AGUARDANDO PEÇA',WorkOrder.Status = 'AGENDADO',WorkOrder.Status = 'VERIFICAÇÃO DE SERVIÇO',WorkOrder.Status = 'AGUARDANDO FATURAMENTO',WorkOrder.Status = 'NÃO AUTORIZADO',WorkOrder.Status = 'DISPONIVEL PARA ENTREGA',WorkOrder.Status = 'ENTREGUE',WorkOrder.Status = 'FECHADO CONCLUÍDO',WorkOrder.Status = 'NÃO ATRIBUÍDAS'),TRUE,FALSE)}">
+                                     <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEZm&oid=00Di0000000JVhH&lastMod=1543868257000" width="15px" height="15px"/>
+                                    </apex:outputText>
+                                    <apex:outputText rendered="{!IF(OR(WorkOrder.Status = 'AGUARDANDO ATENDIMENTO',WorkOrder.Status = 'AGUARDANDO ENVIO DA PROPOSTA',WorkOrder.Status = 'AGUARDANDO AUTORIZAÇÃO',WorkOrder.Status = 'AUTORIZADO',WorkOrder.Status = 'AGUARDANDO PEÇA',WorkOrder.Status = 'AGENDADO',WorkOrder.Status = 'VERIFICAÇÃO DE SERVIÇO',WorkOrder.Status = 'AGUARDANDO FATURAMENTO',WorkOrder.Status = 'NÃO AUTORIZADO',WorkOrder.Status = 'DISPONIVEL PARA ENTREGA',WorkOrder.Status = 'ENTREGUE',WorkOrder.Status = 'FECHADO CONCLUÍDO',WorkOrder.Status = 'NÃO ATRIBUÍDAS'),FALSE,TRUE)}">
+                                     <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEZX&oid=00Di0000000JVhH&lastMod=1543866400000" width="15px" height="15px"/>
+                                    </apex:outputText>
+                              </td>
+                              <td style="vertical-align:center; color: #000080; padding:4px 0px 4px 0px" width="200px" height="20px">
+                                  AGUARDANDO ATENDIMENTO
+                              </td>
+                          </tr>
+                          <tr>
+                              <td style="vertical-align:center; color: #000080; text-align: center; padding:4px 0px 4px 0px" width="15px" height="20px">
+                                   <apex:outputText rendered="{!IF(OR(WorkOrder.Status = 'AGUARDANDO ENVIO DA PROPOSTA',WorkOrder.Status = 'AGUARDANDO AUTORIZAÇÃO',WorkOrder.Status = 'AUTORIZADO',WorkOrder.Status = 'AGUARDANDO PEÇA',WorkOrder.Status = 'VERIFICAÇÃO DE SERVIÇO',WorkOrder.Status = 'AGUARDANDO FATURAMENTO',WorkOrder.Status = 'NÃO AUTORIZADO',WorkOrder.Status = 'DISPONIVEL PARA ENTREGA',WorkOrder.Status = 'ENTREGUE',WorkOrder.Status = 'FECHADO CONCLUÍDO'),TRUE,FALSE)}">
+                                     <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEZm&oid=00Di0000000JVhH&lastMod=1543868257000" width="15px" height="15px"/>
+                                 </apex:outputText>
+                                 
+                                 <apex:outputText rendered="{!IF(OR(WorkOrder.Status = 'AGUARDANDO ENVIO DA PROPOSTA',WorkOrder.Status = 'AGUARDANDO AUTORIZAÇÃO',WorkOrder.Status = 'AUTORIZADO',WorkOrder.Status = 'AGUARDANDO PEÇA',WorkOrder.Status = 'VERIFICAÇÃO DE SERVIÇO',WorkOrder.Status = 'AGUARDANDO FATURAMENTO',WorkOrder.Status = 'NÃO AUTORIZADO',WorkOrder.Status = 'DISPONIVEL PARA ENTREGA',WorkOrder.Status = 'ENTREGUE',WorkOrder.Status = 'FECHADO CONCLUÍDO'),FALSE,TRUE)}">
+                                     <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEZX&oid=00Di0000000JVhH&lastMod=1543866400000" width="15px" height="15px"/>
+                                 </apex:outputText>
+                              </td>
+                              <td style="vertical-align:center; color: #000080; padding:4px 0px 4px 0px" width="200px" height="20px">
+                                  AGUARDANDO AUTORIZAÇÃO
+                              </td>
+                          </tr>
+                          <tr>
+                              <td style="vertical-align:center; color: #000080; text-align: center; padding:4px 0px 4px 0px" width="15px" height="20px">
+                                   <apex:outputText rendered="{!IF(OR(WorkOrder.Status = 'AUTORIZADO',WorkOrder.Status = 'AGUARDANDO PEÇA',WorkOrder.Status = 'VERIFICAÇÃO DE SERVIÇO',WorkOrder.Status = 'AGUARDANDO FATURAMENTO',WorkOrder.Status = 'DISPONIVEL PARA ENTREGA',WorkOrder.Status = 'ENTREGUE',WorkOrder.Status = 'FECHADO CONCLUÍDO'),TRUE,FALSE)}">
+                                     <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEZm&oid=00Di0000000JVhH&lastMod=1543868257000" width="15px" height="15px"/>
+                                 </apex:outputText>
+                                 
+                                 <apex:outputText rendered="{!IF(OR(WorkOrder.Status = 'AUTORIZADO',WorkOrder.Status = 'AGUARDANDO PEÇA',WorkOrder.Status = 'VERIFICAÇÃO DE SERVIÇO',WorkOrder.Status = 'AGUARDANDO FATURAMENTO',WorkOrder.Status = 'DISPONIVEL PARA ENTREGA',WorkOrder.Status = 'ENTREGUE',WorkOrder.Status = 'FECHADO CONCLUÍDO'),FALSE,TRUE)}">
+                                     <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEZX&oid=00Di0000000JVhH&lastMod=1543866400000" width="15px" height="15px"/>
+                                 </apex:outputText>
+                              </td>
+                              <td style="vertical-align:center; color: #000080; padding:4px 0px 4px 0px" width="200px" height="20px">
+                                  AUTORIZADO
+                              </td>
+                          </tr>
+                          <tr>
+                              <td style="vertical-align:center; color: #000080; text-align: center; padding:4px 0px 4px 0px" width="15px" height="20px">
+                                 <apex:outputText rendered="{!IF(OR(WorkOrder.Status = 'AGUARDANDO PEÇA', WorkOrder.Status = 'AGUARDANDO FATURAMENTO', WorkOrder.Status = 'DISPONIVEL PARA ENTREGA', WorkOrder.Status = 'ENTREGUE',WorkOrder.Status = 'FECHADO CONCLUÍDO'),TRUE,FALSE)}">
+                                     <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEZm&oid=00Di0000000JVhH&lastMod=1543868257000" width="15px" height="15px"/>
+                                 </apex:outputText>
+                                 
+                                 <apex:outputText rendered="{!IF(OR(WorkOrder.Status = 'AGUARDANDO PEÇA', WorkOrder.Status = 'AGUARDANDO FATURAMENTO', WorkOrder.Status = 'DISPONIVEL PARA ENTREGA', WorkOrder.Status = 'ENTREGUE',WorkOrder.Status = 'FECHADO CONCLUÍDO'),FALSE,TRUE)}">
+                                     <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEZX&oid=00Di0000000JVhH&lastMod=1543866400000" width="15px" height="15px"/>
+                                 </apex:outputText>                                                                        
+                              </td>
+                              <td style="vertical-align:center; color: #000080; padding:4px 0px 4px 0px" width="200px" height="20px">
+                                  AGUARDANDO PEÇA
+                              </td>
+                          </tr>
+                          <tr>
+                              <td style="vertical-align:center; color: #000080; border-bottom: 1px solid #000080; text-align: center; padding:4px 0px 4px 0px" width="15px" height="20px">
+                                 <apex:outputText rendered="{!IF(OR(WorkOrder.Status = 'AGUARDANDO FATURAMENTO', WorkOrder.Status = 'DISPONIVEL PARA ENTREGA', WorkOrder.Status = 'ENTREGUE', WorkOrder.Status = 'FECHADO CONCLUÍDO'),TRUE,FALSE)}">
+                                     <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEZm&oid=00Di0000000JVhH&lastMod=1543868257000" width="15px" height="15px"/>
+                                 </apex:outputText>
+                              
+                                 <apex:outputText rendered="{!IF(OR(WorkOrder.Status = 'AGUARDANDO FATURAMENTO', WorkOrder.Status = 'DISPONIVEL PARA ENTREGA', WorkOrder.Status = 'ENTREGUE', WorkOrder.Status = 'FECHADO CONCLUÍDO'),FALSE,TRUE)}">
+                                     <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEZX&oid=00Di0000000JVhH&lastMod=1543866400000" width="15px" height="15px"/>
+                                 </apex:outputText>
+                              </td>
+                              
+                              <td style="vertical-align:center; color: #000080; border-bottom: 1px solid #000080; padding:4px 0px 4px 0px " width="200px" height="20px">
+                                  DISPONÍVEL PARA ENTREGA
+                              </td>
+                          </tr>
+                          
+                          <tr>
+                              <td width="200px" style="border-bottom: 1px solid #000080; vertical-align:middle; text-align:center ; color: #000080;" colspan="2" height="21px">
+                                  <b>MODALIDADE DE SERVIÇO</b>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td style="vertical-align:center; color: #000080; text-align: center; padding:4px 0px 4px 0px" width="30px">
+                                   <apex:outputPanel rendered="{!IF(OR(WorkOrder.Categoria__c == 'CONTRATO DE SERVIÇO', WorkOrder.Categoria__c == 'CONTRATO DE LOCAÇÃO'), true, false)}">
+                                        <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEZm&oid=00Di0000000JVhH&lastMod=1543868257000" width="15px" height="15px"/>
+                                    </apex:outputPanel>
+                                    
+                                    <apex:outputPanel rendered="{!IF(NOT(OR(WorkOrder.Categoria__c == 'CONTRATO DE SERVIÇO', WorkOrder.Categoria__c == 'CONTRATO DE LOCAÇÃO')), true, false)}">
+                                        <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEZX&oid=00Di0000000JVhH&lastMod=1543866400000" width="15px" height="15px"/>
+                                    </apex:outputPanel>
+                                    </td>
+                              <td style="vertical-align:center; color: #000080; padding:4px 0px 4px 0px" width="10px" height="20px" >
+                                  CONTRATO DE SERVIÇOS
+                              </td>
+                          </tr>
+                          <tr>
+                              <td style="vertical-align:center; color: #000080; text-align: center; padding:4px 0px 4px 0px" width="30px" height="20px">
+                                  <apex:outputPanel rendered="{!IF(WorkOrder.Categoria__c == 'AVULSO', true, false)}">
+                                        <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEZm&oid=00Di0000000JVhH&lastMod=1543868257000" width="15px" height="15px"/>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel rendered="{!IF(NOT(WorkOrder.Categoria__c == 'AVULSO'), true, false)}">
+                                        <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEZX&oid=00Di0000000JVhH&lastMod=1543866400000" width="15px" height="15px"/>
+                                    </apex:outputPanel>
+                                                               
+                              </td>
+                              <td style="vertical-align:center; color: #000080; padding:4px 0px 4px 0px " width="140px">
+                                  ATENDIMENTO AVULSO
+                              </td>
+                          </tr>
+                          <tr>
+                              <td style="vertical-align:center; color: #000080; text-align: center; padding:4px 0px 4px 0px" width="30px" height="20px">
+                                  <apex:outputPanel rendered="{!IF(WorkOrder.Categoria__c == 'GARANTIA DE FÁBRICA', true, false)}">
+                                        <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEZm&oid=00Di0000000JVhH&lastMod=1543868257000" width="15px" height="15px"/>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel rendered="{!IF(NOT(WorkOrder.Categoria__c == 'GARANTIA DE FÁBRICA'), true, false)}">
+                                        <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEZX&oid=00Di0000000JVhH&lastMod=1543866400000" width="15px" height="15px"/>
+                                    </apex:outputPanel>
+                              </td>
+                              <td style="vertical-align:center; color: #000080; padding:4px 0px 4px 0px" width="140px">
+                                  GARANTIA DE FÁBRICA
+                              </td>
+                          </tr>
+                          <tr>
+                              <td style="vertical-align:center; color: #000080; text-align: center; border-bottom: 1px solid #000080; padding:4px 0px 4px 0px" width="30px" height="20px">
+                                  <apex:outputPanel rendered="{!IF(WorkOrder.Categoria__c == 'GARANTIA DE SERVIÇO', true, false)}">
+                                        <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEZm&oid=00Di0000000JVhH&lastMod=1543868257000" width="15px" height="15px"/>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel rendered="{!IF(NOT(WorkOrder.Categoria__c == 'GARANTIA DE SERVIÇO    '), true, false)}">
+                                        <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009yEZX&oid=00Di0000000JVhH&lastMod=1543866400000" width="15px" height="15px"/>
+                                    </apex:outputPanel>
+                              </td>
+                              <td style="vertical-align:center; color: #000080; border-bottom: 1px solid #000080; padding:4px 0px 4px 0px" width="140px">
+                                  GARANTIA DE SERVIÇO
+                              </td>
+                          </tr>
+                      </table>
+                  </td>
+              </tr>
+          </table>
+      </body>
+  </html>    
+</apex:page>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Alteracao_de_status</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+!ISNEW(),
+$User.ProfileId  != &apos;00e6e000002JQUa&apos;,
+ISCHANGED(Status__c)
+)</errorConditionFormula>
+    <errorMessage>Apenas o jurídico pode alterar o status.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,83 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,force:hasRecordId">
+    
+    <div class="slds-clearfix">
+        <div class="slds-float_right" style="width: 100%; display: flex; justify-content: center">
+            
+            <lightning:buttonMenu class="slds-m-right_x-small customButton3242" menuAlignment="auto" aura:id="menu" onselect="{! c.handleSelect }" alternativeText="Impressão" iconName="utility:print">
+                <lightning:menuItem value="ORDEM DE TRABALHO" label="ORDEM DE TRABALHO"/>
+                <lightning:menuItem value="REGISTRO DE ATENDIMENTO" label="REGISTRO DE ATENDIMENTO" />
+                <lightning:menuItem value="REGISTRO DE ENTREGA" label="REGISTRO DE ENTREGA" />           
+                <lightning:menuItem value="REGISTRO DE BASE INSTALADA" label="REGISTRO DE BASE INSTALADA" />
+                <lightning:menuItem value="LISTA DE PRESENÇA" label="LISTA DE PRESENÇA" />
+                <lightning:menuItem value="LISTA DE PRESENÇA(NOVO)" label="LISTA DE PRESENÇA(NOVO)" />
+                <lightning:menuItem value="PROPOSTA" label="PROPOSTA" /> 
+                <lightning:menuItem value="REGISTRO DE RETIRADA" label="REGISTRO DE RETIRADA" />            
+            </lightning:buttonMenu>
+            
+        </div>
+    </div>
+    
+    
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="modal" type="boolean" default="false"/>
+	<aura:attribute name="Imprimir_OTv3" type="boolean" default="false"/>
+    <aura:attribute name="pdf_RA" type="boolean" default="false"/>
+    <aura:attribute name="pdf_RBI" type="boolean" default="false"/>
+    <aura:attribute name="pdf_LP" type="boolean" default="false"/>
+    <aura:attribute name="pdf_LP_NOVO" type="boolean" default="false"/>
+    <aura:attribute name="pdf_PROPOSTA" type="boolean" default="false"/>
+    <aura:attribute name="pdf_RE" type="boolean" default="false"/>
+    <aura:attribute name="pdf_RE2" type="boolean" default="false"/>
+	
+    
+    
+	<div class="slds-m-around_x-medium">
+		<!-- modal pdf OT -->
+		<aura:if isTrue="{!v.modal}">
+				<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+					<div class="slds-modal__container" style="max-width:70rem!important; width:80%!important;">
+						<!-- cabeçalho -->
+						<header class="modal-header slds-modal__header">
+							<lightning:buttonIcon iconName="utility:close" onclick="{!c.FecharPdf}" alternativeText="Fechar" variant="bare-inverse" class="slds-modal__close"/>
+							<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">PDF DA ORDEM DE TRABALHO</h2>
+						</header>
+						<!-- corpo -->
+						<div class="slds-modal__content slds-p-around_none" id="modal-content-id-1" style="height:90vh !important;max-height:90vh!important;">
+							<aura:if isTrue="{!v.Imprimir_OTv3}">
+                            	<iframe src="{! '/Sales/apex/Imprimir_OTv3?Id='+v.recordId}" frameborder="0" allow="geolocation *; microphone *; camera *" width="100%" height="100%" scrolling="yes" allowfullscreen="true"></iframe>
+                            </aura:if>
+                            <aura:if isTrue="{!v.pdf_RA}">
+                            	<iframe src="{! '/Sales/apex/Registro_de_Atendimento_v3?Id='+v.recordId}" frameborder="0" allow="geolocation *; microphone *; camera *" width="100%" height="100%" scrolling="yes" allowfullscreen="true"></iframe>
+                            </aura:if>
+                            <aura:if isTrue="{!v.pdf_RBI}">
+                            	<iframe src="{! '/Sales/apex/APDFDEINSTALACAO_v2?Id='+v.recordId}" frameborder="0" allow="geolocation *; microphone *; camera *" width="100%" height="100%" scrolling="yes" allowfullscreen="true"></iframe>
+                            </aura:if>
+                            <aura:if isTrue="{!v.pdf_LP}">
+                            	<iframe src="{! '/Sales/apex/LISTADEPRESENCA2?Id='+v.recordId}" frameborder="0" allow="geolocation *; microphone *; camera *" width="100%" height="100%" scrolling="yes" allowfullscreen="true"></iframe>
+                            </aura:if>
+                             <aura:if isTrue="{!v.pdf_LP_NOVO}">
+                            	<iframe src="{! '/Sales/apex/LISTADEPRESENCA2_NOVO?Id='+v.recordId}" frameborder="0" allow="geolocation *; microphone *; camera *" width="100%" height="100%" scrolling="yes" allowfullscreen="true"></iframe>
+                            </aura:if>
+                            <aura:if isTrue="{!v.pdf_PROPOSTA}">
+                            	<iframe src="{! '/Sales/apex/OrdemDeTrabalhoProposta?Id='+v.recordId}" frameborder="0" allow="geolocation *; microphone *; camera *" width="100%" height="100%" scrolling="yes" allowfullscreen="true"></iframe>
+                            </aura:if>
+                            <aura:if isTrue="{!v.pdf_RE}">
+                            	<iframe src="{! '/Sales/apex/Registro_de_Entrega_v2?Id='+v.recordId}" frameborder="0" allow="geolocation *; microphone *; camera *" width="100%" height="100%" scrolling="yes" allowfullscreen="true"></iframe>
+                            </aura:if>
+                            
+                            <aura:if isTrue="{!v.pdf_RE2}">
+                            	<iframe src="{! '/Sales/apex/Registro_de_Retirada?Id='+v.recordId}" frameborder="0" allow="geolocation *; microphone *; camera *" width="100%" height="100%" scrolling="yes" allowfullscreen="true"></iframe>
+                            </aura:if>
+                            
+                        </div>
+						<!-- rodape -->
+						<footer class="slds-modal__footer">
+							<lightning:button variant="neutral" label="Cancelar" title="Cancelar" onclick="{!c.FecharPdf}"/>
+						</footer>
+					</div>
+				</section>
+			<div class="slds-backdrop slds-backdrop_open"></div>			
+        </aura:if>
+        
+    </div>
+</aura:component>

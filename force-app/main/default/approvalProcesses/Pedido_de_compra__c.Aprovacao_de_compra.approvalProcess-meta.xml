@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <submitter>Departamento_de_Compras</submitter>
+        <type>group</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>Descricao__c</field>
+        <field>Data_de_inicio__c</field>
+        <field>Owner</field>
+        <field>CreatedBy</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>gerencia.compras@hospcom.net</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>Unanimous</whenMultipleApprovers>
+        </assignedApprover>
+        <label>Gerente de compras</label>
+        <name>Gerente_de_compras</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>alberth.oliveira@hospcom.net</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <label>Supervisor de Operações</label>
+        <name>Supervisor_de_Opera_es</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <description>Decisão de compra de cotação, para posterior geração de ordem(ns) de compra.</description>
+    <emailTemplate>unfiled$public/Decisao_de_compra</emailTemplate>
+    <enableMobileDeviceAccess>true</enableMobileDeviceAccess>
+    <entryCriteria>
+        <criteriaItems>
+            <field>Pedido_de_compra__c.Valor_total_cotado__c</field>
+            <operation>greaterThan</operation>
+            <value>BRL 0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Pedido_de_compra__c.Status__c</field>
+            <operation>equals</operation>
+            <value>1 - Rascunho,2 - Em Andamento,5 - Reprovado</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Pedido_de_compra__c.Tipo__c</field>
+            <operation>notEqual</operation>
+            <value>Compra para consumo,Compra para estoque</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Status_Em_AprFinanceira</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Status_Reprovado</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Status_Ag_Decisao_Compra</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Aprovação de compra</label>
+    <processOrder>1</processOrder>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

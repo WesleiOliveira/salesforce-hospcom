@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <classAccesses>
+        <apexClass>AprovacoesController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DestinacaoController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ItensPCompraController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>RelatorioDestinacaoComprasContr</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>RequisicaoController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <flowAccesses>
+        <enabled>true</enabled>
+        <flow>Calcular_Quantidade_Requisitada</flow>
+    </flowAccesses>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Destinação de Compra</label>
+    <license>Partner Community</license>
+    <pageAccesses>
+        <apexPage>Aprovacoes</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>Destinacao2</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>ItensDePedidoDeCompra</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>RelatorioDestinacaoCompras</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>Requisicao</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+</PermissionSet>

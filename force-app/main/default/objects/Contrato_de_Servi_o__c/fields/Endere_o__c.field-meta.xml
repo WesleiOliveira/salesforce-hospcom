@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Endere_o__c</fullName>
+    <externalId>false</externalId>
+    <formula>Locat_rio_a__r.ShippingStreet + &quot; &quot; +  Locat_rio_a__r.ShippingCity + &quot; &quot; + Locat_rio_a__r.ShippingState+ &quot; &quot; + &quot;CEP: &quot; +  Locat_rio_a__r.ShippingPostalCode</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Endereço Completo</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

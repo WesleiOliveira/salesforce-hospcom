@@ -1,0 +1,127 @@
+<aura:component  controller="ImageDocument" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="parentId" type="Id"/>
+    
+    <aura:handler event="aura:waiting" action="{!c.waiting}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.doneWaiting}"/>
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.cropperJs + '/cropper.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.cropperJs + '/cropper.js',
+                           $Resource.jqueryCropper + '/jquery-cropper.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.bundle.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js')}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    
+    <div>
+        <!-- SPINNER DE CARREGAMENTO -->
+        <div id='spinnerDiv' style="display: none">
+            <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+        </div>
+        
+        <!--arraste e solte-->
+        <div>
+            <div class =" container-arrasteSolta" id= "container-arrasteSolta">
+                <div class =" title">
+                    <p> Carregar uma nova foto</p>
+                </div>
+                
+                
+                <div class = "arrastaSolta">
+                    <!---->
+                   
+                    
+                    
+                    
+                    
+                    <!--texto e link-->
+                    <div class = "browse">
+                        
+                        <div class="fa-3x">
+                        	<i class="fa fa-file-image-o" aria-hidden="true"></i>
+                        </div>
+                        
+                        <p class= "orienta">Arraste e solte
+                            <br/>
+                            ou
+                            <br/> 
+                            
+                            <label for="upload-photo"> <span class = "link-nav-file"> selecione o arquivo </span></label>
+                        </p>
+                        
+                        
+                        
+                    <!--texto de suportes-->
+                        
+                        <div>
+                            <p id= "temArquivo">Nenhum arquivo escolhido</p>
+                            <p class= "sup">suporte: JPEG, JPN, PNG.</p>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                     <div class="inputPater">
+                        <input type="file" id ="upload-photo" class="file" aura:id="file" />
+                        <ui:button label="Save" class="none" press="{!c.save}"/>
+                    </div>
+                    
+                </div>
+                
+                <div class="buttons">
+                    <button type="button"  id="salvar" class="btn btn-secondary">cortar</button>  
+                    <button type="button" class="btn btn-secondary cancelar" id = "cancela-cropper">cancelar</button>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <!--#############	crop	#############-->        
+        <div class="test">
+            
+            <div class = "container-cropp ">
+                <div class = "title">
+                    <p>Ajuste sua foto</p>
+                </div>
+                
+                <div class = "cropping" >
+                  
+                    <div id="caixa">
+                    
+                    </div>
+                    <div id="zoom">
+                        <button type="button" class="btn btn-secondary " id= "rotateAnteHorario">
+                            <i class="fa fa-undo" aria-hidden="true"></i>
+                        </button>
+                        
+                        <button type="button" class="btn btn-secondary" id= "rotateHorario">
+                            <i class="fa fa-repeat" aria-hidden="true"></i>
+                        </button>                
+                    </div>
+                </div>
+                
+                <div class ="buttons">
+                    <button type="button" class="btn btn-secondary " id= "azul">salvar
+                    </button>
+                    
+                    <button type="button" class="btn btn-secondary cancelar" id="cancela-crop">
+                        cancelar
+                    </button>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+    
+</aura:component>

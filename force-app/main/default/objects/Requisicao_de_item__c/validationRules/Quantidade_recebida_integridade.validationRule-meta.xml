@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Quantidade_recebida_integridade</fullName>
+    <active>false</active>
+    <errorConditionFormula>Quantidade_recebida__c &gt; Quantidade_requisitada__c</errorConditionFormula>
+    <errorMessage>Quantidade recebida maior que a requisitada.</errorMessage>
+</ValidationRule>

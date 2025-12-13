@@ -1,0 +1,99 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global" >      
+    <h1> Edição de cláusulas
+    </h1><br/>
+    <lightning:recordEditForm density="comfy" objectApiName="Contrato_de_Servi_o__c" recordId="{!v.recordId}" onsuccess="{!c.handleSuccess}">
+        
+        <div class="slds-form-element" style="position:relative">
+          	<div>
+                <lightning:inputField fieldName="Qualificacao_Editada__c" />                
+                <lightning:inputField fieldName="Qualificacao__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="Cl_usula_Primeira_Editada__c" />                
+                <lightning:inputField fieldName="Cl_usula_Primeira__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="Cl_usula_Segunda_Editada__c" />                
+                <lightning:inputField fieldName="Cl_usula_Segunda__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="Cl_usula_Terceira_Editada__c" />
+                <lightning:inputField fieldName="Cl_usula_Terceira__c" />                
+          	</div>
+            <div>
+                <lightning:inputField fieldName="Cl_usula_Quarta_Editada__c" />                
+                <lightning:inputField fieldName="Cl_usula_Quarta__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="Cl_usula_Quinta_Editada__c" />                
+                <lightning:inputField fieldName="Cl_usula_Quinta__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="Cl_usula_Sexta_Editada__c" />                
+                <lightning:inputField fieldName="Cl_usula_Sexta__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="Cl_usula_S_tima_Editada__c" />                
+                <lightning:inputField fieldName="Cl_usula_S_tima__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="Cl_usula_Oitava_Editada__c" />                
+                <lightning:inputField fieldName="Cl_usula_Oitava__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="Cl_usula_Nona_Editada__c" />                
+                <lightning:inputField fieldName="Cl_usula_Nona__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="Cl_usula_D_cima_Editada__c" />                
+                <lightning:inputField fieldName="Cl_usula_D_cima__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="Cl_usula_D_cima_Primeira_Editada__c" />
+                <lightning:inputField fieldName="Cl_usula_D_cima_Primeira__c" />                
+          	</div>
+            <div>
+                <lightning:inputField fieldName="Cl_usula_D_cima_Segunda_Editada__c" />
+                <lightning:inputField fieldName="Cl_usula_D_cima_Segunda__c" />                
+          	</div>
+            <div>
+                <lightning:inputField fieldName="Cl_usula_D_cima_Terceira_Editada__c" />
+                <lightning:inputField fieldName="Cl_usula_D_cima_Terceira__c" />                
+          	</div>
+            <div>
+                <lightning:inputField fieldName="Cl_usula_D_cima_Quarta_Editada__c" />
+                <lightning:inputField fieldName="Cl_usula_D_cima_Quarta__c" />                
+          	</div> 
+            <div>
+                <lightning:inputField fieldName="Cl_usula_D_cima_Quinta_Editada__c" />
+                <lightning:inputField fieldName="Cl_usula_D_cima_Quinta__c" />                
+          	</div>
+            <div>
+                <lightning:inputField fieldName="Cl_usula_D_cima_Sexta_Editada__c" />
+                <lightning:inputField fieldName="Cl_usula_D_cima_Sexta__c" />                
+          	</div> 
+            <div>
+                <lightning:inputField fieldName="Cl_usula_D_cima_S_tima_Editada__c" />
+                <lightning:inputField fieldName="Cl_usula_D_cima_S_tima__c" />                
+          	</div>
+            <div>
+                <lightning:inputField fieldName="Clausulas_Especiais_Editadas__c" />
+                <lightning:inputField fieldName="Clausulas_Especiais__c" />                
+          	</div> 
+            <h1> 
+                Configurações adicionais
+    		</h1><br/>
+            <div>
+                <lightning:inputField fieldName="Local_de_assinatura__c" />
+                <lightning:inputField fieldName="Data_de_assinatura__c" />                
+          	</div>  
+            
+            <div width="100%" style="position:fixed;bottom:10px;left:50%">
+                <lightning:button class="slds-button slds-button_brand"  type="submit" label="Salvar" />
+            </div>
+        </div>
+    </lightning:recordEditForm>
+    <aura:attribute name="recordId" type="String" />      
+
+    
+</aura:component>

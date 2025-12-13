@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_permitidos_tecnicos</fullName>
+    <active>true</active>
+    <description>Perfil: Técnico
+Id: 00e6e000002JQTNAA4</description>
+    <errorConditionFormula>AND(
+    $Profile.Id == &apos;00e6e000002JQTNAA4&apos;,
+    ISCHANGED(Status),
+    OR(
+        AND(
+            TEXT(Categoria__c) = &apos;AVULSO&apos;,
+            NOT(
+                OR(
+                    TEXT(Status) = &apos;EM ANALISE&apos;,
+                    TEXT(Status) = &apos;EM ATENDIMENTO&apos;,
+                    TEXT(Status) = &apos;FECHADO CONCLUÍDO&apos;,
+                    TEXT(Status) = &apos;AGUARDANDO ENVIO DA PROPOSTA&apos;,
+                    TEXT(Status) = &apos;ANALISE PAUSADA&apos;,
+                    TEXT(Status) = &apos;ANALISE DO SUPERVISOR&apos;,
+                    TEXT(Status) = &apos;ANALISE CONCLUIDA&apos;,
+                    TEXT(Status) = &apos;EM EXECUÇÃO&apos;,
+                    TEXT(Status) = &apos;ATENDIMENTO PAUSADO&apos;,
+                    TEXT(Status) = &apos;ESCALADO&apos;,
+                    TEXT(Status) = &apos;SERVIÇO CONCLUÍDO&apos;,                    
+                    TEXT(Status) = &apos;AGUARDANDO ATENDIMENTO&apos;
+                )
+            )
+        ),
+        AND(
+            OR(TEXT(Categoria__c) = &apos;GARANTIA DE FABRICA&apos;,TEXT(Categoria__c) = &apos;CONTRATO DE LOCAÇÃO&apos;),
+            NOT(
+                OR(
+                    TEXT(Status) = &apos;EM ANALISE&apos;,
+                    TEXT(Status) = &apos;AGUARDANDO ENVIO DA PROPOSTA&apos;,
+                    TEXT(Status) = &apos;ANALISE PAUSADA&apos;,
+                    TEXT(Status) = &apos;ANALISE DO SUPERVISOR&apos;,
+                    TEXT(Status) = &apos;ANALISE CONCLUIDA&apos;,
+                    TEXT(Status) = &apos;EM EXECUÇÃO&apos;,
+                    TEXT(Status) = &apos;GERAR PEDIDO&apos;,
+                    TEXT(Status) = &apos;EM ATENDIMENTO&apos;,
+                    TEXT(Status) = &apos;ATENDIMENTO PAUSADO&apos;,
+                    TEXT(Status) = &apos;ESCALADO&apos;,
+                    TEXT(Status) = &apos;EM ATENDIMENTO&apos;,
+                    TEXT(Status) = &apos;FECHADO CONCLUÍDO&apos;,
+                    TEXT(Status) = &apos;SERVIÇO CONCLUÍDO&apos;,                    
+                    TEXT(Status) = &apos;AGUARDANDO ATENDIMENTO&apos;
+                )
+            )
+        )
+            )
+        )</errorConditionFormula>
+    <errorDisplayField>Status</errorDisplayField>
+    <errorMessage>Esse status só pode ser utilizado pelo administrativo.</errorMessage>
+</ValidationRule>

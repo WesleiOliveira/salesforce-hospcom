@@ -1,0 +1,76 @@
+<template>
+<h1>2º passo: utilize esta tela para vincular a quantidade vendida de consumíveis aos equipamentos comodatados.</h1>
+
+<div class="container">
+    <div class="table-wrapper">
+    <h2>Equipamentos em Comodato</h2>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Selecionar</th>
+                    <th>Código do Produto</th>
+                    <th>Nome do Ativo</th>
+                    <th>Nº de Série</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={comodatoItems} for:item="item">
+                    <tr key={item.Id}>
+                        <td>
+                            <input type="radio" name="comodatoSelection" onchange={handleComodatoSelection} data-id={item.Id}>
+                        </td>
+                        <td>{item.Ativo__r.Product2.ProductCode}</td>
+                        <td>{item.Ativo__r.Name}</td>
+                        <td>{item.Numero_de_serie__c}</td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+    <div class="table-wrapper">
+        <h2>Itens Vendidos no Comodato</h2>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Selecionar</th>
+                    <th>Código</th>
+                    <th>Nome</th>
+                    <th>Data</th>
+                    <th>Quantidade</th>
+                    <th>Vinculado a</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={orderItems} for:item="item">
+                    <tr key={item.Id}>
+                        <td>
+                            <input name="nome" type="radio" onchange={handleOrderSelection} data-id={item.Id} disabled={item.isCheckboxDisabled}>
+                        </td>
+                        <td>{item.Product2.ProductCode}</td>
+                        <td>{item.Product2.Name}</td>
+                        <td>{item.Order.Data_de_ativacao_formatada__c}</td>
+                        <td>{item.Quantity}</td>
+                        <td><template for:each={item.vinculos} for:item="vinculo">
+                            <div key={vinculo.vinculoId}>
+                                •{vinculo.nomeAtivo} <b>NS:</b> {vinculo.nsAtivo} - <b>Qtd:</b> {vinculo.quantidade} <br/>
+                            </div>
+                        </template>
+                        <b>Total vinculado:</b> {item.Quantidade_vinculada_comodato__c}
+                    </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+</div>
+<template if:true={showQuantityInput}>
+    <div class="quantity-input-wrapper">
+        <label for="quantity">Quantidade:</label>
+        <input type="number" id="quantity" name="quantity" min="1" value={quantity} onchange={handleQuantityChange}>
+        <button class="styled-button" onclick={handleFinalSubmit}>Confirmar</button>
+    </div>
+</template>
+<div class="button-wrapper">
+    <button class="styled-button" onclick={handleSubmit}>Vincular</button>
+</div>
+</template>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Datademonstracao</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND (
+ !$User.Ignorar_erros__c, 
+  OR (
+    ISPICKVAL (Natureza_de_Opera_o__c, &quot;DEMONSTRAÇÃO&quot;),
+    ISPICKVAL (Natureza_de_Opera_o__c, &quot;Empréstimo&quot;)
+  ),
+  Data_da_demonstracao__c &lt; (TODAY () + 7)
+)</errorConditionFormula>
+    <errorDisplayField>Data_da_demonstracao__c</errorDisplayField>
+    <errorMessage>A data da demonstração precisa ser pelo menos 7 dias após a data de hoje.</errorMessage>
+</ValidationRule>

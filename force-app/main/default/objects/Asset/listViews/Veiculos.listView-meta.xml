@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Veiculos</fullName>
+    <booleanFilter>1 AND 2</booleanFilter>
+    <columns>ASSET.NAME</columns>
+    <columns>Responsavel__c</columns>
+    <columns>usuarioResponsavel__c</columns>
+    <columns>Modelo__c</columns>
+    <columns>patrimonio__c</columns>
+    <columns>ASSET.STATUS</columns>
+    <columns>ASSET.CREATED_DATE</columns>
+    <columns>ASSET.LAST_UPDATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Responsavel__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <filters>
+        <field>Categoria_Patrimonial__c</field>
+        <operation>equals</operation>
+        <value>VEÍCULOS</value>
+    </filters>
+    <label>Veículos</label>
+</ListView>

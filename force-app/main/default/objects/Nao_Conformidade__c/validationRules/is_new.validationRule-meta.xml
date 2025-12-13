@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>is_new</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISNEW() &amp;&amp;  !ISBLANK(TEXT(ACAo_imediata__c))</errorConditionFormula>
+    <errorDisplayField>ACAo_imediata__c</errorDisplayField>
+    <errorMessage>esse campo deve estar vazio na criação</errorMessage>
+</ValidationRule>

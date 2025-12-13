@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingGuestRules>
+        <fullName>parteConvidado</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>parteConvidado</label>
+        <sharedTo>
+            <guestUser>HospcomB2B</guestUser>
+        </sharedTo>
+        <criteriaItems>
+            <field>Ativo_site__c</field>
+            <operation>equals</operation>
+            <value>Verdadeiro</value>
+        </criteriaItems>
+        <includeHVUOwnedRecords>false</includeHVUOwnedRecords>
+    </sharingGuestRules>
+</SharingRules>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>manda_email</name>
+        <label>manda email</label>
+        <locationX>50</locationX>
+        <locationY>431</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>Titulo</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>Corpo</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>$Record.Responsevel__r.Email</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <apiVersion>57.0</apiVersion>
+    <decisions>
+        <name>Manda_notifica_o</name>
+        <label>Manda notificação</label>
+        <locationX>182</locationX>
+        <locationY>323</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>verifica_status</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Responsevel__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>manda_email</targetReference>
+            </connector>
+            <label>verifica status</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>att_id</name>
+        <dataType>String</dataType>
+        <expression>SUBSTITUTE({!$Record.Responsevel__c}, &quot;[&quot;, &quot;&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>Corpo</name>
+        <dataType>String</dataType>
+        <expression>&quot;Uma ação corretiva foi iniciada em seu nome.&quot; &amp; BR() &amp;
+&quot;Segue a descrição da não conformidade que deu origem à ação:&quot; &amp; BR() &amp;
+&quot;- &quot; &amp; {!$Record.Descricao_da_NRC__c} &amp; BR() &amp; BR() &amp;
+&quot;Criado em: &quot; &amp; BR() &amp;
+&quot;Link: &quot; &amp; &quot;https://hospcom.my.site.com/Sales/s/acao-corretiva/&quot; &amp; {!$Record.Id}</expression>
+    </formulas>
+    <formulas>
+        <name>Titulo</name>
+        <dataType>String</dataType>
+        <expression>&quot;Ação corretiva &quot;</expression>
+    </formulas>
+    <interviewLabel>Ação corretiva {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Ação corretiva - notificações</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Manda_notifica_o</targetReference>
+        </connector>
+        <object>Acao_corretiva__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>id</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

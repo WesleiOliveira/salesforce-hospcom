@@ -1,0 +1,364 @@
+<template>
+
+    <div class="topo-metricas">
+        
+        <div class="item-metrica">
+            <div class="coluna-Esq fullWidht">
+
+                <div class="title-col-esq">
+                    Meta Mensal
+                </div>
+
+                <div class="value-col-esq">
+                    {metaMensalVenda}
+                </div>
+
+            </div>
+
+            <!-- <div class="coluna-Dir">
+                <i class="fa fa-line-chart" aria-hidden="true"></i>
+            </div> -->
+        </div>
+
+        
+
+        <div class="item-metrica">
+            <div class="coluna-Esq fullWidht">
+
+                <div class="title-col-esq">
+                    Meta Anual
+                </div>
+
+                <div class="value-col-esq">
+                    <div class="container"> 
+                        <div class="skill" data-id="porcentagemDiv">{porcentagemAtingido}%</div> 
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+
+
+        <div class="item-metrica">
+            <div class="coluna-Esq fullWidht">
+
+                <div class="title-col-esq">
+                    OPPs Abertas
+                </div>
+
+                <div class="value-col-esq">
+                    {quantidadeOpps} Neste mês
+                </div>
+
+            </div>
+
+            <!-- <div class="coluna-Dir">
+                <i class="fa fa-cloud" aria-hidden="true"></i>
+            </div> -->
+        </div>
+
+        <div class="item-metrica">
+            <div class="coluna-Esq fullWidht">
+
+                <div class="title-col-esq">
+                    WinRate Anual
+                </div>
+
+                <div class="value-col-esq">
+                    <div class="container"> 
+                        <div class="skill" id="divWinRate" data-id="divWinRate">{winRate}%</div> 
+                    </div> 
+                </div>
+            </div>
+        </div>
+
+        <div class="item-metrica">
+            <div class="coluna-Esq fullWidht">
+
+                <div class="title-col-esq">
+                    GAP Mensal
+                </div>
+
+                <div class="value-col-esq">
+                    <div class="container"> 
+                        <div class="skill" data-id="divGapMensal">{gapMensal}%</div> 
+                    </div> 
+                </div>
+            </div>
+        </div>
+
+        <div class="item-metrica">
+            <div class="coluna-Esq fullWidht">
+
+                <div class="title-col-esq">
+                    Saldo de férias
+                </div>
+
+                <div class="value-col-esq">
+                    {saldoFerias} Dias
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="section-1">
+
+        <div class="atividades-dia-box">
+            <div class="box-header">
+                <div class="box-title">
+                    Próximas atividades       
+                </div>
+
+                <div class="box-options">
+                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                </div>
+            </div>
+
+            <div class="body-atividades">
+
+                <template for:each={atividadesTeams} for:item="atividade">
+                    <div class="event-activy-div" key={atividade.nomeAtividade}>
+                        <div class="event-container">
+
+                            <a href={atividade.url} class="event-header" target="_blank">{atividade.nomeAtividade}</a>
+                        
+                            <div class="event-info">
+                                <div class="event-time">{atividade.diaData}{atividade.inicioAtividade}</div>
+                                <div class="event-status">{atividade.status}</div>
+                            </div>
+                        
+                            <div class="event-tag">
+                                <div class="event-tag-icon"></div>
+                                <span>{atividade.origem}</span>
+                            </div>
+                        
+                            <div class="event-status-accepted">{atividade.status}</div>
+                        </div>
+                    </div>
+                </template>
+
+            </div>
+        </div>
+
+
+
+
+        <div class="inner-section-1">
+            <div class="principais-negocios">
+                <div class="box-header">
+                    <div class="box-title">
+                        Principais Negócios      
+                    </div>
+    
+                    <div class="box-options">
+                        <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+
+                <div class="body-negocios" data-id="body-negocios">
+
+                    <template for:each={negocios} for:item="negocio">
+                        <div class="negocios-div" key={negocio.id} id={negocio.id}>
+                            <div class="event-container">
+                                <a href={negocio.url} class="negocios-header" target="_blank">{negocio.nome}</a>
+                                <div class="negocios-info">
+                                    <div class="negocios-status">{negocio.status}</div>
+                                    <div class="negocios-valor">{negocio.valor}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
+                </div>
+            </div>
+
+            <div class="inner-row-section-1">
+
+                <div class="principais-pendencias">
+
+                    <!-- HEADER  PENDENCIAS-->
+                    <div class="box-header">
+                        <div class="box-title">
+                            Principais Pendências     
+                        </div>
+        
+                        <div class="box-options">
+                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                        </div>
+                    </div>
+
+                    <!-- BODY PENDENCIAS -->
+                    <div class="body-pendencias" data-id="body-pendencias">
+
+                        <!-- Verifica se há ativos -->
+                        <template if:true={pendencias.length}>
+                            <template for:each={pendencias} for:item="pendencia">
+                                <div class="pendencias-div" key={pendencia.id} id={pendencia.id}>
+                                    <div class="event-container">
+                                        <a class="pendencias-header" href={pendencia.url} target="_blank">{pendencia.nome}</a>
+                                        <div class="pendencias-info">
+                                            <div class="pendencias-status">{pendencia.status} - {pendencia.situacao}</div>
+                                            <div class="pendencias-valor">{pendencia.prazo}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </template>
+
+                        <!-- Mensagem quando não há ativos -->
+                        <template if:false={pendencias.length}>
+                            <div class="no-ativos-message">Nenhuma pendencia encontrada.</div>
+                        </template>
+                    </div>
+                </div>
+
+
+                <div class="ativos-em-posse">
+                    <div class="box-header">
+                        <div class="box-title">
+                            Ativos em meu nome    
+                        </div>
+        
+                        <div class="box-options">
+                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                        </div>
+                    </div>
+
+                    <div class="body-ativos" data-id="body-ativos">
+
+                        <!-- Verifica se há ativos -->
+                        <template if:true={ativos.length}>
+                            <template for:each={ativos} for:item="ativo">
+                                <div class="ativos-div" key={ativo.id} id={ativo.id}>
+                                    <div class="event-container">
+                                        <a class="ativos-header" href={ativo.url} target="_blank">{ativo.nome}</a>
+                                        <div class="ativos-info">
+                                            <div class="ativos-status">{ativo.modelo}</div>
+                                            <div class="ativos-valor">S/N.: {ativo.numeroSerie}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </template>
+
+                        <!-- Mensagem quando não há ativos -->
+                        <template if:false={ativos.length}>
+                            <div class="no-ativos-message">Nenhum ativo encontrado.</div>
+                        </template>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <div class="section-2">
+
+        <div class="item-metrica section2">
+            <div class="box-header">
+                <div class="box-title">
+                    Rotas de viagem  
+                </div>
+
+                <div class="box-options">
+                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                </div>
+            </div>
+
+            <!-- BODY ROTAS -->
+            <div class="body-rotas" data-id="body-rotas">
+
+                <template for:each={rotasViagem} for:item="rota">
+
+                    <div class="event-activy-div" key={rota.id}>
+                        <div class="event-container">
+
+                            <a href={rota.url} class="event-header" target="_blank">{rota.nome}</a>
+                        
+                            <div class="event-info">
+                                <div class="event-time">{rota.origem} -> {rota.destino}</div>
+                                <div class="event-status">{rota.dataSaida}</div>
+                            </div>
+                        
+                            <div class="event-tag">
+                                <div class="event-tag-icon"></div>
+                                <span>{rota.confirmada}</span>
+                            </div>
+                        
+                            <div class="event-status-accepted">{rota.departamento}</div>
+                        </div>
+                    </div>
+                </template>
+
+            </div>
+
+        </div>
+
+
+        <div class="item-metrica section2">
+            <div class="box-header">
+                <div class="box-title">
+                    Histórico de comissão  
+                </div>
+
+                <div class="box-options">
+                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="item-metrica section2">
+            <div class="box-header">
+                <div class="box-title">
+                    Solicitação de férias  
+                </div>
+
+                <div class="box-options">
+                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                </div>
+            </div>
+
+
+            <!-- BODY FERIAS -->
+            <div class="body-ferias" data-id="body-ferias">
+
+                <template for:each={ferias} for:item="feriasAtual">
+
+                    <div class="event-activy-div" key={feriasAtual.id}>
+                        <div class="event-container">
+
+                            <a href={feriasAtual.url} class="event-header" target="_blank">{feriasAtual.nome}</a>
+                        
+                            <div class="event-info">
+                                <div class="event-time">{feriasAtual.dataInicial} -> {feriasAtual.dataFinal}</div>
+                                <div class="event-status">{feriasAtual.diasTotal} Dias</div>
+                            </div>
+                        
+                            <div class="event-tag">
+                                <div class="event-tag-icon"></div>
+                                <span>{feriasAtual.status}</span>
+                            </div>
+                        
+                            <!-- <div class="event-status-accepted">-</div> -->
+                        </div>
+                    </div>
+                </template>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    
+</template>

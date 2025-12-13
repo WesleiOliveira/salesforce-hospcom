@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_prazo__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(!ISNULL( Ultimo_recebimento__c ),
+IF(
+TEXT(Pedido_de_compra__r.Tipo_de_entrega__c) = &apos;Marítimo&apos;,
+IF((Ultimo_recebimento__c -  Data_de_aprova_o_da_cota_o__c) &lt;= 120, &apos;Sim&apos;, &apos;Não&apos;),
+
+IF(
+TEXT(Pedido_de_compra__r.Tipo_de_entrega__c) = &apos;Aéreo&apos;,
+IF((Ultimo_recebimento__c -  Data_de_aprova_o_da_cota_o__c) &lt;= 90, &apos;Sim&apos;, &apos;Não&apos;),
+
+IF(
+TEXT(Pedido_de_compra__r.Origem__c) = &apos;Nacional&apos; &amp;&amp; TEXT(Pedido_de_compra__r.Tipo__c) != &apos;Compra para consumo&apos;,
+IF((Ultimo_recebimento__c -  Data_de_aprova_o_da_cota_o__c) &lt;= 30, &apos;Sim&apos;, &apos;Não&apos;),
+
+IF(
+TEXT(Pedido_de_compra__r.Tipo__c) = &apos;Compra para consumo&apos;,
+IF((Ultimo_recebimento__c -  Data_de_aprova_o_da_cota_o__c) &lt;= 10, &apos;Sim&apos;, &apos;Não&apos;),
+
+&apos;Não&apos;)))),
+IF(
+TEXT(Pedido_de_compra__r.Tipo_de_entrega__c) = &apos;Marítimo&apos;,
+IF((TODAY() -  Data_de_aprova_o_da_cota_o__c) &lt;= 120, &apos;Sim&apos;, &apos;Não&apos;),
+
+IF(
+TEXT(Pedido_de_compra__r.Tipo_de_entrega__c) = &apos;Aéreo&apos;,
+IF((TODAY() -  Data_de_aprova_o_da_cota_o__c) &lt;= 90, &apos;Sim&apos;, &apos;Não&apos;),
+
+IF(
+TEXT(Pedido_de_compra__r.Origem__c) = &apos;Nacional&apos; &amp;&amp; TEXT(Pedido_de_compra__r.Tipo__c) != &apos;Compra para consumo&apos;,
+IF((TODAY() -  Data_de_aprova_o_da_cota_o__c) &lt;= 30, &apos;Sim&apos;, &apos;Não&apos;),
+
+IF(
+TEXT(Pedido_de_compra__r.Tipo__c) = &apos;Compra para consumo&apos;,
+IF((TODAY() -  Data_de_aprova_o_da_cota_o__c) &lt;= 10, &apos;Sim&apos;, &apos;Não&apos;),
+
+&apos;Não&apos;))))
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>No prazo</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

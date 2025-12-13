@@ -1,0 +1,189 @@
+.valeu-card {
+    border-radius: 12px;
+    
+    padding: 1rem;
+    background: #ffffff;
+    font-family: 'Salesforce Sans', Arial, sans-serif;
+}
+
+/* Header com ícone e título */
+.valeu-card__header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.valeu-card__title {
+    display: flex;
+    align-items: center;
+}
+
+.valeu-card__icon {
+    margin-right: 0.5rem;
+}
+
+.valeu-card__title-text { 
+     opacity: 0;
+    animation: fadeInTitle 0.6s ease-out forwards;
+    animation-delay: 0.2s;  
+    color: #032d60;
+    align-self: center;
+    font-size: xxx-large;
+    font-weight: 900;
+}
+@keyframes fadeInTitle {
+    to {
+        opacity: 1;
+    }
+}
+
+.userName {
+    font-size: 1rem;
+    color: #4b4b4b;
+    text-align: center;
+}
+
+/* Container geral das regras */
+.rules-body {
+    background-color: #f4f6f9;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-top: 1rem;
+    color: #2e2e2e;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Título principal */
+.rules-body h1 {
+    font-size: 1.4rem;
+    color: #032d60;
+    margin-bottom: 0.8rem;
+}
+
+/* Subtítulo geral (ex: Programa Valeu) */
+.rules-body h2 {
+    font-size: 1.2rem;
+    margin-top: 0.8rem;
+    color: #0070d2;
+}
+
+/* Subseções numeradas */
+.rules-body h3 {
+    font-size: 1rem;
+    margin-top: 1rem;
+    color: #005fb2;
+}
+
+/* Listas */
+.rules-body ul {
+    padding-left: 1.2rem;
+    margin-top: 0.3rem;
+}
+
+
+.rules-body ul li {
+    margin-bottom: 0.3rem;
+}
+
+/* Animação dos itens individuais */
+.rule-item {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: slideIn 0.5s ease-out forwards;
+}
+
+/* Cascata de animação com delay progressivo */
+.rule-item:nth-child(2)  { animation-delay: 0.1s; }
+.rule-item:nth-child(3)  { animation-delay: 0.2s; }
+.rule-item:nth-child(4)  { animation-delay: 0.3s; }
+.rule-item:nth-child(5)  { animation-delay: 0.4s; }
+.rule-item:nth-child(6)  { animation-delay: 0.5s; }
+.rule-item:nth-child(7)  { animation-delay: 0.6s; }
+.rule-item:nth-child(8)  { animation-delay: 0.7s; }
+
+/* Keyframes da animação */
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Formulário */
+.valeu-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.valeu-card__combobox,
+.valeu-card__textarea {
+    width: 100%;
+}
+
+/* Botão */
+.valeu-card__button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    justify-content: center;
+}
+
+.valeu-card__button {
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+}
+
+.valeu-card__button:hover {
+    background-color: #005fb2; /* tom mais escuro do azul padrão Salesforce */
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+/* Campos de texto e seleção */
+.valeu-card__combobox lightning-combobox,
+.valeu-card__textarea lightning-textarea {
+    width: 100%;
+}
+
+
+/* Área de texto */
+.valeu-card__textarea textarea {
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    border: 1px solid #d8dde6;
+    resize: vertical;
+    min-height: 100px;
+    background-color: #fff;
+    color: #2e2e2e;
+}
+
+/* Combobox interno */
+.valeu-card__combobox select {
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    font-size: 0.95rem;
+    background-color: #fff;
+    color: #2e2e2e;
+    border: 1px solid #d8dde6;
+}
+
+/* Margens entre os campos */
+.valeu-card__combobox,
+.valeu-card__textarea {
+    margin-bottom: 1rem;
+}
+.combox54{
+      padding: 0px 101px 0px;
+}
+.fildsContainer43{
+     opacity: 0;
+     animation-delay: 0.2s;
+     animation: fadeInTitle 0.6s ease-out forwards;
+    z-index: 10;
+}

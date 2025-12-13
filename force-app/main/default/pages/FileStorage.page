@@ -1,0 +1,58 @@
+<apex:page controller="FileStorage" showHeader="false" showChat="false" standardStylesheets="false" docType="html-5.0">
+	<html>
+		<head>
+			<script src="{!$Resource.JQuery}"></script>
+		</head>
+		<apex:outputPanel id="controle">
+			<apex:outputText rendered="{!IF(proposta.size>0, true, false)}" >
+				<script>var continua = true;</script>
+			</apex:outputText>
+			<apex:outputText rendered="{!IF(proposta.size==0, true, false)}" >
+				<script>var continua = false;</script>
+			</apex:outputText>
+		</apex:outputPanel>
+		<script>
+			$(document).ready(function(){
+				Pesquisar();
+			});
+			function Mais(){
+				if(continua)
+					Pesquisar();
+			}
+		</script>
+		<body>
+			<apex:form >
+				<apex:actionFunction name="Pesquisar" action="{!Pesquisar}" rerender="resultado,controle" oncomplete="Mais();"/>
+				<table id="geral" border="1px">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>NOME</th>
+							<th>OPP</th>
+							<th>OT</th>
+						</tr>
+					</thead>
+					<tbody>
+						
+					</tbody>
+				</table>
+				
+				<apex:outputPanel id="resultado">
+					<script>console.log('resultado');</script>
+					<table id="parcial" border="1px" style="border-color:blue;">
+						<tr>
+							<td>{!proposta_del.Id}</td>
+							<td>{!proposta_del.Name}</td>
+							<td>{!proposta_del.Oportunidade__c}</td>
+							<td>{!proposta_del.Ordem_de_trabalho__c}</td>
+						</tr>									
+					</table>
+					<script>
+						$('#geral tr:last').after($('#parcial tr'));
+					</script>
+				</apex:outputPanel>
+				
+			</apex:form>
+		</body>
+	</html>
+</apex:page>

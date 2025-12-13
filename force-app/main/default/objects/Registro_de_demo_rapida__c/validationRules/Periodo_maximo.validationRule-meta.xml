@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Periodo_maximo</fullName>
+    <active>true</active>
+    <errorConditionFormula>Data_de_termino_da_demonstracao__c - Data_da_demonstracao__c &gt; 2</errorConditionFormula>
+    <errorMessage>O tempo de demonstração não pode exceder dois dias.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,101 @@
+<template>
+    <lightning-card title="Dashboard do Backlog" icon-name="custom:custom63">
+        <div class="slds-grid slds-wrap slds-p-around_medium">
+
+            <!-- Cards -->
+            <template if:true={data}>
+                <div class="slds-col slds-size_1-of-5 card-box">
+                    <div class="info">
+                        <p class="title">Abertos</p>
+                        <p class="value">{data.totalAbertos} </lightning-icon></p>
+                    </div>
+                    <div class="icone">
+                        <i class="fa fa-ticket" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-5 card-box">
+                    <div class="info">
+                        <p class="title">Em andamento</p>
+                        <p class="value">{data.totalEmAndamento}</p>
+                    </div>
+                    <div class="icone">
+                        <i class="fa fa-spinner" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-5 card-box">
+                    <div class="info">
+                        <p class="title">Rápidos</p>
+                        <p class="value">{data.ticketsRapidos}</p>
+                    </div>
+                    <div class="icone">
+                        <i class="fa fa-object-ungroup" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-5 card-box">
+                    <div class="info">
+                        <p class="title">Finalizados</p>
+                        <p class="value">{data.totalFinalizados}</p>
+                    </div>
+                    <div class="icone">
+                        <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </template>
+
+            <!-- Gráfico -->
+            <div class="slds-col slds-size_1-of-2 slds-p-top_medium containerCanvas">
+                <canvas class="lineChart"></canvas>
+            </div>
+            <div class="slds-col slds-size_1-of-2 slds-p-top_medium containerCanvas">
+                <canvas class="doughnutChart"></canvas>
+            </div>
+
+            <div class="slds-col slds-size_1-of-2 slds-p-top_medium containerCanvas">
+                <canvas class="barChart"></canvas>
+            </div>
+
+            <div class="slds-col slds-size_1-of-2 slds-p-top_medium containerCanvas">
+                <canvas class="pieChart"></canvas>
+            </div>
+
+            <!-- Recentes -->
+            <div class="slds-col slds-size_1-of-1 slds-p-top_medium recentesBox">
+                <div class="recentes">
+                    <b>Tickets recentes</b>
+                    <template if:true={data.recentes}>
+                        <template for:each={data.recentes} for:item="item">
+                            <div key={item.idTkt} class="recent-item" data-id={item.idTkt}>
+
+                                <span class="titulo"><a onclick={navigateToRecord}
+                                        data-id={item.idTkt}>{item.titulo}</a>
+                                </span>
+                                <br>
+                                Criado em: <span class="date">{item.data}</span>
+                                <br>
+                                <span class="descricao">{item.atribuido}</span>
+                            </div>
+                        </template>
+                    </template>
+                </div>
+                <div class="finalizados">
+                    <b>Ultimos tickets finalizados</b>
+                    <template if:true={data.finalizados}>
+                        <template for:each={data.finalizados} for:item="item">
+                            <div key={item.idTkt} class="recent-item" data-id={item.idTkt}>
+
+                                <span class="titulo"><a onclick={navigateToRecord}
+                                        data-id={item.idTkt}>{item.titulo}</a>
+                                </span>
+                                <br>
+                                Finalizado em: <span class="date">{item.data}</span>
+                                <br>
+                                <span class="descricao">{item.atribuido}</span>
+                            </div>
+                        </template>
+                    </template>
+                </div>
+            </div>
+
+        </div>
+    </lightning-card>
+</template>

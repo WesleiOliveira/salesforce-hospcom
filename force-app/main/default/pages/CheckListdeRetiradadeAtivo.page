@@ -1,0 +1,266 @@
+<apex:page standardController="Ativos_do_Contrato__c" extensions="checklistdeativo" renderAs="pdf" applyHtmlTag="false" showHeader="false">
+
+  
+  <head>
+        <style type="text/css" media="print">
+                @page{
+                background: url({!IF(Ativos_do_Contrato__c.Contrato_de_Servico__r.Timbre__c == 'HEALTH SOLUTION',$Resource.TimbradoHealth,IF(Ativos_do_Contrato__c.Contrato_de_Servico__r.Timbre__c == 'HOSPCOM',$Resource.TimbradoPaisagemHospcom,IF(Ativos_do_Contrato__c.Contrato_de_Servico__r.Timbre__c == 'GDB',$Resource.TimbradoPaisagemGDB,"-")))});
+                margin:350px 50px 120px 50px;
+                size: 3508px 2480px;}
+                .special{
+                font-family:'Arial Unicode MS';
+            }
+                
+       </style>
+      
+    </head>
+    <body style="font-family:Arial; padding:0px; margin:0px; border:0px solid #eef2f4; width:*;">
+    <table width="100%">
+        <tr style="border: 1px solid black; font-size: 30pt; text-align: center">
+            <td style="border: 1px solid black; background-color:#f4f5f5;" height="50pt">
+            <b>CHECKLIST DE RETIRADA DE EQUIPAMENTO DE LOCAÇÃO - CONTRATO N° {!Ativos_do_Contrato__c.Contrato_de_Servico__r.N_mero_da_Proposta_Contrato__c}</b>
+            </td>
+        </tr>
+        <tr><td height="25px"></td></tr>
+    </table>
+    
+    <table width="100%" cellspacing="0" style="font-size: 24pt">
+        <tr>
+            <td width="50%">
+                <table width="100%" cellspacing="0" style="font-size: 24pt">
+                    <tr>
+                        <td style="border: 1px solid black;text-align: center;font-size: 30pt" width="100%" colspan="2">
+                            <b>DADOS DO LOCADOR(A)</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black; padding: 5px" width="350px">
+                            <b>LOCADOR(A):</b>
+                        </td>
+                        <td style="border: 1px solid black; padding: 5px" width="1000px">
+                        {!UPPER(Ativos_do_Contrato__c.Contrato_de_Servico__r.Locador_a__r.Name)}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black; padding: 5px" width="350px">
+                            <b>RAZÃO SOCIAL:</b>
+                        </td>
+                        <td style="border: 1px solid black; padding: 5px" width="1000px">
+                        {!UPPER(Ativos_do_Contrato__c.Contrato_de_Servico__r.Locador_a__r.Raz_o_Social__c)}
+                        
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black; padding: 5px" width="350px" height="100px">
+                            <b>ENDEREÇO:</b>
+                        </td>
+                        <td style="border: 1px solid black; padding: 5px" width="1000px">
+                         {!UPPER(Ativos_do_Contrato__c.Contrato_de_Servico__r.Locador_a__r.ShippingStreet + " " + Ativos_do_Contrato__c.Contrato_de_Servico__r.Locador_a__r.ShippingCity + " " + Ativos_do_Contrato__c.Contrato_de_Servico__r.Locador_a__r.ShippingState+ " " + "CEP: " + Ativos_do_Contrato__c.Contrato_de_Servico__r.Locador_a__r.ShippingPostalCode)}
+                        
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black; padding: 5px" width="350px">
+                            <b>CNPJ:</b>
+                        </td>
+                        <td style="border: 1px solid black; padding: 5px" width="1000px">
+                        {!UPPER(IF(Ativos_do_Contrato__c.Contrato_de_Servico__r.Locador_a__r.CNPJ__c == "", Ativos_do_Contrato__c.Contrato_de_Servico__r.Locador_a__r.CPF__pc, Ativos_do_Contrato__c.Contrato_de_Servico__r.Locador_a__r.CNPJ__c) )}
+                        
+                        </td>
+                    </tr>                   
+                    <tr>
+                        <td style="border: 1px solid black; padding: 5px" width="350px">
+                            <b>E-MAIL:</b>
+                        </td>
+                        <td style="border: 1px solid black; padding: 5px" width="1000px">
+                        tatiane.alves@hospcom.net
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+            
+            <td width="50%">
+                <table width="100%" cellspacing="0" style="font-size: 24pt">
+                    <tr>
+                        <td style="border: 1px solid black;text-align: center;font-size: 30pt" width="100%" colspan="2">
+                            <b>DADOS DO LOCATÁRIO(A)</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black; padding: 5px" width="350px">
+                            <b>LOCATÁRIO(A):</b>
+                        </td>
+                        <td style="border: 1px solid black; padding: 5px" width="1000px">
+                        {!UPPER(Ativos_do_Contrato__c.Contrato_de_Servico__r.Locat_rio_a__r.Name)}
+                        
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black; padding: 5px" width="350px" height="36pt">
+                           <b>{!if(Ativos_do_Contrato__c.Contrato_de_Servico__r.Locat_rio_a__r.CNPJ__c==NULL, "", "RAZÃO SOCIAL:")}</b>
+                        
+                        </td>
+                        <td style="border: 1px solid black; padding: 5px" width="1000px">
+                        {!UPPER(Ativos_do_Contrato__c.Contrato_de_Servico__r.Locat_rio_a__r.Raz_o_Social__c)}
+                        
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black; padding: 5px" width="350px" height="100px">
+                            <b>ENDEREÇO:</b>
+                        </td>
+                        <td style="border: 1px solid black; padding: 5px" width="1000px">
+                        {!UPPER(Ativos_do_Contrato__c.Contrato_de_Servico__r.Endere_o__c)}
+                        
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black; padding: 5px" width="350px">
+                            <b>CPF/CNPJ:</b>
+                        </td>
+                        <td style="border: 1px solid black; padding: 5px" width="1000px">
+                        {!UPPER(IF(Ativos_do_Contrato__c.Contrato_de_Servico__r.Locat_rio_a__r.CNPJ__c==NULL,Ativos_do_Contrato__c.Contrato_de_Servico__r.Locat_rio_a__r.CPF__pc ,Ativos_do_Contrato__c.Contrato_de_Servico__r.Locat_rio_a__r.CNPJ__c ))}
+                        
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black; padding: 5px" width="350px" height="50px">
+                            
+                        </td>
+                        <td style="border: 1px solid black; padding: 5px" width="1000px"  height="50px">
+                        
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+        <tr><td height="25px"></td></tr>
+    </table>
+    
+    
+    
+    <table width="100%">
+        <tr style="border: 1px solid black; font-size: 30pt; text-align: center">
+            <td style="border: 1px solid black; background-color:#f4f5f5;" height="50pt">
+            <b>DADOS DO EQUIPAMENTO</b>
+            </td>
+        </tr>
+        <tr><td height="25px"></td></tr>
+    </table>
+    
+    
+    <table width="100%" style="font-size:24pt">
+        <tr>
+            <td style="text-align: center">
+               <b>EQUIPAMENTO:</b> {!Ativos_do_Contrato__c.Ativo_Locado__r.Name}, &nbsp; <b>MARCA:</b> {!Ativos_do_Contrato__c.Ativo_Locado__r.Marca__c}, &nbsp; <b>MODELO:</b> {!Ativos_do_Contrato__c.Ativo_Locado__r.Modelo__c}, &nbsp; <b>N° DE SÉRIE:</b> {!Ativos_do_Contrato__c.Ativo_Locado__r.SerialNumber} 
+            </td>
+        </tr>
+        <tr><td height="25px"></td></tr>
+    </table>
+    
+    <table width="100%" >
+        <tr style="border: 1px solid black; font-size: 30pt; text-align: center">
+            <td style="border: 1px solid black; background-color:#f4f5f5;" height="50pt">
+            <b>ESTADO DOS ITENS RETIRADOS</b>
+            </td>
+        </tr>
+
+    </table>
+    
+    <div style="position:relative; margin: auto; text-align:center; align-itens: center" width="100%">  
+    <table width="100%" >
+        <tr>
+            <td width="30%">
+                <table cellspacing ="0" width="100%">
+                    <tr>
+                        <td style="border: 1px solid black; font-size: 24pt; text-align: center" height="35pt" align="center">
+                        <b>ITEM</b>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+            
+            <td width="30%">
+                <table cellspacing ="0" width="100%">
+                    <tr>
+                        <td style="border: 1px solid black; font-size: 24pt; text-align: center" height="35pt">
+                        <b>ESTADO DO ITEM NA RETIRADA</b>
+                        </td>
+                    </tr>            
+                </table>
+            </td>      
+            
+        </tr>
+        
+        
+        <apex:repeat var="ac" value="{!Ativo}">
+            <apex:repeat var="cl" value="{!ac.Itens_de_Checklist_do_Ativo__r}">
+                <tr>
+                    <td width="30%">
+                        <table cellspacing ="0" width="100%">
+                            <tr>
+                                <td style="border: 1px solid black; font-size: 24pt; text-align: center" height="40pt">
+                               {!UPPER(cl.Nome_do_Item__c)}
+                                </td>
+                            </tr>
+        
+                        </table>
+                    </td>
+                    
+                    <td width="30%">
+                        <table cellspacing ="0" width="100%">
+                            <tr>
+                                <td style="border: 1px solid black; font-size: 24pt; text-align: center" class="special" height="40pt">
+                                
+                               <span style="font-size: 25pt">{!IF(cl.Conforme__c == TRUE, "✔", "☐")}</span> &nbsp; CONFORME  &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="font-size: 25pt">{!IF(cl.N_o_Conforme__c == TRUE, "✔", "☐")}</span> &nbsp; NÃO CONFORME 
+                                </td>
+                            </tr>            
+                        </table>
+                    </td>           
+                </tr>
+            </apex:repeat>     
+        </apex:repeat>
+        
+    </table>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div style="text-align: right; font-size: 24pt;">_____________________, ______ de _______________________________ de __________</div>  
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <table width = "100%">
+        <tr>
+            <td style="text-align:center" width="50%">
+            ___________________________________________________________________________________________
+            </td>
+           
+            
+            <td style="text-align:center" width="50%">
+            ___________________________________________________________________________________________
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:center; font-size: 24pt" width="50%">
+                {!Ativos_do_Contrato__c.Contrato_de_Servico__r.Locador_a__r.Name}
+            </td>
+            <td style="text-align:center; font-size: 24pt" width="50%">
+                {!Ativos_do_Contrato__c.Contrato_de_Servico__r.Locat_rio_a__r.Name}
+            </td>
+        </tr>
+    </table>
+    </div>  
+    </body>  
+</apex:page>

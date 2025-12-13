@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Se_sim_Droga_Psicologia__c</fullName>
+    <externalId>false</externalId>
+    <label>Se sim</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Naturais</fullName>
+                <default>false</default>
+                <label>Naturais</label>
+            </value>
+            <value>
+                <fullName>Sintéticas</fullName>
+                <default>false</default>
+                <label>Sintéticas</label>
+            </value>
+            <value>
+                <fullName>Semi-sintéticas</fullName>
+                <default>false</default>
+                <label>Semi-sintéticas</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

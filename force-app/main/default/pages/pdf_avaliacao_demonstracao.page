@@ -1,0 +1,600 @@
+<apex:page standardController="avaliacaoDeDemonstracao__c" extensions="AvaliacaoDemo" applyHtmlTag="false" showHeader="false" renderAs="pdf">
+
+    <head>
+        <style type="text/css" media="print">
+            @page {
+                size: 21cm 29.7cm;
+                margin: 100px 40px 60px 40px;
+
+                @top-center {
+                    content: element(header);
+                }
+
+                @bottom-center {
+                    content: element(footer);
+                }
+            }
+
+            @page {
+                size: A4;
+                background:url({!$Resource.TimbradoHospcom});
+                margin: 150px 50px 120px 50px;
+
+                @bottom-center {
+                    content: element(footer);
+                }
+            }
+
+            .pagenumber:before {
+                content: counter(page);
+            }
+
+            .pagecount:before {
+                content: counter(pages);
+            }
+
+            div.header {
+                margin: 0px 0px 0px 0px;
+                padding: 20px 0px 20px 0px;
+                position: running(header);
+                height: 60px;
+            }
+
+            div.content {}
+
+            div.footer {
+                margin: 0px 0px 0px 0px;
+                padding: 20px 0px 20px 0px;
+                position: running(footer);
+                height: 20px;
+                text-align: right;
+                font-family: arial, verdana, sans-serif;
+                font-size: 10px;
+                font-weight: normal;
+            }
+        </style>
+        <style type="text/css" media="print">
+            /*
+        
+        
+            @page:first{
+                size:A4;
+                background: url($Resource.SobreHealth);
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);
+                }
+            }
+            
+            @page{
+                size:A4;
+                background: url($Resource.TimbradoHealth);
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);}
+            }
+  */
+            * {
+                font-family: arial, verdana, sans-serif;
+                /* border: none !important;  */
+                text-transform: uppercase;
+            }
+
+            tr {}
+
+            .titulo-secao {
+                font-family: arial, verdana, sans-serif;
+                font-size: 15px;
+                text-align: left !important;
+                font-weight: bold;
+                width: 100%;
+                padding: 10px 0;
+                background-color: #fff;
+                color: #0b3353;
+                margin-top: 10px;
+            }
+
+            .titulo {
+                font-family: arial, verdana, sans-serif;
+                font-size: 15px;
+                text-align: center;
+                font-weight: bold;
+
+                padding: 10px;
+                background-color: ;
+                color: #0b3353;
+            }
+
+            table {
+                border-collapse: collapse;
+                border: none !important;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+
+            .cabecalho-tabela {
+                background: #fff;
+                border: 1px solid #000;
+                text-align: center;
+                font-weight: 900;
+            }
+
+            .corpo-tabela {
+                background: #fff;
+            }
+
+            tr {
+                width: 100%;
+            }
+
+            h3 {
+                color: #0b3353;
+                margin: 0;
+                padding: 0;
+                text-align: center !important;
+            }
+
+            h2 {
+                color: #0b3353;
+                font-family: arial, verdana, sans-serif;
+            }
+
+            td {
+                padding: 5px;
+                font-family: arial, verdana, sans-serif;
+                font-size: 11.5px;
+            }
+
+            tr,
+            td {
+                border: 1px solid #000;
+            }
+
+            table tr.cabecalho-tabela td {
+                border: 1px solid #000;
+                margin: 0;
+            }
+
+
+            .tabela_geral {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            table.print-friendly tr td,
+            table.print-friendly tr th {
+                page-break-inside: avoid;
+            }
+
+            .cabecalho {
+                font-family: arial, verdana, sans-serif;
+                font-size: 11px;
+                font-weight: bold;
+                vertical-align: top;
+                background-color: #c3c3c3;
+                padding: 3px;
+            }
+
+            .celula {
+                font-family: arial, verdana, sans-serif;
+                font-size: 13px;
+                vertical-align: top;
+                line-height: 120%;
+                padding: 3px;
+                border: 1px solid #c3c3c3;
+            }
+
+            .clausula_texto {
+                font-family: arial, verdana, sans-serif;
+                font-size: 11.5px;
+                text-align: justify;
+                text-justify: inter-word;
+                line-height: 120%;
+                text-indent: 50px;
+                vertical-align: top;
+            }
+
+            .infos_texto {
+                font-family: arial, verdana, sans-serif;
+                font-size: 11.5px;
+                text-justify: inter-word;
+                line-height: 120%;
+                vertical-align: top;
+                border: none;
+            }
+
+            .pre_texto {
+                white-space: pre;
+            }
+
+            .maiuscula {
+                text-transform: uppercase;
+            }
+
+            .zebra {
+                background-color: #f3f3f3;
+            }
+
+            .assinaturas {
+                display: flex;
+
+                flex-direction: row;
+                padding: 0;
+                margin: 0;
+            }
+
+            .assinatura {
+                width: 100%;
+                padding: 0;
+                margin: 0;
+            }
+
+            .underline {
+                padding: 0;
+                margin: 0 auto;
+                width: 80px;
+                height: 1px;
+                border-top: 1px solid #000;
+            }
+            
+            .names{
+                text-align:center;
+            }
+            
+        </style>
+    </head>
+
+    <body>
+        <apex:pageBlock >
+
+
+
+
+            <div class="footer" style="text-align:center !important">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Página <span class="pagenumber" /> de <span class="pagecount" /> - Emissão em:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}">
+                    <apex:param value="{! TODAY() }" />
+                </apex:outputText>
+            </div>
+
+            <div>
+                <apex:outputText rendered="true">
+                    <div class="titulo">
+                        AVALIAÇÃO DE DEMONSTRAÇÃO
+                        <br />
+                    </div>
+                    <div style=''>
+
+                        <table style="page-break-inside:avoid;width:100%">
+
+
+                            <h3 class="titulo-secao"> Dados da demonstração</h3>
+
+                            <tr>
+                                <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:200px;">LOCAL:
+                                </td>
+                                <td colspan="3" class="infos_texto" style="text-indent:0px;">{!avaliacaoDeDemonstracao__c.Pedido__r.Account.Name}</td>
+                            </tr>
+
+                            <tr style=''>
+                                <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:200px;">DATA DA DEMONSTRAÇÃO:
+                                </td>
+                                <td colspan="3" class="infos_texto" style="text-indent:0px;">
+                                    <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                        <apex:param value="{!avaliacaoDeDemonstracao__c.Pedido__r.Data_da_demonstracao__c}" />
+                                    </apex:outputText>
+                                
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:200px;">INSTRUTOR:
+                                </td>
+                                <td colspan="3" class="infos_texto" style="text-indent:0px;">{!avaliacaoDeDemonstracao__c.Pedido__r.Usu_rio__r.Name}</td>
+                            </tr>
+
+                            <tr>
+                                <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:200px;">
+                                    NÚMERO DA DEMONSTRAÇÃO: </td>
+                                <td colspan="3" class="infos_texto" style="text-indent:0px;">{!avaliacaoDeDemonstracao__c.Pedido__r.OrderNumber}</td>
+                            </tr>
+
+                        </table>
+
+                    </div>
+                </apex:outputtext>
+            </div>
+            
+            <div>
+                <h3 class="titulo-secao"> Equipamentos</h3>
+                
+                <!-- INFORMAÇÕES DOS ATIVOS -->
+                <table cellpadding="0px" cellspacing="0px" class="tabela_conteudo">
+
+                    <tr style="display: table-header-group;">
+                        <td style="width:35%;" class="label">
+                        &nbsp;<b>Nome</b>                            
+                        </td>                                     
+                        <td style="width:20%;" class="label">
+                        &nbsp;<b>Marca</b>   
+                        </td>                
+                        <td style="width:15%;" class="label">
+                        &nbsp;<b>Modelo</b>   
+                        </td>                
+                        <td style="width:15%;" class="label">
+                        &nbsp;<b>Nº de Série</b>               
+                        </td>                                  
+                    </tr>
+                    <apex:repeat value="{!itens}"  var="PD" >
+                        <tr style="page-break-inside:avoid;">
+                            <td class="valor">
+                                <div style="width:100%; max-width:100%px;">
+                                &nbsp;{!PD.Product2.Name} 
+                                </div>
+                            </td>
+                            <td class="valor">
+                                <div style="width:100%; max-width:100%px;">
+                                &nbsp;{!PD.Product2.Marca__c}
+                                </div>
+                            </td>
+                            <td class="valor">
+                                <div style="width:100%; max-width:100%px;">
+                                &nbsp;{!PD.Product2.Modelo__c}
+                                </div>
+                            </td>
+                            <td class="valor">
+                                <div style="width:100%; max-width:100%px;">
+                                &nbsp;{!PD.Description} 
+                                </div>
+                            </td>
+                        </tr>                
+                    </apex:repeat>
+                </table>
+            </div>
+
+
+            <div>
+                <!--seção 1-->
+                <table>
+
+                    <tr>
+                        <td class="titulo-secao" colspan="2" style="border:none ; ">Critérios avaliados</td>
+                    </tr>
+
+                    <tr class="cabecalho-tabela">
+                        <td>Critério</td>
+                        <td>RESPOSTA</td>
+                    </tr>
+
+                    <!--- pergunta 1 -->
+                    <tr>
+                        <td style="width:70%;">Ergonomia do produto em demonstração</td>
+                        <td style="text-align: left;">
+                        
+                            <div>
+                                <apex:image value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670498531000" width="15" height="15" />
+                                <span style='width: 30px'>Não Atendeu</span>
+                            </div>
+                            
+                            <div>
+                                <apex:image value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670498531000" width="15" height="15" />
+                                <span style='width: 30px'>Atendeu Parcialmente</span>
+                            </div>
+                            
+                            <div>
+                                <apex:image value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670498531000" width="15" height="15" />
+                                <span style='width: 30px'>Atendeu Totalmente</span>
+                            </div>
+                            
+                            <div>
+                                <apex:image value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670498531000" width="15" height="15" />
+                                <span style='width: 30px'>Superou</span>
+                            </div>
+                            
+                        </td>
+                    </tr>
+                    
+                    
+                    <!--- pergunta 2 -->
+                    <tr>
+                        <td style="width:70%;">Facilidade de Uso</td>
+                        <td style="text-align: left;">
+                        
+                            <div>
+                                <apex:image value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670498531000" width="15" height="15" />
+                                <span style='width: 30px'>Não Atendeu</span>
+                            </div>
+                            
+                            <div>
+                                <apex:image value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670498531000" width="15" height="15" />
+                                <span style='width: 30px'>Atendeu Parcialmente</span>
+                            </div>
+                            
+                            <div>
+                                <apex:image value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670498531000" width="15" height="15" />
+                                <span style='width: 30px'>Atendeu Totalmente</span>
+                            </div>
+                            
+                            <div>
+                                <apex:image value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670498531000" width="15" height="15" />
+                                <span style='width: 30px'>Superou</span>
+                            </div>
+                            
+                        </td>
+                    </tr>
+                    
+                    <!--- pergunta 2 -->
+                    <tr>
+                        <td style="width:70%;">Parâmetros, ferramentas e recursos</td>
+                        <td style="text-align: left;">
+                        
+                            <div>
+                                <apex:image value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670498531000" width="15" height="15" />
+                                <span style='width: 30px'>Não Atendeu</span>
+                            </div>
+                            
+                            <div>
+                                <apex:image value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670498531000" width="15" height="15" />
+                                <span style='width: 30px'>Atendeu Parcialmente</span>
+                            </div>
+                            
+                            <div>
+                                <apex:image value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670498531000" width="15" height="15" />
+                                <span style='width: 30px'>Atendeu Totalmente</span>
+                            </div>
+                            
+                            <div>
+                                <apex:image value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670498531000" width="15" height="15" />
+                                <span style='width: 30px'>Superou</span>
+                            </div>
+                            
+                        </td>
+                    </tr>
+                    
+                    <!--- pergunta 3 -->
+                    <tr>
+                        <td style="width:70%;">A demonstração atendeu as expectativas da instituição?</td>
+                        <td style="text-align: left;">
+                        
+                            <div>
+                                <apex:image value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670498531000" width="15" height="15" />
+                                <span style='width: 30px'>Não Atendeu</span>
+                            </div>
+                            
+                            <div>
+                                <apex:image value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670498531000" width="15" height="15" />
+                                <span style='width: 30px'>Atendeu Parcialmente</span>
+                            </div>
+                            
+                            <div>
+                                <apex:image value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670498531000" width="15" height="15" />
+                                <span style='width: 30px'>Atendeu Totalmente</span>
+                            </div>
+                            
+                            <div>
+                                <apex:image value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670498531000" width="15" height="15" />
+                                <span style='width: 30px'>Superou</span>
+                            </div>
+                            
+                        </td>
+                    </tr>
+                    
+                                        <!--- pergunta 3 -->
+                    <tr>
+                        <td style="width:70%;">Satisfação com a demonstração apresentada</td>
+                        <td style="text-align: left;">
+                        
+                            <div>
+                                <apex:image value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670498531000" width="15" height="15" />
+                                <span style='width: 30px'>Não Atendeu</span>
+                            </div>
+                            
+                            <div>
+                                <apex:image value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670498531000" width="15" height="15" />
+                                <span style='width: 30px'>Atendeu Parcialmente</span>
+                            </div>
+                            
+                            <div>
+                                <apex:image value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670498531000" width="15" height="15" />
+                                <span style='width: 30px'>Atendeu Totalmente</span>
+                            </div>
+                            
+                            <div>
+                                <apex:image value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670498531000" width="15" height="15" />
+                                <span style='width: 30px'>Superou</span>
+                            </div>
+                            
+                        </td>
+                    </tr>
+                    
+                                     <!--- pergunta 3 -->
+                    <tr>
+                        <td style="width:70%">Você recomendaria a compra destes produtos?</td>
+                        <td style="text-align: left;">
+                        
+                            <div>
+                                <apex:image value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670498531000" width="15" height="15" />
+                                <span style='width: 30px'>Não Atendeu</span>
+                            </div>
+                            
+                            <div>
+                                <apex:image value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670498531000" width="15" height="15" />
+                                <span style='width: 30px'>Atendeu Parcialmente</span>
+                            </div>
+                            
+                            <div>
+                                <apex:image value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670498531000" width="15" height="15" />
+                                <span style='width: 30px'>Atendeu Totalmente</span>
+                            </div>
+                            
+                            <div>
+                                <apex:image value="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BfEA0&oid=00Di0000000JVhH&lastMod=1670498531000" width="15" height="15" />
+                                <span style='width: 30px'>Superou</span>
+                            </div>
+                            
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            
+            <div style='page-break-inside: avoid'>
+                <!--seção 1-->
+                <table>
+
+                    <tr class="cabecalho-tabela">
+                        <td>Comentários/Sugestões de melhoria</td>
+                    </tr>
+
+                    <!--- pergunta 1 -->
+                    <tr>
+                        <td style="width:70%; height: 100px"></td>
+                        
+                    </tr>
+                    
+                    
+                    
+                </table>
+            </div>
+            
+            <!--seção 1-->
+            <div style=''>
+                <!--seção 1-->
+                <table>
+
+                    <tr class="cabecalho-tabela">
+                        <td>Caso não tenha atendido: Porque a demonstração não atendeu totalmente?</td>
+                    </tr>
+
+                    <!--- pergunta 1 -->
+                    <tr>
+                        <td style="width:70%; height: 100px"></td>
+                        
+                    </tr>
+                    
+                    
+                    
+                </table>
+            </div>
+            
+           
+             
+            <table style="margin-top:150px">
+
+                <tr style="border:none;">
+                    <td style="width:40%;border:none;border-top:1px solid #000;  align-itens:center; text-align:center;">
+                       <span class="names" >Instrutor</span>
+                    </td> 
+                    
+                    <td style="width:10%;border:none; align-itens:center; text-align:center;">
+                       <span class="names" >&nbsp;&nbsp;&nbsp;</span>
+                    </td> 
+                    <td style="width:40%;border:none;border-top:1px solid #000;  align-itens:center; text-align:center;">
+                       <span class="names" >Cliente</span>
+                    </td>
+                </tr>
+            
+            </table>
+            
+           </apex:pageBlock>
+    </body>
+</apex:page>

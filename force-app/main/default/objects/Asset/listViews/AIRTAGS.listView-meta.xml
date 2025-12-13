@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AIRTAGS</fullName>
+    <booleanFilter>(1 AND 2) AND 3</booleanFilter>
+    <columns>ASSET.NAME</columns>
+    <columns>Responsavel__c</columns>
+    <columns>usuarioResponsavel__c</columns>
+    <columns>Modelo__c</columns>
+    <columns>patrimonio__c</columns>
+    <columns>ASSET.STATUS</columns>
+    <columns>ASSET.CREATED_DATE</columns>
+    <columns>ASSET.LAST_UPDATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>usuarioResponsavel__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <filters>
+        <field>Modelo__c</field>
+        <operation>contains</operation>
+        <value>AIRTAG</value>
+    </filters>
+    <filters>
+        <field>Responsavel__c</field>
+        <operation>contains</operation>
+        <value>Danilo</value>
+    </filters>
+    <label>AIRTAGS</label>
+</ListView>

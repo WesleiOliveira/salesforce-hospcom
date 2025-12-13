@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contrato__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Contrato_de_Servi_o__c != null &amp;&amp;  Contrato_de_Servi_o__r.RecordTypeId = &apos;0125A000001Qydf&apos; , &quot;Locação&quot;, 
+ IF(Ordem_de_trabalho__c != null || Contrato_de_Servi_o__r.RecordTypeId = &apos;0125A000001QydL&apos;, &quot;Serviços&quot;,
+&quot;Venda&quot;))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Contrato:</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

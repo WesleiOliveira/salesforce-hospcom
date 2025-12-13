@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Quantidade_Ag_Entrega__c</fullName>
+    <externalId>false</externalId>
+    <label>Quantidade Ag Entrega</label>
+    <summaryFilterItems>
+        <field>OrderItem.Status__c</field>
+        <operation>equals</operation>
+        <value>Aguardando Entrega Fornecedor</value>
+    </summaryFilterItems>
+    <summaryForeignKey>OrderItem.OrderId</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

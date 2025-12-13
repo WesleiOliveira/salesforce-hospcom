@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Respons_vel_pela_Solicita_o_da_doc__c</fullName>
+    <externalId>false</externalId>
+    <label>Responsável pela Solicitação da doc</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Ass. Adm. - Operações</fullName>
+                <default>false</default>
+                <label>Ass. Adm. - Operações</label>
+            </value>
+            <value>
+                <fullName>Ass. Qualidade</fullName>
+                <default>false</default>
+                <label>Ass. Qualidade</label>
+            </value>
+            <value>
+                <fullName>Ass Adm.- Assistência Técnica</fullName>
+                <default>false</default>
+                <label>Ass Adm.- Assistência Técnica</label>
+            </value>
+            <value>
+                <fullName>Auxiliar Adm - logística</fullName>
+                <default>false</default>
+                <label>Auxiliar Adm - logística</label>
+            </value>
+            <value>
+                <fullName>Recepcionista</fullName>
+                <default>false</default>
+                <label>Recepcionista</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,227 @@
+@keyframes growIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes slideInFade {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.THIS .ErrorMessage{
+    display: none; color: red; font-size: 12px; margin-top: 4px;
+}
+.THIS.success-style {
+    background-color: #d4edda!important;
+    color: #155724;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.THIS .etapaAnimada {
+    animation: slideInFade 0.3s ease-out;
+}
+.THIS .mainMainMesmo {
+    animation: growIn 0.3s ease-out;
+    transform-origin: center;
+}
+
+.THIS .mainCard53434 {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 3674px rgba(0, 0, 0, 2);
+    max-width: 600px;
+    margin: 20px auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: block;
+    max-width: 1127px;
+    max-height: 815px;
+    overflow-y: auto;
+}
+.THIS .mainCard53434::-webkit-scrollbar {
+    width: 8px;
+}
+
+.THIS .mainCard53434::-webkit-scrollbar-thumb {
+    background-color: #8eb5fd;
+    border-radius: 4px;
+}
+
+.THIS .mainCard53434::-webkit-scrollbar-track {
+    background-color: #dce9ff; 
+    border-radius: 4px;
+}
+
+.THIS .head53425 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #2a2a2a;
+    border-bottom: 2px solid #8eb5fd;
+    padding-bottom: 10px;
+}
+
+.THIS .body67987 {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    /* background-color: #f9f9f9; */
+    border-radius: 12px;
+    /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.THIS .fieldsContainer7643 {
+    display: flex;
+    flex-direction: column;  
+}
+
+
+.THIS .footer653 {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.THIS .salvar-btn {
+    background-color: #0070d2;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.THIS .salvar-btn:hover {
+    background-color: #005fb2;
+}
+.THIS .fieldsContainer7643 select {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    appearance: none;    
+}
+
+.THIS .fieldsContainer7643 select:focus {
+    border-color: #4a90e2;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.3);
+}
+.THIS .helpText {
+    font-size: 0.875rem;
+    color: #666;
+    margin-top: 0.2rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.THIS .field54 {
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+    padding: 42px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease-in-out;
+}
+
+.THIS .field54:hover{
+     transform: scale(1.01);
+   	 transition: transform 0.2s ease-in-out;
+}
+
+.THIS .field54 label {
+    font-weight: 650;
+    color: #333;
+    margin-bottom: 0.4rem;
+}
+
+.THIS .field54 textarea::placeholder,
+.THIS .field54 input[type="text"]::placeholder,
+.THIS .field54 input[type="date"]::placeholder {
+    color: #999;
+    font-style: italic;
+    opacity: 0.8;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.THIS .field54 textarea:focus::placeholder,
+.THIS .field54 input[type="text"]:focus::placeholder,
+.THIS .field54 input[type="date"]:focus::placeholder {
+    opacity: 0.4;
+}
+
+.THIS .field54 input[type="text"],
+.THIS .field54 input[type="date"],
+.THIS .field54 select,
+.THIS .field54 textarea {
+    padding: 0.6rem 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    resize: vertical;
+}
+
+.THIS .field54 input:focus,
+.THIS .field54 textarea:focus,
+.THIS .field54 select:focus {
+    border-color: #4a90e2;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.3);
+}
+
+.THIS .field54 .helpText {
+    font-size: 0.875rem;
+    color: #666;
+    margin-bottom: 0.4rem;
+    line-height: 1.4;
+}
+.THIS .deleteDocument4323q{    
+    padding-left: 0px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color:black;
+}
+.THIS .deleteDocument4323q:hover{
+        color: red !important;    
+}
+.THIS .fileContainer3113{
+    display:flex!important;
+    background-color:#f9f9f9;
+    color: #155724;
+    border-radius: 8px;
+    gap: 360px;
+}
+.THIS .voltar-btn {
+    background-color: #ccc;
+    padding: 10px 20px;
+    border-radius: 6px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.THIS .voltar-btn:hover {
+    background-color: #838383; 
+    color: white;
+}

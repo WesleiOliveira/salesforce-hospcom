@@ -1,0 +1,41 @@
+@keyframes goldenShine {
+    0% {
+        background-size: 100% 100%;
+    }
+    50% {
+        background-size: 150% 150%;
+    }
+    100% {
+        background-size: 100% 100%;
+    }
+}
+
+.THIS .golden-btn {
+    width: 100%;
+    display: inline-block;
+    outline: none;
+    font-family: system-ui;
+    font-size: 1.2em;
+    box-sizing: border-box;
+    border: none;
+    font-weight: 600;
+    height: 50px;
+    line-height: 2.5em;
+    text-transform: uppercase;
+    padding: 0 1em;
+    background-image: linear-gradient(160deg, #a54e07, #b47e11, #fef1a2, #bc881b, #a54e07);
+    color: #2c3e50;
+    text-shadow: 0 2px 2px rgba(250, 227, 133, 1);
+    transition: all .2s ease-in-out;
+    background-size: 100% 100%;
+    background-position: center;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 15px;
+
+    /* 👇 Aqui a animação infinita */
+    animation: goldenShine 2s ease-in-out infinite;
+}

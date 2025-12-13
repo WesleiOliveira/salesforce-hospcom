@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contratos_de_Loca_o_Vencidos</fullName>
+    <columns>CONTRACT.NAME</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>CONTRACT.STARTDATE</columns>
+    <columns>CONTRACT.ENDDATE</columns>
+    <columns>prazo_restante__c</columns>
+    <columns>CONTRACT.STATUSINDICATOR</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CONTRACT.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>ServiceContract.LOCA_O</value>
+    </filters>
+    <filters>
+        <field>CONTRACT.STATUS</field>
+        <operation>contains</operation>
+        <value>Vencido</value>
+    </filters>
+    <label>Contratos de Locação Vencidos</label>
+</ListView>

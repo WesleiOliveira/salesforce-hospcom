@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pedido_De_Demonstra_o_Loca_o__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <inlineHelpText>Pedido de Demonstração ou Locação que deram origem a esse pedido de Venda.</inlineHelpText>
+    <label>Pedido De Demonstração/Locação</label>
+    <lookupFilter>
+        <active>true</active>
+        <booleanFilter>1 OR 2 OR 3</booleanFilter>
+        <filterItems>
+            <field>$Source.Type</field>
+            <operation>equals</operation>
+            <value>012U4000000QqxRIAS</value>
+        </filterItems>
+        <filterItems>
+            <field>$Source.Type</field>
+            <operation>equals</operation>
+            <value>0126e000001pMEkAAM</value>
+        </filterItems>
+        <filterItems>
+            <field>$Source.Type</field>
+            <operation>equals</operation>
+            <value>012U4000009MeCvIAK</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Order</referenceTo>
+    <relationshipLabel>Pedido De Venda</relationshipLabel>
+    <relationshipName>Pedido_De_Demonstra_o_Loca_o</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

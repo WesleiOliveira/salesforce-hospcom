@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Viagem_E_mail_para_Financeiro_Adiantamento_Quita_o</fullName>
+        <description>(Viagem) - E-mail para Financeiro - Adiantamento/Quitação</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>elias.rodrigues@hospcom.net</recipient>
+            <type>partnerUser</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Solicita_o_de_Viagem_Dados</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>A_o_interna_Verdadeiro</fullName>
+        <field>Acao_interna__c</field>
+        <literalValue>1</literalValue>
+        <name>Ação interna: Verdadeiro</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Aguardando_reservas</fullName>
+        <field>Status__c</field>
+        <literalValue>Aguardando adiantamento</literalValue>
+        <name>Status: Aguardando reservas</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Em_aprovacao</fullName>
+        <field>Status__c</field>
+        <literalValue>Em aprovação</literalValue>
+        <name>Status: Em aprovação</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Em_prestacao_de_contas</fullName>
+        <field>Status__c</field>
+        <literalValue>Em prestação de contas</literalValue>
+        <name>Status: Em prestação de contas</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Em_quitacao_de_valores</fullName>
+        <field>Status__c</field>
+        <literalValue>Em quitação de valores</literalValue>
+        <name>Status: Em quitação de valores</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Reprovada</fullName>
+        <field>Status__c</field>
+        <literalValue>Reprovada</literalValue>
+        <name>Status: Reprovada</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+</Workflow>

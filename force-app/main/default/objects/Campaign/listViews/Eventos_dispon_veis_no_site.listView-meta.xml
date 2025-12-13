@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Eventos_dispon_veis_no_site</fullName>
+    <columns>CAMPAIGN.NAME</columns>
+    <columns>Inicio__c</columns>
+    <columns>Termino__c</columns>
+    <columns>CAMPAIGN.CAMPAIGN_TYPE</columns>
+    <columns>CAMPAIGN.STATUS</columns>
+    <columns>CAMPAIGN.BUDGETED_COST</columns>
+    <columns>CAMPAIGN.ACTUAL_COST</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Dispon_vel_no_Site__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>CAMPAIGN.STATUS</field>
+        <operation>equals</operation>
+        <value>Confirmado</value>
+    </filters>
+    <label>Eventos disponíveis no site</label>
+</ListView>

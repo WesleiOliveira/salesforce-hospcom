@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Aberto</fullName>
+                <default>false</default>
+                <label>Aberto</label>
+            </value>
+            <value>
+                <fullName>Fechado</fullName>
+                <default>false</default>
+                <label>Fechado</label>
+            </value>
+            <value>
+                <fullName>Cancelado</fullName>
+                <default>false</default>
+                <label>Cancelado</label>
+            </value>
+            <value>
+                <fullName>NÃO RECEBIDO</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>NÃO RECEBIDO</label>
+            </value>
+            <value>
+                <fullName>RECEBIMENTO PARCIAL</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>RECEBIMENTO PARCIAL</label>
+            </value>
+            <value>
+                <fullName>RECEBIMENTO TOTAL</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>RECEBIMENTO TOTAL</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

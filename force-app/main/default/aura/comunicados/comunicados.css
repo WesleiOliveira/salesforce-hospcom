@@ -1,0 +1,213 @@
+.THIS .main43534587{
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background-color: #f6f7f7;
+    width: 300px;
+    height: auto;
+    flex-direction: column;
+    z-index: 10000;
+    border-radius: 30px 30px 0px 0px;
+}
+
+@keyframes shake {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(-10deg); }
+  20% { transform: rotate(10deg); }
+  30% { transform: rotate(-10deg); }
+  40% { transform: rotate(10deg); }
+  50% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); } /* Pausa nos últimos 50% da animação */
+}
+
+.THIS .envelopeIcon {
+    font-size: 1.2em;
+    animation: shake 2.5s infinite;
+}
+
+.THIS .bottomComunicado45343453::-webkit-scrollbar,
+.THIS .corpoComunicado32423::-webkit-scrollbar {
+    width: 6px;
+}
+
+.THIS .bottomComunicado45343453::-webkit-scrollbar-track,
+.THIS .corpoComunicado32423::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+.THIS .bottomComunicado45343453::-webkit-scrollbar-thumb,
+.THIS .corpoComunicado32423::-webkit-scrollbar-thumb {
+    background-color: #a0bb31;
+    border-radius: 38px;
+    border: 0px none #ffffff;
+}
+
+.THIS .bottomComunicado45343453 {
+    width: 100%;
+    border-left: 1px solid #d1cbcb;
+    height: 90%;
+    min-height: 400px;
+    max-height: 400px;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.THIS .popupComunicado{
+ display: none;
+    row-gap: 10px;
+    background-color: #f6f7f7;
+    border: 1px solid #d1cbcb;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    height: 810px;
+    text-align: center;
+    line-height: 100px;
+    border-radius: 20px;
+    padding: 40px;
+    z-index: 10000;
+    flex-direction: column;
+    box-shadow: rgba(50, 50, 93, 0.25) 0 6px 12px -2px, rgba(0, 0, 0, 0.3) 0 3px 7px -3px;
+
+}
+
+.THIS .lido{
+    background-color: white!important;
+}
+
+.THIS .textPopup{
+    height: 5%!important;
+    font-size: 1.6em;
+}
+
+.THIS .comunicadosTitle{
+    color: black;
+    font-weight: 600;
+    font-family: system-ui;
+    display: flex;
+    height: 10%;
+    display: flex;
+    align-items: center;
+}
+
+.THIS .popupButtonComunicado43543{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: #0c375a;
+    border: 1px solid;
+    border-radius: 20px;
+    transition: transform 0.1s ease; /* Adiciona uma transição suave */
+}
+
+.THIS .popupButtonComunicado43543:hover{
+    transform: scale(1.03); /* Aumenta o item em 20% */
+    cursor: pointer;
+}
+
+
+.THIS .comunicadosSubTitle{
+    color: black;
+    font-family: system-ui;
+    font-weight: lighter;
+    display: flex;
+    height: 10%;
+    display: flex;
+    align-items: center;
+}
+
+.THIS .buttonPopupComunicado{
+    display: flex;
+    width: 100%;
+    height: 10%;
+}
+
+.THIS .corpoComunicado32423{
+    height: 75%;
+    background-color: white;
+    overflow: auto;
+    border-radius: 20px;
+}
+
+.THIS .comunicadosDate{
+    color: #747474;
+    display: flex;
+    font-family: system-ui;
+    height: 10%;
+    display: flex;
+    align-items: center;
+}
+
+.THIS .itemComunicado490394{
+    width: 100%;
+    height: auto;
+    background-color: #ddddef;
+    border-bottom: 1px #d1cbcb solid;
+    padding: 10px;
+    transition: transform 0.1s ease; /* Adiciona uma transição suave */
+}
+
+.THIS .itemComunicado490394:hover{
+    transform: scale(0.99); /* Aumenta o item em 20% */
+    cursor: pointer;
+}
+
+.THIS .headerComunicado45343453 {
+    display: flex;
+    width: 100%;
+    height: 10%;
+    background-color: #0c375a;
+    color: white;
+    border-radius: 30px 30px 0px 0px;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+}
+
+.THIS .headerLeft342342{
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.THIS .headerMiddle342342{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: system-ui;
+    font-size: 1.2em;
+}
+
+.THIS .headerRight342342{
+    width: 10%;
+}
+
+.THIS .comunicadominimezeclass{
+        transition: transform 0.3s ease; /* Adiciona uma transição suave */
+}
+
+.THIS .comunicadominimezeclass:hover{
+    transform: scale(1.2); /* Aumenta o item em 20% */
+    cursor: pointer;
+}
+.THIS .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}

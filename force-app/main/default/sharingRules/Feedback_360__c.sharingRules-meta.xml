@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>CO_OPERAR</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>PERMITE QUE MAURO ACESSE O PROJETO COOPERAR</description>
+        <label>CO-OPERAR</label>
+        <sharedTo>
+            <group>Recursos_Humanos</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Projeto Cooperar</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Compartilha_mkt</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Compartilha mkt</label>
+        <sharedTo>
+            <group>Supervisor_de_marketing</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Departamento__c</field>
+            <operation>equals</operation>
+            <value>Marketing</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>MKT</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>MKT</label>
+        <sharedTo>
+            <group>Dpt_Marketing</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Departamento__c</field>
+            <operation>equals</operation>
+            <value>Marketing</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>TI</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>TI</label>
+        <sharedTo>
+            <group>T_I</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Departamento__c</field>
+            <operation>equals</operation>
+            <value>T.I</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+</SharingRules>

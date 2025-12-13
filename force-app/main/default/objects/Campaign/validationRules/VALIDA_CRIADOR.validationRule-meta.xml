@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VALIDA_CRIADOR</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+ISNEW(),
+$User.Id != &apos;0056e00000CpHcX&apos;,
+$User.Id != &apos;005i0000005d2fe&apos;,
+$User.Id != &apos;0055A000008onb4&apos;,
+$User.Id != &apos;005i0000005d2fF&apos;,
+$User.Id != &apos;00531000006UzZs&apos;,
+RecordTypeId == &apos;0125A000001dweb&apos;)</errorConditionFormula>
+    <errorMessage>Somente usuários autorizados podem criar Eventos Externos.</errorMessage>
+</ValidationRule>

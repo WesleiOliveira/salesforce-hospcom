@@ -1,0 +1,314 @@
+<aura:component controller="AprovacaoCotacao" extends="c.ApexHelper"
+implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+access="global">
+
+<ltng:require styles="{!join(',',
+                    $Resource.fontAwesome + '/css/font-awesome.min.css')}" scripts="{!join(',',
+                                                                                    $Resource.JQuery)}"
+    afterScriptsLoaded="{!c.onRender}" />
+<aura:attribute name="task" type="Object" default="{ }" />
+<aura:attribute name="existeTarefa" type="Boolean" default="false" />
+
+<aura:attribute name="cotacao" type="Object" default="{}"/>
+<aura:attribute name="statusDaCotacao" type="String" default="Rascunho" />
+
+<aura:attribute name="analiseDeCredito" type="Object[]" default="[]" />
+<aura:attribute name="existeAnaliseDeCredito" type="Boolean" default="false" />
+
+
+<div style='padding: 9px; position: relative;'>
+    <div style="display:flex; gap:10px;">
+        <button id='button342u3423' class='button342u3423'>SIMULAR APROVAÇÃO</button>                
+
+        <aura:if
+            isTrue="{!OR(v.statusDaCotacao == 'Rascunho', v.statusDaCotacao == 'Aguardando Aprovação', v.statusDaCotacao == 'Aprovada internamente')}">
+            <!-- Cinza - Contrato não enviado -->
+            <button class='button342u3423 button-disabled' style="width: 50%" disabled="true"
+                title="O contrato ainda não foi enviado">
+                Revisão de contrato <i class="fa fa-ban"></i>
+            </button>
+
+            <aura:set attribute="else">
+                <aura:if isTrue="{!AND(v.existeTarefa == true, v.task.Status == 'Concluído')}">
+                    <!-- Verde - Contrato Revisado -->
+                    <button class='button342u3423 button-success' onclick="{!c.revisarContratoPopup}"
+                        style="width: 50%">
+                        Contrato Revisado <i class="fa fa-check"></i>
+                    </button>
+
+                    <aura:set attribute="else">
+                        <aura:if isTrue="{!AND(v.statusDaCotacao == 'Contrato aceito', v.existeTarefa == false)}">
+                            <!-- Azul claro - Contrato sem revisão -->
+                            <button class='button342u3423 button-info' style="width: 50%" disabled="true"
+                                title="Não foi necessário revisão por parte do jurídico">
+                                Contrato sem revisão <i class="fa fa-info-circle"></i>
+                            </button>
+
+                            <aura:set attribute="else">
+                                <aura:if isTrue="{!v.existeTarefa == true}">
+                                    <!-- Amarelo - Em Revisão -->
+                                    <button class='button342u3423 button-warning'
+                                        onclick="{!c.revisarContratoPopup}" style="width: 50%">
+                                        Contrato em revisão <i class="fa fa-search"></i>
+                                    </button>
+
+                                    <aura:set attribute="else">
+                                        <aura:if isTrue="{!v.statusDaCotacao == 'Contrato enviado'}">
+                                            <!-- Azul escuro - Disponível -->
+                                            <button class='button342u3423' style="width: 50%"
+                                                onclick="{!c.revisarContratoPopup}">
+                                                Revisão de contrato <i class="fa fa-gavel"></i>
+                                            </button>
+
+                                            <aura:set attribute="else">
+                                                <!-- Cinza - Outros status sem tarefa -->
+                                                <button class='button342u3423 button-disabled' style="width: 50%"
+                                                    disabled="true" title="Aguardando envio do contrato">
+                                                    Revisão de contrato <i class="fa fa-ban"></i>
+                                                </button>
+                                            </aura:set>
+                                        </aura:if>
+                                    </aura:set>
+                                </aura:if>
+                            </aura:set>
+                        </aura:if>
+                    </aura:set>
+                </aura:if>
+            </aura:set>
+        </aura:if>
+
+
+    </div>
+<!-- Popup da tarefa -->
+    <div class='overlay' id='overlay4567'></div>
+    <div id="xyz" style="height:auto" class="containerPopup4358498">
+
+        <h1 class="text47854843Title">Revisão de contrato</h1>
+        <aura:if isTrue="{!NOT(v.existeTarefa)}">
+            <p class="modal-description">
+                Clique em <strong>"Enviar para revisão"</strong> para criar uma tarefa para que o Jurídico revise o
+                contrato enviado pelo cliente. <br></br><br></br>
+                Por favor, não feche a página até que a tarefa seja criada. Caso a janela seja fechada, a tarefa
+                será cancelada. <br></br><br></br>
+                Você poderá anexar o contrato assim que a tarefa for criada.
+            </p>
+
+
+            <div class='footer48359483'>
+                <button class='button342u3423546'>Fechar</button>
+                <button onclick="{!c.criarTarefa}" class='button342u342398'>Enviar para revisão</button>
+            </div>
+        </aura:if>
+
+        <aura:if isTrue="{!v.existeTarefa}">
+            <div class="slds-card task-card">
+                <!-- Cabeçalho -->
+                <div class="slds-card__header slds-grid">
+                    <div class="slds-media slds-media_center">
+                        <div class="slds-media__body">
+                            <h2 class="slds-card__header-title">
+                                <a class="task-title" style="text-decoration: auto;"
+                                    href="{! 'https://hospcom.my.site.com/Sales/s/task/' + v.task.Id}"
+                                    target="_blank">{!v.task.AssuntoJuridco__c}</a>
+                            </h2>
+                            <p class="slds-text-body_small slds-text-color_weak">
+                                Criado em:
+                                <lightning:formattedDateTime value="{!v.task.CreatedDate}" year="numeric"
+                                    month="short" day="numeric" hour="2-digit" minute="2-digit" /> |
+                                Responsável: {!v.task.Owner.Name}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Corpo - Progresso Horizontal -->
+                <div class="slds-card__body slds-card__body_inner">
+                    <div class="progress-container-horizontal">
+
+                        <!-- Não iniciado -->
+                        <div
+                            class="{! 'step-horizontal' + (v.task.Status == 'Não iniciado' ? ' step-active' : v.task.Status != 'Não iniciado' ? ' step-completed' : '')}">
+                            <div class="step-circle-wrapper">
+                                <div
+                                    class="{! 'circle-horizontal' + (v.task.Status == 'Não iniciado' ? ' circle-active' : v.task.Status != 'Não iniciado' ? ' circle-completed' : '')}">
+                                    <aura:if isTrue="{!v.task.Status != 'Não iniciado'}">
+                                        <i class="fa fa-check" style="color:white"></i>
+                                    </aura:if>
+                                </div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-label">Não iniciado</div>
+                        </div>
+
+                        <!-- Imediato -->
+                        <div
+                            class="{! 'step-horizontal' + (v.task.Status == 'Imediato' ? ' step-active' : (v.task.Status == 'Em andamento' || v.task.Status == 'Aguardando outra pessoa' || v.task.Status == 'Adiado' || v.task.Status == 'Concluído' || v.task.Status == 'Cancelada') ? ' step-completed' : '')}">
+                            <div class="step-circle-wrapper">
+                                <div
+                                    class="{! 'circle-horizontal' + (v.task.Status == 'Imediato' ? ' circle-active' : (v.task.Status == 'Em andamento' || v.task.Status == 'Aguardando outra pessoa' || v.task.Status == 'Adiado' || v.task.Status == 'Concluído' || v.task.Status == 'Cancelada') ? ' circle-completed' : '')}">
+                                    <aura:if
+                                        isTrue="{!(v.task.Status == 'Em andamento' || v.task.Status == 'Aguardando outra pessoa' || v.task.Status == 'Adiado' || v.task.Status == 'Concluído' || v.task.Status == 'Cancelada')}">
+                                        <i class="fa fa-check" style="color:white"></i>
+                                    </aura:if>
+                                </div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-label">Imediato</div>
+                        </div>
+
+                        <!-- Em andamento -->
+                        <div
+                            class="{! 'step-horizontal' + (v.task.Status == 'Em andamento' ? ' step-active' : (v.task.Status == 'Aguardando outra pessoa' || v.task.Status == 'Adiado' || v.task.Status == 'Concluído' || v.task.Status == 'Cancelada') ? ' step-completed' : '')}">
+                            <div class="step-circle-wrapper">
+                                <div
+                                    class="{! 'circle-horizontal' + (v.task.Status == 'Em andamento' ? ' circle-active' : (v.task.Status == 'Aguardando outra pessoa' || v.task.Status == 'Adiado' || v.task.Status == 'Concluído' || v.task.Status == 'Cancelada') ? ' circle-completed' : '')}">
+                                    <aura:if
+                                        isTrue="{!(v.task.Status == 'Aguardando outra pessoa' || v.task.Status == 'Adiado' || v.task.Status == 'Concluído' || v.task.Status == 'Cancelada')}">
+                                        <i class="fa fa-check" style="color:white"></i>
+                                    </aura:if>
+                                </div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-label">Em andamento</div>
+                        </div>
+
+                        <!-- Aguardando outra pessoa -->
+                        <div
+                            class="{! 'step-horizontal' + (v.task.Status == 'Aguardando outra pessoa' ? ' step-active' : (v.task.Status == 'Adiado' || v.task.Status == 'Concluído' || v.task.Status == 'Cancelada') ? ' step-completed' : '')}">
+                            <div class="step-circle-wrapper">
+                                <div
+                                    class="{! 'circle-horizontal' + (v.task.Status == 'Aguardando outra pessoa' ? ' circle-active' : (v.task.Status == 'Adiado' || v.task.Status == 'Concluído' || v.task.Status == 'Cancelada') ? ' circle-completed' : '')}">
+                                    <aura:if
+                                        isTrue="{!(v.task.Status == 'Adiado' || v.task.Status == 'Concluído' || v.task.Status == 'Cancelada')}">
+                                        <i class="fa fa-check" style="color:white"></i>
+                                    </aura:if>
+                                </div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-label">Aguardando outra pessoa</div>
+                        </div>
+
+                        <!-- Adiado -->
+                        <div
+                            class="{! 'step-horizontal' + (v.task.Status == 'Adiado' ? ' step-active' : (v.task.Status == 'Concluído' || v.task.Status == 'Cancelada') ? ' step-completed' : '')}">
+                            <div class="step-circle-wrapper">
+                                <div
+                                    class="{! 'circle-horizontal' + (v.task.Status == 'Adiado' ? ' circle-active' : (v.task.Status == 'Concluído' || v.task.Status == 'Cancelada') ? ' circle-completed' : '')}">
+                                    <aura:if
+                                        isTrue="{!(v.task.Status == 'Concluído' || v.task.Status == 'Cancelada')}">
+                                        <i class="fa fa-check" style="color:white"></i>
+                                    </aura:if>
+                                </div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-label">Adiado</div>
+                        </div>
+
+                        <!-- Concluído -->
+                        <div class="{! 'step-horizontal' + (v.task.Status == 'Concluído' ? ' step-active' : '')}">
+                            <div class="step-circle-wrapper">
+                                <div
+                                    class="{! 'circle-horizontal' + (v.task.Status == 'Concluído' ? ' circle-completed' : '')}">
+                                    <aura:if isTrue="{!v.task.Status == 'Concluído'}">
+                                        <i class="fa fa-check" style="color:white"></i>
+                                    </aura:if>
+                                </div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-label">Concluído</div>
+                        </div>
+
+                        <!-- Cancelada -->
+                        <div class="{! 'step-horizontal' + (v.task.Status == 'Cancelada' ? ' step-active' : '')}">
+                            <div class="step-circle-wrapper">
+                                <div
+                                    class="{! 'circle-horizontal' + (v.task.Status == 'Cancelada' ? ' circle-cancelled' : '')}">
+                                    <aura:if isTrue="{!v.task.Status == 'Cancelada'}">
+                                        <i class="fa fa-times" style="color:white"></i>
+                                    </aura:if>
+                                </div>
+                            </div>
+                            <div class="step-label">Cancelada</div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class='footer48359483'>
+                    <button style="width:100%" onclick="{!c.fecharPopup}" class='button342u3423546'>Fechar</button>
+
+                </div>
+            </div>
+        </aura:if>
+    </div>
+
+<!-- Popup da simulação de Aprovação -->
+    <div id='containerPopup4358498' class='containerPopup4358498'>
+        <div class='text47854843Title' id='text47854843Title'>Simulação Nº </div>
+            <div class='Subtile445q'>
+              <div class="dataLine345"><strong>Cotação: </strong>{!v.cotacao.Name}</div>
+              <div class="dataLine345"><strong>Condição de pagamento: </strong>{!v.cotacao.Condicao_de_pagamento__c}</div>
+              <div class="dataLine345"><strong>Preço total: </strong>{!v.cotacao.totalPrice}</div>
+              <div class="dataLine345"><strong>Saldo parcelado: </strong>{!v.cotacao.Saldo_parcelado__c}</div>
+              <div class="dataLine345"><strong>Despesa financeira: </strong>{!v.cotacao.Despesa_Financeira__c}</div>
+                
+            </div>
+
+        <div class='body4873539498' id='body3489473'>
+
+
+
+            <!--
+        <div class="step">
+            <div>
+                <div class="circle"><i class="fa fa-check"></i></div>
+            </div>
+            <div>
+                <div class="title">Primeira etapa</div>
+                <div class="caption">Opcional</div>
+            </div>
+        </div>
+        
+        <div class="step step-active">
+            <div>
+                <div class="circle">2</div>
+            </div>
+            <div>
+                <div class="title">Segunda Etapa</div>
+                <div class="caption">Descrição segunda etapa</div>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div>
+                <div class="circle">3</div>
+            </div>
+            <div>
+                <div class="title">Terceira Etapa</div>
+                <div class="caption">Descrição terceira etapa</div>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div>
+                <div class="circle">4</div>
+            </div>
+            <div>
+                <div class="title">Simulação aprovada</div>
+            </div>
+        </div> -->
+        </div>
+        <div class='footer48359483'>
+            <button class='button342u3423546'>Fechar</button>
+            <button class='button342u342398' style='display: none' id='solicitarNovaAnalise'>Solicitar Nova
+                Análise</button>
+                  <button class='button342u342398' style='display: none' id='abrirAnalises'>Abrir Análise(s) de Crédito</button>
+            <button class='button342u342398' id='buttonEnviar32423'>Enviar</button>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+</aura:component>

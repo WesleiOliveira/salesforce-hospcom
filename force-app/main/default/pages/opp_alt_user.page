@@ -1,0 +1,28 @@
+<apex:page standardController="Opportunity" extensions="opp_alt_user" showHeader="false" sideBar="false" showChat="false">
+    <head>
+        <base target="_parent"/>    
+    </head>
+    
+    <body style="background-color:white; margin:0px 0px 20px 0px; padding:0px;">
+        <apex:form style="background-color:white;">
+            <span style="font-weight:bold;">
+                Alterar Usuário: 
+            </span>
+            
+            <apex:selectList multiselect="false" value="{!opcao}" size="1" title="Nome do Usuário">
+                <apex:selectOptions value="{!opcoes}"/>
+            </apex:selectList> 
+            
+            <!-- INTERFACES LIGHTNING -->
+            <apex:outputText rendered="{!IF(OR(CONTAINS($CurrentPage.URL, 'lightning.force.com'), url_prefixo == '/Sales'),true,false)}" >
+                &nbsp;<apex:commandLink value="Alterar" action="{!opp_save_user}" rerender="false"/>
+            </apex:outputText>
+            <!-- INTERFACES CLÁSSICAS -->
+            <apex:outputText rendered="{!IF(NOT(OR(CONTAINS($CurrentPage.URL, 'lightning.force.com'), url_prefixo == '/Sales')),true,false)}" >
+                &nbsp;<apex:commandLink value="Alterar" action="{!opp_save_user}" />
+            </apex:outputText>            
+                    
+        </apex:form>
+    </body>
+    
+</apex:page>

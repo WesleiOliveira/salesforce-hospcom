@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <customErrors>
+        <name>Lan_a_ee_o</name>
+        <label>Lança Exceção</label>
+        <locationX>50</locationX>
+        <locationY>395</locationY>
+        <connector>
+            <targetReference>Obtem</targetReference>
+        </connector>
+        <customErrorMessages>
+            <errorMessage>Não é possivel continuar pois o nada consta não foi finalizado.</errorMessage>
+            <fieldSelection>Nada_Consta_Finaneiro__c</fieldSelection>
+            <isFieldError>true</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <customErrors>
+        <name>Lan_a_execess_o</name>
+        <label>Lança execessão</label>
+        <locationX>138</locationX>
+        <locationY>1019</locationY>
+        <connector>
+            <targetReference>Percorrre_checkists</targetReference>
+        </connector>
+        <customErrorMessages>
+            <errorMessage>Os checklists de ativos precisam estar finalizados para continuar.</errorMessage>
+            <isFieldError>false</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <decisions>
+        <name>encontrou_algum_checklist</name>
+        <label>encontrou algum checklist?</label>
+        <locationX>182</locationX>
+        <locationY>695</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Sim</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Obtem</leftValueReference>
+                <operator>IsEmpty</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Percorrre_checkists</targetReference>
+            </connector>
+            <label>Sim</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Verifica_pendencias_financenras</name>
+        <label>Verifica pendencias financenras</label>
+        <locationX>182</locationX>
+        <locationY>287</locationY>
+        <defaultConnector>
+            <targetReference>Obtem</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Contem</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Nada_Consta_validado__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Lan_a_ee_o</targetReference>
+            </connector>
+            <label>Contem</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>verifica_se_est_conforme</name>
+        <label>verifica se está conforme</label>
+        <locationX>270</locationX>
+        <locationY>911</locationY>
+        <defaultConnector>
+            <targetReference>Percorrre_checkists</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Sim</defaultConnectorLabel>
+        <rules>
+            <name>nao</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Percorrre_checkists.Checklist_Dpto_Validado__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Lan_a_execess_o</targetReference>
+            </connector>
+            <label>não</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <interviewLabel>Movimentação de Pessoas - Verifica conformidade checklist {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Movimentação de Pessoas - Verifica conformidade checklist</label>
+    <loops>
+        <name>Percorrre_checkists</name>
+        <label>Percorrre checkists</label>
+        <locationX>50</locationX>
+        <locationY>803</locationY>
+        <collectionReference>Obtem</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>verifica_se_est_conforme</targetReference>
+        </nextValueConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Obtem</name>
+        <label>Obtem checklist de ativo</label>
+        <locationX>182</locationX>
+        <locationY>587</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>encontrou_algum_checklist</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Movimenta_o_de_Pessoas__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Checklist_ativo__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Verifica_pendencias_financenras</targetReference>
+        </connector>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Conversa Deslig/Ass. Docume</stringValue>
+            </value>
+        </filters>
+        <object>Movimentacao_de_Pessoas__c</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

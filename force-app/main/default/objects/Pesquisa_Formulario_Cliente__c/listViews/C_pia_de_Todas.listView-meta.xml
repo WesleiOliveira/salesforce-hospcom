@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>C_pia_de_Todas</fullName>
+    <columns>NAME</columns>
+    <columns>Descri_o_do_formul_rio__c</columns>
+    <columns>Nome_do_cliente__c</columns>
+    <columns>Estado__c</columns>
+    <columns>Departamento__c</columns>
+    <columns>Pedido__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Departamento__c</field>
+        <operation>equals</operation>
+        <value>Serviço</value>
+    </filters>
+    <label>Todas serviço</label>
+</ListView>

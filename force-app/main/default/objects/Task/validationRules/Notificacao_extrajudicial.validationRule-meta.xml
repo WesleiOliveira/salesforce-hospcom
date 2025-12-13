@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Notificacao_extrajudicial</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+$User.Id != &apos;0055A00000BcBOn&apos;,
+$User.Id != OwnerId,
+OR(
+ISNEW(),
+ISCHANGED(ActivityDate),
+ISCHANGED(OwnerId)
+),
+Subject = &apos;Notificação extrajudicial&apos;,
+IF(
+WEEKDAY(TODAY()) = 6, ActivityDate - 4 &lt;= TODAY(), IF(
+WEEKDAY(TODAY()) = 5, ActivityDate - 3 &lt;= TODAY(),
+ActivityDate - 1 &lt;= TODAY()))
+)</errorConditionFormula>
+    <errorDisplayField>ActivityDate</errorDisplayField>
+    <errorMessage>O prazo mínimo para notificação extrajudicial é de dois dias úteis.</errorMessage>
+</ValidationRule>

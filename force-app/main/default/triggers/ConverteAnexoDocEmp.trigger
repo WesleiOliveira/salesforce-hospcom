@@ -1,0 +1,1 @@
+trigger ConverteAnexoDocEmp on Documentos_Licita_ao__c (after update) {}

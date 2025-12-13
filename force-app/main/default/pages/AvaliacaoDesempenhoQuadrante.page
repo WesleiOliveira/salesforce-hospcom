@@ -1,0 +1,98 @@
+<apex:page title="Avaliação" standardStylesheets="false"  standardController="Avaliacao_de_Desempenho__c" showHeader="false">
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css"/>
+<style>
+    td{
+    padding-right:140px !important;
+    padding-top:10px !important;
+    padding-bottom:8px !important;
+    }
+</style>
+<apex:form >
+<apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.OwnerId != $User.Id && $User.Id != '0056e00000CnqTC', true, false)}">
+  <div class="form-group">
+    <label>Quadrante 9box antes da calibragem</label><br/>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Q9AC__c== null, true, false)}">
+            <apex:selectRadio value="{!Avaliacao_de_Desempenho__c.Q9AC__c}" styleClass="clsRadio">
+                <apex:selectOption itemValue="1" itemLabel="1"/>
+                <apex:selectOption itemValue="2" itemLabel="2"/>
+                <apex:selectOption itemValue="3" itemLabel="3"/>
+                <apex:selectOption itemValue="4" itemLabel="4"/>
+                <apex:selectOption itemValue="5" itemLabel="5"/>
+                <apex:selectOption itemValue="6" itemLabel="6"/>
+                <apex:selectOption itemValue="7" itemLabel="7"/>
+                <apex:selectOption itemValue="8" itemLabel="8"/>
+                <apex:selectOption itemValue="9" itemLabel="9"/>
+            </apex:selectRadio>
+           </apex:outputText>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Q9AC__c!= null, true, false)}">
+               — A resposta foi <b><apex:outputField value="{!Avaliacao_de_Desempenho__c.Q9AC__c}"/></b>
+           </apex:outputText><br/>
+  </div>
+    <div class="form-group">
+           <label>Quadrante 9box depois da calibragem</label><br/>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Q9DC__c== null, true, false)}">
+            <apex:selectRadio value="{!Avaliacao_de_Desempenho__c.Q9DC__c}" styleClass="clsRadio">
+                <apex:selectOption itemValue="1" itemLabel="1"/>
+                <apex:selectOption itemValue="2" itemLabel="2"/>
+                <apex:selectOption itemValue="3" itemLabel="3"/>
+                <apex:selectOption itemValue="4" itemLabel="4"/>
+                <apex:selectOption itemValue="5" itemLabel="5"/>
+                <apex:selectOption itemValue="6" itemLabel="6"/>
+                <apex:selectOption itemValue="7" itemLabel="7"/>
+                <apex:selectOption itemValue="8" itemLabel="8"/>
+                <apex:selectOption itemValue="9" itemLabel="9"/>
+            </apex:selectRadio>
+           </apex:outputText>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Q9DC__c!= null, true, false)}">
+               — A resposta foi <b><apex:outputField value="{!Avaliacao_de_Desempenho__c.Q9DC__c}"/></b>
+           </apex:outputText>
+  </div>
+  <div class="form-group">
+           <label>Comentários gerais sobre o colaborador</label><br/>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.PPG__c== null, true, false)}">
+                <apex:inputField value="{!Avaliacao_de_Desempenho__c.PPG__c}" styleClass="metro-input"/><br/>
+           </apex:outputText>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.PPG__c!= null, true, false)}">
+               — A resposta foi <b><apex:outputField value="{!Avaliacao_de_Desempenho__c.PPG__c}"/></b>
+           </apex:outputText>
+  </div><br/>
+  <div class="form-group">
+           <label>PDI 1</label><br/>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.PDI__c== null, true, false)}">
+                <apex:inputField value="{!Avaliacao_de_Desempenho__c.PDI__c}" styleClass="metro-input"/><br/>
+           </apex:outputText>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.PDI__c!= null, true, false)}">
+               — A resposta foi <b><apex:outputField value="{!Avaliacao_de_Desempenho__c.PDI__c}"/></b>
+           </apex:outputText>
+  </div><br/>
+  <div class="form-group">
+           <label>PDI 2</label><br/>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.PDI2__c== null, true, false)}">
+                <apex:inputField value="{!Avaliacao_de_Desempenho__c.PDI2__c}" styleClass="metro-input"/><br/>
+           </apex:outputText>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.PDI2__c!= null, true, false)}">
+               — A resposta foi <b><apex:outputField value="{!Avaliacao_de_Desempenho__c.PDI2__c}"/></b>
+           </apex:outputText>
+  </div><br/>
+  <div class="form-group">
+           <label>PDI 3</label><br/>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.PDI3__c== null, true, false)}">
+                <apex:inputField value="{!Avaliacao_de_Desempenho__c.PDI3__c}" styleClass="metro-input"/><br/>
+           </apex:outputText>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.PDI3__c!= null, true, false)}">
+               — A resposta foi <b><apex:outputField value="{!Avaliacao_de_Desempenho__c.PDI3__c}"/></b>
+           </apex:outputText>
+  </div><br/>
+  <div class="form-group">
+           <label>PDI 4</label><br/>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.PDI4__c== null, true, false)}">
+                <apex:inputField value="{!Avaliacao_de_Desempenho__c.PDI4__c}" styleClass="metro-input"/><br/>
+           </apex:outputText>
+           <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.PDI4__c!= null, true, false)}">
+               — A resposta foi <b><apex:outputField value="{!Avaliacao_de_Desempenho__c.PDI4__c}"/></b>
+           </apex:outputText>
+  </div><br/>
+          <div style="text-align:center;"><apex:commandButton action="{!quicksave}" value="Salvar" /></div>
+</apex:outputText>
+    </apex:form>
+</apex:page>

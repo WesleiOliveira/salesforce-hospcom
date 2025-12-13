@@ -1,0 +1,21 @@
+<aura:component
+     controller="integracaoSAP"
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+    access="global"
+>
+ <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="iframeSrc" type="String" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <lightning:card title="Twilio Voice">
+        <iframe
+            src="{!v.iframeSrc}"
+            width="100%"
+            height="700px"
+            frameborder="0"
+            allow="microphone; camera"
+            style="border: none;"
+        ></iframe>
+    </lightning:card>
+</aura:component>

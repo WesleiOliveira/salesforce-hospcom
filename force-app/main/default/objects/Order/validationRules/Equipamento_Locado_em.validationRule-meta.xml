@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Equipamento_Locado_em</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(!$User.Ignorar_erros__c,
+Contrato_de_Servi_o__c != null,
+Locado_em__c = null, 
+DATEVALUE(CreatedDate) &gt;=   DATE(2021,04,26) 
+)</errorConditionFormula>
+    <errorMessage>O campo de Locado em: deverá ser preenchido caso Haja um contrato associado.</errorMessage>
+</ValidationRule>

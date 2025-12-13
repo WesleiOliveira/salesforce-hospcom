@@ -1,0 +1,775 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>60.0</apiVersion>
+    <decisions>
+        <name>Decis_o_Divulga_o_da_Vaga</name>
+        <label>Decisão - Divulgação da Vaga</label>
+        <locationX>314</locationX>
+        <locationY>623</locationY>
+        <defaultConnector>
+            <targetReference>Decisao_Triagem_de_Candidatos</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Inicio_Divulga_o_da_Vaga</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Divulgação da Vaga</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Divulgação da Vaga</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Inicio_Divulga_o_da_Vaga_Atualiza</targetReference>
+            </connector>
+            <label>Inicio - Divulgação da Vaga</label>
+        </rules>
+        <rules>
+            <name>Final_Divulgacao_da_Vaga</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Divulgação da Vaga</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Divulgação da Vaga</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Final_Divulgacao_da_Vaga_Atualiza</targetReference>
+            </connector>
+            <label>Final  - Divulgação da Vaga</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Decisao_Aguardando_aprovacao</name>
+        <label>Decisão - Aguardando aprovação</label>
+        <locationX>314</locationX>
+        <locationY>323</locationY>
+        <defaultConnector>
+            <targetReference>Decis_o_Divulga_o_da_Vaga</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Inicio_Aguardando_aprovacao</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Aguardando aprovação</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Aguardando aprovação</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Inicio_Aguardando_aprovacao_Atualiza</targetReference>
+            </connector>
+            <label>Inicio - Aguardando aprovação</label>
+        </rules>
+        <rules>
+            <name>Final_Aguardando_aprovacao</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Aguardando aprovação</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Aguardando aprovação</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Final_Aguardando_aprova_o_Atualiza</targetReference>
+            </connector>
+            <label>Final  - Aguardando aprovação</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Decisao_Assinatura_de_Documentos</name>
+        <label>Decisão - Assinatura de Documentos</label>
+        <locationX>314</locationX>
+        <locationY>2423</locationY>
+        <defaultConnector>
+            <targetReference>Decisao_Finalizada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Inicio_Assinatura_de_Documentos</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Assinatura de Documentos</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Assinatura de Documentos</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Inicio_Assinatura_de_Documentos_Atualiza</targetReference>
+            </connector>
+            <label>Inicio - Assinatura de Documentos</label>
+        </rules>
+        <rules>
+            <name>Final_Assinatura_de_Documentos</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Assinatura de Documentos</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Assinatura de Documentos</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Final_Assinatura_de_Documentos_Atualiza</targetReference>
+            </connector>
+            <label>Final - Assinatura de Documentos</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Decisao_Entrevista_com_Gestor</name>
+        <label>Decisão - Entrevista com Gestor</label>
+        <locationX>314</locationX>
+        <locationY>1523</locationY>
+        <defaultConnector>
+            <targetReference>Decisao_Proposta_e_ASO</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Inicio_Entrevista_com_Gestor</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Entrevista com Gestor</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Entrevista com Gestor</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Inicio_Entrevista_com_Gestor_Atualiza</targetReference>
+            </connector>
+            <label>Inicio - Entrevista com Gestor</label>
+        </rules>
+        <rules>
+            <name>Final_Entrevista_com_Gestor</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Entrevista com Gestor</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Entrevista com Gestor</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Final_Entrevista_com_Gestor_Atualiza</targetReference>
+            </connector>
+            <label>Final  - Entrevista com Gestor</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Decisao_Entrevista_com_RH</name>
+        <label>Decisão - Entrevista com RH</label>
+        <locationX>314</locationX>
+        <locationY>1223</locationY>
+        <defaultConnector>
+            <targetReference>Decisao_Entrevista_com_Gestor</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Inicio_Entrevista_com_RH</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Entrevista com RH</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Entrevista com RH</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Inicio_Entrevista_com_RH_Atualiza</targetReference>
+            </connector>
+            <label>Inicio - Entrevista com RH</label>
+        </rules>
+        <rules>
+            <name>Final_Entrevista_com_RH</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Entrevista com RH</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Entrevista com RH</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Final_Entrevista_com_RH_Atualiza</targetReference>
+            </connector>
+            <label>Final  - Entrevista com RH</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Decisao_Finalizada</name>
+        <label>Decisão - Finalizada</label>
+        <locationX>314</locationX>
+        <locationY>2723</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Inicio_Finalizada</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Finalizada</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Finalizada</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Atualizar_registros_17</targetReference>
+            </connector>
+            <label>Inicio - Finalizada</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Decisao_Processo_Admissional</name>
+        <label>Decisão - Processo Admissional</label>
+        <locationX>314</locationX>
+        <locationY>2123</locationY>
+        <defaultConnector>
+            <targetReference>Decisao_Assinatura_de_Documentos</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Inicio_Processo_Admissional</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Processo Admissional</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Processo Admissional</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Inicio_Processo_Admissional_Atualiza</targetReference>
+            </connector>
+            <label>Inicio - Processo Admissional</label>
+        </rules>
+        <rules>
+            <name>Final_Processo_Admissional</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Processo Admissional</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Processo Admissional</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Final_Processo_Admissional_Atualiza</targetReference>
+            </connector>
+            <label>Final  - Processo Admissional</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Decisao_Proposta_e_ASO</name>
+        <label>Decisão - Proposta e ASO</label>
+        <locationX>314</locationX>
+        <locationY>1823</locationY>
+        <defaultConnector>
+            <targetReference>Decisao_Processo_Admissional</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Inicio_Proposta_e_ASO</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Proposta e ASO</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Proposta e ASO</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Inicio_Proposta_e_ASO_Atualiza</targetReference>
+            </connector>
+            <label>Inicio - Proposta e ASO</label>
+        </rules>
+        <rules>
+            <name>Final_Proposta_e_ASO</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Proposta e ASO</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Proposta e ASO</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Final_Proposta_e_ASO_Atualiza</targetReference>
+            </connector>
+            <label>Final  - Proposta e ASO</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Decisao_Triagem_de_Candidatos</name>
+        <label>Decisão - Triagem de Candidatos</label>
+        <locationX>314</locationX>
+        <locationY>923</locationY>
+        <defaultConnector>
+            <targetReference>Decisao_Entrevista_com_RH</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Inicio_Triagem_de_Candidatos</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Triagem de Candidatos</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Triagem de Candidatos</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Inicio_Triagem_de_Candidatos_Atualiza</targetReference>
+            </connector>
+            <label>Inicio - Triagem de Candidatos</label>
+        </rules>
+        <rules>
+            <name>Final_Triagem_de_Candidatos</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Triagem de Candidatos</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Triagem de Candidatos</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Final_Triagem_de_Candidatos_Atualiza</targetReference>
+            </connector>
+            <label>Final  - Triagem de Candidatos</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <interviewLabel>Vaga disponivel — Salva Alteração de status {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Vaga disponivel — Salva Alteração de status</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Atualizar_registros_17</name>
+        <label>Atualizar registros 17</label>
+        <locationX>182</locationX>
+        <locationY>2831</locationY>
+        <inputAssignments>
+            <field>Data_de_finaliza_o__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Final_Aguardando_aprova_o_Atualiza</name>
+        <label>Final - Aguardando aprovação (Atualiza)</label>
+        <locationX>314</locationX>
+        <locationY>431</locationY>
+        <connector>
+            <targetReference>Decis_o_Divulga_o_da_Vaga</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Final_Aguardando_aprova_o__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Final_Assinatura_de_Documentos_Atualiza</name>
+        <label>Final - Assinatura de Documentos (Atualiza)</label>
+        <locationX>314</locationX>
+        <locationY>2531</locationY>
+        <connector>
+            <targetReference>Decisao_Finalizada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Final_Assinatura_de_Documentos__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Final_Divulgacao_da_Vaga_Atualiza</name>
+        <label>Final - Divulgação da Vaga (Atualiza)</label>
+        <locationX>314</locationX>
+        <locationY>731</locationY>
+        <connector>
+            <targetReference>Decisao_Triagem_de_Candidatos</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Final_Divulga_o_da_Vaga__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Final_Entrevista_com_Gestor_Atualiza</name>
+        <label>Final - Entrevista com Gestor (Atualiza)</label>
+        <locationX>314</locationX>
+        <locationY>1631</locationY>
+        <connector>
+            <targetReference>Decisao_Proposta_e_ASO</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Final_Entrevista_com_Gestor__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Final_Entrevista_com_RH_Atualiza</name>
+        <label>Final - Entrevista com RH (Atualiza)</label>
+        <locationX>314</locationX>
+        <locationY>1331</locationY>
+        <connector>
+            <targetReference>Decisao_Entrevista_com_Gestor</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Final_Entrevista_com_RH__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Final_Processo_Admissional_Atualiza</name>
+        <label>Final - Processo Admissional (Atualiza)</label>
+        <locationX>314</locationX>
+        <locationY>2231</locationY>
+        <connector>
+            <targetReference>Decisao_Assinatura_de_Documentos</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Final_Processo_Admissional__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Final_Proposta_e_ASO_Atualiza</name>
+        <label>Final - Proposta e ASO(Atualiza)</label>
+        <locationX>314</locationX>
+        <locationY>1931</locationY>
+        <connector>
+            <targetReference>Decisao_Processo_Admissional</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Final_Proposta_e_ASO__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Final_Triagem_de_Candidatos_Atualiza</name>
+        <label>Final -  Triagem de Candidatos (Atualiza)</label>
+        <locationX>314</locationX>
+        <locationY>1031</locationY>
+        <connector>
+            <targetReference>Decisao_Entrevista_com_RH</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Final_Triagem_de_Candidatos__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Inicio_Aguardando_aprovacao_Atualiza</name>
+        <label>Inicio - Aguardando aprovação (Atualiza)</label>
+        <locationX>50</locationX>
+        <locationY>431</locationY>
+        <connector>
+            <targetReference>Decis_o_Divulga_o_da_Vaga</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Inicio_Aguardando_aprova_o__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Inicio_Assinatura_de_Documentos_Atualiza</name>
+        <label>Inicio - Assinatura de Documentos	 (Atualiza)</label>
+        <locationX>50</locationX>
+        <locationY>2531</locationY>
+        <connector>
+            <targetReference>Decisao_Finalizada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Inicio_Assinatura_de_Documentos__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Inicio_Divulga_o_da_Vaga_Atualiza</name>
+        <label>Inicio - Divulgação da Vaga (Atualiza)</label>
+        <locationX>50</locationX>
+        <locationY>731</locationY>
+        <connector>
+            <targetReference>Decisao_Triagem_de_Candidatos</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Inicio_Divulga_o_da_Vaga__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Inicio_Entrevista_com_Gestor_Atualiza</name>
+        <label>Inicio - Entrevista com Gestor (Atualiza)</label>
+        <locationX>50</locationX>
+        <locationY>1631</locationY>
+        <connector>
+            <targetReference>Decisao_Proposta_e_ASO</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Inicio_Entrevista_com_Gestor__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Inicio_Entrevista_com_RH_Atualiza</name>
+        <label>Inicio - Entrevista com RH (Atualiza)</label>
+        <locationX>50</locationX>
+        <locationY>1331</locationY>
+        <connector>
+            <targetReference>Decisao_Entrevista_com_Gestor</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Inicio_Entrevista_com_RH__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Inicio_Processo_Admissional_Atualiza</name>
+        <label>Inicio - Processo Admissional (Atualiza)</label>
+        <locationX>50</locationX>
+        <locationY>2231</locationY>
+        <connector>
+            <targetReference>Decisao_Assinatura_de_Documentos</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Inicio_Processo_Admissional__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Inicio_Proposta_e_ASO_Atualiza</name>
+        <label>Inicio - Proposta e ASO(Atualiza)</label>
+        <locationX>50</locationX>
+        <locationY>1931</locationY>
+        <connector>
+            <targetReference>Decisao_Processo_Admissional</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Inicio_Proposta_e_ASO__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Inicio_Triagem_de_Candidatos_Atualiza</name>
+        <label>Inicio - Triagem de Candidatos (Atualiza)</label>
+        <locationX>50</locationX>
+        <locationY>1031</locationY>
+        <connector>
+            <targetReference>Decisao_Entrevista_com_RH</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Inicio_Triagem_de_Candidatos__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>188</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Decisao_Aguardando_aprovacao</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Status__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>Vagas_Dispon_veis__c</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

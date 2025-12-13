@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>1 - Rascunho</fullName>
+                <default>true</default>
+                <label>1 - Rascunho</label>
+            </value>
+            <value>
+                <fullName>2 - Em Andamento</fullName>
+                <default>false</default>
+                <label>2 - Em Andamento</label>
+            </value>
+            <value>
+                <fullName>3 - Em Aprovação</fullName>
+                <default>false</default>
+                <label>3 - Em Aprovação</label>
+            </value>
+            <value>
+                <fullName>4 - Em aprovação financeira</fullName>
+                <default>false</default>
+                <label>4 - Em aprovação financeira</label>
+            </value>
+            <value>
+                <fullName>5 - Concluído</fullName>
+                <default>false</default>
+                <label>5 - Concluído</label>
+            </value>
+            <value>
+                <fullName>6 - Reprovado</fullName>
+                <default>false</default>
+                <label>6 - Reprovado</label>
+            </value>
+            <value>
+                <fullName>7 - Cancelado</fullName>
+                <default>false</default>
+                <label>7 - Cancelado</label>
+            </value>
+            <value>
+                <fullName>4 - Compra em Andamento</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>4 - Compra em Andamento</label>
+            </value>
+            <value>
+                <fullName>4 - Concluído</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>4 - Concluído</label>
+            </value>
+            <value>
+                <fullName>5 - Reprovado</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>5 - Reprovado</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

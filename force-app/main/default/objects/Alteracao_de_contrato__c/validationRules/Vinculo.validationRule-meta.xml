@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Vinculo</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISBLANK(Comodato__c),
+ISBLANK(Contrato_de_Servico__c),
+ISBLANK(Cotacao__c),
+ISBLANK(Demonstracao__c),
+ISBLANK(Ordem_de_trabalho__c)
+)</errorConditionFormula>
+    <errorMessage>Vincule a solicitação a um tipo de contrato.</errorMessage>
+</ValidationRule>

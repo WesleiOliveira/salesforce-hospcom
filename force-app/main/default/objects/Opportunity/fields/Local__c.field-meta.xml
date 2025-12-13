@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Local__c</fullName>
+    <externalId>false</externalId>
+    <label>Local</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Modalidade__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>APOIO COTAÇÕES</fullName>
+                <default>false</default>
+                <label>APOIO COTAÇÕES</label>
+            </value>
+            <value>
+                <fullName>BBM NET</fullName>
+                <default>false</default>
+                <label>BBM NET</label>
+            </value>
+            <value>
+                <fullName>BEC</fullName>
+                <default>false</default>
+                <label>BEC</label>
+            </value>
+            <value>
+                <fullName>BIONEXO</fullName>
+                <default>false</default>
+                <label>BIONEXO</label>
+            </value>
+            <value>
+                <fullName>BLL</fullName>
+                <default>false</default>
+                <label>BLL</label>
+            </value>
+            <value>
+                <fullName>BNC</fullName>
+                <default>false</default>
+                <label>BNC</label>
+            </value>
+            <value>
+                <fullName>CENTRAL DE COMPRAS - MS</fullName>
+                <default>false</default>
+                <label>CENTRAL DE COMPRAS - MS</label>
+            </value>
+            <value>
+                <fullName>COMPRAS BR</fullName>
+                <default>false</default>
+                <label>COMPRAS BR</label>
+            </value>
+            <value>
+                <fullName>COMPRAS ELETRÔNICAS RS</fullName>
+                <default>false</default>
+                <label>COMPRAS ELETRÔNICAS RS</label>
+            </value>
+            <value>
+                <fullName>COMPRAS MANAUS</fullName>
+                <default>false</default>
+                <label>COMPRAS MANAUS</label>
+            </value>
+            <value>
+                <fullName>COMPRAS MS</fullName>
+                <default>false</default>
+                <label>COMPRAS MS</label>
+            </value>
+            <value>
+                <fullName>COMPRASNETGO</fullName>
+                <default>false</default>
+                <label>COMPRASNETGO</label>
+            </value>
+            <value>
+                <fullName>COMPRASNETGOV</fullName>
+                <default>false</default>
+                <label>COMPRASNETGOV</label>
+            </value>
+            <value>
+                <fullName>CONLICITAÇÃO</fullName>
+                <default>false</default>
+                <label>CONLICITAÇÃO</label>
+            </value>
+            <value>
+                <fullName>E-COMPRAS AM</fullName>
+                <default>false</default>
+                <label>E-COMPRAS AM</label>
+            </value>
+            <value>
+                <fullName>EMAIL</fullName>
+                <default>false</default>
+                <label>EMAIL</label>
+            </value>
+            <value>
+                <fullName>FUNDAÇÃO UNISELVA</fullName>
+                <default>false</default>
+                <label>FUNDAÇÃO UNISELVA</label>
+            </value>
+            <value>
+                <fullName>GOIASCOMPRAS</fullName>
+                <default>false</default>
+                <label>GOIASCOMPRAS</label>
+            </value>
+            <value>
+                <fullName>HUMA</fullName>
+                <default>false</default>
+                <label>HUMA</label>
+            </value>
+            <value>
+                <fullName>IBAMA</fullName>
+                <default>false</default>
+                <label>IBAMA</label>
+            </value>
+            <value>
+                <fullName>JUCEG</fullName>
+                <default>false</default>
+                <label>JUCEG</label>
+            </value>
+            <value>
+                <fullName>LICITAÇÕES-E</fullName>
+                <default>false</default>
+                <label>LICITAÇÕES-E</label>
+            </value>
+            <value>
+                <fullName>LICITANET</fullName>
+                <default>false</default>
+                <label>LICITANET</label>
+            </value>
+            <value>
+                <fullName>OUTROS</fullName>
+                <default>false</default>
+                <label>OUTROS</label>
+            </value>
+            <value>
+                <fullName>PE INTEGRADO</fullName>
+                <default>false</default>
+                <label>PE INTEGRADO</label>
+            </value>
+            <value>
+                <fullName>PLANEJAMENTO GT PLAN</fullName>
+                <default>false</default>
+                <label>PLANEJAMENTO GT PLAN</label>
+            </value>
+            <value>
+                <fullName>PORTAL DE AQUISIÇÕES MT</fullName>
+                <default>false</default>
+                <label>PORTAL DE AQUISIÇÕES MT</label>
+            </value>
+            <value>
+                <fullName>PORTAL DE COMPRAS PUBLICAS</fullName>
+                <default>false</default>
+                <label>PORTAL DE COMPRAS PUBLICAS</label>
+            </value>
+            <value>
+                <fullName>PRESENCIAL</fullName>
+                <default>false</default>
+                <label>PRESENCIAL</label>
+            </value>
+            <value>
+                <fullName>PRO SAÚDE</fullName>
+                <default>false</default>
+                <label>PRO SAÚDE</label>
+            </value>
+            <value>
+                <fullName>PUBLINEXO</fullName>
+                <default>false</default>
+                <label>PUBLINEXO</label>
+            </value>
+            <value>
+                <fullName>SIAG MT</fullName>
+                <default>false</default>
+                <label>SIAG MT</label>
+            </value>
+            <value>
+                <fullName>SICAF</fullName>
+                <default>false</default>
+                <label>SICAF</label>
+            </value>
+            <value>
+                <fullName>SIGA.TO.GOV.BR</fullName>
+                <default>false</default>
+                <label>SIGA.TO.GOV.BR</label>
+            </value>
+            <value>
+                <fullName>SINTESE</fullName>
+                <default>false</default>
+                <label>SINTESE</label>
+            </value>
+            <value>
+                <fullName>SISTEMA FIEG</fullName>
+                <default>false</default>
+                <label>SISTEMA FIEG</label>
+            </value>
+            <value>
+                <fullName>SLICX</fullName>
+                <default>false</default>
+                <label>SLICX</label>
+            </value>
+            <value>
+                <fullName>SMARKETS</fullName>
+                <default>false</default>
+                <label>SMARKETS</label>
+            </value>
+            <value>
+                <fullName>TRÊS LAGOAS</fullName>
+                <default>false</default>
+                <label>TRÊS LAGOAS</label>
+            </value>
+            <value>
+                <fullName>VSSUPPLY</fullName>
+                <default>false</default>
+                <label>VSSUPPLY</label>
+            </value>
+            <value>
+                <fullName>SIGA AP</fullName>
+                <default>false</default>
+                <label>SIGA AP</label>
+            </value>
+            <value>
+                <fullName>COMPRAS CAMPO GRANDE</fullName>
+                <default>false</default>
+                <label>COMPRAS CAMPO GRANDE</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>PREGÃO PRESENCIAL</controllingFieldValue>
+            <controllingFieldValue>CARTA CONVITE</controllingFieldValue>
+            <controllingFieldValue>TOMADA DE PREÇO</controllingFieldValue>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>CHAMAMENTO</controllingFieldValue>
+            <controllingFieldValue>ESTIMATIVA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>ADESÃO DE ATA SRP</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>SICONV</controllingFieldValue>
+            <valueName>PRESENCIAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TOMADA DE PREÇO</controllingFieldValue>
+            <controllingFieldValue>CARTA COTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>CHAMAMENTO</controllingFieldValue>
+            <controllingFieldValue>ESTIMATIVA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>SICONV</controllingFieldValue>
+            <valueName>EMAIL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>BBM NET</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>BEC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>CARTA COTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>ESTIMATIVA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>BIONEXO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>BLL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>BNC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>CENTRAL DE COMPRAS - MS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>COMPRAS BR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>COMPRAS ELETRÔNICAS RS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>COMPRAS MANAUS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>COMPRAS MS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>COMPRASNETGO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>COMPRASNETGOV</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>CONLICITAÇÃO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>E-COMPRAS AM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>FUNDAÇÃO UNISELVA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>GOIASCOMPRAS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>IBAMA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>JUCEG</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>LICITAÇÕES-E</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>LICITANET</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>PE INTEGRADO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <valueName>PORTAL DE AQUISIÇÕES MT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>PORTAL DE COMPRAS PUBLICAS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>CARTA COTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>ESTIMATIVA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>PUBLINEXO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>SIAG MT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>SICAF</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>SIGA.TO.GOV.BR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>SISTEMA FIEG</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>SLICX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DISPENSA DE LICITAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>TRÊS LAGOAS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARTA COTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <valueName>HUMA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARTA COTAÇÃO</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <valueName>PRO SAÚDE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ADESÃO DE ATA SRP</controllingFieldValue>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <controllingFieldValue>SICONV</controllingFieldValue>
+            <controllingFieldValue>PREGÃO ELETRÔNICO</controllingFieldValue>
+            <valueName>OUTROS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <valueName>APOIO COTAÇÕES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <valueName>PLANEJAMENTO GT PLAN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <valueName>SINTESE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <valueName>SMARKETS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COTAÇÃO PREVIA</controllingFieldValue>
+            <valueName>VSSUPPLY</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,149 @@
+<aura:component extends="c.ApexHelper"
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+    access="global">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <ltng:require styles="{!join(',',
+                    $Resource.fontAwesome + '/css/font-awesome.min.css',
+                    $Resource.dropzie + '/jquery.dropzie.css',
+                    $Resource.bootstrap5 + '/css/bootstrap.min.css')}" scripts="{!join(',',
+                    $Resource.JQuery,
+                    $Resource.chart,
+                    $Resource.maskPlugin + '/jquery.mask.min.js',
+                    $Resource.dropzie + '/jquery.dropzie.js',
+                    $Resource.bootstrap5 + '/js/bootstrap.bundle.js',
+                    $Resource.bootstrap5 + '/js/bootstrap.min.js')}" afterScriptsLoaded="{!c.afterScriptsLoad}" />
+
+    <div>
+        <!-- SPINNER DE CARREGAMENTO -->
+        <div id='spinnerDiv' style="display: none">
+            <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+        </div>
+
+        <div class="divPrincipal">
+            <div class="divPrincipal2">
+                <!-- DIV COM FILTROS-->
+                <div class='divFiltros'>
+                    <div class="row" style="width: 100%; justify-content: center;">
+
+                        <div class="col-lg-2 col-md-6" style="padding: 0px;" id="divSelectAnos">
+                            <select id='selectAnos' class='selectDataIn'>
+                                
+                            </select>
+
+                        </div>
+
+                        <div class="col-lg-2 col-md-6" style="padding: 0px; display: none" id="divSelectTipos">
+                            <select id='selectTipos' class='selectDataFin'>
+
+                            </select>
+
+                        </div>
+
+                        <div class="col-lg-2 col-md-6" style="padding: 0px; display: none" id="divSelectSubtipos">
+                            <select id='selectSubtipos' class='selectEstado'>
+
+                            </select>
+                        </div>
+
+                        <div class="col-lg-2 col-md-6" style="padding: 0px; display: none" id="divSelectMetas">
+                            <select id='selectMetas' class='selectMetas'>
+                                <option id='optionSelect' value='00000XXX2'>Metas</option>
+                            </select>
+                        </div>
+
+                        
+
+                    </div>
+
+                </div>
+
+                <!-- DIV COM CONTEÚDO-->
+                <div class="row" style='height: 90%; width: 100%; justify-content: center; margin: 0px;'>
+
+                    <!-- DIV COM GRÁFICO-->
+                    <div class="col-md-9" style='height: 100%;'>
+
+                        <div class='row class1277' id='divTableMetas'>
+                            <div class='col-12 class1278'>
+                                <table class='table table-striped'>
+                                    <thead>
+                                      <tr>
+                                        <th scope='col'>Nome da Meta</th>
+                                        <th scope='col'>Total da Meta</th>
+                                        <th scope='col'>Tipo</th>
+                                        <th scope='col'>Subtipo</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody id='bodyTableMetas'>
+                                        <!--
+                                      <tr>
+                                        <td>Meta teste 1</td>
+                                        <td>800.000.000</td>
+                                        <td>Vendedor</td>
+                                        <td>Letícia</td>
+                                        <td>
+                                            <button id='buttonVisualizaMeta' type='button' style='margin-right: 5px;' class='btn btn-primary'><i class='fa fa-eye'></i></button>
+                                            <button type='button' class='btn btn-success'><i class='fa fa-edit'></i></button>
+                                        </td>
+                                      </tr> -->
+                                    </tbody>
+                                  </table>
+                            </div>
+                        </div>
+
+                        <div class="row" style="height: 20%;">
+                            <div class="col-lg-4 col-md-12" style="padding: 10px;">
+                                <div class="itemChart">
+                                    <div class='valorMeta' id='valorMeta'>0</div>
+                                    <div class='tituloMeta'>Total da meta (R$)</div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6" style="padding: 10px;">
+                                <div class="itemChart">
+                                    <div class='valorMeta' id='valorAtingido'>0</div>
+                                    <div class='tituloMeta'>Total Atingido (R$)</div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6" style="padding: 10px;">
+                                <div class="itemChart">
+                                    <div class='valorMeta' id='percentualAlcancado'>0</div>
+                                    <div class='tituloMeta'>Percentual Alcançado (%)</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="height: 50%;">
+                            <div class="col-12">
+                                <div class="itemChart" id="idChart" style='min-height: 300px;'>
+                                    <div class='classSelecioneFiltro'>Selecione um ano fiscal e os demais filtros para começar...</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DIV COM IMAGEM DO USUARIO-->
+                    <div id='divImagemDescricao' class="col-md-3" style='flex-direction: column; display: none; justify-content: center; align-items: center;'>
+                        <div class='divImagem'>
+                            <div id='divImagem' style="color: #301344;; font-size: 150px; display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; border-bottom-left-radius: 10px; border-top-left-radius: 10px; ">
+                                <!-- <img src='' class='imgUserClass'/> -->
+                                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                            </div>
+                        </div>
+
+                        <div class='valorMeta' style='font-size: 25px;' id='nomePrincipal'></div>
+                        <div class='tituloMeta' id='nomeSecundario'></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</aura:component>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Empresa__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Empresa</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Account.Name</field>
+            <operation>contains</operation>
+            <value>HOSPCOM, GDB, ABC, HEALTH, IZU</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Revisões Gerenciais (Empresa)</relationshipLabel>
+    <relationshipName>Revis_es_Gerenciais1</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

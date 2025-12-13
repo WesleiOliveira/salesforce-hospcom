@@ -1,0 +1,37 @@
+<aura:component controller="UpdateImageUrlClass" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="fileName" type="String" default="Nenhum arquivo selecionado" />
+    <aura:attribute name="fileContent" type="String" />
+    <aura:attribute name="fileType" type="String" />
+    <aura:attribute name="imageId" type="String" />
+    <aura:attribute name="imageSrc" type="String" />
+    <aura:attribute name="URL" type="String" />
+
+    <div class="main">
+    <!-- Input de Arquivo -->
+    <lightning:input type="file" aura:id="fileInput" label="Escolha uma imagem no seu dispositivo"
+                     accept="image/*" onchange="{!c.handleFileChange}" />
+    <p>{!v.fileName}</p>
+
+    <!-- Botão de Salvar -->
+    <lightning:button variant="brand" label="Salvar" onclick="{!c.handleSave}" />
+
+    <!-- Exibe o arquivo selecionado -->
+    <aura:if isTrue="{!v.fileName != 'Nenhum arquivo selecionado'}">
+        <p>Arquivo selecionado: {!v.fileName}</p>
+    </aura:if>
+
+    <!-- Exibe a imagem após o envio -->
+     <aura:if isTrue="{!v.URL}">
+    <h3>URL:</h3>
+    <a href="{!v.URL}" target="_blank">{!v.URL}</a>
+</aura:if>
+
+    <aura:if isTrue="{!v.imageSrc}">
+        <h3>Imagem Salva:</h3>
+        <img src="{!v.imageSrc}" alt="Imagem carregada do Salesforce" />
+    </aura:if>
+        
+       
+        </div>
+</aura:component>

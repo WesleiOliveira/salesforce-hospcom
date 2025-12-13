@@ -1,0 +1,35 @@
+<aura:component extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="nomeMarcas" type="String[]"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="valor" type="String"/>
+    <aura:attribute name="sortDirection" type="String" default="asc" />
+    <aura:attribute name="defaultSortDirection" type="String" default="asc" />
+    <aura:attribute name="sortedBy" type="String" />
+
+    <!-- handlers-->
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    <lightning:select aura:id="select" name="select" label="Selecione uma marca" onchange="{!c.atualizaConsulta}" value="{!v.valor}">
+        <aura:iteration items="{!v.nomeMarcas}" var="marca">
+                <option text="{!marca}"></option>
+            </aura:iteration>
+    </lightning:select><br/>
+    <!-- the container element determine the height of the datatable -->
+    <div style="height: 500px">
+        <lightning:datatable
+                             keyField="id"
+                             data="{!v.data}"
+                             columns="{!v.columns}"
+                             hideCheckboxColumn="true"
+                             enableInfiniteLoading="true"
+                             defaultSortDirection="{!v.defaultSortDirection}"
+                             sortedDirection="{!v.sortDirection}"
+                             sortedBy="{!v.sortedBy}"
+                             onsort="{!c.handleSort}"
+                             showRowNumberColumn="true"
+                             
+                             />
+        
+    </div>
+</aura:component>

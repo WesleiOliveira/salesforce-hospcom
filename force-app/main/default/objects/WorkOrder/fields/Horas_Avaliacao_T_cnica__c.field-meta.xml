@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Horas_Avaliacao_T_cnica__c</fullName>
+    <externalId>false</externalId>
+    <formula>(IF(OR(ISBLANK(Data_e_Hora_da_Avalia_o_T_cnica_T__c), ISBLANK(Data_e_Hora_da_Avalia_o_T_cnica_I__c)), 0, (Data_e_Hora_da_Avalia_o_T_cnica_T__c - Data_e_Hora_da_Avalia_o_T_cnica_I__c))+ 
+IF(OR(ISBLANK(Data_Hora_da_Avalia_o_T_cnica_Pt2_T__c), ISBLANK(Data_Hora_da_Avalia_o_T_cnica_Pt2__c)), 0, (Data_Hora_da_Avalia_o_T_cnica_Pt2_T__c - Data_Hora_da_Avalia_o_T_cnica_Pt2__c))+ 
+IF(OR(ISBLANK(Data_Hora_da_Avalia_o_T_cnica_Pt3_T__c), ISBLANK(Data_Hora_da_Avalia_o_T_cnica_Pt3__c)), 0, (Data_Hora_da_Avalia_o_T_cnica_Pt3_T__c - Data_Hora_da_Avalia_o_T_cnica_Pt3__c)))*24</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Horas Avaliacao Técnica</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>8</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

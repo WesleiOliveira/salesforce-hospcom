@@ -1,0 +1,393 @@
+<aura:component extends="c.ApexHelper" controller="AnaliseEquipamentoController"
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+    access="global">
+
+    <ltng:require scripts="{!$Resource.fontAwesome}" />
+
+    <aura:attribute name="historico" type="List" />
+    <aura:attribute name="msg" type="String" />
+    <aura:attribute name="threadId" type="String" default="" />
+    <aura:attribute name="digitando" type="Boolean" default="false" />
+    <aura:attribute name="analises" type="List" />
+    <aura:attribute name="novaAnalise" type="Object" default="{}" />
+    <aura:attribute name="idDaAnaliseSelecionada" type="String" default="" />
+    <aura:attribute name="analise" type="Object" default="{}" />
+    <aura:attribute name="analiseAlterada" type="Boolean" default="false" />
+    <aura:attribute name="btnSalvarNovaAnalise" type="Boolean" default="false" />
+    <aura:attribute name="isLoading" type="Boolean" default="false" />
+    <aura:attribute name="chatOn" type="Boolean" default="false" />
+    <aura:attribute name="saving3" type="Boolean" default="false" />
+    <aura:attribute name="coberturaAnimada" type="Integer" default="0" />
+    <aura:attribute name="intervalId" type="Object" />
+    <aura:attribute name="isPdfModalOpen" type="Boolean" default="false" />
+    <aura:attribute name="pdfUrl" type="String" />
+    <aura:attribute name="agenteSelecionado" type="String" default="" />
+    <aura:attribute name="btn" type="String" default="chat" />
+
+
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <div>
+
+        <aura:if isTrue="{!empty(v.agenteSelecionado)}">
+            <div class="telaInicialAgente">
+                <div class="cardInicialAgente">
+                    <h1>Selecione o agente</h1>
+                    <lightning:select name="selectAgente" label="Agente de Análise"
+                        onchange="{!c.handleAgenteSelecionado}">
+                        <option value="">-- Selecione --</option>
+                        <option value="principal">Agente PMLS</option>
+                    </lightning:select>
+                </div>
+            </div>
+            <aura:set attribute="else">
+
+                <!--SPINNER-->
+                <aura:if isTrue="{!v.isLoading}">
+                    <lightning:spinner alternativeText="Carregando..." size="medium" />
+                </aura:if>
+                <!-- TÍTULO -->
+                <div class="MainCard6543">
+                    <div class="CardHeader54">
+                        <h2>Análise de Editais</h2>
+
+
+                    </div>
+
+                    <!-- CORPO -->
+                    <div class="CardBody43">
+
+
+
+                        <!-- BARRA LATERAL COM AS ANÁLISES -->
+                        <div class="sidebar543">
+                            <lightning:select name="selectAgenteTopo" label="" value="{!v.agenteSelecionado}"
+                                onchange="{!c.handleAgenteSelecionado}" class="selectAgenteTopo">
+                                <option value="">-- Selecione --</option>
+                                <option value="principal">Agente PMLS</option>
+                                <!-- Futuro: <option value="outro">Outro Agente</option> -->
+                            </lightning:select>
+                            <aura:if isTrue="{!v.chatOn}">
+                                <div class="chatButtom" data-type="chat" onclick="{!c.handleChatClick}">CHAT COM AGENTE
+                                </div>
+                            </aura:if>
+                            <div id="NovaAnaliseBtn" class="chatButtom" onclick="{!c.handleNovaAnaliseClick}">NOVA
+                                ANÁLISE</div>
+                            <div class="conteudo-scrollavel">
+
+
+                                <aura:iteration items="{!v.analises}" var="item">
+                                    <div class="{!'analiseContainer54 fadeInAnim ' + (item.aguardando ? 'bloqueado' : '')}"
+                                        onclick="{!c.handleAnaliseClick}" id="{!item.Id}"
+                                        data-aguardando="{!item.aguardando}">
+
+                                        <div class="containerHead">
+                                            <h1>{!item.Nome_do_Termo_de_Referencia__c}</h1>
+                                        </div>
+
+                                        <div class="containerBody43">
+                                            <div class="infos">
+                                                <h1>Item {!item.Numero_do_Item__c}</h1>
+                                                <h3>{!item.Nome_do_Equipamento__c}</h3>
+                                            </div>
+
+                                            <!-- IF/ELSE baseado no Status -->
+                                            <aura:if isTrue="{!item.Status__c == 'ok'}">
+                                                <div class="{! 'score543 ' + item.cor }">{!item.Cobertura__c}%</div>
+
+                                                <aura:set attribute="else">
+                                                    <div class="score543 statusEmFila">
+                                                        <i class="fa fa-spinner girando" aria-hidden="true"
+                                                            title="{!item.Status__c}"></i>
+                                                    </div>
+                                                </aura:set>
+                                            </aura:if>
+                                        </div>
+
+                                        <div class="containerFooter">
+                                            <div><em>Custo: R${!item.CustoFormatado} - {!item.DataFormatada}</em></div>
+                                        </div>
+                                    </div>
+                                </aura:iteration>
+
+
+                            </div>
+                        </div>
+
+
+                        <!-- Janela de criação de nova analise-->
+                        <div class="novaAnaliseContainer" aura:id="novaAnalise">
+
+
+
+
+                            <div class="chatTitle543">NOVA ANÁLISE</div>
+                            <aura:if isTrue="{!v.saving3}">
+                                <lightning:spinner alternativeText="Loading" size="small" />
+                            </aura:if>
+                            <p class="nac-description">
+                                Envie abaixo os dados do item solicitado conforme o Termo de Referência. Essa análise
+                                será
+                                realizada por um agente de IA especializado em PMLS. Quanto mais detalhada for sua
+                                descrição,
+                                melhores e mais precisos serão os resultados da análise.
+                            </p>
+
+                            <div class="nac-body">
+                                <div class="nac-grid">
+                                    <div class="nac-fieldContainer">
+                                        <lightning:input class="nac-field" label="Termo de Referência"
+                                            aura:id="inputTermo" onchange="{!c.ativaSalvarbtn}" required="true"
+                                            value="{!v.novaAnalise.Nome_do_Termo_de_Referencia__c}" maxlength="255" />
+                                        <div class="nac-fieldHelpText">Nome do Termo de Referência.</div>
+                                    </div>
+
+                                    <div class="nac-fieldContainer">
+                                        <lightning:input aura:id="inputValor" type="text" label="Oportunidade"
+                                            formatter="text" onchange="{!c.ativaSalvarbtn}"
+                                            value="{!v.novaAnalise.oportunidade__c}" locale="pt-BR" />
+                                        <div class="nac-fieldHelpText">A Analise será relacionada à qual opp?</div>
+                                    </div>
+                                </div>
+                                <!-- Grid de 2 colunas -->
+                                <div class="nac-grid">
+
+                                    <div class="nac-fieldContainer">
+                                        <lightning:input class="nac-field" label="Nome do item"
+                                            onchange="{!c.ativaSalvarbtn}"
+                                            value="{!v.novaAnalise.Nome_do_Equipamento__c}" maxlength="255" />
+                                        <div class="nac-fieldHelpText">Nome do item solicitado (Se aplicável).</div>
+                                    </div>
+
+                                    <div class="nac-fieldContainer">
+                                        <lightning:input class="nac-field" type="number" label="Nº do Item"
+                                            aura:id="inputItem" onchange="{!c.ativaSalvarbtn}" required="true"
+                                            value="{!v.novaAnalise.Numero_do_Item__c}" min="0" max="999" />
+                                        <div class="nac-fieldHelpText">Número do Item solicitado.</div>
+                                    </div>
+
+                                    <div class="nac-fieldContainer">
+                                        <lightning:input class="nac-field" type="number" label="Quantidade"
+                                            onchange="{!c.ativaSalvarbtn}" value="{!v.novaAnalise.Quantidade__c}"
+                                            min="1" max="9999" />
+                                        <div class="nac-fieldHelpText">Quantidade solicitada.</div>
+                                    </div>
+
+                                    <div class="nac-fieldContainer">
+                                        <lightning:input aura:id="inputValor" type="currency" label="Valor"
+                                            formatter="currency" onchange="{!c.ativaSalvarbtn}" step="0.01"
+                                            value="{!v.novaAnalise.Valor__c}" locale="pt-BR" />
+                                        <div class="nac-fieldHelpText">Valor estimado do item solicitado</div>
+                                    </div>
+
+                                </div>
+
+                                <!-- Descrição em largura total -->
+                                <div class="nac-fieldContainer nac-full-width">
+                                    <lightning:textarea class="nac-field" label="Descrição" aura:id="inputDescricao"
+                                        onchange="{!c.ativaSalvarbtn}" required="true"
+                                        value="{!v.novaAnalise.Descricao__c}" />
+                                    <div class="nac-fieldHelpText">Insira a descrição completa do item. Quanto mais
+                                        detalhado
+                                        for o texto, maiores são as chances do agente de IA fornecer uma análise
+                                        precisa.</div>
+                                </div>
+
+                                <!-- Botão -->
+
+                                <div class="nac-botton">
+                                    <lightning:button class="nac-btn" label="Limpar" onclick="{!c.iniciaObjAnalise}"
+                                        variant="neutral" />
+
+                                    <aura:if isTrue="{!v.btnSalvarNovaAnalise}">
+                                        <lightning:button class="nac-btn" label="Salvar" onclick="{!c.salvarAnalise}"
+                                            variant="brand" />
+                                    </aura:if>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <!--Analise completa-->
+                        <div aura:id="analiseFullContainer" class="analiseFullContainer"
+                            recordId="{!v.idDaAnaliseSelecionada}">
+                            <!-- Cabeçalho -->
+                            <div class="{!'percent3 ' + v.analise.cor}">{!v.coberturaAnimada}%</div>
+                            <div style="Position:absolute">
+                                <div class="Fullcontainerhead">
+                                    <h2>{!v.analise.Nome_do_Termo_de_Referencia__c}</h2>
+                                    <h3>{!v.analise.Nome_do_Equipamento__c}</h3>
+                                </div>
+                                <!-- Subtítulo -->
+                                <div class="subtitulo">
+
+                                    <aura:if isTrue="{!not(empty(v.analise.Numero_do_Item__c))}">
+                                        <p><strong>Item:</strong> {!v.analise.Numero_do_Item__c}</p>
+                                    </aura:if>
+
+                                    <aura:if isTrue="{!not(empty(v.analise.Quantidade__c))}">
+                                        <p><strong>Quantidade:</strong> {!v.analise.Quantidade__c}</p>
+                                    </aura:if>
+
+                                    <aura:if isTrue="{!not(empty(v.analise.Valor__c))}">
+                                        <p><strong>Valor:</strong> R$ {!v.analise.Valor__c}</p>
+                                    </aura:if>
+
+                                    <aura:if isTrue="{!not(empty(v.analise.CustoFormatado))}">
+                                        <p><strong>Custo da Análise:</strong> R$ {!v.analise.CustoFormatado}</p>
+                                    </aura:if>
+
+                                </div>
+                            </div>
+
+
+
+                            <!-- Corpo (descrição rich text) -->
+                            <div class="FullcontainerBody" aura:id="descricao">
+
+                                <aura:unescapedHtml value="{!v.analise.Analise__c}" />
+                            </div>
+
+                            <!-- Rodapé com campos editáveis -->
+                            <div class="FullContainerFooter">
+
+                                <div class="chatButtom" data-type="analise" onclick="{!c.handleChatClick}">Iniciar chat
+                                    <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                </div>
+
+                                <!--
+                                <lightning:textarea label="Feedback" value="{!v.analise.Feedback__c}"
+                                    class="campo-feedback" onchange="{!c.marcarAlterado}" />
+
+                                <lightning:input label="Nota" type="number" min="0" max="100"
+                                    value="{!v.analise.Nota_para_a_Analise__c}" class="campo-nota"
+                                    onchange="{!c.marcarAlterado}" />
+-->
+
+                            </div>
+
+                            <aura:if isTrue="{!v.analiseAlterada}">
+                                <lightning:button class="save-feedback-btn" label="Salvar" onclick="{!c.salvarFeedback}"
+                                    variant="brand" />
+                            </aura:if>
+                        </div>
+
+
+                        <!--PDF MODAL-->
+                        <aura:if isTrue="{!v.isPdfModalOpen}">
+                            <section role="dialog" tabindex="-1" class="custom-modal custom-fade-in">
+                                <div class="custom-modal__container">
+
+                                    <!-- Cabeçalho do modal -->
+                                    <header class="custom-modal__header">
+                                        <h2 class="custom-modal__title">Visualizar Documento</h2>
+                                        <button class="custom-modal__close" onclick="{!c.closePdfModal}">X</button>
+                                    </header>
+
+                                    <!-- Conteúdo com o iframe -->
+                                    <div class="custom-modal__content">
+                                        <iframe src="{!v.pdfUrl}" width="100%" height="100%"
+                                            style="border: none;"></iframe>
+                                    </div>
+
+                                    <!-- Rodapé opcional -->
+                                    <footer class="custom-modal__footer">
+                                        <button class="custom-button" onclick="{!c.closePdfModal}">Fechar</button>
+                                    </footer>
+                                </div>
+                            </section>
+                            <div class="custom-backdrop custom-backdrop--open"></div>
+                        </aura:if>
+
+
+
+                        <!-- CHAT COM O AGENTE -->
+                        <div aura:id="chat" class="chat53">
+
+                            <aura:if isTrue="{!v.btn == 'chat'}">
+
+                                <div class="chatTitle543">AGENTE PMLS</div>
+                                <aura:set attribute="else">
+
+
+                                    <div class="Fullcontainerhead">
+                                        <h2>{!v.analise.Nome_do_Termo_de_Referencia__c}</h2>
+                                        <h3>{!v.analise.Nome_do_Equipamento__c}</h3>
+                                    </div>
+
+                                    <!-- Subtítulo -->
+                                    <div class="subtitulo">
+
+                                        <aura:if isTrue="{!not(empty(v.analise.Numero_do_Item__c))}">
+                                            <p><strong>Item:</strong> {!v.analise.Numero_do_Item__c}</p>
+                                        </aura:if>
+
+                                        <aura:if isTrue="{!not(empty(v.analise.Quantidade__c))}">
+                                            <p><strong>Quantidade:</strong> {!v.analise.Quantidade__c}</p>
+                                        </aura:if>
+
+                                        <aura:if isTrue="{!not(empty(v.analise.Valor__c))}">
+                                            <p><strong>Valor:</strong> R$ {!v.analise.Valor__c}</p>
+                                        </aura:if>
+
+                                        <aura:if isTrue="{!not(empty(v.analise.CustoFormatado))}">
+                                            <p><strong>Custo da Análise:</strong> R$ {!v.analise.CustoFormatado}</p>
+                                        </aura:if>
+                                    </div>
+                                </aura:set>
+                            </aura:if>
+
+                            <div aura:id="chatHistory" class="ChatHistory6543">
+                                <aura:iteration items="{!v.historico}" var="msg">
+                                    <aura:if isTrue="{!msg.role == 'user'}">
+                                        <div class="mensagem userMsg">
+                                            <div class="value">{!msg.content}</div>
+                                            <div class="createdAt">{!msg.created_at}</div>
+                                        </div>
+                                        <aura:set attribute="else">
+                                            <div class="mensagem agentMsg">
+                                                <div class="value">{!msg.content}</div>
+
+                                                <!-- Iterar as fontes (arquivos) -->
+                                                <aura:iteration items="{!msg.arquivosFontes}" var="arquivo">
+                                                    <a onclick="{!c.openPdfModal}" data-fileid="{!arquivo.fileId}"
+                                                        class="contentSource">
+                                                        {!arquivo.fileName}
+                                                    </a> <br />
+                                                </aura:iteration>
+
+                                                <div class="createdAt">{!msg.created_at}</div>
+                                            </div>
+                                        </aura:set>
+                                    </aura:if>
+                                </aura:iteration>
+
+                                <aura:if isTrue="{!v.digitando}">
+                                    <div class="mensagem agentMsg digitando">
+                                        <div class="value">Digitando...</div>
+                                    </div>
+                                </aura:if>
+                            </div>
+
+                            <div class="chatFooter13">
+                                <lightning:input class="barraDeMensagem43" type="text" placeholder="Pergunte algo..."
+                                    value="{!v.msg}" />
+                                <lightning:button label="⮞"
+                                    class="{!'botaoEnviar ' + (v.digitando ? 'desativado' : '')}" onclick="{!c.sendMsg}"
+                                    disabled="{!v.digitando}" />
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </aura:set>
+        </aura:if>
+    </div>
+
+</aura:component>

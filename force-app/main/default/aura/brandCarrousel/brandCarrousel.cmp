@@ -1,0 +1,46 @@
+<aura:component controller="HomeBotoes" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    
+    <div style="display: flex;justify-content: center;align-items: center; margin-top: 50px; background-color: white;">
+        
+        <div class="logos">
+            <div class="logo_items">
+                <img src="https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=015U4000009phkD&amp;oid=00Di0000000JVhH&amp;lastMod=1727988029000" style="width:100px; height:50px;"/>
+                <img src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BiQcE&amp;oid=00Di0000000JVhH&amp;lastMod=1633008304000" style="width:100px; height:50px;"/>
+                <img src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=015U4000001SVxz&amp;oid=00Di0000000JVhH&amp;lastMod=1705409470000" style="width:100px; height:50px;"/>
+                <img src="https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=015U400000B9sfZ&amp;oid=00Di0000000JVhH&amp;lastMod=1727463294000" style="width:100px; height:50px;"/>
+               <!-- <img src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=015U4000005pg3y&amp;oid=00Di0000000JVhH&amp;lastMod=1715283164000" style="width:100px; height:50px;"/>-->
+                <img src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=015U4000001SR4n&amp;oid=00Di0000000JVhH&amp;lastMod=1705409385000" style="width:100px; height:50px;"/>
+               <!-- <img src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000CHlcZ&amp;oid=00Di0000000JVhH&amp;lastMod=1677692047000" style="width:100px; height:50px;"/>-->
+               <!-- <img src="https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=015U4000005pfz7&amp;oid=00Di0000000JVhH&amp;lastMod=1727988615000" style="width:100px; height:50px;"/>-->
+                <img src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=015U4000005q1jW&amp;oid=00Di0000000JVhH&amp;lastMod=1715287383000" style="width:100px; height:50px;"/>
+                <img src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=015U4000004ULb0&amp;oid=00Di0000000JVhH&amp;lastMod=1712174250000" style="width:100px; height:50px;"/>
+                
+                <!-- Duplicação das imagens para criar o efeito infinito -->
+                <img src="https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=015U4000009phkD&amp;oid=00Di0000000JVhH&amp;lastMod=1727988029000" style="width:100px; height:50px;"/>
+                <img src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000BiQcE&amp;oid=00Di0000000JVhH&amp;lastMod=1633008304000" style="width:100px; height:50px;"/>
+                <img src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=015U4000001SVxz&amp;oid=00Di0000000JVhH&amp;lastMod=1705409470000" style="width:100px; height:50px;"/>
+                <img src="https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=015U400000B9sfZ&amp;oid=00Di0000000JVhH&amp;lastMod=1727463294000" style="width:100px; height:50px;"/>
+                <!--<img src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=015U4000005pg3y&amp;oid=00Di0000000JVhH&amp;lastMod=1715283164000" style="width:100px; height:50px;"/>-->
+                <img src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=015U4000001SR4n&amp;oid=00Di0000000JVhH&amp;lastMod=1705409385000" style="width:100px; height:50px;"/>
+               <!-- <img src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000CHlcZ&amp;oid=00Di0000000JVhH&amp;lastMod=1677692047000" style="width:100px; height:50px;"/>-->
+               <!-- <img src="https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=015U4000005pfz7&amp;oid=00Di0000000JVhH&amp;lastMod=1727988615000" style="width:100px; height:50px;"/>-->
+                <img src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=015U4000005q1jW&amp;oid=00Di0000000JVhH&amp;lastMod=1715287383000" style="width:100px; height:50px;"/>
+                <img src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=015U4000004ULb0&amp;oid=00Di0000000JVhH&amp;lastMod=1712174250000" style="width:100px; height:50px;"/>
+           		
+                 <!-- Duplicação das imagens para criar o efeito infinito -->
+                <img src="https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=015U4000009phkD&amp;oid=00Di0000000JVhH&amp;lastMod=1727988029000" style="width:100px; height:50px;"/>
+                <img src="https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=0156e00000BiQcE&amp;oid=00Di0000000JVhH&amp;lastMod=1633008304000" style="width:100px; height:50px;"/>
+                <img src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=015U4000001SVxz&amp;oid=00Di0000000JVhH&amp;lastMod=1705409470000" style="width:100px; height:50px;"/>
+                <img src="https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=015U400000B9sfZ&amp;oid=00Di0000000JVhH&amp;lastMod=1727463294000" style="width:100px; height:50px;"/>
+               <!-- <img src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=015U4000005pg3y&amp;oid=00Di0000000JVhH&amp;lastMod=1715283164000" style="width:100px; height:50px;"/>-->
+                <img src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=015U4000001SR4n&amp;oid=00Di0000000JVhH&amp;lastMod=1705409385000" style="width:100px; height:50px;"/>
+               <!-- <img src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000CHlcZ&amp;oid=00Di0000000JVhH&amp;lastMod=1677692047000" style="width:100px; height:50px;"/>-->
+               <!-- <img src="https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=015U4000005pfz7&amp;oid=00Di0000000JVhH&amp;lastMod=1727988615000" style="width:100px; height:50px;"/>-->
+                <img src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=015U4000005q1jW&amp;oid=00Di0000000JVhH&amp;lastMod=1715287383000" style="width:100px; height:50px;"/>
+                <img src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=015U4000004ULb0&amp;oid=00Di0000000JVhH&amp;lastMod=1712174250000" style="width:100px; height:50px;"/>
+            
+            </div>
+        </div>
+    </div>
+    
+</aura:component>

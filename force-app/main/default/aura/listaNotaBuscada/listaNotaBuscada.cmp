@@ -1,0 +1,79 @@
+<aura:component extends="c.ApexHelper" controller="XMLtoPDF" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery)}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    <div>
+        
+        <div class='title23423423'>Lançamento simplificado de nota</div>
+        
+        <div class='principalDiv4745839'>
+            
+            <div class='columnUm2347238423'>
+            	<div class='esqTop32482958f'>
+					<div style='display: flex'>
+                    	<div class='fontTopo23423'>Nome do Fornecedor:&nbsp;</div>
+                        <div class='fontCorpo324234' id='fornecedor'></div>
+                    </div>
+                    
+                    <div style='display: flex'>
+                    	<div class='fontTopo23423'>CNPJ:&nbsp;</div>
+                        <div class='fontCorpo324234' id='cnpj'></div>
+                    </div>
+                    
+                    <div style='display: flex'>
+                        <div class='fontTopo23423'>Chave de acesso:&nbsp;</div>
+                        <div class='fontCorpo324234' id='chaveAcesso'></div>
+                    </div>
+                    <div style='display: flex'>
+                        <div class='fontTopo23423'>Valor da nota:&nbsp;</div>
+                        <div class='fontCorpo324234' id='valorDaNota'></div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class='esqBot32482958f'>
+                    <iframe class='iframePDF' id='iframePDF' src="" style="border: none;"></iframe>
+                </div>
+            </div>
+            
+            
+            <div class='columnDois2347238423'>
+                <div class='dirTop32482958f'>
+					<div class='headerCol348538'>
+                    	PEDIDOS DE COMPRA (PC) OU CONTRATOS (CTR) DESTE FORNECEDOR
+                    </div>
+                    
+                    <div class='bodycol435897u49'>
+                        
+                        <div class='headerBody3242'>
+                        	<div class='itemHeaderTop43849'>Número</div>
+                            <div class='itemHeaderTop43849'>Data da compra</div>
+                            <div class='itemHeaderTop43849'>Valor</div>
+                            <div class='itemHeaderTop43849'>Ação</div>
+                        </div>
+                        
+                        <div class='bodyBody433544' id ='bodyPcs4353'>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class='buttonDownloadXML' id='buttonDownloadXML'>
+                	Copiar XML da nota
+                </div>
+            </div>
+            
+        </div>
+        
+        
+    </div>
+	
+</aura:component>

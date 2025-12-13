@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>60.0</apiVersion>
+    <environments>Default</environments>
+    <formulas>
+        <name>obsGerais</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.Observacoes_Gerais__c} + BR()  + &apos;Endereço de entrega: &apos; + {!$Record.ShippingStreet} +&apos;, &apos; + {!$Record.ShippingCity} +&apos; - &apos; + 
+ {!$Record.ShippingState} + &apos;,  CEP: &apos;  + {!$Record.ShippingPostalCode}</expression>
+    </formulas>
+    <interviewLabel>Pedido — Endereços diferentes {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Pedido — Endereços diferentes</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>OBS_Gerais</name>
+        <label>OBS Gerais</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <inputAssignments>
+            <field>Observacoes_Gerais__c</field>
+            <value>
+                <elementReference>obsGerais</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>OBS_Gerais</targetReference>
+        </connector>
+        <filterFormula>AND(
+{!$Record.Enderecos_diferentes__c} == true,
+OR(
+ISNEW(),
+ISCHANGED({!$Record.ShippingCity})
+)
+)</filterFormula>
+        <object>Order</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

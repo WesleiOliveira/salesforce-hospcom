@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>de_contrato_e_sem_contrato</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+	!$User.Ignorar_erros__c,
+	INCLUDES(Disponivel_p_contratos__c, &apos;Nenhum&apos;),
+	OR(
+		INCLUDES(Disponivel_p_contratos__c, &apos;Locação&apos;),
+		INCLUDES(Disponivel_p_contratos__c, &apos;Demonstração&apos;),
+		INCLUDES(Disponivel_p_contratos__c, &apos;Empréstimo&apos;)
+	)
+)</errorConditionFormula>
+    <errorDisplayField>Disponivel_p_contratos__c</errorDisplayField>
+    <errorMessage>Ativo deve estar disponível para um ou mais tipos de contrato, ou nenhum.</errorMessage>
+</ValidationRule>

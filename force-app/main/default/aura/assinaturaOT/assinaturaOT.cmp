@@ -1,0 +1,54 @@
+<aura:component  controller="ImageDocument" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.signaturePad)}"                     
+                  afterScriptsLoaded="{!c.doInit}" />
+    
+    <div>
+        <!-- SPINNER DE CARREGAMENTO -->
+        <div id='spinnerDiv' style="display: none">
+            <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+        </div>
+        
+        <div  class="divMestre" style="display: flex" id="divMestre">
+            
+            <div class="popupSignature">
+                
+                <div class="headerPopup">
+                    <div class="row" style="width: 100%; display: flex">
+                        
+                        <div class="secondaryText col3453" id="buttonCancelar00">
+                            
+                        </div>
+                        
+                        <div class="colSignature col3453">
+                            Assinatura de Término
+                        </div>
+                        <div class="secondaryText col3453" id="limparButton">
+                            Limpar
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bodyPopup">
+                    <canvas id="signature-pad" aura:id="signature-pad" width="450" class="signature-pad" ></canvas>
+                    
+                </div>
+                
+                <div class="footerPopup" id="buttonPronto">
+                    Salvar
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+    </div>
+
+</aura:component>

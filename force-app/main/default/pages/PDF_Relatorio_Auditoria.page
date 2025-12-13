@@ -1,0 +1,467 @@
+<apex:page standardController="Relat_rio_Auditoria__c" extensions="ListagemIMEs_PMP" applyHtmlTag="false" showHeader="false" renderAs="pdf">
+
+<head>
+    <style type="text/css" media="print">
+        @page {
+            size: 21cm 29.7cm;
+            margin: 100px 40px 60px 40px;
+
+            @top-center {
+                content: element(header);
+            }
+
+            @bottom-center {
+                content: element(footer);
+            }
+        }
+
+        @page {
+            size: A4;
+            background: url({!IF(Relat_rio_Auditoria__c.Auditoria__r.Empresa_Auditada__r.CNPJ__c  == '27.476.124/0001-02',$Resource.TimbradoHealth,IF(Relat_rio_Auditoria__c.Auditoria__r.Empresa_Auditada__r.CNPJ__c == '05.743.288/0001-08' || Relat_rio_Auditoria__c.Auditoria__r.Empresa_Auditada__r.CNPJ__c == '05.743.288/0003-70',$Resource.TimbradoHospcom,IF(Relat_rio_Auditoria__c.Auditoria__r.Empresa_Auditada__r.CNPJ__c == '23.813.386/0001-56',$Resource.TimbradoGDB,IF(Relat_rio_Auditoria__c.Auditoria__r.Empresa_Auditada__r.CNPJ__c == '40.014.621/0001-49',$Resource.TimbradoABC,$Resource.TimbradoGenerico))))
+        });
+        margin:150px 50px 120px 50px;
+
+        @bottom-center {
+            content: element(footer);
+        }
+        }
+
+        .pagenumber:before {
+            content: counter(page);
+        }
+
+        .pagecount:before {
+            content: counter(pages);
+        }
+
+        div.header {
+            margin: 0px 0px 0px 0px;
+            padding: 20px 0px 20px 0px;
+            position: running(header);
+            height: 60px;
+        }
+
+        div.content {}
+
+        div.footer {
+            margin: 0px 0px 0px 0px;
+            padding: 20px 0px 20px 0px;
+            position: running(footer);
+            height: 20px;
+            text-align: right;
+            font-family: arial, verdana, sans-serif;
+            font-size: 10px;
+            font-weight: normal;
+        }
+    </style>
+    <style type="text/css" media="print">
+        /*
+        @page:first{
+            size:A4;
+            background: url($Resource.SobreHealth);
+            margin:150px 50px 120px 50px;
+            @bottom-center{content:element(footer);
+            }
+        }
+        
+        @page{
+            size:A4;
+            background: url($Resource.TimbradoHealth);
+            margin:150px 50px 120px 50px;
+            @bottom-center{content:element(footer);}
+        }
+*/
+        td,
+        tr {
+            padding: 0;
+            margin: 0;
+            page-break-inside: avoid;
+        }
+
+        * {
+            letter-spacing: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #0c3557;
+            font-size: 12px;
+            padding: 0px ;
+            
+        }
+
+        .tabela_geral {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table.print-friendly tr td,
+        table.print-friendly tr th {
+            page-break-inside: avoid;
+        }
+
+        .titulo {
+            text-align: left;
+            padding: 1px 1px;
+            text-transform: uppercase;
+            font-size: 14px;
+            color: #fff !important;
+        }
+
+        .maiuscula {
+            text-transform: uppercase;
+        }
+
+        .questoes {}
+
+        .questao {
+            display: flex;
+            flex-direction: row;
+            padding: 5px;
+        }
+
+        .valor {
+            margin-bottom: -100px;
+            /*border: #0c3557 1px solid;*/
+
+        }
+
+        .sessao-questao {
+            font-size: 14px;
+            padding: 10px 0 0 5px;
+        }
+
+
+        .questao {
+            padding: 10px !important;
+            padding-right: 15px !important;
+        }
+
+        h1,
+        h2 {
+            padding: 0;
+            margin: 0;
+        }
+
+        .resposta {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .t {
+            padding: 1px 1px;
+            font-size: 14px;
+        }
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+        }
+
+        .NC {
+            padding: 5px;
+            /*border: #0c3557 1px solid;*/
+            margin: 5px 0;
+            page-break-inside: avoid;
+        }
+
+        .tp-nc {}
+
+        .linha,
+        .linha2,
+        .linha3 {
+            padding: 0px;
+        }
+
+        .campo {
+            font-weight: bold;
+        }
+
+        .linha2 {
+            width: 50%;
+            padding-right: 20px;
+        }
+
+        .linha3 {
+            width: 50%;
+            padding-right: 20px;
+            /*border: 1px solid #02447a*/
+            ;
+        }
+
+        .value {
+            letter-spacing: 1rem;
+            padding: 10px 5px;
+        }
+
+        .value2 {
+            text-transform: uppercase;
+            letter-spacing: 1rem;
+            padding: 10px 5px;
+        }
+
+        .value3 {
+            text-transform: capitalize;
+            letter-spacing: 1rem;
+            padding: 10px 5px;
+
+        }
+
+        .titulo {
+            font-family: arial, verdana, sans-serif;
+            font-size: 15px;
+            text-align: center;
+            font-weight: bold;
+            width: 100%;
+            color: #ffff;
+            background-color: #0c3557;
+        }
+        
+        .testeeee{
+            font-family: arial, verdana, sans-serif;
+            font-size: 15px;
+            text-align: center;
+            font-weight: bold;
+            width: 100%;
+            color: #0c3557;
+            background-color: #ffff;
+        }
+
+        .campo2 {
+            font-weight: bold;
+            text-align: center;     
+            padding: 10px 5px;
+
+        }
+
+        .bloco {
+        page-break-inside: avoid;
+        }
+    </style>
+</head>
+
+<body>
+    <apex:pageBlock >
+
+        <div class="footer" style="text-align:center !important"><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Página <span class="pagenumber"></span> de <span class="pagecount"></span> - Emissão em:&nbsp;
+            <apex:outputText value="{0,date,dd/MM/yyyy}">
+                <apex:param value="{! TODAY() }" />
+            </apex:outputText>
+        </div>
+
+        <table>
+          
+               <apex:repeat value="{!documentos}" var="doc">
+                  <apex:outputText rendered="{!if(doc.Documento__c = 'Relatório de Auditoria', true, false)}" >
+                        <apex:outputText rendered="{!if(doc.Empresa_pesquisa__c = Relat_rio_Auditoria__c.Auditoria__r.Empresa_Auditada__c, true, false)}" >
+                        
+                                <tr>
+                                    <td class = "" >
+                                       emissão: <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{! doc.Data_de_criacao__c }" /></apex:outputText>
+                                    </td>
+                                    
+                                    <td class = "" style="text-align: right;">
+                                       última rev. doc.: <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!doc.Revisao__c}" /></apex:outputText>
+                                    </td>
+                                </tr>
+                            
+                            </apex:outputText>
+                    </apex:outputText>
+                </apex:repeat>
+                
+                <tr>
+                    <td colspan="2">
+                        <h4 class="testeeee" style="color: #ffff text-align:center;">{!Relat_rio_Auditoria__c.RA__c}</h4>
+                    </td>
+                </tr>
+
+            <div><div >
+
+                <!-- DADOS DA EMPRESA -->
+                <tr>
+                    <td colspan="2">
+                        <h6 class="titulo" style="color: #ffff ;">Dados da empresa </h6>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="linha">
+                        <span class="campo">Razão social:</span> <span
+                            class="value2"><apex:outputText value="{!Relat_rio_Auditoria__c.Auditoria__r.Empresa_Auditada__r.Raz_o_Social__c}"/> </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="linha">
+                        <span class="campo">CNPJ:</span> <span
+                            class="value2">{!Relat_rio_Auditoria__c.Auditoria__r.Empresa_Auditada__r.CNPJ__c}</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="linha">
+                        <span class="campo">Endereço:</span> <span class="value2">
+                            <apex:outputText value="{!Relat_rio_Auditoria__c.Auditoria__r.Empresa_Auditada__r.billingStreet}, {!Relat_rio_Auditoria__c.Auditoria__r.Empresa_Auditada__r.billingCity}, {!Relat_rio_Auditoria__c.Auditoria__r.Empresa_Auditada__r.billingState} {!Relat_rio_Auditoria__c.Auditoria__r.Empresa_Auditada__r.billingPostalCode}, {!Relat_rio_Auditoria__c.Auditoria__r.Empresa_Auditada__r.billingCountry}" />
+                        </span>
+                    </td>
+                </tr>
+            </div></div>
+
+            <div><div >
+                <!-- OBJETIVO, ESCCOPO E DATA DA AUDITORIA -->
+                <tr>
+                    <td colspan="2">
+                        <h6 class="titulo" style="color: #ffff ;">Objetivo, Escopo e Data da Auditoria </h6>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="linha">
+                        <span class="value">{!Relat_rio_Auditoria__c.Objetivo_Escopo_e_Data_da_Auditoria__c}</span>
+                    </td>
+                </tr>
+            </div></div>
+
+            <div><div >
+                <!-- CARACTERISTICAS DA EMPRESA AUDITADA -->
+                <tr>
+                    <td colspan="2">
+                        <h6 class="titulo" style="color: #ffff ;">CARACTERISTICAS DA EMPRESA AUDITADA </h6>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="linha">
+                        <span class="value">{!Relat_rio_Auditoria__c.Caracteristicas_da_Empresa_Auditada__c}</span>
+                    </td>
+                </tr>
+            </div></div>
+
+
+
+            <div><div >
+
+
+                <!-- TRILHA DA AUDITORIA -->
+
+                <tr>
+                    <td colspan="2">
+                        <h6 class="titulo" style="color: #ffff ;">Trilha da Auditoria </h6>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="linha">
+                        <span class="value">{!Relat_rio_Auditoria__c.Trilha_da_Auditoria__c}</span>
+                    </td>
+                </tr>
+            </div></div>
+            <div><div >
+
+                <!-- Descrição das não conformidade -->
+                <tr>
+                    <td colspan="2">
+                        <h6 class="titulo" style="color: #ffff ;">Descrição das não conformidade</h6>
+                    </td>
+                </tr>
+
+                 <tr>
+                     <td colspan="2" class="linha3" style="padding-left: 15px;">
+                     
+                  
+               
+                        <apex:repeat var="a" value="{!Relat_rio_Auditoria__c.N_o_Conformidade__r}"> 
+                                  <apex:variable value="{!a.N_o_conformidade__c}" var="myString" />
+                                <apex:variable value="{!LEFT(myString, FIND('-', myString) - 1)}" var="mySubstring" />
+                                    *<span class="value"> <apex:outputText value="{!mySubstring}" />-</span><span class="value">{!a.Descricao__c};</span>
+                                                          </apex:repeat>
+                    </td>
+                </tr>
+            </div></div>
+
+            <div><div >
+
+                <!-- OBSERVAÇÕES A SEREM CONSIDERADAS -->
+
+                <tr>
+                    <td colspan="2">
+                        <h6 class="titulo" style="color: #ffff ;">Observações a Serem Consideradas</h6>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="linha">
+                        <span class="value">{!Relat_rio_Auditoria__c.Observa_es_a_Serem_Consideradas__c}</span>
+                    </td>
+                </tr>
+            </div></div>
+
+
+
+
+            <!-- CONCLUSÃO -->
+            <div><div class="bloco">
+                <tr>
+                    <td colspan="2">
+                        <h6 class="titulo" style="color: #ffff ;">Conclusões</h6>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="linha">
+                    
+                        <span class="value">{!Relat_rio_Auditoria__c.Conclus_es__c}</span>
+                    </td>
+                </tr>
+
+            </div></div>
+
+
+
+
+        </table>
+
+     <table style="margin: 20px  0; width:100%;" class="contaner-ass">   
+                    <td style="border:none; text-align:center; width:50%;" >
+                        <div style="padding:0; margin:0; text-align:center;">
+                            <div  style="padding:0; margin: 0 0 -20px 0; text-align:center;"> 
+                                <apex:image style="padding:0; margin:0 auto -15px ; text-align:center;" value="https://hospcom--c.na170.content.force.com/servlet/servlet.ImageServer?id=0156e00000BgFbi&oid=00Di0000000JVhH&lastMod=1672836269000" width="90%" height="120px"/>
+                            </div>     
+                            <div  style="padding:0; margin:  0px 15px; text-align:center; border-top: 1px solid #0c3557;" > 
+                               
+                            </div>     
+                            <div class="assinatura" style="padding:0; margin:0;">
+                                <p style="padding:0; margin:0 auto;">
+                                    <div class="underline" style="padding:0; margin:0 auto;"></div><br/>
+                                        Daniel Alencar<br/>
+                                        representante da gerência
+                                </p>
+                            </div>
+                        </div>                                      
+                    </td>
+                    
+                    <td style="border:none; text-align:center; width:50%;" >
+                        <div style="padding:0; margin:0; text-align:center;">
+                            <div  style="padding:0; margin: 0 0 -20px 0; text-align:center;" > 
+                                <apex:image style="padding:0; margin:0 auto -15px ; text-align:center;" value="{!Relat_rio_Auditoria__c.Auditoria__r.Responsavel__r.assinatura__c}" width="90%" height="120px"/>
+                            </div>      
+                            
+                            <div  style="padding:0; margin:  0px 15px; text-align:center; border-top: 1px solid #0c3557;" > 
+                               
+                            </div>     
+                            
+                            <div class="assinatura" style="padding:0; margin:0; ">
+                                <p style="padding:0; margin:0 auto;">
+                                    <div class="underline" style="padding:0; margin:0 auto;"></div><br/>
+                                        {!Relat_rio_Auditoria__c.Auditoria__r.Responsavel__r.name}<br/>
+                                        Auditor
+                                </p>
+                            </div>
+                        </div>                                      
+                    </td>
+                </table>
+
+    </apex:pageBlock>
+</body>
+</apex:page>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Funcao</fullName>
+    <active>false</active>
+    <errorConditionFormula>Evento__r.gerente_de_linha__c != NULL &amp;&amp;  TEXT(Fun_o__c) == NULL</errorConditionFormula>
+    <errorDisplayField>Fun_o__c</errorDisplayField>
+    <errorMessage>Campo obrigatório</errorMessage>
+</ValidationRule>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Demonstracao__c</entityName>
+    <fieldName>Status__c</fieldName>
+    <masterLabel>Demonstrações</masterLabel>
+    <pathAssistantSteps>
+        <fieldNames>Data_prevista__c</fieldNames>
+        <fieldNames>Tempo_de_demonstracao__c</fieldNames>
+        <fieldNames>Data_de_termino__c</fieldNames>
+        <info>&lt;p&gt;Tudo OK para início da demo. Aguardandoa data agendada para o entrega dos ativos e aplicação da demonstração em si.&lt;/p&gt;</info>
+        <picklistValueName>Agendado</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;Demonstração apta a gerar pedido de demo para para logística, e PDF do contrato /checklists.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Números de série serão informados automaticamente no momento da integração do pedido.&lt;/p&gt;</info>
+        <picklistValueName>Aprovado</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;Parece que a demo não vingou...&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Você pode voltar ela para rascunho e recomeçar o processo.&lt;/p&gt;</info>
+        <picklistValueName>Cancelado</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;Aguardando aprovação/rejeição do responsável pelas demonstrações.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Se for você quem aprova, esse é o momento! senão, aguarde...&lt;/p&gt;</info>
+        <picklistValueName>Em aprovação</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Data_prevista__c</fieldNames>
+        <fieldNames>Tempo_de_demonstracao__c</fieldNames>
+        <fieldNames>Data_de_termino__c</fieldNames>
+        <info>&lt;p&gt;Demonstração em execução no cliente. Instruções e acompanhamentos presenciais podem ocorrer no meio tempo. Aguardando período de término da demonstração.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Fique atento aos ícones em seu kanban, prazos e notificações de alerta, para dar início ao recolhimento dos equipamentos na data correta.&lt;/p&gt;</info>
+        <picklistValueName>Em comodato</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;&lt;img src=&quot;https://hospcom.file.force.com/servlet/rtaImage?eid=1CF5A000000g6En&amp;amp;feoid=Info&amp;amp;refid=0EM5A000000zR8B&quot;&gt;&lt;/img&gt;&lt;/p&gt;</info>
+        <picklistValueName>Finalizado</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;Preenchimento das informações básicas da demo.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Na guia &amp;quot;Ativos&amp;quot;, analise as observações e agenda de cada equipamento/acessório, antes de incluí-lo na demonstração.&lt;/p&gt;</info>
+        <picklistValueName>Rascunho</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;Ação deve ser tomada. Avalie se é aplicável a edição das informações da demo, para posterior reenvio para aprovação, ou o cancelamento da mesma.&lt;/p&gt;</info>
+        <picklistValueName>Reprovado</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Checklist_assinado__c</fieldNames>
+        <fieldNames>Nota_de_retorno_assinada__c</fieldNames>
+        <fieldNames>Avaliacao_da_demo_assinada__c</fieldNames>
+        <info>&lt;p&gt;Recolhimento dos equipamentos no cliente e verificação dos mesmos pela equipe de serviços da Hospcom. Equipamentos em geral devem possuir uma Ordem de trabalho associada.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Preenchimento, assinatura e anexo no sistema de todos documentos pendentes.&lt;/p&gt;</info>
+        <picklistValueName>Retorno da demo</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>__MASTER__</recordTypeName>
+</PathAssistant>

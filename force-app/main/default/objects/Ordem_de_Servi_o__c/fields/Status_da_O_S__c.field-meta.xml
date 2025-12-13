@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_da_O_S__c</fullName>
+    <externalId>false</externalId>
+    <label>Status da O.S</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>AGUARDANDO APROVAÇÃO</fullName>
+                <default>false</default>
+                <label>AGUARDANDO APROVAÇÃO</label>
+            </value>
+            <value>
+                <fullName>AGUARDANDO MANUTENÇÃO</fullName>
+                <default>false</default>
+                <label>AGUARDANDO MANUTENÇÃO</label>
+            </value>
+            <value>
+                <fullName>AGUARDANDO ORÇAMENTO</fullName>
+                <default>false</default>
+                <label>AGUARDANDO ORÇAMENTO</label>
+            </value>
+            <value>
+                <fullName>AGUARDANDO PEÇA</fullName>
+                <default>false</default>
+                <label>AGUARDANDO PEÇA</label>
+            </value>
+            <value>
+                <fullName>EM ANDAMENTO</fullName>
+                <default>false</default>
+                <label>EM ANDAMENTO</label>
+            </value>
+            <value>
+                <fullName>EM MANUTENÇÃO</fullName>
+                <default>false</default>
+                <label>EM MANUTENÇÃO</label>
+            </value>
+            <value>
+                <fullName>FECHADA E CONCLUÍDA</fullName>
+                <default>false</default>
+                <label>FECHADA E CONCLUÍDA</label>
+            </value>
+            <value>
+                <fullName>CANCELADA</fullName>
+                <default>false</default>
+                <label>CANCELADA</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

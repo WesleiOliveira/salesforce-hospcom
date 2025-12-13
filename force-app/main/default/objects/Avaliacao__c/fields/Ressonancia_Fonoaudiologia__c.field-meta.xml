@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ressonancia_Fonoaudiologia__c</fullName>
+    <externalId>false</externalId>
+    <label>Ressonância</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Adequada</fullName>
+                <default>false</default>
+                <label>Adequada</label>
+            </value>
+            <value>
+                <fullName>Hipernasal</fullName>
+                <default>false</default>
+                <label>Hipernasal</label>
+            </value>
+            <value>
+                <fullName>Hiponasal</fullName>
+                <default>false</default>
+                <label>Hiponasal</label>
+            </value>
+            <value>
+                <fullName>Sem possibilidades de avaliação</fullName>
+                <default>false</default>
+                <label>Sem possibilidades de avaliação</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

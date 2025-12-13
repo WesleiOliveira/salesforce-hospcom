@@ -1,0 +1,223 @@
+<apex:page renderAs="pdf" standardController="Aditivo_do_Contrato_de_Compra__c" standardStylesheets="false" cache="false" showHeader="false" sidebar="false" applyHtmlTag="true" applyBodyTag="false">
+    <head>
+        <style type="text/css" media="print">
+            
+            /* pdf */
+
+            @page{
+                size:A4;
+                background: url({!$Resource.TimbradoHospcom});
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(paginacao);}
+            }
+            .pagina:before{content:counter(page);}
+            .paginas:before{content:counter(pages);}
+            
+            /* paginação */
+            .paginacao{
+                height:120px;
+                position:running(paginacao);
+            }.paginacao .valor{
+                position: absolute;
+                top: 76px;
+                left: 300px;
+                text-align:center;
+                background-color:white;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:600;
+                color:#697f9b;
+            }
+            
+            /* documento */
+            .documento{
+                padding:0px;
+                margin:0px;
+                font-family:arial, verdana, sans-serif;
+            }.bloco{
+                page-break-inside:avoid;
+            }.linha{
+                white-space: nowrap;
+            }
+            
+            /* capa */
+            .capa .titulo{
+
+                width:100%;
+                text-align:center;
+                text-transform:uppercase;
+                font-weight:bold;
+                font-size:20px;
+                white-space:pre;
+            }.capa .numero{
+                margin-top:40px;
+                width:100%;
+                text-align:right;
+                font-size:14px;
+            }.capa .rotulo{
+                margin-top:35px;
+                font-size:15px;
+            }.capa .valor{
+                margin-top:5px;
+                margin-left:20px;
+                font-size:17px;
+                font-weight:bold;
+            }.capa .nota{
+                margin-top:5px;
+                margin-left:20px;
+                font-size:14px;
+            }
+            
+            /* conteudo */
+            .conteudo{
+                page-break-before:always;
+            }.conteudo .titulo{
+                font-size:14px;
+                font-weight:bold;
+                line-height:120%;
+            }.conteudo .paragrafo{
+                font-size:13px;
+                text-align:justify;
+                line-height:120%;
+                text-justify:inter-word;
+                text-indent:50px;
+            }.conteudo .obsimgs{
+                text-align:right;
+                font-size:11px;
+                font-weight:bold;
+                font-style:italic;
+            }.conteudo .assinatura{
+                width:100%;
+            }.conteudo .assinatura td{
+                width:50%;
+                font-size:13px;
+                line-height:130%;
+                vertical-align:top;
+            }.conteudo .nota{
+                font-size:13px;
+                text-align:justify;
+                line-height:120%;
+                font-style:italic;
+            }
+            
+            /* listagem */
+            .listagem{ 
+                width:100%;
+            }.listagem table{ 
+                width:100%;
+                border-collapse:collapse;
+            }.listagem td{ 
+                padding:2px 5px;
+                line-height:120%;
+            }.listagem .pre-cabecalho{
+                height:10px;
+            }.listagem .cabecalho td{
+                font-size:12px;
+                font-weight:bold;
+                background-color:#e2e3e3;
+                white-space: nowrap;
+                border-color:#cacecf;
+                border-style:solid;
+                border-width:1px 0px 1px 0px;
+            }.listagem .item-dados .imagem{
+                vertical-align:middle;
+            }.listagem .item-dados.acessorio .imagem{
+                text-align:right;
+            }.listagem .item-dados.equipamento img{
+                width: 80px;
+                height: 80px; 
+            }.listagem .item-dados.acessorio img{
+                width: 55px;
+                height: 55px; 
+            }.listagem .item-dados .valor{
+                border-color:#eef2f4;
+                border-style:solid;
+                border-width:1px 0px 0px 0px;
+            }.listagem .item-dados td{
+                font-size:10px;
+                vertical-align:top;
+            }.listagem .item-descr td{
+                font-size:10px;
+                text-align:justify;
+                vertical-align:top;
+                text-justify:inter-word;
+                border-color:#eef2f4;
+                border-style:solid;
+                border-width:0px 0px 1px 0px;
+            }.listagem .subtotal{
+                font-weight: bold;
+                font-size:10px;
+                white-space: nowrap;
+            }.listagem .subtotal .valor{
+                border-color:#eef2f4;
+                border-style:solid;
+                border-width:0px 0px 1px 0px;
+            }
+        </style>
+    </head>
+    
+    <body class="documento" style="font-size:13px;">
+        
+        <!-- paginacao -->
+        <div class="paginacao">
+            <div class="valor" style="margin: -11px -10px">Aditivo ao Contrato de&nbsp;{!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Tipo_de_contrato__c}: {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Name} - Página <span class="pagina"/> de <span class="paginas"/></div>
+        </div>
+        
+        
+        <!-- conteudo -->
+        <div class="conteudo">
+        <br/>
+        <br/>
+        <br/>
+                    <div class="titulo" style="text-align:center !important"> {!Aditivo_do_Contrato_de_Compra__c.Name}º TERMO ADITIVO AO CONTRATO DE&nbsp;<apex:outputText style="text-transform:uppercase;" value="{!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Tipo_de_contrato__c}"/> DE N.º {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Name}</div>
+        <br/>
+        <br/>
+
+                
+                    <div style="text-align:justify">Pelo presente instrumento particular de Termo Aditivo ao Contrato de {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Tipo_de_contrato__c} de n. {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Name}, celebrado na data 21/03/2019 entre as partes abaixo denominadas:</div> <br/>
+                    <div style="text-align:justify">
+                    <apex:outputText rendered="{!IF(Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Comprador__r.CNPJ__c != null, true, false)}"> <b>1. {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Comprador__r.Raz_o_Social__c}</b>, pessoa jurídica de direito <apex:outputText value="{!IF(Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Comprador__r.OwnerShip == 'PUBLICO', ' público', ' privado')}"/>, inscrita no CNPJ sob o n.º {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Comprador__r.CNPJ__c}, estabelecida na 
+                    {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Comprador__r.BillingStreet}, {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Comprador__r.BillingCity} - {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Comprador__r.BillingState}, CEP {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Comprador__r.BillingPostalCode}, doravante denominada <b>CONTRATANTE</b> e,                       
+                     </apex:outputText>
+                    <apex:outputText rendered="{!IF(Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Comprador__r.CPF__pc != null, true, false)}"> <b>1. {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Comprador__r.FirstName} !Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Comprador__r.LastName}</b>, pessoa física inscrita no CPF sob o Nº. <apex:outputText value="{!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Comprador__r.CPF__pc}"/>, residente à 
+                    {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Comprador__r.BillingStreet}, {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Comprador__r.BillingCity} - {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Comprador__r.BillingState}, CEP {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Comprador__r.BillingPostalCode}, doravante denominada <b>CONTRATANTE</b> e,                       
+                     </apex:outputText>
+                    </div><br/>
+                    <div style="text-align:justify">
+                    <apex:outputText rendered="{!IF(Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Fornecedor__r.CNPJ__c != null, true, false)}"> <b>2. {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Fornecedor__r.Raz_o_Social__c}</b>, pessoa jurídica de direito <apex:outputText value="{!IF(Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Fornecedor__r.OwnerShip == 'PUBLICO', ' público', ' privado')}"/>, inscrita no CNPJ sob o n.º {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Fornecedor__r.CNPJ__c}, estabelecida na 
+                    {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Fornecedor__r.BillingStreet}, {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Fornecedor__r.BillingCity} - {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Fornecedor__r.BillingState}, CEP {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Fornecedor__r.BillingPostalCode}, doravante denominada <b>CONTRATADA</b>.                       
+                     </apex:outputText>
+                    <apex:outputText rendered="{!IF(Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Fornecedor__r.CPF__pc != null, true, false)}"> <b>2. {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Fornecedor__r.FirstName} !Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Fornecedor__r.LastName}</b>, pessoa física inscrita no CPF sob o Nº. <apex:outputText value="{!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Fornecedor__r.CPF__pc}"/>, residente à 
+                    {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Fornecedor__r.BillingStreet}, {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Fornecedor__r.BillingCity} - {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Fornecedor__r.BillingState}, CEP {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Fornecedor__r.BillingPostalCode}, doravante denominada <b>CONTRATADA</b>.                       
+                     </apex:outputText>
+                    </div><br/><br/>
+                    <div style="text-align:justify">Têm por si justo e contratado, na melhor forma de direito, o presente Termo Aditivo ao de Contrato de {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Tipo_de_contrato__c} de n° {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Name}, segundo as condições adiante especificadas, que mutuamente aceitam e livremente se comprometem a cumprir e respeitar por si e seus sucessores a qualquer título, nos termos que seguem:</div><br/><br/>
+                    <div style="text-align:justify"><b><u>CLAUSULA PRIMEIRA - DO PRAZO/RENOVAÇÃO</u></b></div><br/>
+                    <div style="text-align:justify"><b>1.1.</b> Fica prorrogado o prazo de vigência descrito no item I do contrato originário, pelo período de mais&nbsp;<apex:outputField value="{!Aditivo_do_Contrato_de_Compra__c.qtdMeses__c}"/> meses contados da data de&nbsp;<apex:outputField value="{!Aditivo_do_Contrato_de_Compra__c.Inicio_da_vigencia__c}"/>, ratificados através da assinatura deste instrumento.</div><br/><br/>
+                    <div style="text-align:justify"><b><u>CLAUSULA SEGUNDA - DO VALOR/REAJUSTE DO CONTRATO</u></b></div><br/>
+                    <div style="text-align:justify"><b>2.1.</b> Mediante o disposto no item IV do contrato originário e diante da previsão de atualização monetária anual pelo índice do IGPM, o valor da presente&nbsp;<apex:outputText style="text-transform:lowercase" value="{!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Tipo_de_contrato__c}"/> passa a ser de&nbsp;<apex:outputField value="{!Aditivo_do_Contrato_de_Compra__c.Valor_adicionado_ao_contrato__c}"/> a partir da data estipulada no item 1.1.</div><br/><br/>
+                    <div style="text-align:justify"><b><u>CLAUSULA TERCEIRA - DA RATIFICAÇÃO DAS CLÁUSULAS</u></b></div><br/>
+                    <div style="text-align:justify"><b>3.1</b> Ficam ratificadas todas as demais cláusulas e condições estabelecidas no Contrato n° {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Name} que não colidirem com o presente termo aditivo.</div><br/><br/>
+                    <div style="text-align:justify">Estando as partes assim, ajustadas e acordadas, assinam o presente Termo Aditivo em duas vias de igual teor e forma, acompanhadas de 2 (duas) testemunhas, para que o presente termo produza seus efeitos jurídicos.</div><br/>
+
+                <br/>
+               
+                
+                <div style="text-align: right">Goiânia, {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.hoje__c}.</div>       
+                <br/><br/><br/><br/><br/>
+                <div style="text-align: center">__________________________________________________________</div>       
+                <div style="text-align: center"><b>{!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Comprador__r.Raz_o_Social__c}</b></div>       
+                <div style="text-align: center"><b>CNPJ sob o N°. {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Comprador__r.CNPJ__c}</b></div>
+                <br/><br/><br/><br/><br/>
+                <div style="text-align: center">__________________________________________________________</div>       
+                <div style="text-align: center"><b>{!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Fornecedor__r.Raz_o_Social__c}</b></div>       
+                <div style="text-align: center"><b>CNPJ sob o N°. {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Fornecedor__r.CNPJ__c}</b></div>
+                
+                <br/><br/><br/><br/><br/>
+                <div><b>Testemunhas:</b></div><br/>       
+                <div style="margin-left:30px"><b>1. Bruna Oliveira Tavares</b></div>       
+                <div style="margin-left:30px"><b>2. {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Testemunha__r.FirstName} {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Testemunha__r.LastName}</b></div><br/><br/>       
+                <div style="text-align:justify">Esta é a última página do {!Aditivo_do_Contrato_de_Compra__c.Name}º Termo Aditivo ao Contrato de {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Tipo_de_contrato__c} de n.º {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Name} firmado entre a HOSPCOM EQUIPAMENTOS HOSPITALARES e a&nbsp;<apex:outputText rendered="{!IF(Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Fornecedor__r.CPF__pc != null, true, false)}"> {!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Fornecedor__r.FirstName} !Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Fornecedor__r.LastName}</apex:outputText> <apex:outputText rendered="{!IF(Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Fornecedor__r.CNPJ__c != null, true, false)}">{!Aditivo_do_Contrato_de_Compra__c.Contrato_de_compra__r.Fornecedor__r.Raz_o_Social__c}</apex:outputText>. </div>     
+         </div>  
+    </body>
+</apex:page>

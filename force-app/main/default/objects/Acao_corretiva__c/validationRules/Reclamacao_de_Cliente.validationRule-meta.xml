@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reclamacao_de_Cliente</fullName>
+    <active>true</active>
+    <errorConditionFormula>(TEXT(Origem__c)  = &quot;Reclamação de Cliente&quot; &amp;&amp;
+
+(Item_da_Norma__c != &quot;&quot; ||
+ Fornecedor__c != &quot;&quot; ||
+NF2__c != &quot;&quot; ||
+Quant2__c != &quot;&quot; ||
+Detalhes_outros__c != &quot;&quot; || 
+Codigo__c != &quot;&quot; ||
+Lote__c != &quot;&quot; ||
+NF__c != &quot;&quot;||
+Quant__c != &quot;&quot;))</errorConditionFormula>
+    <errorMessage>Preencha devidamente os campos da origem &quot;Reclamação de Cliente&quot;  e certifique-se  de não ter preenchido o campo de outra origem.</errorMessage>
+</ValidationRule>

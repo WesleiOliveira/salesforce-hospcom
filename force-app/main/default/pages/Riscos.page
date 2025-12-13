@@ -1,0 +1,56 @@
+<apex:page standardController="Prontuario__c" showHeader="false" sidebar="false" docType="HTML-5.0" standardStylesheets="false" >
+<div>
+<apex:image title="Enfermagem" url="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A00000BNDJq&oid=00Di0000000JVhH&lastMod=1618320878000"
+width="40" height="40" alt="Enfermagem" rendered="{!IF(CONTAINS(Prontuario__c.Servicos1__c,'Enfermagem'),true,false)}"/>
+<apex:image title="Fisioterapia" url="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A00000BNDTl&oid=00Di0000000JVhH&lastMod=1618334054000" 
+width="40" height="40" alt="Fisioterapia" rendered="{!IF(CONTAINS(Prontuario__c.Servicos1__c,'Fisioterapia'),true,false)}"/>
+<apex:image title="Fonoaudiologia" url="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A00000BNDTv&oid=00Di0000000JVhH&lastMod=1618334124000" 
+width="40" height="40" alt="Fonoaudiologia" rendered="{!IF(CONTAINS(Prontuario__c.Servicos1__c,'Fonoaudiologia'),true,false)}"/>
+<apex:image title="Médico" url="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A00000BNDU0&oid=00Di0000000JVhH&lastMod=1618334137000" 
+width="40" height="40" alt="Médico" rendered="{!IF(CONTAINS(Prontuario__c.Servicos1__c,'Médico'),true,false)}"/>
+<apex:image title="Psicologia" url="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A00000BNDU5&oid=00Di0000000JVhH&lastMod=1618334148000" 
+width="40" height="40" alt="Psicologia" rendered="{!IF(CONTAINS(Prontuario__c.Servicos1__c,'Psicologia'),true,false)}"/>
+<apex:image title="Terapia Ocupacional" url="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A00000BNDVN&oid=00Di0000000JVhH&lastMod=1618335071000" 
+width="40" height="40" alt="Terapia Ocupacional" rendered="{!IF(CONTAINS(Prontuario__c.Servicos1__c,'Terapia Ocupacional'),true,false)}"/>
+<div style="float:right">
+<apex:image rendered="{!IF(CONTAINS(Prontuario__c.Riscos__c, 'Precaução Por Contato'),true,false)}" url="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A00000BNDWQ&oid=00Di0000000JVhH&lastMod=1618336529000"
+width="40" height="40" style="margin-right:3px;" alt="Precaução Por Contato" title="Precaução Por Contato" onclick="alert(' \f Precaução Por Contato
+\n- Higienizar as mãos antes e após contato com paciente;
+\n- Utilizar Equipamentos de Proteção Individual (Capotes e Luvas);
+\n- Paramentar e Desparamentar de forma segura.')" />
+<apex:image rendered="{!IF(CONTAINS(Prontuario__c.Riscos__c, 'TVP – Trombose Venosa Profunda'),true,false)}" url="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A00000BNDWV&oid=00Di0000000JVhH&lastMod=1618336548000"
+width="40" height="40" style="margin-right:3px;" alt="TVP – Trombose Venosa Profunda" title="Trombose Venosa Profunda" onclick="alert('\f Risco de Trombose Venosa Profunda:
+\n- Utilizar meias compressivas;
+\n- Mobilizar membros inferiores;
+\n- Posicionar membros inferiores para favorecer retorno venoso adequado.')"/>
+<apex:image rendered="{!IF(CONTAINS(Prontuario__c.Riscos__c, 'Broncoaspiração'),true,false)}" url="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A00000BNDWB&oid=00Di0000000JVhH&lastMod=1618336499000"
+width="40" height="40" style="margin-right:3px;" alt="Broncoaspiração" title="Broncoaspiração" onclick="alert(' \f Risco de Broncoaspiração:
+\n- Ofertar dieta na postura sentada;
+\n- Manter cabeceira elevada;
+\n- Horizontalizar paciente para procedimento, apenas após 30 minutos de oferta da dieta.')"/>
+<apex:image rendered="{!IF(CONTAINS(Prontuario__c.Riscos__c, 'LPP – Lesão Por Pressão'),true,false)}" url="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A00000BNDWG&oid=00Di0000000JVhH&lastMod=1618336510000"
+width="40" height="40" style="margin-right:3px;" alt="LPP — Lesão Por Pressão" title="Lesão Por Pressão" onclick="alert('\f Risco de Lesão Por Pressão:
+\n- Mudar de decúbito de 2 em 2 horas;
+\n- Manter lençóis esticados (sem dobras);
+\n- Utilizar colchões adequados (piramidal ou pneumático)
+\n- Manter paciente sempre limpo e seco;')"/>
+<apex:image rendered="{!IF(CONTAINS(Prontuario__c.Riscos__c, 'Queda'),true,false)}" url="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A00000BNDWM&oid=00Di0000000JVhH&lastMod=1618336538000"
+width="40" height="40" style="margin-right:3px;" alt="Queda" title="Queda" onclick="alert('\f Risco de Queda:
+\n- Manter grades da cama elevadas;
+\n- Evitar tapetes no quarto;
+\n- Manter cadeira de rodas e cama travadas;
+\n- Realizar banho sentado;
+\n- Não deixar paciente sozinho;')"/>
+<apex:image rendered="{!IF(CONTAINS(Prontuario__c.Riscos__c, 'Alergia Medicamentosa'),true,false)}" url="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A00000BNDW6&oid=00Di0000000JVhH&lastMod=1618336487000"
+width="40" height="40" style="margin-right:3px;" alt="Alergia Medicamentosa" title="Alergia Medicamentosa" onclick="alert('\f Alergia Medicamentosa:
+\n- Prescrever Medicação não alérgicas ao paciente;
+\n- Sinalizar quais as medicações que causam alergia ao paciente;
+\n- Checar medicação antes de administrar;')"/>
+<apex:image rendered="{!IF(CONTAINS(Prontuario__c.Riscos__c, 'Precaução Por Aerossóis'),true,false)}" url="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A00000BNDWL&oid=00Di0000000JVhH&lastMod=1618336520000"
+width="40" height="40" style="margin-right:3px;" alt="Precaução Por Aerossóis" title="Precaução Por Aerossóis" onclick="alert('\f Precaução Por Aerossóis:
+\n- Higienizar as mãos antes e após contato com paciente;
+\n- Utilizar Equipamentos de Proteção Individual (Capotes, Luvas e Máscaras);
+\n- Paramentar e Desparamentar de forma segura;')"/>
+</div>
+</div>
+</apex:page>

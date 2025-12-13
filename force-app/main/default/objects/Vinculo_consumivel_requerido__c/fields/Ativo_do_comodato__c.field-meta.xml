@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ativo_do_comodato__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Ativo do comodato</label>
+    <referenceTo>Produto_da_demonstracao__c</referenceTo>
+    <relationshipLabel>Vinculo consumíveis requeridos</relationshipLabel>
+    <relationshipName>Vinculo_consum_veis_requeridos</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

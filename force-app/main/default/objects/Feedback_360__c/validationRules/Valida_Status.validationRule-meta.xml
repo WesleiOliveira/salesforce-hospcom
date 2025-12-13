@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valida_Status</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ ISNEW(),
+ NOT(ISPICKVAL(Status__c, &apos;Aberto&apos;))
+)</errorConditionFormula>
+    <errorDisplayField>Status__c</errorDisplayField>
+    <errorMessage>O Status deve ser Aberto.</errorMessage>
+</ValidationRule>

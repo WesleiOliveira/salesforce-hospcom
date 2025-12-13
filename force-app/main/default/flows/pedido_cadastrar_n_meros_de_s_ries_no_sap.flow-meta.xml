@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>A_o_1</name>
+        <label>Ação 1</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>ativos.asssets</actionName>
+        <actionType>externalService</actionType>
+        <faultConnector>
+            <targetReference>error</targetReference>
+        </faultConnector>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>pedidoId</name>
+            <value>
+                <elementReference>$Record.OrderNumber</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>ativos.asssets</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>65.0</apiVersion>
+    <customErrors>
+        <name>error</name>
+        <label>error</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <customErrorMessages>
+            <errorMessage>{!error} erro ao criar no sap os numeros de series</errorMessage>
+            <isFieldError>false</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <description>pedido - cadastrar números de séries no sap</description>
+    <environments>Default</environments>
+    <interviewLabel>pedido - cadastrar números de séries no sap {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>pedido - cadastrar números de séries no sap</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Status</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Ativo</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Natureza_de_Opera_o__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>REMESSA DE LOCAÇÃO</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Faturamento_Feito__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>001i00000085QYbAAM</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>AccountId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>001U400000LvWNnIAN</stringValue>
+            </value>
+        </filters>
+        <object>Order</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <scheduledPaths>
+            <name>criar_assets_sap</name>
+            <connector>
+                <targetReference>A_o_1</targetReference>
+            </connector>
+            <label>criar assets sap</label>
+            <offsetNumber>0</offsetNumber>
+            <offsetUnit>Minutes</offsetUnit>
+            <timeSource>RecordTriggerEvent</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Obsolete</status>
+</Flow>

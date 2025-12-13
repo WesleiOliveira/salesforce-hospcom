@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <customErrors>
+        <name>Erro</name>
+        <label>Erro</label>
+        <locationX>50</locationX>
+        <locationY>539</locationY>
+        <customErrorMessages>
+            <errorMessage>Foi encontrada uma entrada nesse estoque já existente para o produto</errorMessage>
+            <isFieldError>false</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <decisions>
+        <name>Se_encontrar</name>
+        <label>Se encontrar</label>
+        <locationX>182</locationX>
+        <locationY>431</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Encontrado</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>entrada_de_estoque</leftValueReference>
+                <operator>IsEmpty</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Erro</targetReference>
+            </connector>
+            <label>Encontrado</label>
+        </rules>
+    </decisions>
+    <description>fluxo para evitar duplicidade no estoque</description>
+    <environments>Default</environments>
+    <interviewLabel>Verifica Duplicidade {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Entrada de Estoque — Verifica Duplicidade</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>entrada_de_estoque</name>
+        <label>entrada de estoque</label>
+        <locationX>182</locationX>
+        <locationY>323</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Se_encontrar</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>CodigoEstoque__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.CodigoEstoque__c</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Produto__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Produto__c</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Id</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Entrada_de_Estoque__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>entrada_de_estoque</targetReference>
+        </connector>
+        <object>Entrada_de_Estoque__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

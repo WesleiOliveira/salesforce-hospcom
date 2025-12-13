@@ -1,0 +1,721 @@
+<apex:page controller="MktFluxo" showHeader="false" showChat="false" standardStylesheets="false"> 
+    <html>
+        <head>
+            <title>Catálogo de Mídias</title>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+            <link href="{!URLFOR($Resource.bootstrap3iso, 'css/bootstrap.min.css')}" rel="stylesheet"/>
+            <link rel="stylesheet" href="{!$Resource.breadcrumb}" /> 
+            <link rel="stylesheet" href="{!$Resource.videojs_css}" />
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"> </script>
+            <script src="{!URLFOR($Resource.bootstrap3iso, 'js/bootstrap.min.js')}"></script>
+            <script src="{!$Resource.colsheight}"> </script>
+            <script src="{!$Resource.videojs_js}"> </script>
+
+            <style>
+                .CabPrinc{
+                    background-color:#f7f9fb;
+                    border-top: 1px solid #d8dde6;
+                    border-bottom: 1px solid #d8dde6;
+                    padding:4px;
+                    text-align:center;
+                    font-size:24px;
+                    font-weight:bold;
+                    color:#3e3e3c;
+                }
+                .CabInterno{
+                    background-color:#fdfdfd;
+                    border-top: 1px solid #d8dde6;
+                    border-bottom: 1px solid #d8dde6;
+                    text-align:center;
+                    font-size:22px;
+                    font-weight:bold;
+                    color:#3e3e3c;
+                }
+                .CabBannerTab{
+                    width:100%;
+                    border-top: 1px solid #d8dde6;
+                    border-bottom: 1px solid #d8dde6;
+                }
+                .CabBannerCel{
+                    padding:4px!important;
+                    background-color:#fdfdfd;
+                    text-align:center;
+                    font-size:32px;
+                    font-weight:bold;
+                    color:#3e3e3c;
+                }
+                .BarNav{
+                    margin-top:-1px;
+                }
+                .ListItemNome{
+                    text-align:center;
+                    font-weight:bold;
+                    font-size:14px;
+                    color:black;
+                    margin-bottom:20px;
+                    padding-left:10px;
+                    padding-right:10px;
+                }
+                .ListItemDescr{
+                    text-align:center;
+                    font-size:12px;
+                    color:black;
+                    margin-bottom:10px;
+                    padding-left:10px;
+                    padding-right:10px;
+                }
+                .ListItemDescrCod{
+                    font-size:11px;
+                    font-weight:bold;
+                }
+                .ListItemDescrVal{
+                    font-size:14px;
+                    font-weight:bold;
+                    color:green;
+                }
+                .ListNavNome{
+                    text-align:center;
+                    font-size:60px;
+                    color:black;
+                    margin-bottom:10px;
+                    padding-left:10px;
+                    padding-right:10px;
+                }
+                .ListItemImg p{
+                    padding:none!important;
+                    border:none!important;
+                    margin:none!important;
+                }
+                .ListItemImg img{
+                    width:100%;
+                    max-width:100%;
+                }
+                .BannerImg img{
+                    width:200px;
+                    height:auto;
+                }
+                .ListMidiaImg img{
+                    width: 120px;
+                    height: auto;
+                }
+                .truncate {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                .tab-content {
+                    border-left: 1px solid #ddd;
+                    border-right: 1px solid #ddd;
+                    border-bottom: 1px solid #ddd;
+                    padding: 10px;
+                }
+                .btnAcao{
+                    padding-top:0px;
+                    padding-bottom:0px;
+                    padding-left:10px;
+                    padding-right:10px;
+                }
+                .linhaInvis{
+                    padding-top:0px!important;
+                    padding-bottom:0px!important;
+                    border-top:none!important;
+                }
+                .imgVisu{
+                    width:30px;
+                    height:30px;
+                    margin:5px!important;
+                }
+                .midiaNome{
+                    font-weight:bold;
+                }
+                #ele_div_modal_video_body > div:not(.vjs-fullscreen) > video{
+                    height:360px!important; 
+                    width:100%!important;
+                }
+                #ele_div_modal_video_body > div:not(.vjs-fullscreen){
+                    height:360px!important; 
+                    width:auto!important;
+                }
+            </style>
+
+            <script type="text/javascript">
+                var myvideojs       = null;
+                var link            = null;
+                var tipo            = null;
+                let timerId2        = null;
+                var ele_modal_pai   = null;
+                var ele_modal_filho = null;
+                var ele_pag_pai     = null;
+                var ele_pag_filho   = null;
+  
+
+                function openModal(){
+
+                    if(tipo == "Vídeo"){
+                        if(myvideojs != null)
+                            myvideojs.dispose();
+
+                        var ele_video_player = document.createElement('video');
+                        ele_video_player.setAttribute('id', 'ele_video_player');
+                        ele_video_player.setAttribute('class', 'video-js');
+                        ele_video_player.setAttribute('data-setup', '{ "controls": true, "autoplay": false, "preload": "false" }');
+                        $("#ele_div_modal_video_body").append(ele_video_player);
+
+                        var ele_source_player = document.createElement('source');
+                        ele_source_player.setAttribute('src', link);
+                        ele_source_player.setAttribute('id', 'ele_source_player');
+                        $("video[id^='ele_video_player']").append(ele_source_player);
+
+                        myvideojs = videojs("ele_video_player"); 
+                        $('#ele_div_modal_video').modal({
+                            keyboard: true
+                        })                    
+                        myvideojs.play();
+                    }
+                    else if(tipo == "Imagem"){
+                        var ele_img_viewer = document.createElement('div');
+                        ele_img_viewer.setAttribute('id', 'ele_img_viewer');
+                        ele_img_viewer.setAttribute('style', 'height:360px!important; background:url({!urlBase}/sfc/servlet.shepherd/version/download/'+link+') center; background-size: contain; background-repeat: no-repeat;');
+                        $("#ele_div_modal_imagem_body").append(ele_img_viewer);
+
+                        $('#ele_div_modal_imagem').modal({
+                            keyboard: true
+                        })
+                    }
+                    else if(tipo == "Extensão"){
+                        var ele_ext_viewer = document.createElement('div');
+                        ele_ext_viewer.setAttribute('id', 'ele_ext_viewer');
+                        ele_ext_viewer.setAttribute('style', 'width:100%;');
+                        $("#ele_div_modal_extensao_body").append(ele_ext_viewer);
+                        $("#ele_div_modal_extensao_body" ).load("{!urlBase}"+link);
+
+                        $('#ele_div_modal_extensao').modal({
+                            keyboard: true
+                        })
+                    }
+
+                    timerId2 = setInterval(ajusta_altura, 50); 
+                }
+
+                function ajusta_altura(){
+                    ele_pag_pai     = document.querySelector('.bootstrap-iso');
+                    ele_pag_filho   = document.querySelector('.container-fluid');
+
+                    if(tipo == "Vídeo"){
+                        ele_modal_pai   = document.querySelector('#ele_div_modal_video');
+                        ele_modal_filho = document.querySelector('#ele_div_modal_video .modal-dialog');
+                    }else if(tipo == "Imagem"){
+                        ele_modal_pai   = document.querySelector('#ele_div_modal_imagem');
+                        ele_modal_filho = document.querySelector('#ele_div_modal_imagem .modal-dialog');
+                    }else if(tipo == "Extensão"){
+                        ele_modal_pai   = document.querySelector('#ele_div_modal_extensao');
+                        ele_modal_filho = document.querySelector('#ele_div_modal_extensao .modal-dialog');
+                    }
+
+                    if((ele_modal_pai.offsetHeight != 0) && ((ele_modal_pai.offsetTop + ele_modal_filho.offsetHeight) > ele_pag_pai.offsetHeight)){
+                        ele_pag_pai.style.height = (ele_modal_pai.offsetTop + ele_modal_filho.offsetHeight)+'px';
+                        clearInterval(timerId2);
+                    }
+                }
+
+            </script>
+
+        </head>
+
+        <body id="corpo-pag" style="margin-top:0px; margin-bottom:0px;">
+            <div class="bootstrap-iso" style="margin-top:7px;">
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-xs-12 CabPrinc">
+                            Plataforma Marketing
+                        </div>
+                    </div>
+
+                    <!-- ========== caminho de navegação ========== -->
+
+                    <br />
+                    <apex:variable var="navegacaoCont" value="{!0}"/>
+                    <apex:variable var="navegacaoAtual" value="{!''}"/>
+                    <apex:variable var="navegacaoId" value="{!''}"/>
+                    <apex:variable var="navegacaoCapaImg" value="{!''}"/>
+                    <apex:variable var="navegacaoCapaNome" value="{!''}"/>
+                    <div class="row">
+                        <div class="col-xs-12 BarNav">
+                            <div class="btn-group btn-breadcrumb">
+                                <a Class="btn btn-md btn-default btn-info">Você está em </a>
+                                <apex:repeat value="{!navegacoes}" var="nav">
+
+                                    <apex:variable var="navegacaoCont" value="{!navegacaoCont+1}"/>
+                                    <apex:outputText rendered="{!IF(navegacaoCont == navegacaoQtd, true, false)}" >
+                                        <apex:variable var="navegacaoAtual" value="{!'btn-info'}"/>
+                                        <apex:variable var="navegacaoId"  value="{!nav.id}"/>
+                                        <apex:variable var="navegacaoCapaImg"  value="{!nav.imagem}"/>
+                                        <apex:variable var="navegacaoCapaNome" value="{!nav.nome}"/>
+                                    </apex:outputText>
+
+                                    <apex:outputLink value="MktMenu" styleClass="btn btn-md btn-default {!navegacaoAtual}">
+                                        <apex:param name="Id" value="{!nav.id}"/>
+                                        {!nav.nome}
+                                    </apex:outputLink>
+                                </apex:repeat>
+                            </div>
+                            <apex:outputText rendered="{!if(navegacoes.size>1,true,false)}">
+                                <a href="{!urlBase}/{!navegacaoId}" target="_blank">
+                                    <span class="glyphicon glyphicon-new-window"></span>
+                                </a>
+                            </apex:outputText>
+                        </div>
+                    </div>
+                    <br />
+
+                    <!-- banner do objeto -->
+                    <apex:outputText rendered="{!IF(navegacaoObjeto != 'MktInicio', true, false)}" >
+                        <div class="row" style="display:none;">
+                            <div class="col-xs-12 CabBannerTab">
+                                <table style="width:100%;">
+                                    <tr>
+                                        <td class="CabBannerCel" style="width:210px;">
+                                            <div class="img-thumbnail BannerImg">
+                                                <img src="{!navegacaoCapaImg}" />
+                                            </div>
+                                        </td>
+                                        <td class="CabBannerCel">
+                                            {!navegacaoCapaNome}
+                                        </td>
+                                    </tr>
+                                </table>                                
+                            </div>
+                        </div>
+                        <br />
+                    </apex:outputText>
+                    
+                    <!-- ========== listagem de objetos ========== -->
+
+                    <!-- listagem de Categorias -->
+                    
+
+                    <apex:outputText rendered="{!IF(temListaCategoria == true, true, false)}" >
+                        
+                        <!--
+                        <div class="row">
+                            <div class="col-xs-12 CabInterno">
+                                Categorias
+                            </div>
+                        </div>
+                        <br />
+                        -->
+                        
+                        <div class="row">
+                            <apex:repeat value="{!listaCategoria}" var="categoria">
+                                <div class="col-xs-3">
+                                    <apex:outputLink value="MktMenu" style="text-decoration:none;">
+                                        <apex:param name="Id" value="{!categoria.Id}"/>
+                                        <div class="thumbnail" style="margin:3px!important;">
+                                            <div class="ListItemImg">
+                                                <img src="{!categoria.Icone_url__c}"/>
+                                            </div>  
+                                        </div>
+                                        <div class="ListItemNome truncate">
+                                            {!categoria.Name}
+                                        </div>                                                                           
+                                    </apex:outputLink>
+                                </div>
+                            </apex:repeat>                                
+                        </div>
+                    </apex:outputText>
+                    
+                    <!-- ========== listagem de midias e partes ========== -->
+
+                    <apex:outputText rendered="{!IF(OR(temListaMidia==true, temListaParte=true), true, false)}" >
+                        
+                        <!-- cabeçalho de midias (!= produto) -->
+                        <!--
+                        <div class="row">
+                            <div class="col-xs-12 CabInterno">
+                                Mídias e Partes
+                            </div>
+                        </div>
+                        <br />
+                        -->
+                        
+                        <!-- criação das guias (por tipo) -->
+                        <apex:variable var="guiaAtiva" value="{! 'active'}"/>
+                        <ul class="nav nav-tabs">
+                        
+                            <apex:repeat value="{!listaMidiaTipo}" var="midiaTipo">
+                                <li class="{!guiaAtiva}">
+                                    <a data-toggle="tab" href="#{!SUBSTITUTE(midiaTipo['tipo'], ' ', '_')}">{!UPPER(midiaTipo['tipo'])} 
+                                        <span class="badge">{!midiaTipo['qtd']}</span>
+                                    </a>
+                                </li>
+                                <apex:variable var="guiaAtiva" value="{! ''}"/>
+                            </apex:repeat> 
+                            <apex:repeat value="{!listaParteTipo}" var="parteTipo">
+                                <li class="{!guiaAtiva}">
+                                    <a data-toggle="tab" href="#{!SUBSTITUTE(parteTipo['tipo'], ' ', '_')}">{!UPPER(parteTipo['tipo'])} 
+                                        <span class="badge">{!parteTipo['qtd']}</span>
+                                    </a>
+                                </li>
+                                <apex:variable var="guiaAtiva" value="{! ''}"/>
+                            </apex:repeat>  
+                        </ul>
+
+                        <!-- listagem das guias (por tipo) -->
+                        <apex:variable var="painelAtivo"    value="{! 'in active'}"/>
+                        <apex:variable var="contaItem"      value="{! 0}"/>
+
+                        <apex:form >    
+                            <apex:inputHidden value="{!navegacaoId}" id="navegacaoId" />
+                            <script>
+                                var navegacaoId = document.getElementById('{!$Component.navegacaoId}');
+                            </script>
+
+                            <!-- container de painéis -->
+                            <div class="tab-content">
+                                
+
+                                <!-- painéis das guias -->
+                                
+                                <!-- listagem de midias -->
+                                
+                                <apex:repeat value="{!listaMidiaTipo}" var="midiaTipo">
+                                    <div id="{!SUBSTITUTE(midiaTipo['tipo'], ' ', '_')}" class="tab-pane fade {!painelAtivo}">
+                                        <div class="panel-group" id="accordion">
+                                        
+        
+                                            <!-- listagem em miniaturas (Extensão) -->
+                                            <apex:outputText rendered="{!IF(midiaTipo['tipo'] == 'Extensão', true, false)}">
+                                                <div class="row">
+                                                    <apex:repeat value="{!listaMidia}" var="midia">
+                                                        <apex:outputText rendered="{!IF(midiaTipo['tipo'] == midia.Tipo__c, true, false)}" >  
+
+                                                            <apex:variable var="contaItem" value="{! contaItem+1}"/>
+                                                            <apex:outputText rendered="{!IF(contaItem > 4, true, false)}" >  
+                                                                <apex:outputText value="{!quebraLinha}" escape="false"/>
+                                                                <apex:variable var="contaItem" value="{! 0}"/>
+                                                            </apex:outputText> 
+
+                                                            
+                                                            <div class="col-xs-3">
+                                                                <a href="#" style="text-decoration:none;" onclick="
+                                                                    link = '{!midia.URL_do_Arquivo__c}'; tipo='{!midiaTipo['tipo']}'; openModal();
+                                                                ">
+                                                                    <div class="thumbnail" style="margin:3px!important;">
+                                                                        <div class="ListItemImg">
+                                                                            <img src="{!midia.Icone_url__c}"/>
+                                                                        </div>  
+                                                                    </div>
+                                                                    <div class="ListItemNome truncate">
+                                                                        {!midia.Name}
+                                                                    </div>                                                                           
+                                                                </a>
+                                                            </div>
+                                                            
+                                                        </apex:outputText> 
+                                                    </apex:repeat>                                
+                                                </div>
+                                            </apex:outputText> 
+
+                                            <!-- listagem em tabela (demais) -->
+                                            <apex:outputText rendered="{!IF(AND(
+                                                midiaTipo['tipo'] != 'Extensão'
+                                            ), true, false)}" >
+                                                <table class="table table-hover">
+
+                                                    <!-- linha de cabeçalho -->
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width:15%;">&nbsp;</th>
+                                                            <th style="width:25%;">Nome</th>
+                                                            <th style="width:15%;">Ação</th>
+                                                            <th style="width:10%;">Acessos</th>
+                                                            <th style="width:10%;">Formato</th>
+                                                            <th style="width:10%;">Tamanho</th>
+                                                            <th style="width:15%;">Adicionado em</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <apex:repeat value="{!listaMidia}" var="midia">
+                                                            <apex:outputText rendered="{!IF(midiaTipo['tipo'] == midia.Tipo__c, true, false)}" >
+                                                                <apex:variable var="contVisu" value="{!0}"/>
+
+                                                                <!-- linha das infos da mídia -->
+                                                                <tr>
+
+                                                                    <!-- IMAGEM -->
+                                                                    <td rowspan="2">
+                                                                        <!-- interna -->
+                                                                        <apex:outputText rendered="{!IF(midia.URL_do_Arquivo__c == null, true, false)}" >
+                                                                            <img src="{!midia.Icone_url__c}" class="img-thumbnail" />
+                                                                        </apex:outputText> 
+                                                                        <!-- externa -->
+                                                                        <apex:outputText rendered="{!IF(midia.URL_do_Arquivo__c != null, true, false)}" >
+                                                                            <div class="ListMidiaImg img-thumbnail">
+                                                                                <img src="{!midia.Icone_url__c}"/>
+                                                                            </div>  
+                                                                        </apex:outputText>
+                                                                    </td>
+
+                                                                    <!-- NOME -->
+                                                                    <td class="midiaNome">
+                                                                        {!midia.Name}
+                                                                    </td>
+
+                                                                    <!-- AÇÃO -->
+                                                                    <td>
+                                                                        <!-- baixar -->
+                                                                        <apex:commandlink value="Baixar" target="_blank"
+                                                                            styleClass="btn btn-xs btn-success btnAcao" 
+                                                                            onclick="navegacaoId.value='{!midia.Id}';" action="{!Baixar}"
+                                                                        />
+                                                                        &nbsp;&nbsp;
+                                                                        <!-- abrir -->
+                                                                        <apex:outputText rendered="{!IF(OR(midiaTipo['tipo'] == 'Vídeo', midiaTipo['tipo'] == 'Imagem'), true, false)}" >
+                                                                            <apex:commandlink value="Abrir" 
+                                                                                styleClass="btn btn-xs btn-primary" 
+                                                                                onclick="
+                                                                                    navegacaoId.value='{!midia.Id}';
+                                                                                    link = ('{!midia.URL_do_Arquivo__c}' != '' ? '{!midia.URL_do_Arquivo__c}' : '{!midia.DownloadId__c}'); 
+                                                                                    tipo='{!midiaTipo['tipo']}'
+                                                                                " 
+                                                                                action="{!Abrir}" oncomplete="openModal();" 
+                                                                            />
+                                                                        </apex:outputText> 
+                                                                    </td>
+
+                                                                    <!-- VISUALIZAÇÃO -->
+                                                                    <td>
+                                                                        <apex:repeat value="{!listaVisualizacao}" var="visualizacao">
+                                                                            <apex:outputText rendered="{!IF(visualizacao.midia_id == midia.Id, true, false)}" >
+                                                                                <apex:variable var="contVisu" value="{!contVisu+1}"/>
+                                                                            </apex:outputText>  
+                                                                        </apex:repeat>  
+                                                                        <a data-toggle="collapse" data-parent="#accordion" href="#{!midia.Id}">
+                                                                            {!contVisu}
+                                                                        </a>
+                                                                    </td>
+
+                                                                    <!-- FORMATO -->
+                                                                    <td>
+                                                                        {!midia.Formato__c}
+                                                                    </td>
+
+                                                                    <!-- TAMANHO -->
+                                                                    <td>
+                                                                        {!midia.Tamanho__c}
+                                                                    </td>
+
+                                                                    <!-- CDATA RIAÇÃO -->
+                                                                    <td>
+                                                                        <apex:outputField value="{!midia.CreatedDate}"/>
+                                                                    </td>
+                                                                </tr>
+
+                                                                <!-- linha dos visualizadores -->
+                                                                <tr class="panel" style="border: 0px!important;">
+                                                                    <td colspan="6" class="linhaInvis">
+                                                                        <div id="{!midia.Id}" class="panel-collapse collapse">
+                                                                            <apex:outputText rendered="{!IF(contVisu = 0, true, false)}" >
+                                                                                <div class="textoDiscreto small" style="color:gray;">
+                                                                                    Sem Visualizações
+                                                                                </div>
+                                                                            </apex:outputText>  
+                                                                            <apex:repeat value="{!listaVisualizacao}" var="visualizacao">
+                                                                                <apex:outputText rendered="{!IF(visualizacao.midia_id == midia.Id, true, false)}" >
+                                                                                    <img src="{!visualizacao.usuario_foto}" class="img-circle imgVisu linhaInvis2" 
+                                                                                         data-toggle="popover" data-trigger="hover" data-placement="top"
+                                                                                         title="{!visualizacao.usuario_nome}" 
+                                                                                         data-content="Acesso em: {!visualizacao.ultimo_acesso}"
+                                                                                    />
+                                                                                </apex:outputText>  
+                                                                            </apex:repeat>  
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+
+                                                            </apex:outputText>   
+                                                        </apex:repeat>                                  
+                                                    </tbody>
+                                                </table>
+                                            </apex:outputText> 
+
+                                        </div>
+                                    </div> 
+                                    <apex:variable var="painelAtivo" value="{! ''}"/>
+                                </apex:repeat>
+                                
+                                <!-- listagem de partes -->
+                                <apex:repeat value="{!listaParteTipo}" var="parteTipo">
+                                    <div id="{!SUBSTITUTE(parteTipo['tipo'], ' ', '_')}" class="tab-pane fade {!painelAtivo}">
+                                        <div class="panel-group" id="accordion">
+
+                                            <apex:variable var="contaItem" value="{! 0}"/>
+                                            <!-- listagem em miniaturas -->
+                                            <div class="row">
+                                                <apex:repeat value="{!listaParte}" var="parte">
+                                                    <apex:outputText rendered="{!IF(parteTipo['tipo'] == parte.Tipo__c, true, false)}" >  
+
+                                                        
+                                                            <div class="col-sm-2">
+                                                                <apex:outputLink value="{!urlBase}/{!parte.Parte__c}" style="text-decoration:none;" target="_BLANK"> 
+                                                                
+                                                                <apex:outputText rendered="{!IF(parte.Quantidade_em_Estoque_Oficial__c>0,true,false)}">
+                                                                    <div class="thumbnail" style="margin:3px!important; border: 2px solid green">
+                                                                    <div class="ListItemImg">
+                                                                        <apex:outputText rendered="{!IF(parte.Icone__c == '', true, false)}" >  
+                                                                            <img src="{!$Resource.no_image}" />
+                                                                        </apex:outputText> 
+                                                                        <apex:outputText rendered="{!IF(parte.Icone__c != '', true, false)}" >  
+                                                                            <img src="{!parte.Icone__c}" />
+                                                                        </apex:outputText> 
+                                                                    </div>  
+                                                                </div>
+                                                                
+                                                                </apex:outputText>
+                                                                </apex:outputLink>
+                                                                <apex:outputLink value="{!urlBase}/{!parte.Parte__c}" style="text-decoration:none;" target="_BLANK"> 
+                                                                <apex:outputText rendered="{!IF(parte.Quantidade_em_Estoque_Oficial__c=0,true,false)}"> 
+                                                                <div class="thumbnail" style="margin:3px!important; border: 2px solid red">
+                                                                    <div class="ListItemImg">
+                                                                        <apex:outputText rendered="{!IF(parte.Icone__c == '', true, false)}" >  
+                                                                            <img src="{!$Resource.no_image}" />
+                                                                        </apex:outputText> 
+                                                                        <apex:outputText rendered="{!IF(parte.Icone__c != '', true, false)}" >  
+                                                                            <img src="{!parte.Icone__c}" />
+                                                                        </apex:outputText> 
+                                                                    </div>  
+                                                                </div>
+                                                                </apex:outputText>
+                                                                </apex:outputLink>
+                                                                <div class="ListItemNome" style="margin-bottom:5px!important;">
+                                                                    {!LEFT(parte.Nome__c, 50)} 
+                                                                    <apex:outputText rendered="{!IF(LEN(parte.Nome__c) > 50, true, false)}" >...</apex:outputText> 
+                                                                    
+                                                                    <apex:outputText rendered="{!IF(parte.Modelo__c != '', true, false)}" >
+                                                                        <br/><span class="small">{!parte.Modelo__c}</span>
+                                                                    </apex:outputText> 
+                                                                    
+                                                                </div>                                                                           
+                                                                <div class="ListItemDescr">
+                                                                    <apex:outputText rendered="{!IF(parte.Descricao__c != '', true, false)}" >  
+                                                                        {!LEFT(parte.Descricao__c, 80)}
+                                                                    </apex:outputText> 
+                                                                    <apex:outputText rendered="{!IF(LEN(parte.Descricao__c) > 80, true, false)}" >...</apex:outputText> 
+                                                                    
+                                                                    <apex:outputText rendered="{!IF(AND(parte.Descricao__c != '', parte.Codigo__c != ''), true, false)}" >  
+                                                                        <br/>
+                                                                    </apex:outputText> 
+                                                                    
+                                                                    <apex:outputText rendered="{!IF(parte.Codigo__c != '', true, false)}" >  
+                                                                        <span class="ListItemDescrCod">PN: {!parte.Codigo__c} </span>
+                                                                    </apex:outputText> 
+                                                                    
+                                                                    <apex:outputText rendered="{!IF(AND(parte.ValorKit__c != null, parte.ValorKit__c != 0), true, false)}" >  
+                                                                        <br/>
+                                                                        <span class="ListItemDescrVal"><apex:outputField value="{!parte.ValorKit__c}"/></span>
+                                                                    </apex:outputText> 
+                                                                </div>
+                                                            </div>
+                                                        
+                                                        
+                                                        <apex:variable var="contaItem" value="{! contaItem+1}"/>
+                                                        <apex:outputText rendered="{!IF(contaItem = 6, true, false)}" >  
+                                                            <apex:outputText value="{!quebraLinha}" escape="false"/>
+                                                            <apex:variable var="contaItem" value="{! 0}"/>
+                                                        </apex:outputText> 
+                                                        
+                                                        
+                                                    </apex:outputText> 
+                                                </apex:repeat>                                
+                                            </div>
+
+                                        </div>
+                                    </div> 
+                                    <apex:variable var="painelAtivo" value="{! ''}"/>
+                                </apex:repeat>
+                                <!-- fim: painéis das guias -->                                 
+
+                            </div>
+                            <!-- fim: container de painéis -->
+                        </apex:form> 
+
+                        <!-- modal para video -->
+                        <div class="modal fade" id="ele_div_modal_video" role="dialog">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+
+                                    <!-- cabeçalho -->
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title" id="ele_div_modal_header">Vídeo</h4>
+                                    </div>
+
+                                    <!-- conteúdo -->
+                                    <div class="modal-body" id="ele_div_modal_video_body">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- modal para imagem -->
+                        <div class="modal fade" id="ele_div_modal_imagem" role="dialog">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+
+                                    <!-- cabeçalho -->
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title" id="ele_div_modal_header">Imagem</h4>
+                                    </div>
+
+                                    <!-- conteúdo -->
+                                    <div class="modal-body" id="ele_div_modal_imagem_body" style="text-align:center;">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- modal para extensão -->
+                        <div class="modal fade" id="ele_div_modal_extensao" role="dialog">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+
+                                    <!-- cabeçalho -->
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title" id="ele_div_modal_header">Extensão</h4>
+                                    </div>
+
+                                    <!-- conteúdo -->
+                                    <div class="modal-body" id="ele_div_modal_extensao_body" style="text-align:center;">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <br/>
+                    </apex:outputText>
+                    <!-- fim: listagem de mídias/partes -->
+
+                </div>
+                <script>
+                    $(document).ready(function(){
+                        $('[data-toggle="popover"]').popover();   
+                    });
+                </script>
+            </div>
+        </body>
+        <script>
+            
+        </script>
+    </html>
+</apex:page>

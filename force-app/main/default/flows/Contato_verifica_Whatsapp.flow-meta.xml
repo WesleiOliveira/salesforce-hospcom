@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>59.0</apiVersion>
+    <customErrors>
+        <name>Mensagem_de_erro_personalizada_1</name>
+        <label>Mensagem de erro personalizada 1</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <customErrorMessages>
+            <errorMessage>erro teste</errorMessage>
+            <isFieldError>false</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <environments>Default</environments>
+    <formulas>
+        <name>phone</name>
+        <dataType>String</dataType>
+        <expression>&apos;{&quot;number&quot;: &quot;&apos; + {!$Record.Phone} + &apos;&quot;}&apos;</expression>
+    </formulas>
+    <interviewLabel>Contato — verifica Whatsapp {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Contato — verifica Whatsapp</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Mensagem_de_erro_personalizada_1</targetReference>
+        </connector>
+        <object>Contact</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Draft</status>
+    <variables>
+        <name>number</name>
+        <apexClass>ExternalService__verificacoes_whatsapp_IN_body</apexClass>
+        <dataType>Apex</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

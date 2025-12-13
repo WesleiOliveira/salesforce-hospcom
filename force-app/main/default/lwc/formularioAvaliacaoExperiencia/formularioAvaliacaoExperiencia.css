@@ -1,0 +1,59 @@
+/* Alinha o conteúdo da célula verticalmente ao topo */
+td, th {
+    vertical-align: top;
+}
+
+/* Realça os títulos de valor */
+td strong {
+    font-size: 1rem;
+    color: #1a1a1a;
+}
+
+/* Espaçamento interno geral da tabela */
+table {
+    margin-top: 10px;
+}
+
+/* Estilo para a tabela de competências */
+.slds-table_bordered {
+    border: 1px solid #d8dde6;
+    border-radius: 0.25rem;
+    background-color: #ffffff;
+}
+
+/* Cabeçalho da tabela */
+.slds-table_bordered thead {
+    background-color: #f3f3f3;
+}
+
+.slds-table_bordered th {
+    font-weight: 700;
+    text-align: left;
+    color: #3e3e3c;
+    padding: 12px;
+}
+
+/* Células da tabela */
+.slds-table_bordered td {
+    padding: 12px;
+    border-top: 1px solid #d8dde6;
+}
+
+/* Espaçamento entre os radio groups */
+lightning-radio-group {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+/* Responsividade (opcional) */
+@media screen and (max-width: 768px) {
+    .slds-table {
+        font-size: 0.85rem;
+    }
+}
+
+.slds-radio-horizontal {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Opcional, se quiser centralizar os bullets também */
+}

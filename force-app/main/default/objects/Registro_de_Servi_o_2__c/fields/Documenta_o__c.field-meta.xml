@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Documenta_o__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(AND(OR(Fornecedor__r.RecordType.Id = &quot;012i00000011qXa&quot;, Fornecedor__r.RecordType.Id = &quot;01231000000tao6&quot;, Fornecedor__r.RecordType.Id = &quot;&quot;),OR(Data_de_Vencimento1__c &lt; TODAY(),Data_de_Vencimento2__c &lt; TODAY(), Data_de_Vencimento3__c &lt; TODAY(), Data_de_Vencimento4__c &lt; TODAY())),IMAGE(&quot;https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=01531000008stX6&amp;oid=00Di0000000JVhH&amp;lastMod=1502729868000&quot; , &quot;&quot; , 12, 12) &amp; &quot; &quot; &amp; &quot;VENCIDA&quot;,
+
+IF(AND(OR(Fornecedor__r.RecordType.Id = &quot;012i00000011qXa&quot;, Fornecedor__r.RecordType.Id = &quot;01231000000tao6&quot;, Fornecedor__r.RecordType.Id = &quot;&quot;),ISPICKVAL(Categoria__c,&quot;SERVIÇOS&quot;), ISPICKVAL(Sub_Categoria__c,&quot;MANUTENÇÃO&quot;), Cart_o_CNPJ__c = TRUE, OR(Cart_o_de_Inscri_o_Estadual__c = TRUE,  Cart_o_de_Inscri_o_Municipal__c = TRUE, Comunicado_de_Isen_o__c = true),  Autoriza_o_de_Funcionamento__c = TRUE, Alvar_ou_Licen_a_de_Funcionamento__c = TRUE,  Contrato_Social__c = TRUE), IMAGE(&quot;https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=01531000008stOs&amp;oid=00Di0000000JVhH&amp;lastMod=1502730159000&quot; , &quot;&quot; , 12, 12) &amp; &quot; &quot; &amp; &quot;OK&quot; , 
+
+IF(AND(OR(Fornecedor__r.RecordType.Id = &quot;012i00000011qXa&quot;, Fornecedor__r.RecordType.Id = &quot;01231000000tao6&quot;, Fornecedor__r.RecordType.Id = &quot;&quot;), ISPICKVAL(Categoria__c,&quot;SERVIÇOS&quot;), ISPICKVAL(Sub_Categoria__c,&quot;CALIBRAÇÃO&quot;), Cart_o_CNPJ__c = TRUE, OR(Cart_o_de_Inscri_o_Estadual__c = TRUE,  Cart_o_de_Inscri_o_Municipal__c = TRUE, Comunicado_de_Isen_o__c = true),  Autoriza_o_de_Funcionamento__c = TRUE, Alvar_ou_Licen_a_de_Funcionamento__c = TRUE,  Contrato_Social__c = TRUE, Certificado_de_Calibra_o__c =TRUE ),IMAGE(&quot;https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=01531000008stOs&amp;oid=00Di0000000JVhH&amp;lastMod=1502730159000&quot; , &quot;&quot; , 12, 12) &amp; &quot; &quot; &amp; &quot;OK&quot;, 
+
+IF(AND(Fornecedor__r.RecordType.Id = &quot;012310000016BZE&quot;, C_pia_Simples_de_CPF__c = TRUE,  C_pia_Simples_de_RG__c = TRUE,  C_pia_Simples_do_Comprovante_de_Endere_o__c = TRUE),IMAGE(&quot;https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=01531000008stOs&amp;oid=00Di0000000JVhH&amp;lastMod=1502730159000&quot; , &quot;&quot; , 12, 12) &amp; &quot; &quot; &amp; &quot;OK&quot;, IMAGE(&quot;https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=01531000008stS6&amp;oid=00Di0000000JVhH&amp;lastMod=1502730193000&quot; , &quot;&quot; , 12, 12) &amp; &quot; &quot; &amp; &quot;PENDENTE&quot;))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Documentação</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

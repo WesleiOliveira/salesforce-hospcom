@@ -1,0 +1,93 @@
+<apex:page standardController="Checklist_Preenchido__c" applyHtmlTag="false" showHeader="false" extensions="ChecklistController" renderAs="pdf" >
+    <html>
+        <head>
+            <style>
+            @page{
+                    size:A4;
+                    background: url({!$Resource.TimbradoHospcom});
+                    margin:140px 50px 120px 50px;
+                    @bottom-center{content:element(footer);}
+                }
+                body {
+                    font-family: Arial, sans-serif;
+                    font-size: 11px;
+                    margin: 20px;
+                    color: #333;
+                }
+                h1 {
+                    font-size: 19px;
+                    margin-bottom: 20px;
+                    text-align: center;
+                    color: #041E42;
+                }
+                h2 {
+                    font-size: 17px;
+                    margin-top: 20px;
+                    margin-bottom: 10px;
+                    color: #041E42;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-bottom: 20px;
+                }
+                th, td {
+                    border: 1px solid #ccc;
+                    padding: 8px 15px;
+                    text-align: left;
+                    vertical-align: middle;
+                }
+                th {
+                    background-color: #f2f2f2;
+                    font-weight: bold;
+                    color: #041E42;
+                }
+                .section {
+                    page-break-inside: avoid;
+                    margin-bottom: 20px;
+                }
+            </style>
+        </head>
+        <body>
+
+            <h1>{!titulo}</h1>
+
+            <apex:repeat value="{!secoes}" var="secao">
+                <div class="section">
+                    <h2>{!secao.titulo}</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Campo</th>
+                                <th>Resposta</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <apex:repeat value="{!secao.campos}" var="campo">
+                                <tr>
+                                    <td><b>{!campo.label}</b></td>
+                                    <td class="checkbox-cell">
+                                        <!-- Verifica se o valor é true ou false e exibe o checkbox -->
+                                        <apex:outputPanel rendered="{!campo.valor == true}">
+                                            SIM
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!campo.valor == false}">
+                                            NÃO
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!campo.valor == '' && campo.tipo == 'boolean'}">
+                                            NÃO
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!campo.valor != true && campo.valor != false}">
+                                            {!campo.valor}
+                                        </apex:outputPanel>
+                                    </td>
+                                </tr>
+                            </apex:repeat>
+                        </tbody>
+                    </table>
+                </div>
+            </apex:repeat>
+
+        </body>
+    </html>
+</apex:page>

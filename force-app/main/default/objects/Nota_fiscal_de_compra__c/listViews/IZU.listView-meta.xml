@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IZU</fullName>
+    <columns>Ver_DANFE__c</columns>
+    <columns>NAME</columns>
+    <columns>Fornecedor__c</columns>
+    <columns>Data_de_emissao__c</columns>
+    <columns>Valor_da_nota_fiscal__c</columns>
+    <columns>Data_de_vencimento__c</columns>
+    <columns>Lancada__c</columns>
+    <columns>Status__c</columns>
+    <columns>Comprador__c</columns>
+    <columns>Comprado_CNNPJ__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Comprador__c</field>
+        <operation>contains</operation>
+        <value>IZU</value>
+    </filters>
+    <label>IZU</label>
+</ListView>

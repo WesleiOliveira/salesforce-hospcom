@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Celia</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Celia</label>
+        <sharedTo>
+            <group>Supervisor_Comercial</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Departamento__c</field>
+            <operation>equals</operation>
+            <value>Outros,Comercial</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Comercial_gestor</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Comercial (gestor)</label>
+        <sharedTo>
+            <group>Comercial_gestor</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Departamento__c</field>
+            <operation>equals</operation>
+            <value>Comercial</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Departamento_de_Compras</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Departamento de Compras</label>
+        <sharedTo>
+            <group>Departamento_de_Compras</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Aguardando reservas</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Governo_auxiliar</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Governo (auxiliar)</label>
+        <sharedTo>
+            <group>Governo_auxiliar</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Departamento__c</field>
+            <operation>equals</operation>
+            <value>Governo</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Governo_gestor</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Governo (gestor)</label>
+        <sharedTo>
+            <group>Governo_gestor</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Departamento__c</field>
+            <operation>equals</operation>
+            <value>Governo</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Servi_o_auxiliar</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Serviço (auxiliar)</label>
+        <sharedTo>
+            <group>Servico_auxiliar</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Departamento__c</field>
+            <operation>equals</operation>
+            <value>Serviço</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Servi_o_gestor</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Serviço (gestor)</label>
+        <sharedTo>
+            <group>Servico_gestor</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Departamento__c</field>
+            <operation>equals</operation>
+            <value>Serviço</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>Financeiro_adiantamento</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Financeiro (adiantamento)</label>
+        <sharedTo>
+            <group>Financeiro_adiantamento</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Usu_rio_Katyane</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Usuário Katyane</label>
+        <sharedTo>
+            <group>Usuario_Leticia</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

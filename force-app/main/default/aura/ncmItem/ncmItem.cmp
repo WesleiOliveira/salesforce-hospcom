@@ -1,0 +1,24 @@
+<aura:component controller="NCM" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <ltng:require
+                  styles="{!join(',', 
+                          $Resource.fontAwesome + '/css/font-awesome.min.css')}"  
+                  scripts="{!join(',', 
+                           $Resource.JQuery)}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    <div>
+    	<div class='divPrincipal3423422'>
+        	<input class='divInput853497538' id='divInput853497538' placeholder='Digite aqui a descrição de um NCM para pesquisar'></input>
+            <div class='divBusca34895234' id='divBusca34895234' data-tipo='Pesquisar'>
+                <i class='fa fa-search' aria-hidden='true'></i>
+                Pesquisar
+            </div>
+            
+            
+            <div class='resultadosncmsearch342' id='resultadosncmsearch342'>
+                
+            </div>
+        </div>
+    </div>
+	
+</aura:component>

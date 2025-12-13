@@ -1,0 +1,264 @@
+<aura:component  controller="Trello" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.sortableJs + '/Sortable.js',
+                           $Resource.popper + '/popper.js')}"                     
+                  afterScriptsLoaded="{!c.onRender}" />    
+    
+    
+<body>
+	<div class="title">
+		<h2>
+			Organograma
+		</h2>
+	</div>
+    
+	<ul class="tree">
+		<li> <span>Auditoria Interna de Processos e Controles Internos </span>
+		</li>
+		<li> <span>Conselho de Administração Grupo Hospcom</span>
+			<ul>
+				<li> <span>CEO</span>
+					<ul>
+						<li> <span>Diretoria de Negócio e OPERAÇÕES</span>
+							<ul>
+								<li> 
+									<span class="popup" onclick="popupHandling('QSvIr')">
+										GERENTE DE RELACIONAMENTO PÚBLICO
+										<span class="popuptext" id="QSvIr">RAFAEL LEANDRO DE MENDONÇA</span>
+									</span>
+									<ul>
+										<li> <span>TIME DE VENDAS PUBLICAS</span></li>
+									</ul>
+								</li>
+								<li> 
+									<span class="popup" onclick="popupHandling('yQGKc')">
+										GERÊNCIA COMERCIAL NACIONAL
+										<span class="popuptext" id="yQGKc">LUCAS FRARE</span>
+									</span>
+									<ul>
+										<li>
+											<span class="popup" onclick="popupHandling('lPFkK')">
+												GERENTE REGIONAL
+												<span class="popuptext" id="lPFkK">MANUEL DE SANTANA NETO</span>
+											</span>
+											<ul>
+												<li> 													
+													<span class="popup" onclick="popupHandling('QERFq')">
+														BRASILIA
+														<span class="popuptext" id="QERFq">LEONARDO ALENCAR</span>
+													</span>
+													<ul>
+														<li> <span>TIME DE VENDAS</span></li>
+													</ul>
+												</li>
+												<li> 
+													<span class="popup" onclick="popupHandling('bhImM')">
+														SP/MS
+														<span class="popuptext" id="bhImM">ODAIR FACCIOLI DE OLIVEIRA</span>
+													</span>
+													<ul>
+														<li> <span>TIME DE VENDAS</span></li>
+													</ul>
+												</li>
+												<li>
+													<span class="popup" onclick="popupHandling('hNiAp')">
+														GO/MT/TO/RJ/OUTRAS REGIÕES
+														<span class="popuptext" id="hNiAp">JACKELINE TEODORA</span>
+													</span>
+													<ul>
+														<li> <span>TIME DE VENDAS</span></li>
+													</ul>
+												</li>
+												<li> <span>NORTE</span>
+													<ul>
+														<li> <span>TIME DE VENDAS</span></li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+										<li> <span>GERENTE DE LINHA</span>
+											<ul>
+												<li> 
+													<span class="popup" onclick="popupHandling('SRgAJ')">
+														PMLS
+														<span class="popuptext" id="SRgAJ">CARLA BREVIGLIERO</span>
+													</span>
+
+												</li>
+												<li> 
+													<span class="popup" onclick="popupHandling('RFQBh')">
+														ULTRASSOM
+														<span class="popuptext" id="RFQBh">DANILO VIEIRA SUSANO</span>
+													</span>
+												</li>
+												<li> 
+													<span class="popup" onclick="popupHandling('tkICb')">
+														VETERINARIA
+														<span class="popuptext" id="tkICb">ANNA KAROLYNA PEIXOTO SILVA COELHO</span>
+													</span>				
+												</li>
+												<li> <span>VIAS AÉREAS DIFICEIS</span></li>
+												<li> <span>ORTOPEDIA</span></li>
+												<li> <span>SURGICAL</span></li>
+											</ul>
+										</li>
+										<li> <span>GERÊNCIA DE LICITAÇÕES</span>
+											<ul>
+												<li>
+													<span class="popup" onclick="popupHandling('QRDmU')">
+														SUPERVISOR DE LICITAÇÕE
+														<span class="popuptext" id="QRDmU">ANA PAULA GONÇALVES FAGUNDES</span>
+													</span>				
+													<ul>
+														<li> <span>TIME DE LICITAÇÕES</span></li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li> 
+									<span class="popup" onclick="popupHandling('RKEJn')">
+										GERENTE CLINICO
+										<span class="popuptext" id="RKEJn">JESUS FRANCISCO CASTILLO NOVAIS</span>
+									</span>				
+
+									<ul>
+										<li> <span>ESPECIALISTAS CLINICOS</span></li>
+									</ul>
+								</li>
+								<li>
+									<span class="popup" onclick="popupHandling('dziFK')">
+										GERENTE DE SERVIÇOS E LOCAÇÃO
+										<span class="popuptext" id="dziFK">DENY REYNER</span>
+									</span>				
+									<ul>
+										<li>
+											<span class="popup" onclick="popupHandling('kDJnX')">
+												SUPERVISOR DE LOCAÇÃO DE EQUIPAMENTOS
+												<span class="popuptext" id="kDJnX">MARIO UMBERTO FERREIRA DA SILVA FILHO</span>
+											</span>				
+											<ul>
+												<li> <span>DEMONSTRAÇÃO DE EQUIPAMENTOS</span></li>
+											</ul>
+										</li>
+										<li> 
+											<span class="popup" onclick="popupHandling('nYXuJ')">
+												SUPERVISOR DE SERVIÇOS
+												<span class="popuptext" id="nYXuJ">GEAN CARLOS DE BASTOS FEITOSA</span>
+											</span>				
+											<ul>
+												<li> <span>ASSISTÊNCIA TECNICA</span></li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li> <span>GERÊNCIA DE LOGÍSTICA</span></li>
+								<li> 
+									<span class="popup" onclick="popupHandling('IeWAj')">
+										GERÊNCIA DE PROCESSOS, PRODUTIVIDADE E MELHORIA CONTÍNUA
+										<span class="popuptext" id="IeWAj">DIEGO MAGALHÃES PIRES</span>
+									</span>		
+								</li>
+							</ul>
+						</li>
+						<li> 
+							<span class="popup" onclick="popupHandling('MFTyk')">
+								GERÊNCIA DE MARKETING
+								<span class="popuptext" id="MFTyk">BARBARA ALENCAR COELHO</span>
+							</span>
+						</li>
+						<li> 
+							<span>DIRETORIA ADMINISTRATIVA</span>
+							<ul>
+								<li> <span>GERÊNCIA ADMINISTRATIVO/FINANCEIRO</span>
+									<ul>
+										<li> <span>TECNOLOGIA E INOVAÇÃO</span>
+											<ul>
+												<li> <span>SUPORTE/INFRA</span></li>
+												<li>
+													<span class="popup" onclick="popupHandling('mCqkX')">
+														DESENVOLVIMENTO
+														<span class="popuptext" id="mCqkX">WILLYAN ARRUDA DE ARAUJO</span>
+													</span>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<span>CONTABILIDADE</span>
+											<ul>
+												<li>
+													<span>CENTRAL DE NOTAS</span>
+													<ul>
+														<li> 
+															<span class="popup" onclick="popupHandling('sEYNl')">
+																FATURAMENTO
+																<span class="popuptext" id="sEYNl">RHAPHAEL FAGNER DE OLIVEIRA E SOUZA
+																</span>
+															</span>						
+														</li>
+														<li> <span>ENTRADA DE NOTAS</span></li>
+													</ul>
+												</li>
+												<li> 
+													<span class="popup" onclick="popupHandling('ebFWR')">
+														CONTÁBIL
+														<span class="popuptext" id="ebFWR">MARCOS OLIVEIRA NATALINO</span>
+													</span>		
+												</li>
+												<li> <span>DEPARTAMENTO PESSOAL</span></li>
+											</ul>
+										</li>
+										<li> <span>FINANCEIRO</span>
+											<ul>
+												<li> <span>CONTAS A RECEBER</span>
+													<ul>
+														<li> <span>COBRANÇA</span></li>
+													</ul>
+												</li>
+												<li> <span>CONTAS A PAGAR</span></li>
+												<li> <span>PRESTAÇÃO DE CONTAS/REEMBOLSO/ADIANTAMENTO</span></li>
+											</ul>
+										</li>
+										<li>
+											<span class="popup" onclick="popupHandling('cTQWp')">
+												JURÍDICO
+												<span class="popuptext" id="cTQWp">BRUNA OLIVEIRA TAVARES</span>
+											</span>
+										</li>
+										<li> 
+											<span class="popup" onclick="popupHandling('pdIfc')">
+												RECURSOS HUMANOS
+												<span class="popuptext" id="pdIfc">MAURO CESAR NOGUEIRA DO VALE</span>
+											</span>
+										</li>
+										<li> <span>FACILITES/PATRIMÔNIO</span></li>
+										<li> <span>QUALIDADE</span></li>
+										<li> 
+											<span class="popup" onclick="popupHandling('lqLAh')">
+												COMPRAS
+												<span class="popuptext" id="lqLAh">KLEBER MARTINS DE PAIVA</span>
+											</span>
+										</li>
+									</ul>
+								</li>
+								<li> <span>CONTROLADORIA</span></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><span>Auditoria Externa</span></li>
+		<li><span>Compliance Officer</span></li>
+	</ul>
+</body>
+    
+	
+</aura:component>

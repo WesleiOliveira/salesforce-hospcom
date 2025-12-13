@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Viagem__c</entityName>
+    <fieldName>Status__c</fieldName>
+    <masterLabel>Viagem</masterLabel>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;&lt;b&gt;&lt;u&gt;Etapa para adiantamento de valores da viagem:&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Nessa etapa, os valores inseridos anteriormente, marcados como &lt;b&gt;&lt;i&gt;Adiantamento&lt;/i&gt;&lt;/b&gt;, são totalizados pelo &lt;b&gt;&lt;u&gt;setor financeiro&lt;/u&gt;&lt;/b&gt; e disponibilizados ao viajante marcado como &lt;b&gt;&lt;i&gt;Responsável Financeiro&lt;/i&gt;&lt;/b&gt; da viagem.&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>Aguardando adiantamento</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;&lt;b&gt;&lt;u&gt;Etapa de viagem agendada:&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Essa etapa sinaliza que a viagem está organizada, e aguardando apenas a data prevista para execução. Nesse momento ainda podem ser realizadas eventuais alterações.&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>Aguardando agenda</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;&lt;b&gt;&lt;u&gt;Status cancelado:&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Status para sinaliazar que a viagem foi cancelada e não deve ser executada.&lt;/li&gt;&lt;li&gt;Nesse status o &lt;b&gt;&lt;u&gt;viajante/&lt;/u&gt;&lt;/b&gt;&lt;b style=&quot;font-size: 13px;&quot;&gt;&lt;u&gt;organizador da viagem&lt;/u&gt;&lt;/b&gt; não precisa executar nenhuma ação adicional, a não ser que queira reiniciar o processo, sendo assim, é necessário retornar a viagemm para &lt;b&gt;&lt;i&gt;Rascunho &lt;/i&gt;&lt;/b&gt;e proceder com as alterações necessárias.&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>Cancelada</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;&lt;b&gt;&lt;u&gt;Status concluído:&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Status para marcar a viagem como concluída/encerrada.&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>Concluída</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;&lt;b&gt;&lt;u&gt;Etapa de aprovação da viagem:&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Nessa etapa o &lt;b&gt;&lt;u&gt;responsável por aprovar&lt;/u&gt;&lt;/b&gt; o prosseguimento da viagem, analisa e aprova ou não a viagem. A justificativa da decisão, caso haja, pode ser inserida no ato da aprovação/rejeição.&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>Em aprovação</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;&lt;b&gt;&lt;u&gt;Etapa de prestação de contas:&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Nessa etapa o &lt;b&gt;&lt;u&gt;viajante/organizador da viagem&lt;/u&gt;&lt;/b&gt; realiza o processo de prestação de contas dos valores utilizados na viagem, inserindo-os por categoria na guia Detalhes, assim como seus respectivos comprovantes (caso &lt;span style=&quot;font-size: 13px;&quot;&gt;haja&lt;/span&gt;) escaneados/fotografados na sessão de anexos.&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>Em prestação de contas</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;&lt;b&gt;&lt;u&gt;Etapa de quitação de valores:&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Nessa etapa os valores da prestação de contas inseridos anteriormente são checados pelo &lt;b&gt;setor financeiro&lt;/b&gt;, e validados de acordo com a Política de Viagens da empresa.&lt;/li&gt;&lt;li&gt;Havendo diferença de valor a pagar/receber entre viajante e empresa, o mesmo deverá ser inserido no sistema &lt;b&gt;&lt;i&gt;somente após ser acertado entre as partes&lt;/i&gt;&lt;/b&gt;, como um valor do tipo &lt;b&gt;&lt;i&gt;Estorno,&lt;/i&gt;&lt;/b&gt; visando chegar ao saldo final de R$0,00.&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>Em quitação de valores</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;&lt;b&gt;&lt;u&gt;Etapa de criação da viagem:&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Nessa etapa o &lt;b&gt;&lt;u&gt;viajante/organizador da viagem&lt;/u&gt;&lt;/b&gt; preenche as informações básicas na guia Detalhes, e incluí os viajantes e solicitações de valores/despesas &lt;span style=&quot;font-size: 13px;&quot;&gt;na guia Relacionados.&lt;/span&gt;&lt;/li&gt;&lt;li&gt;Caso sejam marcadas as opções Passagem/Hospedagem, o &lt;b&gt;&lt;u&gt;responsável por cotar&lt;/u&gt;&lt;/b&gt; esses valores deve inserí-los na viagem, antes do envio à aprovação.&lt;/li&gt;&lt;li&gt;Estando tudo OK, envia-se para o processo de aprovação.&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>Em rascunho</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;&lt;b&gt;&lt;u&gt;Etapa de viagem em execução:&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Essa etapa sinaliza que a viagem está sendo executada, isto é, atingiu a data de início, e de fato iniciou e está em andamento ainda.&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>Em viagem</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <info>&lt;p&gt;&lt;b&gt;&lt;u&gt;Viagem rejeitada:&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Nesse status o &lt;b&gt;&lt;u&gt;viajante/organizador da viagem&lt;/u&gt;&lt;/b&gt; pode entender o motivo da rejeição, fazer as alterações necessárias, e reenviar para aprovação, ou abortar a viagem.&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>Reprovada</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>__MASTER__</recordTypeName>
+</PathAssistant>

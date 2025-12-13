@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo_de_Servi_o_Requerido__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipo de Serviço Requerido</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Calibração</fullName>
+                <default>false</default>
+                <label>Calibração</label>
+            </value>
+            <value>
+                <fullName>Qualificação</fullName>
+                <default>false</default>
+                <label>Qualificação</label>
+            </value>
+            <value>
+                <fullName>Ensaio de Segurança Elétrica</fullName>
+                <default>false</default>
+                <label>Ensaio de Segurança Elétrica</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

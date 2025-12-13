@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>C_pia_de_Tudo</fullName>
+    <columns>NAME</columns>
+    <columns>Auditor__c</columns>
+    <columns>Auditado__c</columns>
+    <columns>Departamento__c</columns>
+    <columns>Pontua_o_geral__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Empresa__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>notEqual</operation>
+        <value>X5S__c.Auditoria_Veicular</value>
+    </filters>
+    <label>5S</label>
+</ListView>

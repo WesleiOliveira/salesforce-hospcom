@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_do_Item__c</fullName>
+    <externalId>false</externalId>
+    <label>Status do Item</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>NOVO</fullName>
+                <default>true</default>
+                <label>NOVO</label>
+            </value>
+            <value>
+                <fullName>AGUARDANDO COMPRA FORNECEDOR</fullName>
+                <default>false</default>
+                <label>AGUARDANDO COMPRA FORNECEDOR</label>
+            </value>
+            <value>
+                <fullName>AGUARDANDO ENTREGA FORNECEDOR</fullName>
+                <default>false</default>
+                <label>AGUARDANDO ENTREGA FORNECEDOR</label>
+            </value>
+            <value>
+                <fullName>FINALIZADO</fullName>
+                <default>false</default>
+                <label>FINALIZADO</label>
+            </value>
+            <value>
+                <fullName>RECEBIDO FORNECEDOR</fullName>
+                <default>false</default>
+                <label>RECEBIDO FORNECEDOR</label>
+            </value>
+            <value>
+                <fullName>CANCELADO</fullName>
+                <default>false</default>
+                <label>CANCELADO</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

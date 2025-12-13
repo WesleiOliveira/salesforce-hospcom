@@ -1,0 +1,17 @@
+<aura:component extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+
+    <ltng:require
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery)}"                    
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    <div id="spinner" style="display:none; text-align:center; margin-top:20px;">
+        <lightning:spinner alternativeText="Carregando..." size="medium"/>
+    </div>
+    
+    <div style=" display: flex; justify-content: center; align-items: center; padding: 10px; border: 1px solid #d4d4d4; border-radius: 5px; margin: 5px; background-color: #f3f3f3">
+        <button class="button438843" id="button438843">Enviar para aprovação</button>
+    </div>
+	
+</aura:component>

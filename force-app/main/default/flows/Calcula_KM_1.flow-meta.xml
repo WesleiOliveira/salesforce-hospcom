@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <environments>Default</environments>
+    <formulas>
+        <name>formula_1_myRule_1_A3_5704055913</name>
+        <dataType>Currency</dataType>
+        <expression>({!$Record.Km_final__c} - {!$Record.Km_inicial__c}) * 0.75</expression>
+        <scale>18</scale>
+    </formulas>
+    <formulas>
+        <name>formula_2_myRule_1_A2_1967593945</name>
+        <dataType>Currency</dataType>
+        <expression>({!$Record.Total_de_Km__c} * 0.75) * -1</expression>
+        <scale>18</scale>
+    </formulas>
+    <formulas>
+        <name>formula_3_myRule_1_A1_7442658388</name>
+        <dataType>Number</dataType>
+        <expression>{!$Record.Km_final__c} - {!$Record.Km_inicial__c}</expression>
+        <scale>18</scale>
+    </formulas>
+    <interviewLabel>Transação — Calcula KM {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Transação — Calcula KM</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>myRule_1_A1</name>
+        <label>Calcula Total de Km</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <connector>
+            <targetReference>myRule_1_A2</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Tipo__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Quitação</stringValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Total_de_Km__c</field>
+            <value>
+                <elementReference>formula_3_myRule_1_A1_7442658388</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>myRule_1_A2</name>
+        <label>Calcula Valor (Requisição)</label>
+        <locationX>176</locationX>
+        <locationY>431</locationY>
+        <connector>
+            <targetReference>myRule_1_A3</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Tipo__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Requisição</stringValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Valor__c</field>
+            <value>
+                <elementReference>formula_2_myRule_1_A2_1967593945</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>myRule_1_A3</name>
+        <label>Calcula Valor (Quitação)</label>
+        <locationX>176</locationX>
+        <locationY>539</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Tipo__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Quitação</stringValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Valor__c</field>
+            <value>
+                <elementReference>formula_1_myRule_1_A3_5704055913</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>myRule_1_A1</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Categoria__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>KM rodado</stringValue>
+            </value>
+        </filters>
+        <object>Transacao__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Draft</status>
+</Flow>

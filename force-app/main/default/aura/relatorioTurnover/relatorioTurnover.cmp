@@ -1,0 +1,19 @@
+<aura:component extends="c.ApexHelper"
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+    access="global">
+
+    <ltng:require 
+                  scripts="{!join(',',
+                    $Resource.JQuery,
+                    $Resource.chart)}" afterScriptsLoaded="{!c.myAction}" />
+    
+    <div style="min-height: 275px; display: flex;flex-direction: column;align-items: center;justify-content: center;height: 100%;width: 100%;">
+        <div id="container">
+            Turnover
+            <div id="Turnover"></div>
+        </div>
+        
+        <div class="footerDesc">((Admissao + demissao)/2)/Total de funcionarios ativos * 100</div>
+    </div>
+    
+</aura:component>

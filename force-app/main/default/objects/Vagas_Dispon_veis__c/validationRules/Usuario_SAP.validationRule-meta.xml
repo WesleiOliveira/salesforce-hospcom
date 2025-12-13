@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Usuario_SAP</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+TEXT(Existe_licenca_adquirida__c ) = &apos;Sim&apos;,
+Usuario_e_senha_SAP__c = &apos;&apos;
+)</errorConditionFormula>
+    <errorDisplayField>Usuario_e_senha_SAP__c</errorDisplayField>
+    <errorMessage>Informe o usuário e senha do SAP.</errorMessage>
+</ValidationRule>

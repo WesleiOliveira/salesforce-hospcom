@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>valor_valido_nao_preencher</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+	!$User.Ignorar_erros__c,
+	NOT(ISBLANK(Valor_valido__c)),
+	TEXT(Tipo__c) == &apos;Requisição&apos;
+)</errorConditionFormula>
+    <errorDisplayField>Valor_valido__c</errorDisplayField>
+    <errorMessage>O valor válido não deve ser preenchido em transação de requisição, apenas de quitação.</errorMessage>
+</ValidationRule>

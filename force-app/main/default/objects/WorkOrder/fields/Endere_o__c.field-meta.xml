@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Endere_o__c</fullName>
+    <externalId>false</externalId>
+    <formula>UPPER(Account.BillingStreet + &quot;, &quot; + Account.BillingCity + &quot;, &quot; + Account.BillingState + &quot;, CEP: &quot; +  Account.BillingPostalCode)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Endereço da conta do Cliente</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

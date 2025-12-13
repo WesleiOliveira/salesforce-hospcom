@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valor_de_entrada</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ TEXT(Valor_de_entrada__c) == &apos;&apos;,
+OR(
+CONTAINS(TEXT(Condicao_de_pagamento__c) , &apos;Entrada&apos;),  CONTAINS(TEXT(Condicao_de_pagamento__c) , &apos;Entrada&apos;), 
+TEXT(Tem_entrada__c) == &apos;Sim&apos;
+)
+)</errorConditionFormula>
+    <errorDisplayField>Valor_de_entrada__c</errorDisplayField>
+    <errorMessage>Preencha o valor de entrada</errorMessage>
+</ValidationRule>

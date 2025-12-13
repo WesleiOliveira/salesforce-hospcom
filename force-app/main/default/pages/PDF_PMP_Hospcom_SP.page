@@ -1,0 +1,199 @@
+<apex:page controller="ListagemIMEs_PMP" applyHtmlTag="false" showHeader="false" renderAs="pdf">
+  
+    <head>
+        <style type="text/css" media="print">
+            @page {
+                size: 21cm 29.7cm;
+                margin: 100px 40px 60px 40px;
+
+                @top-center {
+                    content: element(header);
+                }
+
+                @bottom-center {
+                    content: element(footer);
+                }
+            }
+
+            *{
+                font-family: sans-serif !important;
+            }
+            
+            @page {
+                size: A4;
+                background:url({!$Resource.TimbradoHospcomSP});
+                margin: 150px 20px 120px 20px;
+
+                @bottom-center {
+                    content: element(footer);
+                }
+            }
+
+            .pagenumber:before {
+                content: counter(page);
+            }
+
+            .pagecount:before {
+                content: counter(pages);
+            }
+
+            div.header {
+                margin: 0px 0px 0px 0px;
+                padding: 20px 0px 20px 0px;
+                position: running(header);
+                height: 60px;
+            }
+
+            div.footer {
+                margin: 0px 0px 0px 0px;
+                padding: 20px 0px 20px 0px;
+                position: running(footer);
+                height: 20px;
+                text-align: right;
+                font-family: arial, verdana, sans-serif;
+                font-size: 10px;
+                font-weight: normal;
+            }
+            
+            
+        </style>
+        <style type="text/css" media="print">
+         
+            
+            
+            .bordas{
+                border: 1px solid #183e60;                
+                text-transform: uppercase;
+            }
+            tr{
+                page-break-inside: avoid;
+            }
+            td{
+                padding: 8px !important ;
+               
+            }
+            table{
+                border-collapse: collapse;
+            }
+            .center{                
+                text-align: center; 
+            }
+            .dado{
+                font-size: 10px;
+                color: #183e60; 
+                border: 1px solid #626363; 
+            }
+            
+            .titulo{
+                font-size: 11px;
+                font-weight: bold;
+                text-align: center; 
+                color: #fff; 
+                background: #183e60;
+                border: 1px solid #626363; 
+            }
+        </style>
+    </head>
+
+    <body>
+        <apex:pageBlock >
+
+            <div class="footer" style="text-align:center !important">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Página <span class="pagenumber" /> de <span class="pagecount" /> - Emissão em:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}">
+                    <apex:param value="{! TODAY() }" />
+                </apex:outputText>
+            </div>
+            
+            
+             
+            
+            <table width='100%'>
+            
+                <tr width='100%'>
+                    <td class="" style='text-align:center; color:#0d3354; font-weight: 900;' colspan='2' width='100%'>
+                                PLANO DE MANUTENÇÃO PREVENTIVA
+                    </td>
+                </tr>
+              
+            </table>
+            <br/><br/>
+            <table>
+                <tr>
+                    
+                    <td class='titulo bordas' width='16%'>
+                        Equipamento
+                    </td>
+                    
+                    <td class='titulo bordas' width='16%'>
+                        Local
+                    </td>
+                    
+                    <td class='titulo bordas' width='16%'>
+                        Última Serviço
+                    </td>
+                    
+               
+                    <td class='titulo bordas' width='16%'>
+                        Próxima Serviço
+                    </td>
+                    
+                    
+                    <td class='titulo bordas' width='16%'>
+                        Responsável
+                    </td>
+                    
+                    
+                    <td class='titulo bordas' width='16%'>
+                        Prazo
+                    </td>
+                    
+                </tr> 
+               
+                
+                <apex:repeat value="{!pmpList}" var="ime">
+                
+                
+                
+                
+                
+                    <apex:outputText rendered="{!if(ime.Empresa__c = '001U4000006sAHD', true, false)}" >
+                    <tr>
+                        <td class='dado bordas'>
+                            {!ime.Nome_do_Ativo__c}
+                        </td>
+                        
+                        <td class='dado bordas center'>
+                             {!ime.Local__c}
+                        </td>
+                        
+                        <td class='dado bordas center'  > 
+                            <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                <apex:param value="{! ime.DatadaExecucao__c }" />
+                            </apex:outputText>
+                        </td>
+                        
+                        <td class='dado bordas center'  width='50px'>
+                            <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                <apex:param value="{!ime.Data_de_Validade__c}" />
+                            </apex:outputText>
+                        </td>
+                        
+                        <td class='dado bordas'>
+                             {!ime.Nome_respons_vel__c}
+                        </td> 
+                        
+                        <td class='dado bordas'>
+                           {!ime.Prazo__c}
+                        </td>
+                    </tr>  
+                    
+                    
+                
+                     </apex:outputText>
+                </apex:repeat>
+            </table>
+        </apex:pageBlock>
+    </body>
+</apex:page>

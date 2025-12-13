@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Produto_Relacionado__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Produto Relacionado</label>
+    <referenceTo>Product2</referenceTo>
+    <relationshipLabel>Ativos do Aditivo Contratual</relationshipLabel>
+    <relationshipName>Ativos_do_Aditivo_Contratual</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

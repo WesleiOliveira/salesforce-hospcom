@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo_de_transporte</fullName>
+    <active>true</active>
+    <errorConditionFormula>(TEXT(Tipo_de_transporte__c) == &apos;Veículo Hospcom&apos; &amp;&amp;  Conta_da_Transportadora__c != NULL) || 
+(TEXT(Tipo_de_transporte__c) == &apos;Transportadora&apos; &amp;&amp;   Ativo__c != NULL) 
+
+||
+
+(TEXT(Tipo_de_transporte__c) == &apos;Veículo Hospcom&apos; &amp;&amp;   Ativo__c == NULL) ||
+(TEXT(Tipo_de_transporte__c) == &apos;Transportadora&apos; &amp;&amp;  Conta_da_Transportadora__c == NULL)</errorConditionFormula>
+    <errorMessage>Verifique se preenchue corretamente os campos de &apos;Veículo&apos; e &apos;Transportadora&apos; de acordo com a seguinte regra:
+
+Tipo de transporte &quot;Veículo Hospcom&quot;: Preencha o campo &quot;Veículo&quot;;
+Tipo de transporte &quot;Transportadora&quot;:   Preencha o campo &apos;Transportadora&quot;</errorMessage>
+</ValidationRule>

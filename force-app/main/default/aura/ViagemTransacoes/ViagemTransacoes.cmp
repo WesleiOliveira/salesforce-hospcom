@@ -1,0 +1,21 @@
+<aura:component controller="ViagemTransacoes" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId">
+	
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+	<aura:attribute name="colunas" type="List"/>
+	<aura:attribute name="resumos" type="List"/>
+	<aura:attribute name="exibir" type="Boolean" default="false"/>
+	
+	<aura:if isTrue="{!v.exibir}">
+		<h3 class="slds-section__title  test-id__section-header-container">
+		   <button class="slds-button test-id__section-header-button slds-section__title-action" type="button" aria-expanded="true">
+			  <!-- <lightning:icon iconName="action:approval" alternativeText="Approved" title="Approved" /> -->
+			  <span class="test-id__section-header-title slds-truncate" data-aura-rendered-by="204:216;a">Resumo de Despesas</span>
+		   </button>
+		</h3>	
+		<div>
+			<lightning:datatable keyField="id" data="{!v.resumos}" columns="{!v.colunas}" hideCheckboxColumn="true" onrowaction="{!c.Redireciona}"/>
+		</div>
+	</aura:if>
+	
+</aura:component>

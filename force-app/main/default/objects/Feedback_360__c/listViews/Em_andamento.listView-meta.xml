@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Em_andamento</fullName>
+    <columns>N_do_Feedback__c</columns>
+    <columns>Gravidade__c</columns>
+    <columns>T_pico__c</columns>
+    <columns>NAME</columns>
+    <columns>Status__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>UPDATEDBY_USER.ALIAS</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Departamento__c</field>
+        <operation>equals</operation>
+        <value>Desenvolvimento</value>
+    </filters>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Em andamento</value>
+    </filters>
+    <label>2 - Em andamento</label>
+</ListView>

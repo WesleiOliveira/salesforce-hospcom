@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Certificado_de_BPF_anvisa</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(Certificado_de_BPF_anvisa__c = true, 
+ISBLANK(Venc_Certificado_BPF__c))</errorConditionFormula>
+    <errorDisplayField>Venc_Certificado_BPF__c</errorDisplayField>
+    <errorMessage>Obrigatório</errorMessage>
+</ValidationRule>

@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <decisions>
+        <name>myRule_1</name>
+        <label>OT CALIBRAÇÃO</label>
+        <locationX>312</locationX>
+        <locationY>323</locationY>
+        <defaultConnector>
+            <targetReference>myRule_4</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>FALSE_OT CALIBRAÇÃO</defaultConnectorLabel>
+        <rules>
+            <name>TRUE_myRule_1</name>
+            <conditionLogic>3 AND (1 OR 2)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>01231000000tb5gAAA</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>01231000000tb5lAAA</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_1_A1</targetReference>
+            </connector>
+            <label>TRUE_OT CALIBRAÇÃO</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myRule_10</name>
+        <label>OT MANUTENÇÃO CORRETIVA</label>
+        <locationX>1097</locationX>
+        <locationY>647</locationY>
+        <defaultConnector>
+            <targetReference>myRule_13</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>FALSE_OT MANUTENÇÃO CORRETIVA</defaultConnectorLabel>
+        <rules>
+            <name>TRUE_myRule_10</name>
+            <conditionLogic>3 AND (1 OR 2)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>01231000000tb6AAAQ</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>01231000000tb6FAAQ</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_10_A1</targetReference>
+            </connector>
+            <label>TRUE_OT MANUTENÇÃO CORRETIVA</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myRule_13</name>
+        <label>OT MANUTENÇÃO PREVENTIVA</label>
+        <locationX>1353</locationX>
+        <locationY>755</locationY>
+        <defaultConnector>
+            <targetReference>myRule_16</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>FALSE_OT MANUTENÇÃO PREVENTIVA</defaultConnectorLabel>
+        <rules>
+            <name>TRUE_myRule_13</name>
+            <conditionLogic>3 AND (1 OR 2)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>01231000000tb5WAAQ</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>01231000000tb5bAAA</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_13_A1</targetReference>
+            </connector>
+            <label>TRUE_OT MANUTENÇÃO PREVENTIVA</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myRule_16</name>
+        <label>OT DEMONSTRAÇÃO DE PRODUTO</label>
+        <locationX>1601</locationX>
+        <locationY>863</locationY>
+        <defaultConnector>
+            <targetReference>myRule_19</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>FALSE_OT DEMONSTRAÇÃO DE PRODUTO</defaultConnectorLabel>
+        <rules>
+            <name>TRUE_myRule_16</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>01231000000taxSAAQ</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_16_A1</targetReference>
+            </connector>
+            <label>TRUE_OT DEMONSTRAÇÃO DE PRODUTO</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myRule_19</name>
+        <label>OT TREINAMENTO DE ATIVOS</label>
+        <locationX>1832</locationX>
+        <locationY>971</locationY>
+        <defaultConnector>
+            <targetReference>myRule_22</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>FALSE_OT TREINAMENTO DE ATIVOS</defaultConnectorLabel>
+        <rules>
+            <name>TRUE_myRule_19</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>01231000000taxXAAQ</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_19_A1</targetReference>
+            </connector>
+            <label>TRUE_OT TREINAMENTO DE ATIVOS</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myRule_22</name>
+        <label>OT VERIFICAÇÃO FUNCIONAL</label>
+        <locationX>2030</locationX>
+        <locationY>1079</locationY>
+        <defaultConnectorLabel>FALSE_OT VERIFICAÇÃO FUNCIONAL</defaultConnectorLabel>
+        <rules>
+            <name>TRUE_myRule_22</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>01231000000tbLLAAY</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_22_A1</targetReference>
+            </connector>
+            <label>TRUE_OT VERIFICAÇÃO FUNCIONAL</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myRule_4</name>
+        <label>OT QUALIFICAÇÃO</label>
+        <locationX>575</locationX>
+        <locationY>431</locationY>
+        <defaultConnector>
+            <targetReference>myRule_7</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>FALSE_OT QUALIFICAÇÃO</defaultConnectorLabel>
+        <rules>
+            <name>TRUE_myRule_4</name>
+            <conditionLogic>3 AND (1 OR 2)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>01231000000tb6tAAA</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>01231000000tb6yAAA</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_4_A1</targetReference>
+            </connector>
+            <label>TRUE_OT QUALIFICAÇÃO</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myRule_7</name>
+        <label>OT E.S.E.</label>
+        <locationX>837</locationX>
+        <locationY>539</locationY>
+        <defaultConnector>
+            <targetReference>myRule_10</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>FALSE_OT E.S.E.</defaultConnectorLabel>
+        <rules>
+            <name>TRUE_myRule_7</name>
+            <conditionLogic>3 AND (1 OR 2)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>01231000000tb60AAA</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>01231000000tb65AAA</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_7_A1</targetReference>
+            </connector>
+            <label>TRUE_OT E.S.E.</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <interviewLabel>OT — Sincroniza tipo de registro com tipo de serviço {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>OT — Sincroniza tipo de registro com tipo de serviço</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>myRule_10_A1</name>
+        <label>ATUALIZA TIPO DE SERVIÇO</label>
+        <locationX>842</locationX>
+        <locationY>755</locationY>
+        <inputAssignments>
+            <field>Tipo_de_Servi_o__c</field>
+            <value>
+                <stringValue>MANUTENÇÃO CORRETIVA</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>myRule_13_A1</name>
+        <label>ATUALIZA TIPO DE SERVIÇO</label>
+        <locationX>1106</locationX>
+        <locationY>863</locationY>
+        <inputAssignments>
+            <field>Tipo_de_Servi_o__c</field>
+            <value>
+                <stringValue>MANUTENÇÃO PREVENTIVA</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>myRule_16_A1</name>
+        <label>ATUALIZA TIPO DE SERVIÇO</label>
+        <locationX>1370</locationX>
+        <locationY>971</locationY>
+        <inputAssignments>
+            <field>Tipo_de_Servi_o__c</field>
+            <value>
+                <stringValue>DEMONSTRAÇÃO DE PRODUTOS</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>myRule_19_A1</name>
+        <label>ATUALIZA TIPO DE SERVIÇO</label>
+        <locationX>1634</locationX>
+        <locationY>1079</locationY>
+        <inputAssignments>
+            <field>Tipo_de_Servi_o__c</field>
+            <value>
+                <stringValue>TREINAMENTO DE ATIVOS</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>myRule_1_A1</name>
+        <label>ATUALIZA TIPO DE SERVIÇO</label>
+        <locationX>50</locationX>
+        <locationY>431</locationY>
+        <inputAssignments>
+            <field>Tipo_de_Servi_o__c</field>
+            <value>
+                <stringValue>CALIBRAÇÃO</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>myRule_22_A1</name>
+        <label>ATUALIZA TIPO DE SERVIÇO</label>
+        <locationX>1898</locationX>
+        <locationY>1187</locationY>
+        <inputAssignments>
+            <field>Tipo_de_Servi_o__c</field>
+            <value>
+                <stringValue>VERIFICAÇÃO FUNCIONAL</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>myRule_4_A1</name>
+        <label>ATUALIZA TIPO DE SERVIÇO</label>
+        <locationX>314</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Tipo_de_Servi_o__c</field>
+            <value>
+                <stringValue>QUALIFICAÇÃO</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>myRule_7_A1</name>
+        <label>ATUALIZA TIPO DE SERVIÇO</label>
+        <locationX>578</locationX>
+        <locationY>647</locationY>
+        <inputAssignments>
+            <field>Tipo_de_Servi_o__c</field>
+            <value>
+                <stringValue>ENSAIO DE SEGURANÇA ELÉTRICA</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>186</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>myRule_1</targetReference>
+        </connector>
+        <object>WorkOrder</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

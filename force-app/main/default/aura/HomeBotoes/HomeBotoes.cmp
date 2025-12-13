@@ -1,0 +1,26 @@
+<aura:component controller="HomeBotoes" implements="forceCommunity:availableForAllPageTypes">
+	
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+	<aura:attribute name="paineis" type="List"/>
+	<aura:attribute name="painel" type="String" default=""/>
+	<aura:attribute name="exibir" type="Boolean" default="false"/>
+	
+	<aura:if isTrue="{!v.exibir}">
+		<div class="slds-m-around_x-small">
+			
+			<!-- botões -->
+			<lightning:buttonGroup class="slds-button_stretch">
+				<aura:iteration items="{!v.paineis}" var="painel">
+					<aura:if isTrue="{!v.painel==painel}">
+						<lightning:button class="slds-button_stretch" label="{!painel}" title="{!painel}" value="{!painel}" variant="brand" onclick="{!c.Atualizar}" />
+					</aura:if>
+					<aura:if isTrue="{!v.painel!=painel}">
+						<lightning:button class="slds-button_stretch" label="{!painel}" title="{!painel}" value="{!painel}" onclick="{!c.Atualizar}" />
+					</aura:if>
+				</aura:iteration>
+			</lightning:buttonGroup>
+			
+		</div>
+	</aura:if>
+	
+</aura:component>

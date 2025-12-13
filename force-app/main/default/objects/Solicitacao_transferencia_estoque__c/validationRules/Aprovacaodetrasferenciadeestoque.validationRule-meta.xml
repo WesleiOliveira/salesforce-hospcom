@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Aprovacaodetrasferenciadeestoque</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    A_ao_interna__c = FALSE,
+    ISPICKVAL(Status__c, &quot;Aprovado&quot;)
+)</errorConditionFormula>
+    <errorMessage>&quot;O status não pode ser alterado para &apos;Aprovado&apos; enquanto o processo de aprovação não estiver concluído.&quot;</errorMessage>
+</ValidationRule>

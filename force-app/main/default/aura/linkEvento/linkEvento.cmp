@@ -1,0 +1,30 @@
+<aura:component controller="Clicksign" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <!-- <aura:handler name="render" value="{!this}" action="{!c.onRead}"/> -->
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css',
+                          $Resource.jqueryProgressBar + '/jquery.progressbar.css',
+                          $Resource.bootstrapSelect14 + '/docs/docs/dist/css/bootstrap-select.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.jqueryProgressBar + '/jquery.progressbar.js',
+                           $Resource.sortableJs + '/Sortable.js',
+                           $Resource.popper + '/popper.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js',
+                           $Resource.bootstrapSelect14 + '/docs/docs/dist/js/bootstrap-select.min.js')}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    <div style="margin: 8px">
+        <div class='divButton'>
+            <button id="copiaLink" onClick="teste" class="slds-button slds-button--brand slds-path__mark-complete stepAction current uiButton">
+                Copiar link do evento
+            </button>
+            <span class="asOfDate" style="display: none" id="sucesso">Link copiado!</span>
+        </div>
+    </div>
+    
+</aura:component>

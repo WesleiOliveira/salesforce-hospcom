@@ -1,0 +1,330 @@
+.THIS .circles{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.THIS .circles li{
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    animation: animate 25s linear infinite;
+    bottom: -150px;
+    
+}
+
+.THIS .circles li:nth-child(1){
+    left: 25%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 0s;
+}
+
+
+.THIS .circles li:nth-child(2){
+    left: 30%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 2s;
+    animation-duration: 12s;
+}
+
+.THIS .circles li:nth-child(3){
+    left: 45%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 4s;
+}
+
+.THIS .circles li:nth-child(4){
+    left: 40%;
+    width: 60px;
+    height: 60px;
+    animation-delay: 0s;
+    animation-duration: 18s;
+}
+
+.THIS .circles li:nth-child(5){
+    left: 48%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 0s;
+}
+
+.THIS .circles li:nth-child(6){
+    left: 45%;
+    width: 110px;
+    height: 110px;
+    animation-delay: 3s;
+}
+
+.THIS .circles li:nth-child(7){
+    left: 35%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 7s;
+}
+
+.THIS .circles li:nth-child(8){
+    left: 30%;
+    width: 25px;
+    height: 25px;
+    animation-delay: 15s;
+    animation-duration: 45s;
+}
+
+.THIS .circles li:nth-child(9){
+    left: 20%;
+    width: 15px;
+    height: 15px;
+    animation-delay: 2s;
+    animation-duration: 35s;
+}
+
+.THIS .circles li:nth-child(10){
+    left: 20%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 0s;
+    animation-duration: 11s;
+}
+
+
+
+@keyframes animate {
+
+    0%{
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+
+    100%{
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
+    
+}
+
+
+
+
+
+/* CSS APLICADO EM DISPOSITIVOS MÓVEIS */
+@media screen
+    and (max-device-width: 480px)
+    and (orientation: portrait){
+    .THIS .contentBanner{
+        display: none!important;
+    }
+    
+    .THIS .vidFull{
+        /*width: 400%!important;*/
+    }
+    
+    .THIS .divPrincipalCartao{
+        width: 100%!important;
+    }
+    
+    .THIS .colunaEsquerda{
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        border-bottom-left-radius: 0px!important; 
+    }
+    
+    .THIS .containerFullBanner{
+        margin-bottom: 200px!important;
+    }
+    
+}
+
+@media screen
+    and (max-device-width: 640px)
+    and (orientation: landscape){
+    .THIS .contentBanner{
+        display: none!important;
+    }
+    .THIS .vidFull{
+        /*width: 400%!important;*/
+    }
+    
+    .THIS .divPrincipalCartao{
+        width: 100%!important;
+    }
+    
+    .THIS .colunaEsquerda{
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        border-bottom-left-radius: 0px!important; 
+    }
+    
+    .THIS .containerFullBanner{
+        margin-bottom: 200px!important;
+    }
+    
+}
+
+@media screen
+    and (max-device-width: 640px){
+    .THIS .contentBanner{
+        display: none!important;
+    }
+    
+    .THIS .vidFull{
+        /*width: 400%!important;*/
+    }
+    
+    .THIS .divPrincipalCartao{
+        width: 100%!important;
+    }
+    
+    .THIS .colunaEsquerda{
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        border-bottom-left-radius: 0px!important; 
+    }
+    
+    .THIS .containerFullBanner{
+        margin-bottom: 200px!important;
+    }
+    
+}
+
+
+/* APLICADO SOMENTE EM TABLETS */
+@media screen
+    and (max-device-width: 1180px){
+
+    
+    .THIS .divPrincipalCartao{
+        width: 100%!important;
+    }
+    
+    
+}
+
+
+/* -------------------------------------------- */
+
+.THIS .imgBanner{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    min-height: 600px;
+}
+
+.THIS .colunaEsquerda{
+    background: linear-gradient(270deg, rgb(12, 55, 90) 21.95%, rgb(0, 0, 0) 118.57%), rgb(13, 55, 91);
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.THIS .btn-success:hover{
+    background-color: #55cd15!important;
+}
+
+.THIS .colunaDireita{
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+    flex-direction: column;
+    height: 100%;
+}
+
+.THIS .textSignClass{
+    color: #00345c;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    display: flex;
+}
+
+.THIS .divPrincipalCartao{
+    background-color: white;
+    width: 1000px;
+    height: 75vh;
+    border-radius: 30px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+.THIS .containerFullBanner{
+    position: relative;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.THIS .vidFull{
+    width: 100%;
+    height: 100%;
+}
+
+
+.THIS .contentBanner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    width: 50%;
+    height: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    border-top-left-radius: 20px!important;
+    border-top-right-radius: 60px!important;
+    border-bottom-right-radius: 40px!important;
+    border-bottom-left-radius: 80px!important;
+    
+}
+
+.THIS .textoInnerContentBlock{
+    font-weight: 200;
+    font-size:2.5vh;
+    text-indent:0px;
+    letter-spacing:0px;
+    word-spacing:0px;
+    line-height: 1.6;
+    text-align:center;
+    color:#ffffff;
+    padding-left:20px;
+    padding-top: 0px;
+    margin:0px;
+    width: 200px;
+    /*border: 1px solid;*/
+    min-height: 150px;
+	border-top-left-radius: 10px!important;
+    border-top-right-radius: 30px!important;
+    border-bottom-right-radius: 20px!important;
+    border-bottom-left-radius: 40px!important;
+    display: flex;
+    align-items: center;
+}
+
+.THIS .innerImage{
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    height: 100px;
+    width: 200px;
+    position: absolute;
+    left: 50%;
+    margin-left: -50px;
+    top: 50%;
+    margin-top: -50px;
+    color: black;
+    align-items: center;
+}

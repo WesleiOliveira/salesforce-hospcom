@@ -1,0 +1,39 @@
+<aura:component controller="AtivosComodato" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+<aura:handler name="init" value="{!this}" action="{!c.doInit2}"/>
+    
+    <ltng:require                 
+                  scripts="{!join(',',
+                           $Resource.JQuery)}"                     
+                  afterScriptsLoaded="{!c.onRender2}" />   
+    <div>
+
+        <div>
+            <button id="criaOtsMassa" class="buttonAbrirr slds-button slds-button--brand">
+                Inserir ativos em massa
+            </button>
+        </div>
+        
+        <div id="boxMasterOts" style="z-index: 100; top: 0; height: 100vh; position: fixed; display: none; flex-direction: column; width: 100vw!important; left: calc(-50vw + 50%); justify-content: center;">
+            <div class="backgroundNoise">
+                <div class="boxCriaOts">
+                    <div class="headerCompartilhaQuadro">
+                        <div class="compartilhaQuadroText" id="compartilhaQuadroText">Inserir ativos em Massa</div>
+                        <i class="fa fa-times-circle closePopup" aria-hidden="true" id="closeSharePopup"></i>
+                    </div>
+                    
+                    <label for="textAreaNumerosSerie">Números de série</label>
+                    <textarea style="min-height: 150px;" class="criaCustomSelect" rows="4" id="textAreaNumerosSerie" placeholder="Digite os números de série por linha"></textarea>
+                    
+                    <div>
+                        <button id="criarSubmit" class="buttonAbrirr slds-button slds-button--brand">
+                            Criar
+                        </button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+</aura:component>

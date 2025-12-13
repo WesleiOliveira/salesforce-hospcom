@@ -1,0 +1,1310 @@
+<apex:page standardController="Demonstracao__c" extensions="DemonstracaoProdutos" showHeader="false" showChat="false" standardStylesheets="false" docType="html-5.0">
+    <html>
+    
+        <head>
+            <title>Configurador de produtos</title>
+            <meta charset="utf-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+            <script src="{!$Resource.JQuery}"></script>
+            <script src="{!$Resource.Sortable}"></script>
+
+            <link href="{!URLFOR($Resource.Bootstrap, 'css/bootstrap.css')}" rel="stylesheet"/>
+            <script src="{!URLFOR($Resource.Bootstrap, 'js/bootstrap.min.js')}"></script>
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css" rel="stylesheet"/>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
+
+            <style>
+                /* GLOBAL ===================================================== */
+
+                /* corpo */
+                body{
+                    margin-top:0px!important;
+                }
+
+                /* loader */
+                .loader{
+                    position: absolute;
+                    z-index:9998!important;
+                    width: 100%;
+                    height: 100%;
+                    min-height:200px;
+                    background: white url({!$Resource.loader}) center 100px no-repeat;
+                    background-size: 50px 50px;
+                    opacity: .8;
+                }
+
+                /* paginação */
+                .pager{
+                    margin:0px!important;
+                }
+
+                /* formulario */
+                .input-group > .input-group-btn:empty {
+                    width: 0px;
+                }.input-group-btn:first-child:not(:last-child) > .bootstrap-select > button {
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                }.input-group-btn:last-child > .bootstrap-select > button {
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                }.input-group-btn:not(:first-child):not(:last-child) > .bootstrap-select > button, .input-group-btn:not(:first-child):not(:last-child) > button {
+                    border-radius: 0;
+                }
+
+                /* CONTEUDO =================================================== */
+
+                /* conteudo */
+                .conteudo {
+                    overflow-x:hidden!important;
+                    overflow-y:visible!important;
+                }
+
+                /* guia */
+                .guia{
+                    font-size: .8125rem;
+                }.guia li{
+                    text-align: center!important;
+                }.guia li.active{
+                    font-weight: 700;
+                }.guia a{
+                    padding-top: 5px!important;
+                    padding-bottom: 5px!important;
+                    color: rgb(0, 153, 222);
+                    border-top-width: 3px!important;
+                    margin-top: -2px"important;
+                }
+
+                /* painel */
+                .painel{
+                    padding-top: 7px!important;
+                }
+
+                /* cursor (arrastar) */
+                .dragging, .dragging *, .mover {
+                    cursor: move !important;
+                }
+
+                /* item (arrastar) */
+                li.dragged{
+                    position: absolute;
+                    top: 0;
+                    opacity: 0.7;
+                    z-index: 9000;
+                }
+
+                /* item (popover) */
+                .conteudo .popover{ /* fora */
+                    min-width:370px!important;
+                }.conteudo .popover .popover-title{ /* titulo */
+                    font-size: 0.93rem!important;
+                    font-weight: 600!important;
+                    padding: 4px 4px 4px 6px!important;
+                    background-color:#fbfbfb!important;
+                    border-bottom:1px solid #f1ebeb!important;
+                }.conteudo .popover .popover-title .status{ /* status */
+                    font-size: 0.73rem!important;
+                    font-weight: 600!important;
+                }.conteudo .popover .popover-content{ /* conteudo */
+                    padding:0px!important;
+                    font-weight: 400!important;
+                    text-transform: uppercase;
+                }.conteudo .popover .popover-content {
+                    padding:2px 2px 2px 4px!important;
+                    font-size: 0.7000rem!important;
+                }.conteudo .popover .popover-content .dado{
+                    margin-bottom:0px!important;
+                }.conteudo .popover .popover-content .dado td{
+                    padding:2px!important;
+                    border: none!important;
+                }.conteudo .popover .detalhes { /* detalhes */
+                    padding-top:6px!important;
+                }.conteudo .popover .detalhes div{
+                    max-height:130px!important;
+                        overflow: hidden!important;
+                        text-overflow: ellipsis!important;
+                }
+                
+                .conteudo .popover .observacao div{ /* observacao */
+                    background-color:#ffffb6!important;
+                }.conteudo .popover .demonstracao div{ /* demonstracao */
+                    background-color:#f1f1ff!important;
+                }.conteudo .popover .contrato div{ /* contrato */
+                    background-color:#b5ffb5!important;
+                }
+                
+                /* CONTEUDO > ORIGEM ========================================== */
+
+                /* guia */
+                .origem .guia li{
+                    width: 100%!important;
+                }.origem .guia a{
+                    border-color: white!important;
+                }
+                
+                /* legenda */
+                .origem .legenda{
+                    margin:0px!important;
+                    margin-bottom: 5px!important;
+                }.origem .legenda .externo{
+                    padding-left:3px!important;
+                    padding-right:3px!important;
+                }.origem .legenda .label{
+                    color:black!important;
+                    width:100%!important;
+                    display:block!important;
+                }.origem .legenda .demonstracao{
+                    background-color: #d7d7fd!important;
+                }.origem .legenda .contrato{
+                    background-color: #8cf38c!important;
+                }.origem .legenda .manutencao{
+                    background-color: #fbcece!important;
+                }.origem .legenda .observacao{
+                     background-color: #ffff7e!important;
+                }
+                
+                /* filtro */
+                #ativos .termo {
+                    margin-bottom: 6px!important;
+                }
+
+                /* container */
+                #ativos ol.externo{
+                    display: table!important;
+                    list-style-type: none!important;
+                    margin: 0px!important;
+                    padding: 0px!important;
+                    min-height:150px!important;
+                }
+
+                /* item */
+                #ativos .item{ /* fora */
+                    float: left!important;
+                    width:50%!important;
+                    padding: 3px!important;
+                }#ativos .item .dentro{ /* dentro */
+                    height:72px!important;
+                    width:100%!important;
+                        max-width:100%!important;
+                    border: rgb(212, 212, 212) 1px solid;
+                    border-radius: .25rem;
+                    background-color:white;
+                    overflow-x:hidden!important;
+                    overflow-y:hidden!important;
+                    position: relative!important;
+                }#ativos .item .dentro>table{
+                    table-layout:fixed!important;
+                }#ativos .item:not(.dragged) .dentro:hover{ /* hover */
+                    outline: none;
+                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+                    transform: translateY(-2px);
+                    transition: all .25s cubic-bezier(0.46, 0.03, 0.52, 0.96);
+                }#ativos .item .imagem{ /* imagem */
+                    padding: 2px;
+                    width:70px!important;
+                    vertical-align:middle!important;
+                }#ativos .item .imagem img{
+                    width:66px;
+                    height:66px;
+                    background-color:white!important;
+                }#ativos .item .titulo{ /* titulo */
+                    height:17px!important;
+                    font-size: 0.7000rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                        overflow: hidden!important;
+                        text-overflow: ellipsis!important;
+                        white-space: nowrap!important;
+                    padding: 2px;
+                    background-color:#fbfbfb!important;
+                    border-bottom:1px solid #f1ebeb!important;
+                }#ativos .item .link{ /* link */
+                    width:18px;
+                    text-align:center;
+                }#ativos .item .detalhe{ /* modelo e codigo */
+                    height:17px!important;
+                    font-size: 0.6500rem;
+                    font-weight: 400;
+                        overflow: hidden!important;
+                        text-overflow: ellipsis!important;
+                        white-space: nowrap!important;
+                    padding: 1px;
+                    border-bottom:1px solid #f1ebeb!important;
+                }#ativos .item .detalhe .atv_etiqueta{
+                    font-weight: 600!important;
+                    border: 1px gray dashed!important;
+                    border-radius:2px!important;
+                }
+                
+                /*observações:   | amarelo  | titulo: #ffff7e | corpo: #ffffb6 */
+                /*manutenção     | vermelho | titulo: #fbcece | corpo: #ffe3e3 */
+                /*demonstrações: | azul     | titulo: #d7d7fd | corpo: #f1f1ff */
+                /*contratos:     | verde    | titulo: #8cf38c | corpo: #b5ffb5 */
+                
+                /* destaques */
+                #ativos .item.observacao table .titulo{ /* observacao */
+                    background-color: #ffff7e!important;
+                }#ativos .item.observacao table{
+                    background-color: #ffffb6!important;
+                }#ativos .item.manutencao table .titulo{ /* manutencao */
+                    background-color: #fbcece!important;
+                }#ativos .item.manutencao table{
+                    background-color: #ffe3e3!important;
+                }#ativos .item.demonstracao table .titulo{ /* demonstracao */
+                    background-color: #d7d7fd!important;
+                }#ativos .item.demonstracao table{
+                    background-color: #f1f1ff!important;
+                }#ativos .item.contrato table .titulo{ /* contrato */
+                    background-color: #8cf38c!important;
+                }#ativos .item.contrato table{
+                    background-color: #b5ffb5!important;
+                }
+
+                /* paginação */
+                #ativos .paginacao{
+                    margin-top:6px!important;
+                }#ativos .paginacao .informacao {
+                    font-size: .8125rem!important;
+                    margin:6px!important;
+                }#ativos .paginacao li a {
+                    font-size: .8125rem!important;
+                    color: rgb(0, 153, 222)!important;
+                }
+
+                /* CONTEUDO > DESTINO ========================================= */
+
+                /* guia */
+                .destino .guia li{
+                    width: 100%!important;
+                }.destino .guia a{
+                    border-color: white!important;
+                }
+
+                /* container */
+                #destino ol {
+                    list-style-type: none!important;
+                    background-color:#fcfcff!important;
+                }#destino ol.externo { /* 1º nível*/
+                    border: 1px dashed #dcdcdc!important;
+                    border-radius: .25rem!important;
+                    margin: 0px!important;
+                    padding: 7px 0px 10px 20px!important;
+                    min-height: 300px!important;
+                    max-height:850px!important;
+                    overflow-y:auto!important;
+                }#destino ol.externo>li>ol { /* 2º nível*/
+                    border: 1px dashed #dcdcdc!important;
+                    border-radius: .25rem!important;
+                    margin: 0px 0px 0px 20px!important;
+                    padding: 7px 0px 10px 20px!important;
+                    min-height: 25px!important;
+                }#destino ol.active { /* destaque */
+                    border: 1px dashed #4545f9!important;
+                    background-color:#e9e9fb!important;
+                    border-radius: .25rem!important;
+                }
+
+                /* item */
+                #destino .item{
+                    margin: 6px 0px 0px 0px!important;
+                    border: rgb(212, 212, 212) 1px solid;
+                    background-color:white;
+                    padding:0px!important
+                }#destino .item table{
+                    table-layout: fixed!important;
+                }#destino ol.externo>li.item{ /* 1º nível */
+                    border-radius: 0rem .25rem .25rem .25rem;
+                }#destino ol.externo>li>ol>li.item{ /* 2º nível */
+                    border-radius:.25rem;
+                }#destino ol.externo>li>ol>li.item tr.cabecalho td.imagem .itm_item{ /* nº item*/
+                    display:none!important;
+                }#destino .item:hover:not(.dragged){ /* hover */
+                    outline: none;
+                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+                }#destino .item .edita:not(.ativo):hover{ /* edita hover */
+                    background: #fbffb1;
+                }#destino .item tr.cabecalho td:not(.imagem){ /* cabecalho */
+                    background-color:#fbfbfb!important;
+                    border-bottom:1px solid #f1ebeb!important;
+                    text-transform: uppercase;
+                    vertical-align:top;
+                }#destino .item tr.cabecalho td.imagem .itm_item { /* nº item */
+                    width:20px;
+                    top:-1px;
+                    left:-20px;
+                    position:absolute;
+                    overflow: hidden!important;
+                    padding-left:2px;
+                    padding-top:2px;
+                    padding-bottom:2px;
+                    border: rgb(212, 212, 212) 1px solid;
+                    border-right:0px;
+                    border-radius: .25rem 0rem 0rem .25rem;
+                    background-color:white;
+                    font-size: 0.7900rem;
+                    font-weight: 600;
+                }#destino .item tr.cabecalho td.imagem{ /* imagem */
+                    padding:2px;
+                    width:55px!important;
+                    vertical-align:mimddle;
+                    border-bottom:1px solid #f1ebeb!important;
+                    position:relative
+                }#destino .item tr.cabecalho td.imagem .itm_imagem{
+                    vertical-align:middle!important;
+                    position: relative;
+                }#destino .item tr.cabecalho td.imagem img{
+                    width:50px;
+                    height:50px;
+                }#destino .item tr.cabecalho td.titulo{ /* titulo */
+                    padding: 1px 1px 1px 6px;
+                    white-space: nowrap!important;
+                    overflow: hidden!important;
+                    text-overflow: ellipsis!important;
+                    line-height: 1.2;
+                }#destino .item tr.cabecalho td.titulo span.itm_nome{ /* itm_nome */
+                    font-size: 0.960rem;
+                    font-weight: 600;
+                }#destino .item tr.cabecalho td.titulo span.itm_modelo{ /* itm_modelo */
+                    margin-left:8px;
+                    font-size: 0.7400rem;
+                    font-style: italic;
+                }#destino .item tr.cabecalho td.remover{ /* remover */
+                    padding:2px!important;
+                    white-space:nowrap;
+                    text-align:right;
+                    width:20px;
+                }#destino .item tr.cabecalho td.remover span{
+                    cursor:pointer;
+                }#destino .item tr.dado>td{ /* dado */
+                    border-bottom:1px solid #f1ebeb!important;
+                }#destino .item tr.dado td{
+                    vertical-align:middle;
+                    line-height: 1;
+                }#destino .item tr.dado td.diverso{ /* diverso */
+                    padding: 1px 2px 1px 6px;
+                    overflow: hidden!important;
+                    text-overflow: ellipsis!important;
+                    white-space: nowrap!important;
+                }#destino .item tr.dado td.diverso span.itm_marca{ /* marca */
+                    font-size: 0.720rem;
+                    font-weight: 600;
+                }#destino .item tr.dado td.diverso .itm_link{ /* itm_link */
+                    font-weight: 600!important;
+                    border: 1px gray dashed!important;
+                    border-radius:2px!important;
+                }#destino .item tr.dado td.diverso span.identificacoes{ /* identificacoes */
+                    font-size: 0.7000rem;
+                    font-weight: 400;
+                }#destino .item tr.descricao td{ /* descricao */
+                    padding: 2px 6px 2px 6px!important;
+                    height:17px!important;
+                    font-size: 0.6600rem!important;
+                    font-weight: 400;
+                    text-transform: uppercase;
+                    line-height: 1.4;
+                }#destino .item tr.descricao .copiar {
+                    font-size: 0.5600rem!important;
+                    font-weight: 600;
+                    cursor:pointer;
+                    float:right;
+                }#destino .item tr.descricao .itm_descricao {
+                    display:table!important;
+                    width:100%!important;
+                    min-height:15px;
+                }#destino .item tr.descricao .itm_descricao textarea{ /* campo */
+                    display:table-cell!important;
+                    width:100%!important;
+                }#destino .item tr.valor table th, 
+                 #destino .item tr.valor table td{ /* valor */
+                    text-align:center!important;
+                    font-size: 0.6800rem;
+                    text-transform: uppercase;
+                    background-color:#fbfbfb!important;
+                }#destino .item tr.valor table{
+                    margin:0px!important;
+                }#destino .item tr.valor table tr.cabecalho th{ /* cabecalho */
+                    padding: 1px 2px 0 2px!important;
+                    line-height: 1.2;
+                }#destino .item tr.valor table tr.entrada td{ /* entrada */
+                    padding: 2px 2px 1px 2px!important;
+                    border-top: none!important;
+                    border-bottom: 1px #ddd solid;
+                    width:20%!important;
+                    max-width:20%!important;
+                    line-height: 1.2;
+                }#destino .item tr.valor table tr.entrada td span{
+                    display:table!important;
+                    width:100%!important;
+                    min-height:15px;
+                }#destino .item tr.valor table tr.entrada td span input{ /* campo */
+                    display:table-cell!important;
+                    width:100%!important;
+                    text-align: center!important;
+                }#destino .item tr.valor table tr.entrada td:first-child{
+                    border-bottom-left-radius: .25rem;
+                }#destino .item tr.valor table tr.entrada td:last-child{
+                    border-bottom-right-radius: .25rem;
+                }
+                
+                /* arrastável */
+                #destino ol li.placeholder { /* placeholder */
+                    position: relative;
+                    margin: 0;
+                    padding: 0;
+                    border: none;
+                }#destino ol li.placeholder:before { /* setinha */
+                    position: absolute;
+                    content: "";
+                    width: 0;
+                    height: 0;
+                    margin-top: -5px;
+                    left: -9px;
+                    top: -5px;
+                    border: 7px solid transparent;
+                    border-left-color: red;
+                    border-right: none;
+                }
+            </style>
+            
+        </head>
+
+        <body id="corpo-pag">
+            <div class="bootstrap-iso">
+                <div class="container-fluid" id="reseta">
+
+                    <apex:form >
+                        
+                        <!-- metodos -->
+                        <apex:actionFunction name="AtivoPesquisar"
+                            action="{!AtivoPesquisar}"
+                            rerender="painel_ativo"
+                            oncomplete="AnexarPaginacao();ExibirBaloes();AtivarArrastavel();ControlarLoader('ocultar','ativos');"
+                        />
+                        <apex:actionFunction name="DemonstracaoSalvarProdutos"
+                            action="{!DemonstracaoSalvarProdutos}"
+                            rerender="painel_produto"
+                            oncomplete="AnexarEdicoes();CriarContainer();AtivarArrastavel();ControlarLoader('ocultar','destino');AtivosRecarregar();AtualizarInterface();"
+                        />
+                        
+                        <!-- conteúdo -->
+                        <apex:outputPanel id="conteudo">
+                            <div class="row conteudo">
+
+                                <!-- origem -->
+                                <div class='col-xs-50 origem'>
+
+                                    <!-- guia -->
+                                    <div class="row guia">
+                                        <ul class="nav nav-tabs">
+                                            <li class="active"><a data-toggle="tab" href="#ativos">Ativos Disponíveis</a></li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <!-- painel -->
+                                    <div class="row painel">
+                                        <div class="col-xs-100">
+                                            <div class="tab-content">
+                                                
+                                                <!-- ativos -->
+                                                <div id="ativos" class="tab-pane in active">
+                                                    
+                                                    <!-- filtro -->
+                                                    <div class="input-group input-group-sm termo">
+                                                        <apex:inputText styleClass="form-control input-sm" html-placeholder="Pesquisar em ativos..." value="{!ativo_pesquisa.termo_busca}" />
+                                                        <div class="input-group-btn">
+                                                            <apex:selectList styleClass="form-control input-sm browserselectpicker" html-data-style="btn-default btn-sm" multiselect="false" size="1" value="{!ativo_pesquisa.ftr_tipo}">
+                                                                <apex:selectOptions value="{!ativo_pesquisa.ftr_tipo_vals}"/>
+                                                            </apex:selectList>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="row loader" style="display:none;"></div>
+                                                    
+                                                    <apex:outputPanel id="painel_ativo">
+                                                        <apex:inputHidden value="{!ativo_pesquisa.pag_atual}" id="ativos_pag_atual" />
+                                                        <script>
+                                                            ativos_pag_atual = document.getElementById('{!$Component.ativos_pag_atual}');
+                                                        </script>
+
+                                                        <!-- legenda -->
+                                                        <apex:outputText rendered="{!if(tela.legenda!='',true,false)}">
+                                                            <div class="row legenda">
+                                                                <apex:outputText rendered="{!contains(tela.legenda, 'EM DEMONSTRAÇÃO')}">
+                                                                    <div class="col-xs-25 externo"><div class="label demonstracao">Em Demonstração</div></div>
+                                                                </apex:outputText>
+                                                                <apex:outputText rendered="{!contains(tela.legenda, 'EM CONTRATO')}">
+                                                                    <div class="col-xs-25 externo"><div class="label contrato">Em Contrato</div></div>
+                                                                </apex:outputText>
+                                                                <apex:outputText rendered="{!contains(tela.legenda, 'EM MANUTENÇÃO')}">
+                                                                    <div class="col-xs-25 externo"><div class="label manutencao">Em Manutenção</div></div>
+                                                                </apex:outputText>
+                                                                <apex:outputText rendered="{!contains(tela.legenda, 'COM OBSERVAÇÕES')}">
+                                                                    <div class="col-xs-25 externo"><div class="label observacao">Com Observações</div></div>
+                                                                </apex:outputText>
+                                                            </div>
+                                                        </apex:outputText>
+                                                        
+                                                        <ol class="externo">
+                                                            <apex:repeat value="{!ativo_pesquisa.ativos}" var="ativo">
+                                                                <apex:variable var="destaque" value="{!if(contains(ativo.status, 'EM DEMONSTRAÇÃO'),'demonstracao',
+                                                                                                     if(contains(ativo.status, 'EM CONTRATO'),'contrato',
+                                                                                                     if(contains(ativo.status, 'EM MANUTENÇÃO'),'manutencao',
+                                                                                                     if(contains(ativo.status, 'COM OBSERVAÇÕES'),'observacao',''))))}" />
+                                                                                                     
+                                                                <apex:variable var="descricao" value="{!if(ativo.campos.Description==null,'display:none;','')}" />
+                                                                <apex:variable var="acessorios" value="{!if(ativo.acessorios=='','display:none;','')}" />
+                                                                <apex:variable var="observacoes" value="{!if(ativo.campos.Observa_es__c==null,'display:none;','')}" />
+
+                                                                <apex:variable var="demonstracoes" value="{!if(ativo.demonstracoes=='','display:none;','')}" />
+                                                                <apex:variable var="contratos" value="{!if(ativo.contratos==null,'display:none;','')}" />                                                               
+                                                                
+                                                                <li class="item {!destaque}">
+                                                                    <div class="dentro" data-toggle="popover" data-trigger="hover" data-html="true" data-container=".conteudo" title="Detalhes <span class='status'></span>" data-content="
+                                                                        <table class='table table-condensed dado' cellpadding='0' cellspacing='0' border='0' style='width:100%; height:100%;'>
+                                                                            <tr>
+                                                                                <td><b>MARCA: </b><span class='atv_marca'>{!ativo.campos.Product2.Marca__c}</span></td>
+                                                                                <td><b>COD. FABR.: </b><span class='atv_cod_fabricante'>{!ativo.campos.Product2.ProductCode}</span></td>
+                                                                            </tr>
+                                                                            
+                                                                            <tr class='descricao' style='{!descricao}'>
+                                                                                <td class='detalhes' colspan='2'><div><b>DESCRIÇÃO: </b><span class='atv_descricao'>{!ativo.campos.Description}</span></div></td>
+                                                                            </tr>
+                                                                            <tr class='acessorios' style='{!acessorios}'>
+                                                                                <td class='detalhes' colspan='2'><div><b>ACESSÓRIOS:<br/> </b><span class='atv_acessorios'>{!ativo.acessorios}</span></div></td>
+                                                                            </tr>
+                                                                            <tr class='observacao' style='{!observacoes}'>
+                                                                                <td class='detalhes' colspan='2'><div><b>OBSERVAÇÕES:<br/> </b><span class='atv_observacoes'>{!ativo.campos.Observa_es__c}</span></div></td>
+                                                                            </tr>
+                                                                            
+                                                                            <tr class='demonstracao' style='{!demonstracoes}'>
+                                                                                <td class='detalhes' colspan='2'><div><b>AGENDA DE DEMONSTRAÇÕES:<br/> </b><span class='atv_demonstracoes'>{!ativo.demonstracoes}</span></div></td>
+                                                                            </tr>
+                                                                            <tr class='contrato' style='{!contratos}'>
+                                                                                <td class='detalhes' colspan='2'><div><b>AGENDA DE CONTRATOS:<br/> </b><span class='atv_contratos'>{!ativo.contratos}</span></div></td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    ">
+                                                                        <table cellpadding="0" cellspacing="0" border="0" style="width:100%; height:100%;">
+                                                                            <tr>
+                                                                                <td class="imagem mover" rowspan="4">
+                                                                                    <span class='atv_imagem'><img src='{!ativo.campos.Product2.URL_da_Imagem__c}' /></span>
+                                                                                </td>
+                                                                                <td class="titulo mover">
+                                                                                    <span class='atv_nome'>{!ativo.campos.Product2.Name}</span>
+                                                                                </td>
+                                                                                <td class="link">
+                                                                                    <span class='atv_link'>
+                                                                                        <a href="{!tela.url_base}/{!ativo.campos.Id}" target="_blank">
+                                                                                            <span class="glyphicon glyphicon-new-window"></span>
+                                                                                        </a>
+                                                                                    </span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="detalhe" colspan="2">
+                                                                                    <span class='atv_modelo'>{!ativo.campos.Product2.Modelo__c}</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="detalhe" colspan="2">
+                                                                                    <span class='atv_empresa'>{!ativo.campos.Account.Name}</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr> 
+                                                                                <td class="detalhe" colspan="2">
+                                                                                    <span class='atv_estoque'><apex:outputText value="{!ativo.campos.Estoque__c}"/></span>
+                                                                                    | <span class="atv_etiqueta"> SN: <span class='atv_serial'>{!ativo.campos.SerialNumber}</span></span>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                        <span class='atv_valor' style="display:none;">{!ativo.valor}</span>
+                                                                        <span class='prd_id' style="display:none;">{!ativo.campos.Product2}</span>
+                                                                        <span class='atv_id' style="display:none;">{!ativo.campos.Id}</span>
+                                                                        <apex:repeat value="{!ativo.campos.ChildAssets}" var="ativo_filho">
+                                                                            <span style='display:none' class='atv_filho'>
+                                                                                <span class="atvf_imagem">{!ativo_filho.Product2.URL_da_Imagem__c}</span>
+                                                                                <span class="atvf_nome">{!ativo_filho.Product2.Name}</span>
+                                                                                <span class="atvf_modelo">{!ativo_filho.Product2.Modelo__c}</span>
+                                                                                <span class="atvf_marca">{!ativo_filho.Product2.Marca__c}</span>
+                                                                                <span class="atvf_cod_fabricante">{!ativo_filho.Product2.ProductCode}</span>
+                                                                                <span class="atvf_serial">{!ativo_filho.SerialNumber}</span>
+                                                                                <span class="atvf_descricao">{!ativo_filho.Description}</span>
+                                                                                <span class="atvf_observacoes">{!ativo_filho.Observa_es__c}</span>
+                                                                                <span class="atvf_valor">{!ativo_filho.Price}</span> <!-- verificar -->
+                                                                                <span class="prdf_id">{!ativo_filho.Product2}</span>
+                                                                                <span class="atvf_id">{!ativo_filho.Id}</span>
+                                                                            </span>
+                                                                        </apex:repeat>
+                                                                    </div>
+                                                                </li>
+                                                            </apex:repeat>
+                                                        </ol>
+                                                        <div class="paginacao">
+                                                            <ul class="pager">
+                                                                <apex:variable var="estilo" value="{!if(ativo_pesquisa.pag_atual == 1, 'visibility:hidden!important', '')}" />
+                                                                <li class="previous" style="{!estilo}">
+                                                                    <a href="javascript:void(0)" data-pagina="{!ativo_pesquisa.pag_atual-1}">Anterior</a>
+                                                                </li>
+
+                                                                <li class="informacao">
+                                                                    <apex:outputText rendered="{!if(ativo_pesquisa.reg_total != 0, true, false)}" >
+                                                                        Página {!ativo_pesquisa.pag_atual} de {!ativo_pesquisa.pag_total} | Total {!ativo_pesquisa.reg_total} ativo(s)
+                                                                    </apex:outputText>
+                                                                    <apex:outputText rendered="{!if(ativo_pesquisa.reg_total == 0, true, false)}" >
+                                                                        <div style="width:100%;text-align:center!important;">
+                                                                            <br/>Nada encontrado .. verifique se:
+                                                                            <br/><br/>
+                                                                            ➡ Ativo foi cadastrado? ➡ Ativo possui número de série?
+                                                                            ➡ Ativo não está inoperante/desativado? ➡ Ativo está disponível para demonstrações?
+                                                                            ➡ Ativo já não está nessa demonstração? ➡ Ativo possui produto associado?
+                                                                            ➡ Produto está ativo? ➡ Produto possui preço padrão? ➡ Preço padrão está ativo?
+                                                                        </div>
+                                                                    </apex:outputText>
+                                                                </li>
+
+                                                                <apex:variable var="estilo" value="{!if(ativo_pesquisa.pag_atual >= ativo_pesquisa.pag_total, 'visibility:hidden!important', false)}" />
+                                                                <li class="next" style="{!estilo}">
+                                                                    <a href="javascript:void(0)" data-pagina="{!ativo_pesquisa.pag_atual+1}" >Próxima</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </apex:outputPanel>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- destino -->
+                                <div class='col-xs-50 destino'>
+
+                                    <!-- guia -->
+                                    <div class="row guia">
+                                        <ul class="nav nav-tabs">
+                                            <li class="active"><a data-toggle="tab" href="#destino"> Ativos </a></li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- painel -->
+                                    <div class="row painel">
+                                        <div class="col-xs-100">
+                                            <div class="tab-content">
+
+                                                <!-- destino -->
+                                                <div id="destino" class="tab-pane in active">
+                                                    
+                                                    <apex:inputHidden value="{!tela.itens_demo}" id="tela_itens_demo" />
+                                                    <script>
+                                                        tela_itens_demo = document.getElementById('{!$Component.tela_itens_demo}');
+                                                    </script>
+                                                    
+                                                    <div class="row loader" style="display:none;"></div>
+                                                    
+                                                    <apex:outputPanel id="painel_produto">
+                                                        
+                                                        <apex:inputHidden value="{!tela.mensagem}" id="tela_mensagem" />
+                                                        <script>
+                                                            tela_mensagem = document.getElementById('{!$Component.tela_mensagem}');
+                                                        </script>
+                                                        
+                                                        <ol class="externo">
+                                                            <apex:repeat value="{!demonstracao.Produtos_da_Demonstracao__r}" var="item">
+                                                                <apex:outputText rendered="{!if(item.Item_pai__c==null, true, false)}" >
+                                                                    <li class="item">
+                                                                        
+                                                                        <!-- visiveis -->
+                                                                        <table cellpadding="0" cellspacing="0" border="0" style="width:100%; height:100%;">
+                                                                            <tr class="cabecalho mover">
+                                                                                <td rowspan="2" class="imagem">
+                                                                                    <span class="itm_item">{!item.Item__c}</span>
+                                                                                    <span class='itm_imagem'><img src="{!if(
+                                                                                        item.Ativo__r.Product2.URL_da_Imagem__c!=null,
+                                                                                        item.Ativo__r.Product2.URL_da_Imagem__c,
+                                                                                        'https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009y8x5&oid=00Di0000000JVhH&lastMod=1540211149000'
+                                                                                    )}"></img></span>
+                                                                                </td>
+                                                                                <td class="titulo">
+                                                                                    <span class='itm_nome'>{!item.Ativo__r.Product2.Name}</span>
+                                                                                    <br/><span class='itm_modelo'>{!item.Ativo__r.Product2.Modelo__c}</span>
+                                                                                </td>
+                                                                                <td class="remover">
+                                                                                    <span class="glyphicon glyphicon-remove"></span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr class="dado">
+                                                                                <td colspan="2">
+                                                                                    <table cellpadding="0" cellspacing="0" border="0" style="width:100%; height:100%;">
+                                                                                        <tr>
+                                                                                            <td class="diverso">
+                                                                                                <span class='itm_marca'>{!item.Ativo__r.Product2.Marca__c}</span>
+                                                                                                <span class="identificacoes">
+                                                                                                    | FABR: <span class='itm_cod_fabricante'>{!item.Ativo__r.Product2.ProductCode}</span>
+                                                                                                    | <span class='itm_link'>
+                                                                                                        <a href="{!tela.url_base}/{!item.Ativo__c}" target="_blank">
+                                                                                                            SERIE: <span class='itm_serial'>{!item.Ativo__r.SerialNumber}</span>
+                                                                                                        </a>
+                                                                                                      </span>
+                                                                                                </span>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </table>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr class="descricao">
+                                                                                <td colspan="3" class="linha">
+                                                                                    <b>Descrição:</b>
+                                                                                    <span class='itm_descricao edita'>{!item.Descricao__c}</span>
+                                                                                    <span style="display:none;" class='copiar'>[usar padrão]</span>
+                                                                                    <span style="display:none;" class='itm_pre_descricao'><apex:outputText value="{!if(item.Ativo__r.Description!=null,item.Ativo__r.Description+'. ','')}"/></span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr class="valor">
+                                                                                <td colspan="3">
+                                                                                    <table class="table table-condensed" cellpadding="0" cellspacing="0" border="0" style="width:100%; height:100%;">
+                                                                                        <tr class="cabecalho">
+                                                                                            <th>VALOR</th>
+                                                                                        </tr>
+                                                                                        <tr class="entrada">
+                                                                                            <td><span class='itm_valor edita'>{!item.Valor__c}</span></td>
+                                                                                        </tr>
+                                                                                    </table>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+
+                                                                        <!-- ocultos -->
+                                                                        <div style='display:none;'>
+                                                                            <span class='itm_id'>{!item.Id}</span>
+                                                                            <span class='prd_id'>{!item.Ativo__r.Product2Id}</span>
+                                                                            <span class='atv_id'>{!item.Ativo__c}</span>
+                                                                            <span class='itm_item_pai'>{!item.Item_Pai__c}</span>
+                                                                        </div>
+
+                                                                        <ol>
+                                                                            <apex:outputText rendered="{!if(item.Item__c!=null, true, false)}" >
+                                                                                <apex:repeat value="{!demonstracao.Produtos_da_Demonstracao__r}" var="item_filho">
+                                                                                    <apex:outputText rendered="{!if(item.Item__c == item_filho.Item_pai__c, true, false)}" >
+                                                                                        <li class="item">
+                                                                                            
+                                                                                            <!-- visiveis -->
+                                                                                            <table cellpadding="0" cellspacing="0" border="0" style="width:100%; height:100%;">
+                                                                                                <tr class="cabecalho mover">
+                                                                                                    <td rowspan="2" class="imagem">
+                                                                                                        <span class="itm_item">{!item_filho.Item__c}</span>
+                                                                                                        <span class='itm_imagem'><img src="{!if(
+                                                                                                            item_filho.Ativo__r.Product2.URL_da_Imagem__c!=null,
+                                                                                                            item_filho.Ativo__r.Product2.URL_da_Imagem__c,
+                                                                                                            'https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009y8x5&oid=00Di0000000JVhH&lastMod=1540211149000'
+                                                                                                        )}"></img></span>
+                                                                                                    </td>
+                                                                                                    <td class="titulo">
+                                                                                                        <span class='itm_nome'>{!item_filho.Ativo__r.Product2.Name}</span>
+                                                                                                        <br/><span class='itm_modelo'>{!item_filho.Ativo__r.Product2.Modelo__c}</span>
+                                                                                                    </td>
+                                                                                                    <td class="remover">
+                                                                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr class="dado">
+                                                                                                    <td colspan="2">
+                                                                                                        <table cellpadding="0" cellspacing="0" border="0" style="width:100%; height:100%;">
+                                                                                                            <tr>
+                                                                                                                <td class="diverso">
+                                                                                                                    <span class='itm_marca'>{!item_filho.Ativo__r.Product2.Marca__c}</span>
+                                                                                                                    <span class="identificacoes">
+                                                                                                                        | FABR: <span class='itm_cod_fabricante'>{!item_filho.Ativo__r.Product2.ProductCode}</span>
+                                                                                                                        | <span class='itm_link'>
+                                                                                                                            <a href="{!tela.url_base}/{!item_filho.Ativo__c}" target="_blank">
+                                                                                                                                SERIE: <span class='itm_serial'>{!item_filho.Ativo__r.SerialNumber}</span>
+                                                                                                                            </a>
+                                                                                                                          </span>
+                                                                                                                    </span>
+                                                                                                                </td>
+                                                                                                            </tr>
+                                                                                                        </table>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr class="descricao">
+                                                                                                    <td colspan="3" class="linha">
+                                                                                                        <b>Descrição:</b>
+                                                                                                        <span class='itm_descricao edita'>{!item_filho.Descricao__c}</span>
+                                                                                                        <span style="display:none;" class='copiar'>[usar padrão]</span>
+                                                                                                        <span style="display:none;" class='itm_pre_descricao'><apex:outputText value="{!if(item_filho.Ativo__r.Description!=null,item_filho.Ativo__r.Description,'')}"/></span>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr class="valor">
+                                                                                                    <td colspan="3">
+                                                                                                        <table class="table table-condensed" cellpadding="0" cellspacing="0" border="0" style="width:100%; height:100%;">
+                                                                                                            <tr class="cabecalho">
+                                                                                                                <th>VALOR</th>
+                                                                                                            </tr>
+                                                                                                            <tr class="entrada">
+                                                                                                                <td><span class='itm_valor edita'>{!item_filho.Valor__c}</span></td>
+                                                                                                            </tr>
+                                                                                                        </table>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </table>
+
+                                                                                            <!-- ocultos -->
+                                                                                            <div style='display:none;'>
+                                                                                                <span class='itm_id'>{!item_filho.Id}</span>
+                                                                                                <span class='prd_id'>{!item_filho.Ativo__r.Product2Id}</span>
+                                                                                                <span class='atv_id'>{!item_filho.Ativo__c}</span>
+                                                                                                <span class='itm_item_pai'>{!item_filho.Item_Pai__c}</span>
+                                                                                            </div>
+                                                                                        </li>
+                                                                                    </apex:outputText>
+                                                                                </apex:repeat>
+                                                                            </apex:outputText>
+                                                                        </ol>
+                                                                    </li>
+                                                                </apex:outputText>
+                                                            </apex:repeat>
+                                                        </ol>
+                                                    
+                                                    </apex:outputPanel>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </apex:outputPanel>
+
+                        <!-- templates -->
+                        <div class="template_produto" style="display:none;">
+
+                            <li class="item">
+                                
+                                <!-- visiveis -->
+                                <table cellpadding="0" cellspacing="0" border="0" style="width:100%; height:100%;">
+                                    <tr class="cabecalho mover">
+                                        <td rowspan="2" class="imagem">
+                                            <span class="itm_item"></span>
+                                            <span class='itm_imagem'><img src=""></img></span>
+                                        </td>
+                                        <td class="titulo">
+                                            <span class='itm_nome'></span>
+                                            <br/><span class='itm_modelo'></span>
+                                        </td>
+                                        <td class="remover">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </td>
+                                    </tr>
+                                    <tr class="dado">
+                                        <td colspan="2">
+                                            <table cellpadding="0" cellspacing="0" border="0" style="width:100%; height:100%;">
+                                                <tr>
+                                                    <td class="diverso">
+                                                        <span class='itm_marca'></span>
+                                                        <span class="identificacoes">
+                                                            | FABR: <span class='itm_cod_fabricante'></span>
+                                                            | <span class='itm_link'>
+                                                                <a href="" target="_blank">
+                                                                    SERIE: <span class='itm_serial'></span>
+                                                                </a>
+                                                              </span>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr class="descricao">
+                                        <td colspan="3" class="linha">
+                                            <b>Descrição:</b>
+                                            <span class='itm_descricao edita'></span>
+                                        </td>
+                                    </tr>
+                                    <tr class="valor">
+                                        <td colspan="3">
+                                            <table class="table table-condensed" cellpadding="0" cellspacing="0" border="0" style="width:100%; height:100%;">
+                                                <tr class="cabecalho">
+                                                    <th>VALOR</th>
+                                                </tr>
+                                                <tr class="entrada">
+                                                    <td><span class='itm_valor edita'></span></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- ocultos -->
+                                <div style='display:none;'>
+                                    <span class='itm_id'></span>
+                                    <span class='prd_id'></span>
+                                    <span class='atv_id'></span>
+                                    <span class='itm_item_pai'></span>
+                                </div>
+                                
+                            </li>
+
+                        </div>
+                        
+                    </apex:form>
+                </div>
+            </div>
+        </body>
+        
+        <script>
+            var termo_anterior='', recarrega_ativo=false,
+                ajuste_arrastar, item_backup, 
+                container_anterior, container_fonte;
+            
+            // inicialização ======================================================================
+            
+            $(document).ready(function(){
+            
+                // verificar vazio
+                $.fn.exists = function () {
+                    return this.length !== 0;
+                }
+                
+                // inicializar formulário
+                $('.browserselectpicker').selectpicker();
+                
+                // anexar envio (enter)
+                $("#ativos .termo input[type='text']").on("keypress", function() {
+                    if (event.which == 13){
+                        event.preventDefault();
+                        termo_anterior = $(this).val();
+                        ativos_pag_atual.value = 1;
+                        ControlarLoader('mostrar','ativos');
+                        DesativarArrastavel();
+                        AtivoPesquisar();
+                    }
+                });
+                
+                // anexar envio (digitar)
+                $("#ativos .termo input[type='text']").keyup(ExecutarDelay(function (e) {
+                    termo_atual = $(this).val();
+                    if(termo_atual != termo_anterior){
+                        ativos_pag_atual.value = 1;
+                        ControlarLoader('mostrar','ativos');
+                        DesativarArrastavel();
+                        AtivoPesquisar();
+                    }
+                    termo_anterior = termo_atual;
+                }, 500));
+                
+                // anexar envio (filtrar)
+                $("#ativos .termo select").on('change',function(){
+                    ativos_pag_atual.value = 1;
+                    ControlarLoader('mostrar','ativos');
+                    DesativarArrastavel();
+                    AtivoPesquisar();
+                });
+                
+                AnexarPaginacao();
+                AnexarEdicoes();
+                ExibirBaloes();
+                CriarContainer();
+                
+                AtivarArrastavel();
+                
+            });
+            
+            // funções ============================================================================
+            
+            function ExecutarDelay(callback, ms){
+                var timer = 0;
+                return function() {
+                    var context = this, args = arguments;
+                    clearTimeout(timer);
+                    timer = setTimeout(function () {
+                        callback.apply(context, args);
+                    }, ms || 0);
+                };
+            }
+            
+            function ControlarLoader(acao, frame){
+                if(acao=='mostrar')
+                    $("#"+frame+" .loader").show();
+                else if(acao=='ocultar')
+                    $("#"+frame+" .loader").hide();
+            }
+            
+            function AnexarPaginacao(){
+                $("#ativos li.previous a, #ativos li.next a").on("click", function() {
+                    ativos_pag_atual.value = $(this).attr('data-pagina');
+                    ControlarLoader('mostrar','ativos');
+                    DesativarArrastavel();
+                    AtivoPesquisar();
+                });
+            }
+            
+            function AnexarEdicoes(){
+                
+                // remover
+                $("#destino li .remover span").on("click", function() {
+                    $(this).closest('li').remove();
+                    NumerarItens();
+                    SalvarDemo();
+                    recarrega_ativo = true;
+                });
+                
+                // editar
+                $("#destino .item .edita.itm_descricao").on('dblclick',function(){
+                    $(this).off('dblclick');
+                    $(this).addClass('ativo');
+                    $(this).html($("<textarea rows='7'></textarea>").val($(this).text()));
+                    $(this).find('textarea').focus();
+                    $(this).find('textarea').select();
+                    $(this).on('focusout',function(){
+                        $(this).off('focusout keypress');
+                        $(this).removeClass('ativo');
+                        $(this).text($(this).find('textarea').val());
+                        SalvarDemo();
+                    });
+                });$("#destino .item .edita:not(.itm_descricao)").on('dblclick',function(){
+                    $(this).off('dblclick');
+                    $(this).addClass('ativo');
+                    $(this).html($("<input></input>").val($(this).text().replace(/[^0-9.,]/g,'')));
+                    $(this).find('input').focus();
+                    $(this).find('input').select();
+                    $(this).on('focusout keypress',function(){
+                        if(event.type == 'blur' || (event.type == 'keypress' && event.which == 13)){
+                            $(this).off('focusout keypress');
+                            $(this).removeClass('ativo');
+                            $(this).text($(this).find('input').val().length==0 ? 0 : $(this).find('input').val());
+                            SalvarDemo();
+                        }
+                    });
+                });
+                
+                // copiar
+                $("#destino li .descricao .copiar").on("click", function() {
+                    $(this).parent().find('.itm_descricao').text(
+                        $(this).parent().find('.itm_pre_descricao').text()
+                    );
+                    SalvarDemo();
+                });$("#destino li .descricao .copiar").each(function(){
+                    if($(this).parent().find('.itm_pre_descricao').text() != '')
+                        $(this).show();
+                })
+                
+                
+            }
+            
+            function ExibirBaloes(){
+                $("#ativos .externo .dentro").popover({
+                    delay:{show:500},
+                    animation:false,
+                    viewport:{selector:'body'}
+                });
+            }
+            
+            function CriarContainer(){
+                $("#destino ol.externo>li").each(function(){
+                    if(!$(this).children("ol").exists())
+                        $(this).append($("<ol></ol>"));
+                    $(this).find("li").children("ol").remove();
+                });
+            }
+            
+            function NumerarItens(){
+                var n_item=0, n_subitem = $("#destino ol.externo>li").length;
+                $("#destino ol.externo>li").each(function(){
+                    n_item++;
+                    $(this).find('.itm_item').first().text(n_item);
+                    $(this).find('.itm_item_pai').first().text('');
+                    $(this).find("ol>li").each(function(){
+                        n_subitem++;
+                        $(this).find('.itm_item').first().text(n_subitem);
+                        $(this).find('.itm_item_pai').first().text(n_item);
+                    });
+                })
+            }
+            
+            function SalvarDemo(){
+                $('#destino .item').each(function(){
+                    $(this).removeData();
+                    $(this).data('itm_id', $(this).find('.itm_id').first().text());
+                    $(this).data('prd_id', $(this).find('.prd_id').first().text());
+                    $(this).data('atv_id', $(this).find('.atv_id').first().text());
+                    $(this).data('itm_item', $(this).find('.itm_item').first().text());
+                    $(this).data('itm_item_pai', $(this).find('.itm_item_pai').first().text());
+                    $(this).data('itm_valor', $(this).find('.itm_valor').first().text().replace(/[^0-9.,]/g,'').replace(',', '.'));
+                    $(this).data('itm_descricao', $(this).find('.itm_descricao').first().text());
+                });
+                CriarContainer();
+                tela_itens_demo.value = JSON.stringify($("#destino ol.externo").sortable("serialize").get(), null, '    ');
+                console.log(tela_itens_demo.value);
+                
+                ControlarLoader('mostrar','destino');
+                DesativarArrastavel();
+                DemonstracaoSalvarProdutos();
+            }
+            
+            function AtualizarInterface(){
+                if(tela_mensagem!=''){
+                    var mensagem = parent.$A.get("e.force:showToast");
+                    mensagem.setParams({"message" : tela_mensagem.value ,"type" : "error"});
+                    mensagem.fire();
+                }
+                
+                parent.$A.get('e.force:refreshView').fire();
+            }
+            
+            function AtivosRecarregar(){
+                if(recarrega_ativo){
+                    termo_anterior = $("#ativos .termo input[type='text']").val();
+                    ativos_pag_atual.value = 1;
+                    ControlarLoader('mostrar','ativos');
+                    DesativarArrastavel();
+                    AtivoPesquisar();
+                    recarrega_ativo = false;
+                }
+            }
+            
+            // arrastável =========================================================================
+            function DesativarArrastavel(){
+                $("#ativos ol.externo").sortable("destroy");
+                $("#destino ol.externo").sortable("destroy");
+            }
+            
+            function AtivarArrastavel(){                
+                $("#destino ol.externo").sortable({
+                    group: 'arrastavel',
+                    handle: '.mover',
+                    distance: 7,
+                    tolerance: 0,
+                    delay: 80,
+                    pullPlaceholder: false,
+                    
+                    onDragStart: function ($item, container, _super, event){
+                        
+                        // soltar destino (pt1)
+                        var deslocamento = $item.offset();
+                        var ponteiro = container.rootGroup.pointer;
+                        ajuste_arrastar = {
+                          left: ponteiro.left - deslocamento.left,
+                          top: ponteiro.top - deslocamento.top
+                        };
+                        
+                        // converter produto (pt1)
+                        container_fonte = container;
+                        container_anterior = container;
+                        
+                        // controlar identação (pt1)
+                        if($item.find("li").exists())
+                            item_backup = $item.clone().insertAfter($item).addClass("hidden");
+                        
+                        _super($item, container, _super, event);
+                    },
+                    
+                    onDrag: function ($item, container, _super, event){
+                        
+                        // soltar destino (pt2)
+                        $item.css({
+                            left: container.left - ajuste_arrastar.left,
+                            top: container.top - ajuste_arrastar.top
+                        });
+                        $("#ativos ol.externo").sortable("refresh");
+                        $("#destino ol.externo").sortable("refresh");
+                        
+                        _super($item, container, _super, event);
+                    },
+
+                    onDrop: function ($item, container, _super, event){
+                        
+                        // converter produto (pt2)
+                        if(container_fonte.el.closest('#ativos').exists() && container.el.closest('#destino').exists()){
+                            
+                            // produto
+                            popup = $.parseHTML($item.find('div.dentro').attr('data-content'));
+                            produto = $('div.template_produto li.item').clone();
+                            
+                            produto.find('.itm_imagem img').attr('src', $item.find('.atv_imagem img').attr('src'));
+                            produto.find('.itm_nome').text($item.find('.atv_nome').text());
+                            produto.find('.itm_modelo').text($item.find('.atv_modelo').text());
+                            produto.find('.itm_marca').text($(popup).find('.atv_marca').text());
+                            produto.find('.itm_cod_fabricante').text($(popup).find('.atv_cod_fabricante').text());
+                            produto.find('.itm_serial').text($item.find('.atv_serial').text());
+                            produto.find('.itm_descricao').text(($(popup).find('.atv_descricao').text()!='' ? $(popup).find('.atv_descricao').text()+'. ' : ''));
+                            produto.find('.itm_valor').text($item.find('.atv_valor').text());
+                            produto.find('.prd_id').text($item.find('.prd_id').text());
+                            produto.find('.atv_id').text($item.find('.atv_id').text());
+
+                            produto.insertAfter($item);
+                            CriarContainer();
+                            
+                            // produto filho
+                            $item.find('.atv_filho').each(function(){
+                                produto_filho = $('div.template_produto li.item').clone();
+
+                                produto_filho.find('.itm_imagem img').attr('src', $(this).find('.atvf_imagem').text());
+                                produto_filho.find('.itm_nome').text($(this).find('.atvf_nome').text());
+                                produto_filho.find('.itm_modelo').text($(this).find('.atvf_modelo').text());
+                                produto_filho.find('.itm_marca').text($(this).find('.atvf_marca').text());
+                                produto_filho.find('.itm_cod_fabricante').text($(this).find('.atvf_cod_fabricante').text());
+                                produto_filho.find('.itm_serial').text($(this).find('.atvf_serial').text());
+                                produto_filho.find('.itm_descricao').text(($(this).find('.atvf_descricao').text()!='' ? $(this).find('.atvf_descricao').text()+'. ' : ''));
+                                produto_filho.find('.itm_valor').text($(this).find('.atvf_valor').text());
+                                produto_filho.find('.prd_id').text($(this).find('.prdf_id').text());
+                                produto_filho.find('.atv_id').text($(this).find('.atvf_id').text());
+                                
+                                produto.find('ol').append(produto_filho);
+                            })
+                            
+                            $item.remove();
+                            recarrega_ativo = true;
+                        }
+
+                        // controlar identação (pt2)
+                        if($item.find("li").exists()){
+                            if($item.parent().hasClass("externo")){
+                                item_backup.remove();
+                            }else{
+                                $item.remove();
+                                item_backup.removeClass("hidden");
+                            }
+                        }
+
+                        // controlar destaque (pt1)
+                        $("ol.active").removeClass("active");
+                        
+                        NumerarItens();
+                        SalvarDemo();
+                        
+                        _super($item, container, _super, event);
+
+                    },
+
+                    afterMove: function (placeholder, container, closestItemOrContainer){
+                        
+                        // controla destaque (pt2)
+                        if(container_anterior != container){
+                            if(container_anterior){
+                                container_anterior.el.removeClass("active");
+                                container.el.addClass("active");
+                            }
+                        }
+                        
+                        ExibirBaloes();
+                        
+                        container_anterior = container;
+                    }
+                    
+                });
+                
+                $("#ativos ol.externo").sortable({
+                    group: 'arrastavel',
+                        exclude: '.hidden',
+                        drop: false
+                });
+                
+            }
+
+        </script>
+        
+    </html>
+</apex:page>

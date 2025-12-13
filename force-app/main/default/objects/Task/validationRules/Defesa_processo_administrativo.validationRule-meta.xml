@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Defesa_processo_administrativo</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    $User.Id != &apos;0055A00000BcBOn&apos;,
+    $User.Id != OwnerId,
+    OR(
+        ISNEW(),
+        ISCHANGED(ActivityDate),
+        ISCHANGED(Subject),
+        ISCHANGED(OwnerId)
+    ),
+     Subject = &apos;Defesa processo administrativo&apos;,
+    IF(
+        WEEKDAY(TODAY()) = 6,
+        ActivityDate - 5 &lt; TODAY(),
+        IF(
+            WEEKDAY(TODAY()) = 5,
+            ActivityDate - 5 &lt; TODAY(),
+            IF(
+                WEEKDAY(TODAY()) = 4,
+                ActivityDate - 3 &lt; TODAY(),
+                IF(
+                    WEEKDAY(TODAY()) = 3,
+                    ActivityDate - 3 &lt; TODAY(),
+                    IF(
+                        WEEKDAY(TODAY()) = 2,
+                        ActivityDate - 3 &lt; TODAY(),
+                        IF(
+                            WEEKDAY(TODAY()) = 1,
+                            ActivityDate - 3 &lt; TODAY(),
+                            false
+                        )
+                    )
+                )
+            )
+        )
+    )
+)</errorConditionFormula>
+    <errorDisplayField>ActivityDate</errorDisplayField>
+    <errorMessage>O prazo mínimo para contrarrazões é de três dias úteis.</errorMessage>
+</ValidationRule>

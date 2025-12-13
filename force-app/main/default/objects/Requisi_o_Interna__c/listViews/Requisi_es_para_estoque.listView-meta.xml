@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Requisi_es_para_estoque</fullName>
+    <columns>NAME</columns>
+    <columns>OWNER.FIRST_NAME</columns>
+    <columns>Prioridade__c</columns>
+    <columns>Status_da_Requisi_o__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status_da_Requisi_o__c</field>
+        <operation>notEqual</operation>
+        <value>Finalizado,Cancelado</value>
+    </filters>
+    <filters>
+        <field>Tipo_de_Requisi_o__c</field>
+        <operation>equals</operation>
+        <value>Compra para estoque revenda,Compra para estoque locação/assistência,Compra para estoque OPME</value>
+    </filters>
+    <label>Requisições para estoque</label>
+</ListView>

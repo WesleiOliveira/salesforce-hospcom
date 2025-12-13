@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Degluti_o_PARD_Fonoaudiologia__c</fullName>
+    <externalId>false</externalId>
+    <label>Deglutição (PARD)</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Nível I – Normal</fullName>
+                <default>false</default>
+                <label>Nível I – Normal</label>
+            </value>
+            <value>
+                <fullName>Nível II – Funcional</fullName>
+                <default>false</default>
+                <label>Nível II – Funcional</label>
+            </value>
+            <value>
+                <fullName>Nível III – Disfagia Leve</fullName>
+                <default>false</default>
+                <label>Nível III – Disfagia Leve</label>
+            </value>
+            <value>
+                <fullName>Nível IV – Disfagia leve a moderada</fullName>
+                <default>false</default>
+                <label>Nível IV – Disfagia leve a moderada</label>
+            </value>
+            <value>
+                <fullName>Nível V – Disfagia moderada</fullName>
+                <default>false</default>
+                <label>Nível V – Disfagia moderada</label>
+            </value>
+            <value>
+                <fullName>Nível VI – Disfagia moderada grave</fullName>
+                <default>false</default>
+                <label>Nível VI – Disfagia moderada grave</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

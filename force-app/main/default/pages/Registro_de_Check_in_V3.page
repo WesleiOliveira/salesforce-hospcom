@@ -1,0 +1,25 @@
+<apex:page showChat="false" showHeader="false">
+  
+   
+  <head>
+      <style type="text/css">
+          .teste {
+          border: 1px solid black;
+          }
+      
+      
+      </style>
+      <apex:stylesheet value="{!URLFOR($Resource.Bootstrap_4, '/css/bootstrap.min.css')}" />
+     
+  </head>
+      <div height="100px" width = "100px" class="teste">
+      aaaa
+      </div>
+    <h3>
+      Fancy display heading
+      <small class="text-muted">With faded secondary text</small>
+    </h3>
+    <div class="alert alert-primary" role="alert">
+  A simple primary alert—check it out!
+  </div>
+</apex:page>

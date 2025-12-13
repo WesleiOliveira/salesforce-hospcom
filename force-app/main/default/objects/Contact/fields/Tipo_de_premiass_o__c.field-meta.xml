@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo_de_premiass_o__c</fullName>
+    <externalId>false</externalId>
+    <label>Tipo de remuneração variável</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Comissão</fullName>
+                <default>false</default>
+                <label>Comissão</label>
+            </value>
+            <value>
+                <fullName>Meta Administrativo</fullName>
+                <default>false</default>
+                <label>Meta Administrativo</label>
+            </value>
+            <value>
+                <fullName>Meta Comercial</fullName>
+                <default>false</default>
+                <label>Meta Comercial</label>
+            </value>
+            <value>
+                <fullName>Meta Serviços</fullName>
+                <default>false</default>
+                <label>Meta Serviços</label>
+            </value>
+            <value>
+                <fullName>Meta Comercial OPME</fullName>
+                <default>false</default>
+                <label>Meta Comercial OPME</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

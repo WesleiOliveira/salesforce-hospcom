@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Origem__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    OR(
+        Marca__c == &quot;MINDRAY&quot;,
+        Marca__c == &quot;SONOSCAPE&quot;,
+        Marca__c == &quot;CHINAMEDI&quot;,
+        Marca__c == &quot;ERBE&quot;,
+        Marca__c == &quot;HEALTH SOLUTIONS&quot;,
+        Marca__c == &quot;HUGEMED&quot;,
+        Marca__c == &quot;ZIMMER BIOMET&quot;,
+        Marca__c == &quot;YUWELL&quot;,
+        Marca__c == &quot;CORITON&quot;,
+        Marca__c == &quot;BEACON&quot;,
+        Marca__c == &quot;LINET&quot;,
+        Marca__c == &quot;WEIZHI TEC&quot;
+    ),
+    &quot;Importado&quot;,
+    &quot;Nacional&quot;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Origem</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

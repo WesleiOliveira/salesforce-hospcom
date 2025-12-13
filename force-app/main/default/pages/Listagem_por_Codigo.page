@@ -1,0 +1,415 @@
+<apex:page standardController="Order" extensions="NovoPDFdoPedido" renderAs="pdf" applyHtmlTag="false" showHeader="false">
+    <head>
+        <style type="text/css" media="print">
+            @page {
+                size:A4 landscape;
+                margin:100px 40px 60px 25px;
+                @top-center {
+                    content:element(header);
+                }
+                @bottom-center {
+                    content:element(footer);
+                }
+            }
+            .pagenumber:before {
+                content:counter(page);
+            }
+            .pagecount:before {
+                content:counter(pages);
+            }
+            div.header {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(header);
+                height:60px;
+            }
+            div.content {
+            }
+            div.footer {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(footer);
+                height:20px;
+                text-align:right;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                font-weight:normal;
+            }
+        </style>
+        <style type="text/css">
+            .titulo{
+                width:100%;
+                font-family:arial, verdana, sans-serif;
+                font-size:15px;
+                font-weight:bold; 
+                text-align:center;
+                margin-bottom:15px;
+            }
+            .tabela_geral tr{
+                //-fs-table-paginate:paginate;
+                //page-break-inside:avoid;
+            }
+            .tabela_item{
+                table-layout: fixed;
+                //page-break-inside:avoid;
+                border-collapse: collapse;
+            }
+            .tabela_item tr{
+                table-layout: fixed;
+            }
+            .incolor{
+                //padding-right: 10px;
+                padding-top: 4px;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                vertical-align:top;
+                text-align:right;
+            }
+            .invisivel{
+                padding: 0;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+            }
+            .cabecalho{
+                padding: 3px;
+                font-family:arial, verdana, sans-serif;
+                font-size:11px;
+                font-weight:bold; 
+                vertical-align:top;
+                background-color: #c3c3c3;
+                border-right: 1px solid #c3c3c3;
+                border-bottom: 1px solid #c3c3c3;
+                border-top: 1px solid #c3c3c3;
+                border-left: 1px solid #c3c3c3
+
+            }
+            .cab_esq{
+                border-left: 1px solid #c3c3c3
+            }
+            .celula{
+                padding: 3px;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                vertical-align:top;
+                border-top: 1px solid #c3c3c3;
+                border-right: 1px solid #c3c3c3;
+                border-bottom: 1px solid #c3c3c3;
+                border-left: 1px solid #c3c3c3;
+                line-height:120%;
+                //word-wrap: break-word;
+                overflow: hidden;
+                text-transform: uppercase;
+            }
+            .cel_esq{
+                border-left: 1px solid #c3c3c3;
+            }
+            .descricao{
+                text-align: justify;
+                //white-space:pre-wrap;
+            }
+            .total{
+                border-left: 1px solid #c3c3c3;
+            }
+            .destaque{
+                font-weight: bold;
+            }
+            .clausula_texto{
+                font-family:arial, verdana, sans-serif;
+                font-size:11.5px;
+                text-align:justify;
+                text-justify:inter-word;
+                line-height:120%;
+                text-indent:50px;
+                vertical-align:top;
+            }
+            .maiuscula{
+                text-transform: uppercase;
+            }
+            .zebra{
+                background-color: #f3f3f3;
+            }
+        </style>
+    </head>
+
+    <!-- Todos: Verifica Oportunidade com "Faturamento Feito" != de "Hospcom", "GDB", "HEALTH" -->
+    <apex:variable var="empresa_logo" value="{!' '}"/>
+
+    <apex:outputText rendered="{!IF(Order.Faturamento_Feito__c == '0015A00001yGbVZQA0',true,false)}" >
+        <apex:variable var="empresa_nome" value="{!'GDB COMÉRCIO E SERVIÇOS - EIRELI - EPP'}"/>
+        <apex:variable var="empresa_logo" value="{!'https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009LNyN&oid=00Di0000000JVhH'}"/>
+    </apex:outputText>
+    
+    <apex:outputText rendered="{!IF(Order.Faturamento_Feito__c == '0015A00001tSrPaQAK',true,false)}" >
+        <apex:variable var="empresa_nome" value="{!'HEALTH SOLUTION COMERCIO E SERVIÇOS - EIRELI - ME'}"/>
+        <apex:variable var="empresa_logo" value="{!'https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009LWSQ&oid=00Di0000000JVhH&lastMod=1520964013000'}"/>
+    </apex:outputText>
+    
+    <apex:outputText rendered="{!IF(AND(Order.Faturamento_Feito__c != '0015A00001yGbVZQA0',
+                                        Order.Faturamento_Feito__c != '0015A00001tSrPaQAK'),true,false)}" >
+        <apex:variable var="empresa_nome" value="{!'HOSPCOM EQUIPAMENTOS HOSPITALARES - EIRELI'}"/>
+        <apex:variable var="empresa_logo" value="{!'https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=015310000099Yg1&oid=00Di0000000JVhH'}"/>
+    </apex:outputText>
+    
+    <html>
+        <body style="font-family:Arial; padding:0px; margin:0px; border:0px solid #eef2f4; width:*;">
+            <!-- cabeçalho -->
+            <div class="header">
+                <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                    <tr>
+                        <td style="width:42%; text-align:center;">
+                            <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=015310000099Yfw&oid=00Di0000000JVhH&lastMod=1500637924000" width="234px" height="60px"/>
+                        </td>
+                        <td style="width:58%; text-align:center; vertical-align:middle;">                                
+                            <img src="{!empresa_logo}" width="324px" height="55px"/>                            
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- rodapé -->
+            <div class="footer">
+                Página <span class="pagenumber"/> de <span class="pagecount"/>
+            </div>
+
+
+            <!-- conteúdo -->
+            <div class="content">
+                <div style="page-break-before:always" />
+                
+                <div class="titulo"> Listagem por código </div>
+                
+                <!--apex:outputText rendered="{!divergencia}" > <p style="font-family:arial, verdana, sans-serif;font-size:15px; color:red; text-align:center"> Existe algum produto inserido neste pedido que não está sendo listado nesta tela por não conter nem o campo ITEM nem o campo ITEM PAI preenchidos.<br/><br/></p></apex:outputText>
+                
+                <!-- informações iniciais -->
+                <table style="page-break-inside:avoid;width:100%;padding-left:24px;">
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:110px;">
+                            Cliente:
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            {!Order.Account.Name}. CNPJ: {!Order.CPF_CNPJ__c}
+                        </td>                        
+                    </tr>
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:110px;">
+                            Faturamento:
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            {!Order.Faturamento_feito__r.Name}. CNPJ: {!Order.Faturamento_feito__r.CNPJ__c}
+                        </td>                        
+                    </tr>
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:110px;">
+                            Forma Pgto:
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            {!Order.Forma_de_pagamento2__c}.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:110px;">
+                            Condição Pgto:
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            {!Order.Condicao_de_pagamento__c}.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:110px;">
+                            Tipo de envio:
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            {!Order.Frete__c}.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:110px;">
+                            Endereço Entrega:
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            <apex:outputText rendered="{!IF(Order.ShippingStreet != '',true,false)}" >{!Order.ShippingStreet}</apex:outputText>
+                            <apex:outputText rendered="{!IF(Order.ShippingCity != '',true,false)}" > - {!Order.ShippingCity}</apex:outputText>
+                            <apex:outputText rendered="{!IF(Order.ShippingState != '',true,false)}" > - {!Order.ShippingState}</apex:outputText>
+                            <apex:outputText rendered="{!IF(Order.ShippingCountry != '',true,false)}" > - {!Order.ShippingCountry}</apex:outputText>
+                            <apex:outputText rendered="{!IF(Order.ShippingPostalCode != '',true,false)}" > - {!Order.ShippingPostalCode}</apex:outputText>.
+                            FRETE: {!Order.Tipo_de_Frete__c}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:110px;">
+                            Observações:
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            {!Order.Observacoes_Gerais__c}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:110px;">
+                            Entr. autorizada pelo financeiro:
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            <apex:outputText value="{!Order.Entrega_liberada_pelo_financeiro__c}"/>
+                        </td>
+                    </tr>
+                </table>
+                
+                <table style="page-break-inside:avoid;width:100%;padding-left:24px;" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="clausula_texto" style="width:25%;">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td class="clausula_texto destaque" style="text-indent:0px; width:110px;">
+                                        Número do Pedido:
+                                    </td>
+                                    <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                                        {!Order.OrderNumber}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="clausula_texto" style="width:25%;">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td class="clausula_texto destaque" style="text-indent:0px; width:110px;text-align:right;">
+                                        Data Abertura:
+                                    </td>
+                                    <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                                        <apex:outputField value="{!Order.EffectiveDate}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="clausula_texto" style="width:25%;">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td class="clausula_texto destaque" style="text-indent:0px; width:110px;text-align:right;">
+                                        Prazo Prometido:
+                                    </td>
+                                    <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                                        <apex:outputField value="{!Order.Prazo_de_entrega__c}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="clausula_texto" style="width:25%;">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td class="clausula_texto destaque" style="text-indent:0px; width:110px;text-align:right;">
+                                        Valor Total:
+                                    </td>
+                                    <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                                        <apex:outputField value="{!Order.TotalAmount}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    
+                </table>
+                
+                <table style="page-break-inside:avoid;width:100%;padding-left:24px;" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="clausula_texto" style="width:25%;">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td class="clausula_texto destaque" style="text-indent:0px; width:110px;">
+                                        Vendedor:
+                                    </td>
+                                    <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                                        {!Order.Vendedor__r.Name}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="clausula_texto" style="width:25%;">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td class="clausula_texto destaque" style="text-indent:0px; width:110px;text-align:right;">
+                                        Departamento:
+                                    </td>
+                                    <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                                        <apex:outputField value="{!Order.Departamento3__c}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="clausula_texto" style="width:25%;">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td class="clausula_texto destaque" style="text-indent:0px; width:110px;text-align:right;">
+                                        Treinamento:
+                                    </td>
+                                    <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                                       <apex:outputField value="{!Order.Necess_rio_Treinamento__c}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="clausula_texto" style="width:25%;">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td class="clausula_texto destaque" style="text-indent:0px; width:110px;text-align:right;">
+                                        Entrega parcial:
+                                    </td>
+                                    <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                                        <apex:outputField value="{!Order.Entrega_parcial__c}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    
+                </table>
+                
+                <br/>
+                
+                <!-- lista de item -->
+                
+                    
+                    <apex:variable var="cont" value="{!1}"/>
+                    
+                        
+                        <!-- item -->
+                                <table class="tabela_item" cellpadding="0px" cellspacing="0px" style="width:100%;">
+                                    
+                                        
+                                        <!-- linha: cabeçalho -->
+                                            <tr>
+                                                <td class="invisivel" style="width:25px;"></td>
+                                                <td class="cabecalho" style="width:*;" >Código</td>
+                                                <td class="cabecalho" style="width:*;">Produto</td>
+                                                <td class="cabecalho" style="width:120px;">Modelo</td>
+                                                <td class="cabecalho" style="width:100px;">Fabricante</td>
+                                                <td class="cabecalho" style="width:70px;">Val. Unitário</td>
+                                                <td class="cabecalho" style="width:30px;">Qtd.</td>
+                                                <td class="cabecalho" style="width:80px;">Val. Total</td>
+                                                <td class="cabecalho" style="width:120px;">Status</td>
+                                                <td class="cabecalho" style="width:85px;">Posição Estoque</td>
+                                            </tr>
+                                        <apex:repeat value="{!itens_por_codigo}" var="item">
+
+                                            <tr>
+                                                <td class="invisivel" style="width:25px;">{!cont}</td>
+                                                <td class="celula"  style="width:*;">{!UPPER(item.Product2.ProductCode)}</td>
+                                                <td class="celula"  style="width:*;">{!UPPER(item.Product2.Name)}</td>
+                                                <td class="celula"  style="width:120px;">{!UPPER(item.Product2.Modelo__c)}</td>
+                                                <td class="celula"  style="width:100px;">{!UPPER(item.Product2.Marca__c)}</td>
+                                                <td class="celula"  style="width:70px;"><apex:outputField value="{!item.UnitPrice}"/></td>
+                                                <td class="celula"  style="width:30px;">{!ROUND(item.Quantity, 0)}</td>
+                                                <td class="celula"  style="width:80px;"><apex:outputField value="{!item.TotalPrice}"/></td>
+                                                <td class="celula"  style="width:120px;"><apex:outputField value="{!item.Status__c}"/></td>
+                                                <td class="celula"  style="width:85px;"><apex:outputField value="{!item.Product2.PosicaoEstoque__c}"/></td>
+                                            </tr>
+
+                                            <apex:variable var="cont" value="{!cont + 1}"/>
+                                            <apex:variable var="subtotal" value="{!0}"/>
+                                            
+                                            
+                                        </apex:repeat>
+               
+                </table>
+                
+                
+            </div> <!-- fim de: conteúdo -->
+        </body>
+    </html>
+</apex:page>

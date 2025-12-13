@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fiador_sem_endereco</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+Fiador__c != null,
+OR(
+Fiador__r.BillingPostalCode == null,
+Fiador__r.BillingCity == null,
+Fiador__r.BillingStreet == null
+)
+)</errorConditionFormula>
+    <errorDisplayField>Fiador__c</errorDisplayField>
+    <errorMessage>Os campos de endereço do fiador estão incompletos</errorMessage>
+</ValidationRule>

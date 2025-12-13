@@ -1,0 +1,1797 @@
+<apex:page standardController="Quote" extensions="CotacaoProdutos" showHeader="false" showChat="false" standardStylesheets="false" docType="html-5.0">
+    
+    <html>
+        <head>
+            <title>Configurador de produtos</title>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+            <script src="{!$Resource.JQuery}"></script>
+            <script src="{!$Resource.Sortable}"></script>
+
+            <link href="{!URLFOR($Resource.Bootstrap, 'css/bootstrap.css')}" rel="stylesheet"/>
+            <script src="{!URLFOR($Resource.Bootstrap, 'js/bootstrap.min.js')}"></script>
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css" rel="stylesheet"/>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
+
+            <style>
+
+                /* GLOBAL ===================================================== */
+
+                /* loader */
+                body{
+                    margin-top:0px!important;
+                }
+                
+                .loader{
+                    position: absolute;
+                    z-index:9998!important;
+                    width: 100%;
+                    height: 100%;
+                    min-height:200px;
+                    background: white url({!$Resource.loader}) center 100px no-repeat;
+                    background-size: 50px 50px;
+                    opacity: .8;
+                }
+                
+                .alert.status{
+                    margin:0px 0px 0px 6px!important;
+                    padding:6px!important;
+                    text-align:center!important;
+                    display:inline!important;
+                }.alert.mensagem{
+                    margin:0px!important;
+                    padding:6px!important;
+                    text-align:center!important;
+                }
+
+                /* paginação */
+                .pager{
+                    margin:0px!important;
+                }
+
+                /* formulario */
+                .input-group > .input-group-btn:empty {
+                    width: 0px;
+                }.input-group-btn:first-child:not(:last-child) > .bootstrap-select > button {
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                }.input-group-btn:last-child > .bootstrap-select > button {
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                }.input-group-btn:not(:first-child):not(:last-child) > .bootstrap-select > button, .input-group-btn:not(:first-child):not(:last-child) > button {
+                    border-radius: 0;
+                }
+
+                /* CABECALHO ================================================== */
+
+                /* cabecalho */
+                div.cabecalho{
+                    background-color: #f7f9fb;
+                    padding-top: 6px;
+                    padding-bottom: 3px;
+                }div.cabecalho .icone{
+                    width:32px;
+                    padding-right: 8px!important;
+                }div.cabecalho .icone .imagem{
+                    width:32px;
+                    height:32px;
+                    background-color: rgb(252, 185, 91);
+                    border-radius:3px;
+                }div.cabecalho .nome{
+                    font-size: .8125rem;
+                    color: rgb(90, 90, 90);
+                }div.cabecalho .titulo{
+                    font-size: 1.125rem;
+                    font-weight: 400;
+                    line-height: 1.25;
+                }div.cabecalho .botao{
+                    text-align:right;
+                }div.cabecalho .botao button{
+                    color: rgb(0, 153, 222)!important;
+                    font-size: .8125rem!important;
+                }
+                
+                /* CONTEUDO =================================================== */
+
+                /* conteudo */
+                .conteudo {
+                    overflow-x:hidden!important;
+                    overflow-y:visible!important;
+                }
+
+                /* guia */
+                .guia{
+                    font-size: .8125rem;
+                }.guia li{
+                    text-align: center!important;
+                }.guia li.active{
+                    font-weight: 700;
+                }.guia a{
+                    padding-top: 5px!important;
+                    padding-bottom: 5px!important;
+                    color: rgb(0, 153, 222);
+                    border-top-width: 3px!important;
+                    margin-top: -2px"important;
+                }
+
+                /* painel */
+                .painel{
+                    padding-top: 7px!important;
+                }
+
+                /* cursor (arrastar) */
+                .dragging, .dragging *, .mover {
+                    cursor: move !important;
+                }
+
+                /* item (arrastar) */
+                li.dragged{
+                    position: absolute;
+                    top: 0;
+                    opacity: 0.7;
+                    z-index: 9000;
+                }
+
+                /* item (popover) */
+                .conteudo .popover{ /* fora */
+                    min-width:370px!important;
+                }.conteudo .popover .popover-title{ /* titulo */
+                    font-size: 0.93rem!important;
+                    font-weight: 600!important;
+                    padding: 4px 4px 4px 6px!important;
+                    background-color:#fbfbfb!important;
+                    border-bottom:1px solid #f1ebeb!important;
+                }.conteudo .popover .popover-title .status{ /* status */
+                    font-size: 0.73rem!important;
+                    font-weight: 600!important;
+                }.conteudo .popover .popover-content{ /* conteudo */
+                    padding:0px!important;
+                    font-weight: 400!important;
+                    text-transform: uppercase;
+                }.conteudo .popover .popover-content .dado{ /* dado */
+                    margin:2px 2px 2px 4px!important;
+                    font-size: 0.7000rem!important;
+                }.conteudo .popover .popover-content .dado td{
+                    padding:2px!important;
+                    border: none!important;
+                }.conteudo .popover .descricao{ /* descricao */
+                    padding-top:6px!important;
+                }.conteudo .popover .descricao div{
+                    max-height:150px!important;
+                        overflow: hidden!important;
+                        text-overflow: ellipsis!important;
+                }.conteudo .popover .popover-content .estatitica{ /* estatitica */
+                    margin:0px!important;
+                    font-size: 0.6000rem!important;
+                }.conteudo .popover .popover-content .estatitica th, .conteudo .popover .popover-content .estatitica td{
+                    padding:2px!important;
+                    text-align:center!important;
+                    background-color: #fbfbfb!important;
+                }
+
+                /* CONTEUDO > ORIGEM ========================================== */
+
+                /* guia */
+                .origem .guia li{
+                    width: 50%!important;
+                    text-align: center!important;
+                }.origem .guia li.active>a, .origem .guia li.active>a:focus, .origem .guia li.active>a:hover {
+                    border-top: 3px solid #00a1df!important;
+                }
+
+                /* CONTEUDO > ORIGEM > PESQUISA =============================== */
+
+                /* filtro */
+                #pesquisa .termo {
+                    margin-bottom: 6px!important;
+                }#pesquisa .filtro div{
+                    text-align:center!important;
+                }#pesquisa .filtro{
+                    margin-bottom:3px!important;
+                }#pesquisa .filtro input[type='checkbox']{
+                    margin-top:0!important;
+                }#pesquisa .filtro label{
+                    font-size: .72rem!important;
+                    font-weight: 400!important;
+                }#pesquisa .filtro .checkbox{
+                    margin:0px!important;
+                }
+
+                /* container */
+                #pesquisa .resultado>ol{
+                    display: table!important;
+                }
+                #pesquisa .resultado>ol{
+                    list-style-type: none!important;
+                    margin: 0px!important;
+                    padding: 0px!important;
+                    min-height:150px!important;
+                }
+
+                /* item */
+                #pesquisa .item{ /* fora */
+                    float: left!important;
+                    width:50%!important;
+                    padding: 3px!important;
+                }#pesquisa .item .dentro{ /* dentro */
+                    height:56px!important;
+                    width:100%!important;
+                        max-width:100%!important;
+                    border: rgb(212, 212, 212) 1px solid;
+                    border-radius: .25rem;
+                    background-color:white;
+                    overflow-x:hidden!important;
+                    overflow-y:hidden!important;
+                    position: relative!important;
+                }#pesquisa .item .dentro>table{
+                    table-layout:fixed!important;
+                }#pesquisa .item .dentro .bloqueio{ /* bloqueio */
+                    cursor: not-allowed;
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.3);
+                    background: repeating-linear-gradient(
+                        45deg, rgba(144, 144, 144, 0.3), rgba(144, 144, 144, 0.3) 10px,
+                        rgba(234, 234, 234, 0.3) 10px, rgba(234, 234, 234, 0.3) 20px
+                    )!important;
+                }#pesquisa .item:not(.bloqueado):not(.dragged) .dentro:hover{ /* hover */
+                    outline: none;
+                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+                    transform: translateY(-2px);
+                    transition: all .25s cubic-bezier(0.46, 0.03, 0.52, 0.96);
+                }#pesquisa .item .imagem{ /* imagem */
+                    padding: 2px;
+                    width:54px!important;
+                    vertical-align:top;
+                }#pesquisa .item .imagem img{
+                    width:50px;
+                    height:50px;
+                }#pesquisa .item .nome{ /* nome */
+                    height:17px!important;
+                    font-size: 0.7000rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                        overflow: hidden!important;
+                        text-overflow: ellipsis!important;
+                        white-space: nowrap!important;
+                    padding: 2px;
+                    background-color:#fbfbfb!important;
+                    border-bottom:1px solid #f1ebeb!important;
+                }#pesquisa .item .codigo{ /* código */
+                    height:17px!important;
+                    font-size: 0.6500rem;
+                    font-weight: 400;
+                        overflow: hidden!important;
+                        text-overflow: ellipsis!important;
+                        white-space: nowrap!important;
+                    padding: 1px;
+                    border-bottom:1px solid #f1ebeb!important;
+                }#pesquisa .item .modelo{ /* modelo */
+                    height:17px!important;
+                    font-size: 0.6500rem;
+                    font-weight: 400;
+                    text-transform: uppercase;
+                        overflow: hidden!important;
+                        text-overflow: ellipsis!important;
+                        white-space: nowrap!important;
+                    padding: 1px;
+                }
+
+                /* paginação */
+                #pesquisa .paginacao{
+                    margin-top:6px!important;
+                }#pesquisa .paginacao .informacao {
+                    font-size: .8125rem!important;
+                    margin:6px!important;
+                }#pesquisa .paginacao li a {
+                    font-size: .8125rem!important;
+                    color: rgb(0, 153, 222)!important;
+                }
+                
+                /* CONTEUDO > ORIGEM > NAVEGAÇÃO ============================== */
+
+                /* guia */
+                .origem .guia li.navegar.active a{
+                    cursor:pointer!important;
+                }
+                
+                /* container */
+                #navegacao .resultado{
+                    display: table!important;
+                }
+                #navegacao .resultado>ol{
+                    list-style-type: none!important;
+                    margin: 0px!important;
+                    padding: 0px!important;
+                    min-height:150px!important;
+                }
+                
+                /* categoria - unica */
+                
+                #navegacao .categoria{
+                    width:100%;
+                }#navegacao .categoria .imagem{
+                    width:25%;
+                }#navegacao .categoria .imagem img{
+                    padding:2px;
+                    width:100%;
+                }#navegacao .categoria .nome{
+                    font-weight: 600;
+                    font-size:0.9000rem;
+                    text-align:center;
+                    max-width:75%;
+                        overflow: hidden!important;
+                        text-overflow: ellipsis!important;
+                        white-space: nowrap!important;
+                }#navegacao .categoria .tipo{
+                    text-align:center;
+                    font-size:0.7000rem;
+                }#navegacao .categoria .tipo a{
+                    padding:5px 10px 5px 10px!important;
+                    font-weight: 600!important;
+                }
+                
+                /* categorias - lista */
+                #navegacao .categorias>div{
+                    width:25%!important;
+                    float: left!important;
+                    padding:3px!important;
+                }#navegacao .categorias>div>table{
+                    table-layout: fixed!important;
+                    cursor:pointer;
+                }#navegacao .categorias .imagem img{
+                    padding:2px;
+                    width:100%;
+                }#navegacao .categorias .nome{
+                    font-weight: 600;
+                    font-size:0.7000rem;
+                    text-align:center;
+                    max-width:100%;
+                        overflow: hidden!important;
+                        text-overflow: ellipsis!important;
+                        white-space: nowrap!important;
+                }
+                
+                /* item */
+                #navegacao .item{ /* fora */
+                    float: left!important;
+                    width:50%!important;
+                    padding: 3px!important;
+                }#navegacao .item .dentro{ /* dentro */
+                    height:56px!important;
+                    width:100%!important;
+                        max-width:100%!important;
+                    border: rgb(212, 212, 212) 1px solid;
+                    border-radius: .25rem;
+                    background-color:white;
+                    overflow-x:hidden!important;
+                    overflow-y:hidden!important;
+                    position: relative!important;
+                }#navegacao .item .dentro>table{
+                    table-layout:fixed!important;
+                }#navegacao .item .dentro .bloqueio{ /* bloqueio */
+                    cursor: not-allowed;
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.3);
+                    background: repeating-linear-gradient(
+                        45deg, rgba(144, 144, 144, 0.3), rgba(144, 144, 144, 0.3) 10px,
+                        rgba(234, 234, 234, 0.3) 10px, rgba(234, 234, 234, 0.3) 20px
+                    )!important;
+                }#navegacao .item:not(.bloqueado):not(.dragged) .dentro:hover{ /* hover */
+                    outline: none;
+                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+                    transform: translateY(-2px);
+                    transition: all .25s cubic-bezier(0.46, 0.03, 0.52, 0.96);
+                }#navegacao .item .imagem{ /* imagem */
+                    padding: 2px;
+                    width:54px!important;
+                    vertical-align:top;
+                }#navegacao .item .imagem img{
+                    width:50px;
+                    height:50px;
+                }#navegacao .item .nome{ /* nome */
+                    height:17px!important;
+                    font-size: 0.7000rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                        overflow: hidden!important;
+                        text-overflow: ellipsis!important;
+                        white-space: nowrap!important;
+                    padding: 2px;
+                    background-color:#fbfbfb!important;
+                    border-bottom:1px solid #f1ebeb!important;
+                }#navegacao .item .codigo{ /* código */
+                    height:17px!important;
+                    font-size: 0.6500rem;
+                    font-weight: 400;
+                        overflow: hidden!important;
+                        text-overflow: ellipsis!important;
+                        white-space: nowrap!important;
+                    padding: 1px;
+                    border-bottom:1px solid #f1ebeb!important;
+                }#navegacao .item .modelo{ /* modelo */
+                    height:17px!important;
+                    font-size: 0.6500rem;
+                    font-weight: 400;
+                    text-transform: uppercase;
+                        overflow: hidden!important;
+                        text-overflow: ellipsis!important;
+                        white-space: nowrap!important;
+                    padding: 1px;
+                }
+                
+                /* paginação */
+                #navegacao .paginacao{
+                    margin-top:6px!important;
+                }#navegacao .paginacao .informacao {
+                    font-size: .8125rem!important;
+                    margin:6px!important;
+                }#navegacao .paginacao li a {
+                    font-size: .8125rem!important;
+                    color: rgb(0, 153, 222)!important;
+                }
+                
+                /* CONTEUDO > DESTINO ========================================= */
+
+                /* guia */
+                .destino .guia li{
+                    width: 100%!important;
+                }.destino .guia a{
+                    border-color: white!important;
+                }
+                
+                /* container */
+                #destino ol {
+                    list-style-type: none!important;
+                    background-color:#fcfcff!important;
+                }#destino>ol { /* 1º nível*/
+                    border: 1px dashed #dcdcdc!important;
+                    border-radius: .25rem!important;
+                    margin: 0px!important;
+                    padding: 7px 0px 10px 20px!important;
+                    min-height: 300px!important;
+                    max-height:850px!important;
+                    overflow-y:auto!important; 
+                }#destino>ol>li>ol { /* 2º nível*/
+                    border: 1px dashed #dcdcdc!important;
+                    border-radius: .25rem!important;
+                    margin: 0px 0px 0px 20px!important;
+                    padding: 7px 0px 10px 20px!important;
+                    min-height: 25px!important;
+                }#destino ol.active { /* destaque */
+                    border: 1px dashed #4545f9!important;
+                    background-color:#e9e9fb!important;
+                    border-radius: .25rem!important;
+                }
+                
+                /* item */ 
+                #destino .item{
+                    margin: 6px 0px 0px 0px!important;
+                    border: rgb(212, 212, 212) 1px solid;
+                    background-color:white;
+                }#destino .item table{
+                    table-layout: fixed!important;
+                }#destino>ol>li.item{ /* 1º nível */
+                    padding:0px!important;
+                    border-radius: 0rem .25rem .25rem .25rem;
+                }#destino>ol>li>ol>li.item{ /* 2º nível */
+                    border-radius:.25rem;
+                    padding:0px!important;
+                }#destino>ol>li>ol>li.item tr.cabecalho td.imagem .itm_item{ /* nº do item*/
+                    display:none!important;
+                }#destino .item:hover:not(.dragged){ /* item hover */
+                    outline: none;
+                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+                }#destino .item .edita:not(.ativo):hover{ /* edita hover */
+                    background: #fbffb1;
+                }/*#destino .item .edita:not(.ativo):hover:after{
+                    content:"&nbsp;\270f";
+                    font-family:"Glyphicons Halflings";
+                    background: #fbffb1;
+                    float:right;
+                    position: absolute;
+                }*/
+                
+                #destino .item tr.cabecalho td:not(.imagem){ /* cabecalho - OK */
+                    background-color:#fbfbfb!important;
+                    border-bottom:1px solid #f1ebeb!important;  
+                    text-transform: uppercase;
+                    vertical-align:top;
+                }#destino .item tr.cabecalho td.imagem .itm_item { /* item */
+                    width:20px;
+                    top:-1px;
+                    left:-20px;
+                    position:absolute;
+                    overflow: hidden!important;
+                    padding-left:2px;
+                    padding-top:2px;
+                    padding-bottom:2px;
+                    border: rgb(212, 212, 212) 1px solid;
+                    border-right:0px;
+                    border-radius: .25rem 0rem 0rem .25rem;
+                    border-color:blue;
+                    background-color:white;
+                    font-size: 0.7900rem;
+                    font-weight: 600;
+                }#destino .item tr.cabecalho td.imagem{ /* cabecalho > imagem */
+                    padding:2px;
+                    width:55px!important;
+                    vertical-align:top;
+                    border-bottom:1px solid #f1ebeb!important;  
+                    position:relative
+                }#destino .item tr.cabecalho td.imagem .prd_imagem{
+                    position: relative;
+                }#destino .item tr.cabecalho td.imagem img{
+                    width:50px;
+                    height:50px;
+                }#destino .item tr.cabecalho td.titulo{ /* cabecalho > titulo */
+                    padding: 1px 1px 1px 6px;
+                    white-space: nowrap!important;
+                    overflow: hidden!important;
+                    text-overflow: ellipsis!important;
+                    line-height: 1.2;
+                }#destino .item tr.cabecalho td.titulo span.prd_nome{ /* cabecalho > titulo > prd_nome */
+                    font-size: 0.960rem;
+                    font-weight: 600;
+                }#destino .item tr.cabecalho td.titulo span.prd_modelo{ /* cabecalho > titulo > prd_modelo */
+                    margin-left:8px;
+                    font-size: 0.7400rem;
+                    font-style: italic;
+                }#destino .item tr.cabecalho td.remover{ /* cabecalho > remover */
+                    padding:2px!important;
+                    white-space:nowrap;
+                    text-align:right;
+                    width:20px;
+                }#destino .item tr.cabecalho td.remover span{
+                    cursor:pointer;
+                }
+                
+                #destino .item tr.dado>td{ /* dado - OK */
+                    border-bottom:1px solid #f1ebeb!important;
+                }#destino .item tr.dado td{
+                    vertical-align:middle;
+                    line-height: 1;
+                }#destino .item tr.dado td.diverso{ /* dado > diverso */
+                    padding: 1px 2px 1px 6px;
+                    overflow: hidden!important;
+                    text-overflow: ellipsis!important;
+                    white-space: nowrap!important;
+                }#destino .item tr.dado td.diverso span.prd_marca{ /* dado > diverso > marca */
+                    font-size: 0.720rem;
+                    font-weight: 600;
+                }#destino .item tr.dado td.diverso span.codigo{ /* dado > diverso > codigo */
+                    font-size: 0.7000rem;
+                    font-weight: 400;
+                }#destino .item tr.dado td.lote-f{ /* dado > lote */
+                    width:35px;
+                    font-size: 0.7000rem;
+                    font-weight: 400;
+                }#destino .item tr.dado td.lote{
+                    width:35px;
+                    padding:2px!important;
+                    white-space: nowrap!important;
+                    font-size: 0.7000rem;
+                    font-weight: 400;
+                }#destino .item tr.dado td.lote .itm_lote {
+                    vertical-align:middle;
+                    min-width:25px;
+                    display:table!important;
+                    width:100%!important;
+                    min-height:15px;
+                }#destino .item tr.dado td.lote .itm_lote input{ /* campo */
+                    width:100%!important;
+                    text-align: center!important;
+                }
+                
+                #destino .item tr.descricao td{ /* descricao - OK */
+                    padding: 2px 6px 2px 6px!important;
+                    height:17px!important;
+                    font-size: 0.6600rem!important;
+                    font-weight: 400;
+                    text-transform: uppercase;
+                    line-height: 1.4;
+                }#destino .item tr.descricao .prd_descricao { /* fonte */
+                    display:none;
+                }#destino .item tr.descricao .copiar {
+                    font-size: 0.5600rem!important;
+                    font-weight: 600;
+                    cursor:pointer;
+                    float:right;
+                }#destino .item tr.descricao .itm_descr_linha { /* linha */
+                    display:table!important;
+                    width:100%!important;
+                    min-height:15px;
+                }#destino .item tr.descricao .itm_descr_linha textarea{ /* campo */
+                    display:table-cell!important;
+                    width:100%!important;
+                }
+                
+                
+                #destino .item tr.valor table th, #destino .item tr.valor table td{ /* valor - OK */
+                    text-align:center!important;
+                    font-size: 0.6800rem;
+                    text-transform: uppercase;
+                    background-color:#fbfbfb!important;
+                }#destino .item tr.valor table{
+                    margin:0px!important;
+                }#destino .item tr.valor table tr.cabecalho th{ /* cabecalho */
+                    padding: 1px 2px 0 2px!important;
+                    line-height: 1.2;
+                }#destino .item tr.valor table tr.entrada td{ /* entrada */
+                    padding: 2px 2px 1px 2px!important;
+                    border-top: none!important;
+                    border-bottom: 1px #ddd solid;
+                    width:20%!important;
+                    max-width:20%!important;
+                    line-height: 1.2;
+                }#destino .item tr.valor table tr.entrada td span{
+                    display:table!important;
+                    width:100%!important;
+                    min-height:15px;
+                }#destino .item tr.valor table tr.entrada td span input{ /* campo */
+                    display:table-cell!important;
+                    width:100%!important;
+                    text-align: center!important;
+                }#destino .item tr.valor table tr.entrada td:first-child{
+                    border-bottom-left-radius: .25rem;
+                }#destino .item tr.valor table tr.entrada td:last-child{
+                    border-bottom-right-radius: .25rem;
+                }
+                
+                
+                /* ======================================================= */
+                
+                
+                /* drop-drag */
+                #destino ol li.placeholder { /* placeholder */
+                    position: relative;
+                    margin: 0;
+                    padding: 0;
+                    border: none;
+                }
+                #destino ol li.placeholder:before { /* setinha */
+                    position: absolute;
+                    content: "";
+                    width: 0;
+                    height: 0;
+                    margin-top: -5px;
+                    left: -9px;
+                    top: -5px;
+                    border: 7px solid transparent;
+                    border-left-color: red;
+                    border-right: none;
+                }                           
+                
+            </style>
+
+            <script>
+                var oldValue = '';
+                var iso_code = '{!cotacao.CurrencyIsoCode}';
+
+                // inicializa (pt1)
+                $(document).ready(function(){
+                    InicializaPt1();
+                });
+                
+                function InicializaPt1(){
+
+                    // cria extensão jquery: verifica objeto vazio
+                    $.fn.exists = function () {
+                        return this.length !== 0;
+                    }
+
+                    // submete formulário com "enter"
+                    $("#pesquisa .termo input[type='text']").on("keypress", function() {
+                        if (event.which == 13){
+                            event.preventDefault();
+                            oldValue = $("#pesquisa .termo input[type='text']").val();
+                            pesquisa_pag_atual.value = 1;
+                            AtivaLoader('pesquisa');
+                            Pesquisar();
+                        }
+                    });
+
+                    // submete formulário ao "digitar"
+                    $("#pesquisa .termo input[type='text']").keyup(delay(function (e) {
+                        newValue = $("#pesquisa .termo input[type='text']").val();
+                        if(newValue != oldValue){
+                            pesquisa_pag_atual.value = 1;
+                            AtivaLoader('pesquisa');
+                            Pesquisar();
+                        }
+                        oldValue = newValue;
+                    }, 500));
+
+                    // submete formulário ao "filtrar"
+                    $("#pesquisa .filtro input[type='checkbox']").on('click change',function(){
+                        pesquisa_pag_atual.value = 1;
+                        AtivaLoader('pesquisa');
+                        Pesquisar();
+                    });
+                    $("#pesquisa .termo select").on('change',function(){
+                        pesquisa_pag_atual.value = 1;
+                        AtivaLoader('pesquisa');
+                        Pesquisar();
+                    });
+
+                    FiltroAcao('navegacao');
+
+                    // volta a home de "navegação"                  
+                    $(".origem .guia li.navegar").on('click',function(){
+                        if($(this).hasClass('active'))
+                            PreNavegar('');
+                    });
+
+                    NivelaItens();
+                    NumeraItens();
+                    HabilitaCopia();
+                    AtivaEdicao();
+                    CalculaTotais();
+                    OcultaMensagem();                   
+                }
+                
+                // cria função global: executa função com delay
+                function delay(callback, ms) {
+                    var timer = 0;
+                    return function() {
+                        var context = this, args = arguments;
+                        clearTimeout(timer);
+                        timer = setTimeout(function () {
+                            callback.apply(context, args);
+                        }, ms || 0);
+                    };
+                }
+                
+                // controla loader
+                function AtivaLoader(id_frame){
+                    $("#"+id_frame+" .loader").show();
+                }
+                function DesativaLoader(id_frame){
+                    $("#"+id_frame+" .loader").hide();
+                }
+
+                // ativa container
+                function AtivaContainer(opcao){
+                    var seletor = '';
+                    if(opcao == 'pesquisa')
+                        seletor = '#pesquisa .resultado>ol';
+                    else if(opcao == 'navegacao')
+                        seletor = '#navegacao .resultado>ol';
+                    $(seletor).sortable({
+                        group: 'itens',
+                            exclude: '.hidden, .bloqueado',
+                            drop: false
+                    });
+                }
+
+                // ativa popover
+                function AtivaPopover(opcao){
+                    var seletor = '';
+                    if(opcao == 'pesquisa')
+                        seletor = '#pesquisa .resultado .dentro'
+                    if(opcao == 'navegacao')
+                        seletor = '#navegacao .resultado .dentro'
+                    $(seletor).popover({
+                        delay:{show:500},
+                        animation:false,
+                        viewport:{selector:'body'}
+                    });
+                }
+                
+                // paginação de formularios
+                function Paginar(opcao, pagina){
+                    if(opcao == 'pesquisa'){
+                        pesquisa_pag_atual.value = pagina;
+                        AtivaLoader('pesquisa');
+                        Pesquisar();
+                    }
+                }
+                
+                function FiltroAcao(opcao){
+                    var seletor = '';
+                    if(opcao == 'navegacao')
+                        seletor = '#navegacao .tipo ul li a'
+                    $(seletor).on('click',function(){
+                        AtivaLoader('navegacao');
+                        navegacao_ftr_tipo.value = $(this).data("valor");
+                        console.log($(this).data("valor"));
+                        Navegar();
+                    });
+                }
+                
+                // navegação
+                function PreNavegar(link){
+                    navegacao_ftr_id.value = link;
+                    AtivaLoader('navegacao');
+                    Navegar();
+                }
+                
+                //cria no máximo 2 níveiss
+                function NivelaItens(){
+                    $("#destino>ol>li").each(function(){
+                        // coloca subnivel em item de 1º nível
+                        if(!$(this).children("ol").exists())
+                            $(this).append($("<ol></ol>"));
+                        // remove subnivel em item de 2º nível
+                        $(this).find("li").children("ol").remove();
+                    });
+                }
+                
+                // numera itens/subitens em destino
+                function NumeraItens(){
+                    // item
+                    var item=0, item_subitem = $("#destino>ol>li").length;
+                    $("#destino>ol>li").each(function(){
+                        item++;
+                        $(this).find('.itm_item').first().text(item);
+                        $(this).find('.itm_item_pai').first().text('');
+                        // subitem
+                        $(this).find("ol>li").each(function(){
+                            item_subitem++;
+                            $(this).find('.itm_item').first().text(item_subitem);
+                            $(this).find('.itm_item_pai').first().text(item);
+                        });
+                    })
+                }
+
+                // habilita copiar descrição fonte na de linha
+                function HabilitaCopia(){
+                    $('#destino .item tr.descricao .copiar').each(function(){
+                        if($(this).parent().find('.prd_descricao').text() != '')
+                            $(this).show(); 
+                    })
+                }
+
+                // ativa campos editáveis de item de cot
+                function AtivaEdicao(){
+                    
+                    $("#destino .item .edita:not(.itm_descr_linha)").off('dblclick');
+                    $("#destino .item .edita:not(.itm_descr_linha)").on('dblclick',function(){
+                        
+                        $(this).off('dblclick');
+                        $(this).addClass('ativo');
+                        $(this).html($("<input></input>").val($(this).text().replace(/[^0-9.,]/g,'')));
+                        $(this).find('input').focus();
+                        $(this).find('input').select();
+                        $(this).on('focusout keypress',function(){
+                            if(event.type == 'blur' || (event.type == 'keypress' && event.which == 13)){
+                                $(this).off('focusout keypress');
+                                $(this).removeClass('ativo');
+                                $(this).text($(this).find('input').val().length==0 ? 0 : $(this).find('input').val());
+                                CalculaTotais();
+                                AtivaEdicao();
+                                Salvar();
+                            }
+                        });
+                    });
+                    
+                    $("#destino .item .edita.itm_descr_linha").off('dblclick');
+                    $("#destino .item .edita.itm_descr_linha").on('dblclick',function(){
+                        $(this).off('dblclick');
+                        $(this).addClass('ativo');
+                        $(this).html($("<textarea rows='10'></textarea>").val($(this).text()));
+                        $(this).find('textarea').focus();
+                        $(this).find('textarea').select();
+                        $(this).on('focusout',function(){
+                            $(this).removeClass('ativo');
+                            $(this).text($(this).find('textarea').val());
+                            $(this).off('focusout keypress');
+                            AtivaEdicao();
+                            Salvar();
+                        });                     
+                    });
+                }
+                
+                // remove item destino 
+                function RemoveItem(item){
+                    $(item).closest('li').remove();
+                    NumeraItens();
+                    CalculaTotais();
+                    Salvar();
+                }
+                
+                // copia descrição fonte na de linha
+                function CopiarFonte(elemento){
+                    $(elemento).parent().find('.itm_descr_linha').text(
+                        $(elemento).parent().find('.prd_descricao').text()
+                    );
+                    AtivaEdicao();
+                    Salvar();
+                }
+                
+                // calcula campos de totais em destino
+                function CalculaTotais(){
+                    var valor_total = 0;
+                    
+                    // remove formatos
+                    $('#destino .item .entrada span.edita').each(function(){$(this).text($(this).text().replace(/[^0-9.,]/g,'').replace(',','.'));});
+                    
+                    // calcula valores
+                    $('#destino .item').each(function(){
+                        $(this).find('.itm_valor').first().text(parseFloat($(this).find('.itm_valor').first().text()).toFixed(2));
+                        $(this).find('.itm_quantidade').first().text(parseFloat($(this).find('.itm_quantidade').first().text()).toFixed(2));
+                        $(this).find('.itm_desconto').first().text(parseFloat($(this).find('.itm_desconto').first().text()).toFixed(2));
+                        var subtotal =  parseFloat($(this).find('.itm_valor').first().text()) * 
+                                        parseFloat($(this).find('.itm_quantidade').first().text());
+                        var total = subtotal - (parseFloat($(this).find('.itm_desconto').first().text()*subtotal/100));
+                        $(this).find('.itm_subtotal').first().text(parseFloat(subtotal).toFixed(2));
+                        $(this).find('.itm_total').first().text(parseFloat(total).toFixed(2));
+                        valor_total += total;
+                    })
+                    $('.destino .guia span.valor-total').first().text('('+iso_code+' '+(parseFloat(valor_total).toFixed(2)).replace('.',',')+')');
+                    
+                    $('#destino .item .entrada span').each(function(){$(this).text($(this).text().replace('.',','));});                 
+                    $('#destino .item .entrada span.itm_valor, #destino .item .entrada span.itm_subtotal, #destino .item .entrada span.itm_total').each(function(){$(this).text(iso_code+' ' + $(this).text());});
+                    $('#destino .item .entrada span.itm_desconto').each(function(){$(this).text($(this).text() + '%');});
+                }
+                
+                // salva itens destino 
+                function Salvar(){
+                    // atualiza atributos "data-"
+                    $('#destino .item').each(function(){
+                        $(this).removeData();
+                        $(this).data('itm_id', $(this).find('.itm_id').first().text());
+                        $(this).data('ent_id', $(this).find('.ent_id').first().text());
+                        $(this).data('itm_item', $(this).find('.itm_item').first().text());
+                        $(this).data('itm_item_pai', $(this).find('.itm_item_pai').first().text());
+                        $(this).data('itm_lote', $(this).find('.itm_lote').first().text());
+                        $(this).data('itm_valor', $(this).find('.itm_valor').first().text().replace(/[^0-9.,]/g,'').replace(',', '.'));
+                        $(this).data('itm_quantidade', $(this).find('.itm_quantidade').first().text().replace(/[^0-9.,]/g,'').replace(',', '.'));
+                        $(this).data('itm_desconto', $(this).find('.itm_desconto').first().text().replace(/[^0-9.,]/g,'').replace(',', '.'));
+                        $(this).data('itm_descr_linha', $(this).find('.itm_descr_linha').first().text());
+                    });                 
+                    
+                    // envia para o controller
+                    tela_itens_cot.value = JSON.stringify(grupo.sortable("serialize").get(), null, '    ');
+                    AtivaLoader('destino')
+                    CotacaoSalvarProdutos();
+                }
+                function atlzr(){
+                    location.reload();
+                     
+                }
+                
+                function AtualizarFormulario(){
+                    parent.$A.get('e.force:refreshView').fire();
+                }
+                
+                // atualiza ids de itens inseridos
+                function AtualizarIds(){
+                    itens_cot = JSON.parse(tela_itens_cot.value);
+                    $('#destino .item').each(function(){
+                        for(var cont_item=0; cont_item<itens_cot[0].length; cont_item++) { // item pai
+                            if($(this).find('.itm_item').first().text() == itens_cot[0][cont_item]['itm_item']){
+                                $(this).find('.itm_id').first().text(itens_cot[0][cont_item]['itm_id']);
+                            }
+                            for(var cont_filho=0; cont_filho<itens_cot[0][cont_item]['children'][0].length; cont_filho++) { // item filho
+                                if($(this).find('.itm_item').first().text() == itens_cot[0][cont_item]['children'][0][cont_filho]['itm_item']){
+                                    $(this).find('.itm_id').first().text(itens_cot[0][cont_item]['children'][0][cont_filho]['itm_id']);
+                                }
+                            }
+                        }
+                    });
+                }
+                
+                function OcultaMensagem(){
+                    $(".status-geral").delay(1500).slideUp();                   
+                }
+                
+            </script>
+        </head>
+
+        <body id="corpo-pag">
+            <div class="bootstrap-iso">
+                <div class="container-fluid">
+                    
+                    <apex:form >
+
+                        <!-- metodos -->
+                        <apex:actionFunction name="Pesquisar" action="{!Pesquisar}" rerender="pesquisa-frame" oncomplete="AtivaContainer('pesquisa');AtivaPopover('pesquisa');DesativaLoader('pesquisa');"/>
+                        <apex:actionFunction name="Navegar" action="{!Navegar}" rerender="navegacao-frame" oncomplete="AtivaContainer('navegacao');AtivaPopover('navegacao');FiltroAcao('navegacao');DesativaLoader('navegacao');"/>
+                        <apex:actionFunction name="CotacaoSalvarProdutos" action="{!CotacaoSalvarProdutos}" rerender="itens-cot, status, mensagem" oncomplete="AtualizarIds();OcultaMensagem();DesativaLoader('destino');AtualizarFormulario();atlzr();"/>
+                        <apex:actionFunction name="CotacaoSalvarCatalogo" action="{!CotacaoSalvarCatalogo}" rerender="conteudo, status, mensagem" oncomplete="InicializaPt1();InicializaPt2();"/> 
+
+                        <!-- mensagens --> 
+                        
+                        <apex:outputPanel id="mensagem">
+                            <apex:outputText rendered="{!IF(tela.mensagem!='', true, false)}" >
+                                <div class="alert alert-danger mensagem">
+                                    <apex:outputText value="{!tela.mensagem}" escape="false" />
+                                </div>                          
+                            </apex:outputText>
+                        </apex:outputPanel>
+                        
+                        <apex:outputPanel id="conteudo">
+                            
+                            <!-- catalogo -->
+                            <apex:outputText rendered="{!IF(cotacao.PriceBook2Id == null, true, false)}" >
+                                <div class="row catalogo">
+                                    <div class='col-xs-offset-22 col-xs-60 input-group'>
+                                        <span class="input-group-addon">Selecione um catálogo de preços</span>
+                                        <div class="input-group-btn">
+                                            <apex:selectList styleClass="form-control browserselectpicker" html-data-style="btn-default" multiselect="false" size="1" value="{!tela.dado_cat}">
+                                                <apex:selectOptions value="{!tela.dado_cats}"/>
+                                            </apex:selectList>
+                                        </div>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button" onclick="CotacaoSalvarCatalogo();"><i class="glyphicon glyphicon-floppy-disk"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </apex:outputText>
+                            
+                            <!-- pesquisa -->
+                            <apex:outputText rendered="{!IF(cotacao.PriceBook2Id != null, true, false)}" >
+                                <div class="row conteudo">
+
+                                    <!-- origem -->
+                                    <div class='col-xs-50 origem'>
+
+                                        <!-- guia -->
+                                        <div class="row guia">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a data-toggle="tab" href="#pesquisa">Pesquisar</a></li>
+                                                <li class="navegar"><a data-toggle="tab" href="#navegacao">Navegar</a></li>
+                                            </ul>
+                                        </div>
+
+                                        <!-- paineis -->
+                                        <div class="row painel">
+                                            <div class="col-xs-100">
+                                                <div class="tab-content">
+
+                                                    <!-- pesquisa -->
+                                                    <div id="pesquisa" class="tab-pane fade in active">
+
+                                                        <div class="input-group input-group-sm termo">
+                                                            <apex:inputText styleClass="form-control input-sm" html-placeholder="Pesquisar em produtos..." value="{!pesquisa.termo_busca}" />
+                                                            <div class="input-group-btn">
+                                                                <apex:selectList styleClass="form-control input-sm browserselectpicker" html-data-style="btn-default btn-sm" multiselect="false" size="1" value="{!pesquisa.ftr_tipo}">
+                                                                    <apex:selectOptions value="{!pesquisa.ftr_tipo_vals}"/>
+                                                                </apex:selectList>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row filtro">
+                                                            <div class="col-xs-50"><div class="checkbox"><label>
+                                                                <apex:inputCheckbox value="{!pesquisa.ftr_add_restricao}"/>
+                                                                Exibir itens com restrições
+                                                            </label></div></div>
+                                                            <div class="col-xs-50"><div class="checkbox"><label>
+                                                                <apex:inputCheckbox value="{!pesquisa.ftr_add_servico}"/>
+                                                                Exibir Itens de serviços
+                                                            </label></div></div>
+                                                        </div>
+
+                                                        <apex:outputPanel id="pesquisa-frame">
+                                                            <apex:inputHidden value="{!pesquisa.pag_atual}" id="pesquisa_pag_atual" />
+                                                            <script>
+                                                                pesquisa_pag_atual = document.getElementById('{!$Component.pesquisa_pag_atual}');
+                                                            </script>
+
+                                                            <div class="row loader" style="display:none;"></div>
+                                                            <div class="resultado">
+                                                                <ol>
+                                                                    <apex:repeat value="{!pesquisa.produtos}" var="produto">
+                                                                        <apex:variable var="estilo" value="{!IF(produto.status!='Ativo','bloqueado','')}" />
+                                                                        <apex:variable var="status" value="{!IF(produto.status!='Ativo','('+produto.status+')','')}" />
+
+                                                                        <apex:variable var="total_vendido" value="{!IF(produto.total_vendido!=null,produto.total_vendido,'-')}" />
+                                                                        <apex:variable var="media_valor" value="{!IF(produto.media_valor!=null,produto.media_valor,'-')}" />
+                                                                        <apex:variable var="entrada_valor" value="{!IF(produto.entrada_valor!=null,produto.entrada_valor,'-')}" />
+                                                                        
+                                                                        <apex:variable var="descricao" value="{!IF(produto.campos.Description==null,'display:none;','')}" />
+
+                                                                        <li class="item {!estilo}">
+                                                                            <div class="dentro" data-toggle="popover" data-trigger="hover" data-html="true" data-container=".conteudo" title="Detalhes <span class='status'>{!status}</span>" data-content="
+                                                                                <table class='table table-condensed dado' cellpadding='0' cellspacing='0' border='0' style='width:100%; height:100%;'>
+                                                                                    <tr>
+                                                                                        <td><b>MARCA: </b><span class='prd_marca'>{!produto.campos.Marca__c}</span></td>
+                                                                                        <td><b>TIPO: </b><span class='prd_tipo'>{!produto.campos.Tipo_do_Produto__c}</span></td>
+                                                                                    </tr>
+                                                                                    <tr style='{!descricao}'>
+                                                                                        <td class='descricao' colspan='2'><div><b>DESCRIÇÃO: </b><span class='prd_descricao'>{!produto.campos.Description}</span></div></td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                                <table class='table table-condensed estatitica' cellpadding='0' cellspacing='0' border='0' style='width:100%; height:100%;'>
+                                                                                    <tr>
+                                                                                        <th>QTD VENDIDA</th>
+                                                                                        <th>VALOR MÉDIO</th>
+                                                                                        <th>PEÇO DE LISTA</th>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>{!total_vendido}</td>
+                                                                                        <td>{!cotacao.CurrencyIsoCode} {!media_valor}</td>
+                                                                                        <td>
+                                                                                            {!cotacao.CurrencyIsoCode}
+                                                                                            <span class='ent_valor'>{!entrada_valor}</span>
+                                                                                            <span class='ent_id' style='display:none;'>{!produto.entrada_id}</span>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            ">
+                                                                                <apex:outputText rendered="{!IF(estilo=='bloqueado', true, false)}" >
+                                                                                    <div class="bloqueio"></div>
+                                                                                </apex:outputText>
+                                                                                <table cellpadding="0" cellspacing="0" border="0" style="width:100%; height:100%;">
+                                                                                    <tr>
+                                                                                        <td class="imagem mover" rowspan="3">
+                                                                                            <span class='prd_imagem'><img src='{!produto.campos.URL_da_Imagem__c}' /></span>
+                                                                                        </td>
+                                                                                        <td class="nome mover">
+                                                                                            <span class='prd_nome'>{!produto.campos.Name}</span>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td class="codigo">
+                                                                                            HOSP: <span class='prd_cod_hosp'>{!produto.campos.StockKeepingUnit}</span>
+                                                                                            <apex:outputText rendered="{!IF(produto.campos.ProductCode != null, true, false)}" >
+                                                                                                | FABR: <span class='prd_cod_fabr'>{!produto.campos.ProductCode}</span>
+                                                                                            </apex:outputText>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td class="modelo">
+                                                                                            <span class='prd_modelo'>{!produto.campos.Modelo__c}</span>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+
+                                                                            </div>
+                                                                        </li>
+                                                                    </apex:repeat>
+                                                                </ol>
+                                                            </div>
+                                                            <div class="paginacao">
+                                                                <ul class="pager">
+                                                                    <apex:variable var="estilo" value="" />
+                                                                    <apex:outputText rendered="{!IF(pesquisa.pag_atual = 1, true, false)}" >
+                                                                        <apex:variable var="estilo" value="visibility:hidden!important" />
+                                                                    </apex:outputText>
+                                                                    <li class="previous" onClick="Paginar('pesquisa',{!pesquisa.pag_atual-1})" style="{!estilo}">
+                                                                        <a href="javascript:void(0)" onClick="" >Anterior</a>
+                                                                    </li>
+
+                                                                    <li class="informacao">
+                                                                        <apex:outputText rendered="{!IF(pesquisa.reg_total != 0, true, false)}" >
+                                                                            Pag. {!pesquisa.pag_atual} de {!pesquisa.pag_total}
+                                                                        </apex:outputText>
+                                                                        <apex:outputText rendered="{!IF(pesquisa.reg_total == 0, true, false)}" >
+                                                                            Nada encontrado :(
+                                                                        </apex:outputText>
+                                                                    </li>
+
+                                                                    <apex:variable var="estilo" value="" />
+                                                                    <apex:outputText rendered="{!IF(pesquisa.pag_atual >= pesquisa.pag_total, true, false)}" >
+                                                                        <apex:variable var="estilo" value="visibility:hidden!important" />
+                                                                    </apex:outputText>
+                                                                    <li class="next">
+                                                                        <a href="javascript:void(0)" onClick="Paginar('pesquisa',{!pesquisa.pag_atual+1})" style="{!estilo}">Próxima</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </apex:outputPanel>
+                                                    </div>
+
+                                                    
+                                                    
+                                                    
+                                                    <!-- navegacao -->
+                                                    <div id="navegacao" class="tab-pane fade">
+                                                        
+                                                        <apex:outputPanel id="navegacao-frame">
+                                                            <apex:inputHidden value="{!navegacao.ftr_id}" id="navegacao_ftr_id" />
+                                                            <script>
+                                                                navegacao_ftr_id = document.getElementById('{!$Component.navegacao_ftr_id}');
+                                                            </script>
+
+                                                            <div class="row loader" style="display:none;"></div>
+                                                            <div class="resultado">
+                                                                
+                                                                <!-- categoria - unica -->
+                                                                <apex:outputText rendered="{!IF(navegacao.categoria.id!=null, true, false)}" >
+                                                                    <div class="categoria">
+                                                                        <table>
+                                                                            <tr>
+                                                                                <td class="imagem" rowspan="2"><img src="{!navegacao.categoria.Icone_url__c}"></img></td>
+                                                                                <td class="nome" >{!navegacao.categoria.Name}</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="tipo">
+                                                                                    <apex:inputHidden value="{!navegacao.ftr_tipo}" id="navegacao_ftr_tipo" />
+                                                                                    <script>
+                                                                                        navegacao_ftr_tipo = document.getElementById('{!$Component.navegacao_ftr_tipo}');
+                                                                                    </script>
+                                                                                    <apex:outputText rendered="{!IF(navegacao.ftr_tipo_vals.size>0, true, false)}" >
+                                                                                        <ul class="nav nav-pills">
+                                                                                            <apex:repeat value="{!navegacao.ftr_tipo_vals}" var="tipo">
+                                                                                                <apex:variable var="estilo" value="{!IF(tipo.value==navegacao.ftr_tipo,'active','')}"/>
+                                                                                                <li class="{!estilo}"><a href="javascript:void(0)" data-valor="{!tipo.value}">{!tipo.label}</a></li>
+                                                                                            </apex:repeat>
+                                                                                        </ul>
+                                                                                        
+                                                                                        <!-- <apex:selectList styleClass="form-control input-sm browserselectpicker" html-data-style='btn-default btn-sm' multiselect="false" size="1" value="{!navegacao.ftr_tipo}"> -->
+                                                                                            <!-- <apex:selectOptions value="{!navegacao.ftr_tipo_vals}"/> -->
+                                                                                        <!-- </apex:selectList> -->
+                                                                                    </apex:outputText>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </div>
+                                                                </apex:outputText>
+                                                                
+                                                                <!-- categorias - lista -->
+                                                                <apex:outputText rendered="{!IF(navegacao.categorias.size>0, true, false)}" >
+                                                                    <apex:repeat value="{!navegacao.categorias}" var="categoria">
+                                                                        <div class="categorias">
+                                                                            <div>
+                                                                                <table cellpadding="0" cellspacing="0" border="0" style="width:100%;" onclick="PreNavegar('{!categoria.Id}')">
+                                                                                    <tr>
+                                                                                        <td class="imagem"><img src="{!categoria.Icone_url__c}"></img></td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td class="nome" >{!categoria.Name}</td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>                                                          
+                                                                    </apex:repeat>
+                                                                </apex:outputText>
+                                                                
+                                                                <!-- produtos - lista -->
+                                                                <ol>
+                                                                    <apex:repeat value="{!navegacao.produtos}" var="produto">
+                                                                        <apex:variable var="estilo" value="{!IF(produto.status!='Ativo','bloqueado','')}" />
+                                                                        <apex:variable var="status" value="{!IF(produto.status!='Ativo','('+produto.status+')','')}" />
+
+                                                                        <apex:variable var="total_vendido" value="{!IF(produto.total_vendido!=null,produto.total_vendido,'-')}" />
+                                                                        <apex:variable var="media_valor" value="{!IF(produto.media_valor!=null,produto.media_valor,'-')}" />
+                                                                        <apex:variable var="entrada_valor" value="{!IF(produto.entrada_valor!=null,produto.entrada_valor,'-')}" />
+                                                                        
+                                                                        <apex:variable var="descricao" value="{!IF(produto.campos.Description==null,'display:none;','')}" />
+
+                                                                        <li class="item {!estilo}">
+                                                                            <div class="dentro" data-toggle="popover" data-trigger="hover" data-html="true" data-container=".conteudo" title="Detalhes <span class='status'>{!status}</span>" data-content="
+                                                                                <table class='table table-condensed dado' cellpadding='0' cellspacing='0' border='0' style='width:100%; height:100%;'>
+                                                                                    <tr>
+                                                                                        <td><b>MARCA: </b><span class='prd_marca'>{!produto.campos.Marca__c}</span></td>
+                                                                                        <td><b>TIPO: </b><span class='prd_tipo'>{!produto.campos.Tipo_do_Produto__c}</span></td>
+                                                                                    </tr>
+                                                                                    <tr style='{!descricao}'>
+                                                                                        <td class='descricao' colspan='2'><div><b>DESCRIÇÃO: </b><span class='prd_descricao'>{!produto.campos.Description}</span></div></td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                                <table class='table table-condensed estatitica' cellpadding='0' cellspacing='0' border='0' style='width:100%; height:100%;'>
+                                                                                    <tr>
+                                                                                        <th>QTD VENDIDA</th>
+                                                                                        <th>VALOR MÉDIO</th>
+                                                                                        <th>PEÇO DE LISTA</th>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>{!total_vendido}</td>
+                                                                                        <td>{!cotacao.CurrencyIsoCode} {!media_valor}</td>
+                                                                                        <td>
+                                                                                            {!cotacao.CurrencyIsoCode}
+                                                                                            <span class='ent_valor'>{!entrada_valor}</span>
+                                                                                            <span class='ent_id' style='display:none;'>{!produto.entrada_id}</span>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            ">
+                                                                                <apex:outputText rendered="{!IF(estilo=='bloqueado', true, false)}" >
+                                                                                    <div class="bloqueio"></div>
+                                                                                </apex:outputText>
+                                                                                <table cellpadding="0" cellspacing="0" border="0" style="width:100%; height:100%;">
+                                                                                    <tr>
+                                                                                        <td class="imagem mover" rowspan="3">
+                                                                                            <span class='prd_imagem'><img src='{!produto.campos.URL_da_Imagem__c}' /></span>
+                                                                                        </td>
+                                                                                        <td class="nome mover">
+                                                                                            <span class='prd_nome'>{!produto.campos.Name}</span>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td class="codigo">
+                                                                                            HOSP: <span class='prd_cod_hosp'>{!produto.campos.StockKeepingUnit}</span>
+                                                                                            <apex:outputText rendered="{!IF(produto.campos.ProductCode != null, true, false)}" >
+                                                                                                | FABR: <span class='prd_cod_fabr'>{!produto.campos.ProductCode}</span>
+                                                                                            </apex:outputText>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td class="modelo">
+                                                                                            <span class='prd_modelo'>{!produto.campos.Modelo__c}</span>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+
+                                                                            </div>
+                                                                        </li>
+                                                                    </apex:repeat>
+                                                                </ol>
+                                                            </div>
+                                                            <div class="paginacao">
+                                                                <ul class="pager">
+                                                                    
+                                                                    <apex:variable var="estilo" value="{!IF(navegacao.ftr_id=='', 'visibility:hidden!important', '')}" />
+                                                                    <apex:variable var="link" value="{!IF(navegacao.categoria.Categoria_Pai__c==null, '', navegacao.categoria.Categoria_Pai__c)}" />
+                                                                    
+                                                                    <li class="previous" onClick="PreNavegar('{!link}')" style="{!estilo}">
+                                                                        <a href="javascript:void(0)" onClick="" >Voltar</a>
+                                                                    </li>
+
+                                                                    <li class="informacao">
+                                                                    </li>
+                                                                    <li class="next">
+                                                                        <a href="javascript:void(0)" style="visibility:hidden!important;">Próxima</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+
+                                                        </apex:outputPanel>
+                                                        
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- destino -->
+                                    <div class='col-xs-50 destino'>
+    
+                                        <!-- guia -->
+                                        <div class="row guia">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a data-toggle="tab" href="#destino">Produtos da cotação
+                                                <span class="valor-total"></span>
+                                                <apex:outputPanel id="status">
+                                                    <apex:variable var="icone"  value="{!IF(tela.mensagem=='','ok','remove')}" />
+                                                    &nbsp;<span class="glyphicon glyphicon-{!icone} status-geral"></span>
+                                                </apex:outputPanel>
+                                                </a></li>
+                                            </ul>
+                                        </div>
+
+                                        <!-- painel -->
+                                        <div id="divDestino" class="row painel">
+                                            <div class="col-xs-100">
+                                                <div class="tab-content">
+
+                                                    <!-- destino -->
+                                                    <div id="destino" class="tab-pane fade in active">
+                                                        <apex:outputPanel id="itens-cot">
+                                                            <apex:inputHidden value="{!tela.itens_cot}" id="tela_itens_cot" />
+                                                            <script>
+                                                                tela_itens_cot = document.getElementById('{!$Component.tela_itens_cot}');
+                                                            </script>
+                                                        </apex:outputPanel>
+                                                        <div class="row loader" style="display:none;"></div>
+                                                        <ol class="primeiro">
+                                                        
+                                                            <apex:repeat value="{!cotacao.QuoteLineItems}" var="item">
+                                                                <apex:outputText rendered="{!IF(item.Item_Pai__c==null, true, false)}" >
+                                                                    <li class="item" style="border-color:blue;">
+                                                                        <!-- visiveis -->
+                                                                        <table cellpadding="0" cellspacing="0" border="0" style="width:100%; height:100%;">
+                                                                            <tr class="cabecalho mover">
+                                                                                <td rowspan="2" class="imagem">
+                                                                                    <span class="itm_item">{!item.Item__c}</span>
+                                                                                    <span class='prd_imagem'><img src="{!item.Product2.URL_da_Imagem__c}"></img></span>
+                                                                                </td>
+                                                                                <td class="titulo">
+                                                                                    <span class='prd_nome'>{!item.Product2.Name}</span>
+                                                                                    <br/><span class='prd_modelo'>{!item.Product2.Modelo__c}</span>
+                                                                                </td>
+                                                                                <td class="remover">
+                                                                                    <span class="glyphicon glyphicon-remove" onclick="RemoveItem(this)" ></span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr class="dado">
+                                                                                <td colspan="2">
+                                                                                    <table cellpadding="0" cellspacing="0" border="0" style="width:100%; height:100%;">
+                                                                                        <tr>
+                                                                                            <td class="diverso">
+                                                                                                <span class='prd_marca'>{!item.Product2.Marca__c}</span>,
+                                                                                                <span class="codigo">
+                                                                                                    HOSP: <span class='prd_cod_hosp'>{!item.Product2.StockKeepingUnit}</span>
+                                                                                                    <apex:outputText rendered="{!IF(item.Product2.ProductCode != null, true, false)}" >
+                                                                                                        | FABR: <span class='prd_cod_fabr'>{!item.Product2.ProductCode}</span>
+                                                                                                    </apex:outputText>
+                                                                                                </span>
+                                                                                            </td>
+                                                                                            <td class="lote-f">
+                                                                                                LOTE:
+                                                                                            </td>
+                                                                                            <td class="lote">
+                                                                                                <span class='itm_lote edita'>{!item.Lote__c}</span>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </table>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr class="descricao">
+                                                                                <td colspan="3" class="linha">
+                                                                                    <b>Descrição:</b>  
+                                                                                    <span class='prd_descricao'>{!item.Product2.Description}</span>
+                                                                                    <span class='copiar' style="display:none;" onclick="CopiarFonte(this);">[usar padrão]</span>
+                                                                                    <span class='itm_descr_linha edita'>{!item.Descricao_da_linha__c}</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr class="valor">
+                                                                                <td colspan="3">
+                                                                                    <table class="table table-condensed" cellpadding="0" cellspacing="0" border="0" style="width:100%; height:100%;">
+                                                                                        <tr class="cabecalho">
+                                                                                            <th>VALOR</th>
+                                                                                            <th>QUANTIDADE</th>
+                                                                                            <th>SUBTOTAL</th>
+                                                                                            <th>DESCONTO</th>
+                                                                                            <th>TOTAL</th>
+                                                                                        </tr>
+                                                                                        <tr class="entrada">
+                                                                                            <td><span class='itm_valor edita'>{!item.UnitPrice}</span></td>
+                                                                                            <td><span class='itm_quantidade edita'>{!item.Quantity}</span></td>
+                                                                                            <td><span class='itm_subtotal'>{!item.Subtotal}</span></td>
+                                                                                            <td><span class='itm_desconto edita'>{!item.Discount}</span></td>
+                                                                                            <td><span class='itm_total'>{!item.TotalPrice}</span></td>
+                                                                                        </tr>
+                                                                                    </table>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+
+                                                                        <!-- ocultas -->
+                                                                        <div style='display:none;'>
+                                                                            <span class='ent_id'>{!item.PricebookEntryId}</span>
+                                                                            <span class='itm_id'>{!item.Id}</span>
+                                                                            <span class='itm_item_pai'>{!item.Item_Pai__c}</span>
+                                                                        </div>
+                                                                        <apex:variable value="{!0}" var="totFilhos"/>
+                                                                        <ol>
+                                                                            <apex:outputText rendered="{!IF(item.Item__c!=null, true, false)}" >
+                                                                                <apex:repeat value="{!cotacao.QuoteLineItems}" var="item_filho">
+                                                                                    <apex:outputText rendered="{!IF(item_filho.Item_Pai__c==item.Item__c, true, false)}" >
+                                                                                        <li class="item">
+                                                                                            <!-- visiveis -->
+                                                                                            <table cellpadding="0" cellspacing="0" border="0" style="width:100%; height:100%;">
+                                                                                                <tr class="cabecalho mover">
+                                                                                                    <td rowspan="2" class="imagem">
+                                                                                                        <span class="itm_item">{!item_filho.Item__c}</span>
+                                                                                                        <span class='prd_imagem'><img src="{!item_filho.Product2.URL_da_Imagem__c}"></img></span>
+                                                                                                    </td>
+                                                                                                    <td class="titulo">
+                                                                                                        <span class='prd_nome'>{!item_filho.Product2.Name}</span>
+                                                                                                        <br/><span class='prd_modelo'>{!item_filho.Product2.Modelo__c}</span>
+                                                                                                    </td>
+                                                                                                    <td class="remover">
+                                                                                                        <span class="glyphicon glyphicon-remove" onclick="RemoveItem(this)" ></span>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr class="dado">
+                                                                                                    <td colspan="2">
+                                                                                                        <table cellpadding="0" cellspacing="0" border="0" style="width:100%; height:100%;">
+                                                                                                            <tr>
+                                                                                                                <td class="diverso">
+                                                                                                                    <span class='prd_marca'>{!item_filho.Product2.Marca__c}</span>,
+                                                                                                                    <span class="codigo">
+                                                                                                                        HOSP: <span class='prd_cod_hosp'>{!item_filho.Product2.StockKeepingUnit}</span>
+                                                                                                                        <apex:outputText rendered="{!IF(item_filho.Product2.ProductCode != null, true, false)}" >
+                                                                                                                            | FABR: <span class='prd_cod_fabr'>{!item_filho.Product2.ProductCode}</span>
+                                                                                                                        </apex:outputText>
+                                                                                                                    </span>
+                                                                                                                </td>
+                                                                                                                <td class="lote-f">
+                                                                                                                    LOTE:
+                                                                                                                </td>
+                                                                                                                <td class="lote">
+                                                                                                                    <span class='itm_lote edita'>{!item_filho.Lote__c}</span>
+                                                                                                                </td>
+                                                                                                            </tr>
+                                                                                                        </table>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr class="descricao">
+                                                                                                    <td colspan="3" class="linha">
+                                                                                                        <b>Descrição:</b>  
+                                                                                                        <span class='prd_descricao'>{!item_filho.Product2.Description}</span>
+                                                                                                        <span class='copiar' style="display:none;" onclick="CopiarFonte(this);">[usar padrão]</span>
+                                                                                                        <span class='itm_descr_linha edita'>{!item_filho.Descricao_da_linha__c}</span>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr class="valor">
+                                                                                                    <td colspan="3">
+                                                                                                        <table class="table table-condensed" cellpadding="0" cellspacing="0" border="0" style="width:100%; height:100%;">
+                                                                                                            <tr class="cabecalho">
+                                                                                                                <th>VALOR</th>
+                                                                                                                <th>QUANTIDADE</th>
+                                                                                                                <th>SUBTOTAL</th>
+                                                                                                                <th>DESCONTO</th>
+                                                                                                                <th>TOTAL</th>
+                                                                                                            </tr>
+                                                                                                            <tr class="entrada">
+                                                                                                                <td><span class='itm_valor edita'>{!item_filho.UnitPrice}</span></td>
+                                                                                                                <td><span class='itm_quantidade edita'>{!item_filho.Quantity}</span></td>
+                                                                                                                <td><span class='itm_subtotal'>{!item_filho.Subtotal}</span></td>
+                                                                                                                <td><span class='itm_desconto edita'>{!item_filho.Discount}</span></td>
+                                                                                                                <td><span class='itm_total'>{!item_filho.TotalPrice}</span><apex:variable value="{!totFilhos + item_filho.TotalPrice }" var="totFilhos"/></td>
+                                                                                                            </tr>
+                                                                                                        </table>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </table>
+
+                                                                                            <!-- ocultas -->
+                                                                                            <div style='display:none;'>
+                                                                                                <span class='ent_id'>{!item_filho.PricebookEntryId}</span>
+                                                                                                <span class='itm_id'>{!item_filho.Id}</span>
+                                                                                                <span class='itm_item_pai'>{!item_filho.Item_Pai__c}</span>
+                                                                                            </div>
+                                                                                        </li>                                                                       
+                                                                                    </apex:outputText>
+                                                                                </apex:repeat>
+                                                                            <br/>
+                                                                               <p style="text-align:center; color:white; font-size:15px; margin-right:1px; background-color:#2f7bf5;">
+                                                                                   <b>BRL&nbsp;{!totFilhos + item.TotalPrice}</b>
+                                                                               </p>
+                                                                            </apex:outputText>
+                                                                        </ol>
+                                                                    </li>
+                                                                </apex:outputText>
+                                                            </apex:repeat>
+                                                        </ol>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </apex:outputText>
+                            
+                        </apex:outputPanel>
+                        
+                        <!-- templates -->
+                        <div class="template" style="display:none;">
+                        
+                            <li class="item">
+                            
+                                <!-- visiveis -->
+                                <table cellpadding="0" cellspacing="0" border="0" style="width:100%; height:100%;">
+                                    <tr class="cabecalho mover">
+                                        <td rowspan="2" class="imagem">
+                                            <span class="itm_item"></span>
+                                            <span class='prd_imagem'><img src=""></img></span>
+                                        </td>
+                                        <td class="titulo">
+                                            <span class='prd_nome'></span>
+                                            <br/><span class='prd_modelo'></span>
+                                        </td>
+                                        <td class="remover">
+                                            <span class="glyphicon glyphicon-remove" onclick="RemoveItem(this)" ></span>
+                                        </td>
+                                    </tr>
+                                    <tr class="dado">
+                                        <td colspan="2">
+                                            <table cellpadding="0" cellspacing="0" border="0" style="width:100%; height:100%;">
+                                                <tr>
+                                                    <td class="diverso">
+                                                        <span class='prd_marca'></span>,
+                                                        <span class="codigo">
+                                                            HOSP: <span class='prd_cod_hosp'></span>
+                                                            | FABR: <span class='prd_cod_fabr'></span>
+                                                        </span>
+                                                    </td>
+                                                    <td class="lote-f">
+                                                        LOTE:
+                                                    </td>
+                                                    <td class="lote">
+                                                        <span class='itm_lote edita'></span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr class="descricao">
+                                        <td colspan="3" class="linha">
+                                            <b>Descrição:</b>  
+                                            <span class='prd_descricao'></span>
+                                            <span class='copiar' style="display:none;" onclick="CopiarFonte(this);">[usar padrão]</span>
+                                            <span class='itm_descr_linha edita'></span>
+                                        </td>
+                                    </tr>
+                                    <tr class="valor">
+                                        <td colspan="3">
+                                            <table class="table table-condensed" cellpadding="0" cellspacing="0" border="0" style="width:100%; height:100%;">
+                                                <tr class="cabecalho">
+                                                    <th>VALOR</th>
+                                                    <th>QUANTIDADE</th>
+                                                    <th>SUBTOTAL</th>
+                                                    <th>DESCONTO</th>
+                                                    <th>TOTAL</th>
+                                                </tr>
+                                                <tr class="entrada">
+                                                    <td><span class='itm_valor edita'></span></td>
+                                                    <td><span class='itm_quantidade edita'></span></td>
+                                                    <td><span class='itm_subtotal'></span></td>
+                                                    <td><span class='itm_desconto edita'></span></td>
+                                                    <td><span class='itm_total'></span></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- ocultas -->
+                                <div style='display:none;'>
+                                    <span class='ent_id'></span>
+                                    <span class='itm_id'></span>
+                                    <span class='itm_item_pai'></span>
+                                </div>
+                                
+                            </li>
+                        
+                        </div>
+
+                    </apex:form>
+                </div>
+            </div>
+
+            <script>
+                var adjustment;
+                var oldContainer;
+                var backupItem;
+                var fontContainer;
+                var grupo;
+
+                // inicializa (pt2)
+                $(document).ready(function(){
+                    InicializaPt2();
+                });
+                
+                function InicializaPt2(){
+                    // ativa container destino (cot) + ações
+                    grupo = $("#destino>ol").sortable({
+                        group: 'itens',
+                        distance: 7,
+                        tolerance: 0,
+                        delay: 80,
+                        handle: '.mover',
+                        containerSelector : '.painel ol',
+                        pullPlaceholder: false,
+                            scroll: true, 
+                            scrollSensitivity: 100, 
+
+                        onDragStart: function ($item, container, _super, event) {
+                            
+                            // clona itens de origem ao arrastar (pt1)
+                            if(!container.options.drop)
+                                $item.clone().insertAfter($item);
+
+                            // solta item somente no destino (pt1)
+                            var offset = $item.offset();
+                            var pointer = container.rootGroup.pointer;
+                            adjustment = {
+                              left: pointer.left - offset.left,
+                              top: pointer.top - offset.top
+                            };
+
+                            // controla nível de identação no destino (pt1)
+                            // impede colocar grupo dentro de item (pt1)
+                            if($item.find("li").exists())
+                                backupItem = $item.clone().insertAfter($item).addClass("hidden");
+
+                            // ativa popovers (pt1)
+                            AtivaPopover('pesquisa');
+                            AtivaPopover('navegacao');
+
+                            // converte produto em item de cot (pt1)
+                            fontContainer = container;
+                            
+                            oldContainer = container;
+                            
+                            _super($item, container, _super, event);
+                        },
+
+                        onDrag: function ($item, container, _super, event) {
+
+                            // solta item somente no destino (pt2)
+                            $item.css({
+                                left: container.left - adjustment.left,
+                                top: container.top - adjustment.top
+                            });
+                            
+                            grupo.sortable("refresh");
+                            
+                            _super($item, container, _super, event);
+                        },
+
+                        onDrop: function ($item, container, _super, event){
+
+                            // clona itens de origem ao arrastar (pt2)
+                            if(!container.options.drop)
+                                $item.remove();
+                            
+                            // converte produto em item de cot (pt2)
+                            if(!fontContainer.el.closest('#destino').exists() && container.el.closest('#destino').exists()){
+                                popup = $.parseHTML($item.find('div.dentro').attr('data-content'));
+                                ItemCot = $('div.template li.item').clone();
+                                
+                                ItemCot.find('.prd_cod_hosp').text($item.find('.prd_cod_hosp').text());
+                                ItemCot.find('.prd_cod_fabr').text($item.find('.prd_cod_fabr').text());
+                                ItemCot.find('.prd_nome').text($item.find('.prd_nome').text());                             
+                                ItemCot.find('.prd_marca').text($(popup).find('.prd_marca').text());
+                                ItemCot.find('.prd_modelo').text($item.find('.prd_modelo').text());
+                                ItemCot.find('.prd_descricao').text($(popup).find('.prd_descricao').text());
+                                ItemCot.find('.prd_imagem img').attr('src', $item.find('.prd_imagem img').attr('src'));
+                                ItemCot.find('.ent_id').text($(popup).find('.ent_id').text());
+                                ItemCot.find('.itm_valor').text($(popup).find('.ent_valor').text());
+                                ItemCot.find('.itm_quantidade').text('1');
+                                ItemCot.find('.itm_subtotal').text('0');
+                                ItemCot.find('.itm_desconto').text('0');
+                                ItemCot.find('.itm_total').text('0');
+                                
+                                ItemCot.insertAfter($item);
+                                $item.remove();
+                            }
+                                
+                            // controla nível de identação no destino (pt2)
+                            // impede colocar grupo dentro de item (pt2)
+                            if($item.find("li").exists()){
+                                if($item.parent().hasClass("primeiro")){
+                                    backupItem.remove();
+                                }else{
+                                    $item.remove();
+                                    backupItem.removeClass("hidden");
+                                }
+                            }
+                            NivelaItens();
+
+                            // controla destaque de destino (pt1)
+                            $("ol.active").removeClass("active");
+
+                            // ativa popovers (pt2)
+                            AtivaPopover('pesquisa');
+                            AtivaPopover('navegacao');
+                            
+                            AtivaEdicao();
+                            NumeraItens();
+                            HabilitaCopia();
+                            CalculaTotais();
+                            
+                            Salvar();
+
+                            _super($item, container, _super, event);
+                            
+                        },
+
+                        afterMove: function (placeholder, container, closestItemOrContainer) {
+                            // controla destaque de destino (pt2)
+                            if(oldContainer != container){
+                                if(oldContainer){
+                                    oldContainer.el.removeClass("active");
+                                    container.el.addClass("active");
+                                }
+                            }
+                            oldContainer = container;
+                        }
+                    });
+                    
+                    AtivaContainer('pesquisa');
+                    AtivaContainer('navegacao');
+                    AtivaPopover('pesquisa');
+                    AtivaPopover('navegacao');
+                    
+                    // inicializa outros elementos
+                    $('.browserselectpicker').selectpicker();
+                }
+                
+            </script>
+        </body>
+    </html>
+</apex:page>

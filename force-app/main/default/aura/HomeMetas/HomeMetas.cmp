@@ -1,0 +1,55 @@
+<aura:component controller="HomeMetas" implements="forceCommunity:availableForAllPageTypes">
+	
+	<aura:attribute name="exibir" type="Boolean" default="false"/>
+	<aura:attribute name="retorno" type="Object" default="null"/>
+	<aura:attribute name="opcao" type="Object" default="null"/>
+	<aura:attribute name="opcoes" type="Object" default="null"/>
+	
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>	
+	
+	<aura:if isTrue="{!v.exibir}">
+	
+		<div class="slds-grid slds-gutters slds-p-horizontal_xx-small">
+		
+			<aura:if isTrue="{!v.retorno.tipo_usuario=='diretoria' || v.retorno.tipo_usuario=='gestor comercial'}">
+				<div class="{! 'slds-col slds-size_1-of-' + if(v.retorno.tipo_usuario=='diretoria' || v.retorno.tipo_usuario=='gestor comercial','5','4')}">
+					<lightning:select name="opcoes" value="{!v.opcao}" onchange="{!c.AlteraOpcao}">
+						<aura:iteration items="{!v.opcoes}" var="opcao">
+							<option text="{!opcao.label}" value="{!opcao.value}"/>
+						</aura:iteration>
+					</lightning:select>
+				</div>
+			</aura:if>
+		
+			<div class="{! 'slds-col slds-size_1-of-' + if(v.retorno.tipo_usuario=='diretoria' || v.retorno.tipo_usuario=='gestor comercial','5','4')}">
+				<span style="font-size:18px!important;">T1: <lightning:formattedNumber value="{!v.retorno.valor_t1/v.retorno.meta_t1*100}" maximumFractionDigits="2"/>% &nbsp;</span>
+				<span style="font-size:14px!important;">({!'R$'+v.retorno.valor_t1+'/'+'R$'+v.retorno.meta_t1})</span>
+				<div class="slds-progress-bar slds-progress-bar_large slds-progress-bar_circular" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{!v.retorno.valor_t1/v.retorno.meta_t1*100}" role="progressbar" style="height:1rem">
+					<span class="slds-progress-bar__value slds-progress-bar__value_success" style="{! 'width:' + if(v.retorno.valor_t1/v.retorno.meta_t1 &lt; 100, v.retorno.valor_t1/v.retorno.meta_t1*100, 100) + '%'}"></span>
+				</div>
+			</div>
+			<div class="{! 'slds-col slds-size_1-of-' + if(v.retorno.tipo_usuario=='diretoria' || v.retorno.tipo_usuario=='gestor comercial','5','4')}">
+				<span style="font-size:18px!important;">T2: <lightning:formattedNumber value="{!v.retorno.valor_t2/v.retorno.meta_t2*100}" maximumFractionDigits="2"/>% &nbsp;</span>
+				<span style="font-size:14px!important;">({!'R$'+v.retorno.valor_t2+'/'+'R$'+v.retorno.meta_t2})</span>
+				<div class="slds-progress-bar slds-progress-bar_large slds-progress-bar_circular" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{!if(v.retorno.valor_t2/v.retorno.meta_t2*100 &lt; 100, v.retorno.valor_t2/v.retorno.meta_t2*100, 100)}" role="progressbar" style="height:1rem">
+					<span class="slds-progress-bar__value slds-progress-bar__value_success" style="{! 'width:' + if(v.retorno.valor_t2/v.retorno.meta_t2*100 &lt; 100, v.retorno.valor_t2/v.retorno.meta_t2*100, 100) + '%'}"></span>
+				</div>
+			</div>
+			<div class="{! 'slds-col slds-size_1-of-' + if(v.retorno.tipo_usuario=='diretoria' || v.retorno.tipo_usuario=='gestor comercial','5','4')}">
+				<span style="font-size:18px!important;">T3: <lightning:formattedNumber value="{!v.retorno.valor_t3/v.retorno.meta_t3*100}" maximumFractionDigits="2"/>% &nbsp;</span>
+				<span style="font-size:14px!important;">({!'R$'+v.retorno.valor_t3+'/'+'R$'+v.retorno.meta_t3})</span>
+				<div class="slds-progress-bar slds-progress-bar_large slds-progress-bar_circular" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{!v.retorno.valor_t3/v.retorno.meta_t3*100}" role="progressbar" style="height:1rem">
+					<span class="slds-progress-bar__value slds-progress-bar__value_success" style="{! 'width:' + if(v.retorno.valor_t3/v.retorno.meta_t3 &lt; 100, v.retorno.valor_t3/v.retorno.meta_t3*100, 100) + '%'}"></span>
+				</div>
+			</div>
+			<div class="{! 'slds-col slds-size_1-of-' + if(v.retorno.tipo_usuario=='diretoria' || v.retorno.tipo_usuario=='gestor comercial','5','4')}">
+				<span style="font-size:18px!important;">T4: <lightning:formattedNumber value="{!v.retorno.valor_t4/v.retorno.meta_t4*100}" maximumFractionDigits="2"/>% &nbsp;</span>
+				<span style="font-size:14px!important;">({!'R$'+v.retorno.valor_t4+'/'+'R$'+v.retorno.meta_t4})</span>
+				<div class="slds-progress-bar slds-progress-bar_large slds-progress-bar_circular" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{!v.retorno.valor_t4/v.retorno.meta_t4*100}" role="progressbar" style="height:1rem">
+					<span class="slds-progress-bar__value slds-progress-bar__value_success" style="{! 'width:' + if(v.retorno.valor_t4/v.retorno.meta_t4 &lt; 100, v.retorno.valor_t4/v.retorno.meta_t4*100, 100) + '%'}"></span>
+				</div>
+			</div>
+		</div>
+	</aura:if>
+	
+</aura:component>

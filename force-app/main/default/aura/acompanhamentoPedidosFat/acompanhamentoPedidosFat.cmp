@@ -1,0 +1,43 @@
+<aura:component extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery)}"                     
+                  afterScriptsLoaded="{!c.myAction}" />
+    
+    <aura:attribute name="popupSubtitle" type="String" />
+    <aura:attribute name="popupTitle" type="String" />
+    <aura:attribute name="popupDate" type="String" />
+    <aura:attribute name="myVal" type="String" />
+    
+    
+    <div>
+        <div class='principalDiv3284923'>
+            <div class='aFaturar3424234 borderBox3849237'>
+                <div class='titleBox325094573'>
+                    A FATURAR
+                </div>
+                
+                <div class='bodyContent4835945' id='bodyAfaturar'>
+                   
+                    
+                    
+                </div>
+            </div>
+            
+            <div class='Faturado3424234 borderBox3849237'>
+                <div class='titleBox325094573'>
+                    FATURADOS
+                </div>
+                <div class='bodyContent4835945' id='bodyFaturados'>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+</aura:component>

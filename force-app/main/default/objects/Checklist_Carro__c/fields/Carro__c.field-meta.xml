@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Carro__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Carro</label>
+    <lookupFilter>
+        <active>true</active>
+        <errorMessage>O valor não existe ou não é compatível com os critérios do filtro (Veículo).</errorMessage>
+        <filterItems>
+            <field>Asset.Categoria_Patrimonial__c</field>
+            <operation>equals</operation>
+            <value>VEÍCULOS</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Asset</referenceTo>
+    <relationshipLabel>Checklists Carro</relationshipLabel>
+    <relationshipName>Checklists_Carro</relationshipName>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

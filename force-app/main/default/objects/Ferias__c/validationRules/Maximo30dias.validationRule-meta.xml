@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Maximo30dias</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+!$User.Ignorar_erros__c,
+(Data_Final__c - Data_Inicial__c) &gt; 30
+)</errorConditionFormula>
+    <errorMessage>O período de férias não pode ser superior a 30 dias</errorMessage>
+</ValidationRule>

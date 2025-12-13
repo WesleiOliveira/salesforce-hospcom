@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <assignments>
+        <name>addId</name>
+        <label>addId</label>
+        <locationX>314</locationX>
+        <locationY>539</locationY>
+        <assignmentItems>
+            <assignToReference>Id</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>005i0000005d2fF</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>Criado_por_Vendedor</name>
+        <label>Criado por = Vendedor</label>
+        <locationX>314</locationX>
+        <locationY>323</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>N_o</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.CreatedById</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record.Vendedor__c</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>C_pia_1_de_Compartilhar</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <interviewLabel>Pedido — Compartilha com Vendedor {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Pedido — Compartilha com Vendedor</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>C_pia_1_de_Compartilhar</name>
+        <label>Cópia 1 de Compartilhar</label>
+        <locationX>50</locationX>
+        <locationY>431</locationY>
+        <faultConnector>
+            <targetReference>addId</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>OrderAccessLevel</field>
+            <value>
+                <stringValue>Edit</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OrderId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>UserOrGroupId</field>
+            <value>
+                <elementReference>$Record.Vendedor__r.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>OrderShare</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <start>
+        <locationX>188</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Criado_por_Vendedor</targetReference>
+        </connector>
+        <filterFormula>OR(
+ISNEW(),
+ISCHANGED({!$Record.Vendedor__c})
+)</filterFormula>
+        <object>Order</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>Id</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

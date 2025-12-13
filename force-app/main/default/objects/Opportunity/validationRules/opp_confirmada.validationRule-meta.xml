@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>opp_confirmada</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISNEW(),
+TEXT(Confirmado__c)== &apos;Sim&apos;
+)</errorConditionFormula>
+    <errorDisplayField>Confirmado__c</errorDisplayField>
+    <errorMessage>A oportunidade deve ser confirmada depois de salva.</errorMessage>
+</ValidationRule>

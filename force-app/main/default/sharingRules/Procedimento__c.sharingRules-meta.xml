@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>T_cnicos_cria_o</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Técnicos-criação</label>
+        <sharedTo>
+            <group>Servico</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>TSE - TESTE DE SEGURANÇA ELÉTRICA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>compartilhamento_com_deny</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>compartilhamento com deny</label>
+        <sharedTo>
+            <group>Gestor_Servicos</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>TSE - TESTE DE SEGURANÇA ELÉTRICA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>hiago</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>hiago</label>
+        <sharedTo>
+            <group>Servico</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>numeroDeSerie__c</field>
+            <operation>notEqual</operation>
+            <value>000000</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+</SharingRules>

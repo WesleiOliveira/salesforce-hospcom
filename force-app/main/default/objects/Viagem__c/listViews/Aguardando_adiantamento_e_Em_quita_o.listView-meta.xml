@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Aguardando_adiantamento_e_Em_quita_o</fullName>
+    <columns>NAME</columns>
+    <columns>Conta__c</columns>
+    <columns>Motivo__c</columns>
+    <columns>Status__c</columns>
+    <columns>Departamento__c</columns>
+    <columns>OWNER.FIRST_NAME</columns>
+    <columns>OWNER.LAST_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Aguardando adiantamento,Em quitação de valores</value>
+    </filters>
+    <label>Aguardando adiantamento e Em quitação</label>
+</ListView>

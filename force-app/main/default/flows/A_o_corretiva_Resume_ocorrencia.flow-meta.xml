@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <environments>Default</environments>
+    <interviewLabel>Ação corretiva {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Ação corretiva — Resume ocorrencia</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Busca_ocorrencia_associada</name>
+        <label>Busca ocorrencia associada</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Atualiza_AC</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Ocorrencia__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Ocorrencia__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Atualiza_AC</name>
+        <label>Atualiza AC</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <inputAssignments>
+            <field>Resumo_da_Ocorr_ncia__c</field>
+            <value>
+                <elementReference>resumo2</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Busca_ocorrencia_associada</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Ocorrencia__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>Acao_corretiva__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Obsolete</status>
+    <textTemplates>
+        <name>Resumo</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;font-size: 18px;&quot;&gt;Resumo da Ocorrência&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Ocorrência: &lt;/strong&gt;{!Busca_ocorrencia_associada.Name}&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Departamento:&lt;/strong&gt; {!Busca_ocorrencia_associada.Departamento__c}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Descrição:&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;{!Busca_ocorrencia_associada.Descri_o_Detalhada_da_Ocorr_ncia__c}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Possíveis causas: &lt;/strong&gt;{!$Record.Causas__c}&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Sugestão para resolução:&lt;/strong&gt; {!Busca_ocorrencia_associada.Sugest_o_para_Resolu_o__c}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Responsável:&lt;/strong&gt; {!Busca_ocorrencia_associada.Responsavel_pela_ocorrencia__r.Name}&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Obs: &lt;/strong&gt;{!Busca_ocorrencia_associada.Observacoes__c}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;Criado por &lt;/em&gt;&lt;strong&gt;&lt;em&gt;{!Busca_ocorrencia_associada.CreatedBy.Name}&lt;/em&gt;&lt;/strong&gt;&lt;em&gt; em &lt;/em&gt;&lt;strong&gt;&lt;em&gt;{!Busca_ocorrencia_associada.datahora_abertura__c}&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>resumo2</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;h2 style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;color: rgb(1, 8, 118);&quot;&gt;Resumo da Ocorrência&lt;/span&gt;&lt;/h2&gt;&lt;table class=&quot;ql-table-blob&quot; style=&quot;width: 100%; border-collapse: collapse; margin-bottom: 20px;&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style=&quot;padding: 6px 10px; width: 30%; font-weight: bold;&quot;&gt;Ocorrência:&lt;/td&gt;&lt;td style=&quot;padding: 6px 10px;&quot;&gt;{!Busca_ocorrencia_associada.Name}&lt;/td&gt;&lt;/tr&gt;&lt;tr style=&quot;background-color: #f9f9f9;&quot;&gt;&lt;td style=&quot;padding: 6px 10px; font-weight: bold;&quot;&gt;Departamento:&lt;/td&gt;&lt;td style=&quot;padding: 6px 10px;&quot;&gt;{!Busca_ocorrencia_associada.Departamento__c}&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding: 6px 10px; font-weight: bold; vertical-align: top;&quot;&gt;Descrição:&lt;/td&gt;&lt;td style=&quot;padding: 6px 10px;&quot;&gt;{!Busca_ocorrencia_associada.Descri_o_Detalhada_da_Ocorr_ncia__c}&lt;/td&gt;&lt;/tr&gt;&lt;tr style=&quot;background-color: #f9f9f9;&quot;&gt;&lt;td style=&quot;padding: 6px 10px; font-weight: bold;&quot;&gt;Possíveis causas:&lt;/td&gt;&lt;td style=&quot;padding: 6px 10px;&quot;&gt;{!Busca_ocorrencia_associada.Possiveis_causas__c}&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding: 6px 10px; font-weight: bold;&quot;&gt;Sugestão para resolução:&lt;/td&gt;&lt;td style=&quot;padding: 6px 10px;&quot;&gt;{!Busca_ocorrencia_associada.Sugest_o_para_Resolu_o__c}&lt;/td&gt;&lt;/tr&gt;&lt;tr style=&quot;background-color: #f9f9f9;&quot;&gt;&lt;td style=&quot;padding: 6px 10px; font-weight: bold;&quot;&gt;Responsável:&lt;/td&gt;&lt;td style=&quot;padding: 6px 10px;&quot;&gt;{!Busca_ocorrencia_associada.Responsavel_pela_ocorrencia__r.Name}&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding: 6px 10px; font-weight: bold;&quot;&gt;Observações:&lt;/td&gt;&lt;td style=&quot;padding: 6px 10px;&quot;&gt;{!Busca_ocorrencia_associada.Observacoes__c}&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;&lt;em style=&quot;font-size: 11px;&quot;&gt;Criado por&lt;/em&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt; &lt;/span&gt;&lt;strong style=&quot;font-size: 11px;&quot;&gt;{!Busca_ocorrencia_associada.CreatedBy.Name}&lt;/strong&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt; &lt;/span&gt;&lt;em style=&quot;font-size: 11px;&quot;&gt;em&lt;/em&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt; &lt;/span&gt;&lt;strong style=&quot;font-size: 11px;&quot;&gt;{!Busca_ocorrencia_associada.datahora_abertura__c}&lt;/strong&gt;&lt;/p&gt;</text>
+    </textTemplates>
+</Flow>

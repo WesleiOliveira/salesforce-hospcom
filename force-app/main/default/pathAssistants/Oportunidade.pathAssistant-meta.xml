@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Opportunity</entityName>
+    <fieldName>StageName</fieldName>
+    <masterLabel>Oportunidade</masterLabel>
+    <pathAssistantSteps>
+        <fieldNames>NextStep</fieldNames>
+        <info>&lt;p&gt;&lt;b&gt;&lt;u&gt;Etapa de fechamento&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Nessa etapa, busque entender o que falta para fechar negócio, seja questão financeira, burocrática, ou apenas uma formalização. Em caso de alguma dificuldade nessa etapa, peça ajuda aos gestores para encontrar melhor solução.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;&lt;u&gt;Quando devo passar para próxima etapa?&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Quando tiver a formalização do pedido.&lt;/p&gt;</info>
+        <picklistValueName>COMITED</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Motivo_da_Perda__c</fieldNames>
+        <fieldNames>NextStep</fieldNames>
+        <info>&lt;p&gt;&lt;img src=&quot;https://hospcom.file.force.com/servlet/rtaImage?eid=1CF5A000000g6Ev&amp;amp;feoid=Info&amp;amp;refid=0EM5A000000zU8x&quot;&gt;&lt;/img&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Infelizmente não foi dessa vez, mas não vamos desanimar, ainda não acabou!&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;É fundamental o motivo pelo qual perdemos, e a guia concorrentes, para que possamos nos preparar melhor para próxima vez.&lt;/p&gt;</info>
+        <picklistValueName>LOSS</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>NextStep</fieldNames>
+        <info>&lt;p&gt;&lt;b&gt;&lt;u&gt;Etapa da qualificação da oportunidade&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Nessa etapa devemos entender com o cliente a real necessidade, e encaixar a melhor solução que possamos oferecer.&lt;/li&gt;&lt;li&gt;Importantíssimo manter uma rotina disciplinada de visitas e/ou ligações com o cliente, após a identificar que existe realmente uma necessidade.&lt;/li&gt;&lt;li&gt;Seja sempre pró-ativo e busque oferecer &lt;b&gt;&lt;u&gt;sempre a melhor solução&lt;/u&gt;&lt;/b&gt; para seu cliente, de acordo com a necessidade de cada um. Tente superar as espectativas no quesito &lt;b&gt;&lt;u&gt;atendimento consultivo&lt;/u&gt;&lt;/b&gt;, isso tem grande peso na tomada de decisão.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;&lt;u&gt;Quando devo passar para próxima etapa?&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Quando identificar real necessidade, e as negociações iniciarem, ou seja, o cliente pretende comprar, porém ainda não sabe de qual empresa.&lt;/li&gt;&lt;/ul&gt;</info>
+        <picklistValueName>OPEN</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>NextStep</fieldNames>
+        <info>&lt;p&gt;&lt;b&gt;&lt;u&gt;Etapa de apresentação da proposta&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Obs: Nessa etapa, é fundamental identificar alguns pilares, como:&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Qual a previsão de fechamento da compra?&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Quais os fatores de compra do cliente?&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Preço &lt;span style=&quot;font-size: 15px;&quot;&gt;• &lt;/span&gt;Custo/benefício &lt;span style=&quot;font-size: 15px;&quot;&gt;• &lt;/span&gt;Forma de pagamento &lt;span style=&quot;font-size: 15px;&quot;&gt;• &lt;/span&gt;Atendimento &lt;span style=&quot;font-size: 15px;&quot;&gt;• &lt;/span&gt;Qualidade&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Como sera feito pagamento e se cliente possui crédito no mercado?&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Tentar identificar quais são os concorrentes e quais soluções estão oferecendo.&lt;/p&gt;&lt;p&gt;Alinhar internamente a melhor estratégia para apresentação da proposta.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;&lt;u&gt;Quando devo passar para próxima etapa?&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Quando identificar que o cliente está indo para fechamento, e nos chamou para a fase de negociação.&lt;/p&gt;</info>
+        <picklistValueName>UPSIDE</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>NextStep</fieldNames>
+        <info>&lt;p&gt;&lt;b&gt;&lt;u&gt;Etapa de negociação&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Obs. Nessa etapa, o negócio está quente, o cliente vai fechar conosco, ou com um concorrente.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Nessa etapa, todos os questionamentos anteriores deve ter sido respondidos, e é necessário uma atenção muito grade para concluir a venda.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Busque alinhar a melhor estratégia internamente, e peça ajuda se necessário. Não podemos perder esse negócio por ações que dependem de nós.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;&lt;u&gt;Quando devo passar para próxima etapa?&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Quando houver certeza que o negócio está bem encaminhado para fechamento com nossa solução proposta, faltando apenas algum detalhe burocrático ou formalização.&lt;/p&gt;</info>
+        <picklistValueName>UPSIDE HIGH</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>NextStep</fieldNames>
+        <info>&lt;p&gt;&lt;img src=&quot;https://hospcom.file.force.com/servlet/rtaImage?eid=1CF5A000000g6FF&amp;amp;feoid=Info&amp;amp;refid=0EM5A000000zU7Q&quot;&gt;&lt;/img&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Fique atento as questões de faturamento e recebimento, são fundamentais para conclusão do negócio.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Obs. Caso tenha perdido alguns dos itens para um concorrente, é fundamental o preenchimento dos itens de concorrentes, para que possamos aprimorar nossa estratégia, e aumentar nossa possibilidade de fechamento em próximos negócios.&lt;/p&gt;</info>
+        <picklistValueName>WIN</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>Comercial</recordTypeName>
+</PathAssistant>

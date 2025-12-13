@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>regra_seca_11_2</fullName>
+    <active>true</active>
+    <errorConditionFormula>( Equipamento_deve_ser_retirado_de_func__c  == true &amp;&amp; 
+(Defici_ncia_detectada_mas_sem_risco__c == true || Nenhuma_defici_ncia_funcional_ou_de_s__c == true ||   Equipamento_n_o_conforme_modifica__c  == true ))</errorConditionFormula>
+    <errorMessage>Selecione apenar uma &quot;Deficiência/Nota &quot;</errorMessage>
+</ValidationRule>

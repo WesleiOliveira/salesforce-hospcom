@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Preco_Unitario</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+    UnitPrice = 0,
+    ISPICKVAL(Status__c, &quot;Cancelado&quot;) = false
+)</errorConditionFormula>
+    <errorDisplayField>UnitPrice</errorDisplayField>
+    <errorMessage>O preço unitário não pode ser igual a R$0,00.</errorMessage>
+</ValidationRule>

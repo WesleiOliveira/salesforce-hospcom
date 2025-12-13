@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Data_inconsistente</fullName>
+    <active>true</active>
+    <errorConditionFormula>Data_Final__c &lt; Data_Inicial__c</errorConditionFormula>
+    <errorDisplayField>Data_Final__c</errorDisplayField>
+    <errorMessage>A data final não pode ser anterior à data inicial.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,82 @@
+<apex:page contentType="application/pdf" renderAs="pdf" standardStylesheets="false" cache="false" showHeader="false" sidebar="false" applyHtmlTag="true" applyBodyTag="false">
+    <div style="font-family: Arial, sans-serif; font-size: 12px; margin: 20px; padding: 0;">
+
+        <!-- Header -->
+        <div style="text-align: center; font-weight: bold; font-size: 20px; margin-bottom: 20px; border-bottom: 3px solid #000; padding-bottom: 10px;">
+            Nota Fiscal de Serviços Eletrônica - NFS-e
+        </div>
+        
+        <!-- Dados do Prestador de Serviços -->
+        <div style="font-weight: bold; font-size: 16px; margin-top: 20px; border-bottom: 2px solid #000; padding-bottom: 5px;">
+            Dados do Prestador de Serviços
+        </div>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+            <tr>
+                <td style="font-weight: bold; width: 35%; vertical-align: top; padding: 8px 5px; border-bottom: 1px solid #ddd;">Nome / Nome Empresarial:</td>
+                <td style="padding: 8px 5px; border-bottom: 1px solid #ddd;">{!$CurrentPage.parameters.prestador}</td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold; width: 35%; vertical-align: top; padding: 8px 5px; border-bottom: 1px solid #ddd;">CPF/CNPJ:</td>
+                <td style="padding: 8px 5px; border-bottom: 1px solid #ddd;">{!$CurrentPage.parameters.cnpjPrestador}</td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold; width: 35%; vertical-align: top; padding: 8px 5px; border-bottom: 1px solid #ddd;">CEP/UF:</td>
+                <td style="padding: 8px 5px; border-bottom: 1px solid #ddd;">{!$CurrentPage.parameters.enderecoPrestador}</td>
+            </tr>
+        </table>
+        
+        <!-- Dados do Tomador de Serviços -->
+        <div style="font-weight: bold; font-size: 16px; margin-top: 20px; border-bottom: 2px solid #000; padding-bottom: 5px;">
+            Dados do Tomador de Serviços
+        </div>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+            <tr>
+                <td style="font-weight: bold; width: 35%; vertical-align: top; padding: 8px 5px; border-bottom: 1px solid #ddd;">Nome / Nome Empresarial:</td>
+                <td style="padding: 8px 5px; border-bottom: 1px solid #ddd;">{!$CurrentPage.parameters.tomador}</td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold; width: 35%; vertical-align: top; padding: 8px 5px; border-bottom: 1px solid #ddd;">CPF/CNPJ:</td>
+                <td style="padding: 8px 5px; border-bottom: 1px solid #ddd;">{!$CurrentPage.parameters.cnpjTomador}</td>
+            </tr>
+        </table>
+
+        <!-- Discriminação dos Serviços -->
+        <div style="font-weight: bold; font-size: 16px; margin-top: 20px; border-bottom: 2px solid #000; padding-bottom: 5px;">
+            Discriminação dos Serviços
+        </div>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+            <tr>
+                <td style="font-weight: bold; width: 35%; vertical-align: top; padding: 8px 5px; border-bottom: 1px solid #ddd;">Descrição do Serviço:</td>
+                <td style="padding: 8px 5px; border-bottom: 1px solid #ddd;">{!$CurrentPage.parameters.servico}</td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold; width: 35%; vertical-align: top; padding: 8px 5px; border-bottom: 1px solid #ddd;">Valor do Serviço (R$):</td>
+                <td style="padding: 8px 5px; border-bottom: 1px solid #ddd;">{!$CurrentPage.parameters.valor}</td>
+            </tr>
+        </table>
+
+        <!-- Informações Adicionais -->
+        <div style="font-weight: bold; font-size: 16px; margin-top: 20px; border-bottom: 2px solid #000; padding-bottom: 5px;">
+            Informações Adicionais
+        </div>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+            <tr>
+                <td style="font-weight: bold; width: 35%; vertical-align: top; padding: 8px 5px; border-bottom: 1px solid #ddd;">Número da NFS-e:</td>
+                <td style="padding: 8px 5px; border-bottom: 1px solid #ddd;">{!$CurrentPage.parameters.nNFSe}</td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold; width: 35%; vertical-align: top; padding: 8px 5px; border-bottom: 1px solid #ddd;">Data de Emissão:</td>
+                <td style="padding: 8px 5px; border-bottom: 1px solid #ddd;">{!$CurrentPage.parameters.dataEmissao}</td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold; width: 35%; vertical-align: top; padding: 8px 5px; border-bottom: 1px solid #ddd;">Código de Verificação:</td>
+                <td style="padding: 8px 5px; border-bottom: 1px solid #ddd;">{!$CurrentPage.parameters.codigoVerificacao}</td>
+            </tr>
+        </table>
+
+        <!-- Footer -->
+        <div style="margin-top: 30px; text-align: center; font-size: 10px; color: #777;">
+            Representação visual simples da Nota Fiscal de Serviços Eletrônica gerada automaticamente pelo sistema.
+        </div>
+    </div>
+</apex:page>

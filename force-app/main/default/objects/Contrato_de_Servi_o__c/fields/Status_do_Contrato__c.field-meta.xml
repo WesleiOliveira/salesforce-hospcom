@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_do_Contrato__c</fullName>
+    <externalId>false</externalId>
+    <label>Status do Contrato</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>AGUARDANDO ACEITAÇÃO DA PROPOSTA</fullName>
+                <default>false</default>
+                <label>AGUARDANDO ACEITAÇÃO DA PROPOSTA</label>
+            </value>
+            <value>
+                <fullName>AGUARDANDO ASSINATURA DO CONTRATO</fullName>
+                <default>false</default>
+                <label>AGUARDANDO ASSINATURA DO CONTRATO</label>
+            </value>
+            <value>
+                <fullName>CANCELADO</fullName>
+                <default>false</default>
+                <label>CANCELADO</label>
+            </value>
+            <value>
+                <fullName>CONCLUÍDO</fullName>
+                <default>false</default>
+                <label>CONCLUÍDO</label>
+            </value>
+            <value>
+                <fullName>CONCLUÍDO (COM PENDENCIAS)</fullName>
+                <default>false</default>
+                <label>CONCLUÍDO (COM PENDENCIAS)</label>
+            </value>
+            <value>
+                <fullName>CONTRATO VIGENTE</fullName>
+                <default>false</default>
+                <label>CONTRATO VIGENTE</label>
+            </value>
+            <value>
+                <fullName>PERDIDO</fullName>
+                <default>false</default>
+                <label>PERDIDO</label>
+            </value>
+            <value>
+                <fullName>SEPARAÇÃO/ENTREGA</fullName>
+                <default>false</default>
+                <label>SEPARAÇÃO/ENTREGA</label>
+            </value>
+            <value>
+                <fullName>EM CALIBRAÇÃO</fullName>
+                <default>false</default>
+                <label>EM CALIBRAÇÃO</label>
+            </value>
+            <value>
+                <fullName>AGUARDANDO DOCUMENTAÇÕES ASSINADAS</fullName>
+                <default>false</default>
+                <label>AGUARDANDO DOCUMENTAÇÕES ASSINADAS</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

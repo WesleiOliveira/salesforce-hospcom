@@ -1,0 +1,24 @@
+<aura:component extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <aura:attribute name="recordId" type="Id"/>
+    
+    <div>
+        <div class="container">
+             <h1>PLANEJAMENTO DE GERENCIAMENTO DE RISCOS</h1>
+            <div class="block">               
+                <div class="btn-wrapper">
+                    <div class="btn" onclick="{!c.assistencia}">
+                       ASSITÊNCIA TÉCNICA
+                    </div>                   
+                </div>
+                <div class="btn-wrapper">
+                    <div class="btn" onclick="{!c.distribuicao}">
+                       DISTRIBUIÇÃO
+                    </div>                   
+                </div>
+                 
+            </div>
+            <div class="tooltip-text">Documentos relativo a ano atual.</div>
+            
+        </div>     </div>
+    
+</aura:component>

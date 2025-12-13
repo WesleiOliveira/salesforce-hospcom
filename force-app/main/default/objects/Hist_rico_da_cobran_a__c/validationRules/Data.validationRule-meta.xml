@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Data</fullName>
+    <active>true</active>
+    <errorConditionFormula>Data_Prevista__c == null &amp;&amp; TEXT( Status__c ) == &apos;Sem previsão&apos;</errorConditionFormula>
+    <errorDisplayField>Data_Prevista__c</errorDisplayField>
+    <errorMessage>Você deve preencher o campo &quot;Data Prevista&quot; quando o Status for igual a &quot;Sem previsão&quot;</errorMessage>
+</ValidationRule>

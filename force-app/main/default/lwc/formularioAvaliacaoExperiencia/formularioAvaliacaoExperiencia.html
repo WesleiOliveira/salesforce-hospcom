@@ -1,0 +1,239 @@
+<template>
+    <lightning-card title="Favor avaliar as competências conforme abaixo:">
+        <div class="slds-p-around_medium">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                    <tr>
+                        <th>Valores</th>
+                        <th>Perguntas</th>
+                        <th>Respostas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Atitude de Dono -->
+                    <tr>
+                        <td rowspan="2"><strong>Atitude de Dono</strong></td>
+                        <td>
+                            Demonstrou proatividade, responsabilidade e comprometimento em relação ao seu trabalho?
+                            <lightning-textarea name="Justificativa_1__c" 
+                                label="Justificativa" 
+                                max-length="255"
+                                value={justificativas.Justificativa_1__c}
+                                onchange={handleJustificativa}
+                                disabled={blockEdicao}>
+                            </lightning-textarea>
+                        </td>
+                        <td>
+                            <lightning-radio-group name="Pergunta_1__c"
+                                options={options}
+                                type="radio"
+                                value={respostas.Pergunta_1__c}
+                                onchange={handleChange}
+                                disabled={blockEdicao}>
+                            </lightning-radio-group>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Procurou soluções e tomou iniciativas para resolver ou melhorar processos?
+                            <lightning-textarea name="Justificativa_2__c" 
+                                label="Justificativa" 
+                                max-length="255"
+                                value={justificativas.Justificativa_2__c}
+                                onchange={handleJustificativa}
+                                disabled={blockEdicao}>
+                            </lightning-textarea>
+                        </td>
+                        <td>
+                            <lightning-radio-group name="Pergunta_2__c"
+                                options={options}
+                                type="radio"
+                                value={respostas.Pergunta_2__c}
+                                onchange={handleChange}
+                                disabled={blockEdicao}>
+                            </lightning-radio-group>
+                        </td>
+                    </tr>
+
+                    <!-- Melhoria Contínua -->
+                    <tr>
+                        <td rowspan="2"><strong>Melhoria Contínua</strong></td>
+                        <td>
+                            Demonstrou abertura e receptividade ao receber críticas ou sugestões de melhoria?
+                            <lightning-textarea name="Justificativa_3__c" 
+                                label="Justificativa" 
+                                max-length="255"
+                                value={justificativas.Justificativa_3__c}
+                                onchange={handleJustificativa}
+                                disabled={blockEdicao}>
+                            </lightning-textarea>
+                        </td>
+                        <td>
+                            <lightning-radio-group name="Pergunta_3__c"
+                                options={options}
+                                type="radio"
+                                value={respostas.Pergunta_3__c}
+                                onchange={handleChange}
+                                disabled={blockEdicao}>
+                            </lightning-radio-group>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Teve curiosidade para buscar e aprender o máximo de atividades possíveis?
+                            <lightning-textarea name="Justificativa_4__c" 
+                                label="Justificativa" 
+                                max-length="255"
+                                value={justificativas.Justificativa_4__c}
+                                onchange={handleJustificativa}
+                                disabled={blockEdicao}>
+                            </lightning-textarea>
+                        </td>
+                        <td>
+                            <lightning-radio-group name="Pergunta_4__c"
+                                options={options}
+                                type="radio"
+                                value={respostas.Pergunta_4__c}
+                                onchange={handleChange}
+                                disabled={blockEdicao}>
+                            </lightning-radio-group>
+                        </td>
+                    </tr>
+
+                    <!-- Respeito -->
+                    <tr>
+                        <td rowspan="2"><strong>Respeito</strong></td>
+                        <td>
+                            Respeitou as pessoas e os processos sem colocar empecilhos?
+                            <lightning-textarea name="Justificativa_5__c" 
+                                label="Justificativa" 
+                                max-length="255"
+                                value={justificativas.Justificativa_5__c}
+                                onchange={handleJustificativa}
+                                disabled={blockEdicao}>
+                            </lightning-textarea>
+                        </td>
+                        <td>
+                            <lightning-radio-group name="Pergunta_5__c"
+                                options={options}
+                                type="radio"
+                                value={respostas.Pergunta_5__c}
+                                onchange={handleChange}
+                                disabled={blockEdicao}>
+                            </lightning-radio-group>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Suas ações foram realizadas com todos com cortesia e respeito?
+                            <lightning-textarea name="Justificativa_6__c" 
+                                label="Justificativa" 
+                                max-length="255"
+                                value={justificativas.Justificativa_6__c}
+                                onchange={handleJustificativa}
+                                disabled={blockEdicao}>
+                            </lightning-textarea>
+                        </td>
+                        <td>
+                            <lightning-radio-group name="Pergunta_6__c"
+                                options={options}
+                                type="radio"
+                                value={respostas.Pergunta_6__c}
+                                onchange={handleChange}
+                                disabled={blockEdicao}>
+                            </lightning-radio-group>
+                        </td>
+                    </tr>
+
+                    <!-- Sangue no Olho -->
+                    <tr>
+                        <td><strong>Sangue no Olho</strong></td>
+                        <td>
+                            Teve atitude e arregaçou as mangas para colocar a mão na massa e começar a entregar o resultado?
+                            <lightning-textarea name="Justificativa_7__c" 
+                                label="Justificativa" 
+                                max-length="255"
+                                value={justificativas.Justificativa_7__c}
+                                onchange={handleJustificativa}
+                                disabled={blockEdicao}>
+                            </lightning-textarea>
+                        </td>
+                        <td>
+                            <lightning-radio-group name="Pergunta_7__c"
+                                options={options}
+                                type="radio"
+                                value={respostas.Pergunta_7__c}
+                                onchange={handleChange}
+                                disabled={blockEdicao}>
+                            </lightning-radio-group>
+                        </td>
+                    </tr>
+
+                    <!-- Honestidade -->
+                    <tr>
+                        <td><strong>Honestidade</strong></td>
+                        <td>
+                            Demonstrou transparência em suas comunicações e ações no ambiente de trabalho?
+                            <lightning-textarea name="Justificativa_8__c" 
+                                label="Justificativa" 
+                                max-length="255"
+                                value={justificativas.Justificativa_8__c}
+                                onchange={handleJustificativa}
+                                disabled={blockEdicao}>
+                            </lightning-textarea>
+                        </td>
+                        <td>
+                            <lightning-radio-group name="Pergunta_8__c"
+                                options={options}
+                                type="radio"
+                                value={respostas.Pergunta_8__c}
+                                onchange={handleChange}
+                                disabled={blockEdicao}>
+                            </lightning-radio-group>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;" colspan="4">
+                            <div>
+                                
+                                <b>obs: Lembramos que é obrigatória a justificativa para todas as opções de avaliação, *exceto* quando a opção escolhida for *Atende totalmente*.</b>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;" colspan="4">
+                            <lightning-textarea name="Observacoes__c" 
+                                label="Observações" 
+                                max-length="255"
+                                value={observacoes}
+                                onchange={handleObservacao}
+                                disabled={blockEdicao}>
+                            </lightning-textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;" colspan="4">
+                            <p><strong>Parecer da Empresa</strong></p>
+                            <p>Aprovado no {periodo}?</p>
+                            <div class="slds-form-element" style="margin-top: 0.5rem;">
+                                <lightning-radio-group 
+                                    name="periodoAprovado"
+                                    options={optionsAprovado}
+                                    value={aprovado}
+                                    onchange={handleAprovado}
+                                    disabled={blockEdicao}
+                                    type="radio">
+                                </lightning-radio-group>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            
+        </div>
+        <div if:false={blockEdicao}>
+             <lightning-button variant="brand" label="Finalizar Avaliação de Experiencia" title="Primary action" onclick={handleSave} class="slds-align_absolute-center"></lightning-button>
+        </div>
+    </lightning-card>
+</template>

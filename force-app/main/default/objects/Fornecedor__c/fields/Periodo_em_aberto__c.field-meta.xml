@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Periodo_em_aberto__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( AND(per_odo_aberto__c &gt;=0 , per_odo_aberto__c &lt;=7),&quot;(a) 0-7&quot;,
+IF( AND(per_odo_aberto__c &gt;=8 , per_odo_aberto__c &lt;=15),&quot;(b) 8-15&quot;,
+IF( AND(per_odo_aberto__c &gt;=16 , per_odo_aberto__c &lt;=30),&quot;(c) 16-30&quot;,
+IF( per_odo_aberto__c &gt;30,&quot;(d) &gt;30&quot;,
+&quot;(a) 0-7&quot;
+)
+)
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Periodo em aberto</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

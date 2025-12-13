@@ -1,0 +1,35 @@
+<aura:component controller="produtosInsercao" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery)}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    
+    <div>
+        <div class='principalDiv3489348389'>
+            <div class="tituloComp342958347">Carregue um arquivo conforme o modelo para criar até 50 produtos em massa</div>
+            <div style="display: flex">
+                Baixe o&nbsp;
+                <a href="https://hospcom.my.salesforce.com/servlet/servlet.FileDownload?file=015U4000009gBWY">modelo para revenda</a>
+                &nbsp;ou o&nbsp;
+                <a href="https://hospcom.my.salesforce.com/servlet/servlet.FileDownload?file=015U4000009grM7">modelo para uso e consumo</a>
+            </div>
+            <div style="padding-bottom: 20px; font-size: 12px">*Em hipótese alguma altere o cabeçalho dos modelos, e não tente criar produtos de consumo com o modelo de revenda ou vice e versa.</div>
+            <input type="file" id="inputFileCsv43534" accept=".csv" />
+            <select id="tipoCadastro" class="inputStyle3425312">
+                <option value="default" selected="selected" disabled="disabled">Selecione o tipo de cadastro</option>
+            	<option value="Revenda">Revenda</option>
+                <option value="Uso e Consumo">Uso e Consumo</option>
+            </select>
+            <button class='buttonAnexar826734' id='buttonAnexar7893478'>Criar produtos</button>
+            
+        </div>
+        
+    </div>
+    
+	
+</aura:component>

@@ -1,0 +1,1426 @@
+<apex:page title="Avaliação" standardStylesheets="false" standardController="Avaliacao_de_Desempenho__c"
+    extensions="AvaliacaoDesempenho" applyHtmlTag="false" showHeader="false" renderAs="advanced_pdf" docType="html-5.0">
+    <!--link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css"/-->
+
+    <head>
+        <style>
+            @page {
+                size: A4;
+                background: url({!$Resource.TimbradoHospcom});
+                margin: 150px 50px 120px 50px;
+
+                @bottom-center {
+                    content: element(paginacao);
+                }
+            }
+
+            .tab1 tr {
+                //-fs-table-paginate:paginate;
+                page-break-inside: avoid;
+            }
+
+            .tab2 {
+                table-layout: fixed;
+                border-collapse: collapse;
+            }
+
+            .tab2 tr {
+                table-layout: fixed;
+            }
+
+            .inv {
+                padding-right: 10px;
+                padding-top: 10px;
+                font-family: arial, verdana, sans-serif;
+                font-size: 12px;
+                vertical-align: top;
+                text-align: right;
+            }
+
+            .nul {
+                padding: 0;
+            }
+
+            .cab2 {
+                padding: 3px;
+                font-family: arial, verdana, sans-serif;
+                font-size: 12px;
+                font-weight: bold;
+                vertical-align: top;
+                background-color: #e2e3e3;
+                border-right: 1px solid #cacecf;
+                border-bottom: 1px solid #cacecf;
+                border-top: 1px solid #cacecf;
+                border-left: 1px solid #cacecf
+            }
+
+            .cab {
+                padding: 3px;
+                font-family: arial, verdana, sans-serif;
+                font-size: 12px;
+                font-weight: bold;
+                vertical-align: top;
+                background-color: #e2e3e3;
+                border: 1px solid #cacecf;
+                line-height: 120%;
+            }
+
+            .cel {
+                padding: 3px;
+                font-family: arial, verdana, sans-serif;
+                font-size: 10px;
+                vertical-align: top;
+                border-top: 1px solid #eef2f4;
+                border-right: 1px solid #eef2f4;
+                border-bottom: 1px solid #eef2f4;
+                border-left: 1px solid #eef2f4;
+                line-height: 120%;
+                //word-wrap: break-word;
+                overflow: hidden;
+                text-transform: uppercase;
+            }
+
+            .total {
+                border-left: 1px solid #eef2f4;
+            }
+
+            .destaque {
+                font-weight: bold;
+            }
+
+            .descr {
+                text-align: justify;
+                text-justify: inter-word;
+            }
+
+            .img {
+                padding: 3px;
+                vertical-align: middle;
+                border-top: 1px solid #eef2f4;
+                border-right: 1px solid #eef2f4;
+                border-left: 1px solid #eef2f4;
+                border-bottom: 1px solid #eef2f4;
+            }
+
+            .tabela_itens {
+                border-top: 1px solid #cacecf;
+                -fs-table-paginate: paginate;
+            }
+
+            .tabela_itens tr {
+                page-break-inside: avoid;
+            }
+
+            .item_titulo_imagem {
+                font-family: arial, verdana, sans-serif;
+                font-size: 12px;
+                font-weight: bold;
+                vertical-align: top;
+                padding: 4px 4px 4px 4px;
+                background-color: #e2e3e3;
+                border-left: 1px solid #cacecf;
+                border-right: 1px solid #cacecf;
+                border-bottom: 1px solid #cacecf;
+            }
+
+            .item_titulo {
+                font-family: arial, verdana, sans-serif;
+                font-size: 12px;
+                font-weight: bold;
+                vertical-align: top;
+                padding: 4px 4px 4px 4px;
+                background-color: #e2e3e3;
+                border-right: 1px solid #cacecf;
+                border-bottom: 1px solid #cacecf;
+                line-height: 120%;
+            }
+
+            .item_imagem {
+                vertical-align: middle;
+                border-left: 1px solid #eef2f4;
+                border-right: 1px solid #eef2f4;
+                border-bottom: 1px solid #cacecf;
+                padding: 4px 4px 4px 4px;
+            }
+
+            .item_texto {
+                font-family: arial, verdana, sans-serif;
+                font-size: 10px;
+                vertical-align: top;
+                border-right: 1px solid #eef2f4;
+                border-bottom: 1px solid #eef2f4;
+                padding: 4px 4px 4px 4px;
+                line-height: 120%;
+            }
+
+            .item_descricao {
+                vertical-align: top;
+                border-right: 1px solid #eef2f4;
+                border-bottom: 1px solid #cacecf;
+                padding: 4px 4px 6px 4px;
+            }
+
+            .item_descricao_texto {
+                font-family: arial, verdana, sans-serif;
+                font-size: 10px;
+                text-align: left;
+                text-justify: inter-word;
+                line-height: 120%;
+            }
+
+            .item_descricao_texto_esquerda {
+                font-family: arial, verdana, sans-serif;
+                font-size: 10px;
+                line-height: 120%;
+            }
+        </style>
+    </head>
+    <apex:outputText rendered="{!
+                        $User.Id == Avaliacao_de_Desempenho__c.Gestor__c ||
+                        $User.Id == Avaliacao_de_Desempenho__c.Novo_Gestor__c ||
+                        $User.Id == '0056e00000DhQUI' ||
+                        $User.Id == '0056e00000DhQUIAA3' ||
+                        $User.ProfileId == '00ei0000000nKA9AAM' ||
+                        ($User.Id == Avaliacao_de_Desempenho__c.OwnerId && Avaliacao_de_Desempenho__c.Liberado__c == true)}">
+
+        <apex:form >
+            <apex:outputText rendered="{!!Avaliacao_de_Desempenho__c.Lideranca__c}">
+                <table class="tabela_itens" cellpadding="0px" cellspacing="0px" style="width:100%;">
+
+                    <tr>
+                        <td class="cab" colspan="5"
+                            style="width:370px; text-align:center; font-size:15px; vertical-align: middle"><b>Avaliação de Desempenho 2025 — {!Avaliacao_de_Desempenho__c.Contato__r.Name}</b></td>
+                    </tr>
+                    <tr>
+                        <td class="cab" colspan="5"
+                            style="width:370px; text-align:center; font-size:15px; vertical-align: middle"><b>Nota
+                                Comportamento:&nbsp;
+                                <apex:outputField value="{!Avaliacao_de_Desempenho__c.Nota_Competencia__c}" /> / Nota
+                                Metas:&nbsp;
+                                <apex:outputField value="{!Avaliacao_de_Desempenho__c.Nota_Metas__c}" />
+                            </b></td>
+                    </tr>
+                    <tr>
+                        <td class="cab" rowspan="2" style="width:370px; text-align:center; vertical-align: middle">
+                            <b>Atitude de Dono — <apex:outputText value="{0, number, #,###.00}">
+                                    <apex:param name="vl"
+                                        value="{!((Avaliacao_de_Desempenho__c.C1__c * 1.5 + Avaliacao_de_Desempenho__c.R1__c * 1.5 + Avaliacao_de_Desempenho__c.G1__c * 7 + Avaliacao_de_Desempenho__c.C2__c * 1.5 + Avaliacao_de_Desempenho__c.R2__c * 1.5 + Avaliacao_de_Desempenho__c.G2__c * 7 + Avaliacao_de_Desempenho__c.AD_3__c * 1.5 + Avaliacao_de_Desempenho__c.RAD3__c * 1.5 + Avaliacao_de_Desempenho__c.GAD3__c * 7) / 30)}" />
+                                </apex:outputText></b></td>
+                        <td colspan="4" class="cab" style="width:27px; text-align:center; vertical-align: middle">Nota
+                            Comportamento</td>
+                    </tr>
+                    <tr>
+                        <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Auto</b></td>
+                        <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Rede 1</b></td>
+                        <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Rede 2</b></td>
+                        <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Gestor</b></td>
+                    </tr>
+                    <tr>
+                        <td class="cel">
+                            Prioriza suas tarefas para garantir que prazos sejam cumpridos com eficiência e senso de
+                            urgência?
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.C1__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.R1__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR1__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.G1__c}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cel">
+                            Conduz de maneira proativa para resolver problemas ou melhoras processos, como se fosse o
+                            dono?
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.C2__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.R2__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR2__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.G2__c}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cel">
+                            Assume a responsabilidade pelos seus erros e trabalha proativamente para corrigi-los e
+                            aprender com eles?
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.AD_3__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.RAD3__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.RRAD3__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.GAD3__c}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cab" rowspan="2" style="width:370px; text-align:center; vertical-align: middle">
+                            <b>Melhoria Contínua — <apex:outputText value="{0, number, #,###.00}">
+                                    <apex:param name="vl"
+                                        value="{!(((((Avaliacao_de_Desempenho__c.C3__c * 1.5) + (Avaliacao_de_Desempenho__c.R3__c * 1.5) + (Avaliacao_de_Desempenho__c.G3__c *7)) / 10)+(((Avaliacao_de_Desempenho__c.C4__c * 1.5) + (Avaliacao_de_Desempenho__c.R4__c * 1.5) + (Avaliacao_de_Desempenho__c.G4__c *7)) / 10)+(((Avaliacao_de_Desempenho__c.C5__c * 1.5) + (Avaliacao_de_Desempenho__c.R5__c * 1.5) + (Avaliacao_de_Desempenho__c.G5__c *7)) / 10))/3)}" />
+                                </apex:outputText></b></td>
+                        <td colspan="4" class="cab" style="width:27px; text-align:center; vertical-align: middle">Nota
+                            Comportamento</td>
+                    </tr>
+                    <tr>
+                        <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Auto</b></td>
+                        <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Rede 1</b></td>
+                        <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Rede 2</b></td>
+                        <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Gestor</b></td>
+                    </tr>
+                    <tr>
+                        <td class="cel">
+                            Sempre pensa de que maneira poderia fazer ainda mais e melhor?
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.C3__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.R3__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR3__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.G3__c}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cel">
+                            É uma pessoa que demonstra abertura e receptividade ao receber críticas ou sugestões de
+                            melhoria?
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.C4__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.R4__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR4__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.G4__c}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cel">
+                            Se compromete a contribuir regularmente com iniciativas, ideias ou sugestões para alavancar
+                            o negócio?
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.C5__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.R5__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR5__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.G5__c}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cab" rowspan="2" style="width:370px; text-align:center; vertical-align: middle">
+                            <b>Respeito — <apex:outputText value="{0, number, #,###.00}">
+                                    <apex:param name="vl"
+                                        value="{!(((((Avaliacao_de_Desempenho__c.C6__c * 1.5) + (Avaliacao_de_Desempenho__c.R6__c * 1.5) + (Avaliacao_de_Desempenho__c.G6__c *7)) / 10) + (((Avaliacao_de_Desempenho__c.C7__c * 1.5) + (Avaliacao_de_Desempenho__c.R7__c * 1.5) + (Avaliacao_de_Desempenho__c.G7__c *7)) / 10))/2)}" />
+                                </apex:outputText> </b></td>
+                        <td colspan="4" class="cab" style="width:27px; text-align:center; vertical-align: middle">Nota
+                            Comportamento</td>
+                    </tr>
+                    <tr>
+                        <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Auto</b></td>
+                        <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Rede 1</b></td>
+                        <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Rede 2</b></td>
+                        <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Gestor</b></td>
+                    </tr>
+                    <tr>
+                        <td class="cel">
+                            Demonstra empatia e consideração por toda a equipe?
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.C6__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.R6__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR6__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.G6__c}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cel">
+                            Suas ações são sempre realizadas com cortesia, tratando todos com dignidade e respeito?
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.C7__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.R7__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR7__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.G7__c}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cel">
+                            Adota uma postura de abertura e acolhimento às críticas construtivas, utilizando-as para o
+                            seu desenvolvimento pessoal e profissional?
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.RESPEITO3__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.RRESPEITO3__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.RRRESPEITO3__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.GCRESPEITO3__c}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cab" rowspan="2" style="width:370px; text-align:center; vertical-align: middle">
+                            <b>Sangue no Olho — <apex:outputText value="{0, number, #,###.00}">
+                                    <apex:param name="vl"
+                                        value="{!(((((Avaliacao_de_Desempenho__c.C8__c * 1.5) + (Avaliacao_de_Desempenho__c.R8__c * 1.5) + (Avaliacao_de_Desempenho__c.G8__c *7)) / 10) + (((Avaliacao_de_Desempenho__c.C9__c * 1.5) + (Avaliacao_de_Desempenho__c.R9__c * 1.5) + (Avaliacao_de_Desempenho__c.G9__c *7)) / 10))/2)}" />
+                                </apex:outputText></b></td>
+                        <td colspan="4" class="cab" style="width:27px; text-align:center; vertical-align: middle">Nota
+                            Comportamento</td>
+                    </tr>
+                    <tr>
+                        <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Auto</b></td>
+                        <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Rede 1</b></td>
+                        <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Rede 2</b></td>
+                        <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Gestor</b></td>
+                    </tr>
+                    <tr>
+                        <td class="cel">
+                            É inconformado com o resultado e está sempre buscando superar metas já atingidas?
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.C8__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.R8__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR8__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.G8__c}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cel">
+                            Conhece bem a rotina, atua com ousadia e trabalha com velocidade para superar suas metas?
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.C9__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.R9__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR9__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.G9__c}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cel">
+                            Demonstra determinação e persistência na busca de metas e objetivos, mesmo diante de
+                            desafios?
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.SO3__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.RSO3__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.RRSO3__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.GCSO3__c}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cab" rowspan="2" style="width:370px; text-align:center; vertical-align: middle">
+                            <b>Honestidade — <apex:outputText value="{0, number, #,###.00}">
+                                    <apex:param name="vl"
+                                        value="{!(((((Avaliacao_de_Desempenho__c.C10__c * 1.5) + (Avaliacao_de_Desempenho__c.R10__c * 1.5) + (Avaliacao_de_Desempenho__c.G10__c *7)) / 10) + (((Avaliacao_de_Desempenho__c.C11__c * 1.5) + (Avaliacao_de_Desempenho__c.R11__c * 1.5) + (Avaliacao_de_Desempenho__c.G11__c *7)) / 10))/2)}" />
+                                </apex:outputText></b></td>
+                        <td colspan="4" class="cab" style="width:27px; text-align:center; vertical-align: middle">Nota
+                            Comportamento</td>
+                    </tr>
+                    <tr>
+                        <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Auto</b></td>
+                        <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Rede 1</b></td>
+                        <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Rede 2</b></td>
+                        <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Gestor</b></td>
+                    </tr>
+                    <tr>
+                        <td class="cel">
+                            Promove um ambiente de trabalho onde a honestidade é valorizada e encorajada entre os
+                            membros da equipe?
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.C10__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.R10__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR10__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.G10__c}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cel">
+                            Tem uma comunicação verdadeira, tanto nas relações internas e externas, compartilhando
+                            informações de forma clara e transparente?
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.C11__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.R11__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR11__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.G11__c}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cel">
+                            Admite seus erros prontamente e toma medidas para corrigi-los?
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.HO3__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.RHO3__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.RRHO3__c}" />
+                        </td>
+                        <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.GCHO3__c}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cab" rowspan="2" style="width:370px; text-align:center; vertical-align: middle">
+                            <b>Entrega de Metas — <apex:outputText value="{0, number, #,###.00}">
+                                    <apex:param name="vl"
+                                        value="{!((Avaliacao_de_Desempenho__c.C_Resultado__c * 3) + (Avaliacao_de_Desempenho__c.G_Resultado__c *7)) / 10}" />
+                                </apex:outputText></b></td>
+                        <td colspan="4" class="cab" style="width:27px; text-align:center; vertical-align: middle">Nota
+                            Comportamento</td>
+                    </tr>
+                    <tr>
+                        <td class="cab" colspan="2" style="width:37px; text-align:center; vertical-align: middle">
+                            <b>Auto</b></td>
+                        <td class="cab" colspan="2" style="width:37px; text-align:center; vertical-align: middle">
+                            <b>Gestor</b></td>
+                    </tr>
+                    <tr>
+                        <td class="cel">
+                            Entregou todas as metas propostas pelo gestor?
+                        </td>
+                        <td class="cel" colspan="2" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.C_Resultado__c}" />
+                        </td>
+                        <td class="cel" colspan="2" style="width:37px; text-align:center; vertical-align: middle">
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.G_Resultado__c}" />
+                        </td>
+                    </tr>
+                    <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Nota_Prova_Teorica__c != null, true,false)}">
+                        <tr>
+                            <td class="cab" colspan="5"
+                                style="width:370px; text-align:center; font-size:15px; vertical-align: middle"><b>Nota
+                                    Prova Teórica:&nbsp;
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.Nota_Prova_Teorica__c}" /> /
+                                    Nota Prova Prática:&nbsp;
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.Nota_Prova_Pratica__c}" />
+                                </b></td>
+                        </tr>
+                        <tr>
+                            <td class="cab" colspan="5"
+                                style="width:370px; text-align:center; font-size:15px; vertical-align: middle">
+                                <b>Resultado Certificação 2024:&nbsp;
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.Resultado_Certificacao__c}" />
+                                </b></td>
+                        </tr>
+                    </apex:outputText>
+                    <tr>
+                        <td class="cab" colspan="5" style="width:370px; text-align:center; vertical-align: middle">
+                            <b>Pontos Fortes</b></td>
+                    </tr>
+                    <tr>
+                        <td class="cel" colspan="5">
+                            <b>Auto: </b>
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.C12__c}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cel" colspan="5">
+                            <b>Rede 1: </b>
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.R12__c}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cel" colspan="5">
+                            <b>Rede 2: </b>
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR12__c}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cel" colspan="5">
+                            <b>Gestor: </b>
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.G12__c}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cab" colspan="5" style="width:370px; text-align:center; vertical-align: middle">
+                            <b>Oportunidades de melhoria</b></td>
+                    </tr>
+                    <tr>
+                        <td class="cel" colspan="5">
+                            <b>Auto: </b>
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.C13__c}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cel" colspan="5">
+                            <b>Rede 1: </b>
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.R13__c}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cel" colspan="5">
+                            <b>Rede 2: </b>
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR13__c}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cel" colspan="5">
+                            <b>Gestor: </b>
+                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.G13__c}" />
+                        </td>
+                    </tr>
+                    <table style="page-break-inside:avoid !important">
+                        <tr>
+                            <td class="cab" style="width:1000px; text-align:center; vertical-align: middle"><b>(PDI)
+                                    Plano de Desenvolvimento Individual</b></td>
+                        </tr>
+                        <tr>
+                            <td class="cab" style="width: 1000px; text-align:center; vertical-align: middle"><b>Detalhe
+                                    a atividade que o colaborador deverá desempenhar</b></td>
+                        </tr>
+                        <tr>
+                            <td class="cel" style="width: 1000px; height:200px; text-align:left;"><b>PDI 1:</b>
+                                <apex:outputField value="{!Avaliacao_de_Desempenho__c.PDI__c}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="cel" style="width: 1000px; height:200px; text-align:left;"><b>PDI 2:</b>
+                                <apex:outputField value="{!Avaliacao_de_Desempenho__c.PDI2__c}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="cel" style="width: 1000px; height:200px; text-align:left;"><b>PDI 3:</b>
+                                <apex:outputField value="{!Avaliacao_de_Desempenho__c.PDI3__c}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="cel" style="width: 1000px; height:200px; text-align:left;"><b>PDI 4:</b>
+                                <apex:outputField value="{!Avaliacao_de_Desempenho__c.PDI4__c}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="cab" style="width:1000px; text-align:center; vertical-align: middle">
+                                <b>Comentários gerais sobre o colaborador</b></td>
+                        </tr>
+                        <tr>
+                            <td class="cel" style="width: 1000px; height:200px; text-align:left;">
+                                <apex:outputField value="{!Avaliacao_de_Desempenho__c.PPG__c}" />
+                            </td>
+                        </tr>
+                    </table>
+                    <br />
+                </table>
+            </apex:outputText>
+
+
+            <!--RELATÓRIO DE GESTORES/DIRETORES-->
+
+            <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Lideranca__c == true && ((Avaliacao_de_Desempenho__c.OwnerId != $User.Id && Avaliacao_de_Desempenho__c.Gestor__c != null)|| Avaliacao_de_Desempenho__c.Gestor__c == null), true, false)}">
+                <table class="tabela_itens" cellpadding="0px" cellspacing="0px" style="width:100%;">
+                    <apex:repeat var="avs" value="{!avaliacao}">
+                        <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.OwnerId == avs['gestor'], true,false)}">
+                            <apex:variable var="mediaTime"
+                                value="{!(avs['media1'] + avs['media2'] + avs['media3'] + avs['media4'] + avs['media5'] + avs['media6'] + avs['media7'] + avs['media8'] + avs['media9'] + avs['media10'] + avs['media11'] + avs['media14'] + avs['media15'] + avs['media16']) / 14}" />
+                            <tr>
+                                <td class="cab" colspan="6"
+                                    style="width:370px; text-align:center; font-size:15px; vertical-align: middle">
+                                    <b>Avaliação de Desempenho — {!Avaliacao_de_Desempenho__c.Contato__r.Name}</b></td>
+                            </tr>
+                            <tr>
+                                <td class="cab" colspan="6"
+                                    style="width:370px; text-align:center; font-size:15px; vertical-align: middle">
+                                    <b>Nota Comportamento:&nbsp;<apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c != null, true, false)}"
+                                            value="{0, number, #,###.00}">
+                                            <apex:param name="competencia"
+                                                value="{!((mediaTime*1.5) + (Avaliacao_de_Desempenho__c.MediaColaborador__c) + (Avaliacao_de_Desempenho__c.Media_Rede__c) + ((Avaliacao_de_Desempenho__c.MediaGestor__c/7)*5.5))/10}" />
+                                        </apex:outputText>
+                                        <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c == null, true, false)}"
+                                            value="{0, number, #,###.00}">
+                                            <apex:param name="competencia"
+                                                value="{!((mediaTime*7) + (Avaliacao_de_Desempenho__c.MediaColaborador__c) + (Avaliacao_de_Desempenho__c.Media_Rede__c))/10}" />
+                                        </apex:outputText> / Nota Metas:&nbsp;
+                                        <apex:outputField value="{!Avaliacao_de_Desempenho__c.Nota_Metas__c}" />
+                                    </b></td>
+                            </tr>
+                            <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Nota_Prova_Teorica__c != null, true,false)}">
+                                <tr>
+                                    <td class="cab" colspan="5"
+                                        style="width:370px; text-align:center; font-size:15px; vertical-align: middle">
+                                        <b>Nota Prova Teórica:&nbsp;
+                                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.Nota_Prova_Teorica__c}" /> / Nota
+                                            Prova Prática:&nbsp;
+                                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.Nota_Prova_Pratica__c}" />
+                                        </b></td>
+                                </tr>
+                                <tr>
+                                    <td class="cab" colspan="5"
+                                        style="width:370px; text-align:center; font-size:15px; vertical-align: middle">
+                                        <b>Resultado Certificação 2024
+                                            <apex:outputField value="{!Avaliacao_de_Desempenho__c.Resultado_Certificacao__c}" />
+                                        </b></td>
+                                </tr>
+                            </apex:outputText>
+                            <tr>
+                                <td class="cab" rowspan="2"
+                                    style="width:370px; text-align:center; vertical-align: middle"><b>Atitude de Dono —
+                                        <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c != null, true,false)}"
+                                            value="{0, number, #,###.00}">
+                                            <apex:param name="vl"
+                                                value="{!(((((Avaliacao_de_Desempenho__c.C1__c * 1.5) + (avs['media1']*1.5) + (Avaliacao_de_Desempenho__c.R1__c * 1.5) + (Avaliacao_de_Desempenho__c.G1__c *5.5)) / 10) + (((Avaliacao_de_Desempenho__c.C2__c * 1.5) + (avs['media2']*1.5) + (Avaliacao_de_Desempenho__c.R2__c * 1.5) + (Avaliacao_de_Desempenho__c.G2__c *5.5)) / 10))/2)}" />
+                                        </apex:outputText>
+                                        <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c == null, true,false)}"
+                                            value="{0, number, #,###.00}">
+                                            <apex:param name="vl"
+                                                value="{!(((((Avaliacao_de_Desempenho__c.C1__c * 1.5) + (avs['media1']*7) + (Avaliacao_de_Desempenho__c.R1__c * 1.5)) / 10) + (((Avaliacao_de_Desempenho__c.C2__c * 1.5) + (avs['media2']*7) + (Avaliacao_de_Desempenho__c.R2__c * 1.5)) / 10))/2)}" />
+                                        </apex:outputText>
+                                    </b></td>
+                                <td colspan="5" class="cab"
+                                    style="width:27px; text-align:center; vertical-align: middle">Nota Comportamento
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle">
+                                    <b>Auto</b></td>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle">
+                                    <b>Time</b></td>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Rede
+                                        1</b></td>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Rede
+                                        2</b></td>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle">
+                                    <b>Gestor</b></td>
+                            </tr>
+                            <tr>
+                                <td class="cel">
+                                    Prioriza suas tarefas para garantir que prazos sejam cumpridos com eficiência e
+                                    senso de urgência?
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.C1__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputText value="{0, number, #,###.00}">
+                                        <apex:param value="{!avs['media1']}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.R1__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR1__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.G1__c}" />
+                                    <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c == null, true, false)}"
+                                        value="N/A" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cel">
+                                    Conduz de maneira proativa para resolver problemas ou melhorar processos, como se
+                                    fosse o dono?
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.C2__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputText value="{0, number, #,###.00}">
+                                        <apex:param value="{!avs['media2']}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.R2__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR2__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.G2__c}" />
+                                    <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c == null, true, false)}"
+                                        value="N/A" />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="cab" rowspan="2"
+                                    style="width:370px; text-align:center; vertical-align: middle"><b>Melhoria Contínua
+                                        —
+                                        <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c != null, true,false)}"
+                                            value="{0, number, #,###.00}">
+                                            <apex:param name="vl"
+                                                value="{!(((((Avaliacao_de_Desempenho__c.C3__c * 1.5) + (avs['media3']*1.5) + (Avaliacao_de_Desempenho__c.R3__c * 1.5) + (Avaliacao_de_Desempenho__c.G3__c *5.5)) / 10)+(((Avaliacao_de_Desempenho__c.C4__c * 1.5) + (avs['media4']*1.5) + (Avaliacao_de_Desempenho__c.R4__c * 1.5) + (Avaliacao_de_Desempenho__c.G4__c *5.5)) / 10)+(((Avaliacao_de_Desempenho__c.C5__c * 1.5) + (Avaliacao_de_Desempenho__c.R5__c * 1.5) + (avs['media5']*1.5) + (Avaliacao_de_Desempenho__c.G5__c *5.5)) / 10))/3)}" />
+                                        </apex:outputText>
+                                        <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c == null, true,false)}"
+                                            value="{0, number, #,###.00}">
+                                            <apex:param name="vl"
+                                                value="{!(((((Avaliacao_de_Desempenho__c.C3__c * 1.5) + (avs['media3']*7) + (Avaliacao_de_Desempenho__c.R3__c * 1.5)) / 10)+(((Avaliacao_de_Desempenho__c.C4__c * 1.5) + (avs['media4']*7) + (Avaliacao_de_Desempenho__c.R4__c * 1.5)) / 10)+(((Avaliacao_de_Desempenho__c.C5__c * 1.5) + (Avaliacao_de_Desempenho__c.R5__c * 1.5) + (avs['media5']*7)) / 10))/3)}" />
+                                        </apex:outputText>
+                                    </b></td>
+                                <td colspan="5" class="cab"
+                                    style="width:27px; text-align:center; vertical-align: middle">Nota Comportamento
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle">
+                                    <b>Auto</b></td>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle">
+                                    <b>Time</b></td>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Rede
+                                        1</b></td>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Rede
+                                        2</b></td>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle">
+                                    <b>Gestor</b></td>
+                            </tr>
+                            <tr>
+                                <td class="cel">
+                                    Sempre pensa de que maneira poderia fazer ainda mais e melhor?
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.C3__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputText value="{0, number, #,###.00}">
+                                        <apex:param value="{!avs['media3']}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.R3__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR3__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.G3__c}" />
+                                    <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c == null, true, false)}"
+                                        value="N/A" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cel">
+                                    É uma pessoa que demonstra abertura e receptividade ao receber críticas ou sugestões
+                                    de melhoria?
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.C4__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputText value="{0, number, #,###.00}">
+                                        <apex:param value="{!avs['media4']}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.R4__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR4__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.G4__c}" />
+                                    <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c == null, true, false)}"
+                                        value="N/A" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cel">
+                                    Se compromete a contribuir regularmente com ideias e soluções para melhorar
+                                    processos e resolver desafios dentro da empresa?
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.C5__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputText value="{0, number, #,###.00}">
+                                        <apex:param value="{!avs['media5']}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.R5__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR5__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.G5__c}" />
+                                    <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c == null, true, false)}"
+                                        value="N/A" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cab" rowspan="2"
+                                    style="width:370px; text-align:center; vertical-align: middle"><b>Respeito —
+                                        <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c != null, true,false)}"
+                                            value="{0, number, #,###.00}">
+                                            <apex:param name="vl"
+                                                value="{!(((((Avaliacao_de_Desempenho__c.C6__c * 1.5) + (avs['media6']*1.5) + (Avaliacao_de_Desempenho__c.R6__c * 1.5) + (Avaliacao_de_Desempenho__c.G6__c *5.5)) / 10) + (((Avaliacao_de_Desempenho__c.C7__c * 1.5) + (avs['media7']*1.5) + + (Avaliacao_de_Desempenho__c.R7__c * 1.5) + (Avaliacao_de_Desempenho__c.G7__c *5.5)) / 10))/2)}" />
+                                        </apex:outputText>
+                                        <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c == null, true,false)}"
+                                            value="{0, number, #,###.00}">
+                                            <apex:param name="vl"
+                                                value="{!(((((Avaliacao_de_Desempenho__c.C6__c * 1.5) + (avs['media6']*7) + (Avaliacao_de_Desempenho__c.R6__c * 1.5)) / 10) + (((Avaliacao_de_Desempenho__c.C7__c * 1.5) + (avs['media7']*7) + + (Avaliacao_de_Desempenho__c.R7__c * 1.5)) / 10))/2)}" />
+                                        </apex:outputText>
+                                    </b></td>
+                                <td colspan="5" class="cab"
+                                    style="width:27px; text-align:center; vertical-align: middle">Nota Comportamento
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle">
+                                    <b>Auto</b></td>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle">
+                                    <b>Time</b></td>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Rede
+                                        1</b></td>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Rede
+                                        2</b></td>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle">
+                                    <b>Gestor</b></td>
+                            </tr>
+                            <tr>
+                                <td class="cel">
+                                    Demonstra empatia e consideração por toda a equipe?
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.C6__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputText value="{0, number, #,###.00}">
+                                        <apex:param value="{!avs['media6']}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.R6__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR6__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.G6__c}" />
+                                    <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c == null, true, false)}"
+                                        value="N/A" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cel">
+                                    Suas ações são sempre realizadas com cortesia, tratando todos com dignidade e
+                                    respeito?
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.C7__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputText value="{0, number, #,###.00}">
+                                        <apex:param value="{!avs['media7']}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.R7__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR7__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.G7__c}" />
+                                    <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c == null, true, false)}"
+                                        value="N/A" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cab" rowspan="2"
+                                    style="width:370px; text-align:center; vertical-align: middle"><b>Sangue no Olho —
+                                        <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c != null, true,false)}"
+                                            value="{0, number, #,###.00}">
+                                            <apex:param name="vl"
+                                                value="{!(((((Avaliacao_de_Desempenho__c.C8__c * 1.5) + (avs['media8']*1.5) + (Avaliacao_de_Desempenho__c.R8__c * 1.5) + (Avaliacao_de_Desempenho__c.G8__c *5.5)) / 10) + (((Avaliacao_de_Desempenho__c.C9__c * 1.5) + (avs['media9']*1.5) + (Avaliacao_de_Desempenho__c.R9__c * 1.5) + (Avaliacao_de_Desempenho__c.G9__c *5.5)) / 10))/2)}" />
+                                        </apex:outputText>
+                                        <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c == null, true,false)}"
+                                            value="{0, number, #,###.00}">
+                                            <apex:param name="vl"
+                                                value="{!(((((Avaliacao_de_Desempenho__c.C8__c * 1.5) + (avs['media8']*7) + (Avaliacao_de_Desempenho__c.R8__c * 1.5)) / 10) + (((Avaliacao_de_Desempenho__c.C9__c * 1.5) + (avs['media9']*7) + (Avaliacao_de_Desempenho__c.R9__c * 1.5)) / 10))/2)}" />
+                                        </apex:outputText>
+                                    </b></td>
+                                <td colspan="5" class="cab"
+                                    style="width:27px; text-align:center; vertical-align: middle">Nota Comportamento
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle">
+                                    <b>Auto</b></td>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle">
+                                    <b>Time</b></td>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Rede
+                                        1</b></td>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Rede
+                                        2</b></td>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle">
+                                    <b>Gestor</b></td>
+                            </tr>
+                            <tr>
+                                <td class="cel">
+                                    É inconformado com o resultado e está sempre buscando superar metas já atingidas?
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.C8__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputText value="{0, number, #,###.00}">
+                                        <apex:param value="{!avs['media8']}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.R8__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR8__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.G8__c}" />
+                                    <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c == null, true, false)}"
+                                        value="N/A" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cel">
+                                    Conhece bem a rotina, atua com ousadia e trabalha com velocidade para superar minhas
+                                    metas?
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.C9__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputText value="{0, number, #,###.00}">
+                                        <apex:param value="{!avs['media9']}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.R9__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR9__c}" />
+                                </td>
+
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.G9__c}" />
+                                    <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c == null, true, false)}"
+                                        value="N/A" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cab" rowspan="2"
+                                    style="width:370px; text-align:center; vertical-align: middle"><b>Honestidade —
+                                        <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c != null, true,false)}"
+                                            value="{0, number, #,###.00}">
+                                            <apex:param name="vl"
+                                                value="{!(((((Avaliacao_de_Desempenho__c.C10__c * 1.5) + (avs['media10']*1.5) + (Avaliacao_de_Desempenho__c.R10__c * 1.5) + (Avaliacao_de_Desempenho__c.G10__c *5.5)) / 10) + (((Avaliacao_de_Desempenho__c.C11__c * 1.5) + (avs['media11']*1.5) + (Avaliacao_de_Desempenho__c.R11__c * 1.5) + (Avaliacao_de_Desempenho__c.G11__c *5.5)) / 10))/2)}" />
+                                        </apex:outputText>
+                                        <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c == null, true,false)}"
+                                            value="{0, number, #,###.00}">
+                                            <apex:param name="vl"
+                                                value="{!(((((Avaliacao_de_Desempenho__c.C10__c * 1.5) + (avs['media10']*7) + (Avaliacao_de_Desempenho__c.R10__c * 1.5)) / 10) + (((Avaliacao_de_Desempenho__c.C11__c * 1.5) + (avs['media11']*7) + (Avaliacao_de_Desempenho__c.R11__c * 1.5)) / 10))/2)}" />
+                                        </apex:outputText>
+                                    </b></td>
+                                <td colspan="5" class="cab"
+                                    style="width:27px; text-align:center; vertical-align: middle">Nota Comportamento
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle">
+                                    <b>Auto</b></td>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle">
+                                    <b>Time</b></td>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Rede
+                                        1</b></td>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Rede
+                                        2</b></td>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle">
+                                    <b>Gestor</b></td>
+                            </tr>
+                            <tr>
+                                <td class="cel">
+                                    Promove um ambiente de trabalho onde a honestidade é valorizada e encorajada entre
+                                    os membros da equipe?
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.C10__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputText value="{0, number, #,###.00}">
+                                        <apex:param value="{!avs['media10']}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.R10__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR10__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.G10__c}" />
+                                    <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c == null, true, false)}"
+                                        value="N/A" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cel">
+                                    Tem uma comunicação verdadeira, tanto nas relações internas e externas,
+                                    compartilhando informações de forma clara e transparente?
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.C11__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputText value="{0, number, #,###.00}">
+                                        <apex:param value="{!avs['media11']}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.R11__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR11__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.G11__c}" />
+                                    <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c == null, true, false)}"
+                                        value="N/A" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cab" rowspan="2"
+                                    style="width:370px; text-align:center; vertical-align: middle"><b>Entrega de Metas —
+                                        <apex:outputText value="{0, number, #,###.00}">
+                                            <apex:param name="vl" value="{!Avaliacao_de_Desempenho__c.Nota_Metas__c}" />
+                                        </apex:outputText></b></td>
+                                <td colspan="5" class="cab"
+                                    style="width:27px; text-align:center; vertical-align: middle">Nota Comportamento
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle">
+                                    <b>Auto</b></td>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle">
+                                    <b>Time</b></td>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Rede
+                                        1</b></td>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle"><b>Rede
+                                        2</b></td>
+                                <td class="cab" style="width:37px; text-align:center; vertical-align: middle">
+                                    <b>Gestor</b></td>
+                            </tr>
+                            <tr>
+                                <td class="cel">
+                                    Entregou todas as metas propostas?
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.C_Resultado__c}" />
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    N/A
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    N/A
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    N/A
+                                </td>
+                                <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.G_Resultado__c}" />
+                                    <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c == null, true, false)}"
+                                        value="N/A" />
+                                </td>
+                            </tr>
+
+
+                            <apex:outputTexT rendered="{!Avaliacao_de_Desempenho__c.Lideranca__c}">
+                                <tr>
+                                    <td class="cab" rowspan="2"
+                                        style="width:370px; text-align:center; vertical-align: middle"><b>Liderança
+                                            Inspiradora —
+                                            <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c != null, true,false)}"
+                                                value="{0, number, #,###.00}">
+                                                <apex:param name="vl"
+                                                    value="{!(((((Avaliacao_de_Desempenho__c.C15__c * 1.5) + (avs['media15']*1.5) + (Avaliacao_de_Desempenho__c.R15__c * 1.5) + (Avaliacao_de_Desempenho__c.G15__c *5.5)) / 10) + (((Avaliacao_de_Desempenho__c.C14__c * 1.5) + (avs['media14']*1.5) + (Avaliacao_de_Desempenho__c.R14__c * 1.5) + (Avaliacao_de_Desempenho__c.G14__c *5.5)) / 10)+ (((Avaliacao_de_Desempenho__c.C16__c * 1.5) + (avs['media16']*1.5) + (Avaliacao_de_Desempenho__c.R16__c * 1.5) + (Avaliacao_de_Desempenho__c.G16__c *5.5)) / 10))/3)}" />
+                                            </apex:outputText>
+                                            <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c == null, true,false)}"
+                                                value="{0, number, #,###.00}">
+                                                <apex:param name="vl"
+                                                    value="{!(((((Avaliacao_de_Desempenho__c.C15__c * 1.5) + (avs['media15']*7) + (Avaliacao_de_Desempenho__c.R15__c * 1.5)) / 10) + (((Avaliacao_de_Desempenho__c.C14__c * 1.5) + (avs['media14']*7) + (Avaliacao_de_Desempenho__c.R14__c * 1.5)) / 10)+ (((Avaliacao_de_Desempenho__c.C16__c * 1.5) + (avs['media16']*7) + (Avaliacao_de_Desempenho__c.R16__c * 1.5)) / 10))/3)}" />
+                                            </apex:outputText>
+                                        </b></td>
+                                    <td colspan="5" class="cab"
+                                        style="width:27px; text-align:center; vertical-align: middle">Nota Comportamento
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="cab" style="width:37px; text-align:center; vertical-align: middle">
+                                        <b>Auto</b></td>
+                                    <td class="cab" style="width:37px; text-align:center; vertical-align: middle">
+                                        <b>Time</b></td>
+                                    <td class="cab" style="width:37px; text-align:center; vertical-align: middle">
+                                        <b>Rede</b></td>
+                                    <td class="cab" style="width:37px; text-align:center; vertical-align: middle">
+                                        <b>Rede 2</b></td>
+                                    <td class="cab" style="width:37px; text-align:center; vertical-align: middle">
+                                        <b>Gestor</b></td>
+                                </tr>
+                                <tr>
+                                    <td class="cel">
+                                        Tem hábitos de gestão (reuniões, desenho de desafios e momentos de feedbacks)
+                                        com sua equipe a fim de estarem alinhados com o resultado?
+                                    </td>
+                                    <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                        <apex:outputField value="{!Avaliacao_de_Desempenho__c.C14__c}" />
+                                    </td>
+                                    <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                        <apex:outputText value="{0, number, #,###.00}">
+                                            <apex:param value="{!avs['media14']}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                        <apex:outputField value="{!Avaliacao_de_Desempenho__c.R14__c}" />
+                                    </td>
+                                    <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                        <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR14__c}" />
+                                    </td>
+                                    <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                        <apex:outputField value="{!Avaliacao_de_Desempenho__c.G14__c}" />
+                                        <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c == null, true, false)}"
+                                            value="N/A" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="cel">
+                                        Cultiva a cultura e multiplica os valores da empresa com seu time para
+                                        entregarem cada vez mais resultados?
+                                    </td>
+                                    <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                        <apex:outputField value="{!Avaliacao_de_Desempenho__c.C15__c}" />
+                                    </td>
+                                    <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                        <apex:outputText value="{0, number, #,###.00}">
+                                            <apex:param value="{!avs['media15']}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                        <apex:outputField value="{!Avaliacao_de_Desempenho__c.R15__c}" />
+                                    </td>
+                                    <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                        <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR15__c}" />
+                                    </td>
+                                    <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                        <apex:outputField value="{!Avaliacao_de_Desempenho__c.G15__c}" />
+                                        <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c == null, true, false)}"
+                                            value="N/A" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="cel">
+                                        Sente que seus colaboradores enxergam nele um líder inspirador e que desenvolve
+                                        pessoas?
+                                    </td>
+                                    <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                        <apex:outputField value="{!Avaliacao_de_Desempenho__c.C16__c}" />
+                                    </td>
+                                    <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                        <apex:outputText value="{0, number, #,###.00}">
+                                            <apex:param value="{!avs['media16']}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                        <apex:outputField value="{!Avaliacao_de_Desempenho__c.R16__c}" />
+                                    </td>
+                                    <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                        <apex:outputField value="{!Avaliacao_de_Desempenho__c.RR16__c}" />
+                                    </td>
+                                    <td class="cel" style="width:37px; text-align:center; vertical-align: middle">
+                                        <apex:outputField value="{!Avaliacao_de_Desempenho__c.G16__c}" />
+                                        <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c == null, true, false)}"
+                                            value="N/A" />
+                                    </td>
+                                </tr>
+                            </apex:outputText>
+                            <tr>
+                                <td class="cab" colspan="6"
+                                    style="width:370px; text-align:center; vertical-align: middle"><b>Pontos Fortes</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cel" colspan="6">
+                                    <b>Auto: </b>
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.C12__c}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cel" colspan="6">
+                                    <b>Rede: </b>
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.R12__c}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cel" colspan="6">
+                                    <b>Time: </b> <br />
+                                    <apex:repeat var="coments" value="{!comentarios}">
+                                        <b>•</b> {!coments.CG12__c} <br /><br />
+                                    </apex:repeat>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cel" colspan="6">
+                                    <b>Gestor: </b>
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.G12__c}" />
+                                    <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c == null, true, false)}"
+                                        value="N/A" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cab" colspan="6"
+                                    style="width:370px; text-align:center; vertical-align: middle"><b>Oportunidades de
+                                        melhoria</b></td>
+                            </tr>
+                            <tr>
+                                <td class="cel" colspan="6">
+                                    <b>Auto: </b>
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.C13__c}" />
+                                </td>
+                            </tr>
+                            <td class="cel" colspan="6">
+                                <b>Time: </b> <br />
+                                <apex:repeat var="coments" value="{!comentarios}">
+                                    <b>•</b> {!coments.CG13__c} <br /><br />
+                                </apex:repeat>
+                            </td>
+                            <tr>
+                                <td class="cel" colspan="5">
+                                    <b>Rede: </b>
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.R13__c}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cel" colspan="5">
+                                    <b>Gestor: </b>
+                                    <apex:outputField value="{!Avaliacao_de_Desempenho__c.G13__c}" />
+                                    <apex:outputText rendered="{!IF(Avaliacao_de_Desempenho__c.Gestor__c == null, true, false)}"
+                                        value="N/A" />
+                                </td>
+                            </tr>
+                            <table style="page-break-inside:avoid !important">
+                                <tr>
+                                    <td class="cab" style="width:1000px; text-align:center; vertical-align: middle">
+                                        <b>(PDI) Plano de Desenvolvimento Individual</b></td>
+                                </tr>
+                                <tr>
+                                    <td class="cab" style="width: 1000px; text-align:center; vertical-align: middle">
+                                        <b>Detalhe a atividade que o colaborador deverá desempenhar</b></td>
+                                </tr>
+                                <tr>
+                                    <td class="cel" style="width: 1000px; height:200px; text-align:left;"><b>PDI 1:</b>
+                                        <apex:outputField value="{!Avaliacao_de_Desempenho__c.PDI__c}" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="cel" style="width: 1000px; height:200px; text-align:left;"><b>PDI 2:</b>
+                                        <apex:outputField value="{!Avaliacao_de_Desempenho__c.PDI2__c}" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="cel" style="width: 1000px; height:200px; text-align:left;"><b>PDI 3:</b>
+                                        <apex:outputField value="{!Avaliacao_de_Desempenho__c.PDI3__c}" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="cel" style="width: 1000px; height:200px; text-align:left;"><b>PDI 4:</b>
+                                        <apex:outputField value="{!Avaliacao_de_Desempenho__c.PDI4__c}" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="cab" style="width:1000px; text-align:center; vertical-align: middle">
+                                        <b>Comentários gerais sobre o colaborador</b></td>
+                                </tr>
+                                <tr>
+                                    <td class="cel" style="width: 1000px; height:200px; text-align:left;">
+                                        <apex:outputField value="{!Avaliacao_de_Desempenho__c.PPG__c}" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <br />
+                        </apex:outputText>
+                    </apex:repeat>
+                </table>
+
+
+            </apex:outputText>
+
+
+        </apex:form>
+    </apex:outputText>
+</apex:page>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <customErrors>
+        <name>Apenas_o_departamento_de_compras</name>
+        <label>Apenas o departamento de compras</label>
+        <locationX>308</locationX>
+        <locationY>503</locationY>
+        <customErrorMessages>
+            <errorMessage>Apenas o departamento de compras pode remover uma destinação.</errorMessage>
+            <isFieldError>false</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <decisions>
+        <description>Verifica Existe Conjunto</description>
+        <name>Verifica_Existe_Conjunto</name>
+        <label>Verifica Existe Conjunto</label>
+        <locationX>176</locationX>
+        <locationY>395</locationY>
+        <defaultConnector>
+            <targetReference>Apenas_o_departamento_de_compras</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Não Existe</defaultConnectorLabel>
+        <rules>
+            <name>existe</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>Obtem_conjuntos_de_permissao</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Obtem_conjuntos_de_permissao</leftValueReference>
+                <operator>IsEmpty</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>existe</label>
+        </rules>
+    </decisions>
+    <description>Alteração feita para o colaborador especifico conseguir excluir destinações</description>
+    <environments>Default</environments>
+    <interviewLabel>Requisiçõ de Item — Apenas compras exclui {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Requisição de Item — Apenas compras exclui</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Obtem_conjuntos_de_permissao</name>
+        <label>Obtem conjuntos de permissao</label>
+        <locationX>176</locationX>
+        <locationY>287</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Verifica_Existe_Conjunto</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>AssigneeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$User.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>PermissionSetId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>0PSU40000003tUb</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>PermissionSetAssignment</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Obtem_conjuntos_de_permissao</targetReference>
+        </connector>
+        <filterFormula>AND(
+!{!$User.Ignorar_erros__c},
+TEXT({!$User.Departamento3__c}) != &apos;Compras&apos;,
+{!$User.Id} != &apos;0056e00000CoF2LAAV&apos;
+)</filterFormula>
+        <object>Requisicao_de_item__c</object>
+        <recordTriggerType>Delete</recordTriggerType>
+        <triggerType>RecordBeforeDelete</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FECHADO_POR_INATIVIDADE</fullName>
+    <columns>N_do_Feedback__c</columns>
+    <columns>NAME</columns>
+    <columns>Gravidade__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Fechado por inatividade</value>
+    </filters>
+    <label>4 - Fechado por inatividade</label>
+</ListView>

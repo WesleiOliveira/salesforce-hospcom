@@ -1,0 +1,100 @@
+<aura:component controller="FeriadoController" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+
+    <ltng:require
+        styles="{!join(',',
+            $Resource.fullCalendarV3 + '/fullcalendar.min.css',
+            $Resource.fontAwesome + '/css/font-awesome.min.css')}" 
+        scripts="{!join(',',
+            $Resource.JQuery,
+            $Resource.fullCalendarV3  + '/moment.min.js',
+            $Resource.fullCalendarV3  + '/fullcalendar.min.js',
+            $Resource.fullCalendarV3  + '/pt-br.js')}"                    
+        afterScriptsLoaded="{!c.doInit}" />
+
+    <!-- Atributos -->
+    <aura:attribute name="feriados" type="Holiday[]" />
+    <aura:attribute name="dataFeriado" type="Date" />
+    <aura:attribute name="nomeFeriado" type="String" />
+    <aura:attribute name="descricaoFeriado" type="String" />
+    <aura:attribute name="showModal" type="Boolean" default="false" />
+    
+    
+    <div style="    width: 100%;
+    border: 1px solid #e6e6e7;
+    border-radius: 20px;
+    height: fit-content;
+    padding: 20px;
+    background-color: #efefef;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0px;">
+        <!-- Modal para criação de feriado -->
+        <aura:if isTrue="{!v.showModal}">
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.closeModal}">
+                            <lightning:icon iconName="utility:close" size="small" alternativeText="close" />
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 class="slds-text-heading_medium">Criar Feriado</h2>
+                    </header>
+                    
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <lightning:input label="Nome do Feriado" value="{!v.nomeFeriado}" />
+                        <lightning:select label="Departamento" value="{!v.descricaoFeriado}">
+                            <option disabled="disabled" selected='selected' value="">-- Departamento --</option>
+                            <option value="Administrativo">Administrativo</option>
+                            <option value="Comercial">Comercial</option>
+                            <option value="Compras">Compras</option>
+                            <option value="Contabilidade">Contabilidade</option>
+                            <option value="Controladoria">Controladoria</option>
+                            <option value="Departamento Pessoal">Departamento Pessoal</option>
+                            <option value="Desenvolvimento">Desenvolvimento</option>
+                            <option value="Facilites">Facilites</option>
+                            <option value="Faturamento">Faturamento</option>
+                            <option value="Financeiro">Financeiro</option>
+                            <option value="Fiscal">Fiscal</option>
+                            <option value="Governo">Governo</option>
+                            <option value="Jurídico">Jurídico</option>
+                            <option value="Limpeza">Limpeza</option>
+                            <option value="Locação">Locação</option>
+                            <option value="Logística">Logística</option>
+                            <option value="Manutenção">Manutenção</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Operações">Operações</option>
+                            <option value="OPME">OPME</option>
+                            <option value="Qualidade">Qualidade</option>
+                            <option value="RH">RH</option>
+                            <option value="Serviço">Serviço</option>
+                            <option value="T.I.">T.I.</option>
+                          
+                            <option value="TODOS">TODOS</option>
+                        </lightning:select>
+                    </div>
+                    
+                    <footer class="slds-modal__footer">
+                        <lightning:button label="Cancelar" onclick="{!c.closeModal}" />
+                        <lightning:button variant="brand" label="Criar" onclick="{!c.criarFeriadoC}" />
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </aura:if>
+        <!-- Calendário -->
+        
+        
+        
+        <div style="background: #fff; font-size: 20px; padding: 20px; width: 100%; text-align: center; text-transform: uppercase; border-radius: 20px; margin: 0 0 10px;">
+           	Calendario de Férias        
+        </div>
+        
+        <div id="mainBox3242" style="width:100%;  
+                                     background: #FFF;
+                                     padding: 20px;
+                                     border-radius: 20px;">
+        </div>
+    </div>
+</aura:component>

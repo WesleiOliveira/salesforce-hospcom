@@ -1,0 +1,46 @@
+<aura:component
+  extends="c.ApexHelper"
+  implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+  access="global"
+>
+  <aura:attribute name="taskId" type="String" />
+  <aura:attribute name="show" type="boolean" default="false" />
+
+  <ltng:require
+    styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css')}"
+    scripts="{!join(',',
+                           $Resource.JQuery)}"
+    afterScriptsLoaded="{!c.doInit}"
+  />
+
+  <aura:if isTrue="{!v.show}">
+    <div
+      style="animation: growIn 0.3s ease-out forwards;
+    transform-origin: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 13vw;
+    height: 48vh;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;"
+    >
+      <div class="container435">
+        <div class="cards-list6435">
+          <div class="p5">
+            <h2 class="title23"> Relacionado à Tarefas </h2>
+            <div class="title123">Assunto</div>
+            <div onclick="{!c.handleTaskClick}" data-id="{!taskId}">
+              <div class="subject12" id="subjectDiv34"></div>
+            </div>
+            <div class="title123">Data de Vencimento</div>
+            <div class="desc534" id="activityDateDiv34"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aura:if>
+</aura:component>

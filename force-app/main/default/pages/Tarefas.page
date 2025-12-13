@@ -1,0 +1,8 @@
+<apex:page standardController="Task">
+    <apex:pageBlock >
+        <apex:pageBlockTable value="{!Task}" var="reg_task">
+            <apex:column value="{!reg_task.Id}"/>
+            <apex:column value="{!reg_task.Subject}"/>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>

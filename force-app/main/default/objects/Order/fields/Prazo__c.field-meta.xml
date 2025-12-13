@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prazo__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(    
+    AND(
+        OR(
+            TEXT(Status) = &apos;Ativo&apos;,
+			TEXT(Status) = &apos;Em Andamento&apos;,
+            TEXT(Status) = &apos;Entregue Parcial&apos;
+        ),
+        Prazo_de_entrega__c = Prazo_de_recebimento__c
+    ),
+    0,
+    IF(
+        AND(
+            OR(
+                TEXT(Status) = &apos;Ativo&apos;,
+				TEXT(Status) = &apos;Em Andamento&apos;,				
+                TEXT(Status) = &apos;Entregue Parcial&apos;
+            ),
+            Prazo_de_entrega__c &gt; Prazo_de_recebimento__c
+        ),
+        Prazo_de_entrega__c-Prazo_de_recebimento__c,
+        IF(
+            AND(
+                OR(
+                    TEXT(Status) = &apos;Ativo&apos;,
+                    TEXT(Status) = &apos;Em Andamento&apos;,
+                    TEXT(Status) = &apos;Entregue Parcial&apos;
+                ),
+                Prazo_de_entrega__c &lt; Prazo_de_recebimento__c
+            ),
+            Prazo_de_entrega__c-Prazo_de_recebimento__c,
+            IF(
+                AND(
+                    TEXT(Status) = &apos;Entregue Total&apos;,
+                    Prazo_de_entrega__c = EndDate
+                ),
+                null,
+                IF(
+                    AND(
+                        TEXT(Status) = &apos;Entregue Total&apos;,
+                        Prazo_de_entrega__c &gt; EndDate
+                    ),
+                    Prazo_de_entrega__c-EndDate,
+                    IF(
+                        AND(
+                            TEXT(Status) = &apos;Entregue Total&apos;,
+                            Prazo_de_entrega__c &lt; EndDate
+                        ),
+                        Prazo_de_entrega__c-EndDate,
+						IF(
+							TEXT(Status) = &apos;Rascunho&apos;,
+							null,
+							IF(
+								OR(
+									TEXT(Status) = &apos;Aguardando Aprovação Comercial&apos;,
+									TEXT(Status) = &apos;Aguardando Aprovação Financeira&apos;
+								),
+								null,
+								IF(
+									TEXT(Status) = &apos;Cancelado/Reprovado&apos;,
+									null,
+									IF(
+										AND(
+											TEXT(Status) = &apos;Entregue Total&apos;,
+											TEXT(EndDate) = &apos;&apos;
+										),
+										null,
+										null
+									)									
+								)
+							)
+						)
+                    )
+                )
+            )
+        )
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>_Prazo (-Atr/+Adi) (del)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

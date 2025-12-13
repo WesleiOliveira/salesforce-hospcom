@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo_servi_os_Contrato</fullName>
+    <columns>NAME</columns>
+    <columns>Valor_real__c</columns>
+    <columns>Data__c</columns>
+    <columns>Tipo__c</columns>
+    <columns>Status__c</columns>
+    <columns>Departamento3__c</columns>
+    <columns>Faturamento_Feito2__c</columns>
+    <columns>Nome_da_Conta2__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Faturamento__c.Servicos</value>
+    </filters>
+    <filters>
+        <field>Contrato_de_servico__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <filters>
+        <field>Data__c</field>
+        <operation>greaterOrEqual</operation>
+        <value>7/1/2019 12:00 AM</value>
+    </filters>
+    <label>Tipo serviços (Contrato)</label>
+</ListView>

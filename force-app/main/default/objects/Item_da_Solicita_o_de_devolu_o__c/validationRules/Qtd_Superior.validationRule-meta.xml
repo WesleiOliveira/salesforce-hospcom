@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Qtd_Superior</fullName>
+    <active>true</active>
+    <errorConditionFormula>Quantidade__c &gt; Produto_do_pedido__r.Quantity</errorConditionFormula>
+    <errorMessage>Quantidade informada maior que do item do pedido.</errorMessage>
+</ValidationRule>

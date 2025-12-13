@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Alterar_vendedor_de_demo</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+$User.Id != &apos;0055A000008pNJG&apos;,
+!$User.Ignorar_erros__c,
+!ISNEW(),
+Tipo_de_Registro__c = &apos;Demonstração&apos;,
+ISCHANGED(Vendedor__c)
+)</errorConditionFormula>
+    <errorMessage>Não é permitido alterar o vendedor da demonstração. Realize o cancelamento e abra uma nova solicitação.</errorMessage>
+</ValidationRule>

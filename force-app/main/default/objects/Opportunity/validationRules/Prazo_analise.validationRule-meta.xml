@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prazo_analise</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+PICKLISTCOUNT(Especialidades__c) &gt; 0,
+ISNULL(Prazo_para_analise__c)
+)</errorConditionFormula>
+    <errorDisplayField>Prazo_para_analise__c</errorDisplayField>
+    <errorMessage>Informe um prazo para análise.</errorMessage>
+</ValidationRule>

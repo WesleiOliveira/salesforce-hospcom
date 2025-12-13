@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gravidade__c</fullName>
+    <externalId>false</externalId>
+    <label>Gravidade</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>SEM GRAVIDADE</fullName>
+                <default>false</default>
+                <label>SEM GRAVIDADE</label>
+            </value>
+            <value>
+                <fullName>POUCA GRAVIDADE</fullName>
+                <default>false</default>
+                <label>POUCA GRAVIDADE</label>
+            </value>
+            <value>
+                <fullName>GRAVE</fullName>
+                <default>false</default>
+                <label>GRAVE</label>
+            </value>
+            <value>
+                <fullName>MUITO GRAVE</fullName>
+                <default>false</default>
+                <label>MUITO GRAVE</label>
+            </value>
+            <value>
+                <fullName>EXTREMAMENTE GRAVE</fullName>
+                <default>false</default>
+                <label>EXTREMAMENTE GRAVE</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

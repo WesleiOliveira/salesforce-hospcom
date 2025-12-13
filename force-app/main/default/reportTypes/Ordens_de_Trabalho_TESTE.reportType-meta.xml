@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ReportType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <baseObject>WorkOrder</baseObject>
+    <category>other</category>
+    <deployed>true</deployed>
+    <description>Ordens de Trabalho TESTE</description>
+    <label>Ordens de Trabalho TESTE</label>
+    <sections>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Subject</field>
+            <table>WorkOrder</table>
+        </columns>
+        <masterLabel>Ordem de trabalho</masterLabel>
+    </sections>
+    <sections>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Nome_do_propriet_rio__c</field>
+            <table>WorkOrder</table>
+        </columns>
+        <masterLabel>Ordens de trabalho</masterLabel>
+    </sections>
+</ReportType>

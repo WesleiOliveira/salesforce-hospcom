@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>57.0</apiVersion>
+    <environments>Default</environments>
+    <interviewLabel>Plano de ação - Insere {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Plano de ação - Insere</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>C_pia_1_de_Insere_auditoria</name>
+        <label>Cópia 1 de Insere auditoria</label>
+        <locationX>176</locationX>
+        <locationY>455</locationY>
+        <inputAssignments>
+            <field>N_o_Conformidade__c</field>
+            <value>
+                <elementReference>$Record.Acao_corretiva__r.RNC__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Insere_auditoria</name>
+        <label>Insere auditoria</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
+        <connector>
+            <targetReference>C_pia_1_de_Insere_auditoria</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Auditoria__c</field>
+            <value>
+                <elementReference>$Record.Acao_corretiva__r.Auditoria__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Insere_auditoria</targetReference>
+        </connector>
+        <object>P__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Obsolete</status>
+</Flow>

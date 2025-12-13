@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntitlementProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <SObjectType>Case</SObjectType>
+    <active>false</active>
+    <entryStartDateField>Case.CreatedDate</entryStartDateField>
+    <exitCriteriaFilterItems>
+        <field>Case.SuppliedCompany</field>
+        <operation>equals</operation>
+        <value>excluirexcluir</value>
+    </exitCriteriaFilterItems>
+    <isVersionDefault>false</isVersionDefault>
+    <milestones>
+        <businessHours>Brasilia</businessHours>
+        <milestoneCriteriaFilterItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Novo</value>
+        </milestoneCriteriaFilterItems>
+        <milestoneName>Excluir</milestoneName>
+        <minutesToComplete>960</minutesToComplete>
+        <timeTriggers>
+            <timeLength>-2</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </timeTriggers>
+        <useCriteriaStartTime>true</useCriteriaStartTime>
+    </milestones>
+    <name>Excluir</name>
+    <versionMaster>55231000000SBcM</versionMaster>
+    <versionNumber>1</versionNumber>
+</EntitlementProcess>

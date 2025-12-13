@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Categoria_Hospital</fullName>
+    <active>true</active>
+    <errorConditionFormula>if( TEXT(Categoria__c) == &apos;HOSPITAL&apos; &amp;&amp;  Quantidade_de_leitos__c == null , true, false )</errorConditionFormula>
+    <errorDisplayField>Quantidade_de_leitos__c</errorDisplayField>
+    <errorMessage>Selecione a Quantidade de leitos do hospital</errorMessage>
+</ValidationRule>

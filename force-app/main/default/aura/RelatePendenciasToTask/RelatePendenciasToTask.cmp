@@ -1,0 +1,49 @@
+<aura:component extends="c.ApexHelper"
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+                access="global">
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery)}"                     
+                  afterScriptsLoaded="{!c.doInit}" />
+    
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="pName" type="String" />
+    <aura:attribute name="pAssunto" type="String" />
+    <aura:attribute name="pendencias" type="List" description="Lista de pendências" />
+    
+    
+    
+    <div>
+        <div class="container"> 
+            
+                <h2 class="title">
+                    Pendências
+                     <aura:if isTrue="{!not(empty(v.pendencias))}">
+                    <i class="fa fa-exclamation" style="margin-top: 8px;margin-left: 10px;" aria-hidden="true"></i>
+                              </aura:if>
+                </h2>
+            
+            <aura:if isTrue="{!not(empty(v.pendencias))}">
+                <p class="subtitle">Lista de Pendências</p>
+            </aura:if>
+            
+            
+            <div class="cards-list">
+                <aura:iteration items="{!v.pendencias}" var="pen">                
+                    <div class="p" onclick="{!c.handlePendenciaClick}" data-id="{!pen.Id}">
+                        <p class="p-title">{!pen.pName}</p>
+                        <p class="p-desc">{!pen.pAssunto}</p>
+                    </div>
+                </aura:iteration>
+             <lightning:button class="new-btn" label="Criar" onclick="{!c.handleNewClick}" />
+
+            </div>
+
+        </div>
+    </div>    
+    
+</aura:component>

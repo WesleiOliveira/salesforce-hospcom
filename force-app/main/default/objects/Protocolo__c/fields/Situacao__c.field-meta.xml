@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Situacao__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( TEXT(Status__c) = &apos;Finalizado&apos;, &apos;Concluído&apos;, IF(TEXT(Status__c) = &apos;Cancelado&apos;, &apos;Cancelado&apos;,
+IF(
+(Prazo_de_recebimento__c  - TODAY())&gt; 1,
+TEXT((Prazo_de_recebimento__c- TODAY()) ) &amp; &quot; dias para concluir&quot;,
+IF(
+(Prazo_de_recebimento__c - TODAY())= 1,
+&quot;Vence Amanhã&quot;,
+IF(
+(Prazo_de_recebimento__c - TODAY())= 0,
+&quot;Vence Hoje&quot;,
+IF(
+(Prazo_de_recebimento__c - TODAY())= -1,
+TEXT((Prazo_de_recebimento__c- TODAY())*(-1)) &amp; &quot; dia atrasado&quot;,
+TEXT((Prazo_de_recebimento__c - TODAY())*(-1)) &amp; &quot; dias atrasado&quot;
+)
+)
+)
+)
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Situação</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

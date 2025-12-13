@@ -1,0 +1,126 @@
+.THIS .containerSidebar {
+    flex-direction: column;
+    background-color: white;
+    display: flex;
+    width: 100%;
+    height: 600px;
+    border-radius: 20px;
+    box-shadow: rgb(14 30 37 / 12%) 0px 2px 4px 0px, rgb(14 30 37 / 32%) 0px 2px 16px 0px;
+}
+
+.THIS .totalClass{
+    display: flex;
+    width: 100%;
+    font-size: 16px;
+    color: #00345c;
+    font-weight: bold;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+
+.THIS .containerViewer {
+    flex-direction: column;
+    background-color: white;
+    display: flex;
+    width: 100%;
+    height: 600px;
+    border-radius: 20px;
+    box-shadow: rgb(14 30 37 / 12%) 0px 2px 4px 0px, rgb(14 30 37 / 32%) 0px 2px 16px 0px;
+}
+
+
+.THIS #tabelaComissoes {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.THIS #tabelaComissoes thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: white;
+}
+
+.THIS .itemPendente{
+    display: flex;
+    gap: 5px;
+    width: 100%;
+    height: 40px;
+    border-bottom: 1px solid #e6e6e7;
+}
+
+.THIS .textItemPendente43{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.THIS .fullwidth{
+    position: relative;
+    display: flex;
+    /* flex-direction: column; */
+    width: 100vw!important;
+    left: calc(-50vw + 50%);
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* padding: 0px; */
+    margin: 0px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.THIS .tituloCabecalho{
+    display: flex;
+    height: 8%;
+    min-height: 8%;
+    color: white;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    background: linear-gradient(270deg, rgb(12, 55, 90) 21.95%, rgb(0, 0, 0) 118.57%),rgb(13, 55, 91);
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+.THIS .bodyContainer{
+    height: 92%;
+    display: flex;
+    margin: 20px;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.THIS .containerTabela{
+    overflow: auto;
+    padding: 10px;
+    height: 84%;
+    display: flex;
+    margin: 20px;
+    box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+    border-radius: 20px;
+}
+
+.THIS .containerButtonsOptions{
+    display: flex;
+    height: 8%;
+    margin-top: 10px;
+    justify-content: flex-end;
+        column-gap: 15px;
+}
+
+.THIS .containerTabela::-webkit-scrollbar {
+    width: 6px;
+    height: 10px;
+    
+}
+
+.THIS .containerTabela::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+.THIS .containerTabela::-webkit-scrollbar-thumb {
+    background-color: #a0bb31;
+    border-radius: 38px;
+    border: 0px none #ffffff;
+}

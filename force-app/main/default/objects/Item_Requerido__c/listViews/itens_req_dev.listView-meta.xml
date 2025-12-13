@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>itens_req_dev</fullName>
+    <columns>Requisi_o_Interna_Relacionada__c</columns>
+    <columns>NAME</columns>
+    <columns>Produto__c</columns>
+    <columns>Quantidade__c</columns>
+    <columns>Categoria__c</columns>
+    <columns>Status_do_Item__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Gestor_Atual__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>ITENS REQUERIDOS DA MINHA EQUIPE</label>
+</ListView>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Finalizada_sem_retorno</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ TEXT(Status__c) = &apos;Fechado&apos;,
+  Retorno__c = &apos;&apos;
+)</errorConditionFormula>
+    <errorMessage>Preencha o campo retorno para finalizar.</errorMessage>
+</ValidationRule>

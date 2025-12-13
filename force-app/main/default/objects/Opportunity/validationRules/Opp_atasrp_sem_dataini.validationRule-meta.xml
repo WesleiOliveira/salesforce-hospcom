@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Opp_atasrp_sem_dataini</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( 
+	!$User.Ignorar_erros__c,
+	Text(ATA_SRP__c) == &apos;SIM&apos;,
+        ISPICKVAL(StageName, &quot;Win&quot;),
+	TEXT(Data_do_Inicio_da_ATA__c) == &apos;&apos;
+)</errorConditionFormula>
+    <errorDisplayField>Data_do_Inicio_da_ATA__c</errorDisplayField>
+    <errorMessage>Oportunidade com ATA SRP deve ter data de inicio preenchida.</errorMessage>
+</ValidationRule>

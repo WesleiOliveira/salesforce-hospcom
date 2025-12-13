@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ativos</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+ISCHANGED(Status__c),
+TEXT(Status__c) == &apos;Aprovado&apos;,
+Quantidade_de_Ativos_no_Aditivo__c == 0
+)</errorConditionFormula>
+    <errorMessage>Insira os ativos no aditivo para aprovar e gerar os pedidos automaticamente.</errorMessage>
+</ValidationRule>

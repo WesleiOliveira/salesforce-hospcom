@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Colombia</fullName>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>CNPJ__c</columns>
+    <columns>Endere_o__c</columns>
+    <columns>ACCOUNT.ADDRESS1_STATE_CODE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>NIT__c</field>
+        <operation>contains</operation>
+        <value>0</value>
+    </filters>
+    <label>Contas da Colômbia</label>
+</ListView>

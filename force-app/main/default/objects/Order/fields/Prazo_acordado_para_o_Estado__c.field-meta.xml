@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prazo_acordado_para_o_Estado__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF((ShippingCity = &apos;Goiânia&apos; || ShippingCity = &apos;Goiania&apos; || ShippingCity = &apos;GOIANIA&apos;|| ShippingCity = &apos;GOIÂNIA&apos;), 7, IF(ShippingState = &apos;Goiás&apos; &amp;&amp; ShippingCity != &apos;Goiânia&apos;,10, IF(ShippingState = &apos;Tocantins&apos; || ShippingState = &apos;Manaus&apos; || ShippingCity = &apos;Manaus&apos; || ((ShippingState = &apos;Pará&apos; &amp;&amp; ShippingCity = &apos;BELEM&apos; ||ShippingState = &apos;Pará&apos; &amp;&amp; ShippingCity = &apos;BELÉM&apos;)) || ShippingState = &apos;Rondônia&apos;, 15, IF(ShippingState = &apos;Distrito Federal&apos; || ShippingState = &apos;Mato Grosso&apos; || ShippingState = &apos;Mato Grosso do Sul&apos; || ShippingState = &apos;São Paulo&apos; || ShippingState = &apos;Rio de Janeiro&apos; || ShippingState = &apos;Maranhão&apos; || ShippingState = &apos;Minas Gerais&apos; || ShippingState = &apos;Bahia&apos; || ShippingState = &apos;Espírito Santo&apos;, 10, IF(ShippingState = &apos;Roraima&apos; || ShippingState = &apos;Ceará&apos; || ShippingState = &apos;Piauí&apos; || ShippingState = &apos;Rio Grande do Norte&apos; || ShippingState = &apos;Paraíba&apos; || ShippingState = &apos;Alagoas&apos; || ShippingState = &apos;Sergipe&apos; || ShippingState = &apos;Rio Grande do Sul&apos; || ShippingState = &apos;Santa Catarina&apos; || ShippingState = &apos;Paraná&apos; || ShippingState = &apos;Pernambuco&apos;, 13, IF((ShippingState = &apos;Pará&apos; &amp;&amp; ShippingCity != &apos;Belém&apos;), 20, IF((ShippingState = &apos;Amazonas&apos; &amp;&amp; ShippingCity != &apos;Manaus&apos;), 30, IF(ShippingState = &apos;Roraima&apos;, 30, IF(ShippingState = &apos;Acre&apos; || ShippingState = &apos;Amapá&apos;, 22, 0 )))))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Prazo acordado para o Estado</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

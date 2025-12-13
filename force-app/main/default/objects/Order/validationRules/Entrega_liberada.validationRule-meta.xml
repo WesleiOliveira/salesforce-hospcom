@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Entrega_liberada</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+$User.ProfileId != &apos;00e5A000001yRA5&apos;,
+$User.ProfileId != &apos;00e6e000002JQTI&apos;,
+TEXT( Entrega_liberada_pelo_financeiro__c ) = &apos;SIM&apos;,
+ISCHANGED(Entrega_liberada_pelo_financeiro__c )
+)</errorConditionFormula>
+    <errorDisplayField>Entrega_liberada_pelo_financeiro__c</errorDisplayField>
+    <errorMessage>Somente o financeiro pode marcar a entrega como liberada.</errorMessage>
+</ValidationRule>

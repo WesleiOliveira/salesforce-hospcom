@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Area_da_Saude__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>Preencher para contas do tipo fornecedor</inlineHelpText>
+    <label>Área da Saúde</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Type</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Sim</fullName>
+                <default>false</default>
+                <label>Sim</label>
+            </value>
+            <value>
+                <fullName>Não</fullName>
+                <default>false</default>
+                <label>Não</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>FORNECEDOR</controllingFieldValue>
+            <valueName>Sim</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FORNECEDOR</controllingFieldValue>
+            <valueName>Não</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

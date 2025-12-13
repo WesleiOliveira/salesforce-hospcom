@@ -1,0 +1,48 @@
+<apex:page controller="BuscaCandidato" label="Pesquisa de Candidatos" showHeader="false" sidebar="false">
+<apex:slds />
+    <body xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <apex:form >
+        <apex:pageBlock title="Candidatos Inscritos">
+            <h1><svg class="slds-icon slds-icon-text-default" aria-hidden="true"><use xlink:href="{!URLFOR($Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#filterList')}"></use></svg><b>Filtros de Pesquisa</b></h1>
+        <apex:pageBlockSection >
+            <apex:inputText id="vaga" value="{!searchKey}" label="Nome da Vaga"/><br/>
+            <apex:inputText value="{!pesquisa}" label="Nome do Candidato"/><br/>         
+            <apex:selectRadio id="chooseStatus" value="{!status}" label="Status do Candidato" required="false">
+                <apex:selectOption itemValue="Em Análise" itemLabel="Em Análise"/>
+                <apex:selectOption itemValue="Selecionado" itemLabel="Selecionado"/>
+                <apex:selectOption itemValue="Reprovado" itemLabel="Reprovado"/>
+                <apex:selectOption itemValue="Aprovado" itemLabel="Aprovado"/>
+                <apex:selectOption itemValue="Cadastro de Reserva" itemLabel="Reserva"/>
+            </apex:selectRadio><br/>
+            <apex:commandButton value="Procurar" action="{!search}"/> 
+            <apex:commandButton value="Limpar" action="{!clear}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>     
+        </apex:form><br/>      
+        <apex:pageBlock >
+                <apex:pageBlockTable align="center" var="Registros" value="{!Records}">
+                    <apex:column style="vertical-align:center; text-align:center" headerValue="Foto" title="Foto">
+                    <apex:outputField value="{!Registros.Imagem_del__c}"/>
+                    </apex:column>
+                    <apex:column style="vertical-align:center; text-align:center" headerValue="Nº de Registro">
+                        <apex:outputLink title="Abrir detalhes do candidato" value="https://hospcomhospitalar.force.com/Sales/s/recrutamento/{!Registros.Id}">{!Registros.Name}</apex:outputLink>
+                </apex:column>
+                <apex:column style="vertical-align:center; text-align:center" headerValue="Status">
+                    <apex:outputField value="{!Registros.Status__c}"/>
+                </apex:column>
+                <apex:column style="vertical-align:center; text-align:center" headerValue="Nome">
+                    <apex:outputText value="{!Registros.Nome_do_candidato__c} {!Registros.Sobrenome__c}"/>
+                </apex:column>
+                <apex:column style="vertical-align:center; text-align:center" headerValue="Idade" title="{!Registros.Idade__c} anos">
+                    <apex:outputText value="{!Registros.Idade__c}"/>
+                </apex:column>
+                <apex:column style="vertical-align:center; text-align:center" headerValue="Vaga Concorrida">
+                    <apex:outputLink title="Abrir detalhes da vaga" value="https://hospcomhospitalar.force.com/Sales/s/vagas-dispon-veis/{!Registros.Vaga_Dispon_vel__r.Id}">{!Registros.Vaga_Dispon_vel__r.Cargo_Ofertado__c}</apex:outputLink>
+                </apex:column>
+                <apex:column style="vertical-align:center; text-align:center" headerValue="Telefone">
+                    <apex:outputText value="{!Registros.Telefone_do_Candidato__c}"/>
+                    </apex:column>
+                </apex:pageBlockTable>           
+                    </apex:pageBlock>
+    </body>
+</apex:page>

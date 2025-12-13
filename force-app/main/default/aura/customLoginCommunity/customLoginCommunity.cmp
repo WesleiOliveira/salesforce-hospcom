@@ -1,0 +1,154 @@
+<aura:component controller="CommunityAuthController" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+<aura:dependency resource="lightning:platformResourceLoader"/>
+    
+   <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.sortableJs + '/Sortable.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.bundle.js',
+                           $Resource.maskPlugin + '/jquery.mask.min.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js')}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    <div style="position: relative; display: flex; flex-direction: column; width: 100vw!important; left: calc(-50.6vw + 50%); justify-content: center">
+        <div class="col-md-12 containerFullBanner" style="">
+            
+            <div class="row divPrincipalCartao" style="padding:10px;">
+                
+                <div class="col-md-6 colunaEsquerda" style="position: relative; ">                
+                    <ul class="circles">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                    <img src="https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=015U400000Eeeum&amp;oid=00Di0000000JVhH&amp;lastMod=1736358703000" alt="User avatar" style="width: 50%!important" data-aura-rendered-by="289:0"/>
+                </div>
+                
+                <!-- COLUNA DIREITA -->
+                <div class="col-md-6 colunaDireita" id='colunaDefault'>
+                    
+                    <div style="padding-bottom: 50px; display: flex; width: 100%; justify-content: center; align-items: center; flex-direction: column;">
+                    	<div class='textSignClass'>Entre na sua conta</div>
+                        <div style='text-align: center'>Digite seu usuário e senha de acesso ao salesforce. Atenção, após 3 tentativas erradas sua senha será bloqueada.</div>
+                    </div>
+                    
+                    
+                    <form id='loginForm'>
+                        
+                        <!-- INPUT USERNAME -->
+                        <label for="exampleInputPassword1">Nome de usuário</label>
+                        <div class="input-group mb-3">
+                            <input id='usuario' type="text" name="username" class="form-control" placeholder="Nome de usuário" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+                        </div>
+
+                        
+                        <!-- INPUT PASSWD -->
+                        <div class="form-group" style="width: 100%;">
+                            <label for="exampleInputPassword1">Senha</label>
+                            <input style='margin-bottom: 5px' name="password" id='senha' type="password" autocomplete="current-password" class="form-control" placeholder="*******"/>
+                            
+                            
+                            <div class="login-action">
+                                &nbsp;
+                                <input class="form-check-input" type="checkbox" id="checkShowPass"/>
+                                
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Exibir senha</label>
+                                &nbsp;&nbsp;&nbsp;
+                                
+                                <input class="form-check-input" type="checkbox" id="lembre"/>
+                                
+                                <label class="lembre-de-mim" for ="lembre">Lembre de mim</label>
+                            </div>
+                        </div>
+                        
+                        
+                        <!-- BUTTON -->
+                        <button type="button" id='buttonEntrar' style="width: 100%; border-radius: 100px; margin-top: 50px; background-color: #00345c; border: 0px" class="btn btn-success">Entrar</button>
+
+                    </form>
+                    
+
+                    
+                    <div class="alert alert-dark" role="alert" style='margin-top: 20px; display: none' id="alertErro">
+                        Erro!
+                    </div>
+                    
+                    <div style="display: flex; justify-content: center; align-items: center; margin-top: 15px">
+                        <div class="spinner-border" role="status" style='display: none' id='spinnerload'>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; width: 100%; justify-content: center; align-items: center; flex-direction: column;">
+                        <div style=''><a style='color: #55cd15' id='esqueciSenhaButton'>Esqueci a senha</a></div>
+                    </div>
+                    
+                </div>
+                
+                
+                <!-- COLUNA DIREITA REDEFINE SENHA-->
+                <div class="col-md-6 colunaDireita" id='colunaRedefine' style='display: none'>
+                    
+                    <div style="padding-bottom: 50px; display: flex; width: 100%; justify-content: center; align-items: center; flex-direction: column;">
+                    	<img src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000CI9LO&amp;oid=00Di0000000JVhH&amp;lastMod=1682428295000" alt="User avatar" style="width: 50%!important" data-aura-rendered-by="289:0"/>
+                        <div class='textSignClass'>Esqueceu sua senha?</div>
+                        <div style='text-align: center'>Não se preocupe, digite seu e-mail de acesso que enviaremos um link de redefinição da sua senha.</div>
+                    </div>
+                    
+                     <!-- INPUT USERNAME -->
+                    <label for="exampleInputPassword1">E-mail do usuário</label>
+                    <div class="input-group mb-3">
+                        <input id='emailRedefinir' type="text" class="form-control" placeholder="usuario@hospcom.net" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+                    </div>
+                    
+                    
+                    <!-- BUTTON -->
+                    <button type="button" id='buttonRedefinir' style="border-radius: 100px; margin-top: 20px; background-color: #00345c; border: 0px" class="btn btn-success">Redefinir</button>
+                    
+                    <div class="alert alert-dark" role="alert" style='margin-top: 20px; display: none' id="alertErro">
+                        Erro!
+                    </div>
+                    
+                    <div class="alert alert-success" role="alert" style='margin-top: 20px; display: none' id="alertSucess">
+                        Erro!
+                    </div>
+                    
+                    <div style="display: flex; justify-content: center; align-items: center; margin-top: 15px">
+                        <div class="spinner-border" role="status" style='display: none' id='spinnerload'>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    
+                    <div style="padding-bottom: 40px;  display: flex; width: 100%; justify-content: center; align-items: center; flex-direction: column;">
+                        <div style=''>Ainda com problemas para acessar?&nbsp;<a style='color: #55cd15' target='_blank' href='https://api.whatsapp.com/send?phone=5565981700029'>Chama o dev!</a></div>
+                    </div>
+                    
+                    <div style="display: flex; width: 100%; justify-content: center; align-items: center; flex-direction: column;">
+                        <div style=''><a style='color: #55cd15' id='voltarLogin'>Voltar para o login</a></div>
+                    </div>
+                    
+                </div>
+                
+
+                
+            </div>
+            
+            <small style="padding-top: 20px">
+                <span id="currentYear"></span> Hospcom©. Todos os direitos reservados
+            </small>            
+            
+        </div>
+    </div>
+    
+</aura:component>

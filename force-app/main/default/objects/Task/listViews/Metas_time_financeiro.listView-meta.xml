@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Metas_time_financeiro</fullName>
+    <columns>SUBJECT</columns>
+    <columns>CORE.USERS.FULL_NAME</columns>
+    <columns>DUE_DATE</columns>
+    <columns>PRIORITY</columns>
+    <columns>STATUS</columns>
+    <columns>Meta__c</columns>
+    <columns>Peso_Meta__c</columns>
+    <columns>Status_do_gestor__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Meta__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>Departamento_do_proprietario__c</field>
+        <operation>equals</operation>
+        <value>Financeiro</value>
+    </filters>
+    <label>Metas time financeiro</label>
+    <sharedTo>
+        <group>Gestor_Financeiro</group>
+        <role>Administrador_do_sistema</role>
+    </sharedTo>
+</ListView>

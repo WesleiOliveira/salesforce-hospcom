@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contato_ativo_com_data_de_termino</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+	NOT(ISNULL(EndDate)),
+	IsActive = true
+)</errorConditionFormula>
+    <errorDisplayField>IsActive</errorDisplayField>
+    <errorMessage>O contato não pode ter data de término e estar ativo simultaneamente.</errorMessage>
+</ValidationRule>

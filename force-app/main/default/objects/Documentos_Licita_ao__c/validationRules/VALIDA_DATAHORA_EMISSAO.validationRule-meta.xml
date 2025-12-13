@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VALIDA_DATAHORA_EMISSAO</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISBLANK(Data_e_Hora_de_Emiss_o__c)</errorConditionFormula>
+    <errorDisplayField>Data_e_Hora_de_Emiss_o__c</errorDisplayField>
+    <errorMessage>PREENCHA DATA/HORA DE EMISSÃO DO DOCUMENTO.</errorMessage>
+</ValidationRule>

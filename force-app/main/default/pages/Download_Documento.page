@@ -1,0 +1,15 @@
+<apex:page standardController="Documentos_Licita_ao__c" showHeader="false">
+    <html>
+        <body>  
+            <div style="border:1px black solid;">
+                <apex:variable var="cont" value="{!0}"/>
+                
+                <apex:repeat value="{!Documentos_Licita_ao__c.Attachments}" var="att">
+                    <apex:variable var="cont" value="{!cont+1}"/>
+                </apex:repeat>
+                
+                {!cont}
+            </div>  
+        </body>
+    </html>
+</apex:page>

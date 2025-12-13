@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Statuss</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISCHANGED(Status__c),
+    NOT(
+        OR(
+            $Profile.Id = &quot;00e6e000002JQWW&quot;,
+            $Profile.Id = &quot;00ei0000000nKA9&quot;
+        )
+    )
+)</errorConditionFormula>
+    <errorDisplayField>Status__c</errorDisplayField>
+    <errorMessage>Campo disponivel somente para o RH</errorMessage>
+</ValidationRule>

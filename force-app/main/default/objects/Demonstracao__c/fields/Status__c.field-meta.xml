@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <defaultValue>&quot;Rascunho&quot;</defaultValue>
+    <externalId>false</externalId>
+    <label>Status</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Rascunho</fullName>
+                <default>false</default>
+                <label>Rascunho</label>
+            </value>
+            <value>
+                <fullName>Em aprovação</fullName>
+                <default>false</default>
+                <label>Em aprovação</label>
+            </value>
+            <value>
+                <fullName>Reprovado</fullName>
+                <default>false</default>
+                <label>Reprovado</label>
+            </value>
+            <value>
+                <fullName>Aprovado</fullName>
+                <default>false</default>
+                <label>Aprovado</label>
+            </value>
+            <value>
+                <fullName>Em calibração</fullName>
+                <default>false</default>
+                <label>Em calibração</label>
+            </value>
+            <value>
+                <fullName>Agendado</fullName>
+                <default>false</default>
+                <label>Agendado</label>
+            </value>
+            <value>
+                <fullName>Em comodato</fullName>
+                <default>false</default>
+                <label>Em comodato</label>
+            </value>
+            <value>
+                <fullName>Retorno da demo</fullName>
+                <default>false</default>
+                <label>Retorno</label>
+            </value>
+            <value>
+                <fullName>Pendente de retorno</fullName>
+                <default>false</default>
+                <label>Pendente de retorno</label>
+            </value>
+            <value>
+                <fullName>Em Verificação Funcional</fullName>
+                <default>false</default>
+                <label>Em Verificação Funcional</label>
+            </value>
+            <value>
+                <fullName>Finalizado</fullName>
+                <default>false</default>
+                <label>Finalizado</label>
+            </value>
+            <value>
+                <fullName>Cancelado</fullName>
+                <default>false</default>
+                <label>Cancelado</label>
+            </value>
+            <value>
+                <fullName>Finalizado com Pendência</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Finalizado com Pendência</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

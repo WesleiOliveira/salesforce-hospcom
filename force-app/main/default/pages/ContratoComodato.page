@@ -1,0 +1,711 @@
+<apex:page renderAs="pdf" standardController="Demonstracao__c" extensions="DemonstracaoContrato" standardStylesheets="false" cache="false" showHeader="false" sidebar="false" applyHtmlTag="true" applyBodyTag="false">
+    <head>
+        <style type="text/css" media="print">
+            
+            /* pdf */
+            @page:first{
+                size:A4;
+                background: url({!$Resource.SobreHospcom});
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(paginacao);}
+            }
+            @page{
+                size:A4;
+                background: url({!$Resource.TimbradoHospcom});
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(paginacao);}
+            }
+            .pagina:before{content:counter(page);}
+            .paginas:before{content:counter(pages);}
+            
+            /* paginação */
+            .paginacao{
+                height:120px;
+                position:running(paginacao);
+            }.paginacao .valor{
+                position: absolute;
+                top: 74px;
+                left: 410px;
+                text-align:center;
+                background-color:white;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:600;
+                color:#697f9b;
+            }
+            
+            /* documento */
+            .documento{
+                padding:0px;
+                margin:0px;
+                font-family:arial, verdana, sans-serif;
+            }.bloco{
+                <!--page-break-inside:avoid;-->
+            }.linha{
+                white-space: nowrap;
+            }
+            
+            /* capa */
+            .capa .titulo{
+                margin-top:505px;
+                width:100%;
+                text-align:center;
+                text-transform:uppercase;
+                font-weight:bold;
+                font-size:20px;
+                white-space:pre;
+            }.capa .numero{
+                margin-top:40px;
+                width:100%;
+                text-align:right;
+                font-size:14px;
+            }.capa .rotulo{
+                margin-top:35px;
+                font-size:15px;
+            }.capa .valor{
+                margin-top:5px;
+                margin-left:20px;
+                font-size:17px;
+                font-weight:bold;
+            }.capa .nota{
+                margin-top:5px;
+                margin-left:20px;
+                font-size:14px;
+            }
+            
+            /* conteudo */
+            .conteudo{
+                page-break-before:always;
+            }.conteudo .titulo{
+                font-size:14px;
+                font-weight:bold;
+                line-height:120%;
+                text-decoration: underline;                
+            }.conteudo .paragrafo{
+                font-size:13px;
+                text-align:justify;
+                line-height:120%;
+                text-justify:inter-word;
+            }.conteudo .obsimgs{
+                text-align:right;
+                font-size:11px;
+                font-weight:bold;
+                font-style:italic;
+            }.conteudo .assinatura{
+                width:100%;
+            }.conteudo .assinatura td{
+                width:50%;
+                font-size:13px;
+                line-height:130%;
+                vertical-align:top;
+            }.conteudo .nota{
+                font-size:13px;
+                text-align:justify;
+                line-height:120%;
+                font-style:italic;
+            }.conteudo .recuo{
+                font-size:13px;
+                line-height:120%;
+                margin-left: 50px;
+            }
+            
+           /* listagem */
+            .listagem{ 
+                width:100%;
+            }.listagem table{ 
+                width:100%;
+                border-collapse:collapse;
+            }.listagem td{ 
+                padding:2px 5px;
+                line-height:120%;
+            }.listagem .pre-cabecalho{
+                height:10px;
+            }.listagem .cabecalho td{
+                font-size:12px;
+                font-weight:bold;
+                background-color:#e2e3e3;
+                white-space: nowrap;
+                border-color: black;
+                border-style:solid;
+                border-width:1px 0px 1px 0px;
+            }.listagem .item-dados .imagem{
+                vertical-align:middle;
+            }.listagem .item-dados.acessorio .imagem{
+                text-align:right;
+            }.listagem .item-dados.equipamento img{
+                width: 70px;
+                height: 80px; 
+            }.listagem .item-dados.acessorio img{
+                width: 55px;
+                height: 55px; 
+            }.listagem .item-dados .valor{
+                border-color: black;
+                border-style:solid;
+                border-width:0px 0px 0px 0px;
+            }.listagem .item-dados td{
+                font-size:10px;
+                vertical-align:top;
+            }.listagem .item-descr td{
+                font-size:10px;
+                <!--text-align:justify; -->
+                vertical-align:top;
+                <!-- text-justify:inter-word;-->
+                border-color:#eef2f4;
+                border-style:solid;
+                border-width:0px 0px 0px 0px;
+            }.listagem .subtotal{
+                font-weight: bold;
+                font-size:10px;
+                white-space: nowrap;
+            }.listagem .subtotal .valor{
+            
+                font-size:10px;
+                width:45px;
+                border-color:#eef2f4;
+                border-style:solid;
+                border-width:0px 0px 0px 0px;
+                white-space: nowrap;
+
+            }
+        </style>
+    </head>
+        <body class="documento">
+        <!--CONTRATO NORMAL-->
+    <apex:outputText rendered="{!IF(Demonstracao__c.RecordTypeId == '0126e000001lGXTAA2', true, false)}">
+    <apex:outputText rendered="{!IF((Demonstracao__c.Quantidade_de_ativos__c > 0 && Demonstracao__c.Valor_requerido_de_venda_mensal2__c > 0) || Demonstracao__c.Id = 'a0KU400001eWjX7MAK' || Demonstracao__c.Id = 'a0KU400001txTaTMAU', true,false)}">
+        
+        <!-- paginacao -->
+        <div class="paginacao">
+            <div class="valor">Página <span class="pagina"/> de <span class="paginas"/></div>
+        </div>
+        
+        <!-- capa -->
+        <div class="capa">
+            <div class="titulo">CONTRATO DE COMODATO DE Nº {!Demonstracao__c.Name}</div>
+        </div>
+        
+        <!-- conteudo -->
+        <div class="conteudo">
+            
+            <div class="bloco">
+                <apex:variable var="n1" value="{!0}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+                <br/>
+                <div class="paragrafo"><apex:outputField value="{!Demonstracao__c.Qualificacao__c}"/></div>
+            </div>
+            
+            <div class="bloco">
+                
+                <div class="paragrafo"><apex:outputField value="{!Demonstracao__c.Clausula_1__c}"/></div>
+                
+                <div class="listagem">
+                <apex:variable var="subtotal" value="{!0}"/>
+                
+                <table cellpadding="0px" cellspacing="0px" border="0">
+                    <apex:repeat value="{!produtos}" var="produto">
+                        <tbody class='bloco'>
+
+                            <!-- cabeçalho -->
+                            <apex:outputText rendered="{!IF(produto.cabecalho,true,false)}">
+                                <tr class="pre-cabecalho"><tr cellspacing="7"></tr></tr>
+                                <tr class="cabecalho">
+                                    <td style="visibility:hidden;border:1px;"></td>
+                                    <td>Imagem</td>
+                                    <td>Produto</td>
+                                    <td>Modelo</td>
+                                    <td>Fabricante</td>
+                                    <td>Nº de Série</td>
+                                    <td>Valor</td>
+                                </tr>
+                            </apex:outputText>
+                            
+                            <!-- item -->
+                            <apex:variable var="tipo" value="{!IF(produto.item.Item_pai__c==null,'equipamento','acessorio')}"/>
+                            <tr class="item-dados {!tipo}">
+                                <td rowspan="2"><apex:outputText value="{!produto.item.Item__c}" rendered="{!IF(tipo=='equipamento',true,false)}"/></td>
+                                <td rowspan="2" class="imagem"><img src="{!produto.item.Ativo__r.Product2.URL_da_Imagem__c}"/></td>
+                                <td class="valor">
+                                    COD: {!produto.item.Ativo__r.Product2.StockKeepingUnit}
+                                    <br/>{!produto.item.Ativo__r.Product2.Name}
+                                </td>
+                                <td class="valor">{!produto.item.Ativo__r.Product2.Modelo__c}</td>
+                                <td class="valor">{!produto.item.Ativo__r.Product2.Marca__c}</td>
+                                <td class="linha valor"><apex:outputField value="{!produto.item.Ativo__r.SerialNumber}"/></td>
+                                <td class="linha valor"><apex:outputField value="{!produto.item.Ativo__r.Product2.Valor_de_Venda__c}"/></td>
+                            </tr>
+                            <tr class="item-descr">
+                                <td colspan="5">{!produto.item.Descricao__c}</td>
+                            </tr>
+                            
+                            <!-- subtotal -->
+                            <apex:variable var="subtotal" value="{!subtotal+produto.item.Valor__c}"/>
+                            <apex:outputText rendered="{!IF(produto.subtotal!=null,true,false)}">
+                                <tr class="subtotal">
+                                    <td colspan="2">&nbsp;</td>
+                                    <td colspan="4" class="valor">SUBTOTAL</td>
+                                    <td class="valor">{!produto.subtotal}</td>
+                                </tr>
+                                <apex:variable var="subtotal" value="{!0}"/>
+                            </apex:outputText>
+                        
+                        </tbody>
+                    </apex:repeat>
+                </table>
+            <table cellpadding="0px" cellspacing="0px" border="0">
+                    <apex:repeat value="{!Demonstracao__c.Produtos_da_proposta_do_comodato__r}" var="produto">
+                        <tbody class='bloco'>
+
+                            <!-- cabeçalho -->
+                                <tr class="pre-cabecalho"><tr cellspacing="7"></tr></tr>
+                                <tr class="cabecalho">
+                                    <td>Imagem</td>
+                                    <td>Produto</td>
+                                    <td>Modelo</td>
+                                    <td>Fabricante</td>
+                                    <td>Valor</td>
+                                </tr>
+                            
+                            <!-- item -->
+                            <tr class="item-dados equipamento">
+                                <td rowspan="2" class="imagem"><img src="{!produto.Produto__r.URL_da_Imagem__c}"/></td>
+                                <td class="valor">
+                                    COD: {!produto.Produto__r.ProductCode}
+                                    <br/>{!produto.Produto__r.Name}
+                                </td>
+                                <td class="valor">{!produto.Produto__r.Modelo__c}</td>
+                                <td class="valor">{!produto.Produto__r.Marca__c}</td>
+                                <td class="linha valor"><apex:outputField value="{!produto.Valor_total__c}"/></td>
+                            </tr>               
+                        </tbody>
+                    </apex:repeat>
+                </table>
+            </div>
+            <br/>
+            <div class="obsimgs">O valor estipulado acima se refere ao custo de cada equipamento em caso de danificação durante o período de comodato.</div>
+            <br/>
+            
+            </div>
+            
+            <div class="bloco">
+                <div class="paragrafo"><apex:outputField value="{!Demonstracao__c.Clausula_2__c}"/></div>
+                <br/>
+                
+            </div>
+<apex:outputText rendered="{!IF(Demonstracao__c.Valor_requerido_de_venda_mensal2__c > 0, true, false)}">
+            <div class="listagem">
+                
+                
+                <apex:variable var="subtotal" value="{!0}"/>
+                
+                <table cellpadding="0px" cellspacing="0px" style="border: 1px solid black">
+                    
+
+                        
+                        <tbody class='bloco'>
+
+                            <!-- cabeçalho -->
+                            
+                                <tr class="pre-cabecalho"><tr cellspacing="6"></tr></tr>
+                                <tr class="cabecalho">
+                                    <td>Imagem</td>
+                                    <td>Produto</td>
+                                    <td>Modelo</td>
+                                    <td>Fabricante</td>
+                                    <td>Valor Unit.</td>
+                                    <td>Qtd Mensal</td>
+                                    <td>Qtd Total</td>
+                                    <td>Valor Mensal</td>
+                                    <td>Valor Total</td>
+                                </tr>
+                            <apex:repeat value="{!Demonstracao__c.Consumiveis_de_comodato__r}" var="produto">
+                            <!-- ITEM -->
+                                <tr class="item-dados equipamento">
+                                    <td style="font-size:9px; width:10px; " class="imagem"><img src="{!produto.Produto__r.URL_da_Imagem__c}"/></td>
+                                    <td style="font-size:9px; width:10px;" class="valor" >
+                                        COD: {!produto.Produto__r.ProductCode}
+                                        <br/>
+                                        {!produto.Produto__r.Name}
+                                    </td>
+                                    <td class="valor" style="font-size:9px; width:10px;">{!produto.Produto__r.Modelo__c}</td>
+                                    <td style="font-size:9px; width:10px;"  class="valor" >{!produto.Produto__r.Marca__c}</td>
+                                    
+                                    <td style="font-size:9px; width:10px;" class="valor" >
+                                        <apex:outputField value="{!produto.Valor_unitario__c}"/>
+                                    </td>
+                                    
+                                    <td style="font-size:9px; width:10px;" class="valor">
+                                        <apex:outputField value="{!produto.Quantidade__c}"/>
+                                    </td>
+                                    <td style="font-size:9px; width:10px;" class="valor">
+                                        <apex:outputField value="{!produto.Qtd_total_do_contrato__c}"/>
+                                    </td>
+                                    <td style="font-size:9px; width:10px;" class="valor">
+                                        <apex:outputField value="{!produto.Valor_total__c}"/>
+                                    </td>
+                                    
+                                    <td style="font-size:9px; width:10px;" class="valor" >
+                                        <apex:outputField value="{!produto.Valor_total_do_contrato__c}"/>
+                                    </td>  
+                                </tr>
+                            </apex:repeat>
+                        </tbody>                      
+                    
+                </table>
+                </div>
+                </apex:outputText>
+                <br/>
+                                
+                <div class="paragrafo"><apex:outputField value="{!Demonstracao__c.Clausula_2_Continuacao__c}"/></div>
+                <div class="paragrafo"><apex:outputField value="{!Demonstracao__c.Clausula_3__c}"/></div>
+                <div class="paragrafo"><apex:outputField value="{!Demonstracao__c.Clausula_4__c}"/></div>
+                <div class="paragrafo"><apex:outputField value="{!Demonstracao__c.Clausula_5__c}"/></div>
+                <div class="paragrafo"><apex:outputField value="{!Demonstracao__c.Clausula_6__c}"/></div>
+                <div class="paragrafo"><apex:outputField value="{!Demonstracao__c.Clausula_7__c}"/></div>
+                <div class="paragrafo"><apex:outputField value="{!Demonstracao__c.Clausula_8__c}"/></div>
+                <div class="paragrafo"><apex:outputField value="{!Demonstracao__c.Clausula_9__c}"/></div>
+                <div class="paragrafo"><apex:outputField value="{!Demonstracao__c.Clausula_10__c}"/></div>
+                <div class="paragrafo"><apex:outputField value="{!Demonstracao__c.Clausula_11__c}"/></div>
+                
+                <div style="page-break-inside:avoid">
+                    <div class="paragrafo"><apex:outputField value="{!Demonstracao__c.Clausula_12__c}"/></div>
+
+                <br/>
+                <br/>               
+                
+
+            
+            <div class="bloco">
+
+                
+                    <div style="text-align: right">Goiânia, ____ de ______________ de _________</div>       
+                <br/><br/><br/><br/><br/>
+                <div style="text-align: center">_______________________________________________________________________</div>       
+                <div style="text-align: center"><b>{!Demonstracao__c.Fornecedor__r.Raz_o_Social__c}</b></div>       
+                <div style="text-align: center"><b>CNPJ sob o n.º {!Demonstracao__c.Fornecedor__r.CNPJ__c}</b></div>       
+                <br/>
+                <div style="text-align: center"></div>       
+                <br/>
+                <div style="text-align: center"></div>       
+                <br/>
+                <br/>
+                <br/>
+                <br/>                             
+                <div style="text-align: center">_______________________________________________________________________</div>              
+                <div style="text-align: center">
+                    <apex:outputText rendered="{!IF(Demonstracao__c.Conta__r.CNPJ__c != null, true, false)}">
+                        <b>{!Demonstracao__c.Conta__r.Raz_o_Social__c}</b><br/>
+                        <b>CNPJ sob o n.º {!Demonstracao__c.Conta__r.CNPJ__c}</b><br/>
+                    </apex:outputText>
+                <apex:outputText rendered="{!IF(Demonstracao__c.Conta__r.CNPJ__c == null, true, false)}">
+                    <b>{!Demonstracao__c.Conta__r.Name}</b><br/>
+                    <b>CPF sob o n.º {!Demonstracao__c.Conta__r.CPF__pc}</b><br/>
+                </apex:outputText>
+                </div>              
+                <br/>
+                <br/>
+                <br/>
+                <b>TESTEMUNHAS:</b>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <table width="100%" style="text-align:center">
+                    <tr>
+                        <td width="50%">
+                            <table width="100%">
+                                <tr>
+                                    <td>
+                                    1) _______________________________
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>
+                                        BRUNA OLIVEIRA TAVARES<br/>
+                                        CPF: 701.232.831-24
+                                        </b>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        
+                        <td width="50%">
+                            <table width="100%">
+                                <tr>
+                                    <td>
+                                     2) _______________________________
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-transform: uppercase;">
+                                        <b>
+                                    <apex:outputText style="text-transform: uppercase;">{!Demonstracao__c.Testemunha__r.FirstName} {!Demonstracao__c.Testemunha__r.LastName} </apex:outputText> <br/>
+                                    CPF: {!cpfTestemunha}
+                                        </b>    
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>  
+                <br/>
+                <br/>
+                <div class="paragrafo">Esta é a última página que corresponde ao Contrato de Comodato de Equipamentos Hospitalares n.º {!Demonstracao__c.Name} da {!Demonstracao__c.Fornecedor__r.Raz_o_Social__c}.</div>
+            </div>
+        </div>
+</div>
+</apex:outputText>
+<apex:outputText rendered="{!IF(Demonstracao__c.Quantidade_de_ativos__c == 0 && Demonstracao__c.Id != 'a0KU400001txTaTMAU', true,false)}">
+    <div style="text-color:red">OS ATIVOS DEVEM SER INSERIDOS NO COMODATO.</div>
+</apex:outputText>
+<apex:outputText rendered="{!IF(Demonstracao__c.Valor_requerido_de_venda_mensal2__c == 0 && Demonstracao__c.Id != 'a0KU400001eWjX7MAK', true,false)}">
+<br/>
+    <div style="text-color:red">OS CONSUMÍVEIS DEVEM SER INSERIDOS NO COMODATO.</div>
+</apex:outputText>        
+    </apex:outputText>
+    
+    
+    
+    
+    
+    <!--CONTRATO PARA DEMO RAPIDA-->
+    <apex:outputText rendered="{!IF(Demonstracao__c.RecordTypeId == '012U4000002zg7dIAA', true, false)}">
+        
+        <!-- paginacao -->
+        <div class="paginacao">
+            <div class="valor">Página <span class="pagina"/> de <span class="paginas"/></div>
+        </div>
+        
+        <!-- capa -->
+        <div class="capa">
+            <div class="titulo">CONTRATO DE COMODATO DE Nº {!Demonstracao__c.Name}</div>
+        </div>
+        
+        <!-- conteudo -->
+        <div class="conteudo">
+            
+            <div class="bloco">
+                <apex:variable var="n1" value="{!0}"/><apex:variable var="n2" value="{!0}"/><apex:variable var="n3" value="{!0}"/>
+                <br/>
+                <div class="paragrafo"><b>{!Demonstracao__c.Fornecedor__r.Raz_o_Social__c}</b>, pessoa jurídica de direito privado, inscrita no CNPJ sob Nº {!Demonstracao__c.Fornecedor__r.CNPJ__c}, sediada na {!Demonstracao__c.Fornecedor__r.BillingStreet}, {!Demonstracao__c.Fornecedor__r.BillingCity}, Estado de {!Demonstracao__c.Fornecedor__r.BillingState} , CEP {!Demonstracao__c.Fornecedor__r.BillingPostalCode}, neste ato representada por seu diretor administrativo Daniel Alencar Coelho, doravante denominada <b>COMODANTE</b>.</div><br/>
+                <div class="paragrafo"><b>{!Demonstracao__c.Conta__r.FirstName} {!Demonstracao__c.Conta__r.LastName}</b>, pessoa física inscrita no CPF sob Nº {!Demonstracao__c.Conta__r.CPF__pc}, residente na {!Demonstracao__c.Conta__r.BillingStreet}, {!Demonstracao__c.Conta__r.BillingCity} - {!Demonstracao__c.Conta__r.BillingState} , CEP {!Demonstracao__c.Conta__r.BillingPostalCode}, doravante denominada simplesmente de <b>COMODATÁRIA</b>.</div>
+                <br/>
+            </div>
+            
+            <div class="bloco">
+                <br/>
+                
+                <div class="paragrafo">????<apex:outputField value="{!Demonstracao__c.Clausula_1__c}"/>. </div>
+                
+                <br/>
+                <div class="listagem">
+                <apex:variable var="subtotal" value="{!0}"/>
+                
+                <table cellpadding="0px" cellspacing="0px" border="0">
+                    <apex:repeat value="{!produtos}" var="produto">
+                        <tbody class='bloco'>
+
+                            <!-- cabeçalho -->
+                            <apex:outputText rendered="{!IF(produto.cabecalho,true,false)}">
+                                <tr class="pre-cabecalho"><tr cellspacing="7"></tr></tr>
+                                <tr class="cabecalho">
+                                    <td style="visibility:hidden;border:1px;"></td>
+                                    <td>Imagem</td>
+                                    <td>Produto</td>
+                                    <td>Modelo</td>
+                                    <td>Fabricante</td>
+                                    <td>Nº de Série.</td>
+                                    <td>Valor</td>
+                                </tr>
+                            </apex:outputText>
+                            
+                            <!-- item -->
+                            <apex:variable var="tipo" value="{!IF(produto.item.Item_pai__c==null,'equipamento','acessorio')}"/>
+                            <tr class="item-dados {!tipo}">
+                                <td rowspan="2"><apex:outputText value="{!produto.item.Item__c}" rendered="{!IF(tipo=='equipamento',true,false)}"/></td>
+                                <td rowspan="2" class="imagem"><img src="{!produto.item.Ativo__r.Product2.URL_da_Imagem__c}"/></td>
+                                <td class="valor">
+                                    COD: {!produto.item.Ativo__r.Product2.StockKeepingUnit}
+                                    <br/>{!produto.item.Ativo__r.Product2.Name}
+                                </td>
+                                <td class="valor">{!produto.item.Ativo__r.Product2.Modelo__c}</td>
+                                <td class="valor">{!produto.item.Ativo__r.Product2.Marca__c}</td>
+                                <td class="linha valor"><apex:outputField value="{!produto.item.Ativo__r.SerialNumber}"/></td>
+                                <td class="linha valor"><apex:outputField value="{!produto.item.Ativo__r.Product2.Valor_de_Venda__c}"/></td>
+                            </tr>
+                            <tr class="item-descr">
+                                <td colspan="5">{!produto.item.Descricao__c}</td>
+                            </tr>
+                            
+                            <!-- subtotal -->
+                            <apex:variable var="subtotal" value="{!subtotal+produto.item.Valor__c}"/>
+                            <apex:outputText rendered="{!IF(produto.subtotal!=null,true,false)}">
+                                <tr class="subtotal">
+                                    <td colspan="2">&nbsp;</td>
+                                    <td colspan="4" class="valor">SUBTOTAL</td>
+                                    <td class="valor">{!produto.subtotal}</td>
+                                </tr>
+                                <apex:variable var="subtotal" value="{!0}"/>
+                            </apex:outputText>
+                        
+                        </tbody>
+                    </apex:repeat>
+                </table>
+            </div>
+            <br/>
+            <div class="obsimgs">O valor estipulado acima se refere ao custo de cada equipamento em caso de danificação durante o período de comodato.</div>
+            <br/>
+            
+            </div>
+            
+            
+                <div class="titulo"><b>2. INSTALAÇÃO E ASSISTÊNCIA TÉCNICA</b></div><br/>
+                <div class="paragrafo"><b>2.1.</b> O equipamento será entregue à <b>COMODATÁRIA</b> e instalado pela <b>COMODANTE</b> em perfeitas condições de operação. </div><br/>
+                <div class="paragrafo"><b>2.2.</b> O equipamento não poderá ser removido do local de instalação sem o consentimento expresso da <b>COMODANTE</b>. </div><br/>
+                <div class="paragrafo"><b>2.3.</b> A <b>COMODANTE</b> se reserva no direito de inspecionar o equipamento e seu funcionamento no estabelecimento da <b>COMODATÁRIA</b>, mediante aviso prévio de 2 dias úteis.</div>
+                <br/>
+                <br/>
+                <div class="titulo"><b>3.</b> DA DEVOLUÇÃO DOS EQUIPAMENTOS EM COMODATO</div><br/>
+                <div class="paragrafo"><b>3.1.</b> Findo o comodato, independentemente do motivo (rescisão, resilição ou resolução contratual), da forma e da época, deverá a <b>COMODATÁRIA</b> devolver os equipamentos livres de objetos e coisas, em perfeito estado de conservação e limpeza, totalmente adequado ao uso a que se destinava de maneira imediata, não tendo direito à indenização ou retenção por quaisquer benfeitorias ou instalações realizadas, mesmo que necessárias, porquanto as mesmas aderirão e ficarão incorporadas ao referido equipamento para todos os fins de direito, sendo tais obrigações assumidas pela <b>COMODATÁRIA</b>, sob pena de serem adotadas as medidas judiciais cabíveis.</div><br/>
+                <div class="paragrafo"><b>3.2.</b> Na hipótese de (i) rescisão antecipada do presente instrumento por vontade da <b>COMODATÁRIA</b> ou (ii) rescisão decorrente de infração de suas cláusulas ou inadimplência verificada, serão devidos os valores referentes aos consumíveis utilizados em sua totalidade até a data da rescisão, com aplicação de multa de 30% (trinta por cento) do valor residual de consumo obrigatório, podendo ser cobrado judicialmente pela <b>COMODANTE</b>, com todos os encargos previstos e pactuados entre as partes.</div>
+                <br/>
+                <br/>
+                <div class="titulo"><b>4.</b> DA CESSÃO, SUBLOCAÇÃO OU TRANSFERÊNCIA</div><br/>
+                <div class="paragrafo"><b>4.1.</b> O(A) <b>COMODATÁRIO(A)</b> não poderá ceder, locar ou transferir, no todo ou em parte, ainda que por empréstimo, o objeto deste contrato.</div>
+                <br/>
+                <br/>
+                <div class="titulo"><b>5.</b> DAS MANUTENÇÕES PREVENTIVAS E CORRETIVAS</div><br/>
+                <div class="paragrafo"><b>5.1.</b> A <b>COMODANTE</b> ou terceiros por ela credenciados, sem qualquer ônus para o <b>COMODATÁRIO(A/S)</b>, fornecerá os serviços técnicos, manutenção e reparo dos equipamentos, incluindo todas as peças, caso a manutenção se faça necessária, salvo em caso de dano por culpa exclusiva do <b>COMODATÁRIO(A/AS)</b>, caso em que será realizado um orçamento para cobertura de danos e substituição de peças necessárias.</div><br/>
+                <div class="paragrafo"><b>5.2.</b> Obriga-se o(a/s) <b>COMODATÁRIO(A/S)</b> a conservar o equipamento em comodato, caso em que, ocorrendo qualquer dano à sua exclusiva culpa, efetuará o pagamento de todos os danos causados, ressarcindo a <b>COMODANTE</b> de todos os gastos e despesas necessárias à reparação do equipamento danificado.</div>
+                <br/>
+                <br/>
+                <div class="titulo"><b>6.</b> CASO FORTUITO E FORÇA MAIOR</div><br/>
+                <div class="paragrafo"><b>6.1.</b> As Partes estabelecem desde já que não serão considerados caso fortuito ou força maior e, portanto, não haverá a exclusão de responsabilidade de qualquer das Partes, a ocorrência de qualquer dos seguintes eventos: (i) alterações no cenário econômico regional ou global; (ii) problemas ou dificuldades econômico-financeiras de qualquer das Partes; (iii) roubo, furto ou danificação do equipamento enquanto em posse do(a) <b>COMODATÁRIO(A)</b>; e (iv) degradação do equipamento em razão do uso, efeitos do tempo e da natureza, enquanto em posse do <b>COMODATÁRIO(A)</b>.</div>
+                <br/>
+                <br/>
+                <div class="titulo"><b>7.</b> DA DESTINAÇÃO DOS EQUIPAMENTOS</div><br/>
+                <div class="paragrafo"><b>7.1.</b> O Equipamento em comodato destina-se exclusivamente para o tratamento hospitalar, não podendo o(a/s) <b>COMODATÁRIO(A/S)</b> alterar sua destinação, ceder ou transferir para outrem, bem como alterar os itens por si comercializados e previamente acertados entre as partes, sob pena de serem aplicadas as penalidades previstas e considerado rescindido o presente instrumento.</div><br/>
+                <div class="paragrafo"><b>7.2.</b> O presente instrumento poderá ser imediatamente rescindido, sem que caiba direito a indenização ou qualquer outra forma de ressarcimento, no caso de reclamação contumaz contra o(a/s) <b>COMODATÁRIO(A/S)</b> vindo de terceiros, referente ao mau uso do equipamento.</div><br/>
+                <div class="paragrafo"><b>7.3.</b> Declara o(a) <b>COMODATÁRIO(A)</b> ciência quanto ao dever de adequado uso dos equipamentos e acessórios objeto do contrato de comodato, bem como quanto ao dever de observância ao treinamento dado pela <b>COMODANTE</b> quanto a não reutilização de consumíveis/acessórios considerados descartáveis, devendo zelar sempre pela boa higiene e segurança do paciente tratado.</div><br/>
+                <div class="paragrafo"><b>7.4.</b> Diante dos treinamentos e orientações repassadas à(ao) <b>COMODATÁRIA(O)</b>, declara esta ciência quanto a ausência de responsabilidade da <b>COMODANTE</b> quanto ao uso inadequado dos equipamentos e acessórios, dando ainda seu aceite quanto a sua exclusiva responsabilidade por eventuais riscos, perdas e danos ou quaisquer questionamentos ou responsabilidades administrativas ou judiciais advindas de atos decorrentes de imprudência, imperícia ou negligência da <b>COMODATÁRIA(O)</b>.</div>
+                <br/>
+                <br/>
+                <div class="titulo"><b>8.</b> DAS PRÁTICAS ANTICORRUPÇÃO</div><br/>
+                <div class="paragrafo"><b>8.1.</b> As Partes obrigam-se a observar, cumprir e/ou fazer cumprir, por si, suas afiliadas (entidades controladoras, controladas, coligadas ou sob controle comum) e representantes (diretores, membros do conselho de administração, quaisquer terceiros, incluindo assessores ou prestadores de serviços) toda e qualquer lei anticorrupção, em especial a Lei Federal nº 12.846/13, conforme aplicável.</div>
+                <br/>
+                <br/>
+                <div class="titulo"><b>9. DA ASSINATURA ELETRÔNICA</b></div><br/>
+                <div class="paragrafo"><b>9.1.</b> Caso o presente instrumento seja assinado de forma digital ou eletronicamente, cada parte declara e garante que sua assinatura digital ou eletrônica tem o mesmo efeito vinculativo que teria a assinatura manuscrita, possuindo caráter irrevogável e irretratável, sendo realizada através de plataforma de conhecida confiabilidade, estando as partes atentas ao disposto na Medida Provisória 2.200-2/2001 ou em outra legislação que venha a substituí-la.</div>
+                <br/>
+                <br/>
+                <div class="titulo"><b>10. DA PROTEÇÃO DE DADOS</b></div><br/>
+                <div class="paragrafo"><b>10.1.</b> As partes, por si e por seus colaboradores, obrigam-se a atuar no presente Contrato em conformidade com a Legislação vigente sobre Proteção de Dados Pessoais e as determinações de órgãos reguladores/fiscalizadores sobre a matéria, tudo conforme o que rege a Lei 13.709/2018. No que tange à utilização dos dados a de cada uma deverão:</div>
+                <div class="recuo"><br/>
+                (i) Tratar os dados pessoais a que tiver acesso de acordo com o que a cada uma lhe direcionar sempre em conformidade com estas cláusulas. Para os casos em que forem obrigadas e não mais puderem cumprir estas obrigações, por qualquer razão, concordam em informar de modo formal este fato à outra parte.<br/><br/>
+                (ii) Manter e utilizar medidas de segurança para que possam proteger a confidencialidade e integridade de todos os dados pessoais mantidos ou transmitidos eletronicamente, a fim de que possam garantir a proteção desses dados contra acesso não autorizado, destruição, uso, modificação, divulgação ou perda acidental ou indevida.<br/><br/>
+                (iii) Acessar os dados dentro de seu escopo e na medida abrangida pela autorização de cada uma, não podendo estes serem modificados sem expressa autorização da outra parte.<br/><br/>
+                (iv) Garantir, por si próprias ou quaisquer de seus empregados, prepostos, sócios, diretores, representantes ou terceiros contratados, a confidencialidade dos dados processados, bem como a manter quaisquer Dados Pessoais estritamente confidenciais e de não os utilizar para outros fins, com exceção do objeto deste contrato.<br/><br/>
+                </div>
+                <br/>
+                <br/>
+                <div style="page-break-inside:avoid">
+                <div class="titulo"><b>11. DO FORO</b></div><br/>
+                <div class="paragrafo"><b>11.1.</b> Fica eleito como competente o foro da Comarca de Brasília, Distrito Federal, para solução de quaisquer dúvidas ou litígios decorrentes deste CONTRATO, renunciando os contratantes a qualquer outro que tenham ou venham a ter, por mais privilegiado que seja.</div>
+
+                
+                
+                <br/>
+                <br/>               
+                
+
+            
+            <div class="bloco">
+
+                
+                    <div style="text-align: right">Goiânia, ____ de ______________ de _________</div>       
+                <br/><br/><br/><br/><br/>
+                <div style="text-align: center">_______________________________________________________________________</div>       
+                <div style="text-align: center"><b>{!Demonstracao__c.Fornecedor__r.Raz_o_Social__c}</b></div>       
+                <div style="text-align: center"><b>CNPJ sob o n.º {!Demonstracao__c.Fornecedor__r.CNPJ__c}</b></div>       
+                <br/>
+                <div style="text-align: center"></div>       
+                <br/>
+                <div style="text-align: center"></div>       
+                <br/>
+                <br/>
+                <br/>
+                <br/>                             
+                <div style="text-align: center">_______________________________________________________________________</div>              
+                <div style="text-align: center">
+                    <apex:outputText rendered="{!IF(Demonstracao__c.Conta__r.CNPJ__c != null, true, false)}">
+                        <b>{!Demonstracao__c.Conta__r.Raz_o_Social__c}</b><br/>
+                        <b>CNPJ sob o n.º {!Demonstracao__c.Conta__r.CNPJ__c}</b><br/>
+                    </apex:outputText>
+                <apex:outputText rendered="{!IF(Demonstracao__c.Conta__r.CNPJ__c == null, true, false)}">
+                    <b>{!Demonstracao__c.Conta__r.Name}</b><br/>
+                    <b>CPF sob o n.º {!Demonstracao__c.Conta__r.CPF__pc}</b><br/>
+                </apex:outputText>
+                </div>              
+                <br/>
+                <br/>
+                <br/>
+                <b>TESTEMUNHAS:</b>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <table width="100%" style="text-align:center">
+                    <tr>
+                        <td width="50%">
+                            <table width="100%">
+                                <tr>
+                                    <td>
+                                    1) _______________________________
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    CPF-MF:
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        
+                        <td width="50%">
+                            <table width="100%">
+                                <tr>
+                                    <td>
+                                     2) _______________________________
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    CPF-MF:
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>  
+                <br/>
+                <br/>
+                <div class="paragrafo">Esta é a última página que corresponde ao Contrato de Comodato de Equipamentos Hospitalares n.º {!Demonstracao__c.Name} da {!Demonstracao__c.Fornecedor__r.Raz_o_Social__c}.</div>
+            </div>
+        </div>
+</div>
+<apex:outputText rendered="{!IF(Demonstracao__c.Quantidade_de_ativos__c == 0, true,false)}">
+    <div style="text-color:red">OS ATIVOS DEVEM SER INSERIDOS NO COMODATO.</div>
+</apex:outputText>
+<apex:outputText rendered="{!IF(Demonstracao__c.Valor_requerido_de_venda_mensal2__c == 0, true,false)}">
+<br/>
+    <div style="text-color:red">OS CONSUMÍVEIS DEVEM SER INSERIDOS NO COMODATO.</div>
+</apex:outputText>        
+    </apex:outputText>
+    
+    
+    
+    
+    </body>
+
+</apex:page>

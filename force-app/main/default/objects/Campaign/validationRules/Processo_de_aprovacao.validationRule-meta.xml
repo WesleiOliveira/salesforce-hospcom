@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Processo_de_aprovacao</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISCHANGED(Status),
+    PRIORVALUE(Status) = &quot;Rascunho&quot;,
+    NOT(
+        OR(
+            ISPICKVAL(Status, &quot;Aguardando Aprovação - Gerência de Marketing&quot;),
+            ISPICKVAL(Status, &quot;Aguardando Aprovação - Gerência Ed. Continuada&quot;),
+            ISPICKVAL(Status, &quot;Aguardando Aprovação - Diretor Comercial&quot;),
+            ISPICKVAL(Status, &quot;Aguardando Aprovação - Gerência de Linha&quot;)
+        )
+    ),
+    OR(
+        $RecordType.Name = &quot;Interno&quot;,
+        $RecordType.Name = &quot;Externo&quot;
+    )
+)</errorConditionFormula>
+    <errorMessage>O evento tem que passar por um processo de aprovação.</errorMessage>
+</ValidationRule>

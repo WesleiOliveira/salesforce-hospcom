@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Email</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISNEW(),
+TEXT(Owner:User.Departamento3__c) == &apos;Jurídico&apos;,
+E_mail_do_fornecedor_cliente_colaborador__c == &apos;&apos;
+)</errorConditionFormula>
+    <errorDisplayField>E_mail_do_fornecedor_cliente_colaborador__c</errorDisplayField>
+    <errorMessage>Preencha o campo de Email.</errorMessage>
+</ValidationRule>

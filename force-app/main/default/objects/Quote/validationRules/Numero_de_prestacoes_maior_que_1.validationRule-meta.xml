@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Numero_de_prestacoes_maior_que_1</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+CONTAINS(TEXT(Condicao_de_pagamento__c), &quot;x&quot;),
+ISNULL(Data_das_demais_parcelas__c)
+)</errorConditionFormula>
+    <errorDisplayField>Data_das_demais_parcelas__c</errorDisplayField>
+    <errorMessage>Preencha a data das demais parcelas.</errorMessage>
+</ValidationRule>

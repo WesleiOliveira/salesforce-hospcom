@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Caractere_Especial_Nome</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+   CONTAINS(Name, &apos;/&apos;),
+   Nome_da_Testemunha__c != null
+)</errorConditionFormula>
+    <errorDisplayField>Name</errorDisplayField>
+    <errorMessage>O nome da Cotação não pode conter o caractere &quot; / &quot;.</errorMessage>
+</ValidationRule>

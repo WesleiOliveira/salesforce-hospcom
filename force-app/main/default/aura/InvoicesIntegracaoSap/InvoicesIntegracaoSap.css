@@ -1,0 +1,623 @@
+.THIS .main-container {   
+    border-radius: 5px;
+    cursor: none; 
+    display: flex;
+}
+
+.THIS .pedido-container {
+    width: 100%;    
+    margin-bottom: 20px;
+    margin: auto;
+}
+
+.THIS .input-group {
+    padding: 10px 3px;
+    display: flex;
+    align-items: center;
+    width: 25%;
+    
+}
+.THIS .btn-faturar .btn-agendar{
+    
+}
+
+.THIS .documentos{    
+    height: 50px;
+    display: flex;
+}
+
+.THIS input[type="text"]{
+    margin-right: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 300px;
+    height: 33px;
+}
+.THIS input[type="date"]{
+    margin-right: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 132px;
+    height: 33px;
+    color: #dbdbdb;
+    
+}
+.THIS .botao-icone {
+    border: none;
+    background: none;
+    padding: 0;
+    color: #0070d2;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.THIS .botao-icone:hover {
+    color: #005bb5; 
+}
+.THIS , .THIS .slds-button {
+    font-size: 1.1rem; 
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.THIS .slds-button--brand:hover {
+    background-color: #005bb5;
+    filter: brightness(1.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+    
+}
+.THIS .pesquisarpedido{
+    
+}
+.THIS .dataFiltro{
+    
+    
+}
+.THIS .fa:hover{
+    tranform: scale(1.02)!important;
+}
+
+.THIS #integrarPedidos {
+    width: 100%; 
+}
+.THIS #agendarPedidos {
+    width: 100%;
+    margin-bottom: 15px;
+    background: #e1e1e1;
+    color: black;
+}
+.THIS #agendarPedidos:hover {    
+    
+}
+
+
+.THIS .slds-button--neutral {
+    background-color: #e0e0e0;
+    color: black;
+    border: none;
+}
+
+.THIS .slds-button--brand {
+    background-color: #0070d2;
+    color: #fff;
+    border: none;
+}
+
+
+.THIS .dados {    
+    width: 95%; 
+    display: flex; 
+    justify-content: space-between; 
+    box-sizing: border-box; 
+    gap: 20px;
+    background-color: #F8F8F8 !important;
+    border-radius: 5px;
+    margin: auto;
+    cursor: default;
+}
+.THIS #listaPedidos {
+    font-size: 16px;
+}
+.THIS .selected-row {
+    background-color: #e0f7fa; 
+    cursor: pointer;
+    cursor: not-allowed;
+}
+
+
+.THIS .agendado {
+    background-color: #e0f7fa;
+    opacity: 0.7;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+.THIS .agendado {
+    background-color: #e0f7fa; 
+    opacity: 0.7;
+    pointer-events: none; 
+    cursor: not-allowed;
+}
+.THIS .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.THIS .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    text-align: center;
+}
+
+.THIS .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.THIS .close:hover,
+
+
+.THIS .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.THIS .btn-botton-container{
+    display: flex;
+    gap: 10px;
+    padding: 3px;
+    justify-content: right;
+    background: white!important;
+    
+}
+
+
+
+
+
+
+
+
+
+.THIS .faturas {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin: auto;
+    overflow-x: auto; 
+    white-space: nowrap; 
+    margin-top: 25px;
+}
+
+.THIS .pedido {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.08);
+    align-items: center;
+    border: 1px solid #ddd;    
+    cursor: pointer;
+    height: 100px;
+    border-radius: 20px;
+    margin: 10px 0 40px;
+    padding: 20px 15px;
+    transition: all .3s ease;
+}
+.THIS .pedido:hover {
+    background-color: #f9f9f9;
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.15);
+}
+.THIS .pedidos-filtrados{
+    background-color: #ffffff;
+    display: none;
+    justify-content: center;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.08);
+    align-items: center;
+    border: 1px solid #ddd;    
+    cursor: pointer;
+    height: 100px;
+    border-radius: 20px;
+    margin: 10px 0 40px;
+    padding: 20px 15px;
+    transition: all .3s ease;
+    
+}
+.THIS .pedidos-filtrados:hover {
+    background-color: #f9f9f9;
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.15);
+}
+.THIS .pedido a {
+    color: blue;
+    text-decoration: none;
+}
+
+.THIS .pedido a:hover {
+    text-decoration: underline;
+}
+.THIS .principal {
+    width: 95%;
+    
+    justify-self: center;
+    margin-top: 50px;
+    border-style: solid;
+    padding: 2rem;
+    border-radius: 40px;
+    border-width: 2px;
+    border-color: #0070d2;
+    background: #fdfdfd; 
+}
+.THIS .button-container{
+    display: flex;
+    background: white;
+}
+.THIS .grupo-interativo {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.THIS .icone-animado {
+    background: none;
+    border: none;
+    color: #0070d2;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.THIS .grupo-interativo:hover .icone-animado {
+    transform: scale(1.2); /* opcional: aumenta ícone no hover */
+}
+
+.THIS .input-animado {
+    width: 0;
+    opacity: 0;
+    padding: 5px 10px;
+    font-size: 14px;
+    margin-left: 5px;
+    transition: all 0.4s ease;
+    border: 1px solid #0070d2;
+    border-radius: 4px;
+    background-color: white;
+    color: #0F1F57;
+    overflow: hidden;
+}
+
+.THIS .grupo-interativo:hover .input-animado {
+    width: 180px;
+    opacity: 1;
+}
+.THIS .tabelaContainer {
+    width: 100%;
+    overflow-x: auto;
+    height: 400px;
+    overflow-y: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    max-height: 400px;
+}
+
+.THIS table {
+    width: 100%;
+    border-collapse: collapse;
+    
+}
+
+.THIS thead {
+    background-color: #cde8ff;
+    color: #333;
+}
+
+.THIS th, 
+.THIS td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid #e0e0e0;
+    white-space: nowrap;
+}
+
+.THIS th:first-child,
+.THIS td:first-child {
+    width: 40px;
+    text-align: center;
+}
+
+.THIS tbody tr:hover {
+    background-color: #f0f8ff;
+    transition: background-color 0.3s ease;
+}
+
+
+.THIS tbody td {
+    font-size: 0.95rem;
+}
+
+.THIS .status-label {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-block;
+    color: white;
+}
+.THIS .faturados{
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    gap: 20px;
+    padding-bottom: 10px;
+    
+}
+
+/* Scrollbar geral (Chrome, Edge, Safari) */
+.THIS .tabelaContainer::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+}
+
+/* Trilha da barra (fundo) */
+.THIS .tabelaContainer::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+/* Parte que se move (thumb) */
+.THIS .tabelaContainer::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+    border: 2px solid #f0f0f0; /* Cria um "espacinho" ao redor */
+}
+
+/* Ao passar o mouse */
+.THIS .tabelaContainer::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+.THIS .documentsCount{
+    justify-self: center;
+    align-self: center;
+    font-size: 14px;
+    font-weight: lighter;
+    padding: 10px;
+}
+
+.THIS .JanelaFaturar {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    padding-bottom: 70px;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    width: 500px;
+    max-width: 90%;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    z-index: 9999;
+    font-family: Arial, sans-serif;
+    position: relative;
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    height: 544px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+
+/* Botão de fechar (X) */
+.THIS .closePopup {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.THIS .closePopup:hover {
+    color: #000;
+}
+
+.THIS .fileContainer {
+    padding: 20px;
+    border-radius: 8px;
+    color: white;
+    transition: background-color 0.5s ease;
+        margin: 20px 20px 0px 20px
+}
+
+.THIS .fileContainer.error {
+    background-color: #d9534f; /* Vermelho */
+}
+
+.THIS .fileContainer.success {
+    background-color: #5cb85c; /* Verde */
+}
+
+.THIS .fileTitle {
+    font-weight: bold;
+    font-size: 16px;
+    justify-self: center;
+}
+
+
+/* Estilo da Tabela com scroll para no máximo 5 linhas */
+.THIS .tabelaPeidosEscolhidos {
+    max-height: 180px; /* Ajustável conforme altura média das linhas */
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.THIS .tabelaPeidosEscolhidos table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.THIS .tabelaPeidosEscolhidos th,
+.THIS .tabelaPeidosEscolhidos td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.THIS .tabelaPeidosEscolhidos th {
+    background-color: #f8f8f8;
+    font-weight: bold;
+}
+
+/* Container dos botões */
+.THIS .btn-FileUploadContainer {
+    position: fixed;
+    bottom: 15px;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: right;
+    left: -11px;
+}
+
+/* Botões pequenos */
+.THIS .btn-faturarPedido,
+.THIS .btn-cancelarPedido {
+    width: 80px;
+    height: 35px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+    color: white;
+}
+
+/* Faturar - Azul */
+.THIS .btn-faturarPedido {
+    background-color: #004aad;
+}
+.THIS .btn-faturarPedido:hover {
+    background-color: #003580;
+}
+
+/* Cancelar - Vermelho */
+.THIS .btn-cancelarPedido {
+    background-color: #e74c3c;
+}
+.THIS .btn-cancelarPedido:hover {
+    background-color: #c0392b;
+}
+.THIS .overlayFaturar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.2); /* leve escurecido */
+    z-index: 9998; /* abaixo do pop-up */
+    display: none;
+    
+}
+.THIS .emailContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+   padding: 0px 16px 27px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.THIS .emailblock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    
+}
+
+.THIS .emailfield {
+    flex-grow: 1;
+    margin-right: 8px;
+}
+
+.THIS .email-btn {
+    flex-shrink: 0;
+    margin-top: 23px;
+}
+
+.THIS .tag-container {
+   display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+    margin-top: 8px;
+    overflow-x: auto; /* Adiciona rolagem horizontal se necessário */
+    max-width: 100%; /* Limita a largura do contêiner */
+    padding-bottom: 10px; /* Adiciona um pouco de espaço para a rolagem */
+    scrollbar-width: thin; /* Define a largura da barra de rolagem (para navegadores suportados) */
+    scrollbar-color: #0070d2 #f3f2f2; /* Define a cor da barra e do fundo da rolagem (para navegadores suportados) */
+}
+.THIS .tag-container::-webkit-scrollbar {
+    width: 8px; /* Largura da barra de rolagem */
+    height: 8px; /* Altura da barra de rolagem horizontal */
+}
+.THIS .tag-container::-webkit-scrollbar-thumb {
+    background-color: #0070d2; /* Cor do "polegar" da barra de rolagem */
+    border-radius: 8px; /* Borda arredondada do "polegar" */
+    transition: background-color 0.3s ease; /* Transição suave */
+}
+.THIS .tag-container::-webkit-scrollbar-thumb:hover {
+    background-color: #005bb5; /* Cor do "polegar" quando estiver sobre ele */
+}
+.THIS .tag-container::-webkit-scrollbar-track {
+    background-color: #f3f2f2; /* Cor do fundo da barra de rolagem */
+    border-radius: 8px; /* Borda arredondada do fundo da barra */
+}
+
+.THIS .tag-item {
+    background-color: #e0f7fa;
+    border-radius: 16px;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #0070d2;
+    white-space: nowrap; /* Evita que o texto da tag quebre */
+}
+
+.THIS .remove-tag {
+    cursor: pointer;
+    margin-left: 8px;
+    color: #d0021b;
+    font-weight: bold;
+}
+
+.THIS .remove-tag:hover {
+    color: #9e1b32;
+}

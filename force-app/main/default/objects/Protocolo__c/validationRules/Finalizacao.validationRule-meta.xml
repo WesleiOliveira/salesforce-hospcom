@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Finalizacao</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISCHANGED(Status__c),
+Total_de_objetos__c !=  Total_de_objetos_recebidos__c,
+TEXT(Status__c) = &apos;Finalizado&apos;
+)</errorConditionFormula>
+    <errorMessage>Para finalizar, marque todos os objetos como recebido.</errorMessage>
+</ValidationRule>

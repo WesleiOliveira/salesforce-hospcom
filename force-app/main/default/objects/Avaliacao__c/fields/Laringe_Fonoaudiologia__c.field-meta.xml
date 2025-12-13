@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Laringe_Fonoaudiologia__c</fullName>
+    <externalId>false</externalId>
+    <label>Laringe</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Excursão adequada</fullName>
+                <default>false</default>
+                <label>Excursão adequada</label>
+            </value>
+            <value>
+                <fullName>Excursão reduzida</fullName>
+                <default>false</default>
+                <label>Excursão reduzida</label>
+            </value>
+            <value>
+                <fullName>Excursão ausente</fullName>
+                <default>false</default>
+                <label>Excursão ausente</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

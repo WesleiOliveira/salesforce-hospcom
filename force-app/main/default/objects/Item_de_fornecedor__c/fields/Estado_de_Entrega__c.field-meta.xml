@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Estado_de_Entrega__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(TODAY() &gt;  Fornecedor__r.Prazo_de_recebimento__c , &quot;Entrega Atrasada&quot;, &quot;No Prazo&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Estado de Entrega</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

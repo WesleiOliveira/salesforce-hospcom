@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OPME__c</fullName>
+    <description>OPME</description>
+    <externalId>false</externalId>
+    <label>OPME</label>
+    <summaryFilterItems>
+        <field>OrderItem.Linha2__c</field>
+        <operation>equals</operation>
+        <value>OPME</value>
+    </summaryFilterItems>
+    <summaryForeignKey>OrderItem.OrderId</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

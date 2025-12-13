@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Hora_T_cnica_de_Servi_o__c</fullName>
+    <externalId>false</externalId>
+    <formula>(IF(ISBLANK(Data_e_Hora_da_Higienizacao_T__c - Data_e_Hora_da_Higienizacao_I__c),0,(Data_e_Hora_da_Higienizacao_T__c - Data_e_Hora_da_Higienizacao_I__c)) 
++ 
+IF(ISBLANK(Data_e_Hora_da_Calibracao_T__c - Data_e_Hora_da_Calibracao_I__c),0,(Data_e_Hora_da_Calibracao_T__c - Data_e_Hora_da_Calibracao_I__c)) 
++ 
+IF(ISBLANK(Data_e_Hora_da_Inspe_o_T__c - Data_e_Hora_da_Inspe_o_I__c),0,(Data_e_Hora_da_Inspe_o_T__c - Data_e_Hora_da_Inspe_o_I__c)) 
++ 
+IF(ISBLANK(Data_e_Hora_da_Instala_o_T__c - Data_e_Hora_da_Instala_o_I__c),0,(Data_e_Hora_da_Instala_o_T__c - Data_e_Hora_da_Instala_o_I__c)) 
++ 
+IF(ISBLANK(Data_e_Hora_da_Manutencao_T__c - Data_e_Hora_da_Manutencao_I__c),0,(Data_e_Hora_da_Manutencao_T__c - Data_e_Hora_da_Manutencao_I__c)) 
++ 
+IF(ISBLANK(Data_e_Hora_da_Qualifica_o_T__c - Data_e_Hora_da_Qualifica_o_I__c),0,(Data_e_Hora_da_Qualifica_o_T__c - Data_e_Hora_da_Qualifica_o_I__c)) 
++ 
+IF(ISBLANK(Data_e_Hora_do_E_S_E_T__c - Data_e_Hora_do_E_S_E_I__c),0,(Data_e_Hora_do_E_S_E_T__c - Data_e_Hora_do_E_S_E_I__c)) 
++ 
+IF(ISBLANK(Data_e_Hora_do_Runin_T__c - Data_e_Hora_do_Runin_I__c),0,(Data_e_Hora_do_Runin_T__c - Data_e_Hora_do_Runin_I__c)) 
++ 
+IF(ISBLANK(Data_e_Hora_do_2_Runin_T__c - Data_e_Hora_do_2_Runin_I__c),0,(Data_e_Hora_do_2_Runin_T__c - Data_e_Hora_do_2_Runin_I__c)) 
++ 
+IF(ISBLANK(Data_e_Hora_do_Teste_T__c - Data_e_Hora_do_Teste_I__c),0,(Data_e_Hora_do_Teste_T__c - Data_e_Hora_do_Teste_I__c)) )*24</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Hora Técnica de Serviço</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

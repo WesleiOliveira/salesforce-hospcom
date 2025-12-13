@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Obriga_responsavel_por_avaliacao</fullName>
+    <active>true</active>
+    <description>A regra impede alterações caso o campo **Responsável pela Avaliação do Fornecedor** esteja em branco. Bloqueia mudanças nos campos `pontosTotalQualificacao__c`, `Status_avaliacao__c` ou quando qualquer checkbox for marcado como **True**,</description>
+    <errorConditionFormula>AND(
+    OR(
+        ISCHANGED(pontosTotalQualificacao__c),
+        ISCHANGED(Status_avaliacao__c),
+        AND(ISCHANGED(Alvara_Sanitario_Fornecedor__c), Alvara_Sanitario_Fornecedor__c = TRUE),
+        AND(ISCHANGED(cartaoInscricaoEstadual__c), cartaoInscricaoEstadual__c = TRUE),
+        AND(ISCHANGED(Contrato_Social__c), Contrato_Social__c = TRUE),
+        AND(ISCHANGED(certificadosCalibracao__c), certificadosCalibracao__c = TRUE),
+        AND(ISCHANGED(Cartao_CNPJ__c), Cartao_CNPJ__c = TRUE),
+        AND(ISCHANGED(Certificados__c), Certificados__c = TRUE)
+    ),
+    ISBLANK(Respons_vel_pela_Avalia_o_do_fornecedor__c)
+)</errorConditionFormula>
+    <errorDisplayField>Respons_vel_pela_Avalia_o_do_fornecedor__c</errorDisplayField>
+    <errorMessage>Campo obrigatório para fornecedores avaliados.</errorMessage>
+</ValidationRule>

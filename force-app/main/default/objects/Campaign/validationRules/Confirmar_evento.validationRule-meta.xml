@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Confirmar_evento</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+OR(
+TEXT(PRIORVALUE(Status)) = &apos;Rascunho&apos;,
+TEXT(PRIORVALUE(Status)) = &apos;Planejado&apos;
+),
+TEXT(Status) == &apos;Em andamento&apos;,
+TEXT(Status) != &apos;Concluído&apos;
+)</errorConditionFormula>
+    <errorDisplayField>Status</errorDisplayField>
+    <errorMessage>Marque o status como &apos;Confirmado&apos; antes de colocar em andamento ou concluído</errorMessage>
+</ValidationRule>

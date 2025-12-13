@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Hor_rio_de_Trabalho__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>Exemplo: Segunda a Sexta - 08:00 às 12:00 e 13:15 às 18:00</inlineHelpText>
+    <label>Horário de Trabalho</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Empresa__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>08h –18h Seg. a Sex</fullName>
+                <default>false</default>
+                <label>08h –18h Seg. a Sex</label>
+            </value>
+            <value>
+                <fullName>16h as 00:20h todos os dias (com uma folga semanal)</fullName>
+                <default>false</default>
+                <label>16h as 00:20h todos os dias (com uma folga semanal)</label>
+            </value>
+            <value>
+                <fullName>08h as 16h20min</fullName>
+                <default>false</default>
+                <label>08h as 16h20min</label>
+            </value>
+            <value>
+                <fullName>15h as 23h</fullName>
+                <default>false</default>
+                <label>15h as 23h</label>
+            </value>
+            <value>
+                <fullName>12x36</fullName>
+                <default>false</default>
+                <label>12x36</label>
+            </value>
+            <value>
+                <fullName>6x1 intercalado- 12h as 15h, intervalo, 19h as 23:20</fullName>
+                <default>false</default>
+                <label>6x1 intercalado- 12h as 15h, intervalo, 19h as 23:20</label>
+            </value>
+            <value>
+                <fullName>Jornada de 4h/dia - Estagio</fullName>
+                <default>false</default>
+                <label>Jornada de 4h/dia - Estagio</label>
+            </value>
+            <value>
+                <fullName>Jornada de 5h/dia - Estágio</fullName>
+                <default>false</default>
+                <label>Jornada de 5h/dia - Estágio</label>
+            </value>
+            <value>
+                <fullName>Jornada de 6h/dia - Estágio</fullName>
+                <default>false</default>
+                <label>Jornada de 6h/dia - Estágio</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Hospcom</controllingFieldValue>
+            <controllingFieldValue>Health</controllingFieldValue>
+            <controllingFieldValue>ABC</controllingFieldValue>
+            <controllingFieldValue>GDB</controllingFieldValue>
+            <controllingFieldValue>IZU</controllingFieldValue>
+            <controllingFieldValue>Gestcom</controllingFieldValue>
+            <valueName>08h –18h Seg. a Sex</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hospcom</controllingFieldValue>
+            <controllingFieldValue>IZU</controllingFieldValue>
+            <controllingFieldValue>Gestcom</controllingFieldValue>
+            <valueName>Jornada de 4h/dia - Estagio</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hospcom</controllingFieldValue>
+            <controllingFieldValue>IZU</controllingFieldValue>
+            <controllingFieldValue>Gestcom</controllingFieldValue>
+            <valueName>Jornada de 5h/dia - Estágio</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hospcom</controllingFieldValue>
+            <controllingFieldValue>IZU</controllingFieldValue>
+            <controllingFieldValue>Gestcom</controllingFieldValue>
+            <valueName>Jornada de 6h/dia - Estágio</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IZU</controllingFieldValue>
+            <valueName>16h as 00:20h todos os dias (com uma folga semanal)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IZU</controllingFieldValue>
+            <valueName>08h as 16h20min</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IZU</controllingFieldValue>
+            <valueName>15h as 23h</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IZU</controllingFieldValue>
+            <valueName>12x36</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IZU</controllingFieldValue>
+            <valueName>6x1 intercalado- 12h as 15h, intervalo, 19h as 23:20</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

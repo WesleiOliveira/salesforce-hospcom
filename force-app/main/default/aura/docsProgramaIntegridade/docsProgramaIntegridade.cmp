@@ -1,0 +1,21 @@
+<aura:component controller="GeraOTs" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.jqueryProgressBar + '/jquery.progressbar.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.jqueryProgressBar + '/jquery.progressbar.js')}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    <div>        
+        <div class="boxContain" id="boxContain">
+            <h1 class="titulo">Programa de integridade</h1>
+            <a style="text-align: center" href="https://www.hospcom.net/compliance/">Acesse o canal de denúncias clicando nesse link</a>
+                        
+        </div>
+    </div>
+	
+</aura:component>

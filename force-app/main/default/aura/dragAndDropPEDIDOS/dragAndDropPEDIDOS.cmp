@@ -1,0 +1,193 @@
+<aura:component controller="ItemPedido" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <!-- <aura:handler name="render" value="{!this}" action="{!c.onRead}"/> -->
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css',
+                          $Resource.bootstrapSelect14 + '/docs/docs/dist/css/bootstrap-select.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.sortableJs + '/Sortable.js',
+                           $Resource.popper + '/popper.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js',
+                           $Resource.bootstrapSelect14 + '/docs/docs/dist/js/bootstrap-select.min.js')}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    
+    <div class="container" style="position: relative; max-width: 1500px!important;" id="containerPrincipal">
+        
+        <!-- FIM CONTAINER DETALHES -->
+        
+        <div class="row" style="border: 1px solid #00345c; min-height: 100vh; border-radius: 15px; margin-top: 10px;">
+            
+            <!-- PRIMEIRA COLUNA DO CONTAINER -->
+            <div class="col-md-6" style="display:flex; flex-direction: column; padding: 0px">
+                
+                <!-- SPINNER DE CARREGAMENTO -->
+                <div id='spinnerDivOrder' style="display: none">
+                    <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+                </div>
+                
+                <!-- PRIMEIRA LINHA COM OS BOTÕES PESQUISE E MARKETING -->
+                <div style="width: 100%; height: 6%; display: flex">
+                    <!-- DIV DO BOTÃO PESQUISE PRODUTOS -->
+                    <div style="width: 50%; height: 100%; display: flex; padding: 4px">
+                        <a style="width: 100%;" class="customAUnderline"><div id="buttonPesquiseProdutos" class="buttonOne primaryBackgroundColor textContainer">Pesquisar</div></a>
+                    </div>
+                    
+                    <!-- DIV DO BOTÃO PLATAFORMA DE MARKETING -->
+                    <div style="width: 50%; height: 100%; display: flex; padding: 4px">
+                        <a style="width: 100%;" class="customAUnderline"><div id="buttonPlataformaMarketing" style="opacity: 40%;" class="buttonOne secondaryBackgroundColor textContainer">Navegar</div></a>
+                    </div>
+                </div>
+                
+                <!-- O CONTEÚDO ABAIXO MUDA CONFORME A SELEÇÃO DOS BOTÕES ANTERIORES -->
+                <div id="divPesquiseProdutos" style="display: flex; flex-direction: column; width: 100%; height: 94%;">
+                    
+                    <!-- LINHA COM O INPUT DE PESQUISA DE PRODUTOS -->
+                    <div style="width: 100%; height: 6%; display: flex; padding: 4px;">
+                        <div class="primaryBackgroundColor" style="color: white; font-size: 17px; display: flex; justify-content: center; align-items: center; width: 7%; height: 100%; border-bottom-left-radius: 10px; border-top-left-radius: 10px; ">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </div>
+                        <div style="width: 93%; height: 100%; border: 1px solid; border-color: #a0bb31!important; border-bottom-right-radius: 10px; border-top-right-radius: 10px;">
+                            <input id="inputPesquisa" type="text" class="form-control customInput" title="Clique aqui e digite um termo para pesquisar" placeholder="Pesquise aqui por nome do produto, modelo, código do fabricante ou marca" aria-label="Username" aria-describedby="basic-addon1"/>
+                        </div>
+                    </div>
+                    
+                    <!-- LINHA COM OS FILTROS DE PESQUISA -->
+                    <div style="width: 100%; height: 7%; display: flex; flex-direction: column;">
+                        
+                        <!-- FILTRO COM O TITULO FILTRE SUA PESQUISA -->
+                        <div class="primaryColor" style="font-weight: 400; width: 100%; display: flex; justify-content: center; align-items: center; height: 50%">
+                            Filtre sua pesquisa
+                        </div>
+                        
+                        <!-- LINHA COM OS FILTROS -->
+                        <div style="display: flex; height: 50%">
+                            
+                            <!-- FILTRO POR LINHA -->
+                            <div class="col-lg-3 col-md-6">
+                                
+                                <!-- CUSTOM SELECT -->
+                                <details style="width: 100%;" class="custom-select" id="selectLinhas">
+                                    <summary class="radios" id="listaItens1">
+                                        <input type='radio' name='item1' id='default' title='Linha' checked='true'/>
+                                    </summary>
+                                    
+                                    <ul class="list" id="listaItens2" style="padding-right: 0rem!important; padding-left: 0rem!important;">
+                                        <li id='' class='itemLinha' onclick=''><label class="labelLinha" for=''>item1</label></li>
+                                    </ul>
+                                </details>
+                                <!-- FIM CUSTOM SELECT -->
+                                
+                            </div>
+                            
+                            <!-- FILTRO POR FAMILIA -->
+                            <div class="col-lg-3 col-md-6">
+                                <!-- CUSTOM SELECT -->
+                                <details style="width: 100%; display: none" class="custom-select" id="selectFamilia">
+                                    <summary class="radios" id="listaFamilia1">
+                                        <input type='radio' name='item1familia' id='default' title='Familia' checked='true'/>
+                                    </summary>
+                                    
+                                    <ul class="list" id="listaFamilia2" style="padding-right: 0rem!important;  padding-left: 0rem!important;">
+                                        
+                                    </ul>
+                                </details>
+                                <!-- FIM CUSTOM SELECT -->
+                            </div>
+                            
+                            <!-- FILTRO POR TIPO -->
+                            <div class="col-lg-3 col-md-6">
+                                <!-- CUSTOM SELECT -->
+                                <details style="width: 100%; display: none" class="custom-select" id="selectTipo">
+                                    <summary class="radios" id="listaTipo1">
+                                        <input type='radio' name='item1Tipo' id='default' title='Tipo' checked='true'/>
+                                    </summary>
+                                    
+                                    <ul class="list" id="listaTipo2" style="padding-right: 0rem!important;  padding-left: 0rem!important;">
+                                        <li id='' class='itemLinha' onclick=''><label class="labelLinha" for=''>item1</label></li>
+                                    </ul>
+                                </details>
+                                <!-- FIM CUSTOM SELECT -->
+                            </div>
+                            
+                            <!-- FILTRO POR MARCA -->
+                            <div class="col-lg-3 col-md-6">
+                                <!-- CUSTOM SELECT -->
+                                <details style="width: 100%; display: none" class="custom-select" id="selectMarca">
+                                    <summary class="radios" id="listaMarca1">
+                                        <input type='radio' name='item1Marca' id='default' title='Marca' checked='true'/>
+                                    </summary>
+                                    
+                                    <ul class="list" id="listaMarca2" style="padding-right: 0rem!important;  padding-left: 0rem!important;">
+                                        
+                                    </ul>
+                                </details>
+                                <!-- FIM CUSTOM SELECT -->
+                            </div>
+                        </div>
+                        
+                    </div> 
+                    
+                    <!-- LINHA COM OS RESULTADOS DA PESQUISA -->
+                    <div style="width: 100%; height: 87%; padding: 4px;" class="divListaProdutosMaster">
+                        <div id="listaProdutos" class="colunaScroll" style="overflow: auto; padding-bottom: 100px!important; align-content: flex-start; flex-wrap: wrap; background-color: #f1f1f1; width: 100%; height: 550px; padding: 10px; border-radius: 15px; display: flex">
+                            
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <div id="divPlataformaMkt" style="display: none; flex-direction: column; width: 100%; height: 94%; padding: 5px">
+                    
+                    <nav class="breadcrumbs" id="breadcrumbsNav">
+                        <a href="" style='background: #00345c; color: white' data-idItem='' class="breadcrumbs__item">Início</a>
+                    </nav>
+                    
+                    <div style="width: 100%; height: 95%" id="divColunaScrollParent">
+                        <div id="colunaPlataformaMkt" class="colunaScroll" style="padding-bottom: 100px; justify-content: flex-start; overflow: auto; align-content: flex-start; flex-wrap: wrap; background-color: #f1f1f1; width: 100%; height: 600px; padding: 5px; border-radius: 15px; display: flex">
+                            
+                            <!-- APPEND DOS ITENS -->
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+            
+            <!-- SEGUNDA COLUNA DO CONTAINER -->            
+            <div  class="col-md-6" style="padding: 0px">
+                
+                <!-- PRIMEIRA LINHA COM A LABEL DA COLUNA -->
+                <div style="width: 100%; height: 6%; display: flex">
+                    
+                    
+                    <!-- DIV DA LABEL -->
+                    <div style="width: 100%; height: 100%; display: flex; padding: 4px">
+                        <div id="totalCotacao"  class="labelOne secondaryBackgroundColor">R$</div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <!-- BLOCO DE ITEMS DA COTAÇÃO -->
+                <div style="width: 100%; height: 94%; padding: 4px;" class="divListaProdutosCotacao">
+                    <!-- LINHA COM OS ITEMS -->
+                    <div id="listaCotacao" class="divCotacao">
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+        <div class='about'>Versão: 2.2.0</div>
+    </div>
+</aura:component>

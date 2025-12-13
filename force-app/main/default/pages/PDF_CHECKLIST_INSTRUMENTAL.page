@@ -1,0 +1,297 @@
+<apex:page standardController="Product2" extensions="Instrumental" applyHtmlTag="false" showHeader="false"  renderAs="pdf">
+<head>
+<style type="text/css" media="print">
+        @page {
+            size:21cm 29.7cm;
+            margin:100px 40px 60px 40px;
+            @top-center {
+                content:element(header);
+            }
+            @bottom-center {
+                content:element(footer);
+            }
+        }
+        @page{
+            size:A4;
+            background: url({!$Resource.TimbradoHospcom});
+            margin:150px 50px 120px 50px;
+            @bottom-center{content:element(footer);}
+        }
+        .pagenumber:before {
+            content:counter(page);
+        }
+        .pagecount:before {
+            content:counter(pages);
+        }
+        div.header {
+            margin:0px 0px 0px 0px;
+            padding:20px 0px 20px 0px;
+            position:running(header);
+            height:60px;
+        }
+        div.content {
+        }
+        div.footer {
+            margin:0px 0px 0px 0px;
+            padding:20px 0px 20px 0px;
+            position:running(footer);
+            height:20px;
+            text-align:right;
+            font-family:arial, verdana, sans-serif;
+            font-size:10px;
+            font-weight:normal;
+        }
+    </style>
+    <style type="text/css" media="print">
+    /*
+        @page:first{
+            size:A4;
+            background: url($Resource.SobreHealth);
+            margin:150px 50px 120px 50px;
+            @bottom-center{content:element(footer);
+            }
+        }
+        
+        @page{
+            size:A4;
+            background: url($Resource.TimbradoHealth);
+            margin:150px 50px 120px 50px;
+            @bottom-center{content:element(footer);}
+        }
+*/
+        td, tr{
+        padding: 0;
+        margin: 0;
+    }
+        
+        *{
+            font-family: Arial, Helvetica, sans-serif;
+            color: #0c3557;
+            
+            text-transform: uppercase;
+        }
+        .titulo{
+            font-family:arial, verdana, sans-serif;
+            font-size:15px;
+            text-align:left;
+            font-weight:bold; 
+            width:100%;
+        }
+        .tabela_geral{
+            border-collapse:collapse;
+            width:100%;
+        }
+        
+        table.print-friendly tr td, table.print-friendly tr th {
+            page-break-inside: avoid;
+        }
+        
+        .titulo{
+            margin-top: 20px;
+            font-size: 50px;
+        }
+        
+        .textoConteudo{
+            margin-bottom: 10px;
+            font-size: 50px;
+        }
+       
+        
+        .maiuscula{
+            text-transform: uppercase;
+        }
+      
+        .questoes{
+         
+        
+        }
+        
+        .questao{
+            display: flex;
+            flex-direction: row;
+            padding: 5px;
+        }
+
+        .valor{
+            margin-bottom: -100px;
+            border: #0c3557 1px solid;
+            
+        }
+
+        .sessao-questao{
+            font-size: 14px;
+            padding: 10px 0  0 5px;
+        }
+        
+        
+        .questao, p{
+            padding: 2px 0 !important;
+            margin: 0;
+            padding-right: 15px !important;
+            font-size: 12px !important;
+        }
+
+        h1,h2{
+            padding: 10px 0;
+            margin: 0;
+            font-size: 14px !important;
+        }
+        .resposta{
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .t{
+            text-align: center;
+            padding: 1px 1px;
+            font-size: 14px;
+        }
+        span{font-size: 12px !important;}
+        .ass{
+            position: fixed;
+            bottom: 0;
+        }
+        td{
+        }
+        .NC{
+            width: 100%;
+            border-collapse: collapse; 
+            border:1px solid #000;
+
+        }
+        .sessao-questao1{
+            font-weight: bold;
+            
+              color:#ffff !important;
+        }
+        .sessao-questao2{
+         text-align:center;
+         color:#ffff;
+         height:100%;
+         border:1px solid #0c3557 ;
+                     page-break-inside: avoid;
+
+        }
+        .color{
+            background:#0c3557 ;
+            color:#ffff;
+        }
+    </style>
+</head>
+<body>
+<apex:pageBlock >
+        
+         <div class="footer" style="text-align:center !important"><br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Página <span class="pagenumber"></span> de <span class="pagecount"></span> - Emissão em:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{! TODAY() }" /></apex:outputText>
+</div>
+        
+            
+
+                <table class="NC">                     
+                    
+                        
+                        <tr>
+                            <td colspan="2">
+                                <h2 class="sessao-questao" style="text-align:center;">CHECKLIST INSTRUMENTAL</h2>
+                            </td>
+                        </tr> 
+                        <tr>
+            <td>
+                &nbsp; <br/>
+            </td>
+        </tr>
+                           <tr>
+            <td>
+                &nbsp; <br/>
+            </td>
+        </tr>
+                    
+                        <tr>                            
+                            <td colspan="1" class="questao"> <span style="">CÓDIGO FABRICANTE:</span><span class="resposta" style=""> {!Product2.ProductCode} </span></td> 
+                            <td colspan="1" class="questao"> <span style="">CÓDIGO HOSPCOM:</span><span class="resposta" style=""> {!Product2.StockKeepingUnit} </span></td> 
+                        </tr>
+                        
+                        <tr>
+                            <td colspan="1" class="questao"> <span style="">lINHA:</span><span class="resposta" style=""> {!Product2.Linha__c} </span></td> 
+                           <td colspan="1" class="questao"><span style="">DATA: </span><span class="resposta" style=""><apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{! TODAY() }" /></apex:outputText> </span></td> 
+                           
+                        </tr>
+                        
+                        <tr>
+                        
+                            <td colspan="2" class="questao"> <span style="">DESCRIÇÃO :</span><span class="resposta" style=""> {!Product2.Description} </span></td> 
+                        </tr>
+                        
+
+
+          <tr>
+            <td>
+                &nbsp; <br/>
+            </td>
+        </tr>
+                 
+                   </table>
+                   
+                   
+                   <table class="NC" style="border:1px solid #000">
+                       <tr class="color">
+                           <td colspan="" style="width:10%;">
+                                <h2 class="sessao-questao1" style="text-align:center; color:#fff;">índice</h2>
+                            </td>
+                       
+                            <td colspan="" style="width:25%;">
+                                <h2 class="sessao-questao1" style="text-align:center; color:#fff;">código</h2>
+                            </td>
+                            
+                            <td colspan="" style="width:50%;">
+                                <h2 class="sessao-questao1" style="text-align:center; color:#fff;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; descrição &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
+                            </td>
+                            
+                            <td colspan="" style="width:15%;">
+                                <h2 class="sessao-questao1" style="text-align:center; color:#fff;">qtd</h2>
+                            </td>
+                            
+                        </tr> 
+                            <apex:variable var="contador" value="{!1}"/>
+                           <apex:repeat value="{!Product2.Produtos_filhos__r}" var="filho">
+                        <tr>
+                            <td colspan="" class="sessao-questao2">
+                                <h2><apex:outputText value="{!contador}"></apex:outputText></h2>
+                            </td>
+                            
+                            <td colspan="" class="sessao-questao2">
+                                <h2>{!filho.Produto_filho__r.ProductCode}</h2>
+                            </td>
+                            
+                            <td colspan="" class="sessao-questao2">
+                                <p ><apex:outputText value="{!filho.Produto_filho__r.Name}"/></p>
+                            </td>
+                            
+                            <td class="sessao-questao2" colspan="">
+                                <h2 ><apex:outputField value="{!filho.Quantidade__c}"/></h2>
+                            </td>
+                            
+                        </tr>   
+                        <apex:variable var="contador" value="{!contador+1}"/>
+
+                        </apex:repeat>
+                        
+                   </table>
+</apex:pageBlock>
+<div style="page-break-inside:avoid">
+
+      <div style=" page-break-after: always;"> </div>
+      
+      <p style="text-align:center"><b>DOCUMENTOS ANEXOS</b></p>
+      
+       <apex:repeat value="{!idDownl}" var="anexo">
+           <p style="text-align:center">
+               <apex:image url="/sfc/servlet.shepherd/version/download/{!anexo.Id}" width="100%" height="100%"/><br/><br/>
+               {!anexo.ContentDocument.Title}
+           </p>
+      </apex:repeat>
+</div>
+</body>
+
+</apex:page>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Elegivel_para_demo_rapida</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(Order.RecordType.DeveloperName  == &apos;Demonstra_o_R_pida&apos;, !Product2.Elegivel_para_demo_rapida__c)</errorConditionFormula>
+    <errorMessage>Esse produto não é elegivel para demo rápida</errorMessage>
+</ValidationRule>

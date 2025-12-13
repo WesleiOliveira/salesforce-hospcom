@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DuplicateRule xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <actionOnInsert>Block</actionOnInsert>
+    <actionOnUpdate>Allow</actionOnUpdate>
+    <alertText>Este ativo já foi inserido no contrato.</alertText>
+    <description xsi:nil="true"/>
+    <duplicateRuleFilter xsi:nil="true"/>
+    <duplicateRuleMatchRules>
+        <matchRuleSObjectType>Ativos_do_Contrato__c</matchRuleSObjectType>
+        <matchingRule>Ativo_do_Contrato_Duplicado</matchingRule>
+        <objectMapping xsi:nil="true"/>
+    </duplicateRuleMatchRules>
+    <isActive>false</isActive>
+    <masterLabel>Ativo do Contrato Duplicado</masterLabel>
+    <operationsOnUpdate>Alert</operationsOnUpdate>
+    <securityOption>EnforceSharingRules</securityOption>
+    <sortOrder>1</sortOrder>
+</DuplicateRule>

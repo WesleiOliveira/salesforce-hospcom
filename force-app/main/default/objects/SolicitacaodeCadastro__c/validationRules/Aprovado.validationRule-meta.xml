@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Aprovado</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+Aprovado__c == true,
+ISNEW())</errorConditionFormula>
+    <errorDisplayField>Aprovado__c</errorDisplayField>
+    <errorMessage>Não é permitido criar produtos com o checkbox Aprovado marcado.</errorMessage>
+</ValidationRule>

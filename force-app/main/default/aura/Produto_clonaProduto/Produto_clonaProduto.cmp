@@ -1,0 +1,155 @@
+<aura:component extends="c.ApexHelper" controller="HistoricoProduto" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:handler name="render" value="{!this}" action="{!c.onRead}"/>
+    
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome6 + '/css/all.min.css', 
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css',
+                          $Resource.bootstrapSelect14 + '/docs/docs/dist/css/bootstrap-select.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                          
+                           $Resource.sortableJs + '/Sortable.js',
+                           $Resource.popper + '/popper.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js',
+                           $Resource.bootstrapSelect14 + '/docs/docs/dist/js/bootstrap-select.min.js')}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    <body>
+        
+        <div class = "body">
+            <div class= "container-geral">
+                <div class = "cabecalho">
+                    <div class= "cont-titulo">
+                        <h1 class = "titulo">Edição do Produto</h1>
+                    </div>
+                    
+                    <div class = "cont-subTitulo">
+                        <h2 id = "subTitulo"> Produto: 000</h2>
+                    </div>
+                </div>
+                
+                <div class="container-campos">
+                    
+                    <div class="texto-content" style="display: none;">
+                        <p data-campoS="StockKeepingUnit__c">Cod. Hospcom</p> 
+                        <textarea class="texto" id="StockKeepingUnit__c" name="" rows="1" cols="130" disabled = 'disabled'></textarea>
+                    </div>  
+                    
+                    <div class="texto-content">
+                        <p data-campoS="Linha__c">Linha</p> 
+                        <select class="texto"  id="Linha__c">
+                        </select>
+                        <!--textarea class="texto" id="Linha__c" name="" rows="2" cols="130"></textarea-->
+                    </div> 	   
+                    
+                    <div class="texto-content" style="display:none;">
+                        <p data-campoS="ProductCode__c">Cod. fabricante</p> 
+                        <textarea class="texto" id="ProductCode__c" name="ProductCode__c" rows="1" cols="130" disabled='disabled'></textarea>
+                    </div> 
+                    
+                    <div class="texto-content">
+                        <p data-campoS="Family__c">Família</p> 
+                        <select class="texto"  id="Family__c">
+                        </select>
+                        <!--textarea class="texto" id="Family__c" name="Family__c" rows="2" cols="130"></textarea-->
+                    </div> 
+                    
+                    <div class="texto-content">
+                        <p data-campoS="Name">Nome</p> 
+                        <textarea class="texto" id="Name" name="Name" rows="1" cols="130"></textarea>
+                    </div> 
+                    
+                    <div class="texto-content">
+                        <p data-campoS="Tipo_do_Produto__c">Tipo</p> 
+                        
+                        <select class="texto"  id="Tipo_do_Produto__c">
+                        </select>
+                        <!--textarea class="texto" id="Tipo_do_Produto__c" name="Tipo_do_Produto__c" rows="2" cols="130"></textarea-->
+                    </div> 
+                    
+                    <div class="texto-content">
+                        <p data-campoS="Marca__c">Marca</p> 
+                        <select  class="texto" id="Marca__c">
+                        </select>
+                        
+                    </div> 
+                    
+                    <div class="texto-content">
+                        <p data-campoS="Num_Anvisa__c">Num. Anvisa</p> 
+                        <textarea class="texto" id="Num_Anvisa__c" name="Num_Anvisa__c" rows="1" cols="130"></textarea>
+                    </div> 
+                    
+                    <div class="texto-content">
+                        <p data-campoS="Modelo__c">Modelo</p> 
+                        <textarea class="texto" id="Modelo__c" name="Modelo__c" rows="1" cols="130"></textarea>
+                    </div> 
+                    
+                    <div class="texto-content">
+                        <p data-campoS="IsActive__c">Ativo</p> 
+                        <input type="checkbox" class="texto" id="IsActive__c" name="Observacoes__c" rows="1" cols="130"></input>
+                        
+                        <!--textarea class="texto" id="IsActive__c" name="IsActive__c" rows="2" cols="130"></textarea-->
+                    </div> 
+                    <div class="texto-content">
+                        <p data-campoS="Elegivel_para_demo_rapida__c">Elegível para demo rápida</p> 
+                        <input type="checkbox" class="texto" id="Elegivel_para_demo_rapida__c" name="Elegivel_para_demo_rapida__c" rows="1" cols="130"></input>
+                        
+                        <!--textarea class="texto" id="Elegivel_para_demo_rapida__c" name="Elegivel_para_demo_rapida__c" rows="2" cols="130"></textarea-->
+                    </div> 
+                   
+  <div class="texto-content">
+    <p data-campoS="Valor_de_Venda__c">Valor de venda (colocar em formatação americana, com pontos no lugar de vírgula)</p> 
+      <textarea class="texto" id="Valor_de_Venda__c" name="Valor_de_Venda__c" type="text" />
+</div>
+                    
+                    <div class="texto-content">
+                        <p data-campoS="Ativo_no_commerce__c">Ativo no commerce</p> 
+                        <input type="checkbox" class="texto" id="Ativo_no_commerce__c" name="Ativo_no_commerce__c" rows="1" cols="130"></input>
+                    </div> 
+                    
+                    <div class="texto-content">
+                        <p data-campoS="Description__c">Descrição</p> 
+                        <textarea class="texto" id="Description__c" name="Description__c" rows="1" cols="130"></textarea>
+                    </div> 
+                       <div class="texto-content">
+                        <p data-campoS="Ativo_na_Loja__c">Ativo na loja</p> 
+                        <input type="checkbox" class="texto" id="Ativo_na_Loja__c" name="Ativo_na_Loja__c" rows="1" cols="130"></input>
+                    </div> 
+                    <div class="texto-content">
+                        
+                        <p data-campoS="Observacoes__c">Observações</p> 
+                        <textarea class="texto" id="Observacoes__c" name="Observacoes__c" rows="1" cols="130"></textarea>
+                    </div> 
+                    
+                </div> 
+                
+                <div class = "cont-buttons">
+                    <!--div class = "button">
+                        <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+                            CANCELAR
+                        </button>
+                 </div-->
+                    <div class = "button">
+                        <button id="next" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+                            CONTINUAR
+                        </button>
+                    </div>
+                </div>        
+            </div>
+        </div>
+        
+        <div class="load"> 
+            <div class="spinner-border" role="status">
+                <span class="sr-only"></span>
+            </div>
+        </div>
+    </body>
+    
+</aura:component>

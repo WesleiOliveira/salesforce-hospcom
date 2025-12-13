@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>preencher_numero_contapessoal</fullName>
+    <active>true</active>
+    <description>Preencher número da residencial ou comercial</description>
+    <errorConditionFormula>AND(
+  ISNEW(),
+  Tipo_de_registro__c = &apos;Conta pessoal&apos;,
+  ISBLANK(N__c)
+)</errorConditionFormula>
+    <errorDisplayField>N__c</errorDisplayField>
+    <errorMessage>Se não tiver número adicione S/N</errorMessage>
+</ValidationRule>

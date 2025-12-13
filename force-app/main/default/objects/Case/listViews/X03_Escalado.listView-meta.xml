@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X03_Escalado</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>CASES.SUBJECT</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>CASES.STATUS</columns>
+    <columns>CASES.RECORDTYPE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>ESCALADO</value>
+    </filters>
+    <label>03 - Escalado</label>
+</ListView>

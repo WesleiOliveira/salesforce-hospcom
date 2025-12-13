@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Data_de_retorno_formatada__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+DAY(Data_de_retorno__c) &lt; 10,
+&apos;0&apos; &amp; TEXT(DAY(Data_de_retorno__c)),
+TEXT(DAY(Data_de_retorno__c))
+)
++ &quot;/&quot; +
+IF(
+MONTH(Data_de_retorno__c) &lt; 10,
+&apos;0&apos; &amp; TEXT(MONTH(Data_de_retorno__c)),
+TEXT(MONTH(Data_de_retorno__c))
+)
++ &quot;/&quot; +
+TEXT(YEAR(Data_de_retorno__c))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Data de retorno (formatada)</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

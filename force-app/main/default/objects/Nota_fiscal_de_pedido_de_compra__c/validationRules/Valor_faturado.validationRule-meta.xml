@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valor_faturado</fullName>
+    <active>false</active>
+    <errorConditionFormula>(Pedido_de_Compra__r.Valor_faturado__c +  Valor_da_nota__c) &gt;  Pedido_de_Compra__r.Valor_total_comprado__c</errorConditionFormula>
+    <errorMessage>O valor total informado de notas fiscais está ultrapassando o valor do pedido.</errorMessage>
+</ValidationRule>

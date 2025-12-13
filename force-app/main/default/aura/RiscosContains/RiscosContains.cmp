@@ -1,0 +1,27 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global">
+
+    <aura:attribute name="prontuario" type="Object"/>
+    <aura:attribute name="recordLoadError" type="String"/>
+    
+    <force:recordData aura:id="recordLoader"
+    recordId="{!v.recordId}"
+    fields="Riscos__c"
+    targetFields="{!v.prontuario}"
+    targetError="{!v.recordLoadError}"
+    />
+    
+    
+    <aura:attribute name="riscos" type="List" default='{!v.prontuario.Riscos__c}'/>
+    
+    <aura:attribute name="listItems" type="List" default="['Name,'Teste']"  />
+    <!-- use 'auraIfWithContains' component with passing item list and contains element name.-->
+    <c:Riscos items="{!v.riscos}" element="Precaução Por Contato">
+        <p><b>yes name is contains in list</b></p>
+    </c:Riscos>
+    <c:Riscos items="{!v.riscos}" element="Email">
+        <p><b> No Email is not contains in list, so it's not showing</b></p>
+    </c:Riscos>
+    <c:Riscos items="{!v.riscos}" element="Phone">
+        <p><b> yes Phone is contains in list</b></p>
+    </c:Riscos>
+</aura:component>

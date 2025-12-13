@@ -1,0 +1,330 @@
+<aura:component
+  extends="c.ApexHelper"
+  controller="taskJuridicoControler"
+  implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+  access="global"
+>
+  <!-- Oláaaaaa seja bem vindo.
+se voce esta lendo isso é porque eu morri, saì da
+empresa ou fui despedido depois que acharam as
+gabiarras que fiz. Ou voce é só o meu eu do futuro
+tendo que voltar aqui para alterar regras.
+Enfim, vamos lá, deixe-me tentar ajudar-lo.
+
+Caso voce esteja adicionando um novo assunto, é nescessario que
+adicione a div com os campos no corpo do cmp e
+coloque todos dentro de um bloco aura:if com o valor do assuunto desejado.
+Tambem é nescessario adicionar os assuntos ao atributo assuntosJuridicos e os novos campos ao taskRecord la no controller.
+os nomes dos assuntos e dos campos precisam estar com o nome de API exatos para funcionar.
+
+As regras com os prazos de vencimento para cada assunto estão em uma função no helper. Ela é chamada no controler quando
+há uma alteração no assunto. c.handleSubjectChange()
+
+
+by victor !
+-->
+
+  <aura:attribute name="show" type="Boolean" default="false" />
+  <aura:attribute
+    name="comprovanteRecebimentoUploaded"
+    type="Boolean"
+    default="false"
+  />
+  <aura:attribute name="files" type="List" />
+  <aura:attribute name="recordId" type="Id" />
+  <aura:attribute name="etapaAtual" type="Integer" default="1" />
+  <aura:attribute name="isLoading" type="Boolean" default="false" />
+
+  <!-- Data minima para vencimento de tarefa
+ Valor resgatao atraves de função no helper helper.valiDate() -->
+  <aura:attribute name="dataMinima" type="String" />
+
+  <!--Valores precisam ser iguais aos nome de APIs do AssuntoJuridco__c -->
+  <aura:attribute
+    name="assuntosJuridicos"
+    type="List"
+    default="['Análise de aditivo',
+                                                                  'Confecção de contrato',
+                                                                  'Contrarrazões',
+                                                                  'Defesa de processo administrativo',
+                                                                  'Denúncia',
+                                                                  'Enviar carta',
+                                                                  'Esclarecimento',
+                                                                  'Impugnação',
+                                                                  'Notificação extrajudicial',
+                                                                  'Processo judicial',
+                                                                  'Prorrogação de entrega',
+                                                                  'Reconsideração',
+                                                                  'Recurso',
+                                                                  'Revisão de contrato',
+                                                                  'Defesa processo judicial',
+                                                                  'Termo de acordo',
+                                                                  'NDA',
+                                                                  'Documentação estratégica',
+                                                                  'Resposta a notificação',
+                                                                  'Audiência',
+                                                                  'Reunião',
+                                                                  'Admissão PJ',
+                                                                  'Desligamento PJ',
+                                                                  'Alteração Contratual PJ',
+                                                                  'Alteração de CNPJ']"
+  />
+
+  <aura:attribute name="assuntoSelecionado" type="String" default="" />
+
+  <!--Valores são iniciados no c.doInit -->
+  <aura:attribute name="taskRecord" type="Object" />
+
+  <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+  <aura:if isTrue="{!v.show}">
+    <div
+      class="mainMainMesmo"
+      style="
+                                          animation: growIn 0.3s ease-out forwards;
+                                          transform-origin: center;
+                                          position: fixed;
+                                          top: 0;
+                                          left: 0;
+                                          width: 100vw;
+                                          height: 100vh;
+                                          backdrop-filter: blur(5px);
+                                          display: flex;
+                                          justify-content: center;
+                                          align-items: center;
+                                          z-index: 9999;
+                                          "
+    >
+      <div class="mainCard53434">
+        <div class="head53425"> Juridico </div>
+
+        <!-- SPINNER DE CARREGAMENTO -->
+        <aura:if isTrue="{!v.isLoading}">
+          <div class="spinner-container">
+            <lightning:spinner alternativeText="Carregando..." size="medium" />
+          </div>
+        </aura:if>
+
+        <!-- PRIMEIRA TELA______________________-->
+        <aura:if isTrue="{!v.etapaAtual == 1}">
+          <div class="body67987">
+            <div class="fieldsContainer7643">
+              <!--_______________________________________CONTORLADOR______________________________________________________-->
+              <div class="field54">
+                <label>Assunto</label>
+                <div class="helpText"
+                  >Escolha o assunto relacionado à tarefa que está sendo
+                  registrada.</div
+                >
+                <select
+                  onchange="{!c.handleSubjectChange}"
+                  data-field="AssuntoJuridco__c"
+                >
+                  <option value="{!v.assuntoSelecionado}"
+                    >Selecione um assunto</option
+                  >
+                  <aura:iteration items="{!v.assuntosJuridicos}" var="assunto">
+                    <option value="{!assunto}">{!assunto}</option>
+                  </aura:iteration>
+                </select>
+              </div>
+              <!-- _________________________________________________________________________________________________ -->
+
+              <!-- ### Campos Dependentes ###  -->
+              <aura:if
+                isTrue="{! 
+                                             v.assuntoSelecionado == 'Defesa de processo administrativo' ||                                              
+                                             v.assuntoSelecionado == 'Prorrogação de entrega' || 
+                                             v.assuntoSelecionado == 'Defesa processo judicial' || 
+                                             v.assuntoSelecionado == 'Resposta a notificação'
+                                             }"
+              >
+                <div class="field54">
+                  <label>Data de recebimento</label>
+                  <div class="helpText">
+                    Qual a data de recebimento do primeiro
+                    pedido/empenho/OC/contrato?
+                  </div>
+                  <input
+                    type="date"
+                    value="{!v.taskRecord.Qual_a_data_de_recebimento_do_primei__c}"
+                    onchange="{!c.handleChange}"
+                    data-field="Qual_a_data_de_recebimento_do_primei__c"
+                  />
+                  <!-- ⚠️ Mensagem de erro -->
+                  <div
+                    id="error-Qual_a_data_de_recebimento_do_primei__c"
+                    class="ErrorMessage"
+                  >
+                    Este campo é obrigatório.
+                  </div>
+
+                  <div class="helpText" style="margin-top: 12px;">
+                    Anexe o comprovante de recebimento/e-mail aos relacionados.
+                  </div>
+                  <div
+                    id="comprovanteRecebimento"
+                    class="{! 'fileContainer3113 ' + (v.comprovanteRecebimentoUploaded ? ' success-style' : '') }"
+                  >
+                    <aura:if isTrue="{!v.comprovanteRecebimentoUploaded}">
+                      <p>Comprovante enviado ✅</p>
+                      <div
+                        style="display:none"
+                        class="deleteDocument4323q"
+                        onclick="{!c.deleteFile}"
+                      >
+                        X
+                      </div>
+                      <aura:set attribute="else">
+                        <lightning:fileUpload
+                          aura:id="ComprovanteDeRecebimento"
+                          class="file"
+                          name="fileUploader"
+                          recordId="{!v.recordId}"
+                          onuploadfinished="{!c.handleFileUploaded}"
+                        />
+                      </aura:set>
+                    </aura:if>
+                  </div>
+                  <!-- ⚠️ Mensagem de erro do comprovante -->
+                  <div id="error-ComprovanteDeRecebimento" class="ErrorMessage">
+                    É necessário anexar o comprovante.
+                  </div>
+                </div>
+                <div class="field54">
+                  <label>Data prevista para resolução</label>
+                  <div class="helpText">
+                    Qual a data prevista para a resolução da ocorrência?
+                  </div>
+                  <input
+                    type="text"
+                    value="{!v.taskRecord.Qual_a_data_prevista_para_a_resol__c}"
+                    onchange="{!c.handleChange}"
+                    data-field="Qual_a_data_prevista_para_a_resol__c"
+                    placeholder="O equipamento será entregue em 12 dias corridos."
+                    maxlength="250"
+                  />
+                  <!-- ⚠️ Mensagem de erro -->
+                  <div
+                    id="error-Qual_a_data_prevista_para_a_resol__c"
+                    class="ErrorMessage"
+                  >
+                    Este campo é obrigatório.
+                  </div>
+                </div>
+
+                <div class="field54">
+                  <label>Motivo do envio da ocorrência</label>
+
+                  <div class="helpText">
+                    Qual o motivo do envio da ocorrência pelo cliente?
+                  </div>
+                  <textarea
+                    rows="2"
+                    onchange="{!c.handleChange}"
+                    data-field="Qual_o_motivo_do_envio_da_ocorr_nc__c"
+                    placeholder="Descreva de forma detalhada e com datas."
+                    maxlength="250"
+                  >
+                    {!v.taskRecord.Qual_o_motivo_do_envio_da_ocorr_nc__c}
+                  </textarea>
+                  <!-- ⚠️ Mensagem de erro -->
+                  <div
+                    id="error-Qual_o_motivo_do_envio_da_ocorr_nc__c"
+                    class="ErrorMessage"
+                  >
+                    Este campo é obrigatório.
+                  </div>
+                </div>
+
+                <div class="field54">
+                  <label>Demais informações necessárias</label>
+
+                  <div class="helpText">
+                    Inclua as demais informações necessárias para a resolução da
+                    tarefa. Foi realizada alguma diligência ou contato com o
+                    cliente nesse meio tempo?
+                  </div>
+                  <textarea
+                    rows="2"
+                    onchange="{!c.handleChange}"
+                    data-field="Inclua_as_demais_informa_es_necess__c"
+                    placeholder="Repasse informações completas."
+                    maxlength="250"
+                  >
+                    {!v.taskRecord.Inclua_as_demais_informa_es_necess__c}
+                  </textarea>
+                  <!-- ⚠️ Mensagem de erro -->
+                  <div
+                    id="error-Inclua_as_demais_informa_es_necess__c"
+                    class="ErrorMessage"
+                  >
+                    Este campo é obrigatório.
+                  </div>
+                </div>
+
+                <div class="field54">
+                  <label>Houve troca de modelo ou versão?</label>
+
+                  <div class="helpText">
+                    Acontecerá alguma troca de modelo ou entrega parcial?
+                  </div>
+                  <input
+                    type="text"
+                    value="{!v.taskRecord.Acontecer_alguma_troca_de_modelo_ou__c}"
+                    onchange="{!c.handleChange}"
+                    data-field="Acontecer_alguma_troca_de_modelo_ou__c"
+                    placeholder="Responda de forma completa e com datas."
+                    maxlength="250"
+                  />
+                  <!-- ⚠️ Mensagem de erro -->
+                  <div
+                    id="error-Acontecer_alguma_troca_de_modelo_ou__c"
+                    class="ErrorMessage"
+                  >
+                    Este campo é obrigatório.
+                  </div>
+                </div>
+              </aura:if>
+              <!-- ### Campos Dependentes ###  -->
+            </div>
+            <div class="footer653">
+              <aura:if isTrue="{!v.assuntoSelecionado != ''}">
+                <div onclick="{!c.irParaProximaEtapa}" class="salvar-btn"
+                  >Próximo</div
+                >
+              </aura:if>
+            </div>
+          </div>
+        </aura:if>
+
+        <!-- SEGUNDA TELA -->
+        <aura:if isTrue="{!v.etapaAtual == 2}">
+          <div class="body67987">
+            <div class="fieldsContainer7643">
+              <div class="field54">
+                <label>Data de vencimento</label>
+                <input
+                  type="date"
+                  value="{!v.taskRecord.ActivityDate}"
+                  onchange="{!c.handleChange}"
+                  data-field="ActivityDate"
+                  min="{!v.dataMinima}"
+                />
+                <div class="helpText"
+                  >Informe a data de vencimento da tarefa.</div
+                >
+              </div>
+            </div>
+          </div>
+          <div class="footer653">
+            <div onclick="{!c.voltarEtapaAnterior}" class="voltar-btn"
+              >Voltar</div
+            >
+            <div onclick="{!c.save}" class="salvar-btn">Salvar</div>
+          </div>
+        </aura:if>
+      </div>
+    </div>
+  </aura:if>
+</aura:component>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reflexos_patol_gicos_Fonoaudiologia__c</fullName>
+    <externalId>false</externalId>
+    <label>Reflexos patológicos</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Não</fullName>
+                <default>false</default>
+                <label>Não</label>
+            </value>
+            <value>
+                <fullName>Busca</fullName>
+                <default>false</default>
+                <label>Busca</label>
+            </value>
+            <value>
+                <fullName>Mordida</fullName>
+                <default>false</default>
+                <label>Mordida</label>
+            </value>
+            <value>
+                <fullName>Travamento</fullName>
+                <default>false</default>
+                <label>Travamento</label>
+            </value>
+            <value>
+                <fullName>Vômito</fullName>
+                <default>false</default>
+                <label>Vômito</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

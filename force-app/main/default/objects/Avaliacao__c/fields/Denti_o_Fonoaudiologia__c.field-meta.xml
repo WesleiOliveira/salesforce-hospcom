@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Denti_o_Fonoaudiologia__c</fullName>
+    <externalId>false</externalId>
+    <label>Dentição</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Ausente</fullName>
+                <default>false</default>
+                <label>Ausente</label>
+            </value>
+            <value>
+                <fullName>Completa</fullName>
+                <default>false</default>
+                <label>Completa</label>
+            </value>
+            <value>
+                <fullName>Incompleta</fullName>
+                <default>false</default>
+                <label>Incompleta</label>
+            </value>
+            <value>
+                <fullName>Bom estado</fullName>
+                <default>false</default>
+                <label>Bom estado</label>
+            </value>
+            <value>
+                <fullName>Médio estado</fullName>
+                <default>false</default>
+                <label>Médio estado</label>
+            </value>
+            <value>
+                <fullName>Mau estado</fullName>
+                <default>false</default>
+                <label>Mau estado</label>
+            </value>
+            <value>
+                <fullName>Próteses bem-adaptadas</fullName>
+                <default>false</default>
+                <label>Próteses bem-adaptadas</label>
+            </value>
+            <value>
+                <fullName>Prósteses mal-adaptadas</fullName>
+                <default>false</default>
+                <label>Prósteses mal-adaptadas</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

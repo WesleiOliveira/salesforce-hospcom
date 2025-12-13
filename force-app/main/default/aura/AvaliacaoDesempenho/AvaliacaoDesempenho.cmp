@@ -1,0 +1,19 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+    <aura:attribute name="bdisabled" type="Boolean" default="true" />
+    <aura:attribute name="fields" type="List" 
+                    default="['Tenho a capacidade de estabelecer vínculos, proximidades e parcerias que favoreçam o ambiente e a entrega de resultados?', 'C1__c', 'Tenho inteligencia emocional para enfrentar os osbtáculos e superá-los?', 'C2__c']"/>
+    <h1 style="text-align:end">
+        <lightning:button label="Novo" title="Neutral action" onclick="{!c.refresh}" disabled="{!v.bdisabled}"/>
+    </h1><br/>
+    <h1 style="text-transform:upperCase">
+    <lightning:recordEditForm objectApiName="Avaliacao_de_Desempenho__c"     
+  onsuccess="{!c.handleSuccess}">
+        <lightning:inputField fieldName="C3__c">TESTE</lightning:inputField>
+    </lightning:recordEditForm>
+    </h1>
+    <aura:attribute name="filetype" type="List" />
+    <aura:attribute name="multiple" type="Boolean" default="true" />
+    <aura:attribute name="disabled" type="Boolean" default="true" />
+    <aura:attribute name="recordId" type="String" />      
+    
+</aura:component>

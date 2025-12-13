@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valida_rota_de_entrega</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(ISPICKVAL(Status__c, &quot;Em rota de entrega&quot;), Prazo_de_entrega__c = null)</errorConditionFormula>
+    <errorMessage>O prazo de entrega do item deve ser preenchido para itens com o status EM ROTA DE ENTREGA.</errorMessage>
+</ValidationRule>

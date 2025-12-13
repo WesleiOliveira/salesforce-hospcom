@@ -1,0 +1,237 @@
+<aura:component
+  extends="c.ApexHelper"
+  controller="ChecklistController"
+  implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+  access="global"
+>
+  <ltng:require styles="{!$Resource.fontAwesome }" />
+
+  <!-- Declaração das variáveis -->
+  <aura:attribute name="campos" type="Object[]" default="[]" />
+  <aura:attribute
+    name="tituloChecklist"
+    type="String"
+    default="Título do Checklist"
+  />
+  <aura:attribute
+    name="descricaoChecklist"
+    type="String"
+    default="Descrição."
+  />
+  <aura:attribute name="secoes" type="Object[]" default="[]" />
+
+  <aura:attribute name="checklists" type="List" />
+  <aura:attribute name="checklist" type="Object" />
+  <aura:attribute name="isLoading" type="Boolean" default="false" />
+  <aura:attribute name="isPopupOpen" type="Boolean" default="false" />
+  <aura:attribute name="selectedChecklist" type="Object" />
+  <aura:attribute name="selectedModeloId" type="Id" />
+  <aura:attribute name="newChecklist" type="Object" />
+  <aura:attribute name="builderWindow" type="Boolean" default="false" />
+  <aura:attribute name="fase" type="Integer" default="0" />
+  <aura:attribute name="changesUnsaved" type="Boolean" default="false" />
+
+  <aura:handler name="init" value="{!this}" action="{!c.loadList}" />
+
+  <div>
+    <aura:if isTrue="{!v.isPopupOpen}">
+      <div class="overlayPopup" id="overlayPopup">
+       
+        <div class="pop-up624">
+             <div class="close-button" onclick="{!c.closePopup}"> X </div>
+          <!-- Renderização do Checklist -->
+            <div>
+          <aura:if isTrue="{!not(empty(v.checklist))}">
+            <div class="custom-checklist-card">
+              <div class="custom-title">{!v.checklist.titulo}</div>
+              <lightning:card
+                class="titulodomodelo"
+                title="{!v.checklist.titulo}"
+              >
+                <aura:if isTrue="{!not(empty(v.checklist.descricao))}">
+                  <p>{!v.checklist.descricao}</p>
+                </aura:if>
+
+                <aura:iteration items="{!v.checklist.secoes}" var="secao">
+                  <div>
+                    <h3>{!secao.titulo}</h3>
+
+                    <aura:iteration items="{!secao.campos}" var="campo">
+                      <div class="custom-field-container">
+                        <aura:if isTrue="{!campo.tipo == 'select'}">
+                          <lightning:select
+                            name="{!campo.nome}"
+                            label="{!campo.label}"
+                            required="{!campo.obrigatorio}"
+                            onchange="{!c.handleInputChange}"
+                            class="custom-select"
+                          >
+                            <aura:iteration items="{!campo.opcoes}" var="opcao">
+                              <option value="{!opcao}">{!opcao}</option>
+                            </aura:iteration>
+                          </lightning:select>
+                          <aura:set attribute="else">
+                            <lightning:input
+                              name="{!campo.nome}"
+                              label="{!campo.label}"
+                              type="{!campo.tipo == 'boolean' ? 'checkbox' : (campo.tipo == 'numero' ? 'number' : (campo.tipo == 'data' ? 'date' : 'text'))}"
+                              fieldLevelHelp="{!campo.ajuda}"
+                              required="{!campo.obrigatorio}"
+                              readonly="true"
+                              class="custom-input"
+                            />
+                          </aura:set>
+                        </aura:if>
+                      </div>
+                    </aura:iteration>
+                  </div>
+                </aura:iteration>
+              </lightning:card>
+            </div>
+          </aura:if>
+                </div>
+        </div>
+      </div>
+    </aura:if>
+
+    <div class="mainDiv9632">
+      <!--_______________________SPINNER__________________________________-->
+     <aura:if isTrue="{!v.isLoading}">
+    <div class="custom-backdrop">
+        <div class="custom-spinner"></div>
+    </div>
+</aura:if>
+      <!--_________________________________________________________-->
+
+      <div class="head1235"> <div class="mainTitle">CHECKLIST <i aria-hidden="true" class="fa fa-check-square-o"></i> </div> </div>
+      <div> </div>
+      <div id="voltarToppo5432" style="display:none" onclick="{!c.voltar}">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
+      </div>
+      <div class="body43425">
+        <!--_______________Lista de checklists_________________-->
+        <aura:if isTrue="{!v.fase == 0}">
+          <div
+            style="justify-self: center;font-weight: 900;font-size: 20px;color: #185783;"
+          >
+            MODELOS
+          </div>
+
+          <div class="listContainer234">
+            <aura:iteration items="{!v.checklists}" var="item">
+              <div
+                class="itemList52"
+                data-id="{!item.Id}"
+                onclick="{!c.openChecklist}"
+              >
+                {!item.Name}
+              </div>
+            </aura:iteration>
+          </div>
+        </aura:if>
+
+        <!--______________________________________________________-->
+
+        <!--_______________________TELA DE CONTRUÇÃO DE CHECKLISTS__________________________________-->
+        <aura:if isTrue="{!v.fase == 1}">
+          <!-- Importa a biblioteca Sortable.js -->
+          <ltng:require
+            scripts="{!$Resource.Sortable}"
+            afterScriptsLoaded="{!c.onScriptsLoaded}"
+          />
+          <div>
+            <div class="custom-container">
+              <!-- Sidebar: Tipos de campos -->
+              <div class="custom-sidebar">
+                <div class="custom-sidebar-title">Tipos de Campos</div>
+                <ul id="sourceList" class="custom-field-type-list">
+                  <li
+                    class="custom-field-type-item"
+                    data-icon="fa fa-font"
+                    data-tipo="texto"
+                    ><i class="fa fa-font" aria-hidden="true"></i
+                    ><div class="legendabloco52"> Texto </div>
+                  </li>
+                  <li
+                    class="custom-field-type-item"
+                    data-icon="fa fa-hashtag"
+                    data-tipo="numero"
+                    ><i class="fa fa-hashtag" aria-hidden="true"></i
+                    ><div class="legendabloco52"> Número </div>
+                  </li>
+                  <li
+                    class="custom-field-type-item"
+                    data-icon="fa fa-calendar-o"
+                    data-tipo="data"
+                    ><i class="fa fa-calendar-o" aria-hidden="true"></i
+                    ><div class="legendabloco52"> Data </div></li
+                  >
+                  <li
+                    class="custom-field-type-item"
+                    data-icon="fa fa-list"
+                    data-tipo="select"
+                    ><i class="fa fa-list" aria-hidden="true"></i
+                    ><div class="legendabloco52"> Lista </div></li
+                  >
+                  <li
+                    class="custom-field-type-item"
+                    data-icon="fa fa-check-square-o"
+                    data-tipo="boolean"
+                    ><i class="fa fa-check-square-o" aria-hidden="true"></i
+                    ><div class="legendabloco52"> Caixa de seleção </div></li
+                  >
+                </ul>
+              </div>
+
+              <div class="custom-builder">
+                <!-- Cabeçalho editável do checklist -->
+                <div class="custom-checklist-header">
+                  <input
+                    type="text"
+                    class="custom-title-input"
+                    value="{!v.tituloChecklist}"
+                    placeholder="Digite o título do checklist"
+                    oninput="{!c.atualizarTitulo}"
+                  />
+                  <textarea
+                    class="custom-description-textarea"
+                    placeholder="Digite a descrição do checklist"
+                    oninput="{!c.atualizarDescricao}"
+                    >{!v.descricaoChecklist}</textarea
+                  >
+                </div>
+
+                <!-- Aqui entram as seções dinamicamente -->
+                <div id="canvasSecoes" class="custom-section-canvas"></div>
+
+                <!-- Botão para adicionar nova seção -->
+                <lightning:button
+                  label="Adicionar Seção"
+                  onclick="{!c.adicionarSecao}"
+                  class="custom-add-section-button"
+                />
+              </div>
+            </div>
+          </div>
+        </aura:if>
+      </div>
+      <!--_______________________________________________________________________-->
+
+      <div class="footer3542">
+        <div
+          id="voltar-btn542"
+          class="btn-voltar"
+          style="display:none;"
+          onclick="{!c.voltar}"
+          >CANCELAR</div
+        >
+        <div id="btn-salvar" class="btn-salvar" onclick="{!c.saveChecklist}"
+          >SALVAR</div
+        >
+        <div id="criar-btn342" class="btn-criar2134" onclick="{!c.criar}"
+          >Novo Modelo</div
+        >
+      </div>
+    </div>
+  </div>
+</aura:component>

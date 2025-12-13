@@ -1,0 +1,36 @@
+<template>
+    <lightning-spinner 
+      alternative-text="Loading" 
+      if:true={loading} 
+      message="Loading" 
+      size="xx-small"
+      variant="base"
+    ></lightning-spinner>
+    <lightning-card title= "Auditoria" >
+        <div class="slds-p-around_medium">
+            <!-- Situação -->
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <lightning-combobox name="situacao" label="Situação" value={situacao} placeholder="Selecione"
+                        options={situacaoOptions} onchange={handleSituacaoChange} disabled={auditado} required="True">
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col">
+                    <lightning-input name="data" label="Data" type="date" value={data} onchange={handleDataChange} disabled={auditado} required="True">
+                    </lightning-input>
+                </div>
+            </div>
+        </div>
+        <!-- Observações -->
+        <div>
+            <lightning-textarea class="slds-m-horizontal_medium" name="obs" label="Observações" value={observacoes} onchange={handleObsChange} disabled={auditado} required="True">
+            </lightning-textarea>
+        </div>
+
+        <!-- Botão Salvar -->
+        <div if:true={botao} class="slds-m-top_medium slds-m-left_medium">
+            <lightning-button label="Salvar Auditoria" variant="brand" onclick={handleSave} >
+            </lightning-button>
+        </div>
+    </lightning-card>
+</template>

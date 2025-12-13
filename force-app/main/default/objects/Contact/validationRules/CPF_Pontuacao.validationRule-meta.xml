@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CPF_Pontuacao</fullName>
+    <active>true</active>
+    <errorConditionFormula>CPF__c != null &amp;&amp; LEN(CPF__c) &lt; 14</errorConditionFormula>
+    <errorDisplayField>CPF__c</errorDisplayField>
+    <errorMessage>O CPF deve estar no formato xxx.xxx.xxx-xx</errorMessage>
+</ValidationRule>

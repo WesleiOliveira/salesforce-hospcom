@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <submitter>Locacao</submitter>
+        <type>group</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>Sistema_todos</submitter>
+        <type>group</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>Administrador_do_sistema</submitter>
+        <type>role</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>OrderNumber</field>
+        <field>Account</field>
+        <field>Demonstracao__c</field>
+        <field>TotalAmount</field>
+        <field>EffectiveDate</field>
+        <field>Prazo_de_entrega__c</field>
+        <field>Natureza_de_Opera_o__c</field>
+        <field>Owner</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Gerente__c</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Order.Natureza_de_Opera_o__c</field>
+                <operation>equals</operation>
+                <value>DEMONSTRAÇÃO</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>ApproveRecord</ifCriteriaNotMet>
+        <label>Aprovação da linha</label>
+        <name>Gerente_de_linha</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Gerente_de_linha_2__c</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Order.Gerente_de_linha_2__c</field>
+                <operation>notEqual</operation>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>ApproveRecord</ifCriteriaNotMet>
+        <label>Aprovação da linha 2</label>
+        <name>Gerente_de_linha_2</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Gerente_regional__c</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <label>Gerente regional</label>
+        <name>Gerente_regional</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <emailTemplate>unfiled$public/Aprova_o_de_pedido</emailTemplate>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>AND(
+OR(
+TEXT(Status) == &apos;Rascunho&apos;,
+TEXT(Status) == &apos;Reprovado&apos;
+),
+OR(
+TEXT(Natureza_de_Opera_o__c) == &apos;DEMONSTRAÇÃO&apos;,
+TEXT(Natureza_de_Opera_o__c) == &apos;REMESSA DE COMODATO&apos;,
+TEXT(Natureza_de_Opera_o__c) == &apos;EMPRÉSTIMO&apos;
+),
+RecordType.Name != &quot;Representação&quot;
+)</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>A_o_interna_verdadeiro</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Ag_Aprovacao_locacao</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Enviar_verdadeiro</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Acao_interna_verdadeiro</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Pedido_reprovado</name>
+            <type>Alert</type>
+        </action>
+        <action>
+            <name>Status_Reprovado</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>A_o_interna_verdadeiro</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Status_Ag_Apr_Comercial</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Comercial - Pedido de Demo</label>
+    <processOrder>13</processOrder>
+    <recallActions>
+        <action>
+            <name>Status_Rascunho</name>
+            <type>FieldUpdate</type>
+        </action>
+    </recallActions>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

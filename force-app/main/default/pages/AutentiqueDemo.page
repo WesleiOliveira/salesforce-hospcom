@@ -1,0 +1,276 @@
+<apex:page standardController="Demonstracao__c" extensions="AutentiqueDemo" showHeader="false" showChat="false" standardStylesheets="false" docType="html-5.0" action="{!inserir}">
+    <apex:slds />
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <head>
+            <title>Assinatura Eletrônica</title>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <script src="{!$Resource.JQuery}"></script>
+
+
+            <link href="{!URLFOR($Resource.Bootstrap, 'css/bootstrap.css')}" rel="stylesheet"/>
+            <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css"/>
+            <link href="metro-icons.css" rel="stylesheet"/> 
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rancho&effect=anaglyph"/>
+            <script src="{!URLFOR($Resource.Bootstrap, 'js/bootstrap.min.js')}"></script>
+            <script src="https://cdn.metroui.org.ua/v4.3.2/js/metro.min.js"></script>       
+
+
+            
+            <style>
+                /* CABECALHO ================================================== */
+
+                /* cabecalho */
+                .cabecalho{
+                    background-color: #f7f9fb;
+                    padding-top: 6px;
+                    padding-bottom: 3px;
+                }.cabecalho .icone{
+                    width:52px;
+                    padding-right: 8px!important;
+                }.cabecalho .icone .imagem{
+                    width:32px;
+                    height:32px;
+                    border-radius:3px;
+                }.cabecalho .nome{
+                    font-size: .8125rem;
+                    color: rgb(90, 90, 90);
+                }.cabecalho .titulo{
+                    font-size: 1.125rem;
+                    font-weight: 400;
+                    line-height: 1.25;
+                }
+                
+                /* CONTEUDO =========================================== */
+                
+                .conteudo .mensagens{
+                    margin-top:6px!important;
+                }.conteudo .mensagens small, .conteudo .mensagens small span.nor{
+                    padding-left:20px;
+                    color:#00a500;
+                }.conteudo .mensagens small span.dif{
+                    border: 1px solid red;
+                    border-radius; 3;
+                    font-weight:bold;
+                    background-color:white!important;
+                    color:red;
+                }.conteudo .mensagens .alert{
+                    padding: 6px!important;
+                    margin-bottom:6px!important;
+                }.conteudo .botoes td{
+                    text-align:center!important;
+                    width:33%!important;
+                }
+            
+                .slds-scope li {
+                    margin-left: 30px !important;
+                }
+                .slds-scope .slds-progress_vertical .slds-progress__item:before, .slds-scope .slds-progress_vertical .slds-progress__item:after {
+                    left: calc((3.7rem / 1.4) - 1px) !important;
+                    width: 8px !important;
+                }
+                .slds-scope .slds-progress_vertical .slds-progress__item_content{
+                    margin-top: 0.65rem !important;
+                    padding-bottom: 1.1rem !important;
+                }
+                .slds-scope .slds-progress__marker {
+                    width: 2.5rem !important;
+                    height: 2.5rem !important;
+                }
+                .slds-scope .slds-progress_vertical .slds-progress__item {
+                    padding: 25px;
+                }
+                .slds-scope:not(html), .slds-scope body {
+                    font-size: .925rem !important;
+                }
+                .slds-scope .slds-icon_xx-small, .slds-scope .slds-icon--xx-small {
+                    width: 2rem !important;
+                    height: 2rem !important;
+                }
+                td{
+                    vertical-align:middle !important;
+                }               
+                
+            </style>
+            <script>
+                function atualiza(){
+                    $("#divStatus").load(location.href + " #divStatus");
+                }
+                
+                function exibeSpinner(){
+                    $('#spinnerDiv').show();
+                }
+            </script>
+        </head>
+
+        <body style="margin-top:7px;">
+            <div class="bootstrap-iso">
+                <div class="container-fluid">
+                    <apex:form >
+                        
+                <!-- cabeçalho -->
+                        <div class="row cabecalho">
+                            <div class="col-xs-100">
+                                <table style="width:100%;" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td rowspan="2" class="icone">
+                                            <img src="https://painel.autentique.com.br/assets/autentique-logo.svg" />
+                                        </td>
+                                        <td class="nome">
+                                            Assinatura via Autentique
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="titulo">
+                                                  CONTRATO DE&nbsp;<apex:outputText value="{!if(Demonstracao__c.RecordTypeId=='0125A000001dwg3QAA','DEMONSTRAÇÃO','EMPRÉSTIMO') }"/>&nbsp;Nº.: {!Contrato.Name}
+                                        </td>
+                                        <td>
+                                        <div style="text-align:right;">
+                <apex:commandButton action="{!enviar}" styleClass="button secondary" value="Enviar" style="height:26px;" rendered="{!IF(enviado == false && contemDocs == true && (Contrato.Nome_da_Testemunha__c != null && Contrato.E_mail_da_Testemunha__c != null), true, false)}" />
+                                        </div>
+                                        </td>                                       
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>                    
+                    </apex:form>
+                </div>
+            </div>
+            <br/>
+            <div style="text-align:right;">
+                <apex:form >
+                    <apex:commandLink styleClass="slds-button slds-button_icon slds-button_icon-border-filled"  title="Atualizar" action="{!atualizar}" oncomplete="atualiza();" rendered="{!IF(enviado == true, true, false)}">
+                          <svg class="slds-button__icon" aria-hidden="true">
+                            <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#refresh')}"></use>
+                          </svg> 
+                    </apex:commandLink>
+                </apex:form>
+            </div>
+            
+            <!-- SPINNER -->
+                <div id="spinnerDiv" class="slds-spinner_container" style="display: none">
+                    <div role="status" class="slds-spinner slds-spinner--large slds-spinner--brand">
+                        <div class="slds-spinner__dot-a"></div>
+                        <div class="slds-spinner__dot-b"></div>
+                    </div>
+                </div>
+            <!-- / SPINNER -->
+            
+            <div id="divStatus">
+            <apex:outputPanel id="status" >
+                <apex:outputText rendered="{!IF(enviado == true, true, false)}">
+                      <div class="slds-progress slds-progress_vertical">
+                      <ol class="slds-progress__list">
+                        <li class="slds-progress__item slds-is-completed">
+                          <apex:outputText rendered="{!IF(stts > 1, true, false)}">
+                              <span class="slds-icon_container slds-icon-utility-success slds-progress__marker slds-progress__marker_icon" title="Complete">
+                            <svg class="slds-icon slds-icon_xx-small" aria-hidden="true">
+                              <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#success')}"></use>
+                            </svg>
+                            <span class="slds-assistive-text">Complete</span>
+                              </span>
+                            </apex:outputText>
+                            <apex:outputText rendered="{!IF(stts == 1, true, false)}">
+                          <div class="slds-progress__marker">
+                            <span class="slds-assistive-text"></span>
+                          </div>
+                            </apex:outputText>
+                          <div class="slds-progress__item_content slds-grid slds-grid_align-spread"><b>Assinatura do cliente</b></div>
+                        </li>
+                        <li class="{!IF(stts == 2,'slds-progress__item slds-is-active', IF(stts > 2,'slds-progress__item slds-is-completed', 'slds-progress__item'))}">
+                            <apex:outputText rendered="{!IF(stts > 2, true, false)}">
+                              <span class="slds-icon_container slds-icon-utility-success slds-progress__marker slds-progress__marker_icon" title="Complete">
+                            <svg class="slds-icon" aria-hidden="true">
+                              <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#success')}"></use>
+                            </svg>
+                            <span class="slds-assistive-text">Complete</span>
+                              </span>
+                            </apex:outputText>
+                            <apex:outputText rendered="{!IF(stts == 2, true, false)}">
+                          <div class="slds-progress__marker">
+                            <span class="slds-assistive-text">Active</span>
+                          </div>
+                            </apex:outputText>
+                            <apex:outputText rendered="{!IF(stts < 2, true, false)}">
+                          <div class="slds-progress__marker">
+                            <span class="slds-assistive-text"></span>
+                          </div>
+                            </apex:outputText>
+                            <div class="slds-progress__item_content slds-grid slds-grid_align-spread"><b>Aprovação financeira</b></div>
+                        </li>
+                          <li class="{!IF(stts == 3,'slds-progress__item slds-is-active', IF(stts > 3,'slds-progress__item slds-is-completed', 'slds-progress__item'))}">
+                            <apex:outputText rendered="{!IF(stts > 3, true, false)}">
+                              <span class="slds-icon_container slds-icon-utility-success slds-progress__marker slds-progress__marker_icon" title="Complete">
+                            <svg class="slds-icon slds-icon_xx-small" aria-hidden="true">
+                              <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#success')}"></use>
+                            </svg>
+                            <span class="slds-assistive-text">Complete</span>
+                              </span>
+                            </apex:outputText>
+                            <apex:outputText rendered="{!IF(stts == 3, true, false)}">
+                          <div class="slds-progress__marker">
+                            <span class="slds-assistive-text">Active</span>
+                          </div>
+                            </apex:outputText>
+                              <apex:outputText rendered="{!IF(stts < 3, true, false)}">
+                          <div class="slds-progress__marker">
+                            <span class="slds-assistive-text"></span>
+                          </div>
+                            </apex:outputText>
+                              <div class="slds-progress__item_content slds-grid slds-grid_align-spread"><b>Aprovação jurídica</b></div>
+                        </li>
+                          <li class="{!IF(stts == 4,'slds-progress__item slds-is-active', IF(stts > 4 ,'slds-progress__item slds-is-completed', 'slds-progress__item'))}">
+                            <apex:outputText rendered="{!IF(stts >= 5, true, false)}">
+                              <span class="slds-icon_container slds-icon-utility-success slds-progress__marker slds-progress__marker_icon" title="Complete">
+                            <svg class="slds-icon slds-icon_xx-small" aria-hidden="true">
+                              <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#success')}"></use>
+                            </svg>
+                            <span class="slds-assistive-text">Complete</span>
+                              </span>
+                            </apex:outputText>
+                              <apex:outputText rendered="{!IF(stts <= 4, true, false)}">
+                          <div class="slds-progress__marker">
+                            <span class="slds-assistive-text"></span>
+                          </div>
+                            </apex:outputText>
+                              <div class="slds-progress__item_content slds-grid slds-grid_align-spread"><b>Assinaturas finalizadas</b></div>
+                         </li>
+                      </ol>
+        
+                    </div>   
+                    <br/>
+                    <apex:outputText rendered="{!IF(stts > 4, true, false)}">
+                          <p>
+                             <span class="slds-icon_container slds-icon-standard-account" title="description of icon when needed">  
+                                <svg aria-hidden="true" class="slds-icon">  
+                                    <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#document_reference')}"></use>
+                                </svg>  
+                                    <span class="slds-assistive-text">Documento</span> 
+                            </span>
+                              Clique <a href="https://api.autentique.com.br/documentos/{!Contrato.idDocAutentique__c}/assinado.pdf">aqui</a> para acessar o documento assinado 
+
+                        </p>
+                    </apex:outputText>
+                    <!--<apex:outputText value="{!IF(status == '1', 'Documento na fase 1 - aguardando assinatura do cliente e da testemunha', IF(status == '2', 'Documento na fase 2 - aguardando aprovação financeira', ''))}"/>-->
+                </apex:outputText>
+            </apex:outputPanel>
+            </div>
+            <apex:outputText rendered="{!IF(Contrato.Nome_da_Testemunha__c == null || Contrato.E_mail_da_Testemunha__c == null, true, false)}">• Os campos <b>Nome da Testemunha</b> e <b>E-mail da Testemunha</b> devem ser preenchidos.<br/></apex:outputText>
+            <apex:outputText rendered="{!IF(contemDocs == false, true, false)}">• O contrato não possui anexos.</apex:outputText>
+            
+            <apex:outputPanel id="msg">
+            <apex:outputText rendered="{!IF(Mensagem != '',true,false)}" >
+            <div style="margin-left: 50px;">
+                <div>
+                    <div role="alert" style="font-weight:bold;color:{!Cor}">
+                        {!Mensagem}
+                    </div>
+                </div>
+            </div>
+            <br/>
+            </apex:outputText>
+        </apex:outputPanel>
+        </body>
+    </html>
+</apex:page>

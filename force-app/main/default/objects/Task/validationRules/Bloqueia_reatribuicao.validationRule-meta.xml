@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bloqueia_reatribuicao</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+NOT(ISNEW()),
+ISCHANGED(OwnerId),
+ Subject == &apos;Departamento Juridico&apos;,
+ $Profile.Id != &apos;00e6e000002JQUa&apos; /* id do perfil Juridico*/
+)</errorConditionFormula>
+    <errorDisplayField>OwnerId</errorDisplayField>
+    <errorMessage>Não é possível reatribuir a tarefa após a criação.
+Cancele a tarefa atual e crie uma nova com as informações corretas.</errorMessage>
+</ValidationRule>

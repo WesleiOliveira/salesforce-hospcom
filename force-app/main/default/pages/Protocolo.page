@@ -1,0 +1,354 @@
+<apex:page standardController="Protocolo__c" renderAs="pdf" applyHtmlTag="false" showHeader="false">
+    <head>
+        <style type="text/css" media="print">
+            @page {
+                size:A4;
+                margin:150px 50px 120px 50px;
+                @top-center {
+                    content:element(header);
+                }
+                @bottom-center {
+                    content:element(footer);
+                }
+            }
+            .pagenumber:before {
+                content:counter(page);
+            }
+            .pagecount:before {
+                content:counter(pages);
+            }
+            div.header {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(header);
+                height:60px;
+            }
+            div.content {
+            }
+            div.footer {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(footer);
+                height:20px;
+                text-align:right;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                font-weight:normal;
+            }
+        </style>
+        <style type="text/css">
+            .titulo{
+                width:100%;
+                font-family:arial, verdana, sans-serif;
+                font-size:15px;
+                font-weight:bold; 
+                text-align:center;
+                margin-bottom:15px;
+            }
+            .tabela_geral tr{
+                //-fs-table-paginate:paginate;
+                page-break-inside:avoid;
+            }
+            .tabela_item{
+                table-layout: fixed;
+                page-break-inside:avoid;
+                border-collapse: collapse;
+            }
+            .tabela_item tr{
+                table-layout: fixed;
+            }
+            .incolor{
+                //padding-right: 10px;
+                padding-top: 4px;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                vertical-align:top;
+                text-align:right;
+            }
+            .invisivel{
+                padding: 0;
+            }
+            .cabecalho{
+                padding: 3px;
+                font-family:arial, verdana, sans-serif;
+                font-size:11px;
+                font-weight:bold; 
+                vertical-align:top;
+                background-color: #c3c3c3;
+                border-right: 1px solid #c3c3c3;
+                border-bottom: 1px solid #c3c3c3;
+                border-top: 1px solid #c3c3c3;
+                border-left: 1px solid #c3c3c3
+
+            }
+            .cab_esq{
+                border-left: 1px solid #c3c3c3
+            }
+            .celula{
+                padding: 3px;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                vertical-align:middle;
+                border-top: 1px solid #c3c3c3;
+                border-right: 1px solid #c3c3c3;
+                border-bottom: 1px solid #c3c3c3;
+                line-height:120%;
+                //word-wrap: break-word;
+                overflow: hidden;
+                text-transform: uppercase;
+            }
+            .cel_esq{
+                border-left: 1px solid #c3c3c3;
+            }
+            .descricao{
+                text-align: justify;
+                font-family:arial, verdana, sans-serif;
+                font-size:15px;
+                //white-space:pre-wrap;
+            }
+            .total{
+                border-left: 1px solid #c3c3c3;
+            }
+            .destaque{
+                font-weight: bold;
+            }
+            .clausula_texto{
+                font-family:arial, verdana, sans-serif;
+                font-size:11.5px;
+                text-align:justify;
+                text-justify:inter-word;
+                line-height:120%;
+                text-indent:50px;
+                vertical-align:top;
+            }
+            .maiuscula{
+                text-transform: uppercase;
+            }
+            .zebra{
+                background-color: #f3f3f3;
+            }
+        </style>
+    </head>
+
+    
+    <html>
+        <body style="font-family:Arial; padding:0px; margin:0px; border:0px solid #eef2f4; width:*;">
+        <apex:outputText rendered="{!IF(Protocolo__c.Total_de_objetos__c = 0, true, false)}"> 
+            <p>
+                INSIRA OBJETOS NO PROTOCOLO
+            </p>
+        </apex:outputText>
+    
+        <apex:outputText rendered="{!IF(Protocolo__c.Total_de_objetos__c > 0, true, false)}">
+            <!-- cabeçalho -->
+            <div class="header">
+                <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                    <tr>
+                        <td style="width:42%; text-align:center;">
+                            <img src="{!$Resource.Logo_Hospcom}" width="234px" height="60px"/>
+                        </td>
+                        <td style="width:58%; text-align:center; vertical-align:middle;">                                
+                            <!--img src="{!empresa_logo}" width="324px" height="55px"/-->
+                            
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- rodapé -->
+            <div class="footer">
+                Página <span class="pagenumber"/> de <span class="pagecount"/>
+            </div>
+
+
+            <!-- conteúdo -->
+            <div class="content">
+                <div style="page-break-before:always" />
+                
+                <div class="titulo"> Protocolo Nº {!Protocolo__c.Name} </div>
+                
+                <!-- informações iniciais -->
+                <table style="page-break-inside:avoid;width:100%;padding-left:24px;">
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:90px;">
+                            Enviado por:
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            {!Protocolo__c.Enviado_por__r.FirstName} {!Protocolo__c.Enviado_por__r.LastName}
+                        </td>                        
+                    </tr>
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:150px">
+                            Em transferência por: 
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            {!Protocolo__c.Em_transferencia_por__r.FirstName} {!Protocolo__c.Em_transferencia_por__r.LastName}
+                        </td>                        
+                    </tr>
+                    <apex:outputText rendered="{!IF(!ISNULL(Protocolo__c.Mediador__c), true, false)}">
+                        <tr>
+                            <td class="clausula_texto destaque" style="text-indent:0px; width:150px">
+                                Mediado por: 
+                            </td>
+                            <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                                {!Protocolo__c.Mediador__r.FirstName} {!Protocolo__c.Mediador__r.LastName}
+                            </td>                        
+                        </tr>
+                    </apex:outputText>
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:90px;">
+                            A receber por: 
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            {!Protocolo__c.Recebido_por__r.FirstName} {!Protocolo__c.Recebido_por__r.LastName}
+                        </td>                        
+                    </tr>
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:90px;">
+                            Previsão de chegada:
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            <apex:outputField value="{!Protocolo__c.Prazo_de_recebimento__c}"/>
+                        </td>                          
+                    </tr>
+                    <apex:outputText rendered="{!IF(OR(!ISNULL(Protocolo__c.Pedido__c),!ISNULL(Protocolo__c.Ativo__c),!ISNULL(Protocolo__c.Contrato__c), !ISNULL(Protocolo__c.Pedido__c),!ISNULL(Protocolo__c.Faturamento__c), !ISNULL(Protocolo__c.Produto__c)), true, false)}">
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:90px;">
+                            Vínculo(s):
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                        
+                        <apex:outputText rendered="{!IF(!ISNULL(Protocolo__c.Ativo__c), true, false)}">
+                          Ativo:&nbsp;<apex:outputField value="{!Protocolo__c.Ativo__r.Name}"/> N/S:&nbsp;<apex:outputField value="{!Protocolo__c.Ativo__r.SerialNumber}"/>.&nbsp;
+                        </apex:outputText>
+                        
+                        <apex:outputText rendered="{!IF(!ISNULL(Protocolo__c.Pedido__c), true, false)}">
+                          Pedido:&nbsp;<apex:outputField value="{!Protocolo__c.Pedido__r.OrderNumber}"/>
+                        </apex:outputText>
+                        
+                        <apex:outputText rendered="{!IF(!ISNULL(Protocolo__c.Produto__c), true, false)}">
+                          Produto:&nbsp;<apex:outputField value="{!Protocolo__c.Produto__r.Name}"/> Cód:&nbsp;<apex:outputField value="{!Protocolo__c.Produto__r.ProductCode}"/>.&nbsp;
+                        </apex:outputText>
+                        
+                        <apex:outputText rendered="{!IF(!ISNULL(Protocolo__c.Ordem_de_trabalho__c), true, false)}">
+                          OT:&nbsp;<apex:outputField value="{!Protocolo__c.Ordem_de_trabalho__r.WorkOrderNumber}"/>.&nbsp;
+                        </apex:outputText>
+                        
+                        <apex:outputText rendered="{!IF(!ISNULL(Protocolo__c.Faturamento__c), true, false)}">
+                          NF:&nbsp;<apex:outputField value="{!Protocolo__c.Faturamento__r.Name}"/>.&nbsp;
+                        </apex:outputText>
+                        
+                        <apex:outputText rendered="{!IF(!ISNULL(Protocolo__c.Contrato__c), true, false)}">
+                          Contrato:&nbsp;<apex:outputField value="{!Protocolo__c.Contrato__r.Name}"/>.&nbsp;
+                        </apex:outputText>
+                        
+                        </td>                          
+                    </tr>
+                    </apex:outputText>
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:90px;">
+                            Observações:
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            <apex:outputField value="{!Protocolo__c.Observacoes__c}"/>
+                        </td>                          
+                    </tr>
+                    
+                </table>
+                
+                
+                <br/>
+                <div style="margin:20px;">
+                
+                <!-- lista de item -->
+                <table class="tabela_geral" cellpadding="0px" cellspacing="0px" style="width:100%;">
+                
+                    <apex:variable var="ultimo_reg" value="{!''}"/>
+                    
+                    <apex:variable var="cont_reg" value="{!0}"/>
+                    <apex:variable var="classe" value="{!''}"/>
+                    
+                    <apex:variable var="span_desc" value="{!0}"/>
+                    <apex:variable var="span_equi" value="{!0}"/>
+                    <apex:variable var="span_fim" value="{!0}"/>
+                    <apex:variable var="cont_col_add" value="{!0}"/> 
+                    <apex:variable var="item_cont"   value="{!0}"/> 
+                    
+                    <apex:outputText >                                            
+                       <tr>
+                           <td class="cabecalho">ITEM</td>
+                           <td class="cabecalho">OBS</td>
+                       </tr>
+                    </apex:outputText>
+                    
+                    <apex:repeat value="{!Protocolo__c.Objetos_do_protocolo__r}" var="item">
+                        <apex:variable var="item_cont"   value="{!item_cont+1}"/>
+                        <tr>
+                            <td>
+                                    <apex:outputText >                                                                              
+                                        <apex:variable var="cont_reg" value="{!cont_reg+1}"/>
+                                        <tr>
+                                            <!-- linha: item - pt2 - geral -->
+                                            <td class="celula cel_esq" style="width:40px !important;">{!item.Name}</td>
+                                            <td class="celula {!classe}" style="width:200px !important;"><apex:outputField value="{!item.Observacoes__c}"/></td>
+                                        </tr>                                   
+                                    </apex:outputText>                              
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                </table>
+                </div>
+                <br/><br/>
+            </div> <!-- fim de: conteúdo -->
+            <div>
+                <p class="descricao"  style="text-align: center">
+                     Declaro que saí de posse dos objetos acima relacionados em ____________, ____/____/______.
+                     <br/>
+                     <br/>
+                     <br/>
+                     <br/>
+                     <br/>
+                     __________________________________________<br/>
+                     <b>{!Protocolo__c.Em_transferencia_por__r.Name}</b>
+                </p>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            
+            <apex:outputText rendered="{!IF(!ISNULL(Protocolo__c.Mediador__c), true, false)}">
+                <div>
+	                <p class="descricao"  style="text-align: center;">
+    	                 Declaro que mediei os objetos acima relacionados em ____________, ____/____/______.
+    
+                     <br/>
+                     <br/>
+                     <br/>
+                     <br/>
+                     <br/>
+                     __________________________________________<br/>
+                     <b>{!Protocolo__c.Mediador__r.Name}</b><br/>
+                    </p>
+                </div>
+            </apex:outputText>
+            
+            <br/>
+            <br/>
+            <br/>
+            <div>
+            <p class="descricao"  style="text-align: center;">
+                 Declaro que recebi os objetos acima relacionados em ____________, ____/____/______.
+
+                 <br/>
+                 <br/>
+                 <br/>
+                 <br/>
+                 <br/>
+                 __________________________________________<br/>
+                 <b>{!Protocolo__c.Recebido_por__r.Name}</b><br/>
+                </p>
+            </div>
+        </apex:outputText>
+        </body>
+    </html>
+</apex:page>

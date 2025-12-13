@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ordem_de_Trabalho__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <description>Se Ordem de Trab.:
+- Assistência : Corretiva : Avulso Unitário/Pacote/AddContrato (Serviço)
+-*Assistência : Preventiva : Avulso Unitário (Serviço+Peça)
+-*Assistência : Metrologia : Avulso Unitário (Serviço)</description>
+    <externalId>false</externalId>
+    <label>Ordem de trabalho</label>
+    <referenceTo>WorkOrder</referenceTo>
+    <relationshipName>Faturamentos</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

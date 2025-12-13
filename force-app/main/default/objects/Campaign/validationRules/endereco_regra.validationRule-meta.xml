@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>endereco_regra</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+    NOT(ISNEW()), 
+    ISBLANK(Endereco__c)
+)</errorConditionFormula>
+    <errorDisplayField>Endereco__City__s</errorDisplayField>
+    <errorMessage>Preencha o campo &apos;Endereço&apos; antes de salvar.</errorMessage>
+</ValidationRule>

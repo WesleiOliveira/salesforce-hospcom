@@ -1,0 +1,117 @@
+<aura:component extends="c.ApexHelper" controller="Cliente" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+   
+    
+    	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <aura:handler name="render" value="{!this}" action="{!c.onRead}"/>
+    
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome6 + '/css/all.min.css',
+                          $Resource.leaflet2 + '/leaflet.css',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css',
+                          $Resource.bootstrapSelect14 + '/docs/docs/dist/css/bootstrap-select.min.css')}"
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.leaflet2 + '/leaflet.js',
+                           $Resource.popper + '/popper.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js',
+                           $Resource.bootstrapSelect14 + '/docs/docs/dist/js/bootstrap-select.min.js')}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    
+    
+    <div class="relativeaaaa" id="geral">
+        
+                
+        <!--div>
+            <label for="cidade">Digite o nome da cidade:</label>
+            <input type="text" id="cidade" />
+            <button id="pesquisar">Pesquisar</button>
+            
+            <span id="cidadeGet"> cidade </span>
+        </div-->
+        
+        <div class="container">
+            
+            
+            
+            
+            <form class="form-inline" id="meuFormulario">
+  
+            </form>
+            
+            <!-- DIV COM FILTROS-->
+            <fieldset style="width: 100%; border-radius: 10px; margin: 0.7rem!important; display: flex; flex-direction: column" class="border p-2"
+                      data-aura-rendered-by="32:2;a">
+                <legend class="float-none w-auto tituloComponente" data-aura-rendered-by="33:2;a">Painel de contas e clientes</legend>
+                
+                <div class='divFiltrosFull'>
+                    <div class='divButton'>
+                        <input class="form-control mr-sm-2" id="cidade" type="search" placeholder="Cidade" aria-label="Search" />
+                        <button id="pesquisar" class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+                    </div>
+                    
+                    <select class="selectPickerLinha" id='tiposRelatorio' data-bs-toggle="dropdown" data-show-subtext="true" data-live-search="true">
+                        <option selected='true' disabled='true'>FILTRO POR LINHA</option>
+                      
+                    </select>
+                    
+                    <select class="selectPickerMarca" style='' id='subtipoRelatorio' data-bs-toggle="dropdown" data-show-subtext="true" data-live-search="true">
+                        <option selected='true' disabled='true'>FILTRE POR MARCA</option>
+                    </select>
+                    
+                </div>
+                
+                <div class='divCidadeSearch'>Exibindo resultados para:               
+                    <span id="cidadeGet" >  </span> - <span id="estadoGet">  </span> 
+                </div>
+                
+                
+            </fieldset>
+            <div id="mapa">
+                
+             
+            <div id = "containerDoSpinner">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden"></span>
+                </div>
+            </div>
+
+                   
+                <div id = "containerDoSpinner3">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden"></span>
+                    </div>
+                </div>
+                
+  				<div aura:id="mapContainer" id="map" style="height:650px;  z-index: 0; border-radius: 10px;"></div>              
+                <div id="container-empresas">
+                    <div id="bar-empresas" value="true" >
+                        Empresas
+                    </div>    
+                    
+                    <div class="empresas" id="empresas">
+                        
+                        
+                    </div> 
+
+                </div>
+                
+                <div class = "marketshere">
+                    <span class="valor">Market Share</span>
+                    <span class="valorMTS" id = "valorMTS">22%</span>
+                </div>
+            </div>
+            
+            
+            <div class="container_botao_parent"  style="width: 100%;">
+            </div>           
+        </div>
+    </div>
+    
+   
+    
+</aura:component>

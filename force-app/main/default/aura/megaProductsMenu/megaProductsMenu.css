@@ -1,0 +1,346 @@
+/* CSS APLICADO EM DISPOSITIVOS MÓVEIS */
+@media screen
+  and (max-device-width: 480px)
+  and (orientation: portrait){
+	.THIS .mobileStyle{
+        padding-bottom: 15px;
+    }
+
+}
+
+@media screen
+  and (max-device-width: 640px)
+  and (orientation: landscape){
+	.THIS .mobileStyle{
+        padding-bottom: 15px;
+    }
+
+}
+
+@media screen
+  and (max-device-width: 640px){
+	.THIS .mobileStyle{
+        padding-bottom: 15px;
+    }
+}
+/* -------------------------------------------- */
+
+.THIS .marquee {
+    width: 80%;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.THIS .customFont {
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 1.8vh!important;
+    color: #a0ba32!important;
+}
+
+.THIS .customFontSelect {
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 2.1vh!important;
+}
+
+.THIS .marquee p {
+    display: inline-block;
+    
+    display: flex;
+    justify-content: center;
+}
+
+.THIS .marquee p:hover {
+    padding-left: 100%;
+    animation: marquee 5s linear infinite;
+    display: inline-block!important;
+}
+
+ 
+@keyframes marquee {
+    0%   { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+}
+
+.THIS #text-roller{
+  position: relative;
+  background-color: #222;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.THIS .boxItens{
+    overflow: hidden; 
+    height: 100%; 
+    width: 90%; 
+    display: flex; 
+    min-height: 200px;
+    padding-top:10px;
+}
+
+.THIS .image{
+    position: relative;
+    object-fit: cover;
+    overflow: hidden;
+    /* width: 100%; */
+    height: 100%;
+}
+
+.THIS .container {
+    overflow-x: hidden!important;
+    overflow-y: hidden!important;
+    width: 100%;
+    height: auto;
+    white-space: nowrap;
+    max-width: 100%!important;
+}
+
+.THIS .imageItem{
+    width: 100%;
+    height: 80%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.THIS .textoItem{
+    width: 200px;
+    height: 20%;
+    background-color: ;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.THIS .optionValue{
+    background-color: white;
+    color: #00345c;
+}
+
+
+.THIS .items {
+    min-width: 200px;
+    min-height: 200px;
+    background-color: ;
+    margin-left: 10px;
+}
+
+.THIS .items:hover{
+    transition: all .3s linear;
+    transform: scale(1.08);
+}
+
+
+/* Flex */
+.THIS .flex {
+    display: flex;
+    flex-wrap: nowrap; 
+    overflow: auto;
+}
+.THIS .flex-item {
+    flex: 0 0 auto;
+}
+
+.THIS .wrap{
+    margin-top: 20px;
+    display: flex;
+    column-gap: 60px;
+    overflow:hidden;
+    float:left;
+    width:100%;
+    height:200px;
+    position:relative;
+}
+.THIS .label{
+    display:block;
+    float:left;
+    width:300px;
+    background-color:red;
+    border-left:solid 1px black;
+    position:relative;
+    height:200px;
+}
+
+.THIS .customSelectHospcom{
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e")!important;
+    padding: 0px;
+    border-width: 0px;
+    border-bottom: 1px solid #FFFFFF;
+    background-color: #00345c;
+    border-radius: 0px;
+    color: white;
+}
+
+.THIS .bootstrap-select .btn:focus {
+    outline: none !important;
+}
+
+/* ---------------- */
+
+
+.THIS .productTitle{
+    text-decoration:none;
+    font-size:15px;
+    font-weight:500;
+    line-height: 1.6;
+    text-align:center;
+    color:#00345c;
+}
+
+/*-----------MENU SELECT TESTE-----------*/
+
+.THIS .itemLinha{
+    background-color: #f1f1f1;
+}
+
+.THIS .itemLinha:hover{
+    background-color: #f0e4e4;
+}
+
+.THIS .itemFamilia{
+    background-color: #f1f1f1;
+}
+
+.THIS .itemTipo:hover{
+    background-color: #f0e4e4;
+}
+
+.THIS .itemTipo{
+    background-color: #f1f1f1;
+}
+
+.THIS .itemFamilia:hover{
+    background-color: #f0e4e4;
+}
+
+.THIS details {
+	position: relative;
+	width: 300px;
+	margin-right: 1rem;
+}
+
+.THIS details[open] {
+	z-index: 1;
+}
+
+.THIS summary {
+	padding: 1rem;
+    cursor: pointer;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 15px;
+    background-color: #ffffff;
+    list-style: none;
+}
+
+.THIS summary::-webkit-details-marker {
+	display: none;
+}
+
+.THIS details[open] summary:before {
+	content: '';
+	display: block;
+	width: 100vw;
+	height: 100vh;
+	background: transparent;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+.THIS summary:after {
+	content: '';
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='black' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e")!important;
+	display: inline-block;
+    background-size: cover;
+	float: right;
+	width: .8rem;
+	height: .8rem;
+	/*transform: rotate(90deg) translate(50%, 0%);*/
+    margin-top: 6px;
+	transform-origin: center center;
+	transition: transform ease-in-out 100ms
+}
+
+.THIS summary:focus {
+	outline: none;
+}
+
+.THIS details[open] summary:after {
+	transform: rotate(180deg) translate(0%, 0%);
+}
+
+.THIS ul {
+	width: 100%;
+	background: #f1f1f1;
+    padding-left: 15px!important;
+	position: absolute;
+	top: calc(100% + .5rem);
+    left: 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-right: 1rem;
+    margin: 0;
+    box-sizing: border-box;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 15px;
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.THIS ul::-webkit-scrollbar {
+    overflow-y: auto;
+}
+
+.THIS li {
+	margin: 0;
+	padding: 1rem 0;
+	border-bottom: 1px solid #ccc;
+}
+
+.THIS li:first-child {
+	padding-top: 0;
+}
+
+.THIS li:last-child {
+	padding-bottom: 0;
+	border-bottom: none;
+}
+
+/* FAKE SELECT */
+
+.THIS summary.radios {
+	counter-reset: radios;
+}
+
+.THIS input[type=radio] {
+	counter-increment: radios;
+	appearance: none;
+	display: none;
+}
+
+.THIS input[type=radio]:checked {
+	display: inline;
+}
+
+.THIS input[type=radio]:after {
+	content: attr(title);
+	display: inline;
+	font-size: 1rem;
+}
+
+.THIS ul.list {
+	counter-reset: labels;
+}
+
+.THIS label {
+	width: 100%;
+	display: block;
+	cursor: pointer;
+}

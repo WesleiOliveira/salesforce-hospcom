@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Solicitante_nao_preenchido</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    !$User.Ignorar_erros__c,
+RecordTypeId != &apos;0AHU40000000rPJ&apos;,
+    Solicitante__c == null
+)</errorConditionFormula>
+    <errorDisplayField>Solicitante__c</errorDisplayField>
+    <errorMessage>O Solicitante deve ser preenchido.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Empr_stimos_para_demo_r_pida</fullName>
+    <columns>NAME</columns>
+    <columns>Solicitante__c</columns>
+    <columns>Data_prevista__c</columns>
+    <columns>Data_Final__c</columns>
+    <columns>Status__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Demonstracao__c.Emprestimo_para_demos_rapidas</value>
+    </filters>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Finalizado,Cancelado</value>
+    </filters>
+    <label>Empréstimos para demo rápida</label>
+</ListView>

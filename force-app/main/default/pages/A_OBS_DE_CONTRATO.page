@@ -1,0 +1,36 @@
+<apex:page standardController="WorkOrder" showChat="false" showHeader="false">
+    <style>
+        .tabl{
+            border:1px dashed #50e3c2;
+            border-radius: 5px;
+            width: 100%;
+        }
+        .cabc{
+            vertical-align: top;
+            font-weight: bold;
+        }
+        .linh{
+            border-top:1px dashed #ececec;
+        }
+    </style>
+
+    <table class="tabl">
+        <tr>
+            <td rowspan="2" class="cabc">Itens inclusos no Contrato de Serviço:</td>
+            <td>Peças: <apex:outputField value="{!WorkOrder.ServiceContract.Pe_as__c}" /></td>
+            <td>Acessórios: <apex:outputField value="{!WorkOrder.ServiceContract.Acess_rios__c}" /></td>
+            <td>Mão de Obra: <apex:outputField value="{!WorkOrder.ServiceContract.M_o_de_Obra__c}" /></td>
+        </tr>
+        <tr>
+            <td>Calibração: <apex:outputField value="{!WorkOrder.ServiceContract.Calibra_o__c}" /></td>
+            <td>Qualificação: <apex:outputField value="{!WorkOrder.ServiceContract.Qualifica_o__c}" /></td>
+            <td>Ensaio de Seg. Elétrica: <apex:outputField value="{!WorkOrder.ServiceContract.Ensaio_de_Seg_El_trica__c}" /></td>
+        </tr>
+        <tr>
+            <td class="cabc linh">Observações do Contrato de Serviços:<br/><br/><br/></td>
+            <td colspan="3" class="linh"><apex:outputField value="{!WorkOrder.ServiceContract.Observa_es__c}" /></td>
+        </tr>
+
+    </table>
+
+</apex:page>

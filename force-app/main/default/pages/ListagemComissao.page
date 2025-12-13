@@ -1,0 +1,167 @@
+<apex:page showHeader="false" showChat="false" standardStylesheets="false" docType="html-5.0">
+  <html>
+      <head>
+            <base target="_parent" />
+            <title>Listagem de Comissões</title>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+            <link   href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" rel="stylesheet"/>
+            <link   href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.min.css" rel="stylesheet"/>
+            <script src="{!URLFOR($Resource.bootstrap3iso, 'js/bootstrap.min.js')}"></script>
+            <link   href="{!URLFOR($Resource.bootstrap3iso, 'css/bootstrap.min.css')}" rel="stylesheet"/>
+
+            <style>
+                /* estrutura */
+
+                .cabecalho{
+                    background-color: #f7f9fb!important;
+                    padding-top:10px!important;
+                    padding-bottom:10px!important;
+                }
+                .cabecalho--texto{
+                    font-size:1.125rem!important;
+                    font-weight:300!important;
+                }
+
+                .filtro-cabecalho{
+                    background-color: #f7f9fb!important;
+                    padding-top:4px!important;
+                    padding-bottom:4px!important;
+                }
+                
+                .listagem td, .listagem th{
+                    border-color: #c9ddff!important;
+                }
+                .listagem-cabecalho{
+                    border-top: 2px solid #ddd!important;
+                }
+                .listagem-item{
+                    font-size:11.5px!important;
+                    border-top-width:1px!important;
+                }
+                .listagem-item--cotacao{
+                    background-color:#dde8fb!important
+                }
+                .listagem-item--pedido-compra{
+                    background-color:#ebf2ff!important
+                }
+                .listagem-item--item-compra{
+                    background-color:#f6f9ff!important
+                }
+
+                /* geral */
+
+                .espaco-baixo{
+                    margin-bottom:5px!important;
+                }
+                .espaco-cima{
+                    padding-top:5px!important;
+                }
+                .clicavel{
+                    cursor: pointer!important;
+                }
+                .nivel1{
+                    margin:0px 40px 0px 0px!important;
+                }
+                .nivel2{
+                    margin:0px 20px 0px 20px!important;
+                }
+                .nivel3{
+                    margin:0px 0px 0px 40px!important;
+                }
+                .console{
+                    font-family: Consolas!important;
+                }
+                .nalinha{
+                    white-space: nowrap;
+                }
+                .emcima{
+                    vertical-align: top!important;
+                }
+                .invisivel{
+                    display:none;
+                }
+
+                /* corrigido */
+
+                .datepicker{
+                    z-index:9997!important;
+                    position:relative;
+                }
+                .input-group-addon {
+                    min-width:80px!important;
+                    text-align:left!important;
+                }
+                .progress{
+                    height:100%!important;
+                    width:100%!important;
+                    position:relative!important;
+                    margin:0px!important;
+                }
+                .progress-bar{
+                    color:black!important;
+                    text-align:left!important;
+                    font-weight:bold!important;
+                    line-height:normal!important;
+                }
+
+                /* customizado */
+
+                .c-loader{
+                    position: fixed;
+                    top:0;
+                    bottom:0;
+                    z-index:9998!important;
+                    width: 100%;
+                    height: 100%;
+                    background: white url({!$Resource.loader}) center 250px no-repeat;
+                    background-size: 50px 50px;
+                    opacity: .8;
+                }
+
+                .alert{
+                    font-weight:bold!important;
+                    padding-top:10px!important;
+                    padding-bottom:10px!important;
+                }
+
+                .c-tooltip + .tooltip > .tooltip-inner {
+                    background-color: #f1f1fc;
+                    color: #000000;
+                    border: 1px solid #c0c0c9;
+                }
+                .c-tooltip + .tooltip.top > .tooltip-arrow {
+                    border-top: 5px solid #c0c0c9;
+                }
+
+                .input-group-field {
+                    width:100px!important;
+                    display: table-cell;
+                    vertical-align: middle;
+                    border-radius:4px;
+                }
+                .input-group-field .form-control {
+                    border-radius: inherit !important;
+                }
+                .input-group-field:not(:first-child):not(:last-child) {
+                    border-radius:0;
+                }
+                .input-group-field:not(:first-child):not(:last-child) .form-control {
+                    border-right-width: 0;
+                }
+                .input-group-field:last-child {
+                    border-bottom-left-radius:0;
+                }
+            </style>            
+        </head>
+      <body id="corpo-pag" style="margin-top:7px;">
+          <div class="bootstrap-iso">
+                <div class="container-fluid">
+                
+                </div>
+          </div>
+      </body>
+  </html>
+</apex:page>

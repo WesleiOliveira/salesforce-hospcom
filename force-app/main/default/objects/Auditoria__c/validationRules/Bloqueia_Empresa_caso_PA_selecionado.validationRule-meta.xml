@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bloqueia_Empresa_caso_PA_selecionado</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISCHANGED(Empresa_Auditada__c),
+    NOT(ISBLANK(Planejamento_de_Auditoria__c))
+)</errorConditionFormula>
+    <errorDisplayField>Empresa_Auditada__c</errorDisplayField>
+    <errorMessage>A Empresa auditada não pode ser editada porque a mesma foi aprovada anteriormente em (PAA).</errorMessage>
+</ValidationRule>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Comodato_obrigatorio</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISNEW(),
+RecordTypeId == &apos;012U4000000QqxR&apos;,
+Demonstracao__r.Solicitante__c != Vendedor__c
+)</errorConditionFormula>
+    <errorDisplayField>Demonstracao__c</errorDisplayField>
+    <errorMessage>Vincule a Demo Rápida a um comodato em nome do solicitante.</errorMessage>
+</ValidationRule>

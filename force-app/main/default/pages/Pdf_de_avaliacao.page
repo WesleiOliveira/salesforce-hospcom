@@ -1,0 +1,1074 @@
+<apex:page standardController="Avaliacao__c" applyHtmlTag="false" showHeader="false" renderAs="PDF" >
+  <head>
+  <style type="text/css" media="print">
+            @page {
+                size:21cm 29.7cm;
+                margin:100px 40px 60px 40px;
+                @top-center {
+                    content:element(header);
+                }
+                @bottom-center {
+                    content:element(footer);
+                }
+            }
+            .pagenumber:before {
+                content:counter(page);
+            }
+            .pagecount:before {
+                content:counter(pages);
+            }
+            div.header {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(header);
+                height:60px;
+            }
+            div.content {
+            }
+            div.footer {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(footer);
+                height:20px;
+                text-align:right;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                font-weight:normal;
+            }
+        </style>
+        <style type="text/css" media="print">
+        /*
+            @page:first{
+                size:A4;
+                background: url($Resource.SobreHealth);
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);
+                }
+            }
+            
+            @page{
+                size:A4;
+                background: url($Resource.TimbradoHealth);
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);}
+            }
+  */
+            td{
+            
+            }
+            .titulo{
+                font-family:arial, verdana, sans-serif;
+                font-size:15px;
+                text-align:center;
+                font-weight:bold; 
+                width:100%;
+            }
+            .tabela_geral{
+                border-collapse:collapse;
+                width:100%;
+            }
+            table.print-friendly tr td, table.print-friendly tr th {
+                page-break-inside: avoid;
+            }
+            .cabecalho{
+                font-family:arial, verdana, sans-serif;
+                font-size:11px;
+                font-weight:bold; 
+                vertical-align:top;
+                background-color: #c3c3c3;
+                padding: 3px;
+            }
+            .celula{
+                font-family:arial, verdana, sans-serif;
+                font-size:13px;
+                vertical-align:top;
+                line-height:120%;
+                padding: 3px;
+                border: 1px solid #c3c3c3;
+            }
+            .clausula_texto{
+                font-family:arial, verdana, sans-serif;
+                font-size:11.5px;
+                text-align:justify;
+                text-justify:inter-word;
+                line-height:120%;
+                text-indent:50px;
+                vertical-align:top;
+            }
+            .infos_texto{
+                font-family:arial, verdana, sans-serif;
+                font-size:11.5px;
+                text-align:justify;
+                text-justify:inter-word;
+                line-height:120%;
+                vertical-align:top;
+            }
+            .pre_texto{
+                white-space: pre;
+            }
+            .maiuscula{
+                text-transform: uppercase;
+            }
+            .zebra{
+                background-color: #f3f3f3;
+            }
+        </style>
+  </head>
+  <body>
+  <apex:pageBlock >
+        <apex:variable var="empresa_nome"   value="{!'HEALTH SOLUTION COMERCIO E SERIVÇOS - EIRELE - ME'}"/>
+        <apex:variable var="empresa_logo"   value="{!'/servlet/servlet.FileDownload?file=0155A000009LWSQ'}"/>
+        <apex:variable var="empresa_dados"  value="{!', inscrita no CNPJ sob n° 27.476.124/0001-02, sediada na Rua 89, Nº 717, Qd. F45A, Lt. 81/83, Setor Sul, Goiânia - GO, CEP 74093-140'}"/>
+    <div class="header">
+                <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                    <tr>
+                        <td style="width:42%; text-align:center;">
+                            <img src="/servlet/servlet.FileDownload?file=015310000099Yfw" width="234px" height="60px"/>
+                        </td>
+                        <td style="width:58%; text-align:center; vertical-align:middle;">                                
+                            <img src="{!empresa_logo}" width="324px" height="55px"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="footer">
+                Página <span class="pagenumber"/> de <span class="pagecount"/>
+            </div>
+  
+              <div >
+                              <div class="titulo">Avaliação Nº {!Avaliacao__c.Name}</div><br/>
+
+
+  <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px; font-size:13px;">Informações do Paciente</div>
+                <table style="page-break-inside:avoid;width:100%;">
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:30px;">Nome:</td>
+                        <td colspan="3" class="infos_texto" style="text-indent:0px;">{!Avaliacao__c.Nome_do_Paciente__c}<b>, CPF: </b>{!Avaliacao__c.Prontuario__r.CPF__c}</td>
+                    </tr>
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px;">Endereço:</td>
+                        <td colspan="3" class="infos_texto maiuscula" style="text-indent:0px;">
+                            {!Avaliacao__c.Prontuario__r.Endereco__c}
+                        </td>                       
+                    </tr>
+                    
+                    <tr>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:30px;">Email:</td>
+                        <td class="infos_texto" style="text-indent:0px;">{!Avaliacao__c.Prontuario__r.Email__c}</td>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:30px;">Telefone:</td>
+                        <td class="infos_texto" style="text-indent:0px;">{!Avaliacao__c.Prontuario__r.Telefone_de_Contato__c}</td>
+                    </tr>
+                    <tr>
+                    <td class="infos_texto" style="font-weight:bold;text-indent:0px;">Atendimento:</td>
+                        <td colspan="3" class="infos_texto maiuscula" style="text-indent:0px;">
+                            <apex:outputField value="{!Avaliacao__c.Prontuario__r.Tipo_de_atendimento__c}"/>
+                        </td>
+                        <td class="infos_texto" style="font-weight:bold;text-indent:0px;">Convênio:</td>
+                        <td colspan="3" class="infos_texto maiuscula" style="text-indent:0px;">
+                            {!Avaliacao__c.Prontuario__r.Convenio__c}
+                        </td>
+                    </tr>
+                    <tr>
+                    <td class="infos_texto" style="font-weight:bold;text-indent:0px;">Data e Hora:</td>
+                        <td colspan="3" class="infos_texto maiuscula" style="text-indent:0px;">
+                            <apex:outputField value="{!Avaliacao__c.Data_e_Hora_da_Avaliacao__c  }"/>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                </div>
+                <div>
+  <apex:outputText id="geral" rendered="{!IF(Avaliacao__c.RecordTypeId = '0125A000001Yb6bQAC', true, false)}">
+                <div class="titulo">Avaliação Geral</div><br/>
+  <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+
+      <tr>
+      <td class="celula"><b>AIVD's</b></td><td class="celula" ><apex:outputField value="{!Avaliacao__c.AIVD_geral__c}"/></td>
+      <td class="celula"><b>AVD's</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.AVDs_geral__c}"/></td>
+      </tr>
+      <tr>
+      <td class="celula"><b>Incapacidade Psíquica</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Incapacidade_geral__c}"/></td>
+      <td class="celula"><b>Vias aéreas superiores</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Vias_Aereas_Superiores_geral__c}"/></td>
+      </tr>
+      <tr>
+      <td class="celula"><b>Incontinência Urinária</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Incontinencia_geral__c}"/></td>
+      <td class="celula"><b>Uso de Medicação</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Uso_de_Medicacao_geral__c}"/></td>
+      </tr>
+      <tr>
+      <td class="celula"><b>Suporte Respiratório</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Suporte_Respirat_rio_geral__c}"/></td>
+      <td class="celula"><b>Presença de úlcera de pressão</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Presenca_de_ulcera_geral__c}"/></td>
+      </tr>
+      <tr>
+      <td class="celula"><b>Reabilitação Fisioterapia e Fonoterapia</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Reabilitacao_geral__c}"/></td>
+      <td class="celula"><b>Terapia Nutricional</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Terapia_Nutricional_geral__c}"/></td>
+      </tr>
+      <tr>
+      <td class="celula" colspan="4" style="text-align:right">
+      <b>Pontuação:</b> &nbsp;<apex:outputField value="{!Avaliacao__c.Pontuacao__c }"/>
+      </td>
+      </tr>
+      </table>
+  </apex:outputText>
+  
+    <apex:outputText id="enfermagem" rendered="{!IF(Avaliacao__c.RecordTypeId = '0125A000001Yb62QAC', true, false)}">
+                <div class="titulo">Avaliação de Enfermagem</div><br/>
+                  <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Informações do Ambiente</div>
+
+     <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+
+      <tr>
+      <td class="celula"><b>Acesso a rede de água e esgoto</b></td><td class="celula" ><apex:outputField value="{!Avaliacao__c.Acesso_a_rede_deagua_enfermagem__c}"/></td>
+      <td class="celula"><b>Ambiente Limpo </b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Ambiente_Limpo_Enfermagem__c}"/></td>
+      </tr>
+      <tr>
+      <td class="celula"><b>Ambiente Arejado</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Ambiente_Arejado_Enfermagem__c}"/></td>
+      <td class="celula"><b>Ambiente Organizado </b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Ambiente_Organizado_Enfermagem__c}"/></td>
+      </tr>
+      </table><br/>
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Escala de Glasgow</div>
+    <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+
+      <tr>
+      <td class="celula"><b>Abertura ocular </b></td><td class="celula" ><apex:outputField value="{!Avaliacao__c.Abertura_ocular_Enfermagem__c}"/></td>
+      <td class="celula"><b>Pontuação  </b></td><td class="celula" style="text-align:center"><apex:outputField value="{!Avaliacao__c.Abertura_ocular_Pontuacao_Enfermagem__c}"/></td>
+      </tr>
+      <tr>
+      <td class="celula"><b>Resposta verbal </b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Resposta_verbal_Enfermagem__c}"/></td>
+      <td class="celula"><b>Pontuação  </b></td><td class="celula" style="text-align:center"><apex:outputField value="{!Avaliacao__c.Resposta_verbal_Pontucao_Enfermagem__c}"/></td>
+      </tr>
+      <tr>
+      <td class="celula"><b>Resposta motora</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Resposta_motora_enfermagem__c}"/></td>
+      <td class="celula"><b>Pontuação  </b></td><td class="celula" style="text-align:center"><apex:outputField value="{!Avaliacao__c.Resposta_motora_Pontuacao_Enfermagem__c}"/></td>
+      </tr>
+      <tr>
+      <td></td>
+      <td></td>
+      <td class="celula"><b>Total</b></td>
+      <td class="celula" style="text-align:center"><apex:outputField value="{!Avaliacao__c.TotalEscalaGlasgow_Enfermagem__c}"/></td>      </tr>
+      </table><br/>
+      <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Escala de Ramsay</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+            <tr>
+              <td class="celula"><b>Sedação </b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Sedacao_Enfermagem__c}"/></td>
+              <td class="celula"><b>Pontuação  </b></td><td class="celula" style="text-align:center"><apex:outputField value="{!Avaliacao__c.EscalaDeRamsayPontuacao_Enfermagem__c}"/></td> 
+            </tr>
+        </table><br/>
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px">Pupilas</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+            <tr>
+              <td class="celula"><b>Isocóricas</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Isocoricas_Enfermagem__c}"/></td>
+              <td class="celula"><b>Midríase</b></td><td class="celula" style="text-align:center"><apex:outputField value="{!Avaliacao__c.Midriase_Enfermagem__c}"/></td> 
+            </tr>
+            <tr>
+              <td class="celula"><b>Anisocóricas</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Anisocoricas_Enfermagem__c}"/></td>
+              <td class="celula"><b>Reflexo fotomotor (+ ou -) </b></td><td class="celula" style="text-align:center"><apex:outputField value="{!Avaliacao__c.Reflexo_fotomotor_Enfermagem__c}"/></td> 
+            </tr>
+            <tr>
+              <td class="celula"><b>Miose</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Miose_Enfermagem__c}"/></td>
+            </tr>
+        </table><br/>
+        
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Avaliação Respiratória</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+            <tr>
+              <td class="celula"><b>Respiração espontânea</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Respiracao_espontanea_Enfermagem__c}"/></td>
+              <td class="celula"><b>Tubo orotraqueal</b></td><td class="celula" style="text-align:center"><apex:outputField value="{!Avaliacao__c.Tubo_orotraqueal_Enfermagem__c}"/></td> 
+            </tr>
+            <tr>
+              <td class="celula"><b>Traqueostomia   </b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Traqueostomia_Enfermagem__c}"/></td>
+              <td class="celula" colspan="2"></td>
+            </tr>
+            <tr>
+              <td class="celula"><b>Uso de O2</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Uso_de_O2_Enfermagem__c}"/></td>
+              <td class="celula"><b>Uso de O2 (L/min)</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Uso_de_O2L_Enfermagem__c}"/></td>
+            </tr>
+            <tr>
+              <td class="celula"><b>Modo</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Modo_Enfermagem__c}"/></td>
+              <td class="celula"><b>FiO2 (%)</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.FiO2_Enfermagem__c}"/></td>
+            </tr>
+            <tr>
+              <td class="celula"><b>Volume corrente </b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Volume_corrente_Enfermagem__c}"/></td>
+              <td class="celula"><b>Pressão inspiratória</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Pressao_inspiratoria_Enfermagem__c}"/></td>
+            </tr>
+            <tr>
+              <td class="celula"><b>PEEP (cmH2O)</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.PEEP_cmH2O_Enfermagem__c}"/></td>
+              <td class="celula" colspan="2"></td>              
+            </tr>
+            <tr>
+              <td class="celula"><b>Pulmão direito - Murmúrios Vesiculares</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Pulmao_direito_murm_Enfermagem__c}"/></td>
+              <td class="celula"><b>Pulmão direito - Ruídos Adventícios</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Pulmao_direito_Ruidos_Enfermagem__c}"/></td>
+            </tr>
+            <tr>
+              <td class="celula"><b>Pulmão esquerdo - Murmúrios Vesiculares</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Pulmao_esquerdo_Murm_Enfermagem__c}"/></td>
+              <td class="celula"><b>Pulmão esquerdo - Ruídos Adventícios</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Pulmao_esquerdo_Ruidos_Enfermagem__c}"/></td>
+            </tr>
+        </table><br/>
+        
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Avaliação Cardiovascular</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+            <tr>
+              <td class="celula"><b>Frequência cardíaca</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Frequencia_cardiaca_Enfermagem__c}"/></td>
+              <td class="celula"><b>Pressão arterial</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Pressao_aterial_Enfermagem__c}"/></td>
+            </tr>
+            <tr>
+              <td class="celula"><b>Ritmo cardíaco</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Ritmo_cardiaco_Enfermagem__c}"/></td>
+              <td class="celula"><b>Ausculta</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Ausculta_Enfermagem__c}"/></td>
+            </tr>
+            <tr>
+              <td class="celula"><b>Marcapasso cardíaco</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Marcapasso_cardiaco_Enfermagem__c}"/></td>
+              <td class="celula"><b>Perfusão periférica</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Perfusao_periferica_Enfermagem__c}"/></td>
+            </tr>
+        </table><br/><br/><br/>
+        
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Avaliação Gastrointestinal</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+            <tr>
+              <td class="celula"><b>Dieta</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Dieta_Enfermagem__c}"/></td>
+              <td class="celula"><b>Sonda</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Sonda_Enfermagem__c}"/></td>
+            </tr>
+            <tr>
+              <td class="celula"><b>Abdome</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Abdome_Enfermagem__c}"/></td>
+              <td class="celula"><b>Ruídos hidroaéreos (+/ -/ ↑/ ↓)</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Ruidos_hidroaereos_Enfermagem__c}"/></td>
+            </tr>
+        </table><br/>
+        
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Avaliação de Eliminações Fisiológicas</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+            <tr>
+              <td class="celula"><b>Diurese</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Diurese_Enfermagem__c}"/></td>
+              <td class="celula"><b>Evacuação</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Evacuacao_Enfermagem__c}"/></td>
+            </tr>
+            <tr>
+              <td class="celula"><b>Retenção urinária</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Retencao_urinaria_Enfermagem__c}"/></td>
+              <td class="celula"><b>Evacuação - Outro</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Evacuacao_Outro_Enfermagem__c}"/></td>
+            </tr>
+            <tr>
+              <td class="celula"><b>Aspecto da urina</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Aspecto_da_urina_Enfermagem__c}"/></td>
+              <td class="celula" colspan="2"></td>
+            </tr>
+        </table><br/>
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Avaliação de Dor</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+            <tr>
+              <td class="celula"><b>Dor</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Dor_Enfermagem__c}"/></td>
+              <td class="celula"><b>Escala de dor</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Escala_de_dor_Enfermagem__c}"/></td>
+            </tr>
+        </table><br/>
+        
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Pele e mucosas</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+            <tr>
+              <td class="celula"><b>Pele e mucosas</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Pele_e_mucosas_Enfermagem__c}"/></td>
+              <td class="celula"><b>Edema - Local (caso se aplique) </b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Edema_Local_caso_se_aplique_Enfermagem__c}"/></td>
+            </tr>
+            <tr>
+              <td class="celula"><b>Dreno</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Dreno_Enfermagem__c}"/></td>
+              <td class="celula"><b>Dreno - Local </b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Dreno_Local_Enfermagem__c}"/></td>
+            </tr>
+            <tr>
+              <td class="celula"><b>Cateteres</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Cateteres_Enfermagem__c}"/></td>
+              <td class="celula"><b>Cateteres - Local </b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Cateteres_Local_Enfermagem__c}"/></td>
+            </tr>
+        </table><br/>
+        
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Observações</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+        <tr>
+            <td class="celula" colspan="4" style="text-align: justify;">{!Avaliacao__c.Observacoes_Enfermagem__c}</td>
+        </tr>
+        </table>
+    </apex:outputText>
+    
+    <apex:outputText id="fisioterapia" rendered="{!IF(Avaliacao__c.RecordTypeId = '0125A000001Yb5dQAC', true, false)}">
+                <div class="titulo">Avaliação de Fisioterapia</div><br/>
+                  <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Geral</div>
+
+     <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+        <tr>
+            <td class="celula"><b>Estado Geral</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Estado_Geral_Fisioterapia__c}"/></td>
+            <td class="celula"><b>Temperatura (ºC) </b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Temperatura_C_Fisioterapia__c}"/></td>
+        </tr>
+        <tr>
+            <td class="celula"><b>Hidratação</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Hidratacao_Fisioterapia__c}"/></td>
+            <td class="celula"><b>Hidratação - Indicar </b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Hidrata_o_Indicar_Fisioterapia__c}"/></td>
+        </tr>
+        <tr>
+            <td class="celula"><b>Mucosa</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Mucosa_Fisioterapia__c}"/></td>
+            <td class="celula"><b>Mucosa - Indicar </b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Mucosa_Indicar_Fisioterapia__c}"/></td>
+        </tr>
+        <tr>
+            <td class="celula"><b>Pressão arterial (mmHg)</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Pressao_arterial_fisioterapia__c}"/></td>
+            <td class="celula"><b>FC (BPM)</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.FC_BPM_Fisioterapia__c}"/></td>
+        </tr>
+        <tr>
+            <td class="celula"><b>FR (Ipm)</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.FR_Ipm_Fisioterapia__c}"/></td>
+            <td class="celula"><b>SpO2 (%)</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.SPO2_fisioterapia__c}"/></td>
+        </tr>
+        <tr>
+            <td class="celula"><b>O2 (L/min)</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.O2_fisioterapia__c}"/></td>
+            <td class="celula" colspan="2"></td>
+        </tr>
+        <tr>
+            <td class="celula"><b>Observações</b></td><td class="celula" colspan="3"><apex:outputField value="{!Avaliacao__c.Observa_es_Fisioterapia__c}"/></td>
+        </tr>
+        <tr>
+            <td class="celula"><b>Antecedentes Pessoais</b></td><td class="celula" colspan="3"><apex:outputField value="{!Avaliacao__c.Antecedentes_Pessoais_Fisioterapia__c}"/></td>
+        </tr>
+     </table><br/>
+     <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Sistema Neurológico</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+            <tr>
+            <td class="celula"><b>Grau de Orientação</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Grau_de_Orienta_o_fisioterapia__c}"/></td>
+            <td class="celula"><b>Estado Emocional</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Estado_Emocional_Fisioterapia__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula"><b>Plegia</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Plegia_Fisioterapia__c}"/></td>
+            <td class="celula"><b>Monoplegia (caso se aplique)</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Monoplegia_fisioterapia__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula"><b>Paresia</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Paresia_Fisioterapia__c}"/></td>
+            <td class="celula"><b>Monoparesia (caso se aplique)</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Monoparesia_Fisioterapia__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula"><b>Nível de Consciência</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Nivel_de_Consciencia_Fisioterapia__c}"/></td>
+            <td class="celula"><b>Observações</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Observacoes2_Fisioterapia__c}"/></td>
+            </tr>
+        </table><br/>
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Sistema Respiratório</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+            <tr>
+            <td class="celula"><b>Padrão Ventilatório</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Padrao_Ventilatorio_Fisioterapia__c}"/></td>
+            <td class="celula"><b>Tosse</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Tosse_Fisioterapia__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula"><b>Traqueostomia</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Traqueostomia_Fisioterapia__c}"/></td>
+            <td class="celula"><b>Traqueostomia (Nº)</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Traqueostomia2_Fisioterapia__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula"><b>Traqueostomia - Condições</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Traqueostomia_Condi_es_Fisioterapia__c}"/></td>
+            <td class="celula"><b>Ausculta Pulmonar </b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Ausculta_Pulmonar_Fisioterapia__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula"><b>Expansibilidade</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Expansibilidade_Fisioterapia__c}"/></td>
+            <td class="celula"><b>Dispnéia MRC</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Dispn_ia_MRC_Fisioterapia__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula"><b>Cianose</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Cianose_Fisioterapia__c}"/></td>
+            <td class="celula"><b>Cianose - Indicar</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Cianose_Indicar_Fisioterapia__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula"><b>Secreção</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Secrecao_Fisioterapia__c}"/></td>
+            <td class="celula"><b>Secreção - Cor</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Secrecao_Cor_Fisioterapia__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula"><b>Necessidade de aspiração </b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Necessidade_de_aspiracap_Fisioterapia__c}"/></td>
+            <td class="celula"><b>Nº de Aspirações </b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.N_de_Aspiracoes_Fisioterapia__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula"><b>Nº Sonda</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.N_Sonda_Fisioterapia__c}"/></td>
+            <td class="celula"><b>Local da aspiração</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Local_da_aspiracao_Fisioterapia__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula"><b>Dispositivos respiratórios</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.DispositivosRespiratorios_Fisioterapia__c}"/></td>
+            <td class="celula"><b>Uso de Oxigênio</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Uso_de_Oxigenio_Fisioterapia__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula"><b>Uso de Oxigênio (L/min)</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Uso_de_Oxig_nio_3_Fisioterapia__c}"/></td>
+            <td class="celula"><b>Uso de Oxigênio (horas/dia)</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Uso_de_Oxig_nio_2_Fisioterapia__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula"><b>Ventilação Mecânica</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Ventila_o_Mecanica_Fisioterapia__c}"/></td>
+            <td class="celula"><b>Ventilador</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Ventilador__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula"><b>Modo</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Modo_Fisioterapia__c}"/></td>
+            <td class="celula"><b>Pins</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Pins_Fisioterapia__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula"><b>PEEP</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.PEEP__c}"/></td>
+            <td class="celula"><b>VT</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.VT_Fisioterapia__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula"><b>FR</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.FR_fisioterapia__c}"/></td>
+            <td class="celula"><b>Observações</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Observacoes3_Fisioterapia__c}"/></td>
+            </tr>
+
+        </table><br/><br/><br/>
+        
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Sistema Locomotor</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+            <tr>
+            <td class="celula"><b>Mobilidade</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Mobilidade_Fisioterapia__c}"/></td>
+            <td class="celula"><b>Sensibilidade</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Sensibilidade_Fisioterapia__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula"><b>Edema</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Edema_Fisioterapia__c}"/></td>
+            <td class="celula"><b>Edema - Local</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Edema_Local_Fisioterapia__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula"><b>Marcha</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Marcha_fisioterapia__c}"/></td>
+            <td class="celula"><b>Descrição</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Marcha_Descricao_Fisioterapia__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula"><b>ADM</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.ADM_Fisioterapia__c}"/></td>
+            <td class="celula"><b>Tônus Ashwoth</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Tonus_Ashwoth_Fisioterapia__c}"/></td>
+            </tr>
+        </table><br/>
+        
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Escala de Força Muscular</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+            <tr>
+            <td class="celula"><b>Cervical</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Cervical_Fisioterapia__c}"/></td>
+            <td class="celula"><b>Tronco</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Tronco_Fisioterapia__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula"><b>MSD</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.MSD_Fisioterapia__c}"/></td>
+            <td class="celula"><b>MSE</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.MSE_Fisioterapia__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula"><b>MID</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.MID_Fisioterapia__c}"/></td>
+            <td class="celula"><b>MIE</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.MIE_Fisioterapia__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula"><b>Observações</b></td><td class="celula" colspan="3"><apex:outputField value="{!Avaliacao__c.Observacoes4_Fisioterapia__c}"/></td>
+            </tr>
+        </table><br/>
+        
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Plano terapêutico</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+            <tr>
+            <td class="celula" colspan="4" style="text-align:center"><b>Curto Prazo</b></td>
+            </tr>
+            <tr>
+            <td class="celula" colspan="4"><apex:outputField value="{!Avaliacao__c.Curto_Prazo__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula" colspan="4" style="text-align:center"><b>Médio Prazo</b></td>
+            </tr>
+            <tr>
+            <td class="celula" colspan="4"><apex:outputField value="{!Avaliacao__c.Medio_Prazo__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula" colspan="4" style="text-align:center"><b>Longo Prazo</b></td>
+            </tr>
+            <tr>
+            <td class="celula" colspan="4"><apex:outputField value="{!Avaliacao__c.Longo_Prazo__c}"/></td>
+            </tr>
+        </table>
+     </apex:outputText>
+
+  <apex:outputText id="fonoaudiologia" rendered="{!IF(Avaliacao__c.RecordTypeId = '0125A000001Yb5iQAC', true, false)}">
+                <div class="titulo">Avaliação de Fonoaudiologia</div><br/>
+                  <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Breve Histórico</div>
+
+     <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+        <tr>
+            <td class="celula" colspan="4" style="text-align:justify"><apex:outputField value="{!Avaliacao__c.Breve_hist_rico_Fonoaudiologia__c}"/></td>
+        </tr>
+     </table><br/>
+     <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Exame físico</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+          <tr>
+            <td class="celula"><b>Sinal vital FC (60 a 100 bpm)</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Sinal_vital_FC_Fonoaudiologia__c}"/></td>
+            <td class="celula"><b>Sinal vital FR (12 a 20rpm)</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Sinal_vital_FR_Fonoaudiologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Sinal vital SPO2 (> 90%)</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Sinal_vital_SPO2_Fonoaudiologia__c}"/></td>
+            <td class="celula"><b>Nível de atenção</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.N_vel_de_aten_o_Fonoaudiologia__c}"/></td>
+          </tr>
+     </table><br/> 
+     
+     <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Respiração</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+          <tr>
+            <td class="celula"><b>Repouso</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Repouso_Fonoaudiologia__c}"/></td>
+            <td class="celula"><b>Modo</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Modo_Fonoaudiologia__c}"/></td>
+            <td class="celula"><b>Nº Traqueostomia</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Se_Traqueostomia_qual_Fonoaudiologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Ventilação</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Ventila_o_2_Fonoaudiologia__c}"/></td>
+            <td class="celula"><b>Dependência</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Depend_ncia_Fonoaudiologia__c}"/></td>
+            <td class="celula"><b>Volume</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Se_necess_rio_qual_volume_Fonoaudiologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Sinais de fadiga</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Sinais_de_fadiga_Fonoaudiologia__c}"/></td>
+            <td class="celula"><b>Ausculta Cervical</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Ausculta_Cervical_Fonoaudiologia__c}"/></td>
+          </tr>
+          </table><br/>
+          
+          <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Comunicação</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+          <tr>
+            <td class="celula"><b>Expressão</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Express_o_Fonoaudiologia__c}"/></td>
+            <td class="celula"><b>Compreensão</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Compreens_o_Fonoaudiologia__c}"/></td>
+            <td class="celula"><b>Fala</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Fala_Fonoaudiologia__c}"/></td>
+          </tr>
+        </table><br/>
+        
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Voz</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+          <tr>
+            <td class="celula"><b>Loudnes</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Loudnes_Fonoaudiologia__c}"/></td>
+            <td class="celula"><b>Pitch</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Pitch_Fonoaudiologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Qualidade</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Qualidade_Fonoaudiologia__c}"/></td>
+            <td class="celula"><b>Ressonância</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Ressonancia_Fonoaudiologia__c}"/></td>
+          </tr>
+        </table><br/> 
+        
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Complexo orofacial</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+          <tr>
+            <td class="celula"><b>Face</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Face_Fonoaudiologia__c}"/></td>
+            <td class="celula"><b>Lábios</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.L_bios_Fonoaudiologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Língua</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.L_ngua_Fonoaudiologia__c}"/></td>
+            <td class="celula"><b>Bochecha</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Bochecha_Fonoaudiologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Palato mole</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Palato_mole_Fonoaudiologia__c}"/></td>
+            <td class="celula"><b>Mandíbula</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Mand_bula_Fonoaudiologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Dentição</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Denti_o_Fonoaudiologia__c}"/></td>
+            <td class="celula"><b>Laringe</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Laringe_Fonoaudiologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Salivação</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Saliva_o_Fonoaudiologia__c}"/></td>
+            <td class="celula"><b>Higienização oral</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Higieniza_o_oral_Fonoaudiologia__c}"/></td>
+          </tr>
+        </table><br/>
+        
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Alimentação e reflexos orais</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+          <tr>
+            <td class="celula"><b>Via de alimentação</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Via_de_alimenta_o_2_Fonoaudiologia__c}"/></td>
+            <td class="celula"><b>Deglutição</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Degluti_o_2_Fonoaudiologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Tosse</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Tosse_Fonoaudiologia__c}"/></td>
+            <td class="celula"><b>Reflexos patológicos</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Reflexos_patol_gicos_Fonoaudiologia__c}"/></td>
+          </tr>
+        </table><br/>
+        
+         <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Avaliação direta de deglutição</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+          <tr>
+            <td class="celula" colspan="4"><apex:outputField value="{!Avaliacao__c.Avalia_o_direta_de_deglu_Fonoaudiologia__c}"/></td>
+          </tr>
+        </table><br/>
+        
+       <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Diagnóstico clínico e conduta</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+          <tr>
+            <td class="celula"><b>Comunicação</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Comunica_o_2_Fonoaudiologia__c}"/></td>
+            <td class="celula"><b>Motricidade orofacial</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Motricidade_orofacial_Fonoaudiologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Deglutição (PARD)</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Degluti_o_PARD_Fonoaudiologia__c}"/></td>
+            <td class="celula"><b>FOIS</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.FOIS_Fonoaudiologia__c}"/></td>
+          </tr>
+        </table><br/>
+        
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">CIF inicial</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+          <tr>
+            <td class="celula"><b>Fala</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Fala_2_Fonoaudiologia__c}"/></td>
+            <td class="celula"><b>Comunicação</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Comunica_o_3_Fonoaudiologia__c}"/></td>
+            <td class="celula"><b>Deglutição</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Degluti_o_3_Fonoaudiologia__c}"/></td>
+          </tr>
+        </table><br/>
+     </apex:outputText>
+     
+     <apex:outputText id="psicologia" rendered="{!IF(Avaliacao__c.RecordTypeId = '0125A000001Yb5nQAC', true, false)}">
+                <div class="titulo">Avaliação de Psicologia</div><br/>
+         <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">História biopsicossocial</div>
+         <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+           <tr>
+             <td class="celula" colspan="4" style="text-align:justify"><apex:outputField value="{!Avaliacao__c.Hist_ria_biopsicossocial_Psicologia__c}"/></td>
+           </tr>
+     </table><br/>
+     
+     <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Informações sobre o diagnóstico</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+          <tr>
+            <td class="celula"><b>Possui informações sobre o diagnóstico</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Tem_informa_es_sobre_o_diagn_stico_Psico__c}"/></td>
+            <td class="celula"><b>Compreensão</b></td><td class="celula" colspan="2"><apex:outputField value="{!Avaliacao__c.Compreenso_do_diagnstico_Psicologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula" style="text-align:center" colspan="6"><b>Expectativas da família para internação</b></td>
+          </tr>
+          <tr>
+            <td class="celula" colspan="6" style="text-align:justify"><apex:outputText value="{!Avaliacao__c.Expectativas_da_fam_lia_para_iPsicologia__c}; {!Avaliacao__c.Especificar_expectativas_Psicologia__c} "/></td>
+          </tr>
+        </table><br/>
+        
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Hábitos de vida</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+          <tr>
+            <td class="celula"><b>Etilista</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Etilista_Psicologia__c}"/></td>
+            <td class="celula"><b>Tipo</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Se_sim_Etilista_Psicologia__c}"/></td>
+            <td class="celula"><b>Frequência</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Frequ_ncia_de_uso_Psicologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Tentativas de parar</b></td><td class="celula" colspan="5" style="text-align:justify"><apex:outputText value="{!Avaliacao__c.Tentativas_de_parar_Psicologia__c}. {!Avaliacao__c.Se_sim_especificar_parar_Psicologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Consequências sócio-familiares</b></td><td class="celula" colspan="5" style="text-align:justify"><apex:outputText value="{!Avaliacao__c.Consequ_ncias_s_cio_familiare_Psicologia__c}. {!Avaliacao__c.Se_sim_especificar_Consequ_Psicologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Tabagista</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Tabagista_Psicologia__c}"/></td>
+            <td class="celula"><b>Tipo</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Se_sim_Tabagista_Psicologia__c}"/></td>
+            <td class="celula"><b>Frequência</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Frequ_ncia_de_uso_Tabagista_Psicologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Tentativas de parar</b></td><td class="celula" colspan="5" style="text-align:justify"><apex:outputText value="{!Avaliacao__c.Tentativas_de_parar_Tabagista_Psicologi__c}. {!Avaliacao__c.Especificar_Tabagista_Psicologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Consequências sócio-familiares</b></td><td class="celula" colspan="5" style="text-align:justify"><apex:outputText value="{!Avaliacao__c.Consequ_familiares_Tabagista_Psicologia__c}. {!Avaliacao__c.Especificar2_Tabagista_Psicologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Droga ilícita</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Droga_il_cita_Psicologia__c}"/></td>
+            <td class="celula"><b>Tipo</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Se_sim_Droga_Psicologia__c}"/></td>
+            <td class="celula"><b>Frequência</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Frequ_ncia_de_uso_Droga_Psicologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Tentativas de parar</b></td><td class="celula" colspan="5" style="text-align:justify"><apex:outputText value="{!Avaliacao__c.Tentativas_de_parar_Droga_Psicologia__c}. {!Avaliacao__c.Se_sim_especificar_para_Droga_Psicologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Consequências sócio-familiares</b></td><td class="celula" colspan="5" style="text-align:justify"><apex:outputText value="{!Avaliacao__c.Consequ_familiares_Droga_Psicologia__c}. {!Avaliacao__c.Se_sim_espec_Consequ_Droga_Psicologia__c}"/></td>
+          </tr>
+        </table><br/>
+        
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">História de transtorno mental</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+          <tr>
+            <td class="celula"><b>Paciente</b></td><td class="celula"><apex:outputText value="{!Avaliacao__c.Paciente_Psicologia__c}. ({!Avaliacao__c.Se_sim_Paciente_Psicologia__c}). {!Avaliacao__c.Especificar_Paciente_Psicologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Familiar</b></td><td class="celula"><apex:outputText value="{!Avaliacao__c.Familiar_Psicologia__c}. ({!Avaliacao__c.Se_sim_Familiar_Psicologia__c}). {!Avaliacao__c.Especificar_Familiar_Psicologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Tratamento psicológico</b></td><td class="celula"><apex:outputText value="{!Avaliacao__c.Tratamento_psicol_gico_paciente_Psicolog__c}. {!Avaliacao__c.Se_sim_especificar_psico_paciente_Psicol__c}."/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Tratamento psiquiátrico</b></td><td class="celula"><apex:outputText value="{!Avaliacao__c.Tratamento_psiqui_trico_paciente_Psicolo__c}. {!Avaliacao__c.Se_sim_especificar_psiqui_Psicologia__c}."/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Tentativas de autoextermínio</b></td><td class="celula"><apex:outputText value="{!Avaliacao__c.Tentativas_de_autoexterm_nio_Psicologia__c}. {!Avaliacao__c.Se_sim_especificar_autoexterminio_Psicol__c}."/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Suicídio ou tentativa, na família</b></td><td class="celula"><apex:outputText value="{!Avaliacao__c.Suic_dio_ou_tentativa_na_fam_lia_Psicolo__c}. Prévios ao adoecimento: {!Avaliacao__c.Pr_vios_ao_adoecimento_Psicologia__c} ({!Avaliacao__c.Se_sim_especificar_previos_Psicologia__c}). Após ao adoecimento: {!Avaliacao__c.Ap_s_o_adoecimento_Psicologia__c} ({!Avaliacao__c.Se_sim_especificar_apos_Psicologia__c})."/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Alteração do sono </b></td><td class="celula" >{!Avaliacao__c.Altera_o_do_sono_Psicologia__c}. b134: {!Avaliacao__c.b134_sono_Psicologia__c}. Tipo:&nbsp;<apex:outputText value="{!IF(Avaliacao__c.Se_sim_sono_Psicologia__c != null, Avaliacao__c.Se_sim_sono_Psicologia__c, 'Nenhuma')}" /><apex:outputText value="{!IF(Avaliacao__c.Outro_sono_Psicologia__c!= null, ' ' + Avaliacao__c.Outro_sono_Psicologia__c, null)}" />; {!Avaliacao__c.Quando_sono_Psicologia__c} </td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Alteração do apetite</b></td><td class="celula" >{!Avaliacao__c.Altera_o_do_apetite_Psicologia__c}. b13402: {!Avaliacao__c.b13402_apetite_Psicologia__c}. Tipo:&nbsp;<apex:outputText value="{!IF(Avaliacao__c.Se_sim_apetite_Psicologia__c!= null, Avaliacao__c.Se_sim_apetite_Psicologia__c, 'Nenhuma')}" /><apex:outputText value="{!IF(Avaliacao__c.Outro_apetite_Psicologia__c!= null, ' ' + Avaliacao__c.Outro_apetite_Psicologia__c, null)}" />; {!Avaliacao__c.Quando_apetite_Psicologia__c} </td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Uso prévio de medicamentos psicotrópicos</b></td><td class="celula" style="vertical-align:middle"> {!Avaliacao__c.Uso_pr_vio_de_medicamentos_Psicologia__c}. {!Avaliacao__c.Se_sim_especificar_medicamentos_Psicolog__c} </td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Sequelas emocionais</b></td><td class="celula" style="vertical-align:middle"> {!Avaliacao__c.Sequelas_emocionais_Psicologia__c}. {!Avaliacao__c.Se_sim_especificar_Sequelas_Psicologia__c} </td>
+          </tr>
+        </table><br/><br/>
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Avaliação psíquica</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+          <tr>
+            <td class="celula"><b>Consciência clínica</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Consci_ncia_cl_nica_ava_Psicologia__c}"/></td>
+            <td class="celula"><b>Orientação Alopsíquica</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Orienta_o_Alops_quica_Psicologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Orientação Autopsíquica</b></td><td class="celula" ><apex:outputField value="{!Avaliacao__c.Orienta_o_Autops_quica_Psicologia__c}"/></td>
+            <td class="celula"><b>b156</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.b156_Pensamento_Psicologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Senso Percepção</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Senso_Percep_o_ava_Psicologia__c}"/></td>
+            <td class="celula"><b>b156</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.b160_comunicacao_Psicologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Pensamento</b></td><td class="celula" colspan="3">{!Avaliacao__c.Pensamento_ava_Psicologia__c}. {!Avaliacao__c.Se_del_rio_qual_Psicologia__c}</td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Comunicação</b></td><td class="celula" colspan="3">{!Avaliacao__c.Comunica_o_Psicologia__c}. </td>
+          </tr>
+        </table><br/>
+        
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Estado emocional geral</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+          <tr>
+            <td class="celula"><b>Afetividade/humor</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Afetividade_humor_Psicologia__c}"/></td>
+            <td class="celula"><b>Motivação e volição</b></td><td class="celula">{!Avaliacao__c.Motiva_o_e_voli_o2_Psicologia__c}. b1301: {!Avaliacao__c.b1301_motivacao_Psicologia__c}</td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Estratégias de enfrentamento</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Estrat_gias_de_enfrentamento_Psicologia__c}"/></td>
+            <td class="celula"><b>Autoconceito</b></td><td class="celula">{!Avaliacao__c.Autoconceito_Psicologia__c}</td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Estado atual a doença/hospitalização</b></td><td class="celula" colspan="3"><apex:outputField value="{!Avaliacao__c.Estado_atual_a_doen_Psicologia__c}"/></td>
+          </tr>
+        </table><br/>
+        
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Manifestações psíquicas observadas</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+          <tr>
+            <td class="celula"><apex:outputField value="{!Avaliacao__c.Manifesta_observadas_Psicologia__c}"/></td>
+          </tr>
+        </table><br/>
+        
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Organização para o cuidado com o paciente</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+          <tr>
+            <td class="celula"><b>Principais cuidadores</b></td><td class="celula">{!Avaliacao__c.Principais_cuidadores_Psicologia__c}. {!Avaliacao__c.Se_sim_especificar_cuidadores_Psicologia__c} . Postura frente aos cuidados: {!Avaliacao__c.Postura_frente_aos_cuidados_Psicologia__c}</td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Conflito familiar</b></td><td class="celula">{!Avaliacao__c.Conflito_familiar_Psicologia__c}. {!Avaliacao__c.Se_sim_especificar_Conflito_Psicologia__c}</td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Estado atual frente a doença</b></td><td class="celula">{!Avaliacao__c.Estado_atual_frente_Psicologia__c}</td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Suporte operacional</b></td><td class="celula">{!Avaliacao__c.Suporte_operacional_Psicologia__c}. <b>e310 ou e315:</b> {!Avaliacao__c.e310_ou_e315_operacional_Psicologia__c}</td>
+          </tr>
+          <tr>
+          <td class="celula"><b>Suporte emocional</b></td><td class="celula">{!Avaliacao__c.Suporte_emocional_Psicologia__c}. <b>e310 ou e315:</b> {!Avaliacao__c.e310_ou_e315_emocional_Psicologia__c}</td>
+          </tr>
+        </table><br/>
+        
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Formulação de risco psicológico</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+          <tr>
+            <td class="celula"><b>Principais riscos observados</b></td><td class="celula">{!Avaliacao__c.Principais_riscos_observados_Psicologia__c}; <apex:outputText value="{!IF(Avaliacao__c.Outros_riscos_Psicologia__c !=null,' ' + Avaliacao__c.Outros_riscos_Psicologia__c, null)}"/></td>
+            <td class="celula"><b>Riscos significativos</b></td><td class="celula">{!Avaliacao__c.Foram_observados_riscos_Psicologia__c}</td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Risco Psicológico</b></td><td class="celula">{!Avaliacao__c.Risco_Psicol_gico_do_Psicologia__c}</td>
+            <td class="celula"><b>Família demanda acompanhamento</b></td><td class="celula">{!Avaliacao__c.Fam_lia_demanda_acompanhamento_Psicologi__c}</td>
+          </tr>
+        </table>
+     </apex:outputText>
+     
+      <apex:outputText id="terapia" rendered="{!IF(Avaliacao__c.RecordTypeId = '0125A000001Yb5sQAC', true, false)}">
+                <div class="titulo">Avaliação de Terapia Ocupacional</div><br/>
+                
+         <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Medida de Independência Funcional</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+          <tr>
+            <td class="celula"><b>MIF</b></td><td class="celula">{!Avaliacao__c.Medida_de_Independencia_TO__c}</td>
+            <td class="celula"><b>Nível de Dependência</b></td><td class="celula">{!Avaliacao__c.Nivel_de_Dependencia_TO__c}</td>
+          </tr>
+        </table><br/>
+        
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Atividades - Pontuação</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+          <tr>
+            <td class="celula"><b>A - Alimentar-se</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Alimentar_se_TO__c}"/></td>
+            <td class="celula"><b>B - Arrumar-se</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Arrumar_se_TO__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>C - Banhar-se</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Banhar_se_TO__c}"/></td>
+            <td class="celula"><b>D - Vestir parte superior</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Vestir_parte_superior_TO__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>E - Vestir parte inferior</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Vestir_parte_inferior_TO__c}"/></td>
+            <td class="celula"><b>F - Higiene Pessoal</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.HigienePessoal_TO__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>G - Controle Vesical</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Controle_Vesical_TO__c}"/></td>
+            <td class="celula"><b>H - Controle intestinal</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Controle_Intestinal_TO__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>I - Leito / Cadeira / Cadeira de rodas</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Leito_Cadeira_TO__c}"/></td>
+            <td class="celula"><b>J - Sanitário</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Sanitario_TO__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>K - Banheira / chuveiro</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Banheira_chuveiro_TO__c}"/></td>
+            <td class="celula"><b>L - Marcha / Cadeira de rodas</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Marcha_Cadeira_de_rodas_TO__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>M - Escadas</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Escadas_TO__c}"/></td>
+            <td class="celula"><b>N - Abrangência</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Abrangencia_TO__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>O - Expressão</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Expressao_TO__c}"/></td>
+            <td class="celula"><b>P - Interação Social</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.InteracaoSocial_TO__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Q - Resolução de problemas</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Resolucao_de_problemas_TO__c}"/></td>
+            <td class="celula"><b>R - Memória</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Memoria_TO__c}"/></td>
+          </tr>
+        </table><br/>
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Plano terapêutico</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+            <tr>
+            <td class="celula" colspan="4" style="text-align:center"><b>Curto Prazo</b></td>
+            </tr>
+            <tr>
+            <td class="celula" colspan="4"><apex:outputField value="{!Avaliacao__c.Curto_Prazo__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula" colspan="4" style="text-align:center"><b>Médio Prazo</b></td>
+            </tr>
+            <tr>
+            <td class="celula" colspan="4"><apex:outputField value="{!Avaliacao__c.Medio_Prazo__c}"/></td>
+            </tr>
+            <tr>
+            <td class="celula" colspan="4" style="text-align:center"><b>Longo Prazo</b></td>
+            </tr>
+            <tr>
+            <td class="celula" colspan="4"><apex:outputField value="{!Avaliacao__c.Longo_Prazo__c}"/></td>
+            </tr>
+        </table>
+      </apex:outputText>
+      
+       <apex:outputText id="medica" rendered="{!IF(Avaliacao__c.RecordTypeId = '0125A000001Yb5xQAC', true, false)}">
+                <div class="titulo">Avaliação Médica</div><br/>
+         <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+          <tr>
+            <td class="celula"><b>Especialidade Médica</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Especialidade_Medica__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>História da Moléstia Atual</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Historia_da_Molestia_Medica__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Comorbidades</b></td><td class="celula"> {!Avaliacao__c.Comorbidades_Medica__c}; <apex:outputText rendered="{!IF(Avaliacao__c.Outras_comorbidades_medica__c != null, true, false)}" value="{!Avaliacao__c.Outras_comorbidades_medica__c};" /></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Reconciliação Medicamentosa</b></td><td class="celula"> <apex:outputText value="{!Avaliacao__c.Reconciliacao_Medicamentosa__c}" /></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Alergia</b></td><td class="celula"> <apex:outputText value="{!Avaliacao__c.Alergia_Medica__c}" /></td>
+          </tr>
+          </table><br/>
+          
+          <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Exame Físico</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+          <tr>
+            <td class="celula"><b>PA</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.PA__c}"/></td>
+            <td class="celula"><b>FC</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.FC_Medica__c}"/></td>           
+          </tr>           
+          <tr>
+            <td class="celula"><b>FR</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.FR_Medica__c}"/></td>
+            <td class="celula"><b>Glasgow</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Glasgow_Medica__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>SPO2</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.SPO2_Medica__c}"/></td>
+            <td class="celula"><b>Ausculta Cardíaca</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Ausculta_Cardiaca_Medica__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Ausculta Pulmonar</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Ausculta_Pulmonar_Medica__c}"/></td>
+            <td class="celula"><b>Neurologia</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Neurologia__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Geral</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Geral_Medica__c}"/></td>
+            <td class="celula"><b>Respiratório</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Respiratorio_Medica__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Ap. Cardiovascular</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Ap_Cardiovascular_Medica__c}"/></td>
+            <td class="celula"><b>Membros e pele</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Membros_e_pele_medica__c}"/></td>
+          </tr>
+          <tr>
+            <td class="celula"><b>Ap. Digestório</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Ap_Digestorio_Medica__c}"/></td>
+            <td class="celula"><b>Dispositivos</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Dispositivos_Medica__c}"/></td>
+          </tr>
+        </table><br/>
+        
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Exames Laboratoriais Relevantes</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+          <tr>
+            <td class="celula"><b>Creatinina</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Creatinina_Medica__c}"/></td>
+            <td class="celula"><b>Hemoglobina</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Hemoglobina_Medica__c}"/></td>           
+          </tr>
+          <tr>
+            <td class="celula"><b>Leucócitos</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Leucocitos_Medica__c}"/></td>
+            <td class="celula"><b>Plaquetas</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Plaquetas_Medica__c}"/></td>           
+          </tr>
+          <tr>
+            <td class="celula"><b>PCR</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.PCR_Medica__c}"/></td>
+            <td class="celula"><b>Sódio</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Sodio_Medica__c}"/></td>           
+          </tr> 
+          <tr>
+            <td class="celula"><b>Potássio</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Potassio_Medica__c}"/></td>
+            <td class="celula"><b>Outros</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.Outros__c}"/></td>           
+          </tr>  
+        </table><br/>
+        
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Exames de Imagem Relevantes</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+          <tr>
+            <td class="celula"><b>RX</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.RX_Medica__c}"/></td>
+            <td class="celula"><b>TC</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.TC_Medica__c}"/></td>           
+          </tr>
+          <tr>
+            <td class="celula"><b>RNM</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.RNM_Medica__c}"/></td>
+            <td class="celula"><b>US</b></td><td class="celula"><apex:outputField value="{!Avaliacao__c.US_Medica__c}"/></td>           
+          </tr>
+          <tr>
+            <td class="celula"><b>Outros</b></td><td class="celula" colspan="3"><apex:outputField value="{!Avaliacao__c.ExamesImagemOutros_Medica__c}"/></td>
+          </tr>
+        </table><br/>
+        
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">         
+          <tr>
+            <td class="celula" colspan="2" style="text-align:center"><b>Observações</b></td>
+          </tr>
+          <tr>
+            <td class="celula" style="text-align:justify"><apex:outputField value="{!Avaliacao__c.Observacoes_Medica__c}"/></td>           
+          </tr>
+          <tr>
+            <td class="celula" colspan="2" style="text-align:center"><b>Hipótese Diagnóstica</b></td>
+          </tr>
+          <tr>
+            <td class="celula" style="text-align:justify"><apex:outputField value="{!Avaliacao__c.Hipotese_Diag_Medica__c}"/></td>           
+          </tr>
+          <tr>
+            <td class="celula" colspan="2" style="text-align:center"><b>Prescrição Medicamentosa</b></td>
+          </tr>
+          <tr>
+            <td class="celula" style="text-align:justify"><apex:outputField value="{!Avaliacao__c.Prescricao_Medicamentosa__c}"/></td>           
+          </tr>
+          <tr>
+            <td class="celula" colspan="2" style="text-align:center"><b>Prescrição de Exames</b></td>
+          </tr>
+          <tr>
+            <td class="celula" style="text-align:justify"><apex:outputField value="{!Avaliacao__c.Prescricao_de_Exames_Medica__c}"/></td>           
+          </tr>
+          <tr>
+            <td class="celula" colspan="2" style="text-align:center"><b>Conduta</b></td>
+          </tr>
+          <tr>
+            <td class="celula" style="text-align:justify"><apex:outputField value="{!Avaliacao__c.Conduta_Medica__c}"/></td>           
+          </tr>
+        </table><br/>
+        
+        <div class="infos_texto" style="font-weight:bold; padding-bottom:6px;text-indent:4px;font-size:13px;">Plano terapêutico</div>
+        <table  class="tabela_geral print-friendly" cellpadding="0px" cellspacing="0px">
+            <tr>
+                <td class="celula" colspan="4" style="text-align:center"><b>Curto Prazo</b></td>
+            </tr>
+            <tr>
+                <td class="celula" colspan="4"><apex:outputField value="{!Avaliacao__c.Curto_Prazo__c}"/></td>
+            </tr>
+            <tr>
+                <td class="celula" colspan="4" style="text-align:center"><b>Médio Prazo</b></td>
+            </tr>
+            <tr>
+                <td class="celula" colspan="4"><apex:outputField value="{!Avaliacao__c.Medio_Prazo__c}"/></td>
+            </tr>
+            <tr>
+                <td class="celula" colspan="4" style="text-align:center"><b>Longo Prazo</b></td>
+            </tr>
+            <tr>
+                <td class="celula" colspan="4"><apex:outputField value="{!Avaliacao__c.Longo_Prazo__c}"/></td>
+            </tr>
+        </table>      
+       </apex:outputText>
+  </div>
+  </apex:pageBlock>
+  </body>
+
+</apex:page>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Situacao_de_entrega__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(    
+    AND(
+        OR(
+            TEXT(Status) = &apos;Ativo&apos;,
+			TEXT(Status) = &apos;Em Andamento&apos;,
+            TEXT(Status) = &apos;Entregue Parcial&apos;
+        ),
+        Prazo_de_entrega__c = Prazo_de_recebimento__c
+    ),
+    &apos;Estimado: No Dia&apos;,
+    IF(
+        AND(
+            OR(
+                TEXT(Status) = &apos;Ativo&apos;,
+				TEXT(Status) = &apos;Em Andamento&apos;,				
+                TEXT(Status) = &apos;Entregue Parcial&apos;
+            ),
+            Prazo_de_entrega__c &gt; Prazo_de_recebimento__c
+        ),
+        &apos;Estimado: &apos; &amp; TEXT(Prazo_de_entrega__c-Prazo_de_recebimento__c) &amp; &apos; dia(s) Adiantado&apos;,
+        IF(
+            AND(
+                OR(
+                    TEXT(Status) = &apos;Ativo&apos;,
+                    TEXT(Status) = &apos;Em Andamento&apos;,
+                    TEXT(Status) = &apos;Entregue Parcial&apos;
+                ),
+                Prazo_de_entrega__c &lt; Prazo_de_recebimento__c
+            ),
+            &apos;Estimado: &apos; &amp; TEXT(Prazo_de_recebimento__c-Prazo_de_entrega__c) &amp; &apos; dia(s) Atrasado&apos;,
+            IF(
+                AND(
+                    TEXT(Status) = &apos;Entregue Total&apos;,
+                    Prazo_de_entrega__c = EndDate
+                ),
+                &apos;Entregue: No Dia&apos;,
+                IF(
+                    AND(
+                        TEXT(Status) = &apos;Entregue Total&apos;,
+                        Prazo_de_entrega__c &gt; EndDate
+                    ),
+                    &apos;Entregue: &apos; &amp; TEXT(Prazo_de_entrega__c-EndDate) &amp; &apos; dia(s) Adiantado&apos;,
+                    IF(
+                        AND(
+                            TEXT(Status) = &apos;Entregue Total&apos;,
+                            Prazo_de_entrega__c &lt; EndDate
+                        ),
+                        &apos;Entregue: &apos; &amp; TEXT(EndDate-Prazo_de_entrega__c) &amp; &apos; dia(s) Atrasado&apos;,
+						IF(
+							TEXT(Status) = &apos;Rascunho&apos;,
+							&apos;Em Desenvolvimento&apos;,
+							IF(
+								OR(
+									TEXT(Status) = &apos;Aguardando Aprovação Comercial&apos;,
+									TEXT(Status) = &apos;Aguardando Aprovação Financeira&apos;
+								),
+								&apos;Pendente de Aprovação&apos;,
+								IF(
+									TEXT(Status) = &apos;Cancelado/Reprovado&apos;,
+									&apos;Não Aprovada&apos;,
+									IF(
+										AND(
+											TEXT(Status) = &apos;Entregue Total&apos;,
+											TEXT(EndDate) = &apos;&apos;
+										),
+										&apos;Sem Data de Entrega&apos;,
+										&apos;Sem Prazo Estimado&apos;
+									)									
+								)
+							)
+						)
+                    )
+                )
+            )
+        )
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>_Situação de entrega (del)</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

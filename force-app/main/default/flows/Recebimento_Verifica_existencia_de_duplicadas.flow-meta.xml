@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <customErrors>
+        <name>Erro</name>
+        <label>Erro</label>
+        <locationX>50</locationX>
+        <locationY>503</locationY>
+        <customErrorMessages>
+            <errorMessage>Recebimento duplicado</errorMessage>
+            <isFieldError>false</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <decisions>
+        <name>encontrou_c_pia</name>
+        <label>encontra cópia</label>
+        <locationX>182</locationX>
+        <locationY>395</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>c_pia</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>obtem_possiveis_c_pias</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Erro</targetReference>
+            </connector>
+            <label>cópia</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <interviewLabel>Recebimento — Verifica existencia de  duplicadas {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Recebimento — Verificar existencia de duplicatas</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>obtem_possiveis_c_pias</name>
+        <label>obtem possiveis cópias</label>
+        <locationX>182</locationX>
+        <locationY>287</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>encontrou_c_pia</targetReference>
+        </connector>
+        <filterLogic>1 AND 2 AND (3 OR 6) AND (4 OR 5)</filterLogic>
+        <filters>
+            <field>Pedido__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Pedido__c</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Name</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Recebimentos__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>obtem_possiveis_c_pias</targetReference>
+        </connector>
+        <object>Recebimentos__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>InvalidDraft</status>
+</Flow>

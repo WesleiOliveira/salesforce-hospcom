@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Peso_meta</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+Meta__c = true,
+OR(
+Peso_Meta__c = 0,
+Peso_Meta__c == null
+)
+)</errorConditionFormula>
+    <errorDisplayField>Peso_Meta__c</errorDisplayField>
+    <errorMessage>O peso da meta deve ser informado.</errorMessage>
+</ValidationRule>

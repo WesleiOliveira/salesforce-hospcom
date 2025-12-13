@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Produto__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Produto</label>
+    <referenceTo>Product2</referenceTo>
+    <relationshipLabel>Itens de linha da ordem de trabalho</relationshipLabel>
+    <relationshipName>Itens_de_linha_da_ordem_de_trabalho</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Lookup</type>
+</CustomField>

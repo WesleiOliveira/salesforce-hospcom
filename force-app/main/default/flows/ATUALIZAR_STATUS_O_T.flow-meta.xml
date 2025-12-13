@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <interviewLabel>ATUALIZAR STATUS O.T {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>ATUALIZAR STATUS O.T</label>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>ATUALIZAR_STATUS_DA_OT</name>
+        <label>ATUALIZAR STATUS DA OT</label>
+        <locationX>82</locationX>
+        <locationY>29</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>IDOT</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>EM ANDAMENTO</stringValue>
+            </value>
+        </inputAssignments>
+        <object>WorkOrder</object>
+    </recordUpdates>
+    <startElementReference>ATUALIZAR_STATUS_DA_OT</startElementReference>
+    <status>Active</status>
+    <variables>
+        <name>IDOT</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

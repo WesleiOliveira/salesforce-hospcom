@@ -1,0 +1,22 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+
+    <aura:handler name="render" value="{!this}" action="{!c.onRead}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <div class = "body">
+            <div class= "container-geral">
+                <div class = "cabecalho">
+                    <div class= "cont-titulo">
+                        
+                       <aura:if isTrue="{!v.recordTypeId == '012U4000005fZF3IAM'}">
+    						<h1 class="titulo">Procedimento Operacional Padrão</h1>
+    				  <aura:set attribute="else">
+       						<h1 class="titulo">Procedimento do Sistema de Qualidade</h1>
+   					 </aura:set>
+					 </aura:if>
+                    </div>
+              </div>
+        </div>
+    </div>
+</aura:component>

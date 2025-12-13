@@ -1,0 +1,21 @@
+<template>
+    <lightning-card if:true={vizualizavel}>
+        <div class="container">
+            <p class="mensagem">
+                Feedback referente à Avaliação do <strong>{periodo}</strong> de Experiência realizado.
+            </p>
+
+            <div class="checkbox">
+                <lightning-input type="checkbox" label="Ciente" checked={ciente} onchange={handleCheckbox} disabled={blockEdicao}></lightning-input>
+            </div>
+
+            <div class="assinatura">
+                <p><strong>{nomeColaborador}</strong></p>
+                <p>{dataHoje}</p>
+            </div>
+            <div if:false={blockEdicao}>
+                <lightning-button variant="brand" label="Salvar" title="Primary action" onclick={handleSave} class="slds-align_absolute-center"></lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+</template>

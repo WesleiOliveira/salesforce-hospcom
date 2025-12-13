@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_da_Garantia_de_Servi_o__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(TODAY()&lt; Data_da_Garantia_de_Servi_o_T__c , IMAGE(&quot;https://hospcom--c.na25.content.force.com/servlet/servlet.FileDownload?file=0153100000815oV&quot;, &quot;&quot;, 15, 15) ,IMAGE(&quot;https://hospcom--c.na25.content.force.com/servlet/servlet.FileDownload?file=0153100000815of&quot;, &quot;&quot;, 15, 15))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Status da Garantia de Serviço</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

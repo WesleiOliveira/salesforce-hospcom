@@ -1,0 +1,80 @@
+<aura:component extends="c.ApexHelper" controller="AssistenteCompras"
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+    access="global">
+
+    <ltng:require styles="{!join(',',
+                           $Resource.fontAwesome + '/css/font-awesome.min.css')}" scripts="{!join(',',
+                           $Resource.JQuery)}" afterScriptsLoaded="{!c.onRender}" />
+
+    <aura:attribute name="idPCGerado" type="String" />
+
+    <div style="margin: 10px">
+        <!-- SPINNER DE CARREGAMENTO -->
+        <div id='spinnerDiv' style="display: none">
+            <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+        </div>
+
+        <div class="pdfPC" id="iframePDFPC">
+            <iframe src="{! 'https://hospcom--c.vf.force.com/apex/AssistentePedidoCompraPDF?id=' + v.idPCGerado}"
+                width="100%" height="500px;" frameBorder="0" />
+        </div>
+
+        <div class="mainDivPrimary">
+            <div class="tituloDecisaoCompra">Decisão de compra e tomada de preço</div>
+            <div class="subtituloDecisaoCompra">Insira os valores, avalie e adicione os produtos mais adequados de
+                acordo com seus fornecedores. Todos os pedidos de compra devem possuir anexo para que a cotação seja
+                enviada para aprovação.</div>
+            <div class="divFiltrosButtons">
+                <!-- <div class="divFiltro">
+                    <input class="customFilterInput" type="text" id="" placeholder="Filtre por P/N, Nome ou  modelo"/>
+                </div> -->
+
+                <div class="divButtons">
+                    <button class="customButton" id="buttonMenorPreco"
+                        title="Destaca todos os itens com menor preço">Menor Preço</button>
+                    <button class="customButton" id="buttonMenorPrazo"
+                        title="Destaca todos os itens com menor prazo">Menor Prazo</button>
+                    <button class="customButton" id="selecionarTodos"
+                        title="Seleciona todos os itens destacados">Selecionar Todos</button>
+                    <button class="customButton" id="limparTudo" title="Limpa todos os itens destacados">Limpar
+                        Tudo</button>
+                </div>
+            </div>
+
+            <div class="tabelaClass">
+                <table class="tg" id="prodTable">
+                    <thead>
+                        <tr>
+                            <th class="tg-fymr" title="SEQ. ITEM DA COTAÇÃO">SEQ. ITEM DA COTAÇÃO</th>
+                            <th class="tg-fymr" title="CÓDIGO DO ITEM">CÓD. DO ITEM</th>
+                            <th class="tg-fymr" title="DESCRIÇÃO DO ITEM">Desc. DO ITEM</th>
+                            <th class="tg-fymr" title="QUANTIDADE">QTD</th>
+                            <th class="tg-fymr" title="UNIDADE DE MEDIDA DE COMPRA">UND DE MEDIDA DE COMPRA</th>
+                            <th class="tg-fymr" title="ÚLTIMA COMPRA (PREÇO UNITÁRIO)">UC (PREÇO UNT)</th>
+                            <th class="tg-fymr" title="ÚLTIMA COMPRA (TIPO DA MOEDA)">UC (TIPO DA MOEDA)</th>
+                            <th class="tg-fymr" title="ÚLTIMA COMPRA (PREÇO TOTAL)">UC (PREÇO TOTAL)</th>
+                            <th class="tg-fymr" title="ÚLTIMA COMPRA (DATA DA COMPRA)">UC (DATA COMPRA)</th>
+                            <th class="tg-fymr" title="VALOR DE VENDA (UNITÁRIO)">VAL. DE VENDA (Unit.)</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="bodyTableCot">
+
+
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div style="display: flex; height: 10%; column-gap: 10px">
+                <button class="customButton2" style="height: 100%" id="salvarTomadaPreco"
+                    title="Salva a tomada de preço">Salvar tomada de preço</button>
+                <button class="customButton2" style="height: 100%" id="salvarDecisaoCompra"
+                    title="Salva a decisão de compra">Salvar decisão de compra</button>
+            </div>
+
+        </div>
+    </div>
+
+
+</aura:component>

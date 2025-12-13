@@ -1,0 +1,1346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OPME_Baumer</fullName>
+    <active>true</active>
+    <businessProcess>Padrão</businessProcess>
+    <label>OPME - Baumer</label>
+    <picklistValues>
+        <picklist>ATA_SRP__c</picklist>
+        <values>
+            <fullName>NÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Canal_de_venda__c</picklist>
+        <values>
+            <fullName>Convênio</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Particular</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Público</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Condicao_de_pagamento__c</picklist>
+        <values>
+            <fullName>10x 30%2F60%2F90%2F120%2F150%2F180%2F210%2F240%2F270%2F300 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>11x 30%2F60%2F90%2F120%2F150%2F180%2F210%2F240%2F270%2F300%2F330 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>12x 30%2F60%2F90%2F120%2F150%2F180%2F210%2F240%2F270%2F300%2F330%2F360 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>15 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>15%2F30 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>21 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2x 30%2F60 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>30 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3x 30%2F60%2F90 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>45 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4x 30%2F60%2F90%2F120 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5x 30%2F60%2F90%2F120%2F150 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>6x 30%2F60%2F90%2F120%2F150%2F180 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>7x 30%2F60%2F90%2F120%2F150%2F180%2F210 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>8x 30%2F60%2F90%2F120%2F150%2F180%2F210%2F240 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>9x 30%2F60%2F90%2F120%2F150%2F180%2F210%2F240%2F270 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cruzamento de Saldos %28Permuta%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financiamento Bancário</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Renegociação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sem Mov%2E Financeiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>À Vista</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Confirmado__c</picklist>
+        <values>
+            <fullName>Não</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Sim</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Departamento__c</picklist>
+        <values>
+            <fullName>Comercial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Controladoria</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Diretoria de B%2EI e Growth</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Educação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Governo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Locação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Logística</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Serviço</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Documentacao_de_credenciamento__c</picklist>
+        <values>
+            <fullName>Certidão Simplificada</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contrato Social</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Declaração ME%2FEPP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Declaração de Habilitação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Documento dos sócios</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Documentos Procurador</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Procuração Especifica</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Termo de Credenciamento</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Documentacao_de_habilitacao__c</picklist>
+        <values>
+            <fullName>AFE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Acervo Técnico</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Alvará de Localização e Funcionamento</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Atestado de Capacidade técnica</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BPFD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Balanço Patrimonial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CNDT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CNPJ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cadfor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Certidão Estadual</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Certidão Federal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Certidão Municipal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contrato Social</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Declaração de Fatos Impeditivos</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Declaração de Menor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Documentos Todos os Socios</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Documentos do Sócio Administrador</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FGTS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Falência e Concordata</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inscrição Estadual</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inscrição Municipal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sicaf</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vigilância Sanitária Estadual</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vigilância Sanitária Municipal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Documentacao_de_proposta__c</picklist>
+        <values>
+            <fullName>BPF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Catalogo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Manual</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Registro Anvisa</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Especialidades__c</picklist>
+        <values>
+            <fullName>BISTURI%2F FOCO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CAMA E VIDEOLARINGO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ENDOSCOPIA FLEXÍVEL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ENDOSCOPIA RIGIDA%2FMESA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HEMATOLOGIA%2FBIOQUIMICA%2FIMUNOENSAIO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INFUSÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INSTRUMENTAIS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MONITORIZAÇÃO%2FCARDIOLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NEURO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ORTOPEDIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RAIOX FIXO%2FRAIOX PORTATIL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ULTRASSOM FIXO%2FULTRASSOM PORTATIL%2FULTRASSOM POC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VENTILAÇÃO%2FANESTESIA%2FFANEM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VET - MONITORIZAÇÃO%2F CARDIOLOGIA%2FINFUSAO%2FENDOSCOPIA RIGIDA%2FENDOSCOPIA FLEXIVEL%2FANESTESIA</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Exclusivo_ME_EPP__c</picklist>
+        <values>
+            <fullName>NÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PARCIAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>ForecastCategoryName</picklist>
+        <values>
+            <fullName>Comited</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Loss</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Open</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Upside</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Win</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Forma_de_pagamento2__c</picklist>
+        <values>
+            <fullName>Boleto Banco Itaú CC 98357-1 Contas  a Receber - HOSPCOM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boleto Banco Itaú Contas  a Receber - GDB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boleto Banco Safra CC 585288-2 Contas  a Receber - HOSPCOM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boleto Banco Santander Contas a Receber - GDB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boleto Bancário</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cob%2E Boleto - Banco Sicoob - Ag%3A 5004-0 Cc%3A 107431-8 - Hospcom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cob%2E Boleto - Banco do Brasil - Ag%3A 1242-4 Cc%3A 47391-X - Health</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cob%2E Boleto - Banco do Brasil - Ag%3A 1242-4 Cc%3A 48068-1 - ABC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cob%2E Boleto - Banco do Brasil - Ag%3A 1242-4 Cc%3A 69869-5 - Hospcom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cob%2E Boleto - Banco do Brasil - Ag%3A 1610-1 Cc%3A 128057-0 - GDB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cruzamento de Saldos %28Permuta%29 Recebido</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dinheiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>E-commerce</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pix</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sem Mov%2E Financeiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transferência Bancária</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Frete2__c</picklist>
+        <values>
+            <fullName>Contratação do Frete por conta de Terceiros</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contratação do Frete por conta do Destinatário %28FOB%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contratação do Frete por conta do Remetente %28CIF%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sem Ocorrência de Transporte%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transporte Próprio por conta do Destinatário</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transporte Próprio por conta do Remetente</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Frete__c</picklist>
+        <values>
+            <fullName>Contratação do Frete por conta de Terceiros</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contratação do Frete por conta do Destinatário %28FOB%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contratação do Frete por conta do Remetente %28CIF%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sem Ocorrência de Transporte%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transporte Próprio por conta do Destinatário</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transporte Próprio por conta do Remetente</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>LeadSource</picklist>
+        <values>
+            <fullName>Anúncio</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boca a boca</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Evento</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Feira ou convenção</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Indicação de funcionário</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Indicação externa</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Outros</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Parceiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Relações públicas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seminário - Interno</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seminário - Parceiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Web</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Linha__c</picklist>
+        <values>
+            <fullName>CAMAS HOSPITALARES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CIRURGIA MINIMAMENTE INVASIVA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CIRURGIA ROBÓTICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ELETROCIRURGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ENDOSCOPIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HUAWEI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IMAGEM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IMAGEM RAIO-X</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IMAGEM ULTRASSOM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LOCAÇÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MONITORES DE GRAU MEDICO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NEONATOLOGIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OPME</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OUTROS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PMLS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SERVIÇO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SURGICAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VETERINÁRIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VETERINÁRIA IVD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VETERINÁRIA MIS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VETERINÁRIA PMLS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VETQLAB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VIAS AÉREAS DIFÍCEIS</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Local__c</picklist>
+        <values>
+            <fullName>APOIO COTAÇÕES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BIONEXO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HUMA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PLANEJAMENTO GT PLAN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PRESENCIAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SINTESE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SMARKETS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VSSUPPLY</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Modalidade__c</picklist>
+        <values>
+            <fullName>CARONA ATA SRP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>COTAÇÃO PREVIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SICONV</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Motivo_Recurso__c</picklist>
+        <values>
+            <fullName>PREÇO INEXEQUÍVEL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PRODUTO</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Motivo_da_Impugna_o__c</picklist>
+        <values>
+            <fullName>DOCUMENTAÇÃO EXIGIDA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PREÇO INEXEQUÍVEL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PRODUTO</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Motivo_da_Perda__c</picklist>
+        <values>
+            <fullName>ACOMPANHAMENTO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CRÉDITO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DECISÃO DO CLIENTE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ERRO DE DOCUMENTAÇÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ESPECIFICAÇÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ESTOQUE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FALTA DE ANÁLISE TÉCNICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FALTA DE DOCUMENTAÇÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FALTA DE REPRESENTANTE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NÃO AUTORIZADO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PERDA DE PRAZO PARA CADASTRO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PREFERÊNCIA DE MARCA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PREÇO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PRODUTO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SERVIÇO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TIME</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Necess_rio_Impugnar__c</picklist>
+        <values>
+            <fullName>NÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Necess_rio_Recurso__c</picklist>
+        <values>
+            <fullName>NÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Oportunidade_OPME__c</picklist>
+        <values>
+            <fullName>NÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Plano_de_sa_de__c</picklist>
+        <values>
+            <fullName>AFFEGO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AMIL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ASSEFAZ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BRADESCO SAÚDE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CAESAN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CASSEMS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CASSI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GEAP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HAPVIDA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IMAS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IPASGO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MAIS SAÚDE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MEDSENIOR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NOTREDAME INTERMÉDICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PLANMED</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>POSTAL SAÚDE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SAMEL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNIMED</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNIMED CERRADO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNIMED GOIANIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNIMED GURUPI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNIMED ITUMBIARA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNIMED NACIONAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNIMED PALMAS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UNIMED RIO VERDE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VIVACOM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Prazo_Impugna_o__c</picklist>
+        <values>
+            <fullName>1 dia útil</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2 dias úteis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3 dias úteis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4 dias úteis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5 dias úteis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>6 dias úteis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>7 dias úteis</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Prazo_Recurso__c</picklist>
+        <values>
+            <fullName>1 dia útil</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2 dias úteis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3 dias úteis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4 dias úteis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5 dias úteis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>6 dias úteis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>7 dias úteis</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Protocolo_Impugnacao__c</picklist>
+        <values>
+            <fullName>ELETRÔNICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PRESENCIAL</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Protocolo_Recurso__c</picklist>
+        <values>
+            <fullName>ELETRÔNICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PRESENCIAL</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Regi_o__c</picklist>
+        <values>
+            <fullName>Acre</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Alagoas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Amapá</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Amazonas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bahia</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ceará</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Distrito Federal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Espírito Santo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Goiás</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Maranhão</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mato Grosso</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mato Grosso do Sul</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Minas Gerais</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Paraná</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Paraíba</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pará</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pernambuco</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Piauí</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rio Grande do Norte</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rio Grande do Sul</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rio de Janeiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rondônia</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Roraima</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Santa Catarina</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sergipe</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>São Paulo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tocantins</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Registro_ATA__c</picklist>
+        <values>
+            <fullName>ESTADUAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FEDERAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MUNICIPAL</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status_da_Assinatura__c</picklist>
+        <values>
+            <fullName>Aprovação financeira</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assinatura do administrador</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assinatura do cliente</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Assinaturas finalizadas</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Sub_Fase__c</picklist>
+        <values>
+            <fullName>ABORTADO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AGUARDANDO ANÁLISE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AGUARDANDO CONTRATO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AGUARDANDO EMPENHO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AGUARDANDO HABILITAÇÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AGUARDANDO HOMOLOGAÇÃO%2FADJUDICADO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AGUARDANDO PARTICIPAÇÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CANCELADO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>COTAÇÃO PRÉVIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DUPLICADO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EM ANDAMENTO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ESTIMATIVA DE PREÇOS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FINALIZADO TOTAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NEGÓCIO FUTURO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PERDIDO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RECURSO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SUSPENSO</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tipo_cirurgico__c</picklist>
+        <values>
+            <fullName>Artroplastia de revisão joelho</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Artroplastia de revisão ombro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Artroplastia de revisão quadril</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Artroplastia parcial joelho primário</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Artroplastia parcial ombro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Artroplastia parcial quadril</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Artroplastia total joelho primário</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Artroplastia total ombro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Artroplastia total quadril</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tipo_de_Opera_o__c</picklist>
+        <values>
+            <fullName>OPORTUNIDADE FILHA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OPORTUNIDADE PAI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OPORTUNIDADE REGULAR</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type</picklist>
+        <values>
+            <fullName>Padrão</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Verba__c</picklist>
+        <values>
+            <fullName>ESTADUAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FEDERAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MUNICIPAL</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

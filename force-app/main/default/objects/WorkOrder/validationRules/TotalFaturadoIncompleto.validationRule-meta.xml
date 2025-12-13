@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TotalFaturadoIncompleto</fullName>
+    <active>false</active>
+    <description>Verifica se po total faturado é 100, se sim prossegue para o fechamento</description>
+    <errorConditionFormula>AND( (Faturado__c &lt;  1), ISPICKVAL( Status , &quot;FECHADO CONCLUÍDO&quot;))</errorConditionFormula>
+    <errorMessage>O total faturado está abaixo de 100%, favor verificar os pedidos</errorMessage>
+</ValidationRule>

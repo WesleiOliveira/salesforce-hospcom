@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HEALTH</fullName>
+    <columns>NAME</columns>
+    <columns>Status__c</columns>
+    <columns>Data_do_fim_do_contrato__c</columns>
+    <columns>Link_do_portal__c</columns>
+    <columns>Login__c</columns>
+    <columns>Senha__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Empresa__c</field>
+        <operation>contains</operation>
+        <value>HEALTH</value>
+    </filters>
+    <label>HEALTH</label>
+</ListView>

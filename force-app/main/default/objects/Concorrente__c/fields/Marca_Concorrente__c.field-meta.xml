@@ -1,0 +1,4084 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Marca_Concorrente__c</fullName>
+    <externalId>false</externalId>
+    <label>Marca Concorrente</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Equipamento__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>1000MEDIC</fullName>
+                <default>false</default>
+                <label>1000MEDIC</label>
+            </value>
+            <value>
+                <fullName>3RAY</fullName>
+                <default>false</default>
+                <label>3RAY</label>
+            </value>
+            <value>
+                <fullName>ABOTT</fullName>
+                <default>false</default>
+                <label>ABOTT</label>
+            </value>
+            <value>
+                <fullName>ACON</fullName>
+                <default>false</default>
+                <label>ACON</label>
+            </value>
+            <value>
+                <fullName>AFK</fullName>
+                <default>false</default>
+                <label>AFK</label>
+            </value>
+            <value>
+                <fullName>AGFA NV</fullName>
+                <default>false</default>
+                <label>AGFA NV</label>
+            </value>
+            <value>
+                <fullName>AIR LIQUID</fullName>
+                <default>false</default>
+                <label>AIR LIQUID</label>
+            </value>
+            <value>
+                <fullName>ALFAMED</fullName>
+                <default>false</default>
+                <label>ALFAMED</label>
+            </value>
+            <value>
+                <fullName>ALFRS</fullName>
+                <default>false</default>
+                <label>ALFRS</label>
+            </value>
+            <value>
+                <fullName>ALLIAGE</fullName>
+                <default>false</default>
+                <label>ALLIAGE</label>
+            </value>
+            <value>
+                <fullName>AMOUL</fullName>
+                <default>false</default>
+                <label>AMOUL</label>
+            </value>
+            <value>
+                <fullName>ANCO</fullName>
+                <default>false</default>
+                <label>ANCO</label>
+            </value>
+            <value>
+                <fullName>AOHUA</fullName>
+                <default>false</default>
+                <label>AOHUA</label>
+            </value>
+            <value>
+                <fullName>APK TECHNOLOGY</fullName>
+                <default>false</default>
+                <label>APK TECHNOLOGY</label>
+            </value>
+            <value>
+                <fullName>ARGUS</fullName>
+                <default>false</default>
+                <label>ARGUS</label>
+            </value>
+            <value>
+                <fullName>ARJO</fullName>
+                <default>false</default>
+                <label>ARJO</label>
+            </value>
+            <value>
+                <fullName>ARTHIMED</fullName>
+                <default>false</default>
+                <label>ARTHIMED</label>
+            </value>
+            <value>
+                <fullName>ARTMED</fullName>
+                <default>false</default>
+                <label>ARTMED</label>
+            </value>
+            <value>
+                <fullName>ASPIRAMAX</fullName>
+                <default>false</default>
+                <label>ASPIRAMAX</label>
+            </value>
+            <value>
+                <fullName>ASPIRATEX</fullName>
+                <default>false</default>
+                <label>ASPIRATEX</label>
+            </value>
+            <value>
+                <fullName>ASPIRAVIDA</fullName>
+                <default>false</default>
+                <label>ASPIRAVIDA</label>
+            </value>
+            <value>
+                <fullName>ASSUT</fullName>
+                <default>false</default>
+                <label>ASSUT</label>
+            </value>
+            <value>
+                <fullName>ASTUS</fullName>
+                <default>false</default>
+                <label>ASTUS</label>
+            </value>
+            <value>
+                <fullName>ATRAMAT</fullName>
+                <default>false</default>
+                <label>ATRAMAT</label>
+            </value>
+            <value>
+                <fullName>BABY BLOCK</fullName>
+                <default>false</default>
+                <label>BABY BLOCK</label>
+            </value>
+            <value>
+                <fullName>BARRFAB</fullName>
+                <default>false</default>
+                <label>BARRFAB</label>
+            </value>
+            <value>
+                <fullName>BASALL</fullName>
+                <default>false</default>
+                <label>BASALL</label>
+            </value>
+            <value>
+                <fullName>BAUMER</fullName>
+                <default>false</default>
+                <label>BAUMER</label>
+            </value>
+            <value>
+                <fullName>BBRAUN</fullName>
+                <default>false</default>
+                <label>BBRAUN</label>
+            </value>
+            <value>
+                <fullName>BD</fullName>
+                <default>false</default>
+                <label>BD</label>
+            </value>
+            <value>
+                <fullName>BENFER</fullName>
+                <default>false</default>
+                <label>BENFER</label>
+            </value>
+            <value>
+                <fullName>BH</fullName>
+                <default>false</default>
+                <label>BH</label>
+            </value>
+            <value>
+                <fullName>BHIO SUPPLY</fullName>
+                <default>false</default>
+                <label>BHIO SUPPLY</label>
+            </value>
+            <value>
+                <fullName>BIC</fullName>
+                <default>false</default>
+                <label>BIC</label>
+            </value>
+            <value>
+                <fullName>BIOCARE</fullName>
+                <default>false</default>
+                <label>BIOCARE</label>
+            </value>
+            <value>
+                <fullName>BIOGÉNESIS</fullName>
+                <default>false</default>
+                <label>BIOGÉNESIS</label>
+            </value>
+            <value>
+                <fullName>BIOLAND</fullName>
+                <default>false</default>
+                <label>BIOLAND</label>
+            </value>
+            <value>
+                <fullName>BIOLIGHT</fullName>
+                <default>false</default>
+                <label>BIOLIGHT</label>
+            </value>
+            <value>
+                <fullName>BIOLINE</fullName>
+                <default>false</default>
+                <label>BIOLINE</label>
+            </value>
+            <value>
+                <fullName>BIONET</fullName>
+                <default>false</default>
+                <label>BIONET</label>
+            </value>
+            <value>
+                <fullName>BIOSANI</fullName>
+                <default>false</default>
+                <label>BIOSANI</label>
+            </value>
+            <value>
+                <fullName>BIOSENSOR</fullName>
+                <default>false</default>
+                <label>BIOSENSOR</label>
+            </value>
+            <value>
+                <fullName>BIOTECNO</fullName>
+                <default>false</default>
+                <label>BIOTECNO</label>
+            </value>
+            <value>
+                <fullName>BIOTRONIC</fullName>
+                <default>false</default>
+                <label>BIOTRONIC</label>
+            </value>
+            <value>
+                <fullName>BLA</fullName>
+                <default>false</default>
+                <label>BLA</label>
+            </value>
+            <value>
+                <fullName>BLT LIGHT</fullName>
+                <default>false</default>
+                <label>BLT LIGHT</label>
+            </value>
+            <value>
+                <fullName>BMC</fullName>
+                <default>false</default>
+                <label>BMC</label>
+            </value>
+            <value>
+                <fullName>BRASCOOL</fullName>
+                <default>false</default>
+                <label>BRASCOOL</label>
+            </value>
+            <value>
+                <fullName>BRASMEDICA</fullName>
+                <default>false</default>
+                <label>BRASMEDICA</label>
+            </value>
+            <value>
+                <fullName>BROTHER</fullName>
+                <default>false</default>
+                <label>BROTHER</label>
+            </value>
+            <value>
+                <fullName>BUNKER</fullName>
+                <default>false</default>
+                <label>BUNKER</label>
+            </value>
+            <value>
+                <fullName>CANON</fullName>
+                <default>false</default>
+                <label>CANON</label>
+            </value>
+            <value>
+                <fullName>CARDIOLINE</fullName>
+                <default>false</default>
+                <label>CARDIOLINE</label>
+            </value>
+            <value>
+                <fullName>CAREFUSION</fullName>
+                <default>false</default>
+                <label>CAREFUSION</label>
+            </value>
+            <value>
+                <fullName>CARESTREAM</fullName>
+                <default>false</default>
+                <label>CARESTREAM</label>
+            </value>
+            <value>
+                <fullName>CELM</fullName>
+                <default>false</default>
+                <label>CELM</label>
+            </value>
+            <value>
+                <fullName>CHISON</fullName>
+                <default>false</default>
+                <label>CHISON</label>
+            </value>
+            <value>
+                <fullName>CHOICE</fullName>
+                <default>false</default>
+                <label>CHOICE</label>
+            </value>
+            <value>
+                <fullName>CHOICEMED</fullName>
+                <default>false</default>
+                <label>CHOICEMED</label>
+            </value>
+            <value>
+                <fullName>CIENLAB</fullName>
+                <default>false</default>
+                <label>CIENLAB</label>
+            </value>
+            <value>
+                <fullName>CISA</fullName>
+                <default>false</default>
+                <label>CISA</label>
+            </value>
+            <value>
+                <fullName>CMOSDRAKE</fullName>
+                <default>false</default>
+                <label>CMOSDRAKE</label>
+            </value>
+            <value>
+                <fullName>CMOS DRAKE</fullName>
+                <default>false</default>
+                <label>CMOS DRAKE</label>
+            </value>
+            <value>
+                <fullName>COMEN</fullName>
+                <default>false</default>
+                <label>COMEN</label>
+            </value>
+            <value>
+                <fullName>COMPER</fullName>
+                <default>false</default>
+                <label>COMPER</label>
+            </value>
+            <value>
+                <fullName>CONFIANCE</fullName>
+                <default>false</default>
+                <label>CONFIANCE</label>
+            </value>
+            <value>
+                <fullName>CONFIANCE MEDICAL</fullName>
+                <default>false</default>
+                <label>CONFIANCE MEDICAL</label>
+            </value>
+            <value>
+                <fullName>CONKAST</fullName>
+                <default>false</default>
+                <label>CONKAST</label>
+            </value>
+            <value>
+                <fullName>CONMED</fullName>
+                <default>false</default>
+                <label>CONMED</label>
+            </value>
+            <value>
+                <fullName>CONTEC</fullName>
+                <default>false</default>
+                <label>CONTEC</label>
+            </value>
+            <value>
+                <fullName>COVIDIEN</fullName>
+                <default>false</default>
+                <label>COVIDIEN</label>
+            </value>
+            <value>
+                <fullName>COVIDIEN-POLYSUTURE</fullName>
+                <default>false</default>
+                <label>COVIDIEN-POLYSUTURE</label>
+            </value>
+            <value>
+                <fullName>CREATIVE</fullName>
+                <default>false</default>
+                <label>CREATIVE</label>
+            </value>
+            <value>
+                <fullName>CRISTOFOLE</fullName>
+                <default>false</default>
+                <label>CRISTOFOLE</label>
+            </value>
+            <value>
+                <fullName>CTC</fullName>
+                <default>false</default>
+                <label>CTC</label>
+            </value>
+            <value>
+                <fullName>D.F.V</fullName>
+                <default>false</default>
+                <label>D.F.V</label>
+            </value>
+            <value>
+                <fullName>D&apos;AQUINO</fullName>
+                <default>false</default>
+                <label>D&apos;AQUINO</label>
+            </value>
+            <value>
+                <fullName>DAIKI</fullName>
+                <default>false</default>
+                <label>DAIKI</label>
+            </value>
+            <value>
+                <fullName>DATRIX</fullName>
+                <default>false</default>
+                <label>DATRIX</label>
+            </value>
+            <value>
+                <fullName>DCK</fullName>
+                <default>false</default>
+                <label>DCK</label>
+            </value>
+            <value>
+                <fullName>DEJAMARO</fullName>
+                <default>false</default>
+                <label>DEJAMARO</label>
+            </value>
+            <value>
+                <fullName>DELLAMED</fullName>
+                <default>false</default>
+                <label>DELLAMED</label>
+            </value>
+            <value>
+                <fullName>DELTA LIFE</fullName>
+                <default>false</default>
+                <label>DELTA LIFE</label>
+            </value>
+            <value>
+                <fullName>DELTRONIX</fullName>
+                <default>false</default>
+                <label>DELTRONIX</label>
+            </value>
+            <value>
+                <fullName>DENTEMED</fullName>
+                <default>false</default>
+                <label>DENTEMED</label>
+            </value>
+            <value>
+                <fullName>DESEMATEC</fullName>
+                <default>false</default>
+                <label>DESEMATEC</label>
+            </value>
+            <value>
+                <fullName>DESTAK</fullName>
+                <default>false</default>
+                <label>DESTAK</label>
+            </value>
+            <value>
+                <fullName>DIGITALE</fullName>
+                <default>false</default>
+                <label>DIGITALE</label>
+            </value>
+            <value>
+                <fullName>DIXTAL</fullName>
+                <default>false</default>
+                <label>DIXTAL</label>
+            </value>
+            <value>
+                <fullName>DONATI</fullName>
+                <default>false</default>
+                <label>DONATI</label>
+            </value>
+            <value>
+                <fullName>DRAGER</fullName>
+                <default>false</default>
+                <label>DRAGER</label>
+            </value>
+            <value>
+                <fullName>EASYTECH</fullName>
+                <default>false</default>
+                <label>EASYTECH</label>
+            </value>
+            <value>
+                <fullName>ECAFIX</fullName>
+                <default>false</default>
+                <label>ECAFIX</label>
+            </value>
+            <value>
+                <fullName>EDAN</fullName>
+                <default>false</default>
+                <label>EDAN</label>
+            </value>
+            <value>
+                <fullName>ELBER</fullName>
+                <default>false</default>
+                <label>ELBER</label>
+            </value>
+            <value>
+                <fullName>ELETROSPITALAR</fullName>
+                <default>false</default>
+                <label>ELETROSPITALAR</label>
+            </value>
+            <value>
+                <fullName>EMAI</fullName>
+                <default>false</default>
+                <label>EMAI</label>
+            </value>
+            <value>
+                <fullName>EMPECS</fullName>
+                <default>false</default>
+                <label>EMPECS</label>
+            </value>
+            <value>
+                <fullName>ENDOBRAX</fullName>
+                <default>false</default>
+                <label>ENDOBRAX</label>
+            </value>
+            <value>
+                <fullName>ENDOMASTER</fullName>
+                <default>false</default>
+                <label>ENDOMASTER</label>
+            </value>
+            <value>
+                <fullName>ENDROBRAX</fullName>
+                <default>false</default>
+                <label>ENDROBRAX</label>
+            </value>
+            <value>
+                <fullName>EPEX.</fullName>
+                <default>false</default>
+                <label>EPEX.</label>
+            </value>
+            <value>
+                <fullName>EQUIPO PARENTERAL</fullName>
+                <default>false</default>
+                <label>EQUIPO PARENTERAL</label>
+            </value>
+            <value>
+                <fullName>ERBE</fullName>
+                <default>false</default>
+                <label>ERBE</label>
+            </value>
+            <value>
+                <fullName>ERBI</fullName>
+                <default>false</default>
+                <label>ERBI</label>
+            </value>
+            <value>
+                <fullName>ESAOTE</fullName>
+                <default>false</default>
+                <label>ESAOTE</label>
+            </value>
+            <value>
+                <fullName>ETHIK</fullName>
+                <default>false</default>
+                <label>ETHIK</label>
+            </value>
+            <value>
+                <fullName>EVOLUÇÃO PET</fullName>
+                <default>false</default>
+                <label>EVOLUÇÃO PET</label>
+            </value>
+            <value>
+                <fullName>FABINJECT</fullName>
+                <default>false</default>
+                <label>FABINJECT</label>
+            </value>
+            <value>
+                <fullName>FAMARA BRASIL</fullName>
+                <default>false</default>
+                <label>FAMARA BRASIL</label>
+            </value>
+            <value>
+                <fullName>FANEM</fullName>
+                <default>false</default>
+                <label>FANEM</label>
+            </value>
+            <value>
+                <fullName>FIAC</fullName>
+                <default>false</default>
+                <label>FIAC</label>
+            </value>
+            <value>
+                <fullName>FINGERTIP</fullName>
+                <default>false</default>
+                <label>FINGERTIP</label>
+            </value>
+            <value>
+                <fullName>FISHER &amp; PAYKEL</fullName>
+                <default>false</default>
+                <label>FISHER &amp; PAYKEL</label>
+            </value>
+            <value>
+                <fullName>FISIOMEDICA</fullName>
+                <default>false</default>
+                <label>FISIOMEDICA</label>
+            </value>
+            <value>
+                <fullName>FLEXINNIUM</fullName>
+                <default>false</default>
+                <label>FLEXINNIUM</label>
+            </value>
+            <value>
+                <fullName>FOKKUS</fullName>
+                <default>false</default>
+                <label>FOKKUS</label>
+            </value>
+            <value>
+                <fullName>FRESENIUS</fullName>
+                <default>false</default>
+                <label>FRESENIUS</label>
+            </value>
+            <value>
+                <fullName>FUJIFILM</fullName>
+                <default>false</default>
+                <label>FUJIFILM</label>
+            </value>
+            <value>
+                <fullName>FUJINOM</fullName>
+                <default>false</default>
+                <label>FUJINOM</label>
+            </value>
+            <value>
+                <fullName>FUJINON</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>FUJINON</label>
+            </value>
+            <value>
+                <fullName>GASLIVE</fullName>
+                <default>false</default>
+                <label>GASLIVE</label>
+            </value>
+            <value>
+                <fullName>GE</fullName>
+                <default>false</default>
+                <label>GE</label>
+            </value>
+            <value>
+                <fullName>GENERALMED</fullName>
+                <default>false</default>
+                <label>GENERALMED</label>
+            </value>
+            <value>
+                <fullName>GENERAL MEDITECH</fullName>
+                <default>false</default>
+                <label>GENERAL MEDITECH</label>
+            </value>
+            <value>
+                <fullName>GETINGE</fullName>
+                <default>false</default>
+                <label>GETINGE</label>
+            </value>
+            <value>
+                <fullName>GG</fullName>
+                <default>false</default>
+                <label>GG</label>
+            </value>
+            <value>
+                <fullName>GIGANTE</fullName>
+                <default>false</default>
+                <label>GIGANTE</label>
+            </value>
+            <value>
+                <fullName>GLICOO</fullName>
+                <default>false</default>
+                <label>GLICOO</label>
+            </value>
+            <value>
+                <fullName>GLOBALTEC</fullName>
+                <default>false</default>
+                <label>GLOBALTEC</label>
+            </value>
+            <value>
+                <fullName>GLOBALTECH</fullName>
+                <default>false</default>
+                <label>GLOBALTECH</label>
+            </value>
+            <value>
+                <fullName>GLOMED</fullName>
+                <default>false</default>
+                <label>GLOMED</label>
+            </value>
+            <value>
+                <fullName>GLUCOLEADER</fullName>
+                <default>false</default>
+                <label>GLUCOLEADER</label>
+            </value>
+            <value>
+                <fullName>GM</fullName>
+                <default>false</default>
+                <label>GM</label>
+            </value>
+            <value>
+                <fullName>GOIAS MERCANTIL DE PRODUTOS HOSPITALAR LTDA</fullName>
+                <default>false</default>
+                <label>GOIAS MERCANTIL DE PRODUTOS HOSPITALAR LTDA</label>
+            </value>
+            <value>
+                <fullName>GOTECH</fullName>
+                <default>false</default>
+                <label>GOTECH</label>
+            </value>
+            <value>
+                <fullName>GTECH</fullName>
+                <default>false</default>
+                <label>GTECH</label>
+            </value>
+            <value>
+                <fullName>G-TECH</fullName>
+                <default>false</default>
+                <label>G-TECH</label>
+            </value>
+            <value>
+                <fullName>GT GROUP</fullName>
+                <default>false</default>
+                <label>GT GROUP</label>
+            </value>
+            <value>
+                <fullName>HAMILTON MEDICAL</fullName>
+                <default>false</default>
+                <label>HAMILTON MEDICAL</label>
+            </value>
+            <value>
+                <fullName>HANKAMED</fullName>
+                <default>false</default>
+                <label>HANKAMED</label>
+            </value>
+            <value>
+                <fullName>HARTMANN</fullName>
+                <default>false</default>
+                <label>HARTMANN</label>
+            </value>
+            <value>
+                <fullName>HAWKMED</fullName>
+                <default>false</default>
+                <label>HAWKMED</label>
+            </value>
+            <value>
+                <fullName>HAWS AVLIS</fullName>
+                <default>false</default>
+                <label>HAWS AVLIS</label>
+            </value>
+            <value>
+                <fullName>HCS</fullName>
+                <default>false</default>
+                <label>HCS</label>
+            </value>
+            <value>
+                <fullName>HEARTSINE</fullName>
+                <default>false</default>
+                <label>HEARTSINE</label>
+            </value>
+            <value>
+                <fullName>HEDY</fullName>
+                <default>false</default>
+                <label>HEDY</label>
+            </value>
+            <value>
+                <fullName>HEMOVET</fullName>
+                <default>false</default>
+                <label>HEMOVET</label>
+            </value>
+            <value>
+                <fullName>HILL-ROM</fullName>
+                <default>false</default>
+                <label>HILL-ROM</label>
+            </value>
+            <value>
+                <fullName>HIPERMEDIC</fullName>
+                <default>false</default>
+                <label>HIPERMEDIC</label>
+            </value>
+            <value>
+                <fullName>HIPNOS PLUS</fullName>
+                <default>false</default>
+                <label>HIPNOS PLUS</label>
+            </value>
+            <value>
+                <fullName>HI TECHNOLOGIES</fullName>
+                <default>false</default>
+                <label>HI TECHNOLOGIES</label>
+            </value>
+            <value>
+                <fullName>HKZ</fullName>
+                <default>false</default>
+                <label>HKZ</label>
+            </value>
+            <value>
+                <fullName>HOFFMANLAB</fullName>
+                <default>false</default>
+                <label>HOFFMANLAB</label>
+            </value>
+            <value>
+                <fullName>HOSPICENTER</fullName>
+                <default>false</default>
+                <label>HOSPICENTER</label>
+            </value>
+            <value>
+                <fullName>HOSPIMETAL</fullName>
+                <default>false</default>
+                <label>HOSPIMETAL</label>
+            </value>
+            <value>
+                <fullName>HOSPMETAL</fullName>
+                <default>false</default>
+                <label>HOSPMETAL</label>
+            </value>
+            <value>
+                <fullName>HR</fullName>
+                <default>false</default>
+                <label>HR</label>
+            </value>
+            <value>
+                <fullName>H STRATTNER</fullName>
+                <default>false</default>
+                <label>H STRATTNER</label>
+            </value>
+            <value>
+                <fullName>H-TECH</fullName>
+                <default>false</default>
+                <label>H-TECH</label>
+            </value>
+            <value>
+                <fullName>IDTECH</fullName>
+                <default>false</default>
+                <label>IDTECH</label>
+            </value>
+            <value>
+                <fullName>IMBRAS</fullName>
+                <default>false</default>
+                <label>IMBRAS</label>
+            </value>
+            <value>
+                <fullName>IMDK</fullName>
+                <default>false</default>
+                <label>IMDK</label>
+            </value>
+            <value>
+                <fullName>IMEX</fullName>
+                <default>false</default>
+                <label>IMEX</label>
+            </value>
+            <value>
+                <fullName>IMPACTO</fullName>
+                <default>false</default>
+                <label>IMPACTO</label>
+            </value>
+            <value>
+                <fullName>IMPROMED</fullName>
+                <default>false</default>
+                <label>IMPROMED</label>
+            </value>
+            <value>
+                <fullName>IMUNNE</fullName>
+                <default>false</default>
+                <label>IMUNNE</label>
+            </value>
+            <value>
+                <fullName>INALAMED</fullName>
+                <default>false</default>
+                <label>INALAMED</label>
+            </value>
+            <value>
+                <fullName>INALAR</fullName>
+                <default>false</default>
+                <label>INALAR</label>
+            </value>
+            <value>
+                <fullName>INCOTERM</fullName>
+                <default>false</default>
+                <label>INCOTERM</label>
+            </value>
+            <value>
+                <fullName>INDREL</fullName>
+                <default>false</default>
+                <label>INDREL</label>
+            </value>
+            <value>
+                <fullName>INFITEC</fullName>
+                <default>false</default>
+                <label>INFITEC</label>
+            </value>
+            <value>
+                <fullName>INFRARED</fullName>
+                <default>false</default>
+                <label>INFRARED</label>
+            </value>
+            <value>
+                <fullName>INJEX</fullName>
+                <default>false</default>
+                <label>INJEX</label>
+            </value>
+            <value>
+                <fullName>INNOMED</fullName>
+                <default>false</default>
+                <label>INNOMED</label>
+            </value>
+            <value>
+                <fullName>INPROMED</fullName>
+                <default>false</default>
+                <label>INPROMED</label>
+            </value>
+            <value>
+                <fullName>INSTRAMED</fullName>
+                <default>false</default>
+                <label>INSTRAMED</label>
+            </value>
+            <value>
+                <fullName>INTERMED</fullName>
+                <default>false</default>
+                <label>INTERMED</label>
+            </value>
+            <value>
+                <fullName>JG MORIYA</fullName>
+                <default>false</default>
+                <label>JG MORIYA</label>
+            </value>
+            <value>
+                <fullName>JHS</fullName>
+                <default>false</default>
+                <label>JHS</label>
+            </value>
+            <value>
+                <fullName>JMS</fullName>
+                <default>false</default>
+                <label>JMS</label>
+            </value>
+            <value>
+                <fullName>JOHNSON &amp; JOHNSON</fullName>
+                <default>false</default>
+                <label>JOHNSON &amp; JOHNSON</label>
+            </value>
+            <value>
+                <fullName>JZIKI</fullName>
+                <default>false</default>
+                <label>JZIKI</label>
+            </value>
+            <value>
+                <fullName>JZK</fullName>
+                <default>false</default>
+                <label>JZK</label>
+            </value>
+            <value>
+                <fullName>KACIL</fullName>
+                <default>false</default>
+                <label>KACIL</label>
+            </value>
+            <value>
+                <fullName>KAPPESBERG</fullName>
+                <default>false</default>
+                <label>KAPPESBERG</label>
+            </value>
+            <value>
+                <fullName>KASVI</fullName>
+                <default>false</default>
+                <label>KASVI</label>
+            </value>
+            <value>
+                <fullName>KAVO</fullName>
+                <default>false</default>
+                <label>KAVO</label>
+            </value>
+            <value>
+                <fullName>KELLY MED</fullName>
+                <default>false</default>
+                <label>KELLY MED</label>
+            </value>
+            <value>
+                <fullName>KINGS</fullName>
+                <default>false</default>
+                <label>KINGS</label>
+            </value>
+            <value>
+                <fullName>KOLPLAST</fullName>
+                <default>false</default>
+                <label>KOLPLAST</label>
+            </value>
+            <value>
+                <fullName>KONICA MINOLTA</fullName>
+                <default>false</default>
+                <label>KONICA MINOLTA</label>
+            </value>
+            <value>
+                <fullName>KONSUNG</fullName>
+                <default>false</default>
+                <label>KONSUNG</label>
+            </value>
+            <value>
+                <fullName>KSS</fullName>
+                <default>false</default>
+                <label>KSS</label>
+            </value>
+            <value>
+                <fullName>KTK</fullName>
+                <default>false</default>
+                <label>KTK</label>
+            </value>
+            <value>
+                <fullName>KYOCERA</fullName>
+                <default>false</default>
+                <label>KYOCERA</label>
+            </value>
+            <value>
+                <fullName>LABOR IMPORT</fullName>
+                <default>false</default>
+                <label>LABOR IMPORT</label>
+            </value>
+            <value>
+                <fullName>LABTET</fullName>
+                <default>false</default>
+                <label>LABTET</label>
+            </value>
+            <value>
+                <fullName>LAMEDID</fullName>
+                <default>false</default>
+                <label>LAMEDID</label>
+            </value>
+            <value>
+                <fullName>LANCO</fullName>
+                <default>false</default>
+                <label>LANCO</label>
+            </value>
+            <value>
+                <fullName>LEISTUNG</fullName>
+                <default>false</default>
+                <label>LEISTUNG</label>
+            </value>
+            <value>
+                <fullName>LEMON</fullName>
+                <default>false</default>
+                <label>LEMON</label>
+            </value>
+            <value>
+                <fullName>LEPU</fullName>
+                <default>false</default>
+                <label>LEPU</label>
+            </value>
+            <value>
+                <fullName>LEVITA</fullName>
+                <default>false</default>
+                <label>LEVITA</label>
+            </value>
+            <value>
+                <fullName>LG</fullName>
+                <default>false</default>
+                <label>LG</label>
+            </value>
+            <value>
+                <fullName>LHB</fullName>
+                <default>false</default>
+                <label>LHB</label>
+            </value>
+            <value>
+                <fullName>LÍDER</fullName>
+                <default>false</default>
+                <label>LÍDER</label>
+            </value>
+            <value>
+                <fullName>LIFEMED</fullName>
+                <default>false</default>
+                <label>LIFEMED</label>
+            </value>
+            <value>
+                <fullName>LIGA LIFE</fullName>
+                <default>false</default>
+                <label>LIGA LIFE</label>
+            </value>
+            <value>
+                <fullName>LINET</fullName>
+                <default>false</default>
+                <label>LINET</label>
+            </value>
+            <value>
+                <fullName>LOOKMED</fullName>
+                <default>false</default>
+                <label>LOOKMED</label>
+            </value>
+            <value>
+                <fullName>LOTUS</fullName>
+                <default>false</default>
+                <label>LOTUS</label>
+            </value>
+            <value>
+                <fullName>LUKE MEDICAL</fullName>
+                <default>false</default>
+                <label>LUKE MEDICAL</label>
+            </value>
+            <value>
+                <fullName>LUMIAR</fullName>
+                <default>false</default>
+                <label>LUMIAR</label>
+            </value>
+            <value>
+                <fullName>M. ANDRADE</fullName>
+                <default>false</default>
+                <label>M. ANDRADE</label>
+            </value>
+            <value>
+                <fullName>MACOM</fullName>
+                <default>false</default>
+                <label>MACOM</label>
+            </value>
+            <value>
+                <fullName>MACROSUL</fullName>
+                <default>false</default>
+                <label>MACROSUL</label>
+            </value>
+            <value>
+                <fullName>MAGNAMED</fullName>
+                <default>false</default>
+                <label>MAGNAMED</label>
+            </value>
+            <value>
+                <fullName>MAKELINE</fullName>
+                <default>false</default>
+                <label>MAKELINE</label>
+            </value>
+            <value>
+                <fullName>MAQUET</fullName>
+                <default>false</default>
+                <label>MAQUET</label>
+            </value>
+            <value>
+                <fullName>MARCA</fullName>
+                <default>false</default>
+                <label>MARCA</label>
+            </value>
+            <value>
+                <fullName>MARCA MEDICA</fullName>
+                <default>false</default>
+                <label>MARCA MEDICA</label>
+            </value>
+            <value>
+                <fullName>MARCONI</fullName>
+                <default>false</default>
+                <label>MARCONI</label>
+            </value>
+            <value>
+                <fullName>MARTEC</fullName>
+                <default>false</default>
+                <label>MARTEC</label>
+            </value>
+            <value>
+                <fullName>MASIMO</fullName>
+                <default>false</default>
+                <label>MASIMO</label>
+            </value>
+            <value>
+                <fullName>MASTERFIX</fullName>
+                <default>false</default>
+                <label>MASTERFIX</label>
+            </value>
+            <value>
+                <fullName>MASTER MEDIKAL</fullName>
+                <default>false</default>
+                <label>MASTER MEDIKAL</label>
+            </value>
+            <value>
+                <fullName>MD</fullName>
+                <default>false</default>
+                <label>MD</label>
+            </value>
+            <value>
+                <fullName>MDF</fullName>
+                <default>false</default>
+                <label>MDF</label>
+            </value>
+            <value>
+                <fullName>MDK</fullName>
+                <default>false</default>
+                <label>MDK</label>
+            </value>
+            <value>
+                <fullName>MDKMED</fullName>
+                <default>false</default>
+                <label>MDKMED</label>
+            </value>
+            <value>
+                <fullName>MEDCIR</fullName>
+                <default>false</default>
+                <label>MEDCIR</label>
+            </value>
+            <value>
+                <fullName>MEDICALFIX</fullName>
+                <default>false</default>
+                <label>MEDICALFIX</label>
+            </value>
+            <value>
+                <fullName>MEDICATE</fullName>
+                <default>false</default>
+                <label>MEDICATE</label>
+            </value>
+            <value>
+                <fullName>MEDIKEE</fullName>
+                <default>false</default>
+                <label>MEDIKEE</label>
+            </value>
+            <value>
+                <fullName>MEDILIGHT</fullName>
+                <default>false</default>
+                <label>MEDILIGHT</label>
+            </value>
+            <value>
+                <fullName>MEDISAÚDE</fullName>
+                <default>false</default>
+                <label>MEDISAÚDE</label>
+            </value>
+            <value>
+                <fullName>MEDI SAUDE</fullName>
+                <default>false</default>
+                <label>MEDI SAUDE</label>
+            </value>
+            <value>
+                <fullName>MEDISING</fullName>
+                <default>false</default>
+                <label>MEDISING</label>
+            </value>
+            <value>
+                <fullName>MEDITROM</fullName>
+                <default>false</default>
+                <label>MEDITROM</label>
+            </value>
+            <value>
+                <fullName>MEDIX</fullName>
+                <default>false</default>
+                <label>MEDIX</label>
+            </value>
+            <value>
+                <fullName>MEDLEVENSOHN</fullName>
+                <default>false</default>
+                <label>MEDLEVENSOHN</label>
+            </value>
+            <value>
+                <fullName>MEDLIGHT</fullName>
+                <default>false</default>
+                <label>MEDLIGHT</label>
+            </value>
+            <value>
+                <fullName>MED LIGHT</fullName>
+                <default>false</default>
+                <label>MED LIGHT</label>
+            </value>
+            <value>
+                <fullName>MED-LINK</fullName>
+                <default>false</default>
+                <label>MED-LINK</label>
+            </value>
+            <value>
+                <fullName>MEDMAX</fullName>
+                <default>false</default>
+                <label>MEDMAX</label>
+            </value>
+            <value>
+                <fullName>MEDPEJ</fullName>
+                <default>false</default>
+                <label>MEDPEJ</label>
+            </value>
+            <value>
+                <fullName>MEDTRONIC</fullName>
+                <default>false</default>
+                <label>MEDTRONIC</label>
+            </value>
+            <value>
+                <fullName>MEDTRONIC COVIDIEN</fullName>
+                <default>false</default>
+                <label>MEDTRONIC COVIDIEN</label>
+            </value>
+            <value>
+                <fullName>MERCEDES</fullName>
+                <default>false</default>
+                <label>MERCEDES</label>
+            </value>
+            <value>
+                <fullName>MERCURY</fullName>
+                <default>false</default>
+                <label>MERCURY</label>
+            </value>
+            <value>
+                <fullName>METAHOSPITALAR</fullName>
+                <default>false</default>
+                <label>METAHOSPITALAR</label>
+            </value>
+            <value>
+                <fullName>META-HOSPITALAR</fullName>
+                <default>false</default>
+                <label>META-HOSPITALAR</label>
+            </value>
+            <value>
+                <fullName>METALCLIN</fullName>
+                <default>false</default>
+                <label>METALCLIN</label>
+            </value>
+            <value>
+                <fullName>METALIC MEDICAL</fullName>
+                <default>false</default>
+                <label>METALIC MEDICAL</label>
+            </value>
+            <value>
+                <fullName>META MÓVEIS</fullName>
+                <default>false</default>
+                <label>META MÓVEIS</label>
+            </value>
+            <value>
+                <fullName>MIAFTI</fullName>
+                <default>false</default>
+                <label>MIAFTI</label>
+            </value>
+            <value>
+                <fullName>MIKATOS</fullName>
+                <default>false</default>
+                <label>MIKATOS</label>
+            </value>
+            <value>
+                <fullName>MINDRAY</fullName>
+                <default>false</default>
+                <label>MINDRAY</label>
+            </value>
+            <value>
+                <fullName>MISSOURI</fullName>
+                <default>false</default>
+                <label>MISSOURI</label>
+            </value>
+            <value>
+                <fullName>MM</fullName>
+                <default>false</default>
+                <label>MM</label>
+            </value>
+            <value>
+                <fullName>MMPNI</fullName>
+                <default>false</default>
+                <label>MMPNI</label>
+            </value>
+            <value>
+                <fullName>MOBIL</fullName>
+                <default>false</default>
+                <label>MOBIL</label>
+            </value>
+            <value>
+                <fullName>MOBIL SAUDE PRO</fullName>
+                <default>false</default>
+                <label>MOBIL SAUDE PRO</label>
+            </value>
+            <value>
+                <fullName>MOBISSOM</fullName>
+                <default>false</default>
+                <label>MOBISSOM</label>
+            </value>
+            <value>
+                <fullName>MOB SMART</fullName>
+                <default>false</default>
+                <label>MOB SMART</label>
+            </value>
+            <value>
+                <fullName>MORYIA</fullName>
+                <default>false</default>
+                <label>MORYIA</label>
+            </value>
+            <value>
+                <fullName>MÓVEIS ANDRADE</fullName>
+                <default>false</default>
+                <label>MÓVEIS ANDRADE</label>
+            </value>
+            <value>
+                <fullName>MOZEC</fullName>
+                <default>false</default>
+                <label>MOZEC</label>
+            </value>
+            <value>
+                <fullName>MRC INDUSTRIA E COMERCIO DE MOVEIS HOSPITALARES LTDA</fullName>
+                <default>false</default>
+                <label>MRC INDUSTRIA E COMERCIO DE MOVEIS HOSPITALARES LTDA</label>
+            </value>
+            <value>
+                <fullName>MSB MEDICAL</fullName>
+                <default>false</default>
+                <label>MSB MEDICAL</label>
+            </value>
+            <value>
+                <fullName>MULTILASER</fullName>
+                <default>false</default>
+                <label>MULTILASER</label>
+            </value>
+            <value>
+                <fullName>MUNDI</fullName>
+                <default>false</default>
+                <label>MUNDI</label>
+            </value>
+            <value>
+                <fullName>NATUS</fullName>
+                <default>false</default>
+                <label>NATUS</label>
+            </value>
+            <value>
+                <fullName>NBTECH</fullName>
+                <default>false</default>
+                <label>NBTECH</label>
+            </value>
+            <value>
+                <fullName>NEEDS</fullName>
+                <default>false</default>
+                <label>NEEDS</label>
+            </value>
+            <value>
+                <fullName>NELLCOR</fullName>
+                <default>false</default>
+                <label>NELLCOR</label>
+            </value>
+            <value>
+                <fullName>NEUROSOFT</fullName>
+                <default>false</default>
+                <label>NEUROSOFT</label>
+            </value>
+            <value>
+                <fullName>NEVONI</fullName>
+                <default>false</default>
+                <label>NEVONI</label>
+            </value>
+            <value>
+                <fullName>NEWMED</fullName>
+                <default>false</default>
+                <label>NEWMED</label>
+            </value>
+            <value>
+                <fullName>NEWPORT</fullName>
+                <default>false</default>
+                <label>NEWPORT</label>
+            </value>
+            <value>
+                <fullName>NIHON KOHDEN</fullName>
+                <default>false</default>
+                <label>NIHON KOHDEN</label>
+            </value>
+            <value>
+                <fullName>NONIN</fullName>
+                <default>false</default>
+                <label>NONIN</label>
+            </value>
+            <value>
+                <fullName>NOVAMEC</fullName>
+                <default>false</default>
+                <label>NOVAMEC</label>
+            </value>
+            <value>
+                <fullName>NOVITECH</fullName>
+                <default>false</default>
+                <label>NOVITECH</label>
+            </value>
+            <value>
+                <fullName>NS</fullName>
+                <default>false</default>
+                <label>NS</label>
+            </value>
+            <value>
+                <fullName>OK BIOTECH</fullName>
+                <default>false</default>
+                <label>OK BIOTECH</label>
+            </value>
+            <value>
+                <fullName>OK METER</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>OK METER</label>
+            </value>
+            <value>
+                <fullName>OLIDEF</fullName>
+                <default>false</default>
+                <label>OLIDEF</label>
+            </value>
+            <value>
+                <fullName>OLIMPUS</fullName>
+                <default>false</default>
+                <label>OLIMPUS</label>
+            </value>
+            <value>
+                <fullName>OLYMPUS</fullName>
+                <default>false</default>
+                <label>OLYMPUS</label>
+            </value>
+            <value>
+                <fullName>ON CALL PLUS</fullName>
+                <default>false</default>
+                <label>ON CALL PLUS</label>
+            </value>
+            <value>
+                <fullName>ONIX</fullName>
+                <default>false</default>
+                <label>ONIX</label>
+            </value>
+            <value>
+                <fullName>OPTO</fullName>
+                <default>false</default>
+                <label>OPTO</label>
+            </value>
+            <value>
+                <fullName>OQTIS</fullName>
+                <default>false</default>
+                <label>OQTIS</label>
+            </value>
+            <value>
+                <fullName>ORTOBIO</fullName>
+                <default>false</default>
+                <label>ORTOBIO</label>
+            </value>
+            <value>
+                <fullName>ORTOBRAS</fullName>
+                <default>false</default>
+                <label>ORTOBRAS</label>
+            </value>
+            <value>
+                <fullName>ORTOMED</fullName>
+                <default>false</default>
+                <label>ORTOMED</label>
+            </value>
+            <value>
+                <fullName>ORTOSINTESE</fullName>
+                <default>false</default>
+                <label>ORTOSINTESE</label>
+            </value>
+            <value>
+                <fullName>OUTRA</fullName>
+                <default>false</default>
+                <label>OUTRA</label>
+            </value>
+            <value>
+                <fullName>OUTROS</fullName>
+                <default>false</default>
+                <label>OUTROS</label>
+            </value>
+            <value>
+                <fullName>OXIGEL</fullName>
+                <default>false</default>
+                <label>OXIGEL</label>
+            </value>
+            <value>
+                <fullName>OXIMAG</fullName>
+                <default>false</default>
+                <label>OXIMAG</label>
+            </value>
+            <value>
+                <fullName>OXIMETER</fullName>
+                <default>false</default>
+                <label>OXIMETER</label>
+            </value>
+            <value>
+                <fullName>PAMED</fullName>
+                <default>false</default>
+                <label>PAMED</label>
+            </value>
+            <value>
+                <fullName>PATOLA CASES</fullName>
+                <default>false</default>
+                <label>PATOLA CASES</label>
+            </value>
+            <value>
+                <fullName>PENTAX MEDICAL</fullName>
+                <default>false</default>
+                <label>PENTAX MEDICAL</label>
+            </value>
+            <value>
+                <fullName>PHARMATEX</fullName>
+                <default>false</default>
+                <label>PHARMATEX</label>
+            </value>
+            <value>
+                <fullName>PHILCO</fullName>
+                <default>false</default>
+                <label>PHILCO</label>
+            </value>
+            <value>
+                <fullName>PHILIPS</fullName>
+                <default>false</default>
+                <label>PHILIPS</label>
+            </value>
+            <value>
+                <fullName>PHOENIX</fullName>
+                <default>false</default>
+                <label>PHOENIX</label>
+            </value>
+            <value>
+                <fullName>PHYSIO CONTROL</fullName>
+                <default>false</default>
+                <label>PHYSIO CONTROL</label>
+            </value>
+            <value>
+                <fullName>POINT SUTURE</fullName>
+                <default>false</default>
+                <label>POINT SUTURE</label>
+            </value>
+            <value>
+                <fullName>PORTAL</fullName>
+                <default>false</default>
+                <label>PORTAL</label>
+            </value>
+            <value>
+                <fullName>PREMIUM</fullName>
+                <default>false</default>
+                <label>PREMIUM</label>
+            </value>
+            <value>
+                <fullName>PROCARE</fullName>
+                <default>false</default>
+                <label>PROCARE</label>
+            </value>
+            <value>
+                <fullName>PROGETTI</fullName>
+                <default>false</default>
+                <label>PROGETTI</label>
+            </value>
+            <value>
+                <fullName>PROLIFE</fullName>
+                <default>false</default>
+                <label>PROLIFE</label>
+            </value>
+            <value>
+                <fullName>PROTEC</fullName>
+                <default>false</default>
+                <label>PROTEC</label>
+            </value>
+            <value>
+                <fullName>PULSE</fullName>
+                <default>false</default>
+                <label>PULSE</label>
+            </value>
+            <value>
+                <fullName>PURITAN BENNETT</fullName>
+                <default>false</default>
+                <label>PURITAN BENNETT</label>
+            </value>
+            <value>
+                <fullName>QUIMIS</fullName>
+                <default>false</default>
+                <label>QUIMIS</label>
+            </value>
+            <value>
+                <fullName>R&amp;D</fullName>
+                <default>false</default>
+                <label>R&amp;D</label>
+            </value>
+            <value>
+                <fullName>RC EQUIPAMENTOS</fullName>
+                <default>false</default>
+                <label>RC EQUIPAMENTOS</label>
+            </value>
+            <value>
+                <fullName>RENASCER</fullName>
+                <default>false</default>
+                <label>RENASCER</label>
+            </value>
+            <value>
+                <fullName>RENOVAR</fullName>
+                <default>false</default>
+                <label>RENOVAR</label>
+            </value>
+            <value>
+                <fullName>RESMED</fullName>
+                <default>false</default>
+                <label>RESMED</label>
+            </value>
+            <value>
+                <fullName>RESPIRAR</fullName>
+                <default>false</default>
+                <label>RESPIRAR</label>
+            </value>
+            <value>
+                <fullName>RESPIRATORY</fullName>
+                <default>false</default>
+                <label>RESPIRATORY</label>
+            </value>
+            <value>
+                <fullName>RICHARD WOLF</fullName>
+                <default>false</default>
+                <label>RICHARD WOLF</label>
+            </value>
+            <value>
+                <fullName>ROCHE</fullName>
+                <default>false</default>
+                <label>ROCHE</label>
+            </value>
+            <value>
+                <fullName>ROMED</fullName>
+                <default>false</default>
+                <label>ROMED</label>
+            </value>
+            <value>
+                <fullName>ROSSMAX</fullName>
+                <default>false</default>
+                <label>ROSSMAX</label>
+            </value>
+            <value>
+                <fullName>ROTAL</fullName>
+                <default>false</default>
+                <label>ROTAL</label>
+            </value>
+            <value>
+                <fullName>RUBMED</fullName>
+                <default>false</default>
+                <label>RUBMED</label>
+            </value>
+            <value>
+                <fullName>RUSSER</fullName>
+                <default>false</default>
+                <label>RUSSER</label>
+            </value>
+            <value>
+                <fullName>RZ VET</fullName>
+                <default>false</default>
+                <label>RZ VET</label>
+            </value>
+            <value>
+                <fullName>SAEVO</fullName>
+                <default>false</default>
+                <label>SAEVO</label>
+            </value>
+            <value>
+                <fullName>SALUTEM</fullName>
+                <default>false</default>
+                <label>SALUTEM</label>
+            </value>
+            <value>
+                <fullName>SAM MEDIC</fullName>
+                <default>false</default>
+                <label>SAM MEDIC</label>
+            </value>
+            <value>
+                <fullName>SAMSUNG</fullName>
+                <default>false</default>
+                <label>SAMSUNG</label>
+            </value>
+            <value>
+                <fullName>SAMTRONIC</fullName>
+                <default>false</default>
+                <label>SAMTRONIC</label>
+            </value>
+            <value>
+                <fullName>SANDERS</fullName>
+                <default>false</default>
+                <label>SANDERS</label>
+            </value>
+            <value>
+                <fullName>SANTA CLARA</fullName>
+                <default>false</default>
+                <label>SANTA CLARA</label>
+            </value>
+            <value>
+                <fullName>SAWAE</fullName>
+                <default>false</default>
+                <label>SAWAE</label>
+            </value>
+            <value>
+                <fullName>SCHOLLY</fullName>
+                <default>false</default>
+                <label>SCHOLLY</label>
+            </value>
+            <value>
+                <fullName>SCHUSTER</fullName>
+                <default>false</default>
+                <label>SCHUSTER</label>
+            </value>
+            <value>
+                <fullName>SDAMED</fullName>
+                <default>false</default>
+                <label>SDAMED</label>
+            </value>
+            <value>
+                <fullName>SERCON</fullName>
+                <default>false</default>
+                <label>SERCON</label>
+            </value>
+            <value>
+                <fullName>SEVEN CARE</fullName>
+                <default>false</default>
+                <label>SEVEN CARE</label>
+            </value>
+            <value>
+                <fullName>SHALON</fullName>
+                <default>false</default>
+                <label>SHALON</label>
+            </value>
+            <value>
+                <fullName>SHENZEN</fullName>
+                <default>false</default>
+                <label>SHENZEN</label>
+            </value>
+            <value>
+                <fullName>SHIMADZU</fullName>
+                <default>false</default>
+                <label>SHIMADZU</label>
+            </value>
+            <value>
+                <fullName>SHIMATDZU</fullName>
+                <default>false</default>
+                <label>SHIMATDZU</label>
+            </value>
+            <value>
+                <fullName>SHUNMEI MEDICAL</fullName>
+                <default>false</default>
+                <label>SHUNMEI MEDICAL</label>
+            </value>
+            <value>
+                <fullName>SIEMENS</fullName>
+                <default>false</default>
+                <label>SIEMENS</label>
+            </value>
+            <value>
+                <fullName>SIMILAR &amp; COMPATÍVEL</fullName>
+                <default>false</default>
+                <label>SIMILAR &amp; COMPATÍVEL</label>
+            </value>
+            <value>
+                <fullName>SINO</fullName>
+                <default>false</default>
+                <label>SINO</label>
+            </value>
+            <value>
+                <fullName>SINOTHINKER</fullName>
+                <default>false</default>
+                <label>SINOTHINKER</label>
+            </value>
+            <value>
+                <fullName>SISMATEC</fullName>
+                <default>false</default>
+                <label>SISMATEC</label>
+            </value>
+            <value>
+                <fullName>SOCINTER SUL</fullName>
+                <default>false</default>
+                <label>SOCINTER SUL</label>
+            </value>
+            <value>
+                <fullName>SOLAB</fullName>
+                <default>false</default>
+                <label>SOLAB</label>
+            </value>
+            <value>
+                <fullName>SOLID STEEL</fullName>
+                <default>false</default>
+                <label>SOLID STEEL</label>
+            </value>
+            <value>
+                <fullName>SONOLINE</fullName>
+                <default>false</default>
+                <label>SONOLINE</label>
+            </value>
+            <value>
+                <fullName>SONOSCAPE</fullName>
+                <default>false</default>
+                <label>SONOSCAPE</label>
+            </value>
+            <value>
+                <fullName>SONOSITE</fullName>
+                <default>false</default>
+                <label>SONOSITE</label>
+            </value>
+            <value>
+                <fullName>SPLABOR</fullName>
+                <default>false</default>
+                <label>SPLABOR</label>
+            </value>
+            <value>
+                <fullName>SSSPECTRUM</fullName>
+                <default>false</default>
+                <label>SSSPECTRUM</label>
+            </value>
+            <value>
+                <fullName>STERIS</fullName>
+                <default>false</default>
+                <label>STERIS</label>
+            </value>
+            <value>
+                <fullName>STERMAX</fullName>
+                <default>false</default>
+                <label>STERMAX</label>
+            </value>
+            <value>
+                <fullName>STERRAD</fullName>
+                <default>false</default>
+                <label>STERRAD</label>
+            </value>
+            <value>
+                <fullName>STORZ</fullName>
+                <default>false</default>
+                <label>STORZ</label>
+            </value>
+            <value>
+                <fullName>STRAMEDICAL</fullName>
+                <default>false</default>
+                <label>STRAMEDICAL</label>
+            </value>
+            <value>
+                <fullName>STRA MEDICAL</fullName>
+                <default>false</default>
+                <label>STRA MEDICAL</label>
+            </value>
+            <value>
+                <fullName>STRYKER</fullName>
+                <default>false</default>
+                <label>STRYKER</label>
+            </value>
+            <value>
+                <fullName>STUART</fullName>
+                <default>false</default>
+                <label>STUART</label>
+            </value>
+            <value>
+                <fullName>SULMEDICAL</fullName>
+                <default>false</default>
+                <label>SULMEDICAL</label>
+            </value>
+            <value>
+                <fullName>SUPRA STEEL</fullName>
+                <default>false</default>
+                <label>SUPRA STEEL</label>
+            </value>
+            <value>
+                <fullName>SURGIBABY</fullName>
+                <default>false</default>
+                <label>SURGIBABY</label>
+            </value>
+            <value>
+                <fullName>SWISSCARE</fullName>
+                <default>false</default>
+                <label>SWISSCARE</label>
+            </value>
+            <value>
+                <fullName>TAKAOKA</fullName>
+                <default>false</default>
+                <label>TAKAOKA</label>
+            </value>
+            <value>
+                <fullName>TECME</fullName>
+                <default>false</default>
+                <label>TECME</label>
+            </value>
+            <value>
+                <fullName>TECNAL</fullName>
+                <default>false</default>
+                <label>TECNAL</label>
+            </value>
+            <value>
+                <fullName>TECNOFIO</fullName>
+                <default>false</default>
+                <label>TECNOFIO</label>
+            </value>
+            <value>
+                <fullName>TECNOVASIVE</fullName>
+                <default>false</default>
+                <label>TECNOVASIVE</label>
+            </value>
+            <value>
+                <fullName>TEKMARKET</fullName>
+                <default>false</default>
+                <label>TEKMARKET</label>
+            </value>
+            <value>
+                <fullName>TERMOMETHER</fullName>
+                <default>false</default>
+                <label>TERMOMETHER</label>
+            </value>
+            <value>
+                <fullName>TERUMO</fullName>
+                <default>false</default>
+                <label>TERUMO</label>
+            </value>
+            <value>
+                <fullName>THR</fullName>
+                <default>false</default>
+                <label>THR</label>
+            </value>
+            <value>
+                <fullName>TOCH</fullName>
+                <default>false</default>
+                <label>TOCH</label>
+            </value>
+            <value>
+                <fullName>TOSHIBA</fullName>
+                <default>false</default>
+                <label>TOSHIBA</label>
+            </value>
+            <value>
+                <fullName>TOTH</fullName>
+                <default>false</default>
+                <label>TOTH</label>
+            </value>
+            <value>
+                <fullName>TOTH LIFECARE</fullName>
+                <default>false</default>
+                <label>TOTH LIFECARE</label>
+            </value>
+            <value>
+                <fullName>TRANSFORM</fullName>
+                <default>false</default>
+                <label>TRANSFORM</label>
+            </value>
+            <value>
+                <fullName>TRIGOPLAST</fullName>
+                <default>false</default>
+                <label>TRIGOPLAST</label>
+            </value>
+            <value>
+                <fullName>TRUMPF</fullName>
+                <default>false</default>
+                <label>TRUMPF</label>
+            </value>
+            <value>
+                <fullName>TUBOMED</fullName>
+                <default>false</default>
+                <label>TUBOMED</label>
+            </value>
+            <value>
+                <fullName>UNICA</fullName>
+                <default>false</default>
+                <label>UNICA</label>
+            </value>
+            <value>
+                <fullName>UNIMED MEDICAL</fullName>
+                <default>false</default>
+                <label>UNIMED MEDICAL</label>
+            </value>
+            <value>
+                <fullName>UNIMICRO</fullName>
+                <default>false</default>
+                <label>UNIMICRO</label>
+            </value>
+            <value>
+                <fullName>VALLEYLAB</fullName>
+                <default>false</default>
+                <label>VALLEYLAB</label>
+            </value>
+            <value>
+                <fullName>VENTCARE</fullName>
+                <default>false</default>
+                <label>VENTCARE</label>
+            </value>
+            <value>
+                <fullName>VENTLOGOS</fullName>
+                <default>false</default>
+                <label>VENTLOGOS</label>
+            </value>
+            <value>
+                <fullName>VERTEX</fullName>
+                <default>false</default>
+                <label>VERTEX</label>
+            </value>
+            <value>
+                <fullName>VETTEC</fullName>
+                <default>false</default>
+                <label>VETTEC</label>
+            </value>
+            <value>
+                <fullName>Via Medical</fullName>
+                <default>false</default>
+                <label>Via Medical</label>
+            </value>
+            <value>
+                <fullName>VINNO</fullName>
+                <default>false</default>
+                <label>VINNO</label>
+            </value>
+            <value>
+                <fullName>VITAGOLD</fullName>
+                <default>false</default>
+                <label>VITAGOLD</label>
+            </value>
+            <value>
+                <fullName>VITTAFLEX</fullName>
+                <default>false</default>
+                <label>VITTAFLEX</label>
+            </value>
+            <value>
+                <fullName>VMI</fullName>
+                <default>false</default>
+                <label>VMI</label>
+            </value>
+            <value>
+                <fullName>VYTTRA DIAGNOSTICOS</fullName>
+                <default>false</default>
+                <label>VYTTRA DIAGNOSTICOS</label>
+            </value>
+            <value>
+                <fullName>WELCH ALLYN</fullName>
+                <default>false</default>
+                <label>WELCH ALLYN</label>
+            </value>
+            <value>
+                <fullName>WELMY</fullName>
+                <default>false</default>
+                <label>WELMY</label>
+            </value>
+            <value>
+                <fullName>WEM</fullName>
+                <default>false</default>
+                <label>WEM</label>
+            </value>
+            <value>
+                <fullName>WINNER</fullName>
+                <default>false</default>
+                <label>WINNER</label>
+            </value>
+            <value>
+                <fullName>WORLD LIFE</fullName>
+                <default>false</default>
+                <label>WORLD LIFE</label>
+            </value>
+            <value>
+                <fullName>XIANDE</fullName>
+                <default>false</default>
+                <label>XIANDE</label>
+            </value>
+            <value>
+                <fullName>X-ONE</fullName>
+                <default>false</default>
+                <label>X-ONE</label>
+            </value>
+            <value>
+                <fullName>YKD</fullName>
+                <default>false</default>
+                <label>YKD</label>
+            </value>
+            <value>
+                <fullName>YONKER</fullName>
+                <default>false</default>
+                <label>YONKER</label>
+            </value>
+            <value>
+                <fullName>YUWELL</fullName>
+                <default>false</default>
+                <label>YUWELL</label>
+            </value>
+            <value>
+                <fullName>ZIEHM</fullName>
+                <default>false</default>
+                <label>ZIEHM</label>
+            </value>
+            <value>
+                <fullName>ZIMEDICAL</fullName>
+                <default>false</default>
+                <label>ZIMEDICAL</label>
+            </value>
+            <value>
+                <fullName>ZOLL</fullName>
+                <default>false</default>
+                <label>ZOLL</label>
+            </value>
+            <value>
+                <fullName>ZONCARE</fullName>
+                <default>false</default>
+                <label>ZONCARE</label>
+            </value>
+            <value>
+                <fullName>Z-ONE</fullName>
+                <default>false</default>
+                <label>Z-ONE</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>RESPIRADOR</controllingFieldValue>
+            <controllingFieldValue>VENTILADOR PULMONAR DE TRANSPORTE</controllingFieldValue>
+            <controllingFieldValue>VENTILADOR PARA CUIDADOS INTENSIVOS</controllingFieldValue>
+            <valueName>LEISTUNG</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CANETA UNIVERSAL</controllingFieldValue>
+            <valueName>GOIAS MERCANTIL DE PRODUTOS HOSPITALAR LTDA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>REANIMADOR AUTOCLAVÁVEL</controllingFieldValue>
+            <controllingFieldValue>REANIMADOR AUTOCLAVÁVEL NEONATAL</controllingFieldValue>
+            <controllingFieldValue>LARINGOSCÓPIO ADULTO</controllingFieldValue>
+            <controllingFieldValue>LARINGOSCÓPIO INFANTIL</controllingFieldValue>
+            <valueName>OXIGEL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>REANIMADOR AUTOCLAVÁVEL ADULTO</controllingFieldValue>
+            <controllingFieldValue>OTOSCOPIO</controllingFieldValue>
+            <controllingFieldValue>DERMATOSCOPIO</controllingFieldValue>
+            <controllingFieldValue>LANTERNA CLÍNICA</controllingFieldValue>
+            <controllingFieldValue>REANIMADOR PULMONAR MANUAL ADULTO</controllingFieldValue>
+            <controllingFieldValue>REANIMADOR PULMONAR MANUAL PEDIÁTRICO</controllingFieldValue>
+            <valueName>MIKATOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>REANIMADOR AUTOCLAVÁVEL ADULTO</controllingFieldValue>
+            <controllingFieldValue>REANIMADOR PULMONAR MANUAL ADULTO</controllingFieldValue>
+            <controllingFieldValue>REANIMADOR PULMONAR MANUAL NEONATAL</controllingFieldValue>
+            <valueName>PHARMATEX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAPACETE DE ACRÍLICO GRANDE</controllingFieldValue>
+            <controllingFieldValue>CAPACETE DE ACRÍLICO MÉDIO</controllingFieldValue>
+            <controllingFieldValue>CAPACETE</controllingFieldValue>
+            <controllingFieldValue>CIRCUITO DE VENTILAÇÃO ADDULTO</controllingFieldValue>
+            <controllingFieldValue>CIRDUITO DE VENTILAÇÃO INFANTIL</controllingFieldValue>
+            <controllingFieldValue>MÁSCARA PARA VNI</controllingFieldValue>
+            <valueName>ROMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ELETRODO CIRÚRGICO</controllingFieldValue>
+            <controllingFieldValue>BISTURI ELETRICO</controllingFieldValue>
+            <controllingFieldValue>CARDIOTOCOGRAFO</controllingFieldValue>
+            <valueName>WEM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ESFIGMOMANOMETRO PEDIÁTRICO</controllingFieldValue>
+            <controllingFieldValue>ESFIGMOMANOMETRO ADULTO</controllingFieldValue>
+            <controllingFieldValue>ESTETOSCOPIO ADULTO</controllingFieldValue>
+            <controllingFieldValue>ESTETOSCOPIO INFANTIL</controllingFieldValue>
+            <controllingFieldValue>LARINGOSCÓPIO ADULTO</controllingFieldValue>
+            <valueName>MISSOURI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ESFIGMOMANOMETRO PEDIÁTRICO</controllingFieldValue>
+            <controllingFieldValue>ESFIGMOMANOMETRO ADULTO</controllingFieldValue>
+            <controllingFieldValue>ESTETOSCOPIO INFANTIL</controllingFieldValue>
+            <controllingFieldValue>ESFIGMOMANOMETRO</controllingFieldValue>
+            <controllingFieldValue>TERMOMETRO</controllingFieldValue>
+            <valueName>PREMIUM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ASPIRADOR CIRURGICO</controllingFieldValue>
+            <controllingFieldValue>DESFIBRILADOR EXTERNO AUTOMÁTICO</controllingFieldValue>
+            <valueName>ASPIRATEX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ASPIRADOR CIRURGICO</controllingFieldValue>
+            <controllingFieldValue>CAMA PPP</controllingFieldValue>
+            <controllingFieldValue>BERÇO AQUECIDO</controllingFieldValue>
+            <controllingFieldValue>INCUBADORA DE TRANSPORTE</controllingFieldValue>
+            <controllingFieldValue>BABYPAP</controllingFieldValue>
+            <controllingFieldValue>BILIRRUBINOMETRO</controllingFieldValue>
+            <controllingFieldValue>BERCINHO</controllingFieldValue>
+            <controllingFieldValue>AGITADORES</controllingFieldValue>
+            <controllingFieldValue>BANHO MARIA</controllingFieldValue>
+            <controllingFieldValue>CAMARA DE CONSERVAÇÃO</controllingFieldValue>
+            <controllingFieldValue>CAMARA B.O.D</controllingFieldValue>
+            <controllingFieldValue>CPAP</controllingFieldValue>
+            <controllingFieldValue>ÓCULOS PARA FOTOTERAPIA</controllingFieldValue>
+            <controllingFieldValue>CAPACETE ACRILICO GRANDE</controllingFieldValue>
+            <valueName>FANEM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ASPIRADOR CIRURGICO</controllingFieldValue>
+            <controllingFieldValue>INCUBADORA ESTACIONÁRIA</controllingFieldValue>
+            <controllingFieldValue>MESA CIRURGICA ELETRICA</controllingFieldValue>
+            <controllingFieldValue>BERÇO AQUECIDO</controllingFieldValue>
+            <controllingFieldValue>INCUBADORA DE TRANSPORTE</controllingFieldValue>
+            <controllingFieldValue>BERCINHO</controllingFieldValue>
+            <controllingFieldValue>MESA GINECOLÓGICA ELÉTRICA</controllingFieldValue>
+            <valueName>GIGANTE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ASPIRADOR CIRURGICO</controllingFieldValue>
+            <controllingFieldValue>ASPIRADOR DE SECREÇÃO ELÉTRICO MÓVEL</controllingFieldValue>
+            <valueName>HR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ASPIRADOR CIRURGICO</controllingFieldValue>
+            <controllingFieldValue>CAMA HOSPITALAR MANUAL</controllingFieldValue>
+            <controllingFieldValue>BERÇO ACRÍLICO</controllingFieldValue>
+            <valueName>INALAMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ASPIRADOR CIRURGICO</controllingFieldValue>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <controllingFieldValue>MESA CIRURGICA ELETRICA</controllingFieldValue>
+            <controllingFieldValue>FOCO CIRURGICO PORTATIL</controllingFieldValue>
+            <controllingFieldValue>FOCO CIRURGICO DE TETO</controllingFieldValue>
+            <controllingFieldValue>CAMA HOSPITALAR ELÉTRICA</controllingFieldValue>
+            <controllingFieldValue>MONITOR DE IMAGEM E CIRURGIA</controllingFieldValue>
+            <valueName>KSS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ASPIRADOR CIRURGICO</controllingFieldValue>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <controllingFieldValue>FOCO CIRURGICO PORTATIL</controllingFieldValue>
+            <controllingFieldValue>FOCO CIRURGICO DE TETO</controllingFieldValue>
+            <controllingFieldValue>CAMA HOSPITALAR MANUAL</controllingFieldValue>
+            <controllingFieldValue>VENTILADOR PARA CUIDADOS INTENSIVOS</controllingFieldValue>
+            <valueName>MAQUET</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ASPIRADOR CIRURGICO</controllingFieldValue>
+            <controllingFieldValue>OTOSCOPIO</controllingFieldValue>
+            <controllingFieldValue>OFTALMOSCOPIO</controllingFieldValue>
+            <controllingFieldValue>DERMATOSCOPIO</controllingFieldValue>
+            <controllingFieldValue>ESTETOSCOPIO</controllingFieldValue>
+            <controllingFieldValue>OXÍMETRO DE PULSO</controllingFieldValue>
+            <controllingFieldValue>MÁSCARA PARA VNI</controllingFieldValue>
+            <controllingFieldValue>DETECTOR FETAL</controllingFieldValue>
+            <controllingFieldValue>LANTERNA CLÍNICA</controllingFieldValue>
+            <controllingFieldValue>LARINGOSCÓPIO ADULTO</controllingFieldValue>
+            <controllingFieldValue>LARINGOSCÓPIO INFANTIL</controllingFieldValue>
+            <controllingFieldValue>REANIMADOR PULMONAR MANUAL ADULTO</controllingFieldValue>
+            <controllingFieldValue>REANIMADOR PULMONAR MANUAL PEDIÁTRICO</controllingFieldValue>
+            <valueName>MD</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ASPIRADOR CIRURGICO</controllingFieldValue>
+            <controllingFieldValue>ASPIRADOR DE SECREÇÃO ELÉTRICO MÓVEL</controllingFieldValue>
+            <valueName>MEDICATE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ASPIRADOR CIRURGICO</controllingFieldValue>
+            <controllingFieldValue>ASPIRADOR DE SECREÇÃO ELÉTRICO MÓVEL</controllingFieldValue>
+            <valueName>NEVONI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ASPIRADOR CIRURGICO</controllingFieldValue>
+            <controllingFieldValue>ASPIRADOR DE SECREÇÃO ELÉTRICO MÓVEL</controllingFieldValue>
+            <valueName>NS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ASPIRADOR CIRURGICO</controllingFieldValue>
+            <controllingFieldValue>INCUBADORA ESTACIONÁRIA</controllingFieldValue>
+            <controllingFieldValue>FOTOTERAPIA</controllingFieldValue>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <controllingFieldValue>BERÇO AQUECIDO</controllingFieldValue>
+            <controllingFieldValue>INCUBADORA DE TRANSPORTE</controllingFieldValue>
+            <controllingFieldValue>BILIRRUBINOMETRO</controllingFieldValue>
+            <controllingFieldValue>BERCINHO</controllingFieldValue>
+            <controllingFieldValue>ASPIRADOR DE SECREÇÃO ELÉTRICO MÓVEL</controllingFieldValue>
+            <controllingFieldValue>CENTRAL DE NEBULIZAÇÃO</controllingFieldValue>
+            <controllingFieldValue>CAPACETE GRANDE</controllingFieldValue>
+            <controllingFieldValue>CAPACETE MÉDIO</controllingFieldValue>
+            <controllingFieldValue>CAPACETE PEQUENO</controllingFieldValue>
+            <controllingFieldValue>CAPACETE ACRILICO GRANDE</controllingFieldValue>
+            <controllingFieldValue>SERRA DE AUTÓPSIA</controllingFieldValue>
+            <controllingFieldValue>BERÇO ACRÍLICO</controllingFieldValue>
+            <valueName>OLIDEF</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ASPIRADOR CIRURGICO</controllingFieldValue>
+            <controllingFieldValue>BISTURI ELETRICO</controllingFieldValue>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <controllingFieldValue>BOMBA DE INFUSÃO VOLUMÉTRICA</controllingFieldValue>
+            <controllingFieldValue>APARELHO DE ANESTESIA</controllingFieldValue>
+            <controllingFieldValue>CALIBRAÇÃO</controllingFieldValue>
+            <controllingFieldValue>MANUTENÇÃO</controllingFieldValue>
+            <controllingFieldValue>CARDIOVERSOR</controllingFieldValue>
+            <controllingFieldValue>ELETROENCEFALÓGRAFO</controllingFieldValue>
+            <controllingFieldValue>BANHO MARIA</controllingFieldValue>
+            <controllingFieldValue>CAMARA DE CONSERVAÇÃO</controllingFieldValue>
+            <controllingFieldValue>ELETROCARDIOGRAFO</controllingFieldValue>
+            <controllingFieldValue>ESFIGMOMANOMETRO</controllingFieldValue>
+            <controllingFieldValue>OXÍMETRO DE PULSO</controllingFieldValue>
+            <controllingFieldValue>DESFIBRILADOR EXTERNO AUTOMÁTICO</controllingFieldValue>
+            <controllingFieldValue>DETECTOR FETAL</controllingFieldValue>
+            <valueName>OUTRA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ASPIRADOR CIRURGICO</controllingFieldValue>
+            <controllingFieldValue>DESFIBRILADOR</controllingFieldValue>
+            <controllingFieldValue>DESFIBRILADOR EXTERNO AUTOMÁTICO</controllingFieldValue>
+            <valueName>PROGETTI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ASPIRADOR CIRURGICO</controllingFieldValue>
+            <controllingFieldValue>ASPIRADOR DE SECREÇÃO ELÉTRICO MÓVEL</controllingFieldValue>
+            <controllingFieldValue>MÁSCARA PARA VNI</controllingFieldValue>
+            <controllingFieldValue>LARINGOSCÓPIO INFANTIL</controllingFieldValue>
+            <controllingFieldValue>REANIMADOR PULMONAR MANUAL PEDIÁTRICO</controllingFieldValue>
+            <controllingFieldValue>CAPACETE GRANDE</controllingFieldValue>
+            <controllingFieldValue>CAPACETE MÉDIO</controllingFieldValue>
+            <controllingFieldValue>CAPACETE PEQUENO</controllingFieldValue>
+            <controllingFieldValue>REANIMADOR PULMONAR MANUAL NEONATAL</controllingFieldValue>
+            <valueName>PROTEC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ASPIRADOR CIRURGICO</controllingFieldValue>
+            <controllingFieldValue>FOCO CIRURGICO PORTATIL</controllingFieldValue>
+            <controllingFieldValue>FOCO CIRURGICO DE TETO</controllingFieldValue>
+            <valueName>SISMATEC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BISTURI ELETRICO</controllingFieldValue>
+            <valueName>CONMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BISTURI ELETRICO</controllingFieldValue>
+            <valueName>DELTRONIX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BISTURI ELETRICO</controllingFieldValue>
+            <controllingFieldValue>CARDIOVERSOR</controllingFieldValue>
+            <valueName>EMAI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BISTURI ELETRICO</controllingFieldValue>
+            <controllingFieldValue>BISTURI ELETRÔNICO</controllingFieldValue>
+            <valueName>ERBE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BISTURI ELETRICO</controllingFieldValue>
+            <valueName>MEDCIR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BISTURI ELETRICO</controllingFieldValue>
+            <valueName>VALLEYLAB</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FOTOTERAPIA</controllingFieldValue>
+            <valueName>BASALL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CENTRIFUGA</controllingFieldValue>
+            <valueName>ANCO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CENTRIFUGA</controllingFieldValue>
+            <controllingFieldValue>ESTUFAS</controllingFieldValue>
+            <valueName>BENFER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CENTRIFUGA</controllingFieldValue>
+            <valueName>CELM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CENTRIFUGA</controllingFieldValue>
+            <valueName>DAIKI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CENTRIFUGA</controllingFieldValue>
+            <valueName>GT GROUP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CENTRIFUGA</controllingFieldValue>
+            <valueName>HOFFMANLAB</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CENTRIFUGA</controllingFieldValue>
+            <valueName>IMBRAS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CENTRIFUGA</controllingFieldValue>
+            <controllingFieldValue>BANHO MARIA</controllingFieldValue>
+            <valueName>KACIL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CENTRIFUGA</controllingFieldValue>
+            <valueName>KASVI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CENTRIFUGA</controllingFieldValue>
+            <controllingFieldValue>OXÍMETRO DE PULSO</controllingFieldValue>
+            <valueName>MEDMAX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <controllingFieldValue>CAMA PPP</controllingFieldValue>
+            <controllingFieldValue>CARRO MACA</controllingFieldValue>
+            <controllingFieldValue>BERÇO ACRÍLICO</controllingFieldValue>
+            <valueName>ALFRS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <valueName>ARJO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <controllingFieldValue>BERÇO AQUECIDO</controllingFieldValue>
+            <valueName>ARTMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <valueName>D&apos;AQUINO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <valueName>DESEMATEC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <valueName>DESTAK</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <controllingFieldValue>CAMA HOSPITALAR MANUAL</controllingFieldValue>
+            <valueName>HILL-ROM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <controllingFieldValue>CAMA HOSPITALAR MANUAL</controllingFieldValue>
+            <valueName>HOSPMETAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <controllingFieldValue>MESA CIRURGICA ELETRICA</controllingFieldValue>
+            <controllingFieldValue>CAMA HOSPITALAR ELÉTRICA</controllingFieldValue>
+            <valueName>LANCO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <valueName>LEVITA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <controllingFieldValue>CAMA HOSPITALAR MANUAL</controllingFieldValue>
+            <valueName>LINET</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <controllingFieldValue>CAMA HOSPITALAR MANUAL</controllingFieldValue>
+            <valueName>MARCA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <valueName>MEDI SAUDE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <controllingFieldValue>CAMA HOSPITALAR MANUAL</controllingFieldValue>
+            <valueName>MERCEDES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <controllingFieldValue>CAMA HOSPITALAR MANUAL</controllingFieldValue>
+            <controllingFieldValue>CAMA HOSPITALAR ELÉTRICA</controllingFieldValue>
+            <valueName>META-HOSPITALAR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <valueName>MÓVEIS ANDRADE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <valueName>NBTECH</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <controllingFieldValue>CAMA PPP</controllingFieldValue>
+            <controllingFieldValue>BERÇO AQUECIDO</controllingFieldValue>
+            <controllingFieldValue>BERCINHO</controllingFieldValue>
+            <controllingFieldValue>CAMA HOSPITALAR MANUAL</controllingFieldValue>
+            <controllingFieldValue>CADEIRA DE RODAS PARA BANHO</controllingFieldValue>
+            <controllingFieldValue>BERÇO ACRÍLICO</controllingFieldValue>
+            <valueName>ORTOMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <valueName>RC EQUIPAMENTOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <valueName>RENOVAR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <valueName>SALUTEM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <valueName>SANTA CLARA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR ELETRICA</controllingFieldValue>
+            <controllingFieldValue>CAMA HOSPITALAR MANUAL</controllingFieldValue>
+            <controllingFieldValue>TORRE DE VÍDEO CIRURGIA</controllingFieldValue>
+            <valueName>STRYKER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA PPP</controllingFieldValue>
+            <valueName>M. ANDRADE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA PPP</controllingFieldValue>
+            <controllingFieldValue>MESA DE CABECEIRA</controllingFieldValue>
+            <controllingFieldValue>MESA DE REFEIÇÃO</controllingFieldValue>
+            <valueName>RUBMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA PPP</controllingFieldValue>
+            <valueName>SAM MEDIC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA PPP</controllingFieldValue>
+            <valueName>TUBOMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MESA CIRURGICA ELETRICA</controllingFieldValue>
+            <controllingFieldValue>FOCO CIRURGICO DE TETO</controllingFieldValue>
+            <controllingFieldValue>BISTURI ELETRÔNICO</controllingFieldValue>
+            <valueName>BARRFAB</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MESA CIRURGICA ELETRICA</controllingFieldValue>
+            <controllingFieldValue>FOCO CIRURGICO PORTATIL</controllingFieldValue>
+            <controllingFieldValue>FOCO CIRURGICO DE TETO</controllingFieldValue>
+            <valueName>IMPROMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MESA CIRURGICA ELETRICA</controllingFieldValue>
+            <valueName>NOVAMEC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ESFIGMOMANOMETRO ADULTO</controllingFieldValue>
+            <controllingFieldValue>TERMOMETRO</controllingFieldValue>
+            <controllingFieldValue>OXÍMETRO DE PULSO</controllingFieldValue>
+            <controllingFieldValue>TIRA DE GLICEMIA</controllingFieldValue>
+            <controllingFieldValue>APARELHO (MONITOR) DE GLICEMIA</controllingFieldValue>
+            <valueName>G-TECH</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <controllingFieldValue>OXÍMETRO DE DEDO</controllingFieldValue>
+            <controllingFieldValue>CARDIOVERSOR</controllingFieldValue>
+            <controllingFieldValue>CENTRAL DE MONITORIZAÇÃO</controllingFieldValue>
+            <controllingFieldValue>ELETROCARDIOGRAFO</controllingFieldValue>
+            <controllingFieldValue>ULTRASSOM FIXO</controllingFieldValue>
+            <controllingFieldValue>ULTRASSOM PORTATIL</controllingFieldValue>
+            <controllingFieldValue>OXÍMETRO DE PULSO</controllingFieldValue>
+            <controllingFieldValue>VENTILADOR PARA CUIDADOS INTENSIVOS</controllingFieldValue>
+            <valueName>ALFAMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <valueName>BIOLIGHT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <controllingFieldValue>ELETROCARDIOGRAFO</controllingFieldValue>
+            <controllingFieldValue>DESFIBRILADOR EXTERNO AUTOMÁTICO</controllingFieldValue>
+            <controllingFieldValue>MONITOR DE IMAGEM E CIRURGIA</controllingFieldValue>
+            <valueName>BIONET</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <controllingFieldValue>BOMBA DE INFUSÃO VOLUMÉTRICA</controllingFieldValue>
+            <controllingFieldValue>CARDIOVERSOR</controllingFieldValue>
+            <controllingFieldValue>DESFIBRILADOR EXTERNO AUTOMÁTICO</controllingFieldValue>
+            <valueName>CMOS DRAKE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <controllingFieldValue>APARELHO DE ANESTESIA</controllingFieldValue>
+            <controllingFieldValue>FOCO CIRURGICO DE TETO</controllingFieldValue>
+            <controllingFieldValue>CARDIOVERSOR</controllingFieldValue>
+            <controllingFieldValue>ELETROCARDIOGRAFO</controllingFieldValue>
+            <controllingFieldValue>VENTILADOR PARA CUIDADOS INTENSIVOS</controllingFieldValue>
+            <valueName>COMEN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <controllingFieldValue>BOMBA DE INFUSÃO VOLUMÉTRICA</controllingFieldValue>
+            <controllingFieldValue>BOMBA DE INFUSÃO DE SERINGA SEM ALVO CONTROLE</controllingFieldValue>
+            <controllingFieldValue>ELETROCARDIOGRAFO</controllingFieldValue>
+            <controllingFieldValue>OXÍMETRO DE PULSO</controllingFieldValue>
+            <valueName>CONTEC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <controllingFieldValue>OXÍMETRO DE PULSO</controllingFieldValue>
+            <controllingFieldValue>MONITOR MULTIPARÂMETROS - LINHA VET</controllingFieldValue>
+            <valueName>CREATIVE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <controllingFieldValue>MONITOR MULTIPARÂMETROS - LINHA VET</controllingFieldValue>
+            <valueName>DELTA LIFE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <controllingFieldValue>APARELHO DE ANESTESIA</controllingFieldValue>
+            <controllingFieldValue>CABO ECG INTEGRADO 5 VIAS</controllingFieldValue>
+            <valueName>DIXTAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <controllingFieldValue>APARELHO DE ANESTESIA</controllingFieldValue>
+            <controllingFieldValue>FOCO CIRURGICO PORTATIL</controllingFieldValue>
+            <controllingFieldValue>FOCO CIRURGICO DE TETO</controllingFieldValue>
+            <controllingFieldValue>VENTILADOR PULMONAR DE TRANSPORTE</controllingFieldValue>
+            <controllingFieldValue>VENTILADOR PARA CUIDADOS INTENSIVOS</controllingFieldValue>
+            <valueName>DRAGER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <controllingFieldValue>VENTILADOR PARA CUIDADOS INTENSIVOS</controllingFieldValue>
+            <valueName>ENDROBRAX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <valueName>FOKKUS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <controllingFieldValue>APARELHO DE ANESTESIA</controllingFieldValue>
+            <controllingFieldValue>ARCO CIRURGICO</controllingFieldValue>
+            <controllingFieldValue>BERÇO AQUECIDO</controllingFieldValue>
+            <controllingFieldValue>ULTRASSOM FIXO</controllingFieldValue>
+            <controllingFieldValue>ULTRASSOM PORTATIL</controllingFieldValue>
+            <valueName>GE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <controllingFieldValue>CENTRAL DE MONITORIZAÇÃO</controllingFieldValue>
+            <controllingFieldValue>OXÍMETRO DE PULSO</controllingFieldValue>
+            <valueName>GENERAL MEDITECH</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <controllingFieldValue>CARDIOVERSOR</controllingFieldValue>
+            <controllingFieldValue>DESFIBRILADOR EXTERNO AUTOMÁTICO</controllingFieldValue>
+            <valueName>INSTRAMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <controllingFieldValue>BOMBA DE INFUSÃO VOLUMÉTRICA</controllingFieldValue>
+            <controllingFieldValue>CARDIOVERSOR</controllingFieldValue>
+            <controllingFieldValue>EQUIPO ENTERAL</controllingFieldValue>
+            <valueName>LIFEMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <controllingFieldValue>OXÍMETRO DE PULSO</controllingFieldValue>
+            <valueName>MACROSUL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <controllingFieldValue>APARELHO DE ANESTESIA</controllingFieldValue>
+            <controllingFieldValue>FOCO CIRURGICO PORTATIL</controllingFieldValue>
+            <controllingFieldValue>FOCO CIRURGICO DE TETO</controllingFieldValue>
+            <controllingFieldValue>ULTRASSOM FIXO</controllingFieldValue>
+            <controllingFieldValue>APARELHO (MONITOR) DE GLICEMIA</controllingFieldValue>
+            <controllingFieldValue>FOCO CIRÚRGICO - LINHA VET</controllingFieldValue>
+            <controllingFieldValue>BOMBA DE SERINGA - LINHA VET</controllingFieldValue>
+            <controllingFieldValue>ULTRASSOM PORTATIL - LINHA VET</controllingFieldValue>
+            <controllingFieldValue>ULTRASSOM FIXO - LINHA VET</controllingFieldValue>
+            <valueName>MINDRAY</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <controllingFieldValue>CARDIOVERSOR</controllingFieldValue>
+            <controllingFieldValue>CENTRAL DE MONITORIZAÇÃO</controllingFieldValue>
+            <controllingFieldValue>ELETROCARDIOGRAFO</controllingFieldValue>
+            <controllingFieldValue>DESFIBRILADOR EXTERNO AUTOMÁTICO</controllingFieldValue>
+            <controllingFieldValue>KIT: APARELHO DE ANESTESIA + MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <valueName>NIHON KOHDEN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <controllingFieldValue>ARCO CIRURGICO</controllingFieldValue>
+            <controllingFieldValue>RAIO-X PORTATIL</controllingFieldValue>
+            <controllingFieldValue>CARDIOVERSOR</controllingFieldValue>
+            <controllingFieldValue>CENTRAL DE MONITORIZAÇÃO</controllingFieldValue>
+            <controllingFieldValue>ELETROCARDIOGRAFO</controllingFieldValue>
+            <controllingFieldValue>ULTRASSOM FIXO</controllingFieldValue>
+            <controllingFieldValue>CPAP</controllingFieldValue>
+            <controllingFieldValue>CONCENTRADOR DE O2</controllingFieldValue>
+            <controllingFieldValue>ULTRASSOM PORTATIL</controllingFieldValue>
+            <controllingFieldValue>BRAÇADEIRA PNI ADULTO</controllingFieldValue>
+            <controllingFieldValue>BRAÇADEIRA PNI NEONATAL</controllingFieldValue>
+            <controllingFieldValue>CABO ECG INTEGRADO 5 VIAS</controllingFieldValue>
+            <controllingFieldValue>DESFIBRILADOR EXTERNO AUTOMÁTICO</controllingFieldValue>
+            <controllingFieldValue>VENTILADOR DE TRANSPORTE</controllingFieldValue>
+            <controllingFieldValue>VENTILADOR PARA CUIDADOS INTENSIVOS</controllingFieldValue>
+            <valueName>PHILIPS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <controllingFieldValue>APARELHO DE ANESTESIA</controllingFieldValue>
+            <controllingFieldValue>CARDIOVERSOR</controllingFieldValue>
+            <controllingFieldValue>CENTRAL DE MONITORIZAÇÃO</controllingFieldValue>
+            <controllingFieldValue>ELETROCARDIOGRAFO</controllingFieldValue>
+            <controllingFieldValue>CADEIRA DE RODAS</controllingFieldValue>
+            <controllingFieldValue>CADEIRA DE RODAS PARA BANHO</controllingFieldValue>
+            <valueName>PROLIFE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <valueName>R&amp;D</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <valueName>RZ VET</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <valueName>SHENZEN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <valueName>TOCH</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <valueName>WORLD LIFE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <valueName>YONKER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <valueName>ZONCARE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BOMBA DE INFUSÃO VOLUMÉTRICA</controllingFieldValue>
+            <controllingFieldValue>BOMBA DE INFUSÃO DE SERINGA SEM ALVO CONTROLE</controllingFieldValue>
+            <controllingFieldValue>BOMBA DE INFUSÃO DE SERINGA COM ALVO CONTROLE</controllingFieldValue>
+            <valueName>1000MEDIC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BOMBA DE INFUSÃO VOLUMÉTRICA</controllingFieldValue>
+            <controllingFieldValue>BOMBA DE INFUSÃO DE SERINGA SEM ALVO CONTROLE</controllingFieldValue>
+            <controllingFieldValue>BOMBA DE INFUSÃO DE SERINGA COM ALVO CONTROLE</controllingFieldValue>
+            <controllingFieldValue>EQUIPO PARENTERAL</controllingFieldValue>
+            <controllingFieldValue>EQUIPO ENTERAL</controllingFieldValue>
+            <valueName>BBRAUN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BOMBA DE INFUSÃO VOLUMÉTRICA</controllingFieldValue>
+            <controllingFieldValue>EQUIPO PARENTERAL</controllingFieldValue>
+            <controllingFieldValue>EQUIPO ENTERAL</controllingFieldValue>
+            <valueName>BIOSENSOR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BOMBA DE INFUSÃO VOLUMÉTRICA</controllingFieldValue>
+            <valueName>COVIDIEN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BOMBA DE INFUSÃO VOLUMÉTRICA</controllingFieldValue>
+            <valueName>CTC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BOMBA DE INFUSÃO VOLUMÉTRICA</controllingFieldValue>
+            <controllingFieldValue>EQUIPO ENTERAL</controllingFieldValue>
+            <valueName>ENDOBRAX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BOMBA DE INFUSÃO VOLUMÉTRICA</controllingFieldValue>
+            <controllingFieldValue>BOMBA DE INFUSÃO DE SERINGA SEM ALVO CONTROLE</controllingFieldValue>
+            <controllingFieldValue>BOMBA DE INFUSÃO DE SERINGA COM ALVO CONTROLE</controllingFieldValue>
+            <controllingFieldValue>EQUIPO PARENTERAL</controllingFieldValue>
+            <controllingFieldValue>EQUIPO ENTERAL</controllingFieldValue>
+            <valueName>FRESENIUS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BOMBA DE INFUSÃO VOLUMÉTRICA</controllingFieldValue>
+            <controllingFieldValue>EQUIPO PARENTERAL</controllingFieldValue>
+            <valueName>HARTMANN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BOMBA DE INFUSÃO VOLUMÉTRICA</controllingFieldValue>
+            <valueName>HAWKMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BOMBA DE INFUSÃO VOLUMÉTRICA</controllingFieldValue>
+            <valueName>HEDY</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BOMBA DE INFUSÃO VOLUMÉTRICA</controllingFieldValue>
+            <controllingFieldValue>BOMBA DE INFUSÃO DE SERINGA SEM ALVO CONTROLE</controllingFieldValue>
+            <valueName>JMS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BOMBA DE INFUSÃO VOLUMÉTRICA</controllingFieldValue>
+            <valueName>KELLY MED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BOMBA DE INFUSÃO VOLUMÉTRICA</controllingFieldValue>
+            <valueName>MDKMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BOMBA DE INFUSÃO VOLUMÉTRICA</controllingFieldValue>
+            <valueName>RESPIRATORY</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BOMBA DE INFUSÃO VOLUMÉTRICA</controllingFieldValue>
+            <controllingFieldValue>BOMBA DE INFUSÃO DE SERINGA SEM ALVO CONTROLE</controllingFieldValue>
+            <controllingFieldValue>BOMBA DE INFUSÃO DE SERINGA COM ALVO CONTROLE</controllingFieldValue>
+            <controllingFieldValue>EQUIPO PARENTERAL</controllingFieldValue>
+            <controllingFieldValue>EQUIPO ENTERAL</controllingFieldValue>
+            <controllingFieldValue>SERINGA</controllingFieldValue>
+            <valueName>SAMTRONIC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BOMBA DE INFUSÃO VOLUMÉTRICA</controllingFieldValue>
+            <valueName>SINO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BOMBA DE INFUSÃO VOLUMÉTRICA</controllingFieldValue>
+            <controllingFieldValue>BOMBA DE INFUSÃO DE SERINGA SEM ALVO CONTROLE</controllingFieldValue>
+            <controllingFieldValue>BOMBA DE INFUSÃO DE SERINGA COM ALVO CONTROLE</controllingFieldValue>
+            <controllingFieldValue>INTRODUTOR</controllingFieldValue>
+            <controllingFieldValue>EQUIPO PARENTERAL</controllingFieldValue>
+            <controllingFieldValue>EQUIPO ENTERAL</controllingFieldValue>
+            <valueName>TERUMO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BOMBA DE INFUSÃO VOLUMÉTRICA</controllingFieldValue>
+            <valueName>UNICA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE DEDO</controllingFieldValue>
+            <valueName>AFK</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE DEDO</controllingFieldValue>
+            <valueName>CHOICE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE DEDO</controllingFieldValue>
+            <valueName>DELLAMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE DEDO</controllingFieldValue>
+            <valueName>FINGERTIP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE DEDO</controllingFieldValue>
+            <valueName>GOTECH</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE DEDO</controllingFieldValue>
+            <controllingFieldValue>NEBULIZADOR</controllingFieldValue>
+            <valueName>GTECH</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE DEDO</controllingFieldValue>
+            <controllingFieldValue>OXÍMETRO DE PULSO</controllingFieldValue>
+            <valueName>HI TECHNOLOGIES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE DEDO</controllingFieldValue>
+            <controllingFieldValue>CONJUNTO DE ANESTESIA BARAKA</controllingFieldValue>
+            <controllingFieldValue>MÁSCARA PARA VNI</controllingFieldValue>
+            <controllingFieldValue>LARINGOSCÓPIO ADULTO</controllingFieldValue>
+            <valueName>JG MORIYA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE DEDO</controllingFieldValue>
+            <valueName>JZIKI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE DEDO</controllingFieldValue>
+            <valueName>JZK</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE DEDO</controllingFieldValue>
+            <valueName>LEMON</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE DEDO</controllingFieldValue>
+            <controllingFieldValue>BERÇO AQUECIDO</controllingFieldValue>
+            <controllingFieldValue>BOMBA DE INFUSÃO DE SERINGA SEM ALVO CONTROLE</controllingFieldValue>
+            <valueName>MDK</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE DEDO</controllingFieldValue>
+            <controllingFieldValue>OXÍMETRO DE PULSO</controllingFieldValue>
+            <valueName>MOBIL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE DEDO</controllingFieldValue>
+            <valueName>MULTILASER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE DEDO</controllingFieldValue>
+            <valueName>OXIMETER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE DEDO</controllingFieldValue>
+            <valueName>PULSE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE DEDO</controllingFieldValue>
+            <valueName>STRAMEDICAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE DEDO</controllingFieldValue>
+            <controllingFieldValue>OXÍMETRO DE PULSO</controllingFieldValue>
+            <valueName>TOTH LIFECARE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE DEDO</controllingFieldValue>
+            <valueName>WINNER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>APARELHO DE ANESTESIA</controllingFieldValue>
+            <controllingFieldValue>FOCO CIRURGICO PORTATIL</controllingFieldValue>
+            <controllingFieldValue>FOCO CIRURGICO DE TETO</controllingFieldValue>
+            <controllingFieldValue>AUTOCLAVE DE ALTA TEMPERATURA</controllingFieldValue>
+            <controllingFieldValue>AUTOCLAVE DE BAIXA TEMPERATURA</controllingFieldValue>
+            <controllingFieldValue>TERMODESINFECTORA</controllingFieldValue>
+            <controllingFieldValue>AUTOCLAVE TABLETOP</controllingFieldValue>
+            <controllingFieldValue>LAVADORA ULTRASSONICA</controllingFieldValue>
+            <controllingFieldValue>SECADORA DE TRAQUEIAS</controllingFieldValue>
+            <valueName>BAUMER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>APARELHO DE ANESTESIA</controllingFieldValue>
+            <valueName>HIPNOS PLUS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>APARELHO DE ANESTESIA</controllingFieldValue>
+            <controllingFieldValue>VENTILADOR PULMONAR DE TRANSPORTE</controllingFieldValue>
+            <controllingFieldValue>VENTILADOR PARA CUIDADOS INTENSIVOS</controllingFieldValue>
+            <valueName>NOVITECH</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>APARELHO DE ANESTESIA</controllingFieldValue>
+            <controllingFieldValue>VENTILADOR PULMONAR DE TRANSPORTE</controllingFieldValue>
+            <controllingFieldValue>KIT: APARELHO DE ANESTESIA + MONITOR MULTIPARAMETRICO</controllingFieldValue>
+            <valueName>TAKAOKA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FOCO CIRURGICO PORTATIL</controllingFieldValue>
+            <controllingFieldValue>FOCO CIRURGICO DE TETO</controllingFieldValue>
+            <valueName>BLA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FOCO CIRURGICO PORTATIL</controllingFieldValue>
+            <valueName>FISIOMEDICA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FOCO CIRURGICO PORTATIL</controllingFieldValue>
+            <valueName>GG</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FOCO CIRURGICO PORTATIL</controllingFieldValue>
+            <valueName>MARTEC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FOCO CIRURGICO PORTATIL</controllingFieldValue>
+            <controllingFieldValue>FOCO REFLETOR AMBULATORIAL</controllingFieldValue>
+            <valueName>MED LIGHT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FOCO CIRURGICO PORTATIL</controllingFieldValue>
+            <controllingFieldValue>FOCO CIRURGICO DE TETO</controllingFieldValue>
+            <controllingFieldValue>ULTRASSOM FIXO</controllingFieldValue>
+            <controllingFieldValue>DOPPLER VASCULAR PORTATIL</controllingFieldValue>
+            <controllingFieldValue>DETECTOR FETAL</controllingFieldValue>
+            <valueName>MEDPEJ</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FOCO CIRURGICO PORTATIL</controllingFieldValue>
+            <controllingFieldValue>FOCO CIRURGICO DE TETO</controllingFieldValue>
+            <controllingFieldValue>AUTOCLAVE DE ALTA TEMPERATURA</controllingFieldValue>
+            <controllingFieldValue>AUTOCLAVE DE BAIXA TEMPERATURA</controllingFieldValue>
+            <controllingFieldValue>TERMODESINFECTORA</controllingFieldValue>
+            <controllingFieldValue>LAVADORA ULTRASSONICA</controllingFieldValue>
+            <controllingFieldValue>SECADORA DE TRAQUEIAS</controllingFieldValue>
+            <valueName>STERIS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FOCO CIRURGICO PORTATIL</controllingFieldValue>
+            <controllingFieldValue>FOCO CIRURGICO DE TETO</controllingFieldValue>
+            <valueName>TRUMPF</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FOCO CIRURGICO DE TETO</controllingFieldValue>
+            <valueName>MEDILIGHT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FOCO CIRURGICO DE TETO</controllingFieldValue>
+            <valueName>OQTIS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AUTOCLAVE DE ALTA TEMPERATURA</controllingFieldValue>
+            <controllingFieldValue>AUTOCLAVE DE BAIXA TEMPERATURA</controllingFieldValue>
+            <valueName>CISA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AUTOCLAVE DE ALTA TEMPERATURA</controllingFieldValue>
+            <controllingFieldValue>AUTOCLAVE DE BAIXA TEMPERATURA</controllingFieldValue>
+            <controllingFieldValue>TERMODESINFECTORA</controllingFieldValue>
+            <controllingFieldValue>LAVADORA ULTRASSONICA</controllingFieldValue>
+            <controllingFieldValue>VENTILADOR PARA CUIDADOS INTENSIVOS</controllingFieldValue>
+            <valueName>GETINGE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AUTOCLAVE DE ALTA TEMPERATURA</controllingFieldValue>
+            <controllingFieldValue>BERÇO ACRÍLICO</controllingFieldValue>
+            <valueName>ONIX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AUTOCLAVE DE ALTA TEMPERATURA</controllingFieldValue>
+            <controllingFieldValue>TERMODESINFECTORA</controllingFieldValue>
+            <controllingFieldValue>LAVADORA ULTRASSONICA</controllingFieldValue>
+            <controllingFieldValue>SECADORA DE TRAQUEIAS</controllingFieldValue>
+            <controllingFieldValue>AUTOCLAVE HORIZONTAL</controllingFieldValue>
+            <valueName>ORTOSINTESE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AUTOCLAVE DE ALTA TEMPERATURA</controllingFieldValue>
+            <controllingFieldValue>TERMODESINFECTORA</controllingFieldValue>
+            <controllingFieldValue>LAVADORA ULTRASSONICA</controllingFieldValue>
+            <controllingFieldValue>AUTOCLAVE HORIZONTAL</controllingFieldValue>
+            <valueName>PHOENIX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AUTOCLAVE DE ALTA TEMPERATURA</controllingFieldValue>
+            <controllingFieldValue>AUTOCLAVE DE BAIXA TEMPERATURA</controllingFieldValue>
+            <controllingFieldValue>AUTOCLAVE TABLETOP</controllingFieldValue>
+            <valueName>SERCON</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AUTOCLAVE DE BAIXA TEMPERATURA</controllingFieldValue>
+            <valueName>STERRAD</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MANUTENÇÃO</controllingFieldValue>
+            <valueName>EASYTECH</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TERMODESINFECTORA</controllingFieldValue>
+            <controllingFieldValue>LAVADORA ULTRASSONICA</controllingFieldValue>
+            <valueName>SANDERS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ARCO CIRURGICO</controllingFieldValue>
+            <valueName>SHIMATDZU</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ARCO CIRURGICO</controllingFieldValue>
+            <controllingFieldValue>ULTRASSOM FIXO</controllingFieldValue>
+            <valueName>SIEMENS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ARCO CIRURGICO</controllingFieldValue>
+            <valueName>TOSHIBA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ARCO CIRURGICO</controllingFieldValue>
+            <valueName>ZIEHM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RAIO-X PORTATIL</controllingFieldValue>
+            <valueName>AGFA NV</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RAIO-X PORTATIL</controllingFieldValue>
+            <controllingFieldValue>RAIO-X FIXO</controllingFieldValue>
+            <valueName>CARESTREAM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RAIO-X PORTATIL</controllingFieldValue>
+            <controllingFieldValue>RAIO-X FIXO</controllingFieldValue>
+            <valueName>DCK</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RAIO-X PORTATIL</controllingFieldValue>
+            <controllingFieldValue>RAIO-X FIXO</controllingFieldValue>
+            <valueName>LOTUS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RAIO-X PORTATIL</controllingFieldValue>
+            <controllingFieldValue>RAIO-X FIXO</controllingFieldValue>
+            <valueName>MOB SMART</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RAIO-X PORTATIL</controllingFieldValue>
+            <valueName>SHIMADZU</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RAIO-X PORTATIL</controllingFieldValue>
+            <controllingFieldValue>RAIO-X FIXO</controllingFieldValue>
+            <valueName>VMI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RAIO-X FIXO</controllingFieldValue>
+            <controllingFieldValue>ULTRASSOM FIXO</controllingFieldValue>
+            <valueName>IMEX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARDIOVERSOR</controllingFieldValue>
+            <controllingFieldValue>ELETROCARDIOGRAFO</controllingFieldValue>
+            <valueName>ECAFIX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARDIOVERSOR</controllingFieldValue>
+            <valueName>MDF</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARDIOVERSOR</controllingFieldValue>
+            <controllingFieldValue>DESFIBRILADOR EXTERNO AUTOMÁTICO</controllingFieldValue>
+            <valueName>ZOLL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BABYPAP</controllingFieldValue>
+            <controllingFieldValue>RESSUSCITADOR INFANTIL (BABYPUFF)</controllingFieldValue>
+            <valueName>FISHER &amp; PAYKEL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BIPAP</controllingFieldValue>
+            <controllingFieldValue>CPAP</controllingFieldValue>
+            <controllingFieldValue>MÁSCARA PARA VNI</controllingFieldValue>
+            <valueName>BMC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BIPAP</controllingFieldValue>
+            <valueName>NEUROSOFT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BIPAP</controllingFieldValue>
+            <controllingFieldValue>CONCENTRADOR DE O2</controllingFieldValue>
+            <controllingFieldValue>TIRA DE GLICEMIA</controllingFieldValue>
+            <controllingFieldValue>APARELHO (MONITOR) DE GLICEMIA</controllingFieldValue>
+            <controllingFieldValue>VENTILADOR PARA CUIDADOS INTENSIVOS</controllingFieldValue>
+            <valueName>YUWELL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SERRA PERFURADORA</controllingFieldValue>
+            <valueName>MACOM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CIRCUITO DE VENTILAÇÃO ADDULTO</controllingFieldValue>
+            <controllingFieldValue>CIRDUITO DE VENTILAÇÃO INFANTIL</controllingFieldValue>
+            <controllingFieldValue>BRAÇADEIRA PNI ADULTO</controllingFieldValue>
+            <controllingFieldValue>BRAÇADEIRA PNI NEONATAL</controllingFieldValue>
+            <controllingFieldValue>CABO ECG INTEGRADO 5 VIAS</controllingFieldValue>
+            <controllingFieldValue>CIRCUITO RESPIRATÓRIO UNIVERSAL</controllingFieldValue>
+            <controllingFieldValue>CIRC.PAC.NEON.C/DRENO SILICONE</controllingFieldValue>
+            <valueName>GLOBALTEC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CIRDUITO DE VENTILAÇÃO INFANTIL</controllingFieldValue>
+            <controllingFieldValue>CPAP</controllingFieldValue>
+            <controllingFieldValue>MÁSCARA PARA VNI</controllingFieldValue>
+            <valueName>VENTCARE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IMPRESSORA LASER</controllingFieldValue>
+            <valueName>BROTHER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IMPRESSORA LASER</controllingFieldValue>
+            <valueName>KYOCERA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLPOSCÓPIO</controllingFieldValue>
+            <valueName>KOLPLAST</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ELETROENCEFALÓGRAFO</controllingFieldValue>
+            <controllingFieldValue>ELETROCARDIOGRAFO</controllingFieldValue>
+            <valueName>MEDITROM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ELETROENCEFALÓGRAFO</controllingFieldValue>
+            <valueName>VERTEX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MICROSCÓPIO</controllingFieldValue>
+            <valueName>D.F.V</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MICROSCÓPIO</controllingFieldValue>
+            <valueName>OPTO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BERCINHO</controllingFieldValue>
+            <valueName>HOSPIMETAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BERCINHO</controllingFieldValue>
+            <controllingFieldValue>BERÇO ACRÍLICO</controllingFieldValue>
+            <valueName>METALIC MEDICAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BERCINHO</controllingFieldValue>
+            <controllingFieldValue>CARRO MACA</controllingFieldValue>
+            <valueName>PORTAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BERCINHO</controllingFieldValue>
+            <controllingFieldValue>CARRO MACA</controllingFieldValue>
+            <valueName>RENASCER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BERCINHO</controllingFieldValue>
+            <valueName>ROTAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AGITADORES</controllingFieldValue>
+            <valueName>LABOR IMPORT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AGITADORES</controllingFieldValue>
+            <valueName>LABTET</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AGITADORES</controllingFieldValue>
+            <valueName>STUART</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BANHO MARIA</controllingFieldValue>
+            <valueName>QUIMIS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BANHO MARIA</controllingFieldValue>
+            <controllingFieldValue>ESTUFAS</controllingFieldValue>
+            <valueName>SOLID STEEL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMARA DE CONSERVAÇÃO</controllingFieldValue>
+            <valueName>BIOTECNO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMARA DE CONSERVAÇÃO</controllingFieldValue>
+            <controllingFieldValue>CAMARA B.O.D</controllingFieldValue>
+            <valueName>BUNKER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMARA DE CONSERVAÇÃO</controllingFieldValue>
+            <valueName>ELBER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMARA DE CONSERVAÇÃO</controllingFieldValue>
+            <valueName>ELETROSPITALAR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMARA DE CONSERVAÇÃO</controllingFieldValue>
+            <valueName>INDREL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMARA B.O.D</controllingFieldValue>
+            <valueName>CIENLAB</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMARA B.O.D</controllingFieldValue>
+            <valueName>MARCA MEDICA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMARA B.O.D</controllingFieldValue>
+            <valueName>SPLABOR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMARA B.O.D</controllingFieldValue>
+            <valueName>TECNAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ESTUFAS</controllingFieldValue>
+            <valueName>SOLAB</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLAR CERVICAL</controllingFieldValue>
+            <valueName>NEEDS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FIO DE KIRSCHNNER</controllingFieldValue>
+            <valueName>ORTOBIO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FIO DE SUTURA</controllingFieldValue>
+            <valueName>ATRAMAT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FIO DE SUTURA</controllingFieldValue>
+            <valueName>BIOLINE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FIO DE SUTURA</controllingFieldValue>
+            <valueName>COVIDIEN-POLYSUTURE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FIO DE SUTURA</controllingFieldValue>
+            <valueName>DONATI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FIO DE SUTURA</controllingFieldValue>
+            <valueName>POINT SUTURE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FIO DE SUTURA</controllingFieldValue>
+            <valueName>PROCARE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FIO DE SUTURA</controllingFieldValue>
+            <valueName>SHALON</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FIO DE SUTURA</controllingFieldValue>
+            <valueName>TECNOFIO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FIO GUIA HIDROFÍLICO</controllingFieldValue>
+            <valueName>MSB MEDICAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PLACA ORTOPÉDICA</controllingFieldValue>
+            <controllingFieldValue>FRESA CORTANTE</controllingFieldValue>
+            <controllingFieldValue>FRESA CRANIÓTOMO</controllingFieldValue>
+            <controllingFieldValue>BROCA HELICOIDAL</controllingFieldValue>
+            <valueName>MEDICALFIX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SISTEMA DE VIDEO CIRURGIA</controllingFieldValue>
+            <valueName>ARTHIMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SISTEMA DE VIDEO CIRURGIA</controllingFieldValue>
+            <valueName>ASTUS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SISTEMA DE VIDEO CIRURGIA</controllingFieldValue>
+            <valueName>CONFIANCE MEDICAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SISTEMA DE VIDEO CIRURGIA</controllingFieldValue>
+            <valueName>SCHOLLY</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR MANUAL</controllingFieldValue>
+            <valueName>SUPRA STEEL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ELETROCARDIOGRAFO</controllingFieldValue>
+            <valueName>3RAY</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ELETROCARDIOGRAFO</controllingFieldValue>
+            <valueName>BIOCARE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ELETROCARDIOGRAFO</controllingFieldValue>
+            <valueName>CARDIOLINE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ELETROCARDIOGRAFO</controllingFieldValue>
+            <controllingFieldValue>ULTRASSOM FIXO</controllingFieldValue>
+            <controllingFieldValue>ULTRASSOM PORTATIL</controllingFieldValue>
+            <valueName>EDAN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ELETROCARDIOGRAFO</controllingFieldValue>
+            <valueName>MEDIKEE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ELETROCARDIOGRAFO</controllingFieldValue>
+            <valueName>TRANSFORM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>VENTILADOR PULMONAR DE TRANSPORTE</controllingFieldValue>
+            <controllingFieldValue>ULTRASSOM FIXO</controllingFieldValue>
+            <controllingFieldValue>ULTRASSOM PORTATIL</controllingFieldValue>
+            <controllingFieldValue>VENTILADOR PARA CUIDADOS INTENSIVOS</controllingFieldValue>
+            <valueName>KTK</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>VENTILADOR PULMONAR DE TRANSPORTE</controllingFieldValue>
+            <valueName>OXIMAG</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AUTOCLAVE TABLETOP</controllingFieldValue>
+            <valueName>CRISTOFOLE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AUTOCLAVE TABLETOP</controllingFieldValue>
+            <valueName>DIGITALE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AUTOCLAVE TABLETOP</controllingFieldValue>
+            <controllingFieldValue>AUTOCLAVE HORIZONTAL</controllingFieldValue>
+            <controllingFieldValue>SELADORA</controllingFieldValue>
+            <valueName>STERMAX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>KIT INTRODUTOR</controllingFieldValue>
+            <valueName>FLEXINNIUM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CATETER BALÃO</controllingFieldValue>
+            <valueName>BIOTRONIC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CATETER BALÃO</controllingFieldValue>
+            <valueName>MOZEC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>STENT</controllingFieldValue>
+            <valueName>SHUNMEI MEDICAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ENXERTO ÓSSEO</controllingFieldValue>
+            <valueName>JHS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BROCA TREPANAÇÃO</controllingFieldValue>
+            <controllingFieldValue>BROCA DIAMANTADA</controllingFieldValue>
+            <valueName>HCS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>LAVADORA ULTRASSONICA</controllingFieldValue>
+            <valueName>BRASMEDICA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ULTRASSOM FIXO</controllingFieldValue>
+            <valueName>ALLIAGE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ULTRASSOM FIXO</controllingFieldValue>
+            <valueName>CANON</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ULTRASSOM FIXO</controllingFieldValue>
+            <controllingFieldValue>ULTRASSOM PORTATIL</controllingFieldValue>
+            <valueName>CHISON</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ULTRASSOM FIXO</controllingFieldValue>
+            <valueName>ESAOTE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ULTRASSOM FIXO</controllingFieldValue>
+            <controllingFieldValue>ULTRASSOM PORTATIL</controllingFieldValue>
+            <controllingFieldValue>TORRE FLEXÍVEL</controllingFieldValue>
+            <valueName>FUJIFILM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ULTRASSOM FIXO</controllingFieldValue>
+            <valueName>HIPERMEDIC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ULTRASSOM FIXO</controllingFieldValue>
+            <controllingFieldValue>ULTRASSOM PORTATIL</controllingFieldValue>
+            <valueName>SAEVO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ULTRASSOM FIXO</controllingFieldValue>
+            <controllingFieldValue>ULTRASSOM PORTATIL</controllingFieldValue>
+            <valueName>SAMSUNG</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ULTRASSOM FIXO</controllingFieldValue>
+            <controllingFieldValue>ULTRASSOM PORTATIL</controllingFieldValue>
+            <valueName>SONOSCAPE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ULTRASSOM FIXO</controllingFieldValue>
+            <controllingFieldValue>ULTRASSOM PORTATIL</controllingFieldValue>
+            <valueName>VINNO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CATETER VENTRICULAR</controllingFieldValue>
+            <controllingFieldValue>CATETER SUBDURAL</controllingFieldValue>
+            <valueName>NATUS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ENDOSCÓPIO RÍGIDO</controllingFieldValue>
+            <valueName>KINGS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CPAP</controllingFieldValue>
+            <valueName>RESMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CONCENTRADOR DE O2</controllingFieldValue>
+            <controllingFieldValue>VENTILADOR PARA CUIDADOS INTENSIVOS</controllingFieldValue>
+            <valueName>AIR LIQUID</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CONCENTRADOR DE O2</controllingFieldValue>
+            <valueName>KONSUNG</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CONCENTRADOR DE O2</controllingFieldValue>
+            <valueName>LHB</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CONCENTRADOR DE O2</controllingFieldValue>
+            <valueName>LUMIAR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CONCENTRADOR DE O2</controllingFieldValue>
+            <valueName>MIAFTI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CONCENTRADOR DE O2</controllingFieldValue>
+            <valueName>Z-ONE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>REGULARDO DE PRESSÃO DE O2</controllingFieldValue>
+            <controllingFieldValue>MÁSCARA PARA VNI</controllingFieldValue>
+            <valueName>GASLIVE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>NEBULIZADOR</controllingFieldValue>
+            <valueName>INALAR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FONTE DE LUZ PARA LAPAROSCOPIA</controllingFieldValue>
+            <controllingFieldValue>MONITOR MULTIPARÂMETROS - LINHA VET</controllingFieldValue>
+            <controllingFieldValue>FOCO CIRÚRGICO - LINHA VET</controllingFieldValue>
+            <controllingFieldValue>APARELHO DE ANESTESIA - LINHA VET</controllingFieldValue>
+            <valueName>EVOLUÇÃO PET</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TERMOMETRO</controllingFieldValue>
+            <valueName>BH</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TERMOMETRO</controllingFieldValue>
+            <valueName>INCOTERM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TERMOMETRO</controllingFieldValue>
+            <valueName>INFRARED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TERMOMETRO</controllingFieldValue>
+            <valueName>STRA MEDICAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TERMOMETRO</controllingFieldValue>
+            <valueName>SWISSCARE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TERMOMETRO</controllingFieldValue>
+            <valueName>TERMOMETHER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TERMOMETRO</controllingFieldValue>
+            <valueName>THR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TERMOMETRO</controllingFieldValue>
+            <valueName>XIANDE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ELEVADOR DE TRANSPOSIÇÃO DE LEITO</controllingFieldValue>
+            <valueName>LÍDER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>URETERORRENOSCÓPIO</controllingFieldValue>
+            <valueName>ENDOMASTER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>URETERORRENOSCÓPIO</controllingFieldValue>
+            <valueName>H STRATTNER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>URETERORRENOSCÓPIO</controllingFieldValue>
+            <valueName>RUSSER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>URETERORRENOSCÓPIO</controllingFieldValue>
+            <valueName>TECNOVASIVE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAIXA DE ESTERILIZAÇÃO METALICA - 540X280X229MM</controllingFieldValue>
+            <valueName>BHIO SUPPLY</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA HOSPITALAR ELÉTRICA</controllingFieldValue>
+            <valueName>METALCLIN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ULTRASSOM PORTATIL</controllingFieldValue>
+            <valueName>MOBISSOM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE PULSO</controllingFieldValue>
+            <valueName>IMDK</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE PULSO</controllingFieldValue>
+            <valueName>LEPU</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE PULSO</controllingFieldValue>
+            <valueName>MASIMO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE PULSO</controllingFieldValue>
+            <valueName>MOBIL SAUDE PRO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE PULSO</controllingFieldValue>
+            <valueName>NELLCOR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE PULSO</controllingFieldValue>
+            <valueName>NONIN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXÍMETRO DE PULSO</controllingFieldValue>
+            <valueName>ROSSMAX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ASPIRADOR DE SECREÇÃO ELÉTRICO MÓVEL</controllingFieldValue>
+            <valueName>ASPIRAMAX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ASPIRADOR DE SECREÇÃO ELÉTRICO MÓVEL</controllingFieldValue>
+            <valueName>ASPIRAVIDA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BALANÇA ANTROPOMÉTRICA ADULTO</controllingFieldValue>
+            <controllingFieldValue>BALANÇA ANTROPOMÉTRICA INFANTIL</controllingFieldValue>
+            <valueName>WELMY</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MÁSCARA PARA VNI</controllingFieldValue>
+            <valueName>COMPER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MÁSCARA PARA VNI</controllingFieldValue>
+            <valueName>HOSPICENTER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MÁSCARA PARA VNI</controllingFieldValue>
+            <valueName>NEWMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TIRA DE GLICEMIA</controllingFieldValue>
+            <controllingFieldValue>APARELHO (MONITOR) DE GLICEMIA</controllingFieldValue>
+            <valueName>ABOTT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TIRA DE GLICEMIA</controllingFieldValue>
+            <controllingFieldValue>APARELHO (MONITOR) DE GLICEMIA</controllingFieldValue>
+            <valueName>ACON</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TIRA DE GLICEMIA</controllingFieldValue>
+            <controllingFieldValue>APARELHO (MONITOR) DE GLICEMIA</controllingFieldValue>
+            <valueName>BIOLAND</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TIRA DE GLICEMIA</controllingFieldValue>
+            <controllingFieldValue>APARELHO (MONITOR) DE GLICEMIA</controllingFieldValue>
+            <valueName>EMPECS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TIRA DE GLICEMIA</controllingFieldValue>
+            <controllingFieldValue>APARELHO (MONITOR) DE GLICEMIA</controllingFieldValue>
+            <valueName>GLICOO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TIRA DE GLICEMIA</controllingFieldValue>
+            <valueName>GLUCOLEADER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TIRA DE GLICEMIA</controllingFieldValue>
+            <controllingFieldValue>APARELHO (MONITOR) DE GLICEMIA</controllingFieldValue>
+            <controllingFieldValue>EQUIPO ENTERAL</controllingFieldValue>
+            <valueName>INJEX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TIRA DE GLICEMIA</controllingFieldValue>
+            <valueName>MASTERFIX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TIRA DE GLICEMIA</controllingFieldValue>
+            <controllingFieldValue>APARELHO (MONITOR) DE GLICEMIA</controllingFieldValue>
+            <valueName>MEDISING</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TIRA DE GLICEMIA</controllingFieldValue>
+            <valueName>MEDLEVENSOHN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TIRA DE GLICEMIA</controllingFieldValue>
+            <valueName>OK BIOTECH</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TIRA DE GLICEMIA</controllingFieldValue>
+            <controllingFieldValue>APARELHO (MONITOR) DE GLICEMIA</controllingFieldValue>
+            <valueName>ON CALL PLUS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TIRA DE GLICEMIA</controllingFieldValue>
+            <valueName>ROCHE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TIRA DE GLICEMIA</controllingFieldValue>
+            <valueName>SOCINTER SUL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TIRA DE GLICEMIA</controllingFieldValue>
+            <valueName>VYTTRA DIAGNOSTICOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>APARELHO DE ANESTESIA - LINHA VET</controllingFieldValue>
+            <valueName>VETTEC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BRAÇADEIRA PNI ADULTO</controllingFieldValue>
+            <controllingFieldValue>BRAÇADEIRA PNI NEONATAL</controllingFieldValue>
+            <controllingFieldValue>CABO ECG INTEGRADO 5 VIAS</controllingFieldValue>
+            <valueName>APK TECHNOLOGY</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BRAÇADEIRA PNI ADULTO</controllingFieldValue>
+            <controllingFieldValue>BRAÇADEIRA PNI NEONATAL</controllingFieldValue>
+            <controllingFieldValue>CABO ECG INTEGRADO 5 VIAS</controllingFieldValue>
+            <valueName>BIOGÉNESIS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BRAÇADEIRA PNI ADULTO</controllingFieldValue>
+            <controllingFieldValue>BRAÇADEIRA PNI NEONATAL</controllingFieldValue>
+            <controllingFieldValue>CABO ECG INTEGRADO 5 VIAS</controllingFieldValue>
+            <valueName>DATRIX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BRAÇADEIRA PNI ADULTO</controllingFieldValue>
+            <controllingFieldValue>BRAÇADEIRA PNI NEONATAL</controllingFieldValue>
+            <controllingFieldValue>CABO ECG INTEGRADO 5 VIAS</controllingFieldValue>
+            <valueName>EPEX.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BRAÇADEIRA PNI ADULTO</controllingFieldValue>
+            <controllingFieldValue>BRAÇADEIRA PNI NEONATAL</controllingFieldValue>
+            <controllingFieldValue>CABO ECG INTEGRADO 5 VIAS</controllingFieldValue>
+            <valueName>GLOBALTECH</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BRAÇADEIRA PNI ADULTO</controllingFieldValue>
+            <controllingFieldValue>BRAÇADEIRA PNI NEONATAL</controllingFieldValue>
+            <controllingFieldValue>CABO ECG INTEGRADO 5 VIAS</controllingFieldValue>
+            <valueName>MASTER MEDIKAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BRAÇADEIRA PNI ADULTO</controllingFieldValue>
+            <controllingFieldValue>BRAÇADEIRA PNI NEONATAL</controllingFieldValue>
+            <controllingFieldValue>CABO ECG INTEGRADO 5 VIAS</controllingFieldValue>
+            <valueName>MED-LINK</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BRAÇADEIRA PNI ADULTO</controllingFieldValue>
+            <controllingFieldValue>BRAÇADEIRA PNI NEONATAL</controllingFieldValue>
+            <valueName>MMPNI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BRAÇADEIRA PNI ADULTO</controllingFieldValue>
+            <controllingFieldValue>BRAÇADEIRA PNI NEONATAL</controllingFieldValue>
+            <controllingFieldValue>CABO ECG INTEGRADO 5 VIAS</controllingFieldValue>
+            <valueName>UNIMED MEDICAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BRAÇADEIRA PNI ADULTO</controllingFieldValue>
+            <controllingFieldValue>BRAÇADEIRA PNI NEONATAL</controllingFieldValue>
+            <controllingFieldValue>CABO ECG INTEGRADO 5 VIAS</controllingFieldValue>
+            <valueName>YKD</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EQUIPO PARENTERAL</controllingFieldValue>
+            <valueName>BIOSANI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EQUIPO PARENTERAL</controllingFieldValue>
+            <valueName>GLOMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EQUIPO PARENTERAL</controllingFieldValue>
+            <valueName>LIGA LIFE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EQUIPO PARENTERAL</controllingFieldValue>
+            <valueName>MEDIX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARRO MACA</controllingFieldValue>
+            <valueName>MEDISAÚDE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARRO MACA</controllingFieldValue>
+            <valueName>META MÓVEIS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CADEIRA ODONTOLÓGICA</controllingFieldValue>
+            <valueName>DENTEMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COMPRESSOR ODONTOLÓGICO</controllingFieldValue>
+            <valueName>FIAC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DIGITALIZADOR DE IMAGENS</controllingFieldValue>
+            <controllingFieldValue>RAIO X DIGITAL</controllingFieldValue>
+            <controllingFieldValue>RAIO X MÓVEL</controllingFieldValue>
+            <valueName>KONICA MINOLTA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DESFIBRILADOR EXTERNO AUTOMÁTICO</controllingFieldValue>
+            <controllingFieldValue>VENTILADOR PARA CUIDADOS INTENSIVOS</controllingFieldValue>
+            <valueName>AMOUL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DESFIBRILADOR EXTERNO AUTOMÁTICO</controllingFieldValue>
+            <valueName>HEARTSINE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DESFIBRILADOR EXTERNO AUTOMÁTICO</controllingFieldValue>
+            <valueName>INNOMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DESFIBRILADOR EXTERNO AUTOMÁTICO</controllingFieldValue>
+            <valueName>TEKMARKET</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DESFIBRILADOR EXTERNO AUTOMÁTICO</controllingFieldValue>
+            <valueName>TOTH</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DETECTOR FETAL</controllingFieldValue>
+            <valueName>SONOLINE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CANETA ELETROCIRÚRGICA</controllingFieldValue>
+            <valueName>SIMILAR &amp; COMPATÍVEL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BOMBA DE SERINGA - LINHA VET</controllingFieldValue>
+            <valueName>SDAMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLCHÃO INFLÁVEL DE PRESSÃO ALTERNADA</controllingFieldValue>
+            <valueName>ZIMEDICAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COLCHÃO PARA CAMA PPP</controllingFieldValue>
+            <valueName>VITTAFLEX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR DE IMAGEM E CIRURGIA</controllingFieldValue>
+            <valueName>BLT LIGHT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR DE IMAGEM E CIRURGIA</controllingFieldValue>
+            <valueName>LG</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FOCO REFLETOR AMBULATORIAL</controllingFieldValue>
+            <valueName>MUNDI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>LARINGOSCÓPIO ADULTO</controllingFieldValue>
+            <controllingFieldValue>LARINGOSCÓPIO INFANTIL</controllingFieldValue>
+            <valueName>SSSPECTRUM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CADEIRA DE RODAS PARA BANHO</controllingFieldValue>
+            <valueName>ORTOBRAS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>GORRO/BANDA</controllingFieldValue>
+            <valueName>BABY BLOCK</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>GORRO/BANDA</controllingFieldValue>
+            <valueName>DEJAMARO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>GORRO/BANDA</controllingFieldValue>
+            <valueName>MAKELINE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TROCATER DESCARTÁVEL</controllingFieldValue>
+            <valueName>ASSUT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TROCATER DESCARTÁVEL</controllingFieldValue>
+            <valueName>LOOKMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TROCATER DESCARTÁVEL</controllingFieldValue>
+            <valueName>SULMEDICAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TROCATER DESCARTÁVEL</controllingFieldValue>
+            <valueName>UNIMICRO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TROCATER DESCARTÁVEL</controllingFieldValue>
+            <valueName>X-ONE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TORRE DE VÍDEO CIRURGIA</controllingFieldValue>
+            <valueName>AOHUA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TORRE DE VÍDEO CIRURGIA</controllingFieldValue>
+            <valueName>CONFIANCE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TORRE DE VÍDEO CIRURGIA</controllingFieldValue>
+            <valueName>OLIMPUS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SISTEMA DE HIPERTERMIA</controllingFieldValue>
+            <valueName>FABINJECT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FILTRO HME</controllingFieldValue>
+            <controllingFieldValue>SONDA ENDOTRAQUEAL</controllingFieldValue>
+            <valueName>SEVEN CARE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ULTRASSOM PORTATIL - LINHA VET</controllingFieldValue>
+            <valueName>OUTROS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>VIDEOLARINGO MCGRATH</controllingFieldValue>
+            <valueName>MEDTRONIC COVIDIEN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TORRE FLEXÍVEL</controllingFieldValue>
+            <valueName>ARGUS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ANALISADOR HEMATOLOGICO</controllingFieldValue>
+            <valueName>HEMOVET</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>APARELHO BIOQUIMICO VET</controllingFieldValue>
+            <valueName>SINOTHINKER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CARRO PARA MONITORES</controllingFieldValue>
+            <valueName>BRASCOOL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OXIMETRO DE PULSO</controllingFieldValue>
+            <valueName>MM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EQUIPAMENTO MASCARA PARA VNI</controllingFieldValue>
+            <valueName>LUKE MEDICAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAMA ELETRICA</controllingFieldValue>
+            <valueName>MEDLIGHT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ESTAÇÃO DE TRABALHO</controllingFieldValue>
+            <valueName>KAPPESBERG</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MONITOR MULTIPARAMETROS</controllingFieldValue>
+            <valueName>HANKAMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EQUIPO PARA TRANSFUSAO DE SANGUE</controllingFieldValue>
+            <valueName>LAMEDID</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>VENTILADOR PARA CUIDADOS INTENSIVOS</controllingFieldValue>
+            <valueName>CMOSDRAKE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>VENTILADOR PARA CUIDADOS INTENSIVOS</controllingFieldValue>
+            <valueName>INTERMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>VENTILADOR PARA CUIDADOS INTENSIVOS</controllingFieldValue>
+            <valueName>MAGNAMED</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>VENTILADOR PARA CUIDADOS INTENSIVOS</controllingFieldValue>
+            <valueName>NEWPORT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>VENTILADOR PARA CUIDADOS INTENSIVOS</controllingFieldValue>
+            <valueName>PURITAN BENNETT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>VENTILADOR PARA CUIDADOS INTENSIVOS</controllingFieldValue>
+            <valueName>RESPIRAR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>VENTILADOR PARA CUIDADOS INTENSIVOS</controllingFieldValue>
+            <valueName>TECME</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>VENTILADOR PARA CUIDADOS INTENSIVOS</controllingFieldValue>
+            <valueName>VENTLOGOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CÂNULA DE TRAQUEOSTOMIA</controllingFieldValue>
+            <valueName>MEDTRONIC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CÂNULA DE TRAQUEOSTOMIA</controllingFieldValue>
+            <valueName>VITAGOLD</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BERÇO ACRÍLICO</controllingFieldValue>
+            <valueName>CONKAST</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BERÇO ACRÍLICO</controllingFieldValue>
+            <valueName>IMUNNE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ESTANTE ORGANIZADORA</controllingFieldValue>
+            <valueName>TRIGOPLAST</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

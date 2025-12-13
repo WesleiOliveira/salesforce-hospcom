@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PAGAMENTO_ANTECIPADO</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+!$User.Ignorar_erros__c,
+AND(
+ISPICKVAL(Condicao_de_pagamento__c,&quot;Antecipado&quot;),
+OR(
+ISBLANK(Nome_do_Pagador__c), ISBLANK(Data_do_Pagamento__c),ISBLANK(Valor_Recebido__c)),
+DATEVALUE(CreatedDate) &gt;=  DATE(2021,03,15)
+)
+)</errorConditionFormula>
+    <errorMessage>Os campos: Nome do Pagador, Data do Pagamento e Valor Recebido devem ser preenchidos quando a Condição de Pagamento for Antecipado.</errorMessage>
+</ValidationRule>

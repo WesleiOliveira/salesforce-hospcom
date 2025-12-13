@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>Owner</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>administrativo@hospcom.net</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <label>Aprovação de compras</label>
+        <name>Aprova_o_de_compras</name>
+    </approvalStep>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <booleanFilter>1 AND 2</booleanFilter>
+        <criteriaItems>
+            <field>solicitacao_de_pagamento__c.Statustus__c</field>
+            <operation>equals</operation>
+            <value>Rascunho</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>solicitacao_de_pagamento__c.RecordType</field>
+            <operation>equals</operation>
+            <value>solicitação avulsa,Pedido de Compra Solicitação de Pagamento</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>status_a_o_interna</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Status_em_Aguardando_pagamento</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>status_liberado</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>status_a_o_interna_true</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>statusAprova_o</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Aprovação do processo de pagament avulsa</label>
+    <processOrder>1</processOrder>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

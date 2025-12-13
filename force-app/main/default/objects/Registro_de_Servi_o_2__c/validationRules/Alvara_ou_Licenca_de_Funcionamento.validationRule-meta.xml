@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Alvara_ou_Licenca_de_Funcionamento</fullName>
+    <active>true</active>
+    <description>Validação da marcação do campo Alvará ou Licença de Funcionamento</description>
+    <errorConditionFormula>AND(Alvar_ou_Licen_a_de_Funcionamento__c = TRUE, ISBLANK(Data_de_Vencimento1__c))</errorConditionFormula>
+    <errorDisplayField>Data_de_Vencimento1__c</errorDisplayField>
+    <errorMessage>Preencha a data de validade do alvará.</errorMessage>
+</ValidationRule>

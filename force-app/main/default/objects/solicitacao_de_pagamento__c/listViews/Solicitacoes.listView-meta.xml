@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Solicitacoes</fullName>
+    <columns>NAME</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>fornecedor__c</columns>
+    <columns>OWNER.ALIAS</columns>
+    <columns>Statustus__c</columns>
+    <columns>Valor_a_pagar__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>greaterThan</operation>
+        <value>1/1/2023 12:00 AM</value>
+    </filters>
+    <label>Solicitações</label>
+</ListView>

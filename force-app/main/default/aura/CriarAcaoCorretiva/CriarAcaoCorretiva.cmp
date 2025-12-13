@@ -1,0 +1,16 @@
+<aura:component extends="c.ApexHelper"
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+                access="global">
+   
+      <aura:attribute name="ocReady" type="Boolean" default="false" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="oc" type="object" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <aura:if isTrue="{!v.ocReady}">
+        <div class="btn-container">
+            <div class="btn" onclick="{!c.criarAc}" >Criar Ação corretiva</div>
+        </div>
+    </aura:if>
+    
+</aura:component>

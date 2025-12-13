@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Status_cancelado</fullName>
+        <field>Statustus__c</field>
+        <literalValue>Cancelado</literalValue>
+        <name>Status cancelado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_em_Aguardando_pagamento</fullName>
+        <field>Statustus__c</field>
+        <literalValue>Aguardando pagamento</literalValue>
+        <name>Status em Aguardando pagamento</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>statusAprova_o</fullName>
+        <field>Statustus__c</field>
+        <literalValue>Em aprovação</literalValue>
+        <name>statusAprovação</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>status_a_o_interna</fullName>
+        <field>acao_interna__c</field>
+        <literalValue>0</literalValue>
+        <name>status - ação interna</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>status_a_o_interna_true</fullName>
+        <field>acao_interna__c</field>
+        <literalValue>1</literalValue>
+        <name>status - ação interna  true</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>status_liberado</fullName>
+        <field>a_o_interna_2__c</field>
+        <literalValue>1</literalValue>
+        <name>status liberado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+</Workflow>

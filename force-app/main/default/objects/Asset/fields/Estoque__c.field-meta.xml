@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Estoque__c</fullName>
+    <externalId>false</externalId>
+    <label>Estoque</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>HOSPCOM (RUA 104)</fullName>
+                <default>false</default>
+                <label>HOSPCOM (RUA 104)</label>
+            </value>
+            <value>
+                <fullName>HEALTH (RUA 89)</fullName>
+                <default>false</default>
+                <label>HEALTH (RUA 89)</label>
+            </value>
+            <value>
+                <fullName>GDB (CAMPO GRANDE)</fullName>
+                <default>false</default>
+                <label>GDB (CAMPO GRANDE)</label>
+            </value>
+            <value>
+                <fullName>BRASÍLIA</fullName>
+                <default>false</default>
+                <label>BRASÍLIA</label>
+            </value>
+            <value>
+                <fullName>TOCANTINS</fullName>
+                <default>false</default>
+                <label>TOCANTINS</label>
+            </value>
+            <value>
+                <fullName>ABC (Av Oeste)</fullName>
+                <default>false</default>
+                <label>ABC (Av Oeste)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

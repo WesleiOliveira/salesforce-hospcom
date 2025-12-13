@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Quantidade_mensal_de_insumos__c</fullName>
+    <externalId>false</externalId>
+    <label>Quantidade mensal de insumos</label>
+    <summarizedField>Insumo_do_contrato__c.Quantidade__c</summarizedField>
+    <summaryForeignKey>Insumo_do_contrato__c.Contrato_de_Fornecimento_de_Insumo__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

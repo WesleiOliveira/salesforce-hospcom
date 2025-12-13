@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Produto__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <inlineHelpText>Caso não encontre, solicite o cadastro em Meu Sales -&gt; Solicitação de Cadastro</inlineHelpText>
+    <label>Produto</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Product2.IsActive</field>
+            <operation>equals</operation>
+            <value>true</value>
+        </filterItems>
+        <infoMessage>O produto tem que ser um produto ativo</infoMessage>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Product2</referenceTo>
+    <relationshipLabel>Itens Requeridos</relationshipLabel>
+    <relationshipName>Itens_Requeridos</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

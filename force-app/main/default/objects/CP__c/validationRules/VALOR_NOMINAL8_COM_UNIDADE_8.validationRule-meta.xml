@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VALOR_NOMINAL8_COM_UNIDADE_8</fullName>
+    <active>true</active>
+    <description>EXIGIR VALOR DA UNIDADE 8 SE VALOR NOMINAL DIFERENTE DE 0.</description>
+    <errorConditionFormula>AND(VN_8__c &lt;&gt; 0,  ISPICKVAL(UN_8__c, &quot;&quot;))</errorConditionFormula>
+    <errorDisplayField>UN_8__c</errorDisplayField>
+    <errorMessage>SELECIONE UMA UNIDADE</errorMessage>
+</ValidationRule>

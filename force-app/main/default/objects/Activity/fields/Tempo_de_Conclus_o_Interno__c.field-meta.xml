@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tempo_de_Conclus_o_Interno__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    AND(
+        NOT(ISBLANK(CreatedDate)),
+        NOT(ISBLANK(Data_interna__c))
+    ),
+    ROUND(
+        (
+            ( 
+                Data_interna__c - DATEVALUE(Data_e_Hora_de_In_cio__c) 
+            ) * 1440
+            - Tempo_parado__c
+        ) / 60,
+        2
+    ),
+    NULL
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Tempo de Conclusão Interno</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

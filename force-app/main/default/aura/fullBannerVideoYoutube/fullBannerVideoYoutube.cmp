@@ -1,0 +1,41 @@
+<aura:component extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="setMeOnInit" type="String" default="default value" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="produtosObj" type="Object[]" default="{!c.soql}" />
+    <aura:attribute name="objectField" type="String" />
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.textRoller,
+                           $Resource.JQuery,
+                           $Resource.popper,
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js')}"                  
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    <aura:attribute name="accountRecord" type="Object"/>
+    <aura:attribute name="recordLoadError" type="String"/>
+    
+    <force:recordData aura:id="recordLoader"
+            recordId = "{!v.objectField}"
+            fields = "linkImagem__c, siteTituloImagem__c, siteDescImagem__c, siteDescImagem2__c, siteDescImagem3__c"
+            targetFields = "{!v.accountRecord}"
+            targetError = "{!v.recordLoadError}"
+            />
+    
+    
+    <div style="position: relative; display: flex; flex-direction: column; width: 100vw!important; left: calc(-50.6vw + 50%); justify-content: center">
+        <div class="col-md-12 containerFullBanner" style="">
+            <iframe width="560" height="315" style="    width: 100%;  height: 1000px;" src="https://www.youtube.com/embed/IvGyGCaZabw?autoplay=1&amp;mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="true"></iframe>
+            
+            
+            
+        </div>
+    </div>
+    
+    
+    
+</aura:component>

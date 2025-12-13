@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Notifica_cliente_necessidade_preventiva</name>
+        <label>Notifica cliente necessidade preventiva</label>
+        <locationX>314</locationX>
+        <locationY>276</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>$Record.E_mail__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>Alerta de manutenção preventiva</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>texto_cliente</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <apiVersion>61.0</apiVersion>
+    <environments>Default</environments>
+    <interviewLabel>Ordem de trabalho - Data da ultima preventiva {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Ordem de trabalho - Data da ultima preventiva</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Atualiza_data_ativo</name>
+        <label>Atualiza data ativo</label>
+        <locationX>50</locationX>
+        <locationY>276</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.AssetId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Data_da_ltima_manuten_o_preventiva__c</field>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Asset</object>
+    </recordUpdates>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Atualiza_data_ativo</targetReference>
+        </connector>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>1 AND 4 AND (2 OR 3 OR 5)</filterLogic>
+        <filters>
+            <field>Status</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>FECHADO CONCLUÍDO</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>01231000000tb5WAAQ</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>01231000000tb5bAAA</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Data_proxima_preventiva__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>00h3100000XFCG8AAP</stringValue>
+            </value>
+        </filters>
+        <object>WorkOrder</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <scheduledPaths>
+            <name>Notifica_Cliente</name>
+            <connector>
+                <targetReference>Notifica_cliente_necessidade_preventiva</targetReference>
+            </connector>
+            <label>Notifica Cliente</label>
+            <offsetNumber>-2</offsetNumber>
+            <offsetUnit>Months</offsetUnit>
+            <recordField>Data_proxima_preventiva__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Draft</status>
+    <textTemplates>
+        <name>texto_cliente</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Prezado cliente. 
+
+A manutenção do seu equipamento {!$Record.Asset.Name}  de numero de série {!$Record.Asset.SerialNumber} vencerá em 2 meses.
+Para continuar usando seu equipamento com toda segurança e dentro das normas vigentes contate a assistencia técnica Hospcom e agende seu serviço.
+
+Telefone: (62) 3241-5555
+
+Esta é uma mensagem automática, não responda.</text>
+    </textTemplates>
+</Flow>

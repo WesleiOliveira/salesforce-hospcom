@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GC_Sold_2008__c</fullName>
+    <externalId>false</externalId>
+    <label>Sold 2008</label>
+    <summarizedField>Opportunity.Amount</summarizedField>
+    <summaryFilterItems>
+        <field>Opportunity.CloseDate</field>
+        <operation>greaterOrEqual</operation>
+        <value>1/1/2008</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Opportunity.CloseDate</field>
+        <operation>lessOrEqual</operation>
+        <value>12/31/2008</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Opportunity.IsWon</field>
+        <operation>equals</operation>
+        <value>True</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Opportunity.AccountId</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

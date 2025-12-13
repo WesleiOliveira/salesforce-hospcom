@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pedido_de_Compra_Solicita_o_de_Pagamento</fullName>
+    <active>true</active>
+    <label>Pedido de Compra Solicitação de Pagamento</label>
+    <picklistValues>
+        <picklist>Banco__c</picklist>
+        <values>
+            <fullName>000 - Outro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>001 %E2%80%93 Banco do Brasil S%2EA%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>033 %E2%80%93 Banco Santander %28Brasil%29 S%2EA%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>104 %E2%80%93 Caixa Econômica Federal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>237 %E2%80%93 Banco Bradesco S%2EA%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>341 %E2%80%93 Banco Itaú S%2EA%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>389 %E2%80%93 Banco Mercantil do Brasil S%2EA%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>652 %E2%80%93 Itaú Unibanco Holding S%2EA%2E</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Forma_de_Pagamento__c</picklist>
+        <values>
+            <fullName>BOLETO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GUIA DE PRODUTOS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PIX</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TRANSFERENCIA BANCARIA</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Statustus__c</picklist>
+        <values>
+            <fullName>Aguardando pagamento</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cancelado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Em aprovação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pago</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rascunho</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tipo_de_Chave_pix__c</picklist>
+        <values>
+            <fullName>CHAVE ALEATÓRIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CNPJ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CPF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EMAIL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TELEFONE</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

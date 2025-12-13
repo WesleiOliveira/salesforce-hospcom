@@ -1,0 +1,285 @@
+<apex:page standardController="Auditoria__c" extensions="AuditoriaPDFController" applyHtmlTag="false" showHeader="false"
+    renderAs="pdf">
+
+    <head>
+        <style type="text/css" media="print">
+            @page {
+                size: 21cm 29.7cm;
+                margin: 100px 40px 60px 40px;
+
+                @top-center {
+                    content: element(header);
+                }
+
+                @bottom-center {
+                    content: element(footer);
+                }
+            }
+
+            @page {
+                size: A4;
+                background: url({!IF(Auditoria__c.Empresa_Auditada__r.CNPJ__c == '27.476.124/0001-02', $Resource.TimbradoHealth, IF(Auditoria__c.Empresa_Auditada__r.CNPJ__c == '05.743.288/0001-08' || Auditoria__c.Empresa_Auditada__r.CNPJ__c == '05.743.288/0003-70', $Resource.TimbradoHospcom, IF(Auditoria__c.Empresa_Auditada__r.CNPJ__c == '23.813.386/0001-56', $Resource.TimbradoGDB, IF(Auditoria__c.Empresa_Auditada__r.CNPJ__c == '40.014.621/0001-49', $Resource.TimbradoABC, $Resource.TimbradoGenerico))))
+            });
+            margin: 150px 50px 120px 50px;
+
+            @bottom-center {
+                content: element(footer);
+            }
+            }
+
+            .pagenumber:before {
+                content: counter(page);
+            }
+
+            .pagecount:before {
+                content: counter(pages);
+            }
+
+            div.header {
+                margin: 0px 0px 0px 0px;
+                padding: 20px 0px 20px 0px;
+                position: running(header);
+                height: 60px;
+            }
+
+            div.content {}
+
+            div.footer {
+                margin: 0px 0px 0px 0px;
+                padding: 20px 0px 20px 0px;
+                position: running(footer);
+                height: 20px;
+                text-align: right;
+                font-family: arial, verdana, sans-serif;
+                font-size: 10px;
+                font-weight: normal;
+            }
+
+            td,
+            tr {
+                padding: 0;
+                margin: 0;
+            }
+
+            * {
+                font-family: Arial, Helvetica, sans-serif;
+                color: #0c3557;
+                font-size: 12px;
+                text-transform: uppercase;
+            }
+
+            .titulo {
+                font-family: arial, verdana, sans-serif;
+                font-size: 15px;
+                font-weight: bold;
+                width: 100%;
+            }
+
+            .tabela_geral {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            table.print-friendly tr td,
+            table.print-friendly tr th {
+                page-break-inside: avoid;
+            }
+
+            .maiuscula {
+                text-transform: uppercase;
+            }
+
+            .questoes {}
+
+            .questao {
+                display: flex;
+                flex-direction: column;
+                padding: 10px !important;
+                padding-right: 15px !important;
+            }
+
+            .valor {
+                margin-bottom: -100px;
+                border: #0c3557 1px solid;
+            }
+
+            .sessao-questao {
+                font-size: 14px;
+
+            }
+
+
+            .resposta {
+                font-weight: bold;
+                font-size: 14px;
+            }
+
+            .t {
+                text-align: center;
+                padding: 1px 1px;
+                font-size: 14px;
+            }
+
+            .subtitle {
+                color: gray;
+                font-size: 10px;
+                margin-bottom: 2px;
+                text-transform: none!important;
+            }
+        </style>
+    </head>
+
+    <body>
+        
+        <!-- Cabeçalho com informações da auditoria -->
+        <br /><br />
+        <div
+        style="display:flex; flex-direction:row; justify-content:space-between; align-items:center; border-bottom:2px solid #0c3557; padding-bottom:10px; margin-bottom:20px;">
+        <div style="display:flex; flex-direction:column; gap:5px;">
+            <h1 class="titulo">Unidade auditada: {!Auditoria__c.Empresa_Auditada__r.name}
+            </h1>
+
+            
+            <!-- Data da auditoria -->
+            <h1 class="titulo">
+                Data da Auditoria:
+                &nbsp;
+                <apex:outputText value="{0,date,dd/MM/yyyy}">
+                            <apex:param value="{!Auditoria__c.Data_da_Auditoria__c}" />
+                        </apex:outputText>
+                    </h1>
+                    
+                </div>
+                
+            </div>
+            <!-- Percentual de conformidade -->
+            <h1 class="titulo">
+                <span style="border: 1px solid #0c3557; padding:2px 5px; font-size:20px;">Nota:
+                    {!Auditoria__c.Percentual_de_conformidade__c}%</span>
+                </h1>
+                
+            
+            
+            
+            <br />
+            
+            <h1 class="t">Checklist de Auditoria</h1>
+            
+            <br />
+            <br />
+            
+            <apex:pageBlock >
+                <div class="footer" style="text-align:center !important">
+                    <br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Página <span class="pagenumber"></span> de <span class="pagecount"></span> - Emissão em:&nbsp;
+                    <apex:outputText value="{0,date,dd/MM/yyyy}">
+                        <apex:param value="{!TODAY()}" />
+                    </apex:outputText>
+                </div>
+    
+    
+    
+                <apex:variable var="ultimaSecao" value="" />
+                <apex:variable var="primeiraIteracao" value="true" />
+            <div class="questoes">
+                
+                <!-- Start table here -->
+                
+                <table>
+                    <apex:repeat value="{!perguntasOrganizadas}" var="p">
+                        
+                        <!-- Section Header -->
+                        <apex:outputPanel rendered="{!p.secao != ultimaSecao}">
+                            <tr>
+                                <td colspan="2">
+                                    <h2 class="sessao-questao">{!p.numeroSecao}.{!p.secao}</h2>
+                                </td>
+                            </tr>
+                            <apex:variable var="ultimaSecao" value="{!p.secao}" />
+                        </apex:outputPanel>
+                        
+                        <!-- Question + Answer -->
+                        <tr>
+                            <td colspan="1" class="numero">
+                                <!-- Exibindo a numeração da seção e da pergunta -->
+                                <span>{!p.numeroSecao}.{!p.numeroPergunta}</span>
+                            </td>
+                            <td colspan="1" class="questao">
+                                <div class="subtitle">Pergunta: {!p.perguntaId} | Tipo: {!p.tipoPergunta}</div>
+                                <div>{!p.perguntaTexto}</div>
+                            </td>
+                            <td colspan="2">
+                                <span class="resposta">{!IF(p.resposta == 'C', 'c', 'nc')}</span>
+                            </td>
+                        </tr>
+
+                    </apex:repeat>
+
+                    <tr>
+                        <td colspan="2" style="height: 5px;">
+                            &nbsp;&nbsp;
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            &nbsp;&nbsp;<br /><br />
+                        </td>
+                    </tr>
+                </table>
+
+
+
+
+
+                <!-- SIGNATURES (outside table) -->
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; page-break-inside: avoid;">
+
+                    <!-- Responsável pela Auditoria -->
+                    <div style="text-align: center; flex: 1;">
+                        <div style="padding: 0; margin: 0;">
+                            <!-- Exibe a assinatura do responsável se estiver preenchida, caso contrário, não mostra nada -->
+                            <apex:image style="padding: 0; margin: 0 auto -15px; text-align: center;" value="{!IF(NOT(ISBLANK(Auditoria__c.Responsavel__r.assinatura__c)), 
+                        Auditoria__c.Responsavel__r.assinatura__c, '')}" width="250" height="60px" />
+                        </div>
+                        <div style="padding: 0; margin: 0;">
+                            <p style="padding: 0; margin: 0 auto;">
+                            <div class="underline"
+                                style="padding: 0; margin: 0 auto; width: 70%; border-bottom: 1px solid #0c3557;"></div>
+                            <br />
+                            {!Auditoria__c.Responsavel__r.Name}<br />
+                            Responsável pela Auditoria
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Auditado -->
+                    <div style="text-align: center; flex: 1;">
+                        <div style="padding: 0; margin: 0;">
+                            <!-- Exibe a assinatura do auditado se estiver preenchida, caso contrário, não mostra nada -->
+                            <apex:image style="padding: 0; margin: 0 auto -15px; text-align: center;" value="{!IF(NOT(ISBLANK(Auditoria__c.Auditado__r.assinatura__c)), 
+                        Auditoria__c.Auditado__r.assinatura__c, '')}" width="250" height="60px" />
+                        </div>
+                        <div style="padding: 0; margin: 0;">
+                            <p style="padding: 0; margin: 0 auto;">
+                            <div class="underline"
+                                style="padding: 0; margin: 0 auto; width: 70%; border-bottom: 1px solid #0c3557;"></div>
+                            <br />
+                            {!Auditoria__c.Auditado__r.Name}<br />
+                            Auditado
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+        </apex:pageBlock>
+    </body>
+</apex:page>

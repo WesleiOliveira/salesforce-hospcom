@@ -1,0 +1,125 @@
+<apex:page standardController="Vagas_Dispon_veis__c" renderAs="advanced_pdf" applyHtmlTag="false" showHeader="false">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />    
+        <style type="text/css">
+            @page {
+            size: A4;    
+            border: 0px solid black;    
+            font-family: verdana;
+            }
+            .label{ /* td */              
+                padding:2px;
+                margin:0px;
+                border-bottom:1px solid #a1a19c;
+                font-family:arial, verdana, sans-serif;
+                font-size:10pt;
+                font-weight:bold;
+                text-align:left;
+                vertical-align:middle;
+            }
+            .label_inferior{ /* td */
+                padding:2px;
+                margin:0px;
+                font-family:arial, verdana, sans-serif;
+                font-size:10pt;
+                font-weight:bold;
+                text-align:left;
+                vertical-align: middle;
+            }
+            .valor{ /* td */
+                padding:2px;
+                margin:0px;
+                border-bottom:1px solid #a1a19c;
+                font-family:arial, verdana, sans-serif;
+                font-size:9pt;
+                font-weight:normal;
+                text-align:left;
+                vertical-align:middle;
+            }
+             .valor_inferior{ /* td */
+                padding:2px;
+                margin:0px;
+                font-family:arial, verdana, sans-serif;
+                font-size:9pt;
+                font-weight:normal;
+                text-align:left;
+                vertical-align:middle;
+            }
+             .tabela_conteudo{
+                width:100%;
+                border:1px #cacecf solid;
+            }
+             .titulo_2{ /* td */
+                padding:2px;
+                margin:0px;
+                border-bottom:1px solid #cacecf;
+                font-family:arial, verdana, sans-serif;
+                font-size:20px;
+                font-weight:bold;
+                text-align:center;
+                background-color:#dff7e5;
+            }
+            h2{
+            padding:2px;
+                margin:0px;
+                border-bottom:1px solid #cacecf;
+                font-family:arial, verdana, sans-serif;
+                font-size:18px;
+                font-weight:bold;
+                text-align:center;
+                background-color:#dff7e5;
+            }
+        </style>
+    </head>
+    <body style="font-family:Arial; padding:0px; margin:0px; border:0px solid #eef2f4; width:*;text-transform: uppercase">
+    <table cellpadding="0px" cellspacing="0px" style="width:100%; border:1px solid #cacecf ; text-align:center; border-bottom: 1px solid #ddd;">
+                <tr>
+                    <td class="titulo_2" colspan="2">
+                        DADOS DA VAGA
+                    </td>
+                </tr>
+                <tr>       
+                    <!-- CONTA -->
+                    <td style="width:100%; vertical-align:top; padding:4px 2px 0px 4px; border-bottom: 1px solid #ddd;"></td>
+                        <table cellpadding="0px" cellspacing="0px" class="tabela_conteudo">                            
+                            <tr><td class="label">Número da Vaga:</td>        <td class="valor">{!Vagas_Dispon_veis__c.Name}</td></tr>
+                            <tr><td class="label">Cargo Ofertado:</td>                <td class="valor">{!Vagas_Dispon_veis__c.Cargo_Ofertado__c}</td></tr>
+                            <tr><td class="label">Descrição do Cargo:</td>   <td class="valor">{!Vagas_Dispon_veis__c.Descri_o_do_Cargo__c  }</td></tr>
+                            <tr><td class="label">Vínculo:</td>   <td class="valor">{!Vagas_Dispon_veis__c.V_nculo__c}</td></tr>
+                            <tr><td class="label">Quantidade de Vagas:</td>   <td class="valor"><apex:outputField value="{!Vagas_Dispon_veis__c.Quantidade_de_vagas__c}"/></td></tr>
+                            <tr><td class="label">Perfil desejado:</td>   <td class="valor"><apex:outputField value="{!Vagas_Dispon_veis__c.PerfilDesejado__c }"/></td></tr>
+                            <tr><td class="label">Experiência Prévia Exigida:</td>   <td class="valor">{!Vagas_Dispon_veis__c.Experi_ncia_Pr_via_Exigida__c }</td></tr>
+                            <tr><td class="label">Salário:</td><td class="valor"><apex:outputField value="{!Vagas_Dispon_veis__c.Sal_rio__c}" /></td></tr>
+                            <tr><td class="label">Horário de Trabalho:</td>   <td class="valor">{!Vagas_Dispon_veis__c.Hor_rio_de_Trabalho__c   }</td></tr>
+                            <tr><td class="label">Local de Trabalho:</td>   <td class="valor">{!Vagas_Dispon_veis__c.Local_de_Atua_o__c }</td></tr>
+                            <tr><td class="label_inferior">Disponibilidade para viagem:</td>   <td class="valor_inferior">{!Vagas_Dispon_veis__c.Disponibilidade_para_Viagem__c     }</td></tr>
+                        </table>                                                       
+        </tr> </table>                                                                                               
+        <br/>
+    <h2>
+        Candidatos Inscritos
+    </h2>
+       <table cellpadding="0px" cellspacing="0px" class="tabela_conteudo">
+
+    <tr>
+        <td class="label" style="text-align: center"><b>Foto</b></td>
+        <td class="label" style="text-align: center"><b>Nome</b></td>
+        <td class="label" style="text-align: center"><b>Escolaridade</b></td>
+        <td class="label" style="text-align: center"><b>Formação</b></td>
+        <td class="label" style="text-align: center"><b>Telefone</b></td>
+        <td class="label" style="text-align: center"><b>Status</b></td>
+    </tr>       
+   <apex:repeat value="{!Vagas_Dispon_veis__c.Recrutamentos__r}" var="A">  
+                                    <tr>
+                                        <td class="valor" style="text-align: center"><apex:outputField value="{!A.Imagem_del__c}"/></td>
+                                        <td class="valor" style="text-align: center">{!A.Nome_do_candidato__c}<br/><b>({!A.Name})</b></td>
+                                        <td class="valor" style="text-align: center">{!A.Grau_de_Escolaridade__c} </td>
+                                        <td class="valor" style="text-align: center">{!A.Forma_o_Acad_mica__c} </td>
+                                        <td class="valor" style="text-align: center">{!A.Telefone_do_Candidato__c} </td>
+                                        <td class="valor" style="text-align: center">{!A.Status__c} </td>
+                                    </tr>
+    </apex:repeat>
+            </table>
+        
+    </body>
+</apex:page>

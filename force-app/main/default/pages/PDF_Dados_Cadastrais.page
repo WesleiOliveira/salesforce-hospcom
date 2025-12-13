@@ -1,0 +1,644 @@
+<apex:page standardController="Account"  applyHtmlTag="false" extensions="ListagemFornecedoresDeUmComprador" showHeader="false" renderAs="pdf">
+  <head>
+  <style type="text/css" media="print">
+            @page {
+                size:21cm 29.7cm;
+                margin:100px 40px 60px 40px;
+                @top-center {
+                    content:element(header);
+                }
+                @bottom-center {
+                    content:element(footer);
+                }
+            }
+            @page{
+                size:A4;
+                background: url({!IF(Account.CNPJ__c  == '27.476.124/0001-02',$Resource.TimbradoHealth,IF(Account.CNPJ__c == '05.743.288/0001-08' || Account.CNPJ__c == '05.743.288/0003-70',$Resource.TimbradoHospcom,IF(Account.CNPJ__c == '23.813.386/0001-56',$Resource.TimbradoGDB,IF(Account.CNPJ__c == '40.014.621/0001-49',$Resource.TimbradoABC, IF(Account.CNPJ__c == '05.743.288/0005-31', $Resource.TimbradoHospcomSP,  IF(Account.CNPJ__c == '05.743.288/0006-12', $Resource.TimbradoHospcomMT,  $Resource.TimbradoGenerico))))))});
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);}
+            }
+            .pagenumber:before {
+                content:counter(page);
+            }
+            .pagecount:before {
+                content:counter(pages);
+            }
+            div.header {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(header);
+                height:60px;
+            }
+            div.content {
+            }
+            div.footer {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(footer);
+                height:20px;
+                text-align:right;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                font-weight:normal;
+            }
+        </style>
+        <style type="text/css" media="print">
+        
+        
+        *{
+            font-family: Arial, Helvetica, sans-serif;    
+         }
+        
+        
+        /*
+            @page:first{
+                size:A4;
+                background: url($Resource.SobreHealth);
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);
+                }
+            }
+            
+            @page{
+                size:A4;
+                background: url($Resource.TimbradoHealth);
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);}
+            }
+         */
+         
+         .titulo{
+             background: #0f375c;
+             color:#fff;,
+             font-weight: 900;
+             text-align: center;
+         }
+         
+         
+         .rotulo{
+             background: #0f375c;
+             color:#fff;
+         }
+         
+         .rotulo-especial{
+             background: #0f375c;
+             color:#fff;
+             width: 25%;
+             text-align: center;
+         }
+         
+         .nome{
+            text-transform: uppercase;
+         }
+         tr, td{
+             border: solid 1px #000;
+             padding:2px 5px; 
+         }
+         
+         .dados-especial{
+             text-align: center;
+         }
+         
+         table{
+             border-collapse: collapse;
+             width:100%;
+             page-break-inside: avoid;
+         }
+           
+        </style>
+  </head>
+  <body>
+  <apex:pageBlock >
+            
+            <table>
+               
+               <tr>                   
+                   <td class='titulo' colspan="8">
+                       Dados cadastrais
+                   </td>
+               </tr>
+               
+               
+               <tr>  
+                   <!-- Razão Social  -->                 
+                   <td class='rotulo' >
+                       Razão Social
+                   </td>
+                                 
+                   <td  class='dados' colspan="6">
+                         {!Account.raz_o_social__c}
+                   </td>
+               </tr>
+               
+               
+               <tr>  
+                   <!-- CNPJ/CPF -->
+                   <td class='rotulo'>
+                       CNPJ/CPF
+                   </td>
+                                 
+                   <td  class='dados' colspan="6">
+                         {!if(Account.CNPJ__c != null, Account.CNPJ__c, Account.CPF__pc)}
+                   </td>
+               </tr>
+               
+               
+               <tr>  
+               
+                   <!-- Endereço -->
+                   <td class='rotulo' >
+                       Endereço
+                   </td>
+                                 
+                   <td class='dados'  colspan="6">
+                       {!Account.billingStreet}
+                   </td>
+                   
+                                      
+               </tr>
+               
+               <tr>  
+               
+                   <!-- Cidade -->
+                   <td class='rotulo' >
+                       Cidade 
+                   </td>
+                                 
+                   <td class='dados' >
+                       {!Account.billingCity}
+                   </td>
+                 
+                   
+                   <!-- UF -->
+                   <td class='rotulo'   colspan="2" >
+                       UF 
+                   </td>
+                                 
+                   <td class='dados' >
+                       {!Account.billingState}
+                   </td> 
+                   
+                   <!-- CEP -->
+                   <td class='rotulo' >
+                       CEP 
+                   </td>
+                                 
+                   <td class='dados' >
+                       {!Account.billingPostalCode}
+                   </td>
+                   
+               </tr>
+               
+             
+                          
+                          
+               <tr>  
+               
+                   <!--  Insc. Estadual -->
+                   <td class='rotulo' >
+                       Insc. Estadual
+                   </td>
+                                 
+                   <td class='dados' colspan="4">
+                       {!Account.Inscri_o_Estadual__c}
+                   </td>
+                   
+                   
+                   <!-- CREA-->
+                   <td class='rotulo' >
+                        Insc. Municipal 
+                   </td>
+                                 
+                   <td class='dados' colspan="4">
+                       {!Account.Inscri_o_Municipal__c}
+                   </td>
+                                    
+                       
+               </tr>
+                
+
+            </table>
+            
+               <br/>
+               
+           <table>
+           
+               <tr>                   
+                   <td class='titulo' colspan="8">
+                       Contatos
+                   </td>
+               </tr>
+               
+               <tr>  
+                   <!-- ADMINISTRATIVO-->                 
+                   <td  width="50px" class='rotulo' colspan="1">
+                       Administrativo
+                   </td>
+                                 
+                   <td  class='dados' colspan="3">
+                       Daniel Alencar
+                   </td> 
+                   <!-- Email -->
+                   <td width="50px" class='rotulo'>
+                       Email
+                   </td>
+                                 
+                   <td  class='dados' colspan="3">
+                       administrativo@hospcom.net
+                   </td>
+                
+               </tr>
+                
+               <tr>  
+                
+                       <!-- FINANCEIRO -->                 
+                   <td  width="50px" class='rotulo' colspan="1">
+                       Financeiro
+                   </td>
+                                 
+                   <td  class='dados' colspan="3">
+                       Sildeny Rodrigues Gomes
+                   </td> 
+                   <!-- Email -->
+                   <td width="50px" class='rotulo'>
+                       Email
+                   </td>
+                                 
+                   <td  class='dados' colspan="3">
+                       gerencia.financeiro@gestcombpo.com.br
+                   </td>
+                
+               </tr>
+                
+                
+                
+                
+                
+               <tr>  
+                   <!-- LOCAÇÃO-->                 
+                   <td  width="50px" class='rotulo' colspan="1">
+                       Locação
+                   </td>
+                                 
+                   <td  class='dados' colspan="3">
+                       Mario Umberto Filho
+                   </td> 
+                   <!-- Email -->
+                   <td width="50px" class='rotulo'>
+                       Email
+                   </td>
+                                 
+                   <td  class='dados' colspan="3">
+                       mario.filho@hospcom.net
+                   </td>
+                
+               </tr>
+                
+                
+                
+                
+                
+               <tr>  
+                   <!-- CONTABILIDADE -->                 
+                   <td  width="50px" class='rotulo' colspan="1">
+                       Contabilidade 
+                   </td>
+                                 
+                   <td  class='dados' colspan="3">
+                       Marcos Natalino 
+                   </td> 
+                   <!-- Email -->
+                   <td width="50px" class='rotulo'>
+                       Email
+                   </td>
+                                 
+                   <td  class='dados' colspan="3">
+                       contabil@hospcom.net
+                   </td>
+                
+               </tr>
+                
+                
+                
+                
+               <tr>  
+                
+                   <!-- cargo  -->                 
+                   <td  width="50px" class='rotulo' colspan="1">
+                       Compras
+                   </td>
+                                 
+                   <td  class='dados' colspan="3">
+                       Kleber Paiva
+                   </td> 
+                   <!-- Email -->
+                   <td width="50px" class='rotulo'>
+                       Email
+                   </td>
+                                 
+                   <td  class='dados' colspan="3">
+                       gerencia.compras@hospcom.net
+                   </td>
+                
+               </tr>
+                
+                
+                
+                
+               <tr>  
+                
+                   <!-- SERVIÇO -->                 
+                   <td  width="50px" class='rotulo' colspan="1">
+                       Serviço
+                   </td>
+                                 
+                   <td  class='dados' colspan="3">
+                       Marcelo Barbosa
+                   </td> 
+                   <!-- Email -->
+                   <td width="50px" class='rotulo'>
+                       Email
+                   </td>
+                                 
+                   <td  class='dados' colspan="3">
+                       marcelo.barbosa@hospcom.net
+                   </td>
+                
+               </tr>
+                
+                
+                
+                
+               <tr>  
+                
+                   <!-- cargo  -->                 
+                   <td  width="50px" class='rotulo' colspan="1">
+                       Comercial
+                   </td>
+                                 
+                   <td  class='dados' colspan="3">
+                       Luzia Luzeni de Souza
+                   </td> 
+                   <!-- Email -->
+                   <td width="50px" class='rotulo'>
+                       Email
+                   </td>
+                                 
+                   <td  class='dados' colspan="3">
+                       luzia.souza@hospcom.net
+                   </td>
+                
+               </tr>
+                
+                
+                
+                
+               <tr>  
+                
+                   <!-- cargo  -->                 
+                   <td  width="50px" class='rotulo' colspan="1">
+                       Qualidade
+                   </td>
+                                 
+                   <td  class='dados' colspan="3">
+                       Murilo Junqueira
+                   </td> 
+                   <!-- Email -->
+                   <td width="50px" class='rotulo'>
+                       Email
+                   </td>
+                                 
+                   <td  class='dados' colspan="3">
+                       qualidade@hospcom.net
+                   </td>
+                
+               </tr>
+                
+                
+                
+               <tr>  
+                
+                   <!-- cargo  -->                 
+                   <td  width="50px" class='rotulo' colspan="1">
+                       Responsável Técnico
+                   </td>
+                                 
+                   <td  class='dados' colspan="3">
+                        {! IF(Account.CNPJ__c == "40.014.621/0001-49", "Maria Patricia", IF(OR(Account.CNPJ__c == "05.743.288/0005-31", Account.CNPJ__c == "05.743.288/0004-50", Account.CNPJ__c == "05.743.288/0006-12", Account.CNPJ__c == "23.813.386/0001-56", Account.CNPJ__c == "40.014.621/0002-20"), "Deny Sousa", IF(OR(Account.CNPJ__c == "27.476.124/0001-02", ISBLANK(Account.CNPJ__c)), "Emerson Cesar", "Deny Sousa")))}
+                        
+                   </td> 
+                   <!-- Email -->
+                   <td width="50px" class='rotulo'>
+                       Email
+                   </td>
+                                 
+                   <td  class='dados' colspan="3">
+                        {! IF(Account.CNPJ__c == "40.014.621/0001-49", "maria.patricia@hospcom.net", IF(OR(Account.CNPJ__c == "05.743.288/0005-31", Account.CNPJ__c == "05.743.288/0004-50", Account.CNPJ__c == "05.743.288/0006-12", Account.CNPJ__c == "23.813.386/0001-56", Account.CNPJ__c == "40.014.621/0002-20"), "deny.sousa@hospcom.net", IF(OR(Account.CNPJ__c == "27.476.124/0001-02", ISBLANK(Account.CNPJ__c)), "emerson.cesar@hospcom.net", "deny.sousa@hospcom.net")))}
+                   </td>
+                
+               </tr>
+                
+                
+         </table>
+         
+         
+         <br/>
+         <!-- Fornecedores -->
+          <table>
+               <tr>                   
+                   <td class='titulo' colspan="4">
+                       Fornecedores
+                   </td>
+               </tr>
+               
+               <tr>  
+                   <!-- NomeS-->                 
+                   <td  width="50px" class='rotulo-especial'>
+                      Nome /razão social
+                   </td>
+                        
+                   <!-- Telefone-->
+                   <td  class='rotulo-especial'>
+                        Telefone
+                   </td> 
+                   
+                   <!-- Email -->
+                   <td class="rotulo-especial" >
+                       Tempo de Relacionamento
+                   </td>
+                           
+                   <!-- Contato -->      
+                   <td  class='rotulo-especial' >
+                         Contato
+                   </td>
+               </tr>
+               
+                   
+               <apex:repeat value="{!fornecedores}" var="fornecedor">
+               
+               <tr>  
+                   
+                   <!-- cargo  -->     
+                   <td  class='dados-especial' >
+                        {!fornecedor.fornecedorName}
+                   </td> 
+                   
+                   <!-- cargo  -->     
+                   <td  class='dados-especial' >
+                        {!fornecedor.telefoneFornecedor}
+                   </td> 
+                   
+                   <!-- cargo  -->     
+                   <td  class='dados-especial' >
+                        {!fornecedor.anosDesdeCriacao}
+                   </td> 
+                   
+                   <!-- cargo  -->     
+                   <td  class='dados nome' >
+                        {!fornecedor.nomeContato}
+                   </td> 
+               </tr>
+               </apex:repeat>
+         </table>
+         
+            
+         <br/>
+         <!-- Fornecedores -->
+          <table>
+               <tr>                   
+                   <td class='titulo' colspan="4">
+                       Clientes
+                   </td>
+               </tr>
+               
+               <tr>  
+                   <!-- NomeS-->                 
+                   <td  width="50px" class='rotulo-especial'>
+                      Nome /razão social
+                   </td>
+                        
+                   <!-- Telefone-->
+                   <td  class='rotulo-especial'>
+                        Telefone
+                   </td> 
+                   
+                   <!-- Email -->
+                   <td class="rotulo-especial" >
+                       Tempo de Relacionamento
+                   </td>
+                           
+                   <!-- Contato -->      
+                   <td  class='rotulo-especial' >
+                         Contato
+                   </td>
+               </tr>
+               
+                   
+               <apex:repeat value="{!clientes}" var="cliente">
+               <tr>  
+               
+                   <!-- cargo  -->     
+                   <td  class='dados-especial' >
+                        {!cliente.clienteName}
+                   </td> 
+                   
+                   <!-- cargo  -->     
+                   <td  class='dados-especial' >
+                        {!cliente.telefoneCliente}
+                   </td> 
+                   
+                   <!-- cargo  -->     
+                   <td  class='dados-especial' >
+                        {!cliente.anosDesdeCriacao}
+                   </td> 
+                   
+                   <!-- cargo  -->     
+                   <td  class='dados nome' >
+                        {!cliente.nomeContato}
+                   </td> 
+               </tr>
+               </apex:repeat>
+         </table>
+         
+         
+         <br/>
+               
+         <table>
+           
+               <tr>                   
+                   <td class='titulo' colspan="8">
+                       Referência Bancária
+                   </td>
+               </tr>
+               
+               
+               
+               
+               
+               <apex:repeat value="{!referencias}" var="banco">
+               <tr>  
+                   <!-- cargo  -->                 
+                   <td  width="50px" class='rotulo' colspan="1">
+                      Banco 
+                   </td>
+                                 
+                   <td  class='dados' colspan="8">
+                        {!banco.banco}
+                   </td> 
+               </tr>
+               
+                <tr>  
+                   <!-- Agencia-->                 
+                   <td  width="50px" class='rotulo' colspan="1">
+                      Agencia
+                   </td>
+                                 
+                   <td  class='dados' colspan="3">
+                   
+                   {!banco.agencia}
+                   </td> 
+                   
+                   
+                     <!-- cargo  -->                 
+                   <td  width="50px" class='rotulo' colspan="1">
+                          conta
+                   </td>
+                                 
+                   <td  class='dados' colspan="3">
+                         {!banco.conta_bancaria}
+                   </td> 
+               </tr>
+               
+                <tr>  
+                   <!-- Contato -->                 
+                   <td  width="50px" class='rotulo' colspan="1">
+                      Contato
+                   </td>
+                                 
+                   <td  class='dados' colspan="3">
+                       {!banco.gerente}
+                   </td> 
+                   
+                   
+                     <!-- Conta-->                 
+                   <td  width="50px" class='rotulo' colspan="1">
+                      Telefone
+                   </td>
+                                 
+                   <td  class='dados' colspan="3">
+                        {!banco.telefoneGerente}
+                   </td> 
+               </tr>
+               
+               </apex:repeat>
+               
+              
+         </table>
+         
+         
+         
+  </apex:pageBlock>
+
+  </body>
+
+</apex:page>

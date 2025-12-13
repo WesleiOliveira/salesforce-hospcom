@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Altera_o_de_status_de_pedido_dpto_comercial</fullName>
+        <description>Alteração de status de pedido dpto comercial</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Comercial_gestor</recipient>
+            <type>group</type>
+        </recipients>
+        <senderAddress>desenvolvimento@hospcom.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Alteracao_de_pedido</template>
+    </alerts>
+    <alerts>
+        <fullName>Altera_o_de_status_de_pedido_dpto_governo</fullName>
+        <description>Alteração de status de pedido dpto governo</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Governo_gestor</recipient>
+            <type>group</type>
+        </recipients>
+        <senderAddress>desenvolvimento@hospcom.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Alteracao_de_pedido</template>
+    </alerts>
+    <alerts>
+        <fullName>Altera_o_de_status_de_pedido_dpto_servi_o</fullName>
+        <description>Alteração de status de pedido dpto serviço</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Servico_gestor</recipient>
+            <type>group</type>
+        </recipients>
+        <senderAddress>desenvolvimento@hospcom.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Alteracao_de_pedido</template>
+    </alerts>
+    <alerts>
+        <fullName>Altera_o_de_status_de_pedido_financeiro</fullName>
+        <description>Alteração de status de pedido financeiro</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Financeiro_aprovacao</recipient>
+            <type>group</type>
+        </recipients>
+        <senderAddress>desenvolvimento@hospcom.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Alteracao_de_pedido</template>
+    </alerts>
+    <alerts>
+        <fullName>Altera_o_de_status_de_pedido_prop</fullName>
+        <description>Alteração de status de pedido proprietário</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderAddress>desenvolvimento@hospcom.net</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Alteracao_de_pedido</template>
+    </alerts>
+    <alerts>
+        <fullName>Notifica_propriet_rio</fullName>
+        <description>Notifica proprietário</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Alteracao_de_pedido</template>
+    </alerts>
+    <alerts>
+        <fullName>Pedido_aprovado</fullName>
+        <description>Pedido aprovado</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <recipients>
+            <recipient>isabele.lima@hospcom.net</recipient>
+            <type>partnerUser</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Pedido_aprovado</template>
+    </alerts>
+    <alerts>
+        <fullName>Pedido_reprovado</fullName>
+        <description>Pedido reprovado</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/Pedido_reprovado</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>A_o_interna_verdadeiro</fullName>
+        <field>Acao_interna__c</field>
+        <literalValue>1</literalValue>
+        <name>Ação interna: verdadeiro</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Acao_interna_verdadeiro</fullName>
+        <field>Acao_interna__c</field>
+        <literalValue>1</literalValue>
+        <name>Ação interna: verdadeiro</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Ag_Apr_Financ</fullName>
+        <field>Status</field>
+        <literalValue>Aguardando Aprovação Financeira</literalValue>
+        <name>Ag Apr Financ</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Ag_Aprovacao_locacao</fullName>
+        <field>Status</field>
+        <literalValue>Aguardando Aprovação Locação</literalValue>
+        <name>Ag. Aprovação Locação</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Aprovado</fullName>
+        <field>Status</field>
+        <literalValue>Aprovado</literalValue>
+        <name>Aprovado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Aprovado2</fullName>
+        <field>Status</field>
+        <literalValue>Aprovado</literalValue>
+        <name>Aprovado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Enviar_falso</fullName>
+        <field>Enviar__c</field>
+        <literalValue>0</literalValue>
+        <name>Enviar: falso</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Enviar_verdadeiro</fullName>
+        <field>Enviar__c</field>
+        <literalValue>1</literalValue>
+        <name>Enviar: verdadeiro</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>StatusCommerce</fullName>
+        <field>Status_Commerce__c</field>
+        <literalValue>Processando</literalValue>
+        <name>StatusCommerce</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Ag_Apr_Comercial</fullName>
+        <field>Status</field>
+        <literalValue>Aguardando Aprovação Comercial</literalValue>
+        <name>Status: Ag. Apr. Comercial</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Ag_Apr_Locacao</fullName>
+        <field>Status</field>
+        <literalValue>Aguardando Aprovação Locação</literalValue>
+        <name>Status: Ag. Apr. Locação</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Aguardando_Apr_Comercial</fullName>
+        <field>Status</field>
+        <literalValue>Aguardando Aprovação Comercial</literalValue>
+        <name>Status Aguardando Apr Comercial</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Rascunho</fullName>
+        <field>Status</field>
+        <literalValue>Rascunho</literalValue>
+        <name>Status: Rascunho</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Reprovado</fullName>
+        <field>Status</field>
+        <literalValue>Reprovado</literalValue>
+        <name>Status &quot;Reprovado.&quot;</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>acao_interna_verdadeiro_locacao</fullName>
+        <field>Acao_interna__c</field>
+        <literalValue>1</literalValue>
+        <name>Ação interna: verdadeiro</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>data_de_aprova_o</fullName>
+        <field>Data_de_aprova_o_do_PV__c</field>
+        <formula>TODAY()</formula>
+        <name>data de aprovação</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>test</fullName>
+        <field>test__c</field>
+        <formula>&apos;test&apos;</formula>
+        <name>test</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <tasks>
+        <fullName>teste_teste</fullName>
+        <assignedTo>desenvolvimento@hospcom.net</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>teste teste</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Baixo</priority>
+        <protected>false</protected>
+        <status>Adiado</status>
+        <subject>teste teste</subject>
+    </tasks>
+</Workflow>

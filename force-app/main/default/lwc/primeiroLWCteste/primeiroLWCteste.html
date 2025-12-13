@@ -1,0 +1,8 @@
+<template>
+    <div>
+        <lightning-button label="Clique para mostrar" onclick={handleClick}></lightning-button>
+        <template if:true={showMessage}>
+            <h2>Hello, World!</h2>
+        </template>
+    </div>
+</template>

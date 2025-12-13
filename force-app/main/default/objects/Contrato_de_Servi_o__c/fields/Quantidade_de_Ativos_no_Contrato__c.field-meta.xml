@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Quantidade_de_Ativos_no_Contrato__c</fullName>
+    <externalId>false</externalId>
+    <label>Quantidade de Ativos no Contrato</label>
+    <summaryFilterItems>
+        <field>Ativos_do_Contrato__c.Equipamento_no_Cliente__c</field>
+        <operation>equals</operation>
+        <value>True</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Ativos_do_Contrato__c.Contrato_de_Servico__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

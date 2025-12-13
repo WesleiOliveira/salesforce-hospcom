@@ -1,0 +1,42 @@
+<aura:component controller="HomeBotoes" implements="forceCommunity:availableForAllPageTypes">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>    
+	<div class="slds-m-around_x-small">
+        <lightning:buttonGroup class="slds-button_stretch" >
+            <lightning:buttonMenu label="Vendas" class="slds-button_stretch format">
+                <lightning:button class="slds-button_stretch" label="Geral" title="Geral" value="Geral" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Comercial" title="Comercial" value="Comercial" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Governo" title="Governo" value="Governo" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Clientes" title="Clientes" value="Clientes" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Representação" title="Representação" value="Representação" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Vendedores" title="Vendedores" value="Vendedores" onclick="{!c.Atualizar}" />
+            </lightning:buttonMenu>
+           
+            <lightning:buttonMenu label="Linhas" class="slds-button_stretch format">
+                <lightning:button class="slds-button_stretch" label="PMLS" title="PMLS" value="PMLS" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Surgical" title="Surgical" value="Surgical" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Vídeo Cirurgia" title="Video_Cirurgia" value="Video_Cirurgia" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="OPME" title="OPME" value="OPME" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Ultrassom" title="Ultrassom" value="Ultrassom" onclick="{!c.Atualizar}" />
+            </lightning:buttonMenu>
+            <lightning:buttonMenu label="Serviços" class="slds-button_stretch format">
+                <lightning:button class="slds-button_stretch" label="Vendas de Serviços" title="Vendas de Serviços" value="Vendas de Serviços" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Tecnicos" title="Tecnicos" value="Tecnicos" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Faturamento" title="Faturamento" value="Faturamento" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Qualidade" title="Qualidade" value="Qualidade" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Base Instalada" title="Base Instalada" value="Base Instalada" onclick="{!c.Atualizar}" />
+            </lightning:buttonMenu>
+            <lightning:buttonMenu label="Locação" class="slds-button_stretch format">
+                <lightning:button class="slds-button_stretch" label="Contrato" title="Contrato" value="Contrato" onclick="{!c.Atualizar}" />
+            </lightning:buttonMenu>
+            <lightning:buttonMenu label="Logistica" class="slds-button_stretch format">
+                <lightning:button class="slds-button_stretch" label="Performance" title="Performance" value="Performance" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Erros Logistica" title="Erros Logistica" value="Erros Logistica" onclick="{!c.Atualizar}" />
+            </lightning:buttonMenu>
+            <lightning:buttonMenu label="Compras" class="slds-button_stretch format">
+                <lightning:button class="slds-button_stretch" label="Compras Geral" title="Compras Nacionais" value="Compras Nacionais" onclick="{!c.Atualizar}" />
+            </lightning:buttonMenu>
+        </lightning:buttonGroup>
+        
+	</div>
+
+</aura:component>

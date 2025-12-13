@@ -1,0 +1,73 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="setMeOnInit" type="String" default="default value" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.popper,
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js')}"                  
+                  afterScriptsLoaded="{!c.doInit}" />
+    
+    <div class="container-fluid mt-5" style="background-color: #00345c; display: flex; justify-content: center">
+        <div class="card bg-white mx-5" style="background-color: #00345c!important; border: 0px; padding: 16px!important; width: 1230px">
+            <div class="row mb-4">
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div class="footer-text pull-left">
+                        <div class="d-flex" style="padding-bottom: 5vh!important">
+                            <img style="width: 50%!important" src="{!$Resource.logoHospcomBranca}" alt="User avatar"/>
+                        </div>
+                        <p class="card-text" style="color: white;">A Hospcom é uma empresa do segmento médico-hospitalar-laboratorial, que desde sua fundação em 2003 vem agregando inovação, alta tecnologia e qualidade para a área da saúde.</p>
+                        <div class="social mt-2 mb-3" style="color: white; display: flex; column-gap: 7px;">
+                            <a target="_blank" href="https://www.facebook.com/Hospcom/" class="classeLink"><i href="" class="fa fa-facebook-square fa-lg"></i></a>
+                            <a target="_blank" href="https://www.instagram.com/hospcom/" class="classeLink"><i href="" class="fa fa-instagram fa-lg"></i></a>
+                            <a target="_blank" href="https://twitter.com/hospcombrasil" class="classeLink"><i href="" class="fa fa-twitter fa-lg"></i></a>
+                            <a target="_blank" href="https://br.linkedin.com/company/hospcom-hospitalar" class="classeLink"><i href="" class="fa fa-linkedin-square fa-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-2"></div>
+                <div class="col-md-2 col-sm-2 col-xs-2"></div>
+                
+                <div class="col-md-2 col-sm-2 col-xs-2">
+                    <h5 class="heading" style="color: white">Soluções</h5>
+                    <ul class="card-text">
+                        <li><a href="https://hospcom--sitepreview.na170.force.com/B2B/s/category/linhas/0ZG6e0000004CCg?c__results_layout_state=%7B%7D" class="classeLink">Toda Nossa Linha</a></li>
+                        <li><a href="https://hospcom--sitepreview.na170.force.com/B2B/s/category/linhas/0ZG6e0000004CCg?c__results_layout_state=%7B%7D" class="classeLink">Locação</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-2">
+                    <h5 class="heading" style="color: white">A Hospcom</h5>
+                    <ul class="card-text">
+                        <li><a href="/contato" class="classeLink">Sobre Nós</a></li>
+                        <li><a href="https://hospcomhospitalar.force.com/Sales/CommunityLogin" class="classeLink">Contato</a></li>
+                        <li><a href="http://bit.ly/hospcom" class="classeLink">Trabalhe Conosco</a></li>
+                        <li><a href="/contato" class="classeLink">Acesso Restrito</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+            <div class="divider mb-4" style="color: white;"> </div>
+            <div class="row" style="font-size:10px; color: white">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div class="pull-left">
+                        <p><i class="fa fa-copyright"></i> 2021 Hospcom. Todos os direitos reservados</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div class="pull-right mr-4 d-flex policy">
+                        <div>Termos de uso</div>
+                        <div>Privacidade</div>
+                        <div>Cookies</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+</aura:component>

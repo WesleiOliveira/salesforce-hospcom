@@ -1,0 +1,32 @@
+<aura:component controller="integracaoSAP" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <ltng:require
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.popper + '/popper.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js',
+                           $Resource.bootstrapSelect14 + '/docs/docs/dist/js/bootstrap-select.min.js')}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    <!--<div class="flexipageComponent">
+        <div class="tabset slds-tabs_card uiTabsetbase uiTabsetdefault uiTabsetdense uiTabset flexipageTabset">
+            <center>-->
+    <div>
+        <!-- SPINNER DE CARREGAMENTO -->
+        <div id='spinnerDiv' style="display: none">
+            <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+        </div>
+        
+        <div class='divButton'>
+            <button id="integracaoSAP" disabled="true" title="funcionalidade em implementacao" onClick="teste" class="slds-button slds-button--brand slds-path__mark-complete stepAction current uiButton">
+                Integrar pedido ao SAP
+            </button>
+        </div>
+    </div>
+    
+    <!--</center>
+        </div>
+    </div>-->
+    
+</aura:component>

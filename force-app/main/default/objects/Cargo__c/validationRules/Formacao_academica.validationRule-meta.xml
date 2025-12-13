@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Formacao_academica</fullName>
+    <active>true</active>
+    <errorConditionFormula>(
+  ISPICKVAL(Tipo_Formacao__c, &quot;Superior Cursando&quot;) ||
+  ISPICKVAL(Tipo_Formacao__c, &quot;Superior Completo&quot;) ||
+  ISPICKVAL(Tipo_Formacao__c, &quot;Pós Graduado&quot;)
+) &amp;&amp;
+ISBLANK(Formacao_Necessaria__c)</errorConditionFormula>
+    <errorDisplayField>Formacao_Necessaria__c</errorDisplayField>
+    <errorMessage>Preencha a Formação Necessária</errorMessage>
+</ValidationRule>

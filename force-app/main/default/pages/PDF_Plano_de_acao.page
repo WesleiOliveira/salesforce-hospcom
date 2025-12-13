@@ -1,0 +1,332 @@
+<apex:page standardController="P__c" extensions="ListagemIMEs_PMP" applyHtmlTag="false" showHeader="false" renderAs="pdf">
+  <head>
+  <style type="text/css" media="print">
+            @page {
+                size:21cm 29.7cm;
+                margin:100px 40px 60px 40px;
+                @top-center {
+                    content:element(header);
+                }
+                @bottom-center {
+                    content:element(footer);
+                }
+            }
+            @page{
+                size:A4;
+                background: url({!IF(P__c.Auditoria__r.Empresa_Auditada__r.CNPJ__c  == '27.476.124/0001-02',$Resource.TimbradoHealth,IF(P__c.Auditoria__r.Empresa_Auditada__r.CNPJ__c == '05.743.288/0001-08' || P__c.Auditoria__r.Empresa_Auditada__r.CNPJ__c == '05.743.288/0003-70',$Resource.TimbradoHospcom,IF(P__c.Auditoria__r.Empresa_Auditada__r.CNPJ__c == '23.813.386/0001-56',$Resource.TimbradoGDB,IF(P__c.Auditoria__r.Empresa_Auditada__r.CNPJ__c == '40.014.621/0001-49',$Resource.TimbradoABC,$Resource.TimbradoGenerico))))});
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);}
+            }
+            .pagenumber:before {
+                content:counter(page);
+            }
+            .pagecount:before {
+                content:counter(pages);
+            }
+            div.header {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(header);
+                height:60px;
+            }
+            div.content {
+            }
+            
+            div.footer {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(footer);
+                height:20px;
+                text-align:right;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                font-weight:normal;
+            }
+        </style>
+        <style type="text/css" media="print">
+        /*
+            @page:first{
+                size:A4;
+                background: url($Resource.SobreHealth);
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);
+                }
+            }
+            
+            @page{
+                size:A4;
+                background: url($Resource.TimbradoHealth);
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);}
+            }
+  */
+            td, tr{
+            padding: 0;
+            margin: 0;
+            page-break-inside:avoid;
+        }
+            
+            *{
+                letter-spacing: 10px;
+                font-family: Arial, Helvetica, sans-serif;
+                color: #0c3557;
+                font-size: 12px;
+                text-transform: uppercase;
+            }
+            .tabela_geral{
+                border-collapse:collapse;
+                width:100%;
+            }
+            table.print-friendly tr td, table.print-friendly tr th {
+                page-break-inside: avoid;
+            }
+            .titulo{
+              
+                text-align: left;
+                padding: 1px 1px;
+                font-size: 14px;
+                color: #fff !important;
+
+                
+            }
+            .maiuscula{
+                text-transform: uppercase;
+            }
+          
+            .questoes{
+             
+            
+            }
+            .questao{
+                display: flex;
+                flex-direction: row;
+                padding: 5px;
+            }
+
+            .valor{
+                margin-bottom: -100px;
+                border: #0c3557 1px solid;
+                
+            }
+
+            .sessao-questao{
+                font-size: 14px;
+                padding: 10px 0  0 5px;
+            }
+            
+            
+            .questao{
+                padding: 10px !important;
+                padding-right: 15px !important;
+            }
+
+            h1,h2{
+                padding: 0;
+                margin: 0;
+            }
+            .resposta{
+                font-weight: bold;
+                font-size: 14px;
+            }
+            .t{
+                padding: 1px 1px;
+                font-size: 14px;
+            }
+            table{
+                width: 100%;
+                
+            border-collapse:collapse;
+            }
+            .NC{              
+                padding: 5px;
+                border:#0c3557 1px solid;
+                margin: 5px 0 ;
+                page-break-inside:avoid;
+            }
+            .tp-nc {
+            
+            }
+
+            .linha, .linha2, .linha3{
+                padding: 5px;
+            }
+            .campo{
+                font-weight: bold;
+            }
+            .linha2{
+                width: 50%;
+                padding-right: 20px;
+            }
+            .linha3{
+                width: 50%;
+                padding-right: 20px;
+                border:1px solid #02447a ;
+            }
+            .value{
+                text-transform:lowercase;
+                letter-spacing:1rem;
+                
+            }
+            .value2{
+                text-transform:uppercase;
+                letter-spacing:1rem;
+                
+            }
+            .value3{
+                text-transform: capitalize;
+                letter-spacing:1rem;
+               
+            }
+            
+            .titulo{
+                font-family:arial, verdana, sans-serif;
+                font-size:15px;
+                text-align:center;
+                font-weight:bold; 
+                width:100%;
+                color: #ffff ;
+                background-color: #0c3557;
+            }
+            .campo2{
+                font-weight: bold;
+                text-align: center;
+                padding: 0 5px;
+            }
+            td{
+                
+            }
+        </style>
+  </head>
+  <body>
+  <apex:pageBlock >
+
+    <div class="footer" style="text-align:center !important"><br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Página <span class="pagenumber"></span> de <span class="pagecount"></span> - Emissão em:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{! TODAY() }" /></apex:outputText>
+    </div>
+
+
+
+     
+    <table>
+        <apex:repeat value="{!documentos}" var="doc">
+            <apex:outputText rendered="{!if(doc.Documento__c = 'Plano de Ação', true, false)}" >
+                <apex:outputText rendered="{!if(doc.Empresa_pesquisa__c =  P__c.Auditoria__r.Empresa_Auditada__c, true, false)}" >
+                    
+                    <tr  colspan="2" width="100%" >
+                        <td width="50%" style='font-size:13px; font-weight:bold;' >
+                            emissão:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{! doc.Data_de_criacao__c }" /></apex:outputText>
+                        </td>
+                        
+                        <td style="text-align: right;
+                            font-size:13px;
+                            font-weight:bold; ">
+                            última rev. doc.:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!doc.Revisao__c}" /></apex:outputText>
+                        </td>
+                    </tr>
+                
+                </apex:outputText>
+            </apex:outputText>
+        </apex:repeat>
+    
+    </table>
+
+   
+    <table >
+        
+
+        
+        <tr>
+            <td colspan="2" ><h6 class="titulo"  style="color: #ffff ;">IDENTIFICAÇÃO</h6></td>
+        </tr>
+        
+        <tr>
+            <td colspan="2" class="linha">
+                <span class="campo">Unidade:</span> <span  class="value2">{!P__c.Unidade_auditada__c}</span>
+            </td>
+            
+            
+        </tr>
+        
+        <tr>
+            <td colspan="1" class="linha">
+                <span class="campo">setor de aplicação:</span> <span  class="value2">{!P__c.Setor__c}</span>
+            </td>
+            
+            <td colspan="1" class="linha">
+                <span class="campo">Data da auditoria: </span> <span  class="value"> <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!P__c.Data_da_Auditoria__c}" /></apex:outputText></span>
+            </td>
+        </tr>
+        
+        <tr>
+            <td colspan="2" class="linha">
+                <span class="campo">Responsáveis envolvidos:</span> 
+                <span  class="value3"> {!P__c.Respons_vel_envolvido_1__r.name}</span>
+                <span  class="value3">  <apex:outputText rendered="{!if(P__c.Respons_vel_envolvido_2__c!= '', true, false)}">,{!P__c.Respons_vel_envolvido_2__r.name}</apex:outputText> </span> 
+                <span  class="value3">  <apex:outputText rendered="{!if(P__c.Respons_vel_envolvido_3__c!= '', true, false)}">,{!P__c.Respons_vel_envolvido_3__r.name}</apex:outputText> </span> 
+                <span  class="value3">  <apex:outputText rendered="{!if(P__c.Respons_vel_envolvido_4__c!= '', true, false)}">,{!P__c.Respons_vel_envolvido_4__r.name}</apex:outputText> </span>
+            </td>
+        </tr>
+    </table>
+
+    <table>
+    
+        <tr>
+            <td colspan="6" ><h6 class="titulo"  style="color: #ffff ;">PLANO DE MELHORIA</h6></td>
+        </tr>
+        
+        <tr>
+           
+            <td colspan="1" class="linha3">
+                <span class="campo2">DESCRIÇÃO DO RAC </span> 
+            </td>
+
+            <td colspan="1" class="linha3">
+                <span class="campo2">DESCRIÇÃO DO RNC</span> 
+            </td>
+
+            <td colspan="1" class="linha3">
+                <span class="campo2">RESPONSALVEL</span> 
+            </td>
+
+            <td colspan="1" class="linha3">
+                <span class="campo2">DATA FINALIZAÇÃO</span> 
+            </td>
+
+            <td colspan="1" class="linha3">
+                <span class="campo2">EFICaz</span> 
+            </td>
+        </tr>
+
+
+    <apex:repeat var="p" value="{!P__c.A_es_corretivas1__r}">
+        <tr>
+            
+            
+            <td colspan="1" class="linha3" style="padding-left: 15px;">
+                <span class="value">{!p.A_o_Corretiva_Detalhada__c} </span> 
+            </td>
+
+            <td colspan="1" class="linha3" style="padding-left: 15px;">
+                <span class="value">{!p.Descricao_da_NRC__c} </span> 
+            </td>
+
+            <td colspan="1" class="linha3"  style="text-align: center; ">
+                <span class="value3" style="text-align: left;">{!p.Responsevel__r.FirstName} </span> 
+            </td>
+
+            <td colspan="1" class="linha3"  style="text-align: center;">
+                <span class="value" style="text-align: center;"><apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!P__c.Data_finalizacao__c}" /></apex:outputText> </span> 
+            </td>
+
+            <td colspan="1" class="linha3"  style="text-align: center;">
+                <span class="value" style="text-align: center;">{!P__c.Solu_o_eficaz__c}</span> 
+            </td>
+        </tr>
+    
+    </apex:repeat> 
+</table>
+  </apex:pageBlock>
+  </body>
+</apex:page>

@@ -1,0 +1,223 @@
+<apex:page standardController="Solicitacao_transferencia_estoque__c" renderAs="pdf" applyHtmlTag="false" showHeader="false">
+    <head>
+        <style type="text/css" media="print">
+            @page {
+                size: A4 landscape;
+                margin: 100px 40px 60px 25px;
+                @top-center { content: element(header); }
+                @bottom-center { content: element(footer); }
+            }
+            .pagenumber:before { content: counter(page); }
+            .pagecount:before { content: counter(pages); }
+
+            div.header {
+                margin: 0px;
+                padding: 20px 0px;
+                position: running(header);
+                height: 60px;
+            }
+            div.content {}
+            div.footer {
+                margin: 0px;
+                padding: 20px 0px;
+                position: running(footer);
+                height: 20px;
+                text-align: right;
+                font-family: Arial, Verdana, sans-serif;
+                font-size: 10px;
+                font-weight: normal;
+            }
+        </style>
+        
+        <style type="text/css">
+            .titulo {
+                width: 100%;
+                font-family: Arial, Verdana, sans-serif;
+                font-size: 15px;
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: 15px;
+            }
+            .tabela_geral tr { }
+            .tabela_item {
+                table-layout: fixed;
+                border-collapse: collapse;
+            }
+            .tabela_item tr { table-layout: fixed; }
+            .incolor {
+                padding-top: 4px;
+                font-family: Arial, Verdana, sans-serif;
+                font-size: 10px;
+                vertical-align: top;
+                text-align: right;
+            }
+            .invisivel {
+                padding: 0;
+                font-family: Arial, Verdana, sans-serif;
+                font-size: 10px;
+            }
+            .cabecalho {
+                padding: 3px;
+                font-family: Arial, Verdana, sans-serif;
+                font-size: 11px;
+                font-weight: bold;
+                vertical-align: top;
+                background-color: #c3c3c3;
+                border: 1px solid #c3c3c3;
+            }
+            .celula {
+                padding: 3px;
+                font-family: Arial, Verdana, sans-serif;
+                font-size: 10px;
+                vertical-align: top;
+                border: 1px solid #c3c3c3;
+                line-height: 120%;
+                overflow: hidden;
+                text-transform: uppercase;
+            }
+            .descricao {
+                text-align: justify;
+            }
+            .total {
+                border-left: 1px solid #c3c3c3;
+            }
+            .destaque {
+                font-weight: bold;
+            }
+            .clausula_texto {
+                font-family: Arial, Verdana, sans-serif;
+                font-size: 11.5px;
+                text-align: justify;
+                text-justify: inter-word;
+                line-height: 120%;
+                text-indent: 50px;
+                vertical-align: top;
+            }img
+            .maiuscula {
+                text-transform: uppercase;
+            }
+            .zebra {
+                background-color: #f3f3f3;
+            }
+        </style>
+    </head>
+
+    <!-- Variables for the Company Logo and Name -->
+    <apex:variable var="empresa_nome" value="{!''}" />
+    <apex:variable var="empresa_logo" value="{!'https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009LNyN&oid=00Di0000000JVhH'}" />
+    <apex:variable var="empresa_nome" value="{!'GDB COMÉRCIO E SERVIÇOS - EIRELI - EPP'}" />
+    <apex:variable var="empresa_logo" value="{!'https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009LWSQ&oid=00Di0000000JVhH&lastMod=1520964013000'}" />
+    <apex:variable var="empresa_nome" value="{!'HEALTH SOLUTION COMERCIO E SERVIÇOS - EIRELI - ME'}" />
+    <apex:variable var="empresa_logo" value="{!'https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=015310000099Yg1&oid=00Di0000000JVhH'}" />
+
+    <html>
+        <body style="font-family: Arial; padding: 0px; margin: 0px; border: 0px solid #eef2f4; width: 100%;">
+
+            <!-- Header -->
+            <div class="header">
+                <table cellpadding="0px" cellspacing="0px" style="width: 100%;">
+                    <tr>
+                        <td style="width: 42%; text-align: center;">
+                            <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=015310000099Yfw&oid=00Di0000000JVhH&lastMod=1500637924000" width="234px" height="60px"/>
+                        </td>
+                        <td style="width: 58%; text-align: center; vertical-align: middle;">
+                            <img src="{!empresa_logo}" width="324px" height="55px"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                Página <span class="pagenumber"/> de <span class="pagecount"/>
+            </div>
+
+            <!-- Content -->
+            <div class="content">
+                <div style="page-break-before: always" />
+
+                <div class="titulo">Solicitação de Transferência de Estoque</div>
+
+                <!-- Initial Information -->
+                <table style="page-break-inside: avoid; width: 100%; padding-left: 24px;">
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent: 0px; width: 110px;">Solicitante:</td>
+                        <td class="clausula_texto maiuscula" style="text-indent: 0px;">{!Solicitacao_transferencia_estoque__c.Name}</td>
+                    </tr>
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent: 0px; width: 110px;">Departamento:</td>
+                        <td class="clausula_texto maiuscula" style="text-indent: 0px;">{!Solicitacao_transferencia_estoque__c.Departamento__c}</td>
+                    </tr>
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent: 0px; width: 110px;">Status:</td>
+                        <td class="clausula_texto maiuscula" style="text-indent: 0px;">{!Solicitacao_transferencia_estoque__c.Status__c}</td>
+                    </tr>
+                </table>
+
+                <table style="page-break-inside: avoid; width: 100%; padding-left: 24px;" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="clausula_texto" style="width: 30%;">
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td class="clausula_texto destaque" style="text-indent: 0px; width: 110px;">Estoque de origem:</td>
+                                    <td class="clausula_texto maiuscula" style="text-indent: 0px;">{!Solicitacao_transferencia_estoque__c.Estoque_de_origem__c}</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="clausula_texto" style="width: 25%;">
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td class="clausula_texto destaque" style="text-indent: 0px; width: 110px; text-align: right;">Estoque de destino:</td>
+                                    <td class="clausula_texto maiuscula" style="text-indent: 0px;">{!Solicitacao_transferencia_estoque__c.Estoque_de_destino__c}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent: 0px; width: 110px;">Observações:</td>
+                        <td class="clausula_texto maiuscula" style="text-indent: 0px;">{!Solicitacao_transferencia_estoque__c.Observacao__c}</td>
+                    </tr>
+                    <td>
+                    
+                    </td>
+                </table>
+                <td>
+                    </td>
+
+                <!-- Item List -->
+                <table class="tabela_geral" cellpadding="0px" cellspacing="0px" style="width:100%;">
+                    <apex:variable var="cont" value="{!1}"/>
+                    <tr>
+                        <td>
+                            <table class="tabela_item" cellpadding="0px" cellspacing="0px" style="width: 100%;">
+                                
+                                <tr>
+                                
+                                    <td class="invisivel" style="width: 25px; text-align: left;">#</td>
+                                    <td class="cabecalho" style="width: 150px;" >Código</td>
+                                    <td class="cabecalho" style="width: 200">Produto</td>
+                                    <td class="cabecalho" style="width: *;">Modelo</td>
+                                    <td class="cabecalho" style="width: 20px;">Qtd.</td>
+                                    <td class="cabecalho" style="width: 70px;">Marca</td>
+                                </tr>
+
+                                <apex:repeat value="{!Solicitacao_transferencia_estoque__c.Itens_da_Transfer_ncia_de_Estoque__r}" var="item">
+                                    <tr>
+                                        <td class="invisivel" style="width: 25px; text-align: left;">{!cont}</td>
+                                        <td class="celula" style="width: 150px;" >{!item.codigo_produto__c}</td>
+                                        <td class="celula" style="width: 200px">{!item.Produto__r.Name}</td>
+                                        <td class="celula" style="width: *;">{!item.Modelo__c}</td>
+                                        <td class="celula" style="width: 20px;">{!item.Quantidade__c}</td>
+                                        <td class="celula" style="width: 70px;">{!item.Marca__c}</td>
+                                    </tr>
+                                    <apex:variable var="cont" value="{!cont + 1}"/>
+                                </apex:repeat>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+            </div> <!-- End of Content -->
+        </body>
+    </html>
+</apex:page>

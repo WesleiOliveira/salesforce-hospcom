@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Subfase__c</fullName>
+    <externalId>false</externalId>
+    <label>Subfase</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>COTAÇÃO ENVIADA</fullName>
+                <default>false</default>
+                <label>COTAÇÃO ENVIADA</label>
+            </value>
+            <value>
+                <fullName>ENCAMINHADO PARA O CONSULTOR</fullName>
+                <default>false</default>
+                <label>ENCAMINHADO PARA O CONSULTOR</label>
+            </value>
+            <value>
+                <fullName>ENCAMINHADO PARA OUTRO DEPARTAMENTO</fullName>
+                <default>false</default>
+                <label>ENCAMINHADO PARA OUTRO DEPARTAMENTO</label>
+            </value>
+            <value>
+                <fullName>OUTRA REGIÃO</fullName>
+                <default>false</default>
+                <label>OUTRA REGIÃO</label>
+            </value>
+            <value>
+                <fullName>OUTRO</fullName>
+                <default>false</default>
+                <label>OUTRO</label>
+            </value>
+            <value>
+                <fullName>CASO CRIADO</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CASO CRIADO</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

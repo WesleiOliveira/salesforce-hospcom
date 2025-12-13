@@ -1,0 +1,25 @@
+<apex:page standardController="OpportunityTeamMember" extensions="RemoveFromOpp" sideBar="false" showChat="false">
+    <head>
+        <base target="_parent"/>    
+    </head>
+    
+    <body style="background-color:white; margin:0px 0px 20px 0px; padding:0px;">
+        
+        <apex:outputText rendered="{!IF(renderiza == true ,true,false)}" >
+            
+            <apex:form style="background-color:white;">
+                <!-- INTERFACES LIGHTNING -->
+                <apex:outputText rendered="{!IF(OR(CONTAINS($CurrentPage.URL, 'lightning.force.com'), url_prefixo == '/Sales'),true,false)}" >
+                    &nbsp;<apex:commandLink value="Remova-me da equipe." action="{!RemoveNow}" rerender="false"/>
+                </apex:outputText>
+                <!-- INTERFACES CLÁSSICAS -->
+                <apex:outputText rendered="{!IF(NOT(OR(CONTAINS($CurrentPage.URL, 'lightning.force.com'), url_prefixo == '/Sales')),true,false)}" >
+                    &nbsp;<apex:commandLink value="Remova-me da equipe." action="{!RemoveNow}" />
+                </apex:outputText>            
+            </apex:form>
+            
+        </apex:outputText>
+        
+    </body>
+    
+</apex:page>

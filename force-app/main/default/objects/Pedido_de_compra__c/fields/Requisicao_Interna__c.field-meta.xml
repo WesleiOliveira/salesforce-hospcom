@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Requisicao_Interna__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <inlineHelpText>Para pedidos de compra para consumo que tenham requisição interna no sistema.</inlineHelpText>
+    <label>Requisição Interna</label>
+    <referenceTo>Requisi_o_Interna__c</referenceTo>
+    <relationshipLabel>Cotações de compra</relationshipLabel>
+    <relationshipName>Cota_es_de_compra</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

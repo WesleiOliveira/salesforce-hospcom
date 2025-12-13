@@ -1,0 +1,113 @@
+<apex:page standardController="WorkOrder" renderAs="pdf">
+<html style="margin-top:-26px;">
+
+<head style="margin-top:-45px;">
+
+    <img style="position:absolute;" src="https://hospcom--c.na25.content.force.com/servlet/servlet.FileDownload?file=01531000008Tjd8" width="250" height="100px"/>
+    <h2 style="position:relative; text-align:right;">Nº da O.S &nbsp; <apex:outputText value="{!WorkOrder.WorkOrderNumber}"/></h2>
+    <div id="right" style="font-size:12px; text-align:right; line-height:1px;"><b>Data de Abertura:</b> &nbsp;<apex:outputText value="{0,date,dd/MM/yyyy}"> <apex:param value="{!WorkOrder.StartDate}" /> </apex:outputText> </div>
+    <br/>
+    <div id="right2" style="font-size:12px; text-align:right; line-height:1px;"><b>Data de Fechamento:</b> &nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"> <apex:param value="{!WorkOrder.EndDate}" /> </apex:outputText> </div>
+
+</head>
+
+<body style="font-size:8pt;">
+  <br/>
+    <br/>
+    <div id="tarja1" style="background-color: #ADD8EF; font-weight: bold; line-height:25px; font-size:15px; ">
+    &nbsp; INFORMAÇÕES GERAIS 
+    </div>
+    <br/>
+    <div id="IEAS" style="font-size: 12px">
+    <table>
+    <tr>
+    <td width="90px"><b>Cliente:</b></td> <td>{!WorkOrder.Account.Name}</td>
+    </tr>
+    <tr>
+    <td width="90px"><b>Endereço:</b></td> <td>{!WorkOrder.Endere_o__c}</td>
+    </tr>
+    <tr>
+    <td><b>Contato:</b></td> <td>{!WorkOrder.Contact.Name}</td>
+    </tr>
+    <tr>
+    <td><b>Telefone:</b></td><td>{!WorkOrder.Telefone__c}</td>
+    </tr>
+    <tr>
+    <td><b>E-mail:</b></td><td>{!WorkOrder.E_mail__c}</td>
+    </tr>
+    </table>
+    <br/>
+    </div>
+    
+    <div id="tarja2" style="background-color: #ADD8EF; font-weight: bold; line-height:25px; font-size:15px; ">
+    &nbsp; EQUIPAMENTO 
+    </div>
+    <br/>
+    <div id="IEAS2" style="font-size: 12px; position:absolute; width:350px;">
+    <table>
+    <tr>
+    <td width="90px"><b>&nbsp; Equipamento:</b></td> <td>{!WorkOrder.Asset.Name}</td>
+    </tr>
+    <tr>
+    <td width="90px"><b>&nbsp; Marca:</b></td> <td>{!WorkOrder.Marca__c}</td>
+    </tr>
+    <tr>
+    <td><b>&nbsp; Modelo:</b></td> <td>{!WorkOrder.Modelo__c}</td>
+    </tr>
+    <tr>
+    <td><b>&nbsp; Nº de Série:</b></td><td>{!WorkOrder.Numero_de_Serie__c}</td>
+    </tr>
+    <tr>
+    <td><b>&nbsp; ID/Tag:</b></td><td>{!WorkOrder.Patrimonio_Tag__c}</td>
+    </tr>
+    </table>
+    <br/>
+    </div>
+    <div style="position:absolute; margin-left:360px;font-size: 12px;">
+    <table width="350px">
+    <td width="90px"><b>Itens que Acompanham o Equipamento</b></td><td>{!WorkOrder.Acess_rios_que_Acompanham_o_Equipamento__c}</td>
+    </table>
+    </div>
+    <div id="tarja3" style="margin-top:110px; background-color: #ADD8EF; font-weight: bold; line-height:25px; font-size:15px; ">
+    &nbsp; INFORMAÇÕES SOBRE O SERVIÇO
+    </div>
+    <br/>
+    <div id="IEAS" style="font-size: 12px">
+    <table>
+    <tr>
+    <td><b>Assunto:</b></td> <td width="230px">{!WorkOrder.Subject}</td> <td><b>Tipo de Serviço:</b></td><td>{!WorkOrder.Tipo_de_Servi_o__c}</td>
+    </tr>
+    <tr>
+    <td><b>Técnico Responsável:</b></td><td>{!WorkOrder.T_cnico_Respons_vel__c}</td><td><b>Local de Atendimento:</b></td><td>{!WorkOrder.Local_de_Atendimento__c}</td>
+    </tr>
+    </table>
+    <table>
+    <tr>
+    <td><b>Descrição:</b></td><td>{!WorkOrder.Description}</td>
+    </tr>
+    <br/>
+ 
+    <br/>
+    <br/>
+    </table>
+    </div>
+    
+     <div id="tarja4" style="background-color: #ADD8EF; font-weight: bold; line-height:25px; font-size:15px; ">
+    &nbsp; SERVIÇO 
+    </div>
+    <br/>
+    <div id="IEAS" style="font-size: 12px">
+    <table>
+    <tr>
+    <td width="90px"><b>Higienização Realizada?</b></td><td width="150px" style="border-right: 1px solid black;"></td><td width="90px"><b>Run-in Realizado?</b></td><td width="150px" style="border-right: 1px solid black;"></td><td width="90px"><b>Houve 2º Run-in?</b></td> <td></td>
+    </tr>
+    <td width="90px"><b>Data e Hora da Higienização (I)</b></td><td width="150px" style="border-right: 1px solid black;"></td><td width="90px"><b>Data e Hora do Run-in (I)</b></td><td width="150px" style="border-right: 1px solid black;"></td> <td width="90px"><b>Data e Hora do 2º Run-in (I)</b></td> <td ></td>
+    
+
+    </table>
+    </div>
+</body>
+
+
+</html>
+</apex:page>

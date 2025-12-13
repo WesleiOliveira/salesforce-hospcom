@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>Compartilhar_com_todos</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Compartilhar com todos</label>
+        <sharedTo>
+            <group>Sistema_todos</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>RH</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>RH</label>
+        <sharedTo>
+            <group>Recursos_Humanos</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

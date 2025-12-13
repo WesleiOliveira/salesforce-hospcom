@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MktDataConnection xmlns="http://soap.sforce.com/2006/04/metadata">
+    <connectionMethod>Ingress</connectionMethod>
+    <connectionStatus>ACTIVE</connectionStatus>
+    <connectorName>SAPHana</connectorName>
+    <credentials>
+        <fullName>SAP_PRINCIPAL_Password</fullName>
+        <credentialName>Password</credentialName>
+        <value>*</value>
+    </credentials>
+    <credentials>
+        <fullName>SAP_PRINCIPAL_SSLServerCert</fullName>
+        <credentialName>SSLServerCert</credentialName>
+        <value>*</value>
+    </credentials>
+    <credentials>
+        <fullName>SAP_PRINCIPAL_User</fullName>
+        <credentialName>User</credentialName>
+        <value>*</value>
+    </credentials>
+    <externalRecordIdentifier>3e348ce0-6508-4dbb-b85b-b29b58fd2234</externalRecordIdentifier>
+    <masterLabel>SAP PRINCIPAL</masterLabel>
+    <parameters>
+        <fullName>SAP_PRINCIPAL_connection_url</fullName>
+        <paramName>connection_url</paramName>
+        <value>sap-xsengine-hospcomprd.skyinone.net</value>
+    </parameters>
+    <parameters>
+        <fullName>SAP_PRINCIPAL_Database</fullName>
+        <paramName>Database</paramName>
+        <value>SK1</value>
+    </parameters>
+    <parameters>
+        <fullName>SAP_PRINCIPAL_Port</fullName>
+        <paramName>Port</paramName>
+        <value>30015</value>
+    </parameters>
+</MktDataConnection>

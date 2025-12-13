@@ -1,0 +1,164 @@
+<aura:component controller="solicitacaoCadastroProduto" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <ltng:require
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery)}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    <aura:attribute name="valInputShare" type="String" />
+    <aura:attribute name="valInputContratoRelacionado" type="String" />
+    
+    <div>
+        <!-- SPINNER DE CARREGAMENTO -->
+        <div id='spinnerDiv' style="display: none">
+            <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+        </div>
+        
+        
+        <div id='boxMasterOts' style="z-index: 100; align-items: center; top: 0; display: flex; flex-direction: column; left: calc(-50vw + 50%); justify-content: center">
+            <div class='boxCriaOts'>
+                
+                <div class="headerCompartilhaQuadro">
+                    <div class="compartilhaQuadroText" id="compartilhaQuadroText">Solicitação de cadastro de produtos para uso e consumo</div>
+                </div>
+                
+                <label for="fname">Nome</label>
+                <input class='criaCustomSelect' type="text" id="nome"/>
+                
+                <label for="fname">Descrição</label>
+                <textarea style='min-height: 150px' class='criaCustomSelect' rows="4" id="descricao" placeholder='Digite a descrição detalhada do produto'>
+                </textarea>
+                
+                <label for="fname">Modelo</label>
+                <input class='criaCustomSelect' type="text" id="modelo"/>
+                
+                <div class='classColumn'>
+                    <select class='criaCustomSelect' id='unidadeMedida'>
+                        <option value="default" selected="selected" disabled="disabled">Unidade de medida</option>
+                        <option value="AMPOLA">AMPOLA</option>
+                        <option value="BALDE">BALDE</option>
+                        <option value="BANDEJ">BANDEJ</option>
+                        <option value="BARRA">BARRA</option>
+                        <option value="BISNAG">BISNAG</option>
+                        <option value="BLOCO">BLOCO</option>
+                        <option value="BOBINA">BOBINA</option>
+                        <option value="BOMB">BOMB</option>
+                        <option value="CAPS">CAPS</option>
+                        <option value="CART">CART</option>
+                        <option value="CENTO">CENTO</option>
+                        <option value="CJ">CJ</option>
+                        <option value="CM">CM</option>
+                        <option value="CM2">CM2</option>
+                        <option value="CX">CX</option>
+                        <option value="CX2">CX2</option>
+                        <option value="CX3">CX3</option>
+                        <option value="CX5">CX5</option>
+                        <option value="CX10">CX10</option>
+                        <option value="CX15">CX15</option>
+                        <option value="CX20">CX20</option>
+                        <option value="CX25">CX25</option>
+                        <option value="CX50">CX50</option>
+                        <option value="CX100">CX100</option>
+                        <option value="DISP">DISP</option>
+                        <option value="DUZIA">DUZIA</option>
+                        <option value="EMBAL">EMBAL</option>
+                        <option value="FARDO">FARDO</option>
+                        <option value="FOLHA">FOLHA</option>
+                        <option value="FRASCO">FRASCO</option>
+                        <option value="GALAO">GALAO</option>
+                        <option value="GF">GF</option>
+                        <option value="GRAMAS">GRAMAS</option>
+                        <option value="JOGO">JOGO</option>
+                        <option value="KG">KG</option>
+                        <option value="KIT">KIT</option>
+                        <option value="LATA">LATA</option>
+                        <option value="LITRO">LITRO</option>
+                        <option value="M">M</option>
+                        <option value="M2">M2</option>
+                        <option value="M3">M3</option>
+                        <option value="MILHEI">MILHEI</option>
+                        <option value="ML">ML</option>
+                        <option value="MWH">MWH</option>
+                        <option value="PACOTE">PACOTE</option>
+                        <option value="PALETE">PALETE</option>
+                        <option value="PARES">PARES</option>
+                        <option value="PC">PC</option>
+                        <option value="POTE">POTE</option>
+                        <option value="K">K</option>
+                        <option value="RESMA">RESMA</option>
+                        <option value="ROLO">ROLO</option>
+                        <option value="SACO">SACO</option>
+                        <option value="SACOLA">SACOLA</option>
+                        <option value="TAMBOR">TAMBOR</option>
+                        <option value="TANQUE">TANQUE</option>
+                        <option value="TON">TON</option>
+                        <option value="TUBO">TUBO</option>
+                        <option value="UNID">UNID</option>
+                        <option value="VASIL">VASIL</option>
+                        <option value="VIDRO">VIDRO</option>
+                    </select>
+                    
+                    <select class='criaCustomSelect' id='categoriaCompra'>
+                        <option value="default" selected="selected" disabled="disabled">Categoria de compra</option>
+                        <option value="MATERIAL LIMPEZA">MATERIAL LIMPEZA</option>
+                        <option value="MATERIAL ESCRITÓRIO">MATERIAL ESCRITÓRIO</option>
+                        <option value="MATERIAL DE COPA">MATERIAL DE COPA</option>
+                        <option value="MATERIAL DE INFORMÁTICA">MATERIAL DE INFORMÁTICA</option>
+                        <option value="MATERIAL DE COMUNICAÇÃO">MATERIAL DE COMUNICAÇÃO</option>
+                        <option value="EMBALAGEM">EMBALAGEM</option>
+                        <option value="MATERIAL ELÉTRICO">MATERIAL ELÉTRICO</option>
+                        <option value="MATERIAL ELETRÔNICO">MATERIAL ELETRÔNICO</option>
+                        <option value="CONSTRUÇÃO CIVIL">CONSTRUÇÃO CIVIL</option>
+                        <option value="COMBUSTIVEL E LUBRIFICANTES">COMBUSTIVEL E LUBRIFICANTES</option>
+                        <option value="ALIMENTAÇÃO">ALIMENTAÇÃO</option>
+                        <option value="FERRAMENTAS ELÉTRICA">FERRAMENTAS ELÉTRICA</option>
+                        <option value="FERRAMENTAS MANUAL">FERRAMENTAS MANUAL</option>
+                        <option value="EQUIPAMENTOS">EQUIPAMENTOS</option>
+                        <option value="VEÍCULOS">VEÍCULOS</option>
+                        <option value="IMPRESSOS">IMPRESSOS</option>
+                        <option value="PNEU E CAMERAS">PNEU E CAMERAS</option>
+                        <option value="TECIDOS">TECIDOS</option>
+                        <option value="REFRIGERAÇÃO">REFRIGERAÇÃO</option>
+                        <option value="VIDRAÇARIA">VIDRAÇARIA</option>
+                        <option value="CHAVES E CADEADOS">CHAVES E CADEADOS</option>
+                        <option value="MOVÉIS">MOVÉIS</option>
+                        <option value="ELETRODOMÉSTICOS">ELETRODOMÉSTICOS</option>
+                        <option value="MEDICAMENTOS">MEDICAMENTOS</option>
+                        <option value="EPIS">EPIS</option>
+                        <option value="UNIFORME">UNIFORME</option>
+                        <option value="LOCAÇÃO DE IMOVEIS">LOCAÇÃO DE IMOVEIS</option>
+                        <option value="LIMPEZA E CONSERVAÇÃO">LIMPEZA E CONSERVAÇÃO</option>
+                        <option value="VIGILÂNCIA PATRIMONIAL">VIGILÂNCIA PATRIMONIAL</option>
+                        <option value="CONSULTORIA E ASSESSORIAS">CONSULTORIA E ASSESSORIAS</option>
+                        <option value="LOCAÇÃO DE VEÍCULOS">LOCAÇÃO DE VEÍCULOS</option>
+                        <option value="LOCAÇÃO DE MÁQUINAS E EQUIPAMENTOS">LOCAÇÃO DE MÁQUINAS E EQUIPAMENTOS</option>
+                        <option value="HOSPEDAGEM">HOSPEDAGEM</option>
+                        <option value="PEDÁGIOS">PEDÁGIOS</option>
+                        <option value="IMPRESSÃO E CÓPIAS">IMPRESSÃO E CÓPIAS</option>
+                        <option value="CORREIOS E TELEGRÁFOS">CORREIOS E TELEGRÁFOS</option>
+                        <option value="CURSOS E TREINAMENTOS">CURSOS E TREINAMENTOS</option>
+                        <option value="MARKETING">MARKETING</option>
+                        <option value="CONFRATERNIZAÇÃO E EVENTOS">CONFRATERNIZAÇÃO E EVENTOS</option>
+                        <option value="ASSINATURAS JORNAIS, LIVROS E REVISTAS">ASSINATURAS JORNAIS, LIVROS E REVISTAS</option>
+                        <option value="LAZER E ESPORTES">LAZER E ESPORTES</option>
+                        <option value="MANUTENÇÃO PREDIAL">MANUTENÇÃO PREDIAL</option>
+                        <option value="MANUTENÇÃO E MÁQUINAS E EQUIPAMENTOS">MANUTENÇÃO E MÁQUINAS E EQUIPAMENTOS</option>
+                        <option value="SERVIÇOS DE PJ">SERVIÇOS DE PJ</option>
+                        <option value="SEGUROS EM GERAL">SEGUROS EM GERAL</option>
+                        <option value="DEDETIZAÇÃO, DESRATIZAÇÃO E DESCUPINIZAÇÃO">DEDETIZAÇÃO, DESRATIZAÇÃO E DESCUPINIZAÇÃO</option>
+                        <option value="FRETES E CARRETOS">FRETES E CARRETOS</option>
+                    </select>
+                </div>
+                
+                <div class='divButton'>
+                    <button id="solicitaCadastro" onClick="teste" class="buttonCriar slds-button slds-button--brand slds-path__mark-complete stepAction current uiButton">
+                        Solicitar
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+    
+</aura:component>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cadastro_de_Reserva</fullName>
+    <columns>NAME</columns>
+    <columns>Nome_do_candidato__c</columns>
+    <columns>Vaga_Dispon_vel__c</columns>
+    <columns>Cargo__c</columns>
+    <columns>Forma_o_Acad_mica__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Status__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Cadastro de Reserva</value>
+    </filters>
+    <label>Cadastro de Reserva</label>
+</ListView>

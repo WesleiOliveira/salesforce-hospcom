@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>60.0</apiVersion>
+    <decisions>
+        <name>Aprovado</name>
+        <label>Aprovado</label>
+        <locationX>440</locationX>
+        <locationY>1331</locationY>
+        <defaultConnector>
+            <targetReference>Ativo</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Inicio_Aprovado</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Aprovado</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Aprovado</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Inicio_Aprovado_Atualiza</targetReference>
+            </connector>
+            <label>Inicio Aprovado</label>
+        </rules>
+        <rules>
+            <name>Final_Aprovado</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Aprovado</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Aprovado</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Final_Aprovado_Atualiza</targetReference>
+            </connector>
+            <label>Final Aprovado</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Ativo</name>
+        <label>Ativo</label>
+        <locationX>440</locationX>
+        <locationY>1631</locationY>
+        <defaultConnector>
+            <targetReference>Em_Andamento</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>InicioAtivo</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Ativo</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>C_pia_1_de_Inicio_Ag_Aprov_Loca_o_atualiza</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>Inicio Ativo</label>
+        </rules>
+        <rules>
+            <name>Final_Ativo</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Ativo</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Ativo</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>C_pia_2_de_Inicio_Ativo_atualiza</targetReference>
+            </connector>
+            <label>Final Ativo</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Comercial</name>
+        <label>Comercial</label>
+        <locationX>440</locationX>
+        <locationY>731</locationY>
+        <defaultConnector>
+            <targetReference>Loca_o</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>C_pia_2_de_Inicio_Aguardando_Aprova_o_Comercial</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Aguardando Aprovação Comercial</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Aguardando Aprovação Comercial</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>C_pia_2_de_Inicio_Ag_aprov_Comercial_atualiza</targetReference>
+            </connector>
+            <label>Inicio Aguardando Aprovação Comercial</label>
+        </rules>
+        <rules>
+            <name>C_pia_2_de_Final_Aguardando_Aprova_o_Financeira</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Aguardando Aprovação Comercial</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Aguardando Aprovação Comercial</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Final_ag_aprov_Comercial_atualiza</targetReference>
+            </connector>
+            <label>Cópia 2 de Final Aguardando Aprovação Financeira</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>deci_o</name>
+        <label>decição</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <defaultConnector>
+            <targetReference>Decis_o_1</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>teste</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Id</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>8016e000007c2iAAAQ</stringValue>
+                </rightValue>
+            </conditions>
+            <label>é teste</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Decis_o_1</name>
+        <label>Financeiro</label>
+        <locationX>440</locationX>
+        <locationY>431</locationY>
+        <defaultConnector>
+            <targetReference>Comercial</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Inicio_Aguardando_Aprova_o_Financeira</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Aguardando Aprovação Financeira</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Aguardando Aprovação Financeira</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Inicio_Ag_aprov_financeiara_atualiza</targetReference>
+            </connector>
+            <label>Inicio Aguardando Aprovação Financeira</label>
+        </rules>
+        <rules>
+            <name>Final_Aguardando_Aprova_o_Financeira</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Aguardando Aprovação Financeira</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Aguardando Aprovação Financeira</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Final_ag_aprov_financeira_atualiza</targetReference>
+            </connector>
+            <label>Final Aguardando Aprovação Financeira</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Em_Andamento</name>
+        <label>Em Andamento</label>
+        <locationX>440</locationX>
+        <locationY>1931</locationY>
+        <defaultConnector>
+            <targetReference>Entregue_Total</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Inicio_em_Andamento</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Em Andamento</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Em Andamento</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Inicio_em_Andamento_Atualiza</targetReference>
+            </connector>
+            <label>Inicio em Andamento</label>
+        </rules>
+        <rules>
+            <name>Final_Em_Andamento</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Em Andamento</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Em Andamento</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Final_em_Andamento_Atualiza</targetReference>
+            </connector>
+            <label>Final Em Andamento</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Entregue_Parcial</name>
+        <label>Entregue Parcial</label>
+        <locationX>440</locationX>
+        <locationY>2531</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Inicio_entregue_parcial</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Entregue Parcial</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Entregue Parcial</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Inicio_Entregue_parcial_Atualiza</targetReference>
+            </connector>
+            <label>Inicio entregue parcial</label>
+        </rules>
+        <rules>
+            <name>Final_em_Entregue_Parcial</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Entregue Parcial</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Entregue Parcial</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>FInal_Entregue_parcial_Atualiza</targetReference>
+            </connector>
+            <label>Final em Entregue Parcial</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Entregue_Total</name>
+        <label>Entregue Total</label>
+        <locationX>440</locationX>
+        <locationY>2231</locationY>
+        <defaultConnector>
+            <targetReference>Entregue_Parcial</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Inicio_em_Entregue_Total</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Entregue Total</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Entregue Total</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>FInal_Entregue_Percial_Atualiza</targetReference>
+            </connector>
+            <label>Inicio em Entregue Total</label>
+        </rules>
+        <rules>
+            <name>Final_em_Entregue_Total</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Entregue Total</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Entregue Total</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Final_Entregue_Total_Atualiza</targetReference>
+            </connector>
+            <label>Final em Entregue Total</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Loca_o</name>
+        <label>Locação</label>
+        <locationX>440</locationX>
+        <locationY>1031</locationY>
+        <defaultConnector>
+            <targetReference>Aprovado</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Aguardando_Aprova_o_Loca_o</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Aguardando Aprovação Locação</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Aguardando Aprovação Locação</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Inicio_Ag_Aprov_Loca_o_atualiza</targetReference>
+            </connector>
+            <label>Inicio Ag Aprov Locação</label>
+        </rules>
+        <rules>
+            <name>Final_Aguardando_Aprova_o_locacao</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record__Prior.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Aguardando Aprovação Locação</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Status</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue>Aguardando Aprovação Locação</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>C_pia_2_de_Inicio_Ag_Aprov_Loca_o_atualiza</targetReference>
+            </connector>
+            <label>Final Aguardando Aprovação Locação</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>NOW</name>
+        <dataType>DateTime</dataType>
+        <expression>NOW()</expression>
+    </formulas>
+    <interviewLabel>Pedido — Tempo por Status (Novo) {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Pedido — Tempo por Status (Novo)</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>C_pia_1_de_Inicio_Ag_Aprov_Loca_o_atualiza</name>
+        <label>Inicio Ativo atualiza</label>
+        <locationX>176</locationX>
+        <locationY>1739</locationY>
+        <connector>
+            <targetReference>Em_Andamento</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Inicio_Ativo__c</field>
+            <value>
+                <elementReference>NOW</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>C_pia_2_de_Inicio_Ag_aprov_Comercial_atualiza</name>
+        <label>Inicio Ag aprov Comercial atualiza</label>
+        <locationX>176</locationX>
+        <locationY>839</locationY>
+        <connector>
+            <targetReference>Loca_o</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>InicioAgAprovComercial__c</field>
+            <value>
+                <elementReference>NOW</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>C_pia_2_de_Inicio_Ag_Aprov_Loca_o_atualiza</name>
+        <label>Final Ag Aprov Locação atualiza</label>
+        <locationX>440</locationX>
+        <locationY>1139</locationY>
+        <connector>
+            <targetReference>Aprovado</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>n_cio_Ag_Aprov_Locacao__c</field>
+            <value>
+                <elementReference>NOW</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>C_pia_2_de_Inicio_Ativo_atualiza</name>
+        <label>Final Ativo atualiza</label>
+        <locationX>440</locationX>
+        <locationY>1739</locationY>
+        <connector>
+            <targetReference>Em_Andamento</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Final_Ativo__c</field>
+            <value>
+                <elementReference>NOW</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Final_ag_aprov_Comercial_atualiza</name>
+        <label>Final ag aprov financeira atualiza</label>
+        <locationX>440</locationX>
+        <locationY>839</locationY>
+        <connector>
+            <targetReference>Loca_o</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>FinalAgAprovComercial__c</field>
+            <value>
+                <elementReference>NOW</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Final_ag_aprov_financeira_atualiza</name>
+        <label>Final ag aprov financeira atualiza</label>
+        <locationX>440</locationX>
+        <locationY>539</locationY>
+        <connector>
+            <targetReference>Comercial</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>FinalAgAprovFinanceira__c</field>
+            <value>
+                <elementReference>NOW</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Final_Aprovado_Atualiza</name>
+        <label>Final Aprovado Atualiza</label>
+        <locationX>440</locationX>
+        <locationY>1439</locationY>
+        <connector>
+            <targetReference>Ativo</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Final_Aprovado__c</field>
+            <value>
+                <elementReference>NOW</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Final_em_Andamento_Atualiza</name>
+        <label>Final em Andamento Atualiza</label>
+        <locationX>440</locationX>
+        <locationY>2039</locationY>
+        <connector>
+            <targetReference>Entregue_Total</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Final_Em_Andamento__c</field>
+            <value>
+                <elementReference>NOW</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>FInal_Entregue_parcial_Atualiza</name>
+        <label>Final Entregue Total Atualiza</label>
+        <locationX>440</locationX>
+        <locationY>2639</locationY>
+        <inputAssignments>
+            <field>Final_At_Ent_Parcial__c</field>
+            <value>
+                <elementReference>NOW</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>FInal_Entregue_Percial_Atualiza</name>
+        <label>Final Entregue Percial Atualiza</label>
+        <locationX>176</locationX>
+        <locationY>2339</locationY>
+        <connector>
+            <targetReference>Entregue_Parcial</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Final_At_Ent_Parcial__c</field>
+            <value>
+                <elementReference>NOW</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Final_Entregue_Total_Atualiza</name>
+        <label>Final Entregue Total Atualiza</label>
+        <locationX>440</locationX>
+        <locationY>2339</locationY>
+        <connector>
+            <targetReference>Entregue_Parcial</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Final_Em_Andamento__c</field>
+            <value>
+                <elementReference>NOW</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Inicio_Ag_aprov_financeiara_atualiza</name>
+        <label>Inicio Ag aprov financeiara atualiza</label>
+        <locationX>176</locationX>
+        <locationY>539</locationY>
+        <connector>
+            <targetReference>Comercial</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>InicioAgAprovFinanceira__c</field>
+            <value>
+                <elementReference>NOW</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Inicio_Ag_Aprov_Loca_o_atualiza</name>
+        <label>Inicio Ag Aprov Locação atualiza</label>
+        <locationX>176</locationX>
+        <locationY>1139</locationY>
+        <connector>
+            <targetReference>Aprovado</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>In_cio_Ag_Aprov_Locacao__c</field>
+            <value>
+                <elementReference>NOW</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Inicio_Aprovado_Atualiza</name>
+        <label>Inicio Aprovado Atualiza</label>
+        <locationX>176</locationX>
+        <locationY>1439</locationY>
+        <connector>
+            <targetReference>Ativo</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Inicio_Aprovado__c</field>
+            <value>
+                <elementReference>NOW</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Inicio_em_Andamento_Atualiza</name>
+        <label>Inicio em Andamento Atualiza</label>
+        <locationX>176</locationX>
+        <locationY>2039</locationY>
+        <connector>
+            <targetReference>Entregue_Total</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Inicio_Em_Andamento__c</field>
+            <value>
+                <elementReference>NOW</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Inicio_Entregue_parcial_Atualiza</name>
+        <label>Inicio Entregue Total Atualiza</label>
+        <locationX>176</locationX>
+        <locationY>2639</locationY>
+        <inputAssignments>
+            <field>Inicio_At_Ent_Parcial__c</field>
+            <value>
+                <elementReference>NOW</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>deci_o</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Status</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>Order</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

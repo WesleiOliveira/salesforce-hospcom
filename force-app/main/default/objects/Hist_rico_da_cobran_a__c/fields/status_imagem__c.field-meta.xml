@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>status_imagem__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    ISBLANK(Data_do_pr_ximo_contato__c),
+    IMAGE(&quot;https://hospcom.file.force.com/servlet/servlet.ImageServer?id=01531000008stX6&amp;oid=00Di0000000JVhH&amp;lastMod=1502729868000&quot;, &quot;Sem Data&quot;, 40, 40),
+    IF(
+        Data_do_pr_ximo_contato__c &lt; TODAY(),
+        IMAGE(&quot;https://hospcom.file.force.com/servlet/servlet.ImageServer?id=01531000008stOs&amp;oid=00Di0000000JVhH&amp;lastMod=1502730159000&quot;, &quot;Data Passada&quot;, 40, 40),
+        IMAGE(&quot;https://hospcom.file.force.com/servlet/servlet.ImageServer?id=01531000008stS6&amp;oid=00Di0000000JVhH&amp;lastMod=1502730193000&quot;, &quot;Data Futura&quot;, 40, 40)
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Data Prevista</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

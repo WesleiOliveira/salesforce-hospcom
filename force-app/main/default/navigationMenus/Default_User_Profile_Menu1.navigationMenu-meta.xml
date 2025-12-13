@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NavigationMenu xmlns="http://soap.sforce.com/2006/04/metadata">
+    <container>HospcomB2B</container>
+    <containerType>Network</containerType>
+    <label>Default User Profile Menu</label>
+    <navigationMenuItem>
+        <label>Sobre</label>
+        <position>1</position>
+        <publiclyAvailable>true</publiclyAvailable>
+        <target>/sobre</target>
+        <type>InternalLink</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <label>Categorias de vitrine</label>
+        <position>2</position>
+        <publiclyAvailable>true</publiclyAvailable>
+        <target>StorefrontCategories</target>
+        <type>DataSourceDriven</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <label>Fale conosco</label>
+        <position>3</position>
+        <publiclyAvailable>true</publiclyAvailable>
+        <target>/contato</target>
+        <type>InternalLink</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <label>University</label>
+        <position>4</position>
+        <publiclyAvailable>true</publiclyAvailable>
+        <target>https://hospcom.net/university/</target>
+        <type>ExternalLink</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <label>Acesso Restrito</label>
+        <position>5</position>
+        <publiclyAvailable>true</publiclyAvailable>
+        <target>https://hospcomhospitalar.force.com/Sales/CommunityLogin</target>
+        <type>ExternalLink</type>
+    </navigationMenuItem>
+</NavigationMenu>

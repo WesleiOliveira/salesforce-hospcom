@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HOSPCOM_GO_Av_OESTE</fullName>
+    <active>true</active>
+    <label>HOSPCOM - GO(Av. OESTE)</label>
+    <picklistValues>
+        <picklist>Reserva_recorrente__c</picklist>
+        <values>
+            <fullName>Mensal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Não Recorrente</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Quinzenal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Semanal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Sala__c</picklist>
+        <values>
+            <fullName>Administrativo - Oeste</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auditório</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sala de Reunião</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sala de Reunião 1 - Oeste</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sala de Reunião 2 - Oeste</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sala de Reunião 3 - Oeste</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sala de Vídeo Conferência 1 - Oeste</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sala de Vídeo Conferência 2 - Oeste</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Em curso</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Finalizado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Novo</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pontuacao__c</fullName>
+    <externalId>false</externalId>
+    <formula>VALUE(TEXT(AIVD_geral__c)) + VALUE(TEXT(AVDs_geral__c)) +  VALUE(TEXT(Incapacidade_geral__c)) + VALUE(TEXT(Incontinencia_geral__c)) +  VALUE(TEXT(Presenca_de_ulcera_geral__c)) + VALUE(TEXT(Reabilitacao_geral__c)) + VALUE(TEXT(Terapia_Nutricional_geral__c)) +   VALUE(TEXT(Vias_Aereas_Superiores_geral__c)) + VALUE(TEXT( Uso_de_Medicacao_geral__c)) + VALUE(TEXT( Suporte_Respirat_rio_geral__c))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Pontuação</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

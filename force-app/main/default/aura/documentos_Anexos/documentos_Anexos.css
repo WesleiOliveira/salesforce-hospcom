@@ -1,0 +1,59 @@
+.THIS #th_linha, .THIS .td_linha{
+    display: flex;
+    background: #fff;
+    color: #5a5a5a;
+    column-gap: 15px;
+   /* width: fit-content !important;*/
+    padding: 10px;
+    border-top: 1px solid #cecece !important;
+    font-weight: 700;
+    justify-content: space-around;
+}
+
+.THIS .td_linha{
+    font-weight: 500;
+    transition:.5s;
+}
+
+.THIS .td_linha2, .THIS .td_linha3 {
+    padding: 10px;
+    width: 320px;
+   
+    transition:.4s;
+}
+
+.THIS .td_linha2:hover{
+    cursor:pointer;
+    scale:1.1;
+}
+
+.THIS .td_linha:hover{
+    background:#f2f5f7;
+}
+
+.THIS #container_body{
+    width: 98%;
+    border: 1px solid #cecece !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+    margin:auto;
+}
+
+.THIS .cabecalho_anexos{
+    padding: 10px 5px;
+    text-align: center;
+    width: 100%;
+    background: #f3f3f3;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 1px solid #cecece !important;
+}
+
+.THIS .icon, .THIS .icon1{
+    width: 100px;
+    text-align: center;
+}
+
+.THIS .icon:hover{
+    scale:1.2;
+}

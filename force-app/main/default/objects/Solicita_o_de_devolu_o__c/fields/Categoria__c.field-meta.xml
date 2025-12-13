@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Categoria__c</fullName>
+    <externalId>false</externalId>
+    <label>Categoria</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ERRO DE SEPARAÇÃO/ENVIO</fullName>
+                <default>false</default>
+                <label>ERRO DE SEPARAÇÃO/ENVIO</label>
+            </value>
+            <value>
+                <fullName>DEFEITO DE PRODUTO/EQUIPAMENTO</fullName>
+                <default>false</default>
+                <label>DEFEITO DE PRODUTO/EQUIPAMENTO</label>
+            </value>
+            <value>
+                <fullName>ERRO DE CÓDIGO DO PRODUTO ERRADO</fullName>
+                <default>false</default>
+                <label>ERRO DE CÓDIGO DO PRODUTO ERRADO</label>
+            </value>
+            <value>
+                <fullName>PRODUTO VENCIDO OU FORA DO PADRÃO</fullName>
+                <default>false</default>
+                <label>PRODUTO VENCIDO OU FORA DO PADRÃO</label>
+            </value>
+            <value>
+                <fullName>PEDIDO DUPLICADO OU FATURADO INDEVIDAMENTE</fullName>
+                <default>false</default>
+                <label>PEDIDO DUPLICADO OU FATURADO INDEVIDAMENTE</label>
+            </value>
+            <value>
+                <fullName>CANCELAMENTO PELO CLIENTE FINAL</fullName>
+                <default>false</default>
+                <label>CANCELAMENTO PELO CLIENTE FINAL</label>
+            </value>
+            <value>
+                <fullName>PROBLEMAS LOGÍSTICOS EXTERNOS</fullName>
+                <default>false</default>
+                <label>PROBLEMAS LOGÍSTICOS EXTERNOS</label>
+            </value>
+            <value>
+                <fullName>PROBLEMAS DE PAGAMENTO DO CLIENTE</fullName>
+                <default>false</default>
+                <label>PROBLEMAS DE PAGAMENTO DO CLIENTE</label>
+            </value>
+            <value>
+                <fullName>INTERRUPÇÃO CONTRATUAL (HOSPCOM)</fullName>
+                <default>false</default>
+                <label>INTERRUPÇÃO CONTRATUAL (HOSPCOM)</label>
+            </value>
+            <value>
+                <fullName>FATORES DE FORÇA MAIOR</fullName>
+                <default>false</default>
+                <label>FATORES DE FORÇA MAIOR</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

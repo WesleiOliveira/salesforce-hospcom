@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Motricidade_orofacial_Fonoaudiologia__c</fullName>
+    <externalId>false</externalId>
+    <label>Motricidade orofacial</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Dispraxia bucofacial</fullName>
+                <default>false</default>
+                <label>Dispraxia bucofacial</label>
+            </value>
+            <value>
+                <fullName>Paralisia facial central</fullName>
+                <default>false</default>
+                <label>Paralisia facial central</label>
+            </value>
+            <value>
+                <fullName>Paralisia facial periférica</fullName>
+                <default>false</default>
+                <label>Paralisia facial periférica</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

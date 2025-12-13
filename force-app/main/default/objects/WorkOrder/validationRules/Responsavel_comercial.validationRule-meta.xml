@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Responsavel_comercial</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(
+AND(
+ISCHANGED(Respons_vel_pela_negocia_o__c),
+!ISBLANK(Respons_vel_pela_negocia_o__c), 
+$User.Id = &apos;00531000007hyVE&apos;,
+Respons_vel_pela_negocia_o__c != &apos;00531000007hyVE&apos;
+),
+AND(
+ISCHANGED(Respons_vel_pela_negocia_o__c), 
+!ISBLANK(Respons_vel_pela_negocia_o__c), 
+$User.Id = &apos;0056e00000CrS8h&apos;,
+Respons_vel_pela_negocia_o__c != &apos;0056e00000CrS8h&apos;
+)
+)</errorConditionFormula>
+    <errorDisplayField>Respons_vel_pela_negocia_o__c</errorDisplayField>
+    <errorMessage>Só é permitido colocar seu próprio usuário como responsável pela negociação.</errorMessage>
+</ValidationRule>

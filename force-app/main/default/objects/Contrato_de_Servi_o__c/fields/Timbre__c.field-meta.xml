@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Timbre__c</fullName>
+    <externalId>false</externalId>
+    <label>Timbre</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>GDB</fullName>
+                <default>false</default>
+                <label>GDB</label>
+            </value>
+            <value>
+                <fullName>HEALTH SOLUTION</fullName>
+                <default>false</default>
+                <label>HEALTH SOLUTION</label>
+            </value>
+            <value>
+                <fullName>HOSPCOM</fullName>
+                <default>false</default>
+                <label>HOSPCOM</label>
+            </value>
+            <value>
+                <fullName>ABC TO</fullName>
+                <default>false</default>
+                <label>ABC TO</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

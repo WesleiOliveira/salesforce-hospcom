@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IZU_Solicita_es</fullName>
+    <columns>NAME</columns>
+    <columns>Colaborador3__c</columns>
+    <columns>Status__c</columns>
+    <columns>Data_Inicial__c</columns>
+    <columns>Data_Final__c</columns>
+    <columns>Dias_totais__c</columns>
+    <columns>OWNER.FIRST_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Registrada,Rejeitada,Cancelada</value>
+    </filters>
+    <filters>
+        <field>Empresa__c</field>
+        <operation>notContain</operation>
+        <value>HOSPCOM</value>
+    </filters>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Ferias__c.Registro</value>
+    </filters>
+    <label>IZU Solicitações</label>
+</ListView>

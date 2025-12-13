@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <groupingStringEnum>WorkStatusCategory</groupingStringEnum>
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Nova</fullName>
+        <default>true</default>
+        <label>Nova</label>
+        <groupingString>None</groupingString>
+    </standardValue>
+    <standardValue>
+        <fullName>Em andamento</fullName>
+        <default>false</default>
+        <label>Em andamento</label>
+        <groupingString>None</groupingString>
+    </standardValue>
+    <standardValue>
+        <fullName>Concluído</fullName>
+        <default>false</default>
+        <label>Concluído</label>
+        <groupingString>None</groupingString>
+    </standardValue>
+    <standardValue>
+        <fullName>Fechado</fullName>
+        <default>false</default>
+        <label>Fechado</label>
+        <groupingString>Closed</groupingString>
+    </standardValue>
+</StandardValueSet>

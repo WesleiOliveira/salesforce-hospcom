@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>C_pia_de_PROJETO_CO_OPERAR_SOLICITA_O</fullName>
+    <columns>NAME</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Feedback_360__c.Projeto_Co_operar</value>
+    </filters>
+    <filters>
+        <field>Esta_ideia_e_sua__c</field>
+        <operation>equals</operation>
+        <value>Não</value>
+    </filters>
+    <label>PROJETO CO-OPERAR (SOLICITAÇÃO)</label>
+</ListView>

@@ -1,0 +1,111 @@
+<aura:component controller="separacaoItens" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery)}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+
+    
+    <div>
+        
+        <div class='title23423423'>Lançamento simplificado de nota</div>
+        
+        <div class='principalDiv4745839'>
+            
+            <div class='columnUm2347238423'>
+                <div class='tituloColUm'>PEDIDOS AGUARDANDO SEPARAÇÃO</div>
+                <div class='esqBot32482958f' id='blocoPedidos'>
+                    
+
+                </div>
+            </div>
+            
+            
+            <div id='popupSeparacaoLote' class='popupSeparacaoLote'>
+                
+                <div class='headerPopup'>
+                    Quantidade Falta separar:&nbsp;<span id='quantidadeFaltaSeparar'></span>
+                </div>
+                
+                <div class='bodycol435897u49'>
+                    <div class='headerBody3242'>
+                        <div class='itemHeaderTop43849'>Nome</div>
+                        <div class='itemHeaderTop43849'>Cód. Fabr</div>
+                        <div class='itemHeaderTop43849'>End. Estoque</div>
+                        <div class='itemHeaderTop43849'>Qtd. Separada</div>
+                        <div class='itemHeaderTop43849' style='width: calc(20% + 7px)'>N. Lote</div>
+                        <div class='itemHeaderTop43849'>Ação</div>
+                    </div>
+                    
+                    <div class='bodyBody433544' id ='bodySeparacaoLote'>
+                        
+                    </div>
+                    
+                </div>
+                
+                <div style="display: flex; gap: 10px">
+                    <div class='buttonClose' id='buttonClose'>
+                        Fechar
+                    </div>
+                    
+                    <div class='buttonConcluir' id='buttonConcluir'>
+                        Concluir
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class='columnDois2347238423'>
+                <div class='dirTop32482958f'>
+					<div class='headerCol348538'>
+                    	ITENS DO PEDIDO
+                    </div>
+                    
+                    <div class='bodycol435897u49'>
+                        
+                        <div class='headerBody3242'>
+                            <div class='itemHeaderTop43849'>Ação</div>
+                            <div class='itemHeaderTop43849'>Nome</div>
+                            <div class='itemHeaderTop43849'>Cód. Fabr</div>
+                            <div class='itemHeaderTop43849'>End. Estoque</div>
+                            <div class='itemHeaderTop43849'>Quantidade</div>
+                            <div class='itemHeaderTop43849' style='width: calc(20% + 7px)'>N. Série</div>
+                        </div>
+                        
+                        <div class='bodyBody433544' id ='bodyPcs4353'>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="comentáriosPedido">
+                    <textarea class="textAreaComentariosPedido342345423" id="textAreaComent3245" placeholder="Comentários" rows="4" cols="50"></textarea>
+                    <div class="infoText453345">Digite e/ou altere o comentário acima e clique fora da caixa para salvar</div>
+                </div>
+                
+                <div class='optionsConfigEntrada'>
+                    Entrada automática com Scanner
+                    <label class="switch">
+                        <input type="checkbox" checked="true" id="inputSlider1"></input>
+                        <span id="sliderInput1" class="slider round"></span>
+                    </label>
+                </div>
+                
+                <div class='buttonDownloadXML' id='buttonSalvaSeparacao'>
+                    Salvar separação
+                </div>
+            </div>
+            
+            <div>
+            
+            </div>
+            
+        </div>
+    </div>
+    
+</aura:component>

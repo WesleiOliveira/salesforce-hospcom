@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rascunho</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+TEXT(Aditivo_de_Comodato__r.Status__c) != &apos;Rascunho&apos;,
+!$User.Ignorar_erros__c
+)</errorConditionFormula>
+    <errorMessage>O aditivo deve estar em rascunho para adicionar ativos.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>origem_preencher</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+	!$User.Ignorar_erros__c,
+	ISBLANK(Trajeto_de_origem__c),
+	OR(
+		ISBLANK(Cidade_origem__c),
+		TEXT(Estado_origem__c) == &apos;&apos;
+	)
+)</errorConditionFormula>
+    <errorMessage>Preencha o trajeto de origem ou o endereço de origem</errorMessage>
+</ValidationRule>

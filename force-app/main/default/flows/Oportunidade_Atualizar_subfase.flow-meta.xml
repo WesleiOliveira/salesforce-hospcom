@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <decisions>
+        <name>Se_faturada_0_01_100</name>
+        <label>Se % faturada &gt; 0,01 &amp; &lt; 100</label>
+        <locationX>182</locationX>
+        <locationY>311</locationY>
+        <defaultConnector>
+            <targetReference>Se_faturado_100</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Faturada_Parcial</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Faturado__c</leftValueReference>
+                <operator>GreaterThanOrEqualTo</operator>
+                <rightValue>
+                    <numberValue>0.01</numberValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Faturado__c</leftValueReference>
+                <operator>LessThan</operator>
+                <rightValue>
+                    <numberValue>100.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Subfase_Finalizado_Parcial</targetReference>
+            </connector>
+            <label>Faturada Parcial</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Se_faturado_100</name>
+        <label>Se faturado 100%</label>
+        <locationX>182</locationX>
+        <locationY>647</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Faturado_total</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Faturado__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <numberValue>100.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Finalizado_Total</targetReference>
+            </connector>
+            <label>Faturado total</label>
+        </rules>
+    </decisions>
+    <interviewLabel>Oportunidade — Atualizar subfase {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Oportunidade — Atualizar subfase</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Finalizado_Total</name>
+        <label>Subfase Finalizado Total</label>
+        <locationX>50</locationX>
+        <locationY>767</locationY>
+        <inputAssignments>
+            <field>Sub_Fase__c</field>
+            <value>
+                <stringValue>FINALIZADO TOTAL</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Subfase_Finalizado_Parcial</name>
+        <label>Subfase Finalizado Parcial</label>
+        <locationX>50</locationX>
+        <locationY>431</locationY>
+        <connector>
+            <targetReference>Se_faturado_100</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Sub_Fase__c</field>
+            <value>
+                <stringValue>FINALIZADO PARCIAL</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Se_faturada_0_01_100</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>StageName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>WIN</stringValue>
+            </value>
+        </filters>
+        <object>Opportunity</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Draft</status>
+</Flow>

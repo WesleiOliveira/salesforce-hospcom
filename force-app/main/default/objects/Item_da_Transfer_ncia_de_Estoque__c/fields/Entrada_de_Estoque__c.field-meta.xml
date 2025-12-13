@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Entrada_de_Estoque__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Entrada de Estoque</label>
+    <referenceTo>Entrada_de_Estoque__c</referenceTo>
+    <relationshipLabel>Itens da Transferência de Estoque</relationshipLabel>
+    <relationshipName>Itens_da_Transfer_ncia_de_Estoque</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

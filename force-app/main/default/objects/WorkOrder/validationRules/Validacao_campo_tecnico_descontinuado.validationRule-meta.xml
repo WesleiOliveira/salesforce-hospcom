@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validacao_campo_tecnico_descontinuado</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(
+  AND( ISNEW(), NOT( ISBLANK( TEXT(T_cnico_Respons_vel__c) ) ) ),
+  ISCHANGED(T_cnico_Respons_vel__c)
+)</errorConditionFormula>
+    <errorMessage>O campo Técnico Responsável foi descontinuado. Este não pode ser preenchido na criação nem alterado após o registro ser salvo.</errorMessage>
+</ValidationRule>

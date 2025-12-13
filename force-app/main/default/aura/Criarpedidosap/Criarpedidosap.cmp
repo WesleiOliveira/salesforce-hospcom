@@ -1,0 +1,27 @@
+<aura:component controller="integracaoSAP" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <ltng:require
+                  styles="{!join(',', $Resource.fontAwesome + '/css/font-awesome.min.css', $Resource.bootstrap5 + '/css/bootstrap.min.css', $Resource.bootstrapSelect14 + '/docs/docs/dist/css/bootstrap-select.min.css')}"
+                  scripts="{!join(',', $Resource.JQuery, $Resource.popper + '/popper.js', $Resource.bootstrap5 + '/js/bootstrap.min.js', $Resource.bootstrapSelect14 + '/docs/docs/dist/js/bootstrap-select.min.js')}"
+                   />
+
+ <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="statusMessage" type="String"/>
+    <aura:attribute name="mostrarBotao" type="Boolean" default="false"/>
+    <aura:attribute name="isLoading" type="Boolean" default="false" />
+<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <!-- Botão aparece SOMENTE se mostrarBotao == true -->
+    <aura:if isTrue="{!v.isLoading}">
+    <lightning:spinner alternativeText="Carregando..." size="medium" />
+</aura:if>
+    <aura:if isTrue="{!v.mostrarBotao}">
+        <lightning:button 
+            label="Criar pedido e a Nota de Entrada no Sap" 
+            onclick="{!c.handleClick}" 
+            class="btn-enviar"
+            variant="brand"/>
+    </aura:if>
+
+    <p class="mensagem-status">{!v.statusMessage}</p>
+
+
+</aura:component>

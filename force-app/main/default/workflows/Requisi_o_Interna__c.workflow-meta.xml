@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Status_Aguardando_Aprova_o</fullName>
+        <field>Status_da_Requisi_o__c</field>
+        <literalValue>Em aprovação de compra</literalValue>
+        <name>Status Aguardando Aprovação</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Em_cotacao</fullName>
+        <field>Status_da_Requisi_o__c</field>
+        <literalValue>Aguardando compra</literalValue>
+        <name>Status Ag Compra</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Rejeitado</fullName>
+        <field>Status_da_Requisi_o__c</field>
+        <literalValue>REPROVADO</literalValue>
+        <name>Status Rejeitado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_ag_compra</fullName>
+        <field>Status_da_Requisi_o__c</field>
+        <literalValue>Aguardando compra</literalValue>
+        <name>Status ag compra</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+</Workflow>

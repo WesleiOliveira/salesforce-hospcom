@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valida_quantidade_destinada_Vazia</fullName>
+    <active>true</active>
+    <errorConditionFormula>Quantidade_destinada__c == null</errorConditionFormula>
+    <errorMessage>A Quantidade destinada não pode estar vazia</errorMessage>
+</ValidationRule>

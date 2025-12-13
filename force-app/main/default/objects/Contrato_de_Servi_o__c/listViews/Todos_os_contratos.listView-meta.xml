@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Todos_os_contratos</fullName>
+    <columns>N_mero_da_Proposta_Contrato__c</columns>
+    <columns>NAME</columns>
+    <columns>Locat_rio_a__c</columns>
+    <columns>StatusAssinatura__c</columns>
+    <columns>Data_da_fase__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status_do_Contrato__c</field>
+        <operation>notEqual</operation>
+        <value>CANCELADO,PERDIDO</value>
+    </filters>
+    <label>Todos os contratos</label>
+</ListView>

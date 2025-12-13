@@ -1,0 +1,108 @@
+<aura:component extends="c.ApexHelper" controller="checklistDemo" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <ltng:require
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.signaturePad)}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+        
+    <div id="classDivMaster" style="display: none; justify-content: center; align-items: center; position: relative">
+        
+        <!-- SPINNER DE CARREGAMENTO -->
+        <div id='spinnerDiv' style="display: none">
+            <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+        </div>
+        
+        <div class="divButtonSAP">
+            <button  id="buttonDocsDemo" style="width: 100%" class="slds-button slds-button--brand slds-path__mark-complete stepAction current uiButton">
+                CHECKLIST DIGITAL DA DEMO
+            </button>
+        </div>
+        
+        
+        <div id='checkList' class='iframeClass'>
+            
+            <div class='docTitleChecklist' id='docTitleChecklistMain' style='height: 5%'></div>
+            
+            <div style='height: 10%'>
+                <p class='txtBold2342'>INFORMAÇÕES GERAIS</p>
+                <p id='nomeConta'></p><Br></Br>
+            </div>
+            
+            <!-- ITEM CHECKLIST -->
+            <div id='itensChecklist' class='itensChecklist' style='height: 85%'>
+            </div>
+            
+            <div style="display: flex; column-gap: 10px">
+                <button  id="fechaChecklist" style="width: 100%; background-color: red; border: 0px solid" class="slds-button slds-button--brand slds-path__mark-complete stepAction current uiButton">
+                    FECHAR
+                </button>
+                
+                <button  id="finalizaChecklist" style="width: 100%" class="slds-button slds-button--brand slds-path__mark-complete stepAction current uiButton">
+                    ASSINAR
+                </button>
+            </div>
+            
+            <div class='popupAssinaturas' id='popupAssinaturas'>
+                
+                <!-- ASSINATURAS DE ENVIO -->
+                <div class='docTitleChecklist' id='docTitleChecklist' style='height: 10%; width: 100%'>Assinatura de envio</div>
+                
+                <div class="assinaturaContainer" id="assinaturaDiv" style='height: 270px !important;'>
+                    <div style='width: 50% ;    height: 200px !important;'>
+                        <div class="assinaturaDiv" id="assinaturaClienteEnvio">
+                            <canvas id="signature-pad" aura:id="signature-pad" width="600" class="signature-pad" ></canvas>
+                        </div>
+                        <input style='width: 100%; border: 0px solid' placeholder='Digite aqui o nome do responsável do cliente' id='nomeClienteEnvio'></input>
+                        <input style='width: 100%; border: 0px solid' placeholder='Digite aqui o cargo do responsável do cliente' id='cargoClienteEnvio'></input>
+                        <input style='width: 100%; border: 0px solid' placeholder='Digite aqui o cpf do responsável do cliente' id='cpfClienteEnvio'></input>
+
+                    </div>
+                    
+                    <div style='width: 50%;     height: 200px !important;'>
+                        <div class="assinaturaDiv" id="assinaturaHospcomEnvio">
+                            <canvas id="signature-pad2" aura:id="signature-pad2" width="600" class="signature-pad" ></canvas>
+                        </div>
+                        <input style='width: 100%; border: 0px solid;' placeholder='Digite aqui o nome do responsável Hospcom' id='nomeHospcomEnvio'></input>
+                    </div>
+                </div>
+                
+                
+                <!-- ASSINATURAS DE RETORNO -->
+                <div class='docTitleChecklist' id='divTituloAssRetorno' style='height: 10%; width: 100%'>Assinatura de Retorno</div>
+                
+                <div class="assinaturaContainer" id="divAssinaturaRetorno">
+                    
+                    <div style='width: 50%'>
+                        <div class="assinaturaDiv" id="assinaturaClienteRetorno">
+                            <canvas id="signature-pad3" aura:id="signature-pad3" width="600" class="signature-pad" ></canvas>
+                        </div>
+                        <input style='width: 100%; border: 0px solid; height: 20%' placeholder='Digite aqui o nome do responsável do cliente' id='nomeClienteRetorno'></input>
+                        <input style='width: 100%; border: 0px solid' placeholder='Digite aqui o cargo do responsável do cliente' id='cargoClienteEnvio'></input>
+                        <input style='width: 100%; border: 0px solid' placeholder='Digite aqui o cpf do responsável do cliente' id='cpfClienteEnvio'></input>
+                    </div>
+                    
+                    <div style='width: 50%'>
+                        <div class="assinaturaDiv" id="assinaturaHospcomRetorno">
+                            <canvas id="signature-pad4" aura:id="signature-pad4" width="600" class="signature-pad" ></canvas>
+                        </div>
+                        <input style='width: 100%; border: 0px solid;height: 20%' placeholder='Digite aqui o nome do responsável Hospcom' id='nomeHospcomRetorno'></input>
+                    </div>
+                </div>
+                
+                <div style="width: 100%; height: 10%; margin-top: 10px">
+                    <button  id="buttonLimpaEnvio" style="width: 25%; height: 100%; border: 0px solid" class="slds-button slds-button--brand slds-path__mark-complete stepAction current uiButton">LIMPAR ENVIO</button>
+                    <button  id="buttonLimpaRetorno" style="width: 25%; height: 100%; border: 0px solid" class="slds-button slds-button--brand slds-path__mark-complete stepAction current uiButton">LIMPAR RETORNO</button>
+                    <button  id="buttonCancelaAssinaturas" style="width: 25%; height: 100%; background-color: red; border: 0px solid" class="slds-button slds-button--brand slds-path__mark-complete stepAction current uiButton">FECHAR</button>
+                    <button  id="buttonFinalizaAssinaturas" style="width: 23%; height: 100%; background-color: green; border: 0px solid" class="slds-button slds-button--brand slds-path__mark-complete stepAction current uiButton">FINALIZAR</button>
+                </div>
+                
+                
+            </div>
+            
+            
+        </div>
+        
+    </div>
+    
+</aura:component>

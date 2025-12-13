@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>Compartilhar_com_murilo</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Compartilhar com murilo</label>
+        <sharedTo>
+            <group>Qualidade</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Gerentes</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Gerentes</label>
+        <sharedTo>
+            <group>Gerentes</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Supervisora_Comercial</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Supervisora Comercial</label>
+        <sharedTo>
+            <group>Usu_rio_Karlla</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

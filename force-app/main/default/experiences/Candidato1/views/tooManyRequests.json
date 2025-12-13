@@ -1,0 +1,61 @@
+{
+  "appPageId" : "f3b15820-caac-4d7d-82ff-12c7be5ac1fe",
+  "componentName" : "community_layout:sldsFlexibleLayout",
+  "dataProviders" : [ ],
+  "id" : "1d359699-25c8-4d62-a58d-558dcc18f026",
+  "label" : "Too Many Requests",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "backgroundImageConfig" : "",
+        "backgroundImageOverlay" : "rgba(0,0,0,0)",
+        "componentSpacerSize" : "",
+        "layoutDirectionDesktop" : "row",
+        "layoutDirectionMobile" : "column",
+        "layoutDirectionTablet" : "column",
+        "maxContentWidth" : "",
+        "sectionColumnGutterWidth" : "",
+        "sectionConfig" : "{\"UUID\":\"c5173c2b-ba18-4d6f-b012-e3e0c23f7ebc\",\"columns\":[{\"UUID\":\"907e23c3-6a6f-427d-94c2-954bed561411\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}",
+        "sectionMinHeight" : "",
+        "sectionVerticalAlign" : "flex-start"
+      },
+      "componentName" : "community_layout:section",
+      "id" : "c5173c2b-ba18-4d6f-b012-e3e0c23f7ebc",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "imageInfos" : "",
+            "richTextValue" : "<div style=\"display: flex; align-items: center; flex-direction: column; margin: 60px 25px 30px 25px;\">\n\t<div style=\"background-image: url(assets/img/tooManyRequests.svg) !important; background-size: contain; height: 350px; width: 100%; background-repeat: no-repeat; background-position: center;\"></div>\n</div>\n<div style=\"margin: 0 25px; text-align: center;\">\n\t<h1 class=\"slds-text-heading_large\">Looks like the site is experiencing higher than usual demand&#8230;</h1>\n\t<p class=\"slds-text-heading_small\">Don't go anywhere. We'll redirect you in a moment.</p>\n</div>"
+          },
+          "componentName" : "community_builder:htmlEditor",
+          "id" : "a106c977-0596-40b0-9233-62d27245127e",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        }, {
+          "componentAttributes" : { },
+          "componentName" : "experience_availability:autoRefresh",
+          "id" : "e7a0e8a2-0fbe-4961-b7e4-ac370f691f96",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "907e23c3-6a6f-427d-94c2-954bed561411",
+        "regionLabel" : "Coluna 1",
+        "regionName" : "col1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "scopedBrandingSetId" : null,
+      "type" : "component"
+    } ],
+    "id" : "33bfde40-c597-4a83-8002-d8b9d8a0bc80",
+    "regionName" : "content",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "ServiceNotAvailable",
+  "type" : "view",
+  "viewType" : "too-many-requests"
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Capacidade__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>Qual a lotação do veículo até então?</inlineHelpText>
+    <label>Capacidade</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Lotação mínima</fullName>
+                <default>false</default>
+                <label>Lotação mínima</label>
+            </value>
+            <value>
+                <fullName>Lotação média</fullName>
+                <default>false</default>
+                <label>Lotação média</label>
+            </value>
+            <value>
+                <fullName>Lotação máxima</fullName>
+                <default>false</default>
+                <label>Lotação máxima</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

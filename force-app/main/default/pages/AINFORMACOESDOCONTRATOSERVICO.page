@@ -1,0 +1,61 @@
+<apex:page standardController="Case" showChat="false" showHeader="false">
+<apex:outputPanel id="teste" rendered="{!IF(Case.O_Cliente_possui_Contrato__c='SIM',TRUE,FALSE)}">
+
+
+<b>Itens inclusos no Contrato de Serviço</b>
+<br/>
+<br/>
+<table>
+<tr>
+
+<td>
+<b style="color:#4169E1 ;"> Peças:&nbsp; </b>
+</td>
+
+<td>
+<apex:outputField value="{!Case.ContratodeServico__r.Pe_as__c}" />
+</td>
+<td width="30px"></td>
+<td>
+<b style="color:#4169E1 ;">Acessórios:&nbsp;</b>
+</td>
+
+<td>
+<apex:outputField value="{!Case.ContratodeServico__r.Acess_rios__c}" />
+</td>
+<td width="30px"></td>
+<td>
+<b style="color:#4169E1 ;">Mão de Obra:&nbsp;</b>
+</td>
+<td>
+<apex:outputField value="{!Case.ContratodeServico__r.M_o_de_Obra__c}" />
+</td>
+<td width="30px"></td>
+<td>
+<b style="color:#4169E1 ;">Calibração:&nbsp;</b>
+</td>
+<td>
+<apex:outputField value="{!Case.ContratodeServico__r.Calibra_o__c}" />
+</td>
+<td width="30px"></td>
+<td>
+<b style="color:#4169E1 ;">Qualificação:&nbsp;</b>
+</td>
+<td>
+<apex:outputField value="{!Case.ContratodeServico__r.Qualifica_o__c}" />
+</td>
+<td width="30px"></td>
+<td>
+<b style="color:#4169E1 ;">Ensaio de Seg. Elétrica:</b>
+</td>
+<td>
+<apex:outputField value="{!Case.ContratodeServico__r.Ensaio_de_Seg_El_trica__c}" />
+</td>
+</tr>
+</table>
+<br/>
+<br/>
+<br/>
+<b>Observações do Contrato de Serviços:&nbsp;</b><apex:outputField value="{!Case.ContratodeServico__r.Observa_es__c}" />
+</apex:outputPanel>
+</apex:page>

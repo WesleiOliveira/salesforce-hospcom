@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Resposta_motora_enfermagem__c</fullName>
+    <externalId>false</externalId>
+    <label>Resposta motora</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Obedece a comandos</fullName>
+                <default>false</default>
+                <label>Obedece a comandos</label>
+            </value>
+            <value>
+                <fullName>Localiza a dor</fullName>
+                <default>false</default>
+                <label>Localiza a dor</label>
+            </value>
+            <value>
+                <fullName>Movimento de retirada</fullName>
+                <default>false</default>
+                <label>Movimento de retirada</label>
+            </value>
+            <value>
+                <fullName>Flexão anormal</fullName>
+                <default>false</default>
+                <label>Flexão anormal</label>
+            </value>
+            <value>
+                <fullName>Extensão anormal</fullName>
+                <default>false</default>
+                <label>Extensão anormal</label>
+            </value>
+            <value>
+                <fullName>Nenhuma</fullName>
+                <default>false</default>
+                <label>Nenhuma</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

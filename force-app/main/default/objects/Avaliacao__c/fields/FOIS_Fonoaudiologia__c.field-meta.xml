@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FOIS_Fonoaudiologia__c</fullName>
+    <externalId>false</externalId>
+    <label>FOIS</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Nível 1 – Nulidade de via oral</fullName>
+                <default>false</default>
+                <label>Nível 1 – Nulidade de via oral</label>
+            </value>
+            <value>
+                <fullName>Nível 2 – Dependente de via alternativa, mínima via oral</fullName>
+                <default>false</default>
+                <label>Nível 2 – Dependente de via alternativa, mínima via oral</label>
+            </value>
+            <value>
+                <fullName>Nível 3 – Dependente de via alternativa, consistente via oral</fullName>
+                <default>false</default>
+                <label>Nível 3 – Dependente de via alternativa, consistente via oral</label>
+            </value>
+            <value>
+                <fullName>Nível 4 – Via oral total, única consistência</fullName>
+                <default>false</default>
+                <label>Nível 4 – Via oral total, única consistência</label>
+            </value>
+            <value>
+                <fullName>Nível 5 – Via oral total, múltiplas consistências, preparo especial</fullName>
+                <default>false</default>
+                <label>Nível 5 – Via oral total, múltiplas consistências, preparo especial</label>
+            </value>
+            <value>
+                <fullName>Nível 6 – Via oral total, múltiplas consistências, sem preparo especial</fullName>
+                <default>false</default>
+                <label>Nível 6 – Via oral total, múltiplas consistências, sem preparo especial</label>
+            </value>
+            <value>
+                <fullName>Nível 7 – Via oral total, sem restrições</fullName>
+                <default>false</default>
+                <label>Nível 7 – Via oral total, sem restrições</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

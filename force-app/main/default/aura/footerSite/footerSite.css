@@ -1,0 +1,119 @@
+/* CSS APLICADO EM DISPOSITIVOS MÓVEIS */
+@media screen
+  and (max-device-width: 480px)
+  and (orientation: portrait){
+	.THIS .card{
+        margin: 0px!important;
+        
+    }
+    
+    .THIS .heading{
+        text-align: center!important;
+    }
+    
+    .THIS li{
+        text-align: center!important;
+    }
+    
+}
+
+@media screen
+  and (max-device-width: 640px)
+  and (orientation: landscape){
+	.THIS .card{
+        margin: 0px!important;
+        
+    }
+        
+    .THIS .heading{
+        text-align: center!important;
+    }
+    
+    .THIS li{
+        text-align: center!important;
+    }
+}
+
+@media screen
+  and (max-device-width: 640px){
+	.THIS .card{
+        margin: 0px!important;
+        
+    }
+        
+    .THIS .heading{
+        text-align: center!important;
+    }
+    
+    .THIS li{
+        text-align: center!important;
+    }
+}
+/* -------------------------------------------- */
+
+.THIS body {
+    background-color: #f3f6fd;
+    font-size: 13px;
+    font-weight: bold;
+    color: rgb(189, 196, 203);
+}
+
+.THIS ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.THIS ul>li {
+    padding-top: 4px;
+    text-align: right;
+    padding-bottom: 4px;
+    color: #ffffff;
+}
+
+.THIS ul>li:hover {
+    color: #a0bb31;
+    cursor: pointer
+}
+
+.THIS .classeLink{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.THIS .classeLink:hover{
+    color: #a0bb31;
+}
+
+.THIS hr {
+    border-width: 3px
+}
+
+.THIS .card {
+    padding: 2% 7%
+}
+
+.THIS .social>i {
+    padding: 1%;
+    display: flex;
+    column-gatp: 7px;
+}
+
+.THIS .social>i:hover {
+    color: #a0bb31;
+    cursor: pointer
+}
+
+.THIS .policy>div {
+    padding: 4px
+}
+
+.THIS .heading {
+    text-align: right;
+    font-family: 'Titillium Web', sans-serif;
+    color: black
+}
+
+.THIS .divider {
+    border-top: 2px solid
+}

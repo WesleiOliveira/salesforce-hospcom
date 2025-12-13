@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Att_de_status</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ $User.Id != &apos;005U400000FddyX&apos;,
+$User.ProfileId != &apos;00e5A000001yRA5&apos;,
+$User.ProfileId != &apos;00e6e000002JQTI&apos;,
+ $User.Ignorar_erros__c !=true,
+ISCHANGED(Status__c)
+)</errorConditionFormula>
+    <errorDisplayField>Status__c</errorDisplayField>
+    <errorMessage>Somente o financeiro pode atualizar o status da análise de crédito.</errorMessage>
+</ValidationRule>

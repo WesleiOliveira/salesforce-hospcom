@@ -1,0 +1,75 @@
+<aura:component extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="setMeOnInit" type="String" default="default value" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="produtosObj" type="Object[]" default="{!c.soql}" />
+    <aura:attribute name="objectField" type="String" />
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.popper,
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js')}"                  
+                  afterScriptsLoaded="{!c.doInit}" />
+    
+	<aura:attribute name="accountRecord" type="Object"/>
+    <aura:attribute name="recordLoadError" type="String"/>
+    
+    <force:recordData aura:id="recordLoader"
+            recordId = "{!v.objectField}"
+            fields = "linkImagem__c, siteTituloImagem__c, siteDescImagem__c"
+            targetFields = "{!v.accountRecord}"
+            targetError = "{!v.recordLoadError}"
+            />
+    
+    
+    <div class="row" style="padding-top: 150px; padding-bottom: 150px">
+        <div class="col-md-6" style="">
+            <img src="{!v.accountRecord.linkImagem__c}" 
+                 style="border-top-left-radius: 20px!important;
+                        border-top-right-radius: 60px!important;
+                        border-bottom-right-radius: 40px!important;
+                        border-bottom-left-radius: 80px!important;"/>
+        </div>
+        
+        <div class="col-md-6" style="display: flex; align-items: center; padding: 0px">
+            <div style="width: 100%">
+                <div style="display: flex; width: 100%; height: 40%; font-size: 30px; align-items: center;">
+                    <div style="
+                                font-size:5vh;
+                                font-weight:600;
+                                line-height: 1.6;
+                                text-align:left;
+                                color:#00345c;
+                                padding-left:20px;" class="generated-text">{!v.accountRecord.siteTituloImagem__c}
+                    </div>
+                </div>
+                
+                <div style="display: flex; padding-top: 10px; height: 10%">
+                    <hr style="border-top: 3px solid #a0bb31; width: 50px; margin-left: 20px; margin-top: 0; margin-bottom: 0; opacity: 1; background-color: #ffffff"/>
+                </div>
+                
+                <div style="display: flex; width: 100%; height: 50%; flex-direction: column; padding-top: 10px;">
+                    <div style="
+                                font-size:20px;
+                                text-indent:0px;
+                                letter-spacing:0px;
+                                word-spacing:0px;
+                                line-height: 1.6;
+                                text-align:left;
+                                color:#00345c;
+                                padding-left:20px;
+                                padding-top: 0px;
+                                margin:0px;" class="generated-text">{!v.accountRecord.siteDescImagem__c}
+                    </div>
+                </div>
+                
+                <button href="#" type="button" style="border-color: #a0bb31; background-color: #a0bb31!important; margin-top: 20px; margin-left: 20px; border-radius: 180px" class="btn btn-primary">Conheça mais</button>
+				<div class="divTeste"></div>
+            </div>
+        </div>
+    </div>
+</aura:component>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>area_veicular__c</fullName>
+    <externalId>false</externalId>
+    <label>Área</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ASSISTÊNCIA TÉCNICA</fullName>
+                <default>false</default>
+                <label>ASSISTÊNCIA TÉCNICA</label>
+            </value>
+            <value>
+                <fullName>LOGISTICA</fullName>
+                <default>false</default>
+                <label>LOGISTICA</label>
+            </value>
+            <value>
+                <fullName>COMERCIAL</fullName>
+                <default>false</default>
+                <label>COMERCIAL</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

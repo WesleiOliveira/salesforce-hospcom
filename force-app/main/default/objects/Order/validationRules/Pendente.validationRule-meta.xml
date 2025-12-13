@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pendente</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+!$User.Ignorar_erros__c,
+    ISCHANGED(Status),
+    TEXT(Status) = &apos;Pendente&apos;,
+        $User.Id != &apos;0056e00000Cqx9A&apos;,
+        $User.Id != &apos;0056e00000Cqgd8&apos;,
+        $User.Id != &apos;005U4000001K4lF&apos;,
+    TEXT(PRIORVALUE(Status)) != &apos;Aguardando Aprovação Financeira&apos;
+)</errorConditionFormula>
+    <errorMessage>Somente o financeiro pode colocar o pedido em Pendente e apenas após o status Aguardando Aprovação Financeira</errorMessage>
+</ValidationRule>

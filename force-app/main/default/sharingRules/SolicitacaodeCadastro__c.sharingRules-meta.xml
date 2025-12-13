@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>PMLS</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>PMLS</label>
+        <sharedTo>
+            <group>Gerente_de_Linha_PMLS_SP</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Linha__c</field>
+            <operation>equals</operation>
+            <value>PMLS</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingOwnerRules>
+        <fullName>Compartilha_Opera_es</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Compartilha Operações</label>
+        <sharedTo>
+            <group>Operacoes</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Hospcom_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Compras</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Compras</label>
+        <sharedTo>
+            <group>Departamento_de_Compras</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

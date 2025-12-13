@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valor_do_contrato</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+Aprovado__c = true,
+ISCHANGED(Valor_do_contrato__c)
+)</errorConditionFormula>
+    <errorDisplayField>Valor_do_contrato__c</errorDisplayField>
+    <errorMessage>Contrato já aprovado só altera valor a partir de aditivo aprovado.</errorMessage>
+</ValidationRule>

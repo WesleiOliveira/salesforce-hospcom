@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tudo_Menos_Cancelados</fullName>
+    <columns>NAME</columns>
+    <columns>N_mero_da_Proposta_Contrato__c</columns>
+    <columns>Cliente__c</columns>
+    <columns>CNPJ_CLIENTE__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status_do_Contrato__c</field>
+        <operation>notEqual</operation>
+        <value>CANCELADO,CONCLUÍDO</value>
+    </filters>
+    <label>Tudo Exceto (Cancelados e Concluídos)</label>
+</ListView>

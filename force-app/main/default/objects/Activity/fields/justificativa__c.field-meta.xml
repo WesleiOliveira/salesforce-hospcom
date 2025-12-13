@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>justificativa__c</fullName>
+    <externalId>false</externalId>
+    <label>justificativa</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Sem conexão no momento do compromisso</fullName>
+                <default>false</default>
+                <label>Sem conexão no momento do compromisso</label>
+            </value>
+            <value>
+                <fullName>Endereço da conta errado</fullName>
+                <default>false</default>
+                <label>Endereço da conta errado</label>
+            </value>
+            <value>
+                <fullName>Localização atual errada</fullName>
+                <default>false</default>
+                <label>Localização atual errada</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,117 @@
+<aura:component extends="c.ApexHelper"
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+                access="global">
+    
+    <ltng:require styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css')}" 
+                  scripts="{!join(',',                                                 
+                           $Resource.JQuery,
+                           $Resource.Chart294)}" afterScriptsLoaded="{!c.myAction}" />
+    
+    <aura:attribute name="chartInstance" type="Object"/>
+    
+    
+    
+    <div style="display: flex;flex-direction: column;height: fit-content">
+        
+        <div class="topo329838">
+            <div class="itemBox3824923">
+                
+                <div class="esq485934">
+                    <div class="titleBox3829">Feedbacks Abertos</div>
+                    <div class="numBox483597">1254</div>
+                </div>
+                
+                <div class="dir485934">
+                    <i class="fa fa-ticket" aria-hidden="true"></i>
+                </div>
+                
+                
+            </div>
+            
+            <div class="itemBox3824923">
+                
+                <div class="esq485934">
+                    <div class="titleBox3829">Em andamento</div>
+                    <div class="numBox483597">100</div>
+                </div>
+                
+                <div class="dir485934">
+                    <i class="fa fa-spinner" aria-hidden="true"></i>
+                </div>
+                
+            </div>
+            
+            <div class="itemBox3824923">
+                
+                <div class="esq485934">
+                    <div class="titleBox3829">Tickets rápidos</div>
+                    <div class="numBox483597">541</div>
+                </div>
+                
+                <div class="dir485934">
+                    <i class="fa fa-object-ungroup" aria-hidden="true"></i>
+                </div>
+                
+            </div>
+            
+            <div class="itemBox3824923">
+                
+                <div class="esq485934">
+                    <div class="titleBox3829">Finalizados</div>
+                    <div class="numBox483597">100</div>
+                </div>
+                
+                <div class="dir485934">
+                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="body48356493">
+            
+            <div class="first483943">
+                <div class="text324234">Feedbacks concluídos por mês</div>
+                <canvas aura:id="lineChart"></canvas>
+            </div>
+            
+            <div class="second483943">
+                <img style="height: 80%" src="https://quickchart.io/chart?c=%7B%0A%20%20type%3A%20%27doughnut%27%2C%0A%20%20data%3A%20%7B%0A%20%20%20%20datasets%3A%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20data%3A%20%5B24%2C%2025%2C%2026%2C%2032%5D%2C%0A%20%20%20%20%20%20%20%20backgroundColor%3A%20%5B%27%23FFB03B%27%2C%20%27%23FFD79D%27%2C%20%27%230E9EFF%27%5D%2C%0A%20%20%20%20%20%20%20%20label%3A%20%27Dataset%201%27%2C%0A%20%20%20%20%20%20%20%20borderWidth%3A%2010%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%2C%0A%20%20%20%20labels%3A%20%5B%27A%27%2C%20%27B%27%2C%20%27C%27%2C%27D%27%5D%2C%0A%20%20%7D%2C%0A%20%20options%3A%20%7B%0A%20%20%20%20circumference%3A%20Math.PI%2C%0A%20%20%20%20rotation%3A%20Math.PI%2C%0A%20%20%20%20cutoutPercentage%3A%2075%2C%0A%20%20%20%20layout%3A%20%7B%0A%20%20%20%20%20%20padding%3A%2040%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20legend%3A%20%7B%0A%20%20%20%20%20%20display%3A%20false%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20plugins%3A%20%7B%0A%20%20%20%20%20%20datalabels%3A%20%7B%0A%20%20%20%20%20%20%20%20color%3A%20%27%23000%27%2C%0A%20%20%20%20%20%20%20%20anchor%3A%20%27end%27%2C%0A%20%20%20%20%20%20%20%20align%3A%20%27end%27%2C%0A%20%20%20%20%20%20%20%20formatter%3A%20(val)%20%3D%3E%20val%20%2B%20%27%25%27%2C%0A%20%20%20%20%20%20%20%20font%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20size%3A%2025%2C%0A%20%20%20%20%20%20%20%20%20%20weight%3A%20%27bold%27%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20doughnutlabel%3A%20%7B%0A%20%20%20%20%20%20%20%20labels%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20text%3A%20%27%5CnFeedbacks%20por%20tipo%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20font%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20size%3A%2017%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20text%3A%20%27%5Cn24%25%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20color%3A%20%27%23000%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20font%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20size%3A%2030%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20weight%3A%20%27bold%27%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%7D%2C%0A%7D" alt="Gráfico de exemplo" />
+            </div>
+            
+        </div>
+        
+        <div class="body48356493" style="margin-top: 20px">
+            
+            <div class="first483943" style="width: 50%">
+                <div class="text324234">Feedbacks concluídos por mês</div>
+            </div>
+            
+            <div class="first483943" style="width: 50%">
+                <div class="text324234">Feedbacks recentes</div>
+                
+                <div>
+                    <div class="item3829342">
+                        <div class="date435345">Abr 09, 2025</div>
+                        
+                        <div class="date43534576">Lorem ipsum</div>
+                        <div class="date43534765">Lorem ipsum 2</div>
+                        
+                    </div>
+                    
+                    <div class="item3829342">
+                        
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+        
+        
+    </div>
+    
+    
+</aura:component>

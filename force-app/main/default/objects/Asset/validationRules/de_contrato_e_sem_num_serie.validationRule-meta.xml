@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>de_contrato_e_sem_num_serie</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+	!$User.Ignorar_erros__c,
+	OR(
+		INCLUDES(Disponivel_p_contratos__c, &apos;Locação&apos;),
+		INCLUDES(Disponivel_p_contratos__c, &apos;Demonstração&apos;),
+		INCLUDES(Disponivel_p_contratos__c, &apos;Empréstimo&apos;)
+	),
+	SerialNumber == null
+)</errorConditionFormula>
+    <errorDisplayField>SerialNumber</errorDisplayField>
+    <errorMessage>Ativo disponível para contrato deve possuir número de série preenchido.</errorMessage>
+</ValidationRule>

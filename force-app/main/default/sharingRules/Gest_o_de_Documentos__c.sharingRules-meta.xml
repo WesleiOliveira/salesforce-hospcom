@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>comaprtihla_com_todos</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>comaprtihla com todos</label>
+        <sharedTo>
+            <group>Sistema_todos</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>qualidade</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>qualidade</label>
+        <sharedTo>
+            <group>Qualidade</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

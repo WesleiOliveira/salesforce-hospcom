@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cria_como_pendente</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISNEW(),
+TEXT(Status__c) != &apos;Pendente&apos;
+)</errorConditionFormula>
+    <errorDisplayField>Status__c</errorDisplayField>
+    <errorMessage>A solicitação deve se iniciar com status de pendente.</errorMessage>
+</ValidationRule>

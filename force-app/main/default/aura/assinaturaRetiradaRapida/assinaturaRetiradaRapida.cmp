@@ -1,0 +1,56 @@
+<aura:component  controller="ImageDocument" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.signaturePad)}"                     
+                  afterScriptsLoaded="{!c.doInit}" />
+    
+    <div>
+        <!-- SPINNER DE CARREGAMENTO -->
+        <div id='spinnerDiv' style="display: none">
+            <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+        </div>
+        
+        <button style="width: 100%; margin-top: 10px;" id="colherAssinatura" class="btn btn-secondary slds-button slds-button--brand slds-path__mark-complete stepAction current uiButton">
+            Assinatura do cliente
+        </button>
+        
+        <div  class="divMestre" style="display: none" id="divMestre">
+            
+            <div class="popupSignature">
+                
+                <div class="headerPopup">
+                    <div class="row" style="width: 100%">
+                        <div class="col secondaryText" id="buttonCancelar">
+                            Cancelar
+                        </div>
+                        <div class="col-6 colSignature">
+                            Assinatura
+                        </div>
+                        <div class="col secondaryText" id="buttonPronto">
+                            Pronto
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bodyPopup">
+                    <canvas id="signature-pad" aura:id="signature-pad" width="600" class="signature-pad" ></canvas>
+                    
+                </div>
+                
+                <div class="footerPopup" id="limparButton">
+                    Limpar
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+    </div>
+
+</aura:component>

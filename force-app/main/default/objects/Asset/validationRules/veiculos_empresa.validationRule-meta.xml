@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>veiculos_empresa</fullName>
+    <active>true</active>
+    <errorConditionFormula>TEXT( Categoria_Patrimonial__c) == &apos;VEÍCULOS&apos; &amp;&amp; AccountId == NULL</errorConditionFormula>
+    <errorDisplayField>AccountId</errorDisplayField>
+    <errorMessage>Para criar um Ativo do tipo &quot;VEÍCULO&quot;  Você deve preencher o campo &quot;Conta&quot; vinculando um ativo a uma empresa do grupo HOSPCOM</errorMessage>
+</ValidationRule>

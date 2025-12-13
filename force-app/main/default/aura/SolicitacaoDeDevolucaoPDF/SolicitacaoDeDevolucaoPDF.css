@@ -1,0 +1,21 @@
+.THIS .pdf-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.THIS .pdf-button {
+    background-color: #0070d2;  /* Cor do botão */
+    color: white;               /* Cor do texto */
+    font-size: 16px;            /* Tamanho da fonte */
+    padding: 10px 20px;         /* Espaçamento interno */
+    border-radius: 5px;         /* Bordas arredondadas */
+    cursor: pointer;           /* Aponta para o mouse */
+    text-align: center;
+    transition: background-color 0.3s ease; /* Transição suave para hover */
+}
+
+.THIS .pdf-button:hover {
+    background-color: #005bb5;  /* Cor do botão quando o mouse passa em cima */
+}

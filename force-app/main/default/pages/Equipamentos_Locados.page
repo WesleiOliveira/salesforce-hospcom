@@ -1,0 +1,319 @@
+<apex:page standardController="Contrato_de_Servi_o__c" renderAs="pdf" applyHtmlTag="false" showHeader="false">
+    
+    <head>
+        <style type="text/css" media="print">
+           
+            @page{
+                size:A4;
+                background: url({!IF(Contrato_de_Servi_o__c.Timbre__c == 'HEALTH SOLUTION',$Resource.TimbradoHealth,IF(Contrato_de_Servi_o__c.Timbre__c == 'HOSPCOM',$Resource.TimbradoHospcom,IF(Contrato_de_Servi_o__c.Timbre__c == 'GDB',$Resource.TimbradoGDB,"-")))});
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);}
+            }
+            .pagenumber:before {
+                content:counter(page);
+            }
+            .pagecount:before {
+                content:counter(pages);
+            }
+            div.header {
+                margin:0px 0px 0px 0px;
+                padding:30px 0px 50px 0px;
+                position:running(header);
+                height:70px;
+            }
+            div.content {
+            }
+            div.footer1 {
+                margin:20px 0px 0px 260px;
+                padding:0px 0px 0px 0px;
+                position:running(footer);
+                text-align:center;
+                height:10px;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:normal;
+    
+                font-family:arial, verdana, sans-serif;
+                color:#697f9b;
+                width:350px;
+            }
+           
+        </style>
+        <style type="text/css">
+            .titulo_proposta{
+                font-family:arial, verdana, sans-serif;
+                font-size:20px;
+                font-weight:bold;
+                text-align:center;
+            }
+            .subtitulo_proposta{ /* remover */
+                font-family:arial, verdana, sans-serif;
+                font-size:16px;
+                font-weight:normal;
+                text-decoration:underline;
+                text-align:center;
+                width:100%;
+            }
+            .titulo_numeracao{
+                font-family:arial, verdana, sans-serif;
+                font-size:14px;
+                font-weight:normal;
+                width:100%;
+                padding-right:20px;
+            }
+            .destaque_label{
+                font-family:arial, verdana, sans-serif;
+                font-size:15px;
+                line-height:150%;
+            }
+            .destaque_dado{
+                font-family:arial, verdana, sans-serif;
+                font-size:17px;
+                line-height:150%;
+                font-weight:bold;
+                padding-left:20px;
+            }
+            .destaque_dado2{
+                font-family:arial, verdana, sans-serif;
+                font-size:14px;
+                line-height:150%;
+                padding-left:20px;:
+            }
+            .clausula_cabecalho{
+                font-family:arial, verdana, sans-serif;
+                font-size:14px;
+                font-weight:bold;
+                line-height:120%;
+            }
+            .clausula_texto{
+                font-family:arial, verdana, sans-serif;
+                font-size:13px;
+                text-align:justify;
+                text-justify:inter-word;
+                line-height:120%;
+                text-indent:50px;
+            }
+            .clausula_texto_declaracao{
+                font-family:arial, verdana, sans-serif;
+                font-size:13px;
+                line-height:120%;
+            }
+            .clausula_obs{
+                font-family:arial, verdana, sans-serif;
+                font-size:11px;
+                font-weight:bold;
+                text-decoration:underline;
+                font-style:italic;
+                line-height:120%;
+                text-align:right;
+            }            
+            .assinatura{
+                font-family:arial, verdana, sans-serif;
+                font-size:13px;
+                line-height:120%;
+                vertical-align: top;
+            }
+            .notas{
+                font-family:arial, verdana, sans-serif;
+                font-size:13px;
+                font-style:italic;
+            }
+            
+            
+            .tab1 tr{
+                //-fs-table-paginate:paginate;
+                page-break-inside:avoid;
+            }
+            .tab2{
+                table-layout: fixed;
+                page-break-inside:avoid;
+                border-collapse: collapse;
+            }
+            .tab2 tr{
+                table-layout: fixed;
+            }
+            .inv{
+                padding-right: 10px;
+                padding-top: 10px;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                vertical-align:top;
+                text-align:right;
+            }
+            .nul{
+                padding: 0;
+            }
+            .cab2{
+                padding: 3px;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:bold; 
+                vertical-align:top;            
+                background-color: #e2e3e3;
+                border-right: 1px solid #cacecf;
+                border-bottom: 1px solid #cacecf;
+                border-top: 1px solid #cacecf;
+                border-left: 1px solid #cacecf
+            }
+            .cab{
+                padding: 3px;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:bold; 
+                vertical-align:top;            
+                background-color: #e2e3e3;
+                border-right: 1px solid #cacecf;
+                border-bottom: 1px solid #cacecf;
+                border-top: 1px solid #cacecf;
+                line-height:120%;
+            }
+            .cel{
+                padding: 3px;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                vertical-align:top;
+                border-top: 1px solid #eef2f4;
+                border-right: 1px solid #eef2f4;
+                border-bottom: 1px solid #eef2f4;
+                line-height:120%;
+                //word-wrap: break-word;
+                overflow: hidden;
+                text-transform: uppercase;
+            }
+           
+            .total{
+                border-left: 1px solid #eef2f4;
+            }
+            .destaque{
+                font-weight: bold;
+            }
+            .descr{
+                text-align:justify;
+                text-justify:inter-word;
+            }
+            .img{
+                padding: 3px;
+                vertical-align:middle;
+                border-top: 1px solid #eef2f4;
+                border-right: 1px solid #eef2f4;
+                border-left: 1px solid #eef2f4;
+                border-bottom: 1px solid #eef2f4;
+            }     
+                
+            .tabela_itens{
+                border-top:1px solid #cacecf;
+                -fs-table-paginate:paginate;
+            }.tabela_itens tr{
+                page-break-inside:avoid;
+            }
+            .item_titulo_imagem{
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:bold;
+                vertical-align:top;
+                padding:4px 4px 4px 4px;
+                background-color:#e2e3e3;
+                border-left:1px solid #cacecf;
+                border-right:1px solid #cacecf;
+                border-bottom:1px solid #cacecf;
+            }
+            .item_titulo{
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:bold;
+                vertical-align:top;
+                padding:4px 4px 4px 4px;
+                background-color:#e2e3e3;
+                border-right:1px solid #cacecf;
+                border-bottom:1px solid #cacecf;
+                line-height:120%;
+            }
+            .item_imagem{
+                vertical-align:middle;
+                border-left:1px solid #eef2f4;
+                border-right:1px solid #eef2f4;
+                border-bottom:1px solid #cacecf;
+                padding:4px 4px 4px 4px;
+            }
+            .item_texto{
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                vertical-align:top;
+                border-right:1px solid #eef2f4;
+                border-bottom:1px solid #eef2f4;
+                padding:4px 4px 4px 4px;
+                line-height:120%;
+            }
+            .item_descricao{
+                vertical-align:top;
+                border-right:1px solid #eef2f4;
+                border-bottom:1px solid #cacecf;
+                padding:4px 4px 6px 4px;
+            }
+            .item_descricao_texto{
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                text-align:left;
+                text-justify:inter-word;
+                line-height:120%;
+            }            
+            .item_descricao_texto_esquerda{
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                line-height:120%;
+            }            
+        </style>
+
+  </head>
+  <body style="font-size: 11px">
+      <table width="100%" cellspacing="0px">
+          <tr>
+              <td style="border: 0.3px solid black; text-align: center" class="cab" colspan="5">
+                  <b>EQUIPAMENTOS LOCADOS</b>
+              </td>
+          </tr>
+          <tr>
+              <td style="border: 0.3px solid black; text-align: center">
+                  <b>Equipamento</b>
+              </td>
+              <td style="border: 0.3px solid black; text-align: center">
+                  <b>Marca</b>
+              </td>
+              <td style="border: 0.3px solid black; text-align: center">
+                  <b>Modelo</b>
+              </td>
+              <td style="border: 0.3px solid black; text-align: center">
+                  <b>N° de Série</b>
+              </td>
+              <td style="border: 0.3px solid black; text-align: center">
+                  <b>Quantidade</b>
+              </td>
+          </tr>
+          
+          <apex:repeat var="EQ" value="{!Contrato_de_Servi_o__c.Ativos_do_Contrato__r}">
+              <tr>
+              <td style="border: 0.3px solid black; text-align: center">
+                  {!EQ.Ativo_Locado__r.Name}
+              </td>
+              <td style="border: 0.3px solid black; text-align: center">
+                  {!EQ.Ativo_Locado__r.Marca__c}
+              </td>
+              <td style="border: 0.3px solid black; text-align: center">
+                  {!EQ.Ativo_Locado__r.Modelo__c}
+              </td>
+              <td style="border: 0.3px solid black; text-align: center">
+                  {!EQ.N_de_S_rie__c}
+              </td>
+              <td style="border: 0.3px solid black; text-align: center">
+                  {!EQ.Quantidade__c}
+              </td>
+          </tr>       
+          </apex:repeat>
+          
+      </table>
+  <div class="footer1">
+                <span style="text-align:right;">Contrato: {!Contrato_de_Servi_o__c.N_mero_da_Proposta_Contrato__c}</span>&nbsp; - &nbsp; <span style="text-align:right;">Página</span> <span class="pagenumber"/> de <span class="pagecount"/> <apex:outputText rendered="{!IF(Contrato_de_Servi_o__c.Assinatura__c = 'DANIEL ALENCAR COELHO', TRUE, FALSE)}"><span style="position:absolute; margin: -40px 580px"><apex:outputField value="{!Contrato_de_Servi_o__c.Visto__c}"/> </span></apex:outputText>
+            </div>
+  </body>
+
+</apex:page>

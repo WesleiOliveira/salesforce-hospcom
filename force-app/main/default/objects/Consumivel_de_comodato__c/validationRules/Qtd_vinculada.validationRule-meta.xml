@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Qtd_vinculada</fullName>
+    <active>true</active>
+    <errorConditionFormula>Quantidade__c &lt;  Quantidade_vinculada__c</errorConditionFormula>
+    <errorMessage>Quantidade vinculada não pode ser maior que a quantidade</errorMessage>
+</ValidationRule>

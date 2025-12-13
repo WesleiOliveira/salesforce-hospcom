@@ -1,0 +1,258 @@
+<apex:page renderAs="pdf" standardController="Contrato_de_compra__c" standardStylesheets="false" cache="false" showHeader="false" sidebar="false" applyHtmlTag="true" applyBodyTag="false">
+    <head>
+        <style type="text/css" media="print">
+            
+            /* pdf */
+         
+            @page{
+                size:A4;
+                background: url({!if(Contrato_de_compra__c.Comprador__r.id_da_conta2__c =='001i00000085QYb',  $Resource.TimbradoHospcom, 
+                                 if(Contrato_de_compra__c.Comprador__r.id_da_conta2__c =='001U4000006sAHD',  $Resource.TimbradoHospcomSP, 
+                                 if(Contrato_de_compra__c.Comprador__r.id_da_conta2__c == '001U4000006NOXh', $Resource.TimbradoHospcomMT, 
+                                 if(Contrato_de_compra__c.Comprador__r.id_da_conta2__c == '001U4000006s18x', $Resource.TimbradoHospcom153,
+                                 if(Contrato_de_compra__c.Comprador__r.id_da_conta2__c == '0016e00002y5N5b', $Resource.TimbradoHospcomDF,
+                                 if(Contrato_de_compra__c.Comprador__r.id_da_conta2__c == '0016e00002y3Eil', $Resource.TimbradoABC_GO,
+                                 if(Contrato_de_compra__c.Comprador__r.id_da_conta2__c == '0015A00002SZiBc', $Resource.TimbradoABC,
+                                 if(Contrato_de_compra__c.Comprador__r.id_da_conta2__c == '0015A00001tSrPa', $Resource.TimbradoHealth,
+                                 if(Contrato_de_compra__c.Comprador__r.id_da_conta2__c == '0016e000039RTPX', $Resource.TimbradoGestcom,
+                                 
+                                 if(Contrato_de_compra__c.Comprador__r.id_da_conta2__c == '0015A00002GC6r6', $Resource.TimbradoIZUoeste,                                 
+                                 if(Contrato_de_compra__c.Comprador__r.id_da_conta2__c == '0016e00003JCYFt', $Resource.TimbradoIZUjardimGoias,
+
+                                 
+                                 if(Contrato_de_compra__c.Comprador__r.id_da_conta2__c == '001U400000G2xUJ', $Resource.TimbradoIZUeldorado,                                 
+                                 if(Contrato_de_compra__c.Comprador__r.id_da_conta2__c == '001U40000010gmg', $Resource.TimbradoIZUmatriz,
+                                 
+                                 
+                                 if(Contrato_de_compra__c.Comprador__r.id_da_conta2__c == '0015A00001yGbVZ', $Resource.TimbradoGDB, $Resource.TimbradoGenerico))))))))))))))});
+                margin:150px 50px 120px 50px; 
+                background-size: cover;
+                @bottom-center{content:element(paginacao);}
+            }
+            
+            .pagina:before{content:counter(page);}
+            .paginas:before{content:counter(pages);}
+            
+            /* paginação */
+            .paginacao{
+                height:120px;
+                position:running(paginacao);
+            }.paginacao .valor{
+                position: absolute;
+                top: 76px;
+                left: 300px;
+                text-align:center;
+                background-color:white;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:600;
+                color:#697f9b;
+            }
+            
+            /* documento */
+            .documento{
+                padding:0px;
+                margin:0px;
+                font-family:arial, verdana, sans-serif;
+            }.bloco{
+                page-break-inside:avoid;
+            }.linha{
+                white-space: nowrap;
+            }
+            
+            /* capa */
+            .capa .titulo{
+
+                width:100%;
+                text-align:center;
+                text-transform:uppercase;
+                font-weight:bold;
+                font-size:20px;
+                white-space:pre;
+            }.capa .numero{
+                margin-top:40px;
+                width:100%;
+                text-align:right;
+                font-size:14px;
+            }.capa .rotulo{
+                margin-top:35px;
+                font-size:15px;
+            }.capa .valor{
+                margin-top:5px;
+                margin-left:20px;
+                font-size:17px;
+                font-weight:bold;
+            }.capa .nota{
+                margin-top:5px;
+                margin-left:20px;
+                font-size:14px;
+            }
+            
+            /* conteudo */
+            .conteudo{
+                page-break-before:always;
+            }.conteudo .titulo{
+                font-size:14px;
+                font-weight:bold;
+                line-height:120%;
+            }.conteudo .paragrafo{
+                font-size:13px;
+                text-align:justify;
+                line-height:120%;
+                text-justify:inter-word;
+                text-indent:50px;
+            }.conteudo .obsimgs{
+                text-align:right;
+                font-size:11px;
+                font-weight:bold;
+                font-style:italic;
+            }.conteudo .assinatura{
+                width:100%;
+            }.conteudo .assinatura td{
+                width:50%;
+                font-size:13px;
+                line-height:130%;
+                vertical-align:top;
+            }.conteudo .nota{
+                font-size:13px;
+                text-align:justify;
+                line-height:120%;
+                font-style:italic;
+            }
+            
+            /* listagem */
+            .listagem{ 
+                width:100%;
+            }.listagem table{ 
+                width:100%;
+                border-collapse:collapse;
+            }.listagem td{ 
+                padding:2px 5px;
+                line-height:120%;
+            }.listagem .pre-cabecalho{
+                height:10px;
+            }.listagem .cabecalho td{
+                font-size:12px;
+                font-weight:bold;
+                background-color:#e2e3e3;
+                white-space: nowrap;
+                border-color:#cacecf;
+                border-style:solid;
+                border-width:1px 0px 1px 0px;
+            }.listagem .item-dados .imagem{
+                vertical-align:middle;
+            }.listagem .item-dados.acessorio .imagem{
+                text-align:right;
+            }.listagem .item-dados.equipamento img{
+                width: 80px;
+                height: 80px; 
+            }.listagem .item-dados.acessorio img{
+                width: 55px;
+                height: 55px; 
+            }.listagem .item-dados .valor{
+                border-color:#eef2f4;
+                border-style:solid;
+                border-width:1px 0px 0px 0px;
+            }.listagem .item-dados td{
+                font-size:10px;
+                vertical-align:top;
+            }.listagem .item-descr td{
+                font-size:10px;
+                text-align:justify;
+                vertical-align:top;
+                text-justify:inter-word;
+                border-color:#eef2f4;
+                border-style:solid;
+                border-width:0px 0px 1px 0px;
+            }.listagem .subtotal{
+                font-weight: bold;
+                font-size:10px;
+                white-space: nowrap;
+            }.listagem .subtotal .valor{
+                border-color:#eef2f4;
+                border-style:solid;
+                border-width:0px 0px 1px 0px;
+            }
+        </style>
+    </head>
+    
+    <body class="documento" style="font-size:13px;">
+        
+        <!-- paginacao -->
+        <div class="paginacao">
+            <div class="valor" style="margin: -11px -10px">Contrato de&nbsp;{!Contrato_de_compra__c.Tipo_de_contrato__c}: {!Contrato_de_compra__c.Name} - Página <span class="pagina"/> de <span class="paginas"/></div>
+        </div>
+        
+        
+        <!-- conteudo -->
+        <div class="conteudo">
+        <br/>
+        <br/>
+                    <div class="titulo" style="text-align:center !important"> CONTRATO DE&nbsp;<apex:outputText style="text-transform:uppercase;" value="{!Contrato_de_compra__c.Tipo_de_contrato__c}"/>&nbsp;- Nº&nbsp;{!Contrato_de_compra__c.Name}</div>
+        <br/>
+        <br/>
+
+            <div>
+                
+                        <div style="text-align:justify"><apex:outputField value="{!Contrato_de_compra__c.Qualificacao__c}"/></div>
+                        <div style="text-align:justify"><apex:outputField value="{!Contrato_de_compra__c.Clausula_I__c}"/></div>
+                        <div style="text-align:justify"><apex:outputField value="{!Contrato_de_compra__c.Clausula_II__c}"/></div>
+                        <div style="text-align:justify"><apex:outputField value="{!Contrato_de_compra__c.Clausula_III__c}"/></div>
+                        <div style="text-align:justify"><apex:outputField value="{!Contrato_de_compra__c.Clausula_IV__c}"/></div>
+                        <div style="text-align:justify"><apex:outputField value="{!Contrato_de_compra__c.Clausula_V__c}"/></div>
+                        <div style="text-align:justify"><apex:outputField value="{!Contrato_de_compra__c.Clausula_VI__c}"/></div>
+                        <div style="text-align:justify"><apex:outputField value="{!Contrato_de_compra__c.Clausula_VII__c}"/></div>
+                        <div style="text-align:justify"><apex:outputField value="{!Contrato_de_compra__c.Clausula_VIII__c}"/></div>
+                        <div style="text-align:justify"><apex:outputField value="{!Contrato_de_compra__c.Clausula_IX__c}"/></div>
+                        <div style="text-align:justify"><apex:outputField value="{!Contrato_de_compra__c.Clausula_X__c}"/></div>
+                        <div style="text-align:justify"><apex:outputField value="{!Contrato_de_compra__c.Clausula_XI__c}"/></div>
+                        <br/>
+
+              
+                
+                <div style=" page-break-inside: avoid;">
+                        <div style="text-align:justify"><apex:outputField value="{!Contrato_de_compra__c.Clausula_XII__c}"/></div>
+
+                <br/>
+               
+                
+                <div style="text-align: right">Goiânia, {!Contrato_de_compra__c.hoje__c}.</div>
+                <apex:outputText rendered="{!IF(Contrato_de_compra__c.RecordType.Name == 'Padrão', true, false)}">       
+                <br/><br/><br/><br/><br/>
+                <div style="text-align: center">__________________________________________________________</div>       
+                <div style="text-align: center"><b>{!Contrato_de_compra__c.Comprador__r.Raz_o_Social__c}</b></div>       
+                <div style="text-align: center"><b>CNPJ sob o N°. {!Contrato_de_compra__c.Comprador__r.CNPJ__c}</b></div>
+                <br/><br/><br/><br/><br/>
+                <div style="text-align: center">__________________________________________________________</div>       
+                <apex:outputText rendered="{!IF(Contrato_de_compra__c.Fornecedor__r.CNPJ__c != '', true, false)}"><div style="text-align: center"><b>{!Contrato_de_compra__c.Fornecedor__r.Raz_o_Social__c}</b></div></apex:outputText>       
+                <apex:outputText rendered="{!IF(Contrato_de_compra__c.Fornecedor__r.CNPJ__c == '', true, false)}"><div style="text-align: center"><b>{!Contrato_de_compra__c.Fornecedor__r.FirstName} {!Contrato_de_compra__c.Fornecedor__r.LastName}</b></div></apex:outputText>       
+                <apex:outputText rendered="{!IF(Contrato_de_compra__c.Fornecedor__r.CNPJ__c != '', true, false)}"><div style="text-align: center"><b>CNPJ sob o N°. {!Contrato_de_compra__c.Fornecedor__r.CNPJ__c}</b></div></apex:outputText> 
+                <apex:outputText rendered="{!IF(Contrato_de_compra__c.Fornecedor__r.CPF__pc != '', true, false)}"><div style="text-align: center"><b>CPF sob o N°. {!Contrato_de_compra__c.Fornecedor__r.CPF__pc}</b></div></apex:outputText> 
+                
+                <br/><br/><br/><br/><br/>
+                <div><b>Testemunhas:</b></div><br/>       
+                <div style="margin-left:30px"><b>1. Bruna Oliveira Tavares</b></div>       
+                <div style="margin-left:30px"><b>2. {!Contrato_de_compra__c.Testemunha__r.FirstName} {!Contrato_de_compra__c.Testemunha__r.LastName}</b></div>       
+                </apex:outputText>
+                
+                <apex:outputText rendered="{!IF(Contrato_de_compra__c.RecordType.Name != 'Padrão', true, false)}">       
+                <br/><br/><br/><br/><br/>
+                <div><b>REPRESENTADA:</b>__________________________________________________________</div>       
+                <div><b>{!Contrato_de_compra__c.Contratante__r.Raz_o_Social__c}</b></div>       
+                <div><b>CNPJ n°. {!Contrato_de_compra__c.Contratante__r.CNPJ__c}</b></div>
+                <br/><br/><br/><br/>
+                <div><b>REPRESENTANTE:</b>__________________________________________________________</div>       
+                <div><b>{!Contrato_de_compra__c.Contratado_a__r.Raz_o_Social__c}</b></div>       
+                <div><b>CNPJ n°. {!Contrato_de_compra__c.Contratado_a__r.CNPJ__c}</b></div>
+                
+                <br/><br/><br/><br/><br/>
+                <div><b>Testemunhas:</b></div><br/>       
+                <div style="margin-left:30px"><b>1. Bruna Oliveira Tavares</b></div>       
+                <div style="margin-left:30px"><b>2. {!Contrato_de_compra__c.Testemunha__r.FirstName} {!Contrato_de_compra__c.Testemunha__r.LastName}</b></div>       
+                </apex:outputText>        
+      
+ </div>
+ </div>  
+ </div>     
+    </body>
+</apex:page>

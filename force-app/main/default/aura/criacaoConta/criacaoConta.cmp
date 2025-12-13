@@ -1,0 +1,31 @@
+<aura:component extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+
+    <ltng:require
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery)}"                    
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    <div id="spinner" style="display:none; text-align:center; margin-top:20px;">
+        <lightning:spinner alternativeText="Carregando..." size="medium"/>
+    </div>
+    
+    <div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.4); backdrop-filter: blur(5px); z-index: 999; display: none; justify-content: center; align-items: center;" id="overlay438720"></div>
+    
+    
+    <div style="flex-direction: column; gap: 20px; align-items: center; display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #ffffff; border-radius: 8px; width: 370px; padding: 20px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); z-index: 1000; border-top: 6px solid #0070d2; animation: fadeInScale-lwc-27j458mprd4 0.3s ease-out; transition: 0.5s;" id="popup483994">
+    	<label class="label4323">CADASTRO SIMPLIFICADO DE CONTAS</label>
+        <input class="cnpjInput3245234" placeholder="Digite CPF ou CNPJ" maxlength="18"></input>
+        
+        <div style="display: flex; width: 100%; gap: 10px;">
+            <button id="closeButton43980943">Fechar</button>
+            <button id="buttonCriar34534">Avançar</button>
+        </div>
+    </div>
+    
+    
+    <div style=" display: flex; justify-content: center; align-items: center; padding: 10px; border-radius: 5px; margin: 5px 0px 10px 0px; background-color: #f5f5f5">
+        <button class="button438843" id="button43884343">Criar nova conta</button>
+    </div>
+	
+</aura:component>

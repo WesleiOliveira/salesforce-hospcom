@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Receberemos_pelo_servi_o_do_fabricante__c</fullName>
+    <externalId>false</externalId>
+    <label>Receberemos pelo serviço do fabricante?</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Categoria__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Sim</fullName>
+                <default>false</default>
+                <label>Sim</label>
+            </value>
+            <value>
+                <fullName>Não</fullName>
+                <default>true</default>
+                <label>Não</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>AVULSO</controllingFieldValue>
+            <controllingFieldValue>GARANTIA DE FÁBRICA</controllingFieldValue>
+            <controllingFieldValue>GARANTIA DE SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>CONTRATO DE SERVIÇO</controllingFieldValue>
+            <controllingFieldValue>CONTRATO DE LOCAÇÃO</controllingFieldValue>
+            <valueName>Não</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>GARANTIA DE FÁBRICA</controllingFieldValue>
+            <controllingFieldValue>CONTRATO DE LOCAÇÃO</controllingFieldValue>
+            <valueName>Sim</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Horas_Qualifica_o__c</fullName>
+    <externalId>false</externalId>
+    <formula>(IF(OR(ISBLANK(Data_e_Hora_da_Qualifica_o_T__c), ISBLANK(Data_e_Hora_da_Qualifica_o_I__c	)), 0, (Data_e_Hora_da_Qualifica_o_T__c	- Data_e_Hora_da_Qualifica_o_I__c	))+ 
+IF(OR(ISBLANK(Data_Hora_da_Qualifica_o_Pt2_T__c), ISBLANK(Data_Hora_da_Qualifica_o_Pt2_I__c)), 0, (Data_Hora_da_Qualifica_o_Pt2_T__c - Data_Hora_da_Qualifica_o_Pt2_I__c))+ 
+IF(OR(ISBLANK(Data_Hora_da_Qualifica_o_Pt3_T__c), ISBLANK(Data_Hora_da_Qualifica_o_Pt3_I__c)), 0, (Data_Hora_da_Qualifica_o_Pt3_T__c - Data_Hora_da_Qualifica_o_Pt3_I__c))+ 
+IF(OR(ISBLANK(Data_Hora_da_Qualifica_o_Pt4_T__c), ISBLANK(Data_Hora_da_Qualifica_o_Pt4_I__c)), 0, (Data_Hora_da_Qualifica_o_Pt4_T__c - Data_Hora_da_Qualifica_o_Pt4_I__c))+ 
+IF(OR(ISBLANK(Data_Hora_da_Qualifica_o_Pt5_T__c), ISBLANK(Data_Hora_da_Qualifica_o_Pt5_I__c)), 0, (Data_Hora_da_Qualifica_o_Pt5_T__c - Data_Hora_da_Qualifica_o_Pt5_I__c)))*24</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Horas Qualificação</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>8</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

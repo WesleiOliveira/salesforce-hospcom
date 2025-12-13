@@ -1,0 +1,731 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <decisions>
+        <name>c_Clausula_III_Editada</name>
+        <label>Clausula III Editada</label>
+        <locationX>182</locationX>
+        <locationY>1223</locationY>
+        <defaultConnector>
+            <targetReference>Clausula_IV_Editada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>C_2_de_Sim</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Clausula_III_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Att_III_Compra</targetReference>
+            </connector>
+            <label>Sim</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>C_pia_2_de_Cl_usula_11_Editada</name>
+        <label>Cláusula 12 Editada</label>
+        <locationX>182</locationX>
+        <locationY>3923</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>C_pia_13_de_Sim</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Clausula_XII_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Att_XII_Compra</targetReference>
+            </connector>
+            <label>Sim</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Cl_usula_11_Editada</name>
+        <label>Cláusula 11 Editada</label>
+        <locationX>182</locationX>
+        <locationY>3623</locationY>
+        <defaultConnector>
+            <targetReference>C_pia_2_de_Cl_usula_11_Editada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Sim11</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Clausula_XI_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Att_XI_Compra</targetReference>
+            </connector>
+            <label>Sim</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Clausula_I_Editada</name>
+        <label>Clausula I Editada</label>
+        <locationX>182</locationX>
+        <locationY>623</locationY>
+        <defaultConnector>
+            <targetReference>Clausula_II_Editada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Sim</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Clausula_I_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Att_I</targetReference>
+            </connector>
+            <label>Sim</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Clausula_II_Editada</name>
+        <label>Clausula II Editada</label>
+        <locationX>182</locationX>
+        <locationY>923</locationY>
+        <defaultConnector>
+            <targetReference>c_Clausula_III_Editada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>e_Sim</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Clausula_II_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Att_II_Compra</targetReference>
+            </connector>
+            <label>Sim</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Clausula_IV_Editada</name>
+        <label>Clausula IV Editada</label>
+        <locationX>182</locationX>
+        <locationY>1523</locationY>
+        <defaultConnector>
+            <targetReference>Clausula_V_Editada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>C4Sim</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Clausula_IV_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Att_IV_Compra</targetReference>
+            </connector>
+            <label>Sim</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Clausula_IX</name>
+        <label>Clausula IX</label>
+        <locationX>182</locationX>
+        <locationY>3023</locationY>
+        <defaultConnector>
+            <targetReference>Clausula_X_Editada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>C9</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Clausula_IX_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Att_IX_Compra</targetReference>
+            </connector>
+            <label>Sim</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Clausula_V_Editada</name>
+        <label>Clausula V Editada</label>
+        <locationX>182</locationX>
+        <locationY>1823</locationY>
+        <defaultConnector>
+            <targetReference>Clausula_VI_Editada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>C5Sim</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Clausula_V_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Att_V_Compra</targetReference>
+            </connector>
+            <label>Sim</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Clausula_VI_Editada</name>
+        <label>Clausula VI Editada</label>
+        <locationX>182</locationX>
+        <locationY>2123</locationY>
+        <defaultConnector>
+            <targetReference>Clausula_VII_Editada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>C6Sim</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Clausula_VI_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Att_VI_Compra</targetReference>
+            </connector>
+            <label>Sim</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Clausula_VII_Editada</name>
+        <label>Clausula VII Editada</label>
+        <locationX>182</locationX>
+        <locationY>2423</locationY>
+        <defaultConnector>
+            <targetReference>Clausula_VIII_Editada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>C_pia_6_de_Sim</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Clausula_VII_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Att_VII_Compra</targetReference>
+            </connector>
+            <label>Sim</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Clausula_VIII_Editada</name>
+        <label>Clausula VIII Editada</label>
+        <locationX>182</locationX>
+        <locationY>2723</locationY>
+        <defaultConnector>
+            <targetReference>Clausula_IX</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>C8</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Clausula_VIII_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Att_VIII_Compra</targetReference>
+            </connector>
+            <label>Sim</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Clausula_X_Editada</name>
+        <label>Clausula X Editada</label>
+        <locationX>182</locationX>
+        <locationY>3323</locationY>
+        <defaultConnector>
+            <targetReference>Cl_usula_11_Editada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>X10Sim</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Clausula_X_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Att_X_Compra</targetReference>
+            </connector>
+            <label>Sim</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Qualifica_o_Editada</name>
+        <label>Qualificação Editada</label>
+        <locationX>182</locationX>
+        <locationY>323</locationY>
+        <defaultConnector>
+            <targetReference>Clausula_I_Editada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Q</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Qualificacao_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Att_Qualifica_o_Compra</targetReference>
+            </connector>
+            <label>Sim</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>dadosComprador</name>
+        <dataType>String</dataType>
+        <expression>IF({!$Record.Comprador__r.CNPJ__c} != null, &apos; pessoa jurídica de direito privado inscrita no CNPJ sob o n.º &apos; +  {!$Record.Comprador__r.CNPJ__c} +&apos;, estabelecida &apos;, &apos; pessoa física inscrita no CPF sob o n.º &apos; + {!$Record.Comprador__r.CPF__pc} + &apos;, residente &apos;)</expression>
+    </formulas>
+    <formulas>
+        <name>dadosFornecedor</name>
+        <dataType>String</dataType>
+        <expression>IF({!$Record.Fornecedor__r.CNPJ__c} != null, &apos; pessoa jurídica de direito privado inscrita no CNPJ sob o n.º &apos; +  {!$Record.Fornecedor__r.CNPJ__c} +&apos;, estabelecida &apos;, &apos; pessoa física inscrita no CPF sob o n.º &apos; + {!$Record.Fornecedor__r.CPF__pc} + &apos;, residente &apos;)</expression>
+    </formulas>
+    <formulas>
+        <name>dataEntrega</name>
+        <dataType>String</dataType>
+        <expression>IF(DAY({!$Record.Prazo_de_entrega__c}) &gt; 9,
+TEXT(DAY({!$Record.Prazo_de_entrega__c})),
+&apos;0&apos; + TEXT(DAY({!$Record.Prazo_de_entrega__c})))
++ &apos;/&apos; +
+IF(MONTH({!$Record.Prazo_de_entrega__c}) &gt; 9,
+TEXT(MONTH({!$Record.Prazo_de_entrega__c})),
+&apos;0&apos; + TEXT(MONTH({!$Record.Prazo_de_entrega__c})))
++&apos;/&apos;+
+TEXT(YEAR({!$Record.Prazo_de_entrega__c}))</expression>
+    </formulas>
+    <formulas>
+        <name>dataFinal</name>
+        <dataType>String</dataType>
+        <expression>IF(DAY({!$Record.Final_do_contrato__c}) &gt; 9,
+TEXT(DAY({!$Record.Final_do_contrato__c})),
+&apos;0&apos; + TEXT(DAY({!$Record.Final_do_contrato__c})))
++ &apos;/&apos; +
+IF(MONTH({!$Record.Final_do_contrato__c}) &gt; 9,
+TEXT(MONTH({!$Record.Final_do_contrato__c})),
+&apos;0&apos; + TEXT(MONTH({!$Record.Final_do_contrato__c})))
++&apos;/&apos;+
+TEXT(YEAR({!$Record.Final_do_contrato__c}))</expression>
+    </formulas>
+    <formulas>
+        <name>dataInicio</name>
+        <dataType>String</dataType>
+        <expression>IF(DAY({!$Record.Inicio_do_contrato__c}) &gt; 9,
+TEXT(DAY({!$Record.Inicio_do_contrato__c})),
+&apos;0&apos; + TEXT(DAY({!$Record.Inicio_do_contrato__c})))
++ &apos;/&apos; +
+IF(MONTH({!$Record.Inicio_do_contrato__c}) &gt; 9,
+TEXT(MONTH({!$Record.Inicio_do_contrato__c})),
+&apos;0&apos; + TEXT(MONTH({!$Record.Inicio_do_contrato__c})))
++&apos;/&apos;+
+TEXT(YEAR({!$Record.Inicio_do_contrato__c}))</expression>
+    </formulas>
+    <formulas>
+        <name>dataPagamento</name>
+        <dataType>String</dataType>
+        <expression>IF(DAY({!$Record.Data_do_pagamento__c}) &gt; 9,
+TEXT(DAY({!$Record.Data_do_pagamento__c})),
+&apos;0&apos; + TEXT(DAY({!$Record.Data_do_pagamento__c})))
++ &apos;/&apos; +
+IF(MONTH({!$Record.Data_do_pagamento__c}) &gt; 9,
+TEXT(MONTH({!$Record.Data_do_pagamento__c})),
+&apos;0&apos; + TEXT(MONTH({!$Record.Data_do_pagamento__c})))
++&apos;/&apos;+
+TEXT(YEAR({!$Record.Data_do_pagamento__c}))</expression>
+    </formulas>
+    <formulas>
+        <name>mensais</name>
+        <dataType>String</dataType>
+        <expression>IF(TEXT({!$Record.Tipo_de_dura_o__c}) = &apos;Contínuo&apos;, &apos;mensais, com início de pagamento em &apos;, &apos; com o pagamento até o dia &apos;)</expression>
+    </formulas>
+    <formulas>
+        <name>nomeComprador</name>
+        <dataType>String</dataType>
+        <expression>IF({!$Record.Contratante__r.CNPJ__c} != null, {!$Record.Contratante__r.Raz_o_Social__c}, {!$Record.Contratante__r.FirstName} + &apos; &apos; + {!$Record.Contratante__r.LastName} )</expression>
+    </formulas>
+    <formulas>
+        <name>nomeFornecedor</name>
+        <dataType>String</dataType>
+        <expression>IF({!$Record.Contratado_a__r.CNPJ__c} != null, {!$Record.Contratado_a__r.Raz_o_Social__c}, {!$Record.Contratado_a__r.FirstName} + &apos; &apos; + {!$Record.Contratado_a__r.LastName})</expression>
+    </formulas>
+    <formulas>
+        <name>tipoContrato</name>
+        <dataType>String</dataType>
+        <expression>TEXT({!$Record.Tipo_de_contrato__c})</expression>
+    </formulas>
+    <formulas>
+        <name>virgula</name>
+        <dataType>String</dataType>
+        <expression>IF(CONTAINS(TEXT({!$Record.Valor_do_contrato__c}), &apos;.&apos;), &apos;&apos;,&apos;,00&apos;)</expression>
+    </formulas>
+    <interviewLabel>Contrato de compra — Atualiza cláusulas (PJ) {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Contrato de compra — Atualiza cláusulas (PJ)</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Att_I</name>
+        <label>Att I</label>
+        <locationX>50</locationX>
+        <locationY>731</locationY>
+        <connector>
+            <targetReference>Clausula_II_Editada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Clausula_I__c</field>
+            <value>
+                <elementReference>I</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Att_II_Compra</name>
+        <label>Att II</label>
+        <locationX>50</locationX>
+        <locationY>1031</locationY>
+        <connector>
+            <targetReference>c_Clausula_III_Editada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Clausula_II__c</field>
+            <value>
+                <elementReference>II</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Att_III_Compra</name>
+        <label>Att III</label>
+        <locationX>50</locationX>
+        <locationY>1331</locationY>
+        <connector>
+            <targetReference>Clausula_IV_Editada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Clausula_III__c</field>
+            <value>
+                <elementReference>III</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Att_IV_Compra</name>
+        <label>Att IV</label>
+        <locationX>50</locationX>
+        <locationY>1631</locationY>
+        <connector>
+            <targetReference>Clausula_V_Editada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Clausula_IV__c</field>
+            <value>
+                <elementReference>IV</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Att_IX_Compra</name>
+        <label>Att IX</label>
+        <locationX>50</locationX>
+        <locationY>3131</locationY>
+        <connector>
+            <targetReference>Clausula_X_Editada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Clausula_IX__c</field>
+            <value>
+                <elementReference>IX</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Att_Qualifica_o_Compra</name>
+        <label>Att Qualificação</label>
+        <locationX>50</locationX>
+        <locationY>431</locationY>
+        <connector>
+            <targetReference>Clausula_I_Editada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Qualificacao__c</field>
+            <value>
+                <elementReference>qualificacao</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Att_V_Compra</name>
+        <label>Att V</label>
+        <locationX>50</locationX>
+        <locationY>1931</locationY>
+        <connector>
+            <targetReference>Clausula_VI_Editada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Clausula_V__c</field>
+            <value>
+                <elementReference>V</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Att_VI_Compra</name>
+        <label>Att VI</label>
+        <locationX>50</locationX>
+        <locationY>2231</locationY>
+        <connector>
+            <targetReference>Clausula_VII_Editada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Clausula_VI__c</field>
+            <value>
+                <elementReference>VI</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Att_VII_Compra</name>
+        <label>Att VII</label>
+        <locationX>50</locationX>
+        <locationY>2531</locationY>
+        <connector>
+            <targetReference>Clausula_VIII_Editada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Clausula_VII__c</field>
+            <value>
+                <elementReference>VII</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Att_VIII_Compra</name>
+        <label>Att VIII</label>
+        <locationX>50</locationX>
+        <locationY>2831</locationY>
+        <connector>
+            <targetReference>Clausula_IX</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Clausula_VIII__c</field>
+            <value>
+                <elementReference>VIII</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Att_X_Compra</name>
+        <label>Att X</label>
+        <locationX>50</locationX>
+        <locationY>3431</locationY>
+        <connector>
+            <targetReference>Cl_usula_11_Editada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Clausula_X__c</field>
+            <value>
+                <elementReference>X</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Att_XI_Compra</name>
+        <label>Att XI</label>
+        <locationX>50</locationX>
+        <locationY>3731</locationY>
+        <connector>
+            <targetReference>C_pia_2_de_Cl_usula_11_Editada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Clausula_XI__c</field>
+            <value>
+                <elementReference>XI</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Att_XII_Compra</name>
+        <label>Att XII</label>
+        <locationX>50</locationX>
+        <locationY>4031</locationY>
+        <inputAssignments>
+            <field>Clausula_XII__c</field>
+            <value>
+                <elementReference>foro</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Qualifica_o_Editada</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>RecordTypeId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>012U400000009OH</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Tipo_de_contrato__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Representação Comercial</stringValue>
+            </value>
+        </filters>
+        <object>Contrato_de_compra__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>foro</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;&lt;u&gt;XII.	DO FORO DO CONTRATO&lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;12.1.	&lt;/strong&gt;As partes elegem, com exclusão de qualquer outro, por mais privilegiado que seja, o foro da Comarca de Goiânia, Estado de Goiás, como único e competente, para reconhecer e dirimir quaisquer questões oriundas do presente contrato.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;E por estarem justos e contratados, firmam o presente instrumento em 2 (duas) vias de igual teor e forma, na presença de 2 (duas) testemunhas.&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>I</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;strong style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;u&gt;I. DO OBJETO DO CONTRATO&lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;strong style=&quot;color: rgb(0, 0, 0);&quot;&gt;1.&lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt; A &lt;/span&gt;&lt;strong style=&quot;color: rgb(0, 0, 0);&quot;&gt;REPRESENTADA &lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;contrata, com exclusividade, a &lt;/span&gt;&lt;strong style=&quot;color: rgb(0, 0, 0);&quot;&gt;REPRESENTANTE&lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt; para a mediação de seus negócios mercantis e agenciamentos de propostas ou pedidos em território a ser indicado pela &lt;/span&gt;&lt;strong style=&quot;color: rgb(0, 0, 0);&quot;&gt;REPRESENTADA&lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;, sendo certo que toda e qualquer negociação deverá ser transmitida pela &lt;/span&gt;&lt;strong style=&quot;color: rgb(0, 0, 0);&quot;&gt;REPRESENTANTE&lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt; à &lt;/span&gt;&lt;strong style=&quot;color: rgb(0, 0, 0);&quot;&gt;REPRESENTADA &lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;para conhecimento e aprovação. &lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot; class=&quot;ql-indent-2&quot;&gt;&lt;strong style=&quot;color: rgb(0, 0, 0);&quot;&gt;1.1.&lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt; A relação de produtos e a região constantes deste instrumento poderão ser alteradas pela &lt;/span&gt;&lt;strong style=&quot;color: rgb(0, 0, 0);&quot;&gt;REPRESENTADA&lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;, mediante comunicação prévia &lt;/span&gt;&lt;strong style=&quot;color: rgb(0, 0, 0);&quot;&gt;REPRESENTANTE&lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;; &lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot; class=&quot;ql-indent-2&quot;&gt;&lt;strong style=&quot;color: rgb(0, 0, 0);&quot;&gt;1.2.&lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt; A &lt;/span&gt;&lt;strong style=&quot;color: rgb(0, 0, 0);&quot;&gt;REPRESENTANTE &lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;deve trabalhar apenas com produtos determinados pela &lt;/span&gt;&lt;strong style=&quot;color: rgb(0, 0, 0);&quot;&gt;REPRESENTADA&lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;, não podendo vender produtos similares, compatíveis ou de outra utilidade na linha de saúde, sob pena de rescisão contratual por justa causa&lt;/span&gt;&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>II</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;&lt;u&gt;II. DOS DOCUMENTOS QUE INTEGRAM O PRESENTE INSTRUMENTO &lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;2.1.&lt;/strong&gt; Integram e vinculam o presente instrumento, independentemente de sua transcrição, os quais terão plena validade, salvo naquilo que tenham sido modificados por eventual cadeia de contratos decorrentes deste instrumento, a seguinte documentação:&lt;/p&gt;&lt;p class=&quot;ql-indent-2&quot;&gt;i. Cartão emitido pela Receita Federal constando o n.º de CNPJ da &lt;strong&gt;REPRESENTANTE&lt;/strong&gt;;&lt;/p&gt;&lt;p class=&quot;ql-indent-2&quot;&gt;ii. Documentação de representação da &lt;strong&gt;REPRESENTANTE&lt;/strong&gt;;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;2.2.&lt;/strong&gt; Pelo presente instrumento declara a &lt;strong&gt;REPRESENTANTE&lt;/strong&gt; a autenticidade, sob sua responsabilidade, de toda a documentação que o instrui, sob pena da responsabilização judicial competente e eventuais perdas e danos que decorrerem de eventual ilegitimidade.&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>III</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;&lt;u&gt;III. PRAZO DE VIGÊNCIA&lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;3.1.&lt;/strong&gt; O presente contrato vigorará por prazo indeterminado, com início na data de {!dataInicio}, independentemente da data de sua assinatura.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;3.2.&lt;/strong&gt; Este contrato poderá ser rescindido na ocorrência de uma das seguintes hipóteses:&lt;/p&gt;&lt;p style=&quot;margin-left:30px&quot;&gt;i. Insolvência, dissolução judicial ou extrajudicial, pedido de recuperação judicial, decretação de falência de qualquer das partes;&lt;/p&gt;&lt;p style=&quot;margin-left:30px&quot;&gt;ii. Descumprimento de qualquer das cláusulas e condições do presente instrumento;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Parágrafo único: &lt;/strong&gt;Poderão as partes pugnar livremente e de forma imediata pela rescisão do presente instrumento, através de notificação formal e por escrito a ser encaminhada de uma parte a outra via Aviso de Recebimento, comunicação eletrônica ou notificação verbal posteriormente formalizada por escrito.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;3.3.&lt;/strong&gt; A título de mera liberalidade e desde que concluído o ciclo de 01 (um) ano desde o início da prestação dos serviços, estes poderão ser suspensos de forma remunerada pelo prazo de 30 (trinta) dias ou outro prazo a ser instituído entre as partes, mediante emissão da nota fiscal competente, conforme estipulado no item 5.4 deste contrato;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;3.4. &lt;/strong&gt;Qualquer omissão ou tolerância em exigir o estrito cumprimento de quaisquer termos ou condições deste contrato, ou em exercer direito dele decorrente, não constituirá renúncia a eles e não prejudicará assim, a faculdade de qualquer das partes em exigi-los ou exercê-los a qualquer tempo.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;3.5. &lt;/strong&gt;Ocorrendo motivo justo para a rescisão do contrato, a &lt;strong&gt;REPRESENTADA &lt;/strong&gt;poderá reter comissões devidas à &lt;strong&gt;REPRESENTANTE&lt;/strong&gt;, com o fim de ressarcir-se de danos, por este causado, compensando-se inclusive com o valor de outras comissões&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>IV</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;IV. DAS HIPOTESES DE RESCISÃO &lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;4.1.&lt;/strong&gt; O presente contrato poderá ser rescindido por justa causa. Entre outros, constituem motivos justos para a rescisão do contrato de representação: &lt;/p&gt;&lt;p style=&quot;margin-left:30px&quot;&gt;i. A desídia da &lt;strong&gt;REPRESENTANTE&lt;/strong&gt; no cumprimento das obrigações decorrentes do contrato; &lt;/p&gt;&lt;p style=&quot;margin-left:30px&quot;&gt;ii. A prática de atos que importem em descrédito comercial da &lt;strong&gt;REPRESENTADA&lt;/strong&gt;; &lt;/p&gt;&lt;p style=&quot;margin-left:30px&quot;&gt;iii. A falta de cumprimento de qualquer obrigação inerentes ao contrato de representação comercial; &lt;/p&gt;&lt;p style=&quot;margin-left:30px&quot;&gt;iv. A condenação definitiva da &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;por crime considerado infamante; &lt;/p&gt;&lt;p style=&quot;margin-left:30px&quot;&gt;v. Atos de imprudência, negligência e imperícia por parte da &lt;strong&gt;REPRESENTANTE&lt;/strong&gt;; &lt;/p&gt;&lt;p&gt;&lt;strong&gt;4.3. &lt;/strong&gt;Nos casos de rescisão por justa causa, a &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;ficará sujeita ao pagamento de multa punitiva, no valor de 10% do total recebido a título de comissão, além das perdas e danos que forem efetivamente comprovados e havidos de forma dolosa. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;4.4.&lt;/strong&gt; Ocorrendo motivo justo para a rescisão do contrato, a &lt;strong&gt;REPRESENTADA&lt;/strong&gt; poderá reter comissões devidas à &lt;strong&gt;REPRESENTANTE&lt;/strong&gt;, com o fim de ressarcir-se de danos, por este causado, compensando-se inclusive com o valor de outras comissões. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;4.5&lt;/strong&gt;. Na hipótese de rescisão, por qualquer motivo, a &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;se obriga a dar assistência às cobranças pendentes até a final liquidação, ficando assegurado o direito ao recebimento das comissões pendentes, quanto às vendas realizadas e pagas. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;Parágrafo Primeiro&lt;/strong&gt;: Caso a &lt;strong&gt;REPRESENTANTE&lt;/strong&gt; tenha comissão prévia estipulada para locações e, em caso de rescisão do presente instrumento, os valores de comissão referentes a locações fechadas anteriormente pela &lt;strong&gt;REPRESENTANTE&lt;/strong&gt;, serão pagos tão somente até 90 (noventa) dias após a rescisão do contrato, não sendo devida qualquer comissão posterior à data limite ora estipulada.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Parágrafo Segundo&lt;/strong&gt;: Em caso de rescisão do presente instrumento, eventuais vendas ou locações que estejam em fase de fechamento pela &lt;strong&gt;REPRESENTANTE&lt;/strong&gt; na data da rescisão do contrato, deverão ser imediatamente informadas à &lt;strong&gt;REPRESENTADA&lt;/strong&gt;, ficando certo o limite de até 60 (sessenta) dias para que a &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;possa concluir a operação e, assim, ter direito a comissão referente à venda. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;4.6.&lt;/strong&gt; Fica estipulado o dever de zelo aos equipamentos e/ou veículos disponibilizados pela &lt;strong&gt;REPRESENTADA&lt;/strong&gt; à &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;para o cumprimento de suas obrigações. Em caso de danos causados em decorrência de atos de negligência, imprudência e imperícia que resultem em danos financeiros ou de imagem por parte da &lt;strong&gt;REPRESENTANTE&lt;/strong&gt;, fica estabelecida sua obrigação de ressarcimento e/ou regularização de danos, incluindo mas não se limitando a acidentes de trânsito e multas.&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>IX</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;&lt;u&gt;IX. DO RESPEITO ÀS NORMAS DE COMPLIANCE &lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;9.1.&lt;/strong&gt; Fica ratificado que &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;e a &lt;strong&gt;REPRESENTADA &lt;/strong&gt;cumprirão com a legislação anticorrupção aplicável. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;9.2.&lt;/strong&gt; A &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;declara e garante que durante a execução dos serviços aqui contratados, não violará a legislação anticorrupção aplicável, e na execução deste instrumento: &lt;/p&gt;&lt;p style=&quot;margin-left:30px&quot;&gt;&lt;strong&gt;9.2.1. &lt;/strong&gt;Concorda que será responsável perante a &lt;strong&gt;REPRESENTADA &lt;/strong&gt;por qualquer violação à legislação anticorrupção aplicável que venha a ser 9 cometida por ela ou por seus prepostos. &lt;/p&gt;&lt;p style=&quot;margin-left:30px&quot;&gt;&lt;strong&gt;9.2.2.&lt;/strong&gt; Não prometeram, ofereceram, deram e que não prometerão, oferecerão ou darão, direta ou indiretamente, vantagem indevida a funcionário público ou da iniciativa privada, ou a terceira pessoa física ou jurídica a ele relacionada nos negócios ou serviços que envolvam direta ou indiretamente a &lt;strong&gt;REPRESENTADA&lt;/strong&gt;. &lt;/p&gt;&lt;p style=&quot;margin-left:30px&quot;&gt;&lt;strong&gt;9.2.3.&lt;/strong&gt; Não prometeram, ofereceram, deram e que não prometerão, oferecerão ou darão, direta ou indiretamente, Vantagem Indevida a colaborador da &lt;strong&gt;REPRESENTADA&lt;/strong&gt;, ou a terceira pessoa física ou jurídica a ela relacionada. &lt;/p&gt;&lt;p style=&quot;margin-left:30px&quot;&gt;&lt;strong&gt;9.2.4.&lt;/strong&gt; Não exercerá influência indevida, perante a administração pública, valendo-se de funcionários ou ex-funcionários públicos, bem como de seus cônjuges, companheiros ou parentes, por consanguinidade ou afinidade. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;9.3.&lt;/strong&gt; Será facultado à &lt;strong&gt;REPRESENTADA &lt;/strong&gt;a realização de treinamentos em compliance, anticorrupção e antifraude para a &lt;strong&gt;REPRESENTANTE&lt;/strong&gt;, visando garantir que todos os níveis profissionais engajados na execução dos serviços compreendam a importância da integridade para o sucesso deste instrumento. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;9.4. &lt;/strong&gt;A &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;concorda em documentar de forma precisa e detalhada em seus livros e registros, bem como nos documentos fornecidos à &lt;strong&gt;REPRESENTADA&lt;/strong&gt;, todas as transações relacionadas, direta ou indiretamente, ao presente instrumento e a qualquer outro contrato que vier a ser firmado entre as partes. Tais registros deverão ser mantidos de maneira organizada pela &lt;b&gt;REPRESENTANTE&lt;/b&gt; durante a vigência deste instrumento, e por um período adicional de 3 (três) anos após seu eventual término. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;9.5.&lt;/strong&gt; Durante o prazo do presente instrumento e por 3 (três) anos após o seu término, mediante comunicado por escrito com 10 (dez) dias de antecedência, a &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;concorda em permitir que a &lt;strong&gt;REPRESENTADA&lt;/strong&gt;, ou terceiros por ela autorizados, tenham acesso a todos os livros, registros, documentos e informações considerados necessários pela &lt;strong&gt;REPRESENTADA&lt;/strong&gt;, podendo obter cópias, a fim de verificar a conformidade da relação contratual aqui descrita. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;9.6. &lt;/strong&gt;Sem prejuízo da auditoria descrita no item acima, será facultado ainda à &lt;strong&gt;REPRESENTADA &lt;/strong&gt;a realização de due diligence reputacional da &lt;strong&gt;REPRESENTANTE&lt;/strong&gt;, de modo que o eventual indício de atos praticados em desatendimento à legislação anticorrupção vigente, que possa comprometer a imagem da &lt;strong&gt;REPRESENTADA&lt;/strong&gt;, 10 obrigará a &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;a entregar, mediante solicitação por escrito da &lt;strong&gt;REPRESENTADA&lt;/strong&gt;, no prazo de 05 (cinco) dias corridos, eventuais esclarecimentos relacionados aos eventos identificados. &lt;/p&gt;&lt;p style=&quot;margin-left:30px&quot;&gt;&lt;strong&gt;9.6.1.&lt;/strong&gt; Caso a &lt;strong&gt;REPRESENTADA &lt;/strong&gt;considere como não satisfatórios os esclarecimentos prestados pela &lt;b&gt;REPRESENTANTE&lt;/b&gt; em relação às alegações encontradas em due diligence reputacional prevista no item 9.6 acima, fica facultado à &lt;strong&gt;REPRESENTADA &lt;/strong&gt;a possibilidade de rescisão contratual imediata, sem prejuízo da cobrança de multa por quebra contratual descrita no presente instrumento. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;9.7. &lt;/strong&gt;A &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;se compromete a envidar os melhores esforços para aprimorar seu programa de integridade, de modo a cumprir, em sua integralidade, com os dispositivos na Lei Federal n.º 12.846/2013 e no Decreto n.º 8.420/2015 que a regulamenta, assim como buscará seguir as orientações emanadas pelo Ministério da Transparência, Fiscalização e Controladoria-Geral da União em seu guia “Programa de Integridade: Diretrizes para Empresas Privadas”, disponibilizadas através de sítio disponibilizado na internet. &lt;/p&gt;&lt;p style=&quot;margin-left:30px&quot;&gt;&lt;b&gt;9.7.1.&lt;/b&gt; Caso a &lt;strong&gt;REPRESENTADA &lt;/strong&gt;considere como não satisfatórios os esforços empreendidos pela &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;em relação ao desenvolvimento de seu programa de integridade, previsto no item 9.7 acima, fica facultado à &lt;strong&gt;REPRESENTADA &lt;/strong&gt;a possibilidade de rescisão contratual imediata, sem prejuízo de cobrança da multa estipulada por justa causa no presente instrumento. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;9.8.&lt;/strong&gt; A &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;se compromete ainda, no desempenho de qualquer ação ou negócio que envolva interesses da &lt;strong&gt;REPRESENTADA&lt;/strong&gt;, a cumprir, no que seja aplicável, com todas as normas de compliance e de boa política da &lt;strong&gt;REPRESENTADA&lt;/strong&gt;. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;Parágrafo Primeiro&lt;/strong&gt; - Qualquer violação das disposições desta cláusula pela &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;autorizará a &lt;strong&gt;REPRESENTADA&lt;/strong&gt;, a seu exclusivo critério, a rescindir o presente instrumento imediatamente e sem qualquer obrigação da &lt;strong&gt;REPRESENTADA &lt;/strong&gt;de pagar indenização à &lt;strong&gt;REPRESENTANTE&lt;/strong&gt;. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;Parágrafo Segundo&lt;/strong&gt; – Em caso de descumprimento aos termos desta cláusula, a &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;deverá, ainda, indenizar e isentar a &lt;b&gt;REPRESENTADA&lt;/b&gt; de quaisquer prejuízos ou danos incorridos pela &lt;strong&gt;REPRESENTADA&lt;/strong&gt; como resultado da violação dos termos desta cláusula.&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>qualificacao</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;strong style=&quot;background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;REPRESENTANTE: {!nomeFornecedor}&lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;, empresa estabelecida à {!$Record.Contratado_a__r.BillingStreet}, &lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;{!$Record.Contratado_a__r.BillingCity}&lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt; - &lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;{!$Record.Contratado_a__r.BillingState}&lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;, CEP &lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;{!$Record.Contratado_a__r.BillingPostalCode}&lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;, inscrita no CNPJ sob o nº &lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;{!$Record.Contratado_a__r.CNPJ__c}, neste ato devidamente representada por &lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;{!$Record.Colaborador_vinculado__r.Contact.FirstName} &lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;{!$Record.Colaborador_vinculado__r.Contact.LastName}, portador da cédula de identidade RG {!$Record.Colaborador_vinculado__r.Contact.RG__c} e inscrito(a) no CPF/MF sob o nº {!$Record.Colaborador_vinculado__r.Contact.CPF__c}&lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;.&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;strong style=&quot;color: rgb(0, 0, 0);&quot;&gt;{!nomeComprador}&lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;, pessoa jurídica de direito privado, estabelecida na {!$Record.Contratante__r.BillingStreet}, &lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;{!$Record.Contratante__r.BillingCity} &lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;- &lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;{!$Record.Contratante__r.BillingState}&lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;, CEP &lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;{!$Record.Contratante__r.BillingPostalCode}&lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;,  inscrita no CNPJ sob o nº {!$Record.Contratante__r.CNPJ__c}, neste ato representada por seu diretor administrativo GABRIEL ALENCAR COELHO, doravante denominada &lt;/span&gt;&lt;strong style=&quot;color: rgb(0, 0, 0);&quot;&gt;REPRESENTADA.&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;span style=&quot;background-color: var(--slds-g-color-neutral-base-100, var(--lwc-colorBackgroundInput,rgb(255, 255, 255))); color: var(--slds-g-color-neutral-base-30, var(--lwc-colorTextWeak,rgb(68, 68, 68))); font-size: var(--lwc-fontSize3,0.8125rem); font-family: var(--lwc-fontFamily,-apple-system, BlinkMacSystemFont, &apos;Segoe UI&apos;, Roboto, Helvetica, Arial, sans-serif, &apos;Apple Color Emoji&apos;, &apos;Segoe UI Emoji&apos;, &apos;Segoe UI Symbol&apos;);&quot;&gt;Têm entre si justo e acertado o presente Contrato de {!$Record.Tipo_de_contrato__c}, pelas cláusulas e condições a seguir aduzidas.&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;strong&gt;CONSIDERAÇÕES PREAMBULARES &lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;strong&gt;Considerando &lt;/strong&gt;que se encontram preenchidos os requisitos para a ‘validade do negócio jurídico’, fixados no artigo 104 do Código Civil, quais sejam, ‘agente capaz’, ‘objeto lícito, possível, determinado ou determinável’ e ‘forma prescrita ou não defesa em lei’;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;strong&gt;Considerando&lt;/strong&gt; que nas declarações de vontade se atenderão mais à intenção nelas consubstanciadas do que ao sentido literal da linguagem;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;strong&gt;Considerando&lt;/strong&gt; que a lei de n.º 4.886 descreve que ‘Exerce a representação comercial autônoma a pessoa jurídica ou a pessoa física, sem relação de emprego, que desempenha, em caráter não eventual por conta de uma ou mais pessoas, a mediação para a realização de negócios mercantis, agenciando propostas ou pedidos, para transmiti-los aos representados, praticando ou não atos relacionados com a execução dos negócios.’&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;strong&gt;Considerando&lt;/strong&gt;, então, tudo o que acima foi dito, &lt;strong&gt;REPRESENTANTE&lt;/strong&gt; e &lt;strong&gt;REPRESENTADA&lt;/strong&gt; firmam este instrumento, nos termos das cláusulas que seguem, conforme entendem e livremente declaram, efetivamente caracterizando a relação civil entre as partes deste negócio jurídico&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>V</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;&lt;u&gt;V. DA REMUNERAÇÃO DOS SERVIÇOS&lt;/u&gt;&lt;/strong&gt; &lt;/p&gt;&lt;p&gt;&lt;strong&gt;5.1.&lt;/strong&gt; A &lt;strong&gt;REPRESENTADA &lt;/strong&gt;pagará à &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;a comissão estipulada por tipo de venda sobre os valores líquidos das vendas que intermediar. &lt;/p&gt;&lt;p style=&quot;margin-left:30px&quot;&gt;&lt;strong&gt;5.1.1. &lt;/strong&gt;Valores devidos à &lt;strong&gt;REPRESENTANTE&lt;/strong&gt; só serão pagos em até dez dias após a emissão das notas fiscais. A emissão deverá respeitar os ditames do item 5.4.1. Comissionamento deve ser pago tão somente após o pagamento do cliente e apresentação de nota e relatórios do sistema da &lt;strong&gt;REPRESENTADA &lt;/strong&gt;devidamente validados. &lt;/p&gt;&lt;p style=&quot;margin-left:30px&quot;&gt;&lt;strong&gt;5.1.2.&lt;/strong&gt; Na eventualidade de ser concedido um abatimento no valor das vendas (desconto) pela &lt;strong&gt;REPRESENTADA&lt;/strong&gt;, a comissão que será paga à &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;poderá sofrer alteração. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;5.2. &lt;/strong&gt;Nenhuma retribuição será devida à &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;se não houver o pagamento das respectivas aquisições por parte do comprador, bem como se a falta de pagamento resultar de inadimplência, insolvência, recuperação judicial ou extrajudicial, falência do comprador, bem como se o negócio vier a ser por ele desfeito ou for sustada a entrega da mercadoria por ser duvidosa a liquidação. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;5.3.&lt;/strong&gt; Na justa proporção das eventuais faltas de pagamento por parte do comprador, devoluções de mercadorias, a qualquer título, ou em qualquer outro caso de cancelamento da venda, as comissões já creditadas à &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;serão estornadas e as já pagas serão deduzidas de futuros pagamentos, ou poderão ser cobradas judicial ou extrajudicialmente em caso de rescisão deste contrato de representação. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;5.4&lt;/strong&gt;. A &lt;strong&gt;REPRESENTADA&lt;/strong&gt; pagará à &lt;strong&gt;REPRESENTANTE&lt;/strong&gt; um valor de R$ {!$Record.Remuneracao_fixa__c}{!mensais} referente a ajuda de custo, {!$Record.Percentual_de_vendas__c}% a título de comissão sobre o que vender e {!$Record.Percentual_de_locacao__c}% de comissão sobre o que locar. &lt;/p&gt;&lt;p style=&quot;margin-left:30px&quot;&gt;&lt;strong&gt;5.4.1.&lt;/strong&gt; A remuneração só será paga posteriormente ao envio da nota fiscal pela &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;à &lt;strong&gt;REPRESENTADA&lt;/strong&gt;, o que deve ser realizado de acordo com manual a ser entregue pela &lt;strong&gt;REPRESENTADA&lt;/strong&gt;. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;Parágrafo Primeiro:&lt;/strong&gt; Em casos de negociações especiais, onde se apresentem descontos ou tratativas diferentes da normalidade, o valor de comissão poderá ser reduzido, mediante acordo prévio entre as partes. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;Parágrafo Segundo:&lt;/strong&gt; A &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;será reembolsada ou terá valores adiantados para cobertura de eventuais gastos para a representação deste contrato. Os gastos com hospedagem, alimentação e transporte deverão respeitar o teto de 6 gastos estipulado na política da &lt;strong&gt;REPRESENTADA&lt;/strong&gt;, que configura como anexo a este contrato, ficando a &lt;strong&gt;REPRESENTANTE&lt;/strong&gt; desde já a ela vinculada, da qual formaliza seu aceite.&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>VI</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;&lt;u&gt;VI. DAS CONDIÇÕES GERAIS DO CONTRATO&lt;/u&gt;&lt;/strong&gt; &lt;/p&gt;&lt;p&gt;&lt;strong&gt;6.1.&lt;/strong&gt; Quando se tratar de novos clientes, a &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;será responsável, pelo levantamento dos documentos necessários para elaboração da análise de crédito. &lt;/p&gt;&lt;p style=&quot;margin-left:30px&quot;&gt;&lt;b&gt;6.1.1.&lt;/b&gt; Fica sob inteira responsabilidade da &lt;strong&gt;REPRESENTADA &lt;/strong&gt;a aprovação ou não da referida ficha cadastral. A &lt;strong&gt;REPRESENTADA&lt;/strong&gt; fixará o limite de crédito para o novo cliente, sendo certo que se eventuais pedidos ultrapassarem esse valor, caberá à &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;a obtenção de garantias adicionais junto ao cliente, no prazo fixado pela &lt;strong&gt;REPRESENTADA&lt;/strong&gt;, sob pena de reprovação do crédito. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;6.2.&lt;/strong&gt; A &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;deverá cumprir com as metas de venda estabelecidas pela &lt;strong&gt;REPRESENTADA&lt;/strong&gt;. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;6.3.&lt;/strong&gt; Verificando-se a qualquer momento que a &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;não está se dedicando à representação de modo a preencher todas as possibilidades oferecidas pelo mercado adquirente dos produtos da &lt;strong&gt;REPRESENTADA&lt;/strong&gt;, independentemente das metas de venda estipuladas pela &lt;strong&gt;REPRESENTANTE&lt;/strong&gt;, poderá a &lt;strong&gt;REPRESENTADA&lt;/strong&gt;, mediante aviso escrito com antecedência mínima de 10 (dez) dias, estabelecer à &lt;strong&gt;REPRESENTANTE&lt;/strong&gt;, volumes razoáveis de vendas para determinados períodos que, se não alcançados, darão automaticamente à &lt;strong&gt;REPRESENTADA &lt;/strong&gt;o direito de restringir a relação dos CLIENTES e/ou REGIÕES de sua representação. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;6.4&lt;/strong&gt;. Ocorrendo a hipótese acima indicada, as partes concordam desde já, que nenhuma indenização será devida à &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;pela redução dos CLIENTES e/ou REGIÕES, ou pela nomeação de outra(s) &lt;strong&gt;REPRESENTANTE&lt;/strong&gt;(s) para atuação na mesma zona, ficando, também, ressalvado à &lt;strong&gt;REPRESENTADA &lt;/strong&gt;o direito de proceder à venda direta dos produtos junto aos CLIENTES e/ou REGIÕES, independentemente do pagamento de qualquer comissão à &lt;strong&gt;REPRESENTANTE&lt;/strong&gt;. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;6.5.&lt;/strong&gt; Persistindo a REPRESENTANTE, em não atender os volumes e as margens mínimas de venda estabelecidas pela &lt;strong&gt;REPRESENTADA&lt;/strong&gt; ficará configurada a hipótese de rescisão por justa causa, prevista no item “a” do artigo 35 da Lei 4.886/65. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;6.6.&lt;/strong&gt; Fica vedado à &lt;strong&gt;REPRESENTANTE&lt;/strong&gt; realizar a mediação, promoção ou venda do mesmo produto ou similar ao apresentado pela &lt;strong&gt;REPRESENTADA&lt;/strong&gt;, fora do território determinado neste contrato, sem prévia autorização. A infração desta cláusula ensejará 7 a cobrança de multa equivalente a 10% (dez por cento) dos valores apurados a título de comissão, na vigência deste contrato, ensejando, ainda, a rescisão por justa causa deste contrato. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;6.7.&lt;/strong&gt; A &lt;strong&gt;REPRESENTANTE&lt;/strong&gt; fornecerá à &lt;strong&gt;REPRESENTADA&lt;/strong&gt;, mensalmente, relatório contendo informações detalhadas sobre o andamento dos negócios a seu cargo, devendo dedicar-se à representação de modo a expandir os negócios da &lt;strong&gt;REPRESENTADA &lt;/strong&gt;e promover os seus produtos. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;6.8.&lt;/strong&gt; O preço a ser praticado, bem como as condições de pagamento e os prazos de entrega das mercadorias serão estabelecidos pela &lt;strong&gt;REPRESENTADA&lt;/strong&gt;, que poderá alterá-los, mediante comunicação por escrito à &lt;strong&gt;REPRESENTANTE&lt;/strong&gt;. &lt;/p&gt;&lt;p style=&quot;margin-left:30px&quot;&gt;&lt;b&gt;6.8.1.&lt;/b&gt; A &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;não concederá descontos, abatimentos ou dilações de prazos de pagamento, salvo com autorização expressa da &lt;strong&gt;REPRESENTADA&lt;/strong&gt;. &lt;/p&gt;&lt;p style=&quot;margin-left:30px&quot;&gt;&lt;b&gt;6.8.2.&lt;/b&gt; A &lt;strong&gt;REPRESENTANTE&lt;/strong&gt; não receberá pagamentos parciais ou totais de títulos em nome da &lt;strong&gt;REPRESENTADA&lt;/strong&gt;, salvo com sua autorização expressa. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;6.9.&lt;/strong&gt; A &lt;strong&gt;REPRESENTADA &lt;/strong&gt;reserva-se o direito de, segundo seu exclusivo critério, não aceitar as propostas ou pedidos que lhe forem encaminhadas pela &lt;strong&gt;REPRESENTANTE&lt;/strong&gt;, dentro do prazo de 30 (trinta) dias, contados do respectivo recebimento. Neste caso, nenhuma comissão será devida à &lt;strong&gt;REPRESENTANTE&lt;/strong&gt;. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;6.10.&lt;/strong&gt; A &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;não poderá assinar qualquer documento em nome da &lt;strong&gt;REPRESENTADA&lt;/strong&gt;. Podendo, porém, apresentar-se perante os clientes como intermediário dos negócios em nome da &lt;strong&gt;REPRESENTADA&lt;/strong&gt;. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;6.11. &lt;/strong&gt;A &lt;strong&gt;REPRESENTANTE&lt;/strong&gt; será o único responsável pelas despesas em que incorrer no exercício da representação comercial, especialmente aqueles referentes a salários de seus empregados, contribuições previdenciárias, FGTS e todos os impostos e tributos incidentes sobre o exercício da representação como exemplificativamente o I.R.R.F. (Imposto de Renda Retido na Fonte), I.S.S. (Imposto sobre Serviços), e outros&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>VII</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;&lt;u&gt;VII. DO CASO FORTUITO E FORÇA MAIOR &lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;7.1. &lt;/strong&gt;Se qualquer das partes ficar temporariamente impedida de cumprir suas obrigações, no todo ou em parte, em consequência de caso fortuito ou de força maior, deverá comunicar o fato à outra parte de maneira imediata e ratificar por escrito a comunicação em até 03 (três) dias, sob pena de decair do direito de invocar o 8 disposto, informando os efeitos danosos do evento, as medidas que estiverem sendo tomadas e a previsão para regularizar a situação. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;7.2.&lt;/strong&gt; Em nenhuma hipótese será considerado como evento de força maior ou de caso fortuito a ocorrência de: &lt;/p&gt;&lt;p style=&quot;margin-left:30px&quot;&gt;&lt;strong&gt;7.2.1&lt;/strong&gt;. Qualquer ação de qualquer autoridade pública que uma parte pudesse ter evitado se tivesse cumprido suas obrigações legais ou contratuais; &lt;/p&gt;&lt;p style=&quot;margin-left:30px&quot;&gt;&lt;strong&gt;7.2.2&lt;/strong&gt;. Situações decorrentes de culpa da &lt;strong&gt;REPRESENTANTE&lt;/strong&gt;, resultantes de ausência de imprudência, imperícia e negligência; &lt;/p&gt;&lt;p style=&quot;margin-left:30px&quot;&gt;&lt;strong&gt;7.2.3. &lt;/strong&gt;Dificuldades econômicas ou financeiras de qualquer das partes; &lt;/p&gt;&lt;p&gt;&lt;strong&gt;7.3.&lt;/strong&gt; Se o fato invocado como caso fortuito ou motivo de força maior impossibilitar o cumprimento integral deste instrumento e perdurar por mais de 3 (três) dias, a &lt;strong&gt;REPRESENTADA &lt;/strong&gt;poderá optar pela resolução deste instrumento.&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>VIII</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;&lt;u&gt;VIII. DA NÃO CONCORRÊNCIA &lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;8.1.&lt;/strong&gt; A &lt;strong&gt;REPRESENTANTE&lt;/strong&gt; se compromete a não prestar nenhum serviço ou ser admitida pelos clientes ou fornecedores da &lt;strong&gt;REPRESENTADA&lt;/strong&gt;, seja diretamente ou por meio de outras consultorias, durante a vigência deste contrato, salvo expressa autorização da &lt;strong&gt;REPRESENTADA&lt;/strong&gt;, sob pena de arcar com multa de 04 (quatro) vezes o valor do último faturamento pela prestação dos serviços, além de reparar eventuais perdas e danos decorrentes do descumprimento deste item.&amp;nbsp;&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>X</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;X. DA MANUTENÇÃO DO SIGILO&lt;/strong&gt; &lt;/p&gt;&lt;p&gt;&lt;strong&gt;10.1. &lt;/strong&gt;A &lt;strong&gt;REPRESENTANTE&lt;/strong&gt; durante a vigência do presente instrumento e nos 5 (cinco) anos subsequentes ao seu término ou rescisão, obriga-se a manter o mais completo e absoluto sigilo sobre quaisquer dados, materiais, informações, documentos, especificações técnicas ou comerciais, inovações e aperfeiçoamentos obtidos da &lt;strong&gt;REPRESENTADA&lt;/strong&gt;, ou que venha a lhe ser confiado em razão deste contrato, sejam eles de interesse da &lt;strong&gt;REPRESENTADA&lt;/strong&gt; ou de terceiros, não podendo, sob qualquer pretexto, divulgar, revelar, reproduzir, utilizar ou deles dar conhecimento a terceiros estranhos a esta contratação sem a prévia anuência e concordância da &lt;strong&gt;REPRESENTADA&lt;/strong&gt;.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Parágrafo Único &lt;/strong&gt;– A inobservância do disposto na presente cláusula, sujeitará a &lt;strong&gt;REPRESENTANTE&lt;/strong&gt; às penalidades decorrentes da violação e quebra de sigilo contratual apurada na multa correspondente a 4 (quatro) vezes o valor do faturamento da última prestação de serviços, sem prejuízo de arcar com as perdas e danos decorrentes do seu ato, a serem delineadas em processo judicial competente para esta finalidade.&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>XI</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong&gt;&lt;u&gt;XI. DISPOSIÇÕES FINAIS &lt;/u&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;11.1.&lt;/strong&gt; O presente contrato é regido pela Lei n. 4.886, de 09 de dezembro de 1.965 e subsequentes alterações, razão pela qual qualquer hipótese não prevista no presente contrato será igualmente regulamentada pela mesma. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;11.2.&lt;/strong&gt; No valor da remuneração devida à &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;já estão inclusas toda e qualquer despesa, inclusive aquelas referentes a impostos, taxas e contribuições, ficando aqui expresso que a &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;bem como seus prepostos, não possui nenhuma subordinação funcional com a &lt;strong&gt;REPRESENTADA&lt;/strong&gt;, não se estabelecendo desta forma, qualquer vínculo empregatício entre a &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;e a &lt;strong&gt;REPRESENTADA&lt;/strong&gt;. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;11.3&lt;/strong&gt;. A celebração do presente instrumento não implica em nenhuma espécie de sociedade, associação, solidariedade obrigacional, nem em qualquer responsabilidade direta ou indireta, seja societária, comercial, tributária, trabalhista, previdenciária ou de 12 qualquer outra natureza, nem em alienação ou sucessão, seja entre as partes, seus empregados ou prepostos, seja perante terceiros, estando preservada a autonomia jurídica e funcional de cada uma das partes. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;Parágrafo Único&lt;/strong&gt; - A &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;fica responsável pelo pagamento de todos os impostos, taxas ou contribuições sociais na prestação dos serviços objeto deste contrato. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;11.4.&lt;/strong&gt; Este contrato não envolve qualquer responsabilidade trabalhista, quer entre as partes, quer entre a &lt;strong&gt;REPRESENTADA &lt;/strong&gt;e o pessoal empregado pela &lt;strong&gt;REPRESENTANTE&lt;/strong&gt;, para executar os serviços contratados, responsabilizando-se a &lt;b&gt;REPRESENTANTE&lt;/b&gt; por todos os encargos de natureza trabalhista, previdenciária e acidentes de trabalho, arcando, quanto a estes, também pelo ônus referente à responsabilidade civil e criminal, relativas às pessoas que vier a utilizar. Além disso, responderá por todos os ônus tributários, cujos gastos já estão incluídos no preço retro. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;11.5&lt;/strong&gt;. A &lt;strong&gt;REPRESENTANTE &lt;/strong&gt;declara, ainda, sob as penas das leis criminais e civis, que está absolutamente em dia com todas as obrigações trabalhistas, inclusive acidentarias relativas às pessoas que utilizar ou que vier a utilizar nos serviços ora contratados. &lt;/p&gt;&lt;p&gt;&lt;strong&gt;11.6.&lt;/strong&gt; Caso a &lt;strong&gt;REPRESENTADA&lt;/strong&gt; seja condenada judicialmente a um desses encargos, ressarcir-se-á da &lt;strong&gt;REPRESENTANTE&lt;/strong&gt;, ficando, desde já, autorizada a descontar das importâncias de crédito que porventura tenha juntado a ela ou reter, até solução final da demanda, valores equivalentes a possíveis condenações solidárias, decorrentes de ações judiciais que tenham sido movidas em face da &lt;strong&gt;REPRESENTADA &lt;/strong&gt;por terceiros.&lt;/p&gt;</text>
+    </textTemplates>
+</Flow>

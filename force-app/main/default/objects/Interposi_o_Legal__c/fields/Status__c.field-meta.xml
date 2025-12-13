@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Status</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Novo</fullName>
+                <default>false</default>
+                <label>Novo</label>
+            </value>
+            <value>
+                <fullName>Em Andamento</fullName>
+                <default>false</default>
+                <label>Em Andamento</label>
+            </value>
+            <value>
+                <fullName>Aguardando Parecer</fullName>
+                <default>false</default>
+                <label>Aguardando Parecer</label>
+            </value>
+            <value>
+                <fullName>Parecer Favorável</fullName>
+                <default>false</default>
+                <label>Parecer Favorável</label>
+            </value>
+            <value>
+                <fullName>Parecer Parcial Favorável</fullName>
+                <default>false</default>
+                <label>Parecer Parcial Favorável</label>
+            </value>
+            <value>
+                <fullName>Parecer Desfavorável</fullName>
+                <default>false</default>
+                <label>Parecer Desfavorável</label>
+            </value>
+            <value>
+                <fullName>Perdido por Prazo</fullName>
+                <default>false</default>
+                <label>Perdido por Prazo</label>
+            </value>
+            <value>
+                <fullName>Não enviado</fullName>
+                <default>false</default>
+                <label>Não enviado</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

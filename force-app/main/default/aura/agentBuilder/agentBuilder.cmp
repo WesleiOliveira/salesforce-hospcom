@@ -1,0 +1,326 @@
+<aura:component extends="c.ApexHelper"
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+    access="global">
+
+    <ltng:require scripts="{!$Resource.fontAwesome}" />
+
+    <!-- Atributos simulados -->
+    <aura:attribute name="agentes" type="Object[]" />
+    <aura:attribute name="agenteEmEdicao" type="Object" default="{
+                                                                 'agentId': '',
+                                                                 'description': '',
+                                                                 'instruction': '',
+                                                                 'Intrucoes__c': '',
+                                                                 'Compartilhado_com__c': '',
+                                                                 'assistent_id__c': ''
+                                                                 }" />
+
+    <aura:attribute name="agenteSelecionado" type="Object" />
+
+    <aura:attribute name="showEditModal" type="Boolean" default="false" />
+    <aura:attribute name="carregado" type="Boolean" default="false" />
+
+    <aura:attribute name="mode" type="String" default="Novo" />
+    <aura:attribute name="msg" type="String" default="" />
+
+    <aura:attribute name="agentIsLoading" type="Boolean" default="true" />
+    <aura:attribute name="digitando" type="Boolean" default="false" />
+    <aura:attribute name="exibirConfirmacaoExclusao" type="Boolean" default="false" />
+
+    <aura:attribute name="userId" type="String" />
+    <aura:attribute name="gestor" type="Boolean" default="false" />
+
+    <aura:attribute name="uploadedFiles" type="List" />
+
+    <aura:attribute name="usuariosCompartilhados" type="List" default="[]" />
+    <aura:attribute name="buscaUsuario" type="String" />
+    <aura:attribute name="resultadosUsuario" type="List" default="[]" />
+
+
+    <aura:attribute name="threads" type="Object[]" />
+    <aura:attribute name="threadSelecionada" type="Object" />
+    <aura:attribute name="historico" type="List" />
+
+
+    <ltng:require scripts="{!$Resource.JQuery}" styles="{!$Resource.fontAwesome + '/css/font-awesome.min.css'}"
+        afterScriptsLoaded="{!c.loadAgent}" />
+    <div class="container">
+
+        <div id="spinner" style="display:none">
+            <lightning:spinner alternativeText="Carregando..." size="medium" variant="brand" />
+        </div>
+
+        <div class="container23546" id="initialContainer" style="display:none">
+            <div class="bodyText" style="font-family: 'Work Sans';margin-bottom: 2rem;">
+                <strong>Bata suas metas com mais velocidade </strong><i class="fa fa-bolt"
+                    aria-hidden="true"></i><br></br>
+                <p>Crie seu primeiro agente de I.A✨</p><br></br><br></br>
+                <aura:if isTrue="{!!v.gestor}">
+                    <p>opa! Apenas usuários gestores podem criar agentes...</p>
+                </aura:if>
+            </div>
+            <div class="footer" style="justify-self:center">
+                <aura:if isTrue="{!v.gestor}">
+                    <button class="bottomButton" data-mode="Novo" onclick="{!c.editarAgente}">+</button>
+                </aura:if>
+            </div>
+        </div>
+
+        <!--==================================POP DE EDIÇÃO DO AGENTE====================================================-->
+        <aura:if isTrue="{!v.showEditModal}">
+
+            <!--===POPUP DE CONFIRMAÇÂO===-->
+            <aura:if isTrue="{!v.exibirConfirmacaoExclusao}">
+                <section class="popup-confirmacao animate-popup">
+                    <div class="popup-conteudo">
+                        <div class="warning-icon">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        </div>
+                        <p>Tem certeza que deseja excluir {!v.agenteSelecionado.Name}?</p>
+                        <div class="popup-botoes">
+                            <button class="btn-cancelar" onclick="{!c.fecharConfirmacaoExclusao}">Cancelar</button>
+                            <button class="btn-excluir" onclick="{!c.deleteAgent}">Excluir</button>
+                        </div>
+                    </div>
+                </section>
+            </aura:if>
+
+            <div class="custom-modal-overlay">
+                <div class="custom-modal">
+
+
+                    <div class="custom-modal-header">
+                        <h2>{!v.mode} agente</h2>
+                        <button id="xlr8" onclick="{!c.cancelarEdicao}" class="modal-close">×</button>
+                    </div>
+
+                    <div> </div>
+
+
+                    <div class="custom-modal-body">
+
+                        <!-- Campo Nome -->
+                        <div class="field-container">
+                            <lightning:input aura:id="campoNome" label="Nome" value="{!v.agenteEmEdicao.Name}"
+                                placeholder="Digite um nome." onchange="{!c.onChangeCampo}" data-campo="Name"
+                                required="{!v.mode == 'Novo'}" />
+
+                            <aura:if isTrue="{!v.mode == 'Novo'}">
+                                <div class="ajuda-campo">
+                                    Ex: "Suporte Técnico", "Consultor de Vendas" ou "Agente Jurídico".
+                                </div>
+                            </aura:if>
+                        </div>
+
+                        <!-- Campo Descrição -->
+                        <div class="field-container">
+                            <lightning:input aura:id="campoDescricao" type="text" label="Descrição"
+                                placeholder="Escreva uma descrição do agente." value="{!v.agenteEmEdicao.Descricao__c}"
+                                onchange="{!c.onChangeCampo}" data-campo="Descricao__c" maxlength="512"
+                                required="{!v.mode == 'Novo'}" />
+
+                            <aura:if isTrue="{!v.mode == 'Novo'}">
+                                <div class="ajuda-campo">
+                                    Ex: "Especialista em responder dúvidas jurídicas com linguagem simples."
+                                </div>
+                            </aura:if>
+                        </div>
+
+                        <!-- Campo Instruções -->
+                        <div class="field-container">
+                            <lightning:textarea aura:id="campoInstrucoes" label="Instruções"
+                                placeholder="Escreva as instruções deste agente."
+                                value="{!v.agenteEmEdicao.Intrucoes__c}" onchange="{!c.onChangeCampo}"
+                                data-campo="Intrucoes__c" required="{!v.mode == 'Novo'}" />
+
+                            <aura:if isTrue="{!v.mode == 'Novo'}">
+                                <div class="ajuda-campo">
+                                    Ex: "Responda de forma objetiva, com linguagem informal e empática. Seja claro,
+                                    evite termos técnicos e sempre ofereça uma ação prática."
+                                </div>
+                            </aura:if>
+                        </div>
+
+                        <!-- Container relativo para o input e dropdown -->
+                        <div class="autocomplete-container">
+                            <lightning:input label="Compartilhar com usuários"
+                                placeholder="Busque um usuário para compartilhar." value="{!v.buscaUsuario}"
+                                onchange="{!c.buscarUsuarios}" />
+
+                            <!-- Dropdown flutuante com resultados -->
+                            <aura:if isTrue="{!v.resultadosUsuario.length > 0}">
+                                <div class="autocomplete-dropdown">
+                                    <aura:iteration items="{!v.resultadosUsuario}" var="usuario">
+                                        <div class="usuario-item" onclick="{!c.adicionarUsuario}"
+                                            data-id="{!usuario.Id}">
+                                            {!usuario.Name} ({!usuario.Username})
+                                        </div>
+                                    </aura:iteration>
+                                </div>
+                            </aura:if>
+                        </div>
+
+                        <!-- Tags dos usuários selecionados -->
+                        <div class="tag-container">
+                            <aura:iteration items="{!v.usuariosCompartilhados}" var="usuario">
+                                <span class="tag">
+                                    {!usuario.Name}
+                                    <button class="remove-tag" data-id="{!usuario.Id}"
+                                        onclick="{!c.removerUsuario}">×</button>
+                                </span>
+                            </aura:iteration>
+                        </div>
+                        <!-- Upload de Arquivo -->
+                        <aura:if isTrue="{!v.mode == 'Editar'}">
+                            <lightning:fileUpload label="Enviar Arquivo" name="fileUploader"
+                                recordId="{!v.agenteSelecionado.Id}" accept=".pdf"
+                                onuploadfinished="{!c.handleUploadFinished}" multiple="false" />
+                        </aura:if>
+                        <!-- Lista de arquivos carregados -->
+                        <aura:if isTrue="{!v.mode == 'Editar'}">
+
+                            <div class="slds-box slds-theme_default slds-m-top_medium spinner-wrapper">
+                                <p>
+                                    <b><i class="fa fa-paperclip" aria-hidden="true"></i> Arquivos de conhecimento:</b>
+                                </p>
+
+                                <!-- Spinner customizado -->
+                                <div id="fileSpinner" class="custom-spinner-overlay">
+                                    <div class="custom-spinner"></div>
+                                </div>
+
+                                <!-- Conteúdo real -->
+                                <div class="fileContainer" id="fileContainer"></div>
+                            </div>
+
+                        </aura:if>
+                    </div>
+
+                    <div class="custom-modal-footer">
+                        <aura:if isTrue="{!v.mode == 'Editar'}">
+                            <lightning:buttonIcon iconName="utility:delete" variant="bare" alternativeText="Remover"
+                                onclick="{!c.abrirConfirmacaoExclusao}" class="delete-icon" />
+                        </aura:if>
+                        <div></div>
+                        <button class="btn-primary" data-mode="{!v.mode}" onclick="{!c.salvarAgente}">
+                            Salvar
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </aura:if>
+        <!--=======================================================================================================-->
+
+
+
+        <aura:if isTrue="{!v.carregado}">
+            <!-- Painel lateral com agente e botões -->
+            <div class="sidebar">
+                <div class="agente-header">
+                    <select class="agente-select" onchange="{!c.handleAgenteChange}">
+                        <aura:iteration items="{!v.agentes}" var="agente">
+                            <option value="{!agente.Id}" selected="{!v.agenteSelecionado.Id == agente.Id}">
+                                {!agente.Name}
+                            </option>
+                        </aura:iteration>
+                    </select>
+                    <aura:if isTrue="{!v.userId == v.agenteSelecionado.OwnerId}">
+                        <button class="btn-editar" data-mode="Editar" onclick="{!c.editarAgente}">✎</button>
+                    </aura:if>
+                    <aura:if isTrue="{!v.gestor == true}">
+                        <button class="btn-novo" data-mode="Novo" onclick="{!c.editarAgente}"><i class="fa fa-plus"
+                                aria-hidden="true"></i></button>
+                    </aura:if>
+                </div>
+
+                <button class="btn-nova-conversa" onclick="{!c.newThread}"><i class="fa fa-pencil-square-o"
+                        aria-hidden="true"></i> Novo chat</button>
+
+                <aura:iteration items="{!v.threads}" var="thread">
+                    <div data-threadId="{!thread.Id}" onclick="{!c.openThread}"
+                        class="{!'thread-item ' + (v.threadSelecionada.Id == thread.Id ? 'active' : '')}">
+
+                        <!-- Se for o item selecionado, exibe um campo de input HTML -->
+                        <aura:if isTrue="{!v.threadSelecionada.Id == thread.Id}">
+                            <input type="text" value="{!thread.Name}" onchange="{!c.handleNameChange}"
+                                style="background-color: #e5f3ff;border: none;" />
+                        </aura:if>
+
+                        <!-- Caso contrário, exibe apenas o nome -->
+                        <aura:if isTrue="{!v.threadSelecionada.Id != thread.Id}">
+                            {!thread.Name}
+                        </aura:if>
+
+                    </div>
+                </aura:iteration>
+
+
+            </div>
+
+            <!-- Painel de chat principal -->
+            <div class="chatArea">
+                <div class="chatHeader">
+                    <h2>{!v.agenteSelecionado.Name}</h2>
+                </div>
+
+                <div class="threadsArea">
+                    <div class="thread-placeholder">{!v.threadSelecionada.Name}</div>
+                </div>
+
+                <div class="chatMessages" aura:id="chatHistory">
+                    <aura:if isTrue="{!EMPTY(v.threadSelecionada)}">
+                        <div class="warranty">
+                            Que tal comerçarmos criando um novo chat!?<br></br>
+                            <button class="bottomButton2" style="border-style:none" data-mode="Novo"
+                                onclick="{!c.newThread}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Novo
+                                chat</button>
+
+                        </div>
+                    </aura:if>
+                    <aura:iteration items="{!v.historico}" var="msg">
+                        <aura:if isTrue="{!msg.role == 'user'}">
+                            <div class="mensagem userMsg">
+                                <div class="value">
+                                    <aura:unescapedHtml value="{!msg.content}" />
+                                </div>
+                                <div class="createdAt">{!msg.created_at}</div>
+                            </div>
+                            <aura:set attribute="else">
+                                <div class="mensagem agentMsg">
+                                    <div class="value">
+                                        <aura:unescapedHtml value="{!msg.content}" />
+                                    </div>
+                                    <div class="createdAt">{!msg.created_at}</div>
+                                </div>
+                            </aura:set>
+                        </aura:if>
+                    </aura:iteration>
+
+
+                    <aura:if isTrue="{!v.digitando}">
+                        <div class="mensagem agentMsg digitando">
+                            <div class="value">Digitando...</div>
+                        </div>
+                    </aura:if>
+                </div>
+
+                <!-- 🔽 FOOTER no final da chatArea 🔽 -->
+                <!-- Quando HÁ thread: fixo na base -->
+                <aura:if isTrue="{!!EMPTY(v.threadSelecionada)}">
+                    <footer class="chatFooter13 fixo">
+                        <lightning:textarea aura:id="barraDeMensagem" class="barraDeMensagem43"
+                            onkeypress="{!c.keyCheck}" label="Digite sua mensagem" value="{!v.msg}"
+                            onchange="{!c.onChangeMensagem}" placeholder="Pergunte algo..." maxlength="1000" rows="2" />
+
+                        <button class="{!'botaoEnviar ' + (v.digitando ? 'desativado' : '')}"
+                            onclick="{!c.enviarMensagem}" disabled="{!v.digitando}">
+                            <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                        </button>
+                    </footer>
+                </aura:if>
+            </div>
+        </aura:if>
+    </div>
+
+</aura:component>

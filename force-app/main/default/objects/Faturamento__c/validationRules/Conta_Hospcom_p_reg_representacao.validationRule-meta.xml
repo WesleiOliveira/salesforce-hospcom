@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Conta_Hospcom_p_reg_representacao</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+	RecordType.Name == &apos;Representação&apos;,
+	AND(
+		Faturamento_Feito2__r.Id != &apos;001i00000085QYb&apos;,
+		Faturamento_Feito2__r.Id != &apos;0015A00001yGbVZ&apos;,
+		Faturamento_Feito2__r.Id != &apos;0015A00001tSrPa&apos;
+	)
+)</errorConditionFormula>
+    <errorDisplayField>Faturamento_Feito2__c</errorDisplayField>
+    <errorMessage>Empresas válidas: Hospcom, GDB, Health Solution</errorMessage>
+</ValidationRule>

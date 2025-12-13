@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pagamento_antecipado__c</fullName>
+    <externalId>false</externalId>
+    <label>Pagamento antecipado</label>
+    <summaryFilterItems>
+        <field>Fornecedor__c.Pagamento_antecipado__c</field>
+        <operation>equals</operation>
+        <value>SIM</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Fornecedor__c.Status_do_PC__c</field>
+        <operation>notEqual</operation>
+        <value>Cancelado</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Fornecedor__c.Pedido_de_compra__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

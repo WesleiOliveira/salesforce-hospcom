@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GC_Sales_breakdown__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(GC_Sold_New_Customer__c+GC_Sold_Add_ons__c&gt;0,image(&quot;http://chart.apis.google.com/chart?cht=p&amp;chd=t:&quot;&amp;TEXT( GC_Sold_New_Customer__c*100/ (GC_Sold_New_Customer__c+GC_Sold_Add_ons__c)  )&amp;&quot;,&quot;&amp;TEXT(  GC_Sold_Add_ons__c*100/(GC_Sold_New_Customer__c+GC_Sold_Add_ons__c) )&amp;&quot;&amp;chs=230x75&amp;chco=CCCCCC,236FBD&amp;chl=New Customer|Add-Ons&quot;,&quot;Sales breakdown&quot;),image(&quot;http://chart.apis.google.com/chart?cht=p&amp;chd=t:0,0&amp;chs=230x75&amp;chco=CCCCCC,236FBD&quot;,&quot;Sales breakdown&quot;))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Sales breakdown</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

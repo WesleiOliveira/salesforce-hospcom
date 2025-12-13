@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Status</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Novo</fullName>
+                <default>true</default>
+                <label>Novo</label>
+            </value>
+            <value>
+                <fullName>Aprovação - Operações</fullName>
+                <default>false</default>
+                <label>Aprovação - Operações</label>
+            </value>
+            <value>
+                <fullName>Aprovação -  Gestor</fullName>
+                <default>false</default>
+                <label>Aprovação -  Gestor</label>
+            </value>
+            <value>
+                <fullName>Conferência Financeira</fullName>
+                <default>false</default>
+                <label>Conferência Financeira</label>
+            </value>
+            <value>
+                <fullName>Integrando ao SAP</fullName>
+                <default>false</default>
+                <label>Integrando ao SAP</label>
+            </value>
+            <value>
+                <fullName>Aguardando Devolução</fullName>
+                <default>false</default>
+                <label>Aguardando Devolução</label>
+            </value>
+            <value>
+                <fullName>Finalizado</fullName>
+                <default>false</default>
+                <label>Finalizado</label>
+            </value>
+            <value>
+                <fullName>Reprovado</fullName>
+                <default>false</default>
+                <label>Reprovado</label>
+            </value>
+            <value>
+                <fullName>Aguardando cancelamento do boleto</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Aguardando cancelamento do boleto</label>
+            </value>
+            <value>
+                <fullName>Aprovado</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Aprovado</label>
+            </value>
+            <value>
+                <fullName>Em andamento</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Em andamento</label>
+            </value>
+            <value>
+                <fullName>Em aprovação</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Em aprovação</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

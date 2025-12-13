@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cliente__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Quantidade_destinada__c &gt; 0, &quot;REVENDA&quot;,
+IF(TEXT(Fornecedor__r.Pedido_de_compra__r.Tipo__c) = &apos;Compra para consumo&apos;, Fornecedor__r.Pedido_de_compra__r.Requisicao_Interna__r.Owner:User.FirstName + &quot; &quot; + Fornecedor__r.Pedido_de_compra__r.Requisicao_Interna__r.Owner:User.LastName, &quot;ESTOQUE&quot;))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Cliente</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

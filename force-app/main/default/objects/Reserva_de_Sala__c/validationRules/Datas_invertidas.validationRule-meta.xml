@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Datas_invertidas</fullName>
+    <active>true</active>
+    <errorConditionFormula>In_cio__c &gt; Termino__c</errorConditionFormula>
+    <errorDisplayField>In_cio__c</errorDisplayField>
+    <errorMessage>A data de início não pode ser mair que a data de término.</errorMessage>
+</ValidationRule>

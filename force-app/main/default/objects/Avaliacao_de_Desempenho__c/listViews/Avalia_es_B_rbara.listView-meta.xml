@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Avalia_es_B_rbara</fullName>
+    <booleanFilter>1 AND (2 OR 3 OR 4 OR 5)</booleanFilter>
+    <columns>NAME</columns>
+    <columns>Contato__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>greaterOrEqual</operation>
+        <value>7/1/2025 12:00 AM</value>
+    </filters>
+    <filters>
+        <field>Contato__c</field>
+        <operation>contains</operation>
+        <value>Barbara</value>
+    </filters>
+    <filters>
+        <field>Rede_de_relacionamento__c</field>
+        <operation>contains</operation>
+        <value>Barbara</value>
+    </filters>
+    <filters>
+        <field>Rede_de_relacionamento2__c</field>
+        <operation>contains</operation>
+        <value>Barbara</value>
+    </filters>
+    <filters>
+        <field>Gestor__c</field>
+        <operation>contains</operation>
+        <value>Barbara</value>
+    </filters>
+    <label>Avaliações (Barbara)</label>
+</ListView>

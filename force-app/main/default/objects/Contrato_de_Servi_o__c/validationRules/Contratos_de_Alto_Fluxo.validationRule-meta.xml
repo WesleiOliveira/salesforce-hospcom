@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contratos_de_Alto_Fluxo</fullName>
+    <active>false</active>
+    <errorConditionFormula>OR(AND(ISPICKVAL(Contrato_de_AltoFluxo__c, &quot;SIM&quot;), OR(Internado_no_Hospital__c = null,  Nome_do_Paciente__c = null,  CPF__c = null)),
+AND(ISPICKVAL(Contrato_de_AltoFluxo__c, &quot;NÃO&quot;), OR(Internado_no_Hospital__c != null,  Nome_do_Paciente__c != null,  CPF__c != null))
+)</errorConditionFormula>
+    <errorMessage>Os campos: Internado no Hospital, Nome do Paciente e CPF do Paciente devem ser preenchidos quando o campo Contrato de Alto Fluxo for igual a &quot;SIM&quot;, caso contrário os campos devem permanecerem em vazio.</errorMessage>
+</ValidationRule>

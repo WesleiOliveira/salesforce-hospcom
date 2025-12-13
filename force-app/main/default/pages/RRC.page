@@ -1,0 +1,282 @@
+<apex:page standardController="Case" extensions="ContratoChecklist" renderAs="pdf" applyHtmlTag="false" showHeader="false">
+    
+  <head>
+      <style type="text/css" media="print">
+        
+        *{
+            margin:0;
+            padding:0;
+            font-family:arial, verdana, sans-serif;
+            font-size:12px ;
+     
+        }
+       @page {
+                size:21cm 29.7cm;
+                margin:100px 40px 60px 40px;
+                @top-center {
+                    content:element(header);
+                }
+                @bottom-center {
+                    content:element(footer);
+                }
+            }
+            @page{
+                size:A4;
+                background: url({!$Resource.TimbradoHospcom});
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);}
+            }
+            .pagenumber:before {
+                content:counter(page);
+            }
+            .pagecount:before {
+                content:counter(pages);
+            }
+            div.header {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(header);
+                height:60px;
+            }
+            div.content {
+            }
+            div.footer {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(footer);
+                height:20px;
+                text-align:right;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                font-weight:normal;
+            }
+            tr,td{
+                border:1px solid #dddbdb;
+                padding:5px 10px ;
+                border-collapse: collapse;
+                text-align:left;
+                font-size:12px;
+            }
+            table{
+                width: 100%;
+                margin:20px 0;
+                border-collapse: collapse;
+            }
+            .titulo{
+               background:#0b3353;
+               color:#fff;
+               
+               text-align: center;
+            }
+            h2{
+            font-size:12px;}
+           
+      </style>      
+  </head>
+  
+  <body>
+             <div class="footer" style="text-align:center !important">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              
+                 Emissão em:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!Case.Data_de_emissao__c }" /></apex:outputText> <br/>
+                
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 Pág <span class="pagenumber"/> de <span class="pagecount"/>  
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Data Rev: em:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!Case.Data_de_revisao__c}" /></apex:outputText> 
+               
+             </div>
+      
+      <h1 style="text-align:center; font-size: 14px; color:#0b3353;">REGISTRO DE RECLAMAÇÃO DE CLIENTE</h1>
+      <h2 style="text-align:center; font-size: 14px; color:#0b3353;">Rev: {!case.CaseNumber}</h2>
+      
+      <table>
+      
+      
+          <table width="100%" >              
+                <apex:repeat value="{!documentos}" var="doc">
+                    <apex:outputText rendered="{!if(doc.Documento__c = 'Registro de Reclamação de Clientes', true, false)}" >
+                        <apex:outputText rendered="{!if(doc.Empresa__c = case.Empresa_do_grupo__c, true, false)}" >
+                        
+                            <tr  colspan="2" width="100%" >
+                                <td width="50%" style='font-size:13px; font-weight:bold;' >
+                                    emissão:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{! doc.Data_de_criacao__c }" /></apex:outputText>
+                                </td>
+                                
+                                <td style="text-align: right;
+                                    font-size:13px;
+                                    font-weight:bold; ">
+                                    última rev. doc.:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!doc.Revisao__c}" /></apex:outputText>
+                                </td>
+                            </tr>
+                        
+                        </apex:outputText>
+                    </apex:outputText>
+                </apex:repeat>
+              </table>
+          <tr>
+              <td class=" titulo" colspan="3">
+                  <h2> DADOS DO CLIENTE </h2>
+              </td>
+          </tr>
+          
+          <tr>
+              <td colspan="3">Cliente: {!Case.primeiroNome__c} {!Case.sobrenome__c} </td>  
+                    
+          </tr> 
+          
+          <tr>
+              <td colspan="3">Contato: {!Case.Contact.name} </td>
+              
+          </tr> 
+
+          <tr>
+              <td>telefone: {!Case.Nome_do_cliente__r.Phone}</td>
+              <td colspan="2">E-mail: {!Case.SuppliedEmail}</td>
+          </tr>
+
+          <tr>
+              <td>Produto: {!Case.Asset.Name}</td>
+              <td>Marca: {!Case.Asset.Marca__c  }</td>
+              <td>No. de série: {!case.Asset.SerialNumber}</td>
+          </tr>
+          
+          <tr>
+              <td colspan="3" >Garantia/Validade: &nbsp; <apex:outputField value=" {!Case.Garantia_validade__c}"/></td>    
+          </tr>    
+      </table>
+             
+          
+             
+          
+      <table>
+          <tr>
+              <td  class=" titulo" colspan="2">
+              <h2>DESCRIÇÃO DA RECLAMAÇÃO</h2>
+              </td>
+          </tr>
+          
+          <tr>
+              <td rowspan="4" style="width:60%; text-align: center;">{!case.mensagem__c} </td>
+          </tr>
+          <tr>
+              <td style="text-aling:center;">Atendente:  {!case.LastModifiedBy.Name}</td>
+          </tr>
+          <tr>
+                
+              <td>   
+                  Data: <apex:outputField value="{!case.Data_de_revisao__c}"/>
+               
+              </td>
+          </tr>
+      </table>
+             
+          
+             
+          
+      <table>
+              <tr>
+                  <td  class=" titulo" colspan="2">
+                      <h2>ANÁLISE DA RECLAMAÇÃO</h2>
+                  </td>
+              </tr>
+             <tr>
+                 <td  colspan="2" style ="border:1px solid #dddbdb;">{!case.Reclama_o_procedente_de__c}</td>          
+             </tr>
+             <tr>
+                 <td colspan="2" style ="border:1px solid #dddbdb;"> Parecer: {!case.status}</td>            
+             </tr>
+             <tr>
+                 <td>Resp: {!case.Contato_analise_da_reclamacao__r.name} &nbsp;&nbsp;&nbsp; RG:{!case.Contato_analise_da_reclamacao__r.RG__c}</td>
+                 <td>
+              
+                     Data: <apex:outputField value="{!case.Data_analise_da_reclamacao__c}"/>
+                  </td> 
+             </tr>
+      </table>
+             
+          
+             
+          
+          
+        <table>
+              <tr>
+                  <td  class=" titulo" colspan="3"> <h2>AÇÃO IMEDIATA</h2></td> 
+                  <td  class=" titulo" ><h2> INVESTIGAÇÃO </h2></td>
+              </tr>
+             
+             <tr>
+                <td rowspan="2" colspan="3" > 
+                Ação Imediata: {!case.Houve_a_o_imediata__c } <br/><br/>
+                Motivo: {!case.Motivo_acao_imediata__c}
+                </td>
+                
+                <td  ><span style="text-transform: uppercase;" > {!case.Houve_Investiga_o__c}</span>: {!if(case.Houve_Investiga_o__c == "não", 'obs.:',if(case.Houve_Investiga_o__c == "sim", "Ação Corretiva nº",""))}
+                {!case.dado_investigacao__c}
+                </td>   
+              
+             </tr>
+            
+             <tr>
+                 <td>
+                     Resp:  {!case.Contato_investigacao__r.name}<br/>                     
+                     Prazo: {!case.Prazo_investigacao__c} dias
+                 </td>
+             </tr>
+            <tr>
+                <td colspan="2" >
+                   Resp: {!case.Contato_acao_imediata__r.name}
+                </td>
+                <td>
+                    Prazo: {!case.Prazo_acao_imediata__c} dias
+                </td>
+                <td>
+                    Data: <apex:outputField value="{!case.Data_investigcao__c}"/>
+                </td>
+            </tr>
+      </table>   
+               
+      <table>
+          <tr>
+              <td class=" titulo"  colspan="5"><h2> RESPOSTA AO RECLAMANTE </h2></td>
+          </tr>
+          <tr>
+                  <td  style="text-transform: uppercase;"> {!case.Resposta_ao_reclamante__c}</td>
+                  <td  colspan="3" >{!if(case.Resposta_ao_reclamante__c == "sim", case.Resposta_ao_reclamante_por_meio__c,if(case.Resposta_ao_reclamante__c== "não", case.Motivo_resposta_ao_reclamante__c  ,"Nenhum valor selecionado"))}</td>
+          </tr>
+      
+          <tr>
+              <td>Resp: {!case.Contato_resposta_ao_reclamante__r.name}</td>
+              <td>Prazo: {!case.Prazo_resposta_ao_reclamante__c} dias</td>
+              <td>Data:<apex:outputField value="{!case.Data_resposta_ao_reclamante__c}"/> </td>
+          </tr>
+      </table>
+      
+      <table>
+          <tr>
+              <td  class=" titulo" colspan="5"><h2> INFORMAÇÃO À AUTORIDADE SANITÁRIA </h2></td>
+          </tr>
+          <tr>
+                 <td>{!case.Informa_o_autoridade_sanit_ria__c}</td>
+                  <td  colspan="4" >{!if(case.Informa_o_autoridade_sanit_ria__c == "Sim", case.Origin,if(case.Informa_o_autoridade_sanit_ria__c == "Não", case.motivo_autoridade_sanitaria__c,"Nenhum valor selecionado"))}</td>
+             
+          </tr>
+        
+          <tr>
+              <td colspan="2">Resp: {!case.Contato_info_autoridade_sanitaria__r.name}&nbsp;&nbsp;</td>
+              <td>RG: {!case.RG_IAS__c} </td>
+              <td>Prazo: {!case.Prazo_info_autoridade_sanitaria__c} dias</td>
+              <td>Data:&nbsp; <apex:outputField value="{!Case.Data_info_atoridade_sanitaria__c}"/> </td>
+              
+          </tr>
+        
+      </table>
+  </body>
+  
+</apex:page>

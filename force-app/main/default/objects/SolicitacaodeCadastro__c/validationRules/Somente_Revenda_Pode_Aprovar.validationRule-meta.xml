@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Somente_Revenda_Pode_Aprovar</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+    !$User.Ignorar_erros__c,
+    $User.Id != &apos;0055A000008lqdWQAQ&apos;,
+				$User.Id != &apos;005U400000BCtaHIAT&apos;,
+    Aprovado__c = true,
+    TEXT(Tipo_de_Produto__c) = &apos;REVENDA&apos;
+)</errorConditionFormula>
+    <errorMessage>Somente o setor de operações pode aprovar uma solicitação de cadastro de revenda</errorMessage>
+</ValidationRule>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Procedencia__c</fullName>
+    <externalId>false</externalId>
+    <label>Procedência (automático)</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Contrato de Serviço</fullName>
+                <default>false</default>
+                <label>Contrato de Serviço</label>
+            </value>
+            <value>
+                <fullName>Contrato de Locação</fullName>
+                <default>false</default>
+                <label>Contrato de Locação</label>
+            </value>
+            <value>
+                <fullName>Serviço Avulso (Contrato de Serviço)</fullName>
+                <default>false</default>
+                <label>Serviço Avulso (Contrato de Serviço)</label>
+            </value>
+            <value>
+                <fullName>Serviço Avulso (Contrato de Locação)</fullName>
+                <default>false</default>
+                <label>Serviço Avulso (Contrato de Locação)</label>
+            </value>
+            <value>
+                <fullName>Serviço Avulso</fullName>
+                <default>false</default>
+                <label>Serviço Avulso</label>
+            </value>
+            <value>
+                <fullName>Comercial</fullName>
+                <default>false</default>
+                <label>Comercial</label>
+            </value>
+            <value>
+                <fullName>Governo</fullName>
+                <default>false</default>
+                <label>Governo</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

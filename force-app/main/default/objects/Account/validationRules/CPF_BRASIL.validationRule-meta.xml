@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CPF_BRASIL</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+BillingCountry == &apos;Brasil&apos;,
+ISNEW(),
+RecordTypeId == &apos;0125A000001ETFq&apos;,
+CPF__pc == null
+)</errorConditionFormula>
+    <errorDisplayField>CPF__pc</errorDisplayField>
+    <errorMessage>Preencha o CPF da conta.</errorMessage>
+</ValidationRule>

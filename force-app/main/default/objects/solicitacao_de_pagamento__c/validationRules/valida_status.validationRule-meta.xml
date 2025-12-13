@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>valida_status</fullName>
+    <active>true</active>
+    <errorConditionFormula>a_o_interna_2__c == false &amp;&amp;  TEXT( Statustus__c ) == &quot;Aguardando pagamento&quot;
+||
+ a_o_interna_2__c == false &amp;&amp;  TEXT( Statustus__c ) == &quot;Pago&quot;</errorConditionFormula>
+    <errorDisplayField>Statustus__c</errorDisplayField>
+    <errorMessage>você não pode mudar o status enquanto a solicitação não for aprovada</errorMessage>
+</ValidationRule>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pedido_de_Venda</fullName>
+    <active>true</active>
+    <description>Demonstração: 0126e000001pMEkAAM
+Demonstração Rápida: 012U4000000QqxRIAS
+Remessa de Locação: 012U4000009MeCvIAK</description>
+    <errorConditionFormula>AND(
+  ISPICKVAL(Pedido_Convertido_em_Venda__c, &quot;SIM&quot;),
+  ISBLANK(Pedido_de_Venda__c)
+)</errorConditionFormula>
+    <errorDisplayField>Pedido_de_Venda__c</errorDisplayField>
+    <errorMessage>Favor Informe o Pedido de venda</errorMessage>
+</ValidationRule>

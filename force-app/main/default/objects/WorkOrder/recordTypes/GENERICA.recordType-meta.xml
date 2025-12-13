@@ -1,0 +1,905 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GENERICA</fullName>
+    <active>true</active>
+    <label>GENERICA</label>
+    <picklistValues>
+        <picklist>Avalia_o_do_contratante__c</picklist>
+        <values>
+            <fullName>Bom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Regular</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ruim</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ótimo</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Categoria__c</picklist>
+        <values>
+            <fullName>AVULSO</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>COMODATO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CONTRATO DE LOCAÇÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CONTRATO DE SERVIÇO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GARANTIA DE FÁBRICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GARANTIA DE SERVIÇO</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Condicao_de_pagamento__c</picklist>
+        <values>
+            <fullName>10x 30%2F60%2F90%2F120%2F150%2F180%2F210%2F240%2F270%2F300 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>11x 30%2F60%2F90%2F120%2F150%2F180%2F210%2F240%2F270%2F300%2F330 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>12x 30%2F60%2F90%2F120%2F150%2F180%2F210%2F240%2F270%2F300%2F330%2F360 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>15 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>15%2F30 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>21 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2x 30%2F60 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>30 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3x 30%2F60%2F90 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>45 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4x 30%2F60%2F90%2F120 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5x 30%2F60%2F90%2F120%2F150 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>6x 30%2F60%2F90%2F120%2F150%2F180 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>7x 30%2F60%2F90%2F120%2F150%2F180%2F210 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>8x 30%2F60%2F90%2F120%2F150%2F180%2F210%2F240 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>9x 30%2F60%2F90%2F120%2F150%2F180%2F210%2F240%2F270 Dias</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cruzamento de Saldos %28Permuta%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financiamento Bancário</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Renegociação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sem Mov%2E Financeiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>À Vista</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Departamento__c</picklist>
+        <values>
+            <fullName>Comercial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Controladoria</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Diretoria de B%2EI e Growth</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Educação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Governo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Locação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Logística</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Serviço</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Faturamento_Feito__c</picklist>
+        <values>
+            <fullName>GDB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HEALTH SOLUTION</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HOSPCOM</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Forma_de_pagamento2__c</picklist>
+        <values>
+            <fullName>Boleto Banco Itaú CC 98357-1 Contas  a Receber - HOSPCOM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boleto Banco Itaú Contas  a Receber - GDB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boleto Banco Safra CC 585288-2 Contas  a Receber - HOSPCOM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boleto Banco Santander Contas a Receber - GDB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boleto Bancário</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cob%2E Boleto - Banco Sicoob - Ag%3A 5004-0 Cc%3A 107431-8 - Hospcom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cob%2E Boleto - Banco do Brasil - Ag%3A 1242-4 Cc%3A 47391-X - Health</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cob%2E Boleto - Banco do Brasil - Ag%3A 1242-4 Cc%3A 48068-1 - ABC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cob%2E Boleto - Banco do Brasil - Ag%3A 1242-4 Cc%3A 69869-5 - Hospcom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cob%2E Boleto - Banco do Brasil - Ag%3A 1610-1 Cc%3A 128057-0 - GDB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cruzamento de Saldos %28Permuta%29 Recebido</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dinheiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>E-commerce</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pix</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sem Mov%2E Financeiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transferência Bancária</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Forma_de_pagamento__c</picklist>
+        <values>
+            <fullName>A VISTA CONTRA EMBARQUE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>A VISTA NO PEDIDO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FINANCIAMENTO BANCÁRIO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OPEN ACCOUNT</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Formatar_Produto__c</picklist>
+        <values>
+            <fullName>COMPACTO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ORIGINAL</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Frete2__c</picklist>
+        <values>
+            <fullName>Contratação do Frete por conta de Terceiros</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contratação do Frete por conta do Destinatário %28FOB%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contratação do Frete por conta do Remetente %28CIF%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sem Ocorrência de Transporte%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transporte Próprio por conta do Destinatário</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transporte Próprio por conta do Remetente</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Frete__c</picklist>
+        <values>
+            <fullName>CIF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FOB</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Local_de_Atendimento__c</picklist>
+        <values>
+            <fullName>EXTERNO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INTERNO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INTERNO E EXTERNO</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Priority</picklist>
+        <values>
+            <fullName>ALTA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BAIXA</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>CRITICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MÉDIA</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Receberemos_pelo_servi_o_do_fabricante__c</picklist>
+        <values>
+            <fullName>Não</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sim</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Situacao_Auditoria__c</picklist>
+        <values>
+            <fullName>Conforme</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Não Conforme</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status</picklist>
+        <values>
+            <fullName>AGUARDANDO ATENDIMENTO</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>AGUARDANDO AUTORIZAÇÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AGUARDANDO ENVIO DA PROPOSTA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AGUARDANDO FATURAMENTO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AGUARDANDO PEÇA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AGUARDANDO RECEBIMENTO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ANALISE DO SUPERVISOR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ANALISE PAUSADA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ATENDIMENTO PAUSADO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AUTORIZADO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CANCELADO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DISPONIVEL PARA ENTREGA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EM ATENDIMENTO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EM TRÂNSITO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ESCALADO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FECHADO CONCLUÍDO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GERAR PEDIDO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PRÉ-AUTORIZAÇÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SERVIÇO CONCLUÍDO</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status_da_Aprovacao__c</picklist>
+        <values>
+            <fullName>Aguardando Aprovação Financeira</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aguardando Aprovação Jurídica</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aprovado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pendente</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rascunho</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reprovado</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Sub_Status__c</picklist>
+        <values>
+            <fullName>FINALIZADO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GARANTIA DE SERVIÇO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NÃO APRESENTOU DEFEITO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NÃO AUTORIZADO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SEM CONSERTO</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>T_cnico_Respons_vel__c</picklist>
+        <values>
+            <fullName>ALEXANDRE AMARAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ALON ROCHA DA SILVA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ANDRE BRANDAO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ANTONIO LEVI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BRUNO VINICIUS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CAIO AUGUSTO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CARLOS ALBERTO SANTANA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CASSIANO SILVA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CLEITON RIBEIRO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CYLL RODRIGUES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DANIEL NOGUEIRA DE OLIVEIRA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DANILO GUIMARÃES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DAVID QUEIROZ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DEIBLY ARAUJO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DENY REYNER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DIMAS RODRIGUES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DOUGLAS CARVALHO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DOUGLAS SANTOS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EDER VIEIRA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EDUARDO RIBEIRO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EMERSON CÉSAR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FHELIPE AUGUSTO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FRANCIELLY BATISTA DE SOUZA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FRANCIELLY XAVIER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GEAN CARLOS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GISELE FERNANDES SANTOS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GLEYSON JOSÉ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GONÇALO LEAL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GUALTER BARBOSA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HADEN LOBO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ISABELLE SODRÉ ROCHA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JEAN QUEIROZ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JOCIMAR TORRES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JOSE JUNIOR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JOSIAS LEITE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JOÃO MEDEIROS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JULIANA DE SOUZA FONSECA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JULIANA%09MOREIRA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JULIANE DAMASCENO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JÚLIO SIRAVEGNA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KEYTTH FRANÇA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LETÍCIA PEREIRA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LOUISE GOMES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LUCAS MARTINS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LUCAS PEREIRA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LUCIANO MASCARENHAS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MANUELA CUNHA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MARCELO CAVALCANTI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MARCELO HENRIQUE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MARCELO SILVA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MARCOS CHAVES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MARCOS VINICIUS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MARIA PATRÍCIA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MARIO NETO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NAYARA CHRISTINA RITA LEANDRO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NILSON TORQUATO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ORLANDO NETO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PATRÍCIA COSTA CANTÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PAULO CARDOZO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PEDRO HENRIQUE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RAFAEL PRADO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RAPHAEL MALCHER</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RAPHAEL MIRANDA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RENATO GALENO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RENNAN SANTOS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RODRIGO BORGES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RUDSON RIBEIRO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SABRINA KARLA DE LIMA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SERGIO BELTRÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SIMONE MARIANO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TATIANE ALVES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>THIAGO FRANCO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TIAGO DINIZ</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VICTOR MENDES</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WALLYSON NOLETO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WILSON PEREIRA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WILSON SALGADO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WOLMY NETO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ÚRSULA FERRAZ</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tipo_de_Atendimento__c</picklist>
+        <values>
+            <fullName>Presencial - Hora Técnica</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Presencial - Pacote de Horas %284hrs%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Remoto</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tipo_de_Servi_o_Requerido__c</picklist>
+        <values>
+            <fullName>Calibração</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ensaio de Segurança Elétrica</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Qualificação</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tipo_de_Servi_o__c</picklist>
+        <values>
+            <fullName>CALIBRAÇÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DEMONSTRAÇÃO DE PRODUTOS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ENSAIO DE SEGURANÇA ELÉTRICA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ENTREGA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>INSTALAÇÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MANUTENÇÃO CORRETIVA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MANUTENÇÃO PREVENTIVA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>OUTROS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QUALIFICAÇÃO</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TREINAMENTO DE ATIVOS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VERIFICAÇÃO FUNCIONAL</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

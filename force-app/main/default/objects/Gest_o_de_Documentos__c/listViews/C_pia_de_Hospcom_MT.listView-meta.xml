@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>C_pia_de_Hospcom_MT</fullName>
+    <columns>NAME</columns>
+    <columns>Documento__c</columns>
+    <columns>Data_de_criacao__c</columns>
+    <columns>Revisao__c</columns>
+    <columns>Status__c</columns>
+    <columns>SISTEMA__c</columns>
+    <columns>Empresa__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Empresa__c</field>
+        <operation>equals</operation>
+        <value>HOSPCOM - MT</value>
+    </filters>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>VIGENTE</value>
+    </filters>
+    <label>Hospcom - MT</label>
+</ListView>

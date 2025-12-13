@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntitlementProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <SObjectType>WorkOrder</SObjectType>
+    <active>true</active>
+    <entryStartDateField>WorkOrder.LastModifiedDate</entryStartDateField>
+    <exitCriteriaFilterItems>
+        <field>WorkOrder.IsClosed</field>
+        <operation>equals</operation>
+        <value>true</value>
+    </exitCriteriaFilterItems>
+    <isVersionDefault>false</isVersionDefault>
+    <milestones>
+        <milestoneCriteriaFilterItems>
+            <field>WorkOrder.Status</field>
+            <operation>equals</operation>
+            <value>AGUARDANDO FATURAMENTO</value>
+        </milestoneCriteriaFilterItems>
+        <milestoneName>Aguardando Faturamento</milestoneName>
+        <minutesToComplete>1440</minutesToComplete>
+        <useCriteriaStartTime>false</useCriteriaStartTime>
+    </milestones>
+    <name>TESTE — Aguardando Fat</name>
+    <versionMaster>5526e000000wk8W</versionMaster>
+    <versionNumber>2</versionNumber>
+</EntitlementProcess>

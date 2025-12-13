@@ -1,0 +1,497 @@
+<aura:component controller="AssistenteCompras" extends="c.ApexHelper"
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+    access="global">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <!-- <aura:handler name="render" value="{!this}" action="{!c.onRead}"/> -->
+
+    <ltng:require styles="{!join(',',
+                        $Resource.fontAwesome + '/css/font-awesome.min.css',
+                        $Resource.bootstrap5 + '/css/bootstrap.min.css',
+                        $Resource.bootstrapDatePicker + '/css/bootstrap-datepicker.min.css',
+                        $Resource.bootstrapSelect14 + '/docs/docs/dist/css/bootstrap-select.min.css')}" scripts="{!join(',',
+                        $Resource.JQuery,
+                        $Resource.sortableJs + '/Sortable.js',
+                        $Resource.popper + '/popper.js',
+                        $Resource.bootstrap5 + '/js/bootstrap.min.js',
+                        $Resource.bootstrapDatePicker + '/js/bootstrap-datepicker.min.js',
+                        $Resource.bootstrapDatePicker + '/locales/bootstrap-datepicker.pt-BR.min.js',
+                        $Resource.bootstrapSelect14 + '/docs/docs/dist/js/bootstrap-select.min.js')}"
+        afterScriptsLoaded="{!c.onRender}" />
+
+    <aura:attribute name="mostrarModal" type="Boolean" default="false" />
+    <aura:attribute name="statusSelecionado" type="String" default="" />
+    <aura:attribute name="apenasDestinados" type="Boolean" default="false" />
+    <aura:attribute name="produtosSelecionados" type="List" />
+
+
+
+    <div class="container" style="position: relative; max-width: 1500px!important;" id="containerPrincipal">
+
+        <!--div de controle para recaregar paginar se obj 1 já foi criado -->
+        <div id="recarregarPaginaObj1" style='display: none'>render</div>
+
+
+        <!-- SPINNER DE CARREGAMENTO -->
+        <div id='spinnerDiv' style="display: none">
+            <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+        </div>
+
+        <!-- Seção do Modal (renderizada condicionalmente) -->
+        <aura:if isTrue="{!v.mostrarModal}">
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- Header do Modal -->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close" onclick="{!c.fecharModal}"
+                            alternativeText="Fechar" variant="bare-inverse" class="slds-modal__close" />
+                        <h2 class="slds-text-heading_medium">Alterar status dos itens selecionados</h2>
+                    </header>
+
+                    <!-- Body do Modal -->
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <lightning:select name="selectStatus" value="{!v.statusSelecionado}" variant="label-inline"
+                            required="true" label="Selecione um status" class="select-status">
+                            <option value="">-- Nenhum selecionado --</option>
+                            <option value="NOVO">NOVO</option>
+                            <option value="RECEBIDO PARCIAL">RECEBIDO PARCIAL</option>
+                            <option value="RECEBIDO TOTAL">RECEBIDO TOTAL</option>
+                            <option value="CMP - EM PRODUÇÃO FORN.">CMP - EM PRODUÇÃO FORN.</option>
+                            <option value="CMP - EM COLETA PORTO/FORNECEDOR">CMP - EM COLETA PORTO/FORNECEDOR</option>
+                            <option value="EM TRANSITO">EM TRANSITO</option>
+                            <option value="CMP - EM DESEMBARAÇO">CMP - EM DESEMBARAÇO</option>
+                            <option value="CMP - EM TRANSITO NACIONAL">CMP - EM TRANSITO NACIONAL</option>
+                            <option value="CMP - EM TRANSITO INTERNACIONAL">CMP - EM TRANSITO INTERNACIONAL</option>
+                            <option value="CMP - PRE-EMBARQUE IMPORTAÇÃO">CMP - PRE-EMBARQUE IMPORTAÇÃO</option>
+                            <option value="CMP - AG. PAGAMENTO FORN">CMP - AG. PAGAMENTO FORN</option>
+                            <option value="CMP - AG. CONSOLIDAÇÃO DE CARGA">CMP - AG. CONSOLIDAÇÃO DE CARGA</option>
+                            <option value="CMP - AG. DESEMBARAÇO ADUANEIRO">CMP - AG. DESEMBARAÇO ADUANEIRO</option>
+                            <option value="CMP - AG. NFE NACIONALIZAÇÃO">CMP - AG. NFE NACIONALIZAÇÃO</option>
+                            <option value="AG APROVAÇÃO PEDIDO">AG APROVAÇÃO PEDIDO</option>
+                            <option value="CMP -AG. DADOS TECNICOS">CMP -AG. DADOS TECNICOS</option>
+                            <option value="AG. RECEBIMENTO LOGISTICA">AG. RECEBIMENTO LOGISTICA</option>
+                            <option value="CMP - AG. AUTORIZAÇÃO DESEMBARAÇO">CMP - AG. AUTORIZAÇÃO DESEMBARAÇO</option>
+                            <option value="CMP - AG. REMOÇAO DE CARGA">CMP - AG. REMOÇAO DE CARGA</option>
+                            <option value="CMP - AG. LIBERAÇAO CANAL VERMELHO">CMP - AG. LIBERAÇAO CANAL VERMELHO
+                            </option>
+                            <option value="CMP - AG. LIBERAÇAO CANAL AMARELO">CMP - AG. LIBERAÇAO CANAL AMARELO</option>
+                            <option value="CMP - AG. LIBERAÇAO CANAL CINZA">CMP - AG. LIBERAÇAO CANAL CINZA</option>
+                            <option value="CMP - AG. ACEITE DE CARGA DG/BATERIA">CMP - AG. ACEITE DE CARGA DG/BATERIA
+                            </option>
+                            <option value="AG. PRONTIDÃO">AG. PRONTIDÃO</option>
+                            <option value="CMP -AG. ENTREGA FORNECEDOR">CMP -AG. ENTREGA FORNECEDOR</option>
+                            <option value="CANCELADO">CANCELADO</option>
+                            <option value="CMP - COTAÇÃO DE COMPRA">CMP - COTAÇÃO DE COMPRA</option>
+                        </lightning:select>
+                    </div>
+
+                    <!-- Footer do Modal -->
+                    <footer class="slds-modal__footer">
+                        <lightning:button label="Cancelar" onclick="{!c.fecharModal}" />
+                        <lightning:button label="Confirmar" variant="brand" onclick="{!c.confirmarAlteracao}" />
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </aura:if>
+
+        <!-- POPUP CONFIRMAÇÃO -->
+        <div>
+            <div class="container-popup" id="containerChildDestinacao" style='display: none'>
+                <div style=" position:relative;">
+                    <div class="popup">
+                        <br /> <br /> <br />
+                        <div class="ap">
+                            <span id="atenderPedido">Atender Pedido: <span id="numeroPedidoPopup">000</span></span>
+                            <div style="position:absolute; top:0; right:0;">
+                                <div id='closeButtonPopupAtender' class="closeButtonPopupAtender"
+                                    style='color: red; font-size: 25px; display: flex; justify-content: flex-end; align-items: center; width: 10%; height: 100%;'>
+                                    <a class='closeButtonPopupAtender'><i class='fa fa-times-circle'
+                                            aria-hidden='true'></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; flex-direction:row;">
+                            <table class="tabela-popup">
+
+                                <tr id='linhaConta'>
+                                    <th colspan="2"><span class="formatacaoTexto" id="nomeContaPopup">EBSERH HOSPITAL
+                                            UNIVERSITARIO DO TRIANGULO MINEIRO</span></th>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="2"> <br /> </td>
+                                </tr>
+
+                                <tr id='linhaQuantidade'>
+                                    <td style="text-align:left;  " class="formatacaoTexto" id='textoPopupQuantidade'>
+                                        Quantidade a requisitar:</td>
+                                    <td style="text-align:center important; " class="formatacaoTexto"
+                                        id="quantidadeARequisitar">0</td>
+                                    <br />
+                                </tr>
+
+                                <tr id='linhaQuantidade2'>
+                                    <td style="text-align:left; " id='textoQuantidade' class="formatacaoTexto">
+                                        Quantidade a destinar:</td>
+                                    <td style="text-align:center; width:150px; border:none !important;"
+                                        class="formatacaoTexto" id="quantidadeADestinar">
+
+                                        <form action="/action_page.php">
+
+                                            <input type="text" id="inputQantidadeADestinar"
+                                                name="quantidadeADestinar" />
+
+                                        </form>
+                                    </td>
+                                </tr>
+
+                                <tr id='linhaRecebimento' style='display: none'>
+                                    <td style="text-align:left; " class="formatacaoTexto">Data de recebimento:</td>
+                                    <td style="text-align:center; width:150px; border:none !important;"
+                                        class="formatacaoTexto" id="dataDeRecebimento">
+
+                                        <form action="/action_page.php">
+                                            <input class="datepicker" id="inputDataRecebimento"
+                                                data-date-format="mm/dd/yyyy" />
+
+
+                                        </form>
+                                    </td>
+
+
+                                </tr>
+
+                                <tr>
+                                    <td colspan="2"> <br /> <br /> </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"> <button id="confirmarDestinacaoPopup"
+                                            class="btn btn-success buttonPopupConfirmacao"> Confirmar </button> </td>
+                                </tr>
+                            </table>
+
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTAINER POPUP RECEBIMENTO -->
+        <div class='containerDetalhes' id='containerRecebimento' style='display: none; flex-direction:column;'>
+
+            <div style="width: 88%; height: 6%; display: flex">
+                <div style="width: 100%; height: 100%; display: flex; padding-bottom: 4px">
+                    <div id="totalCotacao" class="labelOne colorTopoTitle">RECEBIMENTO DE ITENS</div>
+                </div>
+            </div>
+            <div class='containerDetalhesInterno'>
+                <div style='width: 23%; height: 100%; display: flex; flex-direction: row;'>
+                    <div style='width: 100%; display: flex; justify-content: center; align-items: center;'>
+                        <img style='height: auto; border-bottom-left-radius: 10px; border-top-left-radius: 10px;'
+                            id='imagemPopup' class='imagemPopup' src='' />
+                    </div>
+                </div>
+                <div style='display: flex; height: 100%; width: 4%; align-items: center; justify-content: center;'>
+                    <hr
+                        style='border-left: 1px solid #dcdcdc; margin-top: 0px; height: 90%; margin-bottom: 0; opacity: 1; background-color: #ffffff' />
+                </div>
+                <div style='width: 72%; height: auto;'>
+                    <div style='width: 100%; height: auto; display: flex'>
+                        <div class='nomeProdutoDetails' style='width: 65%!important;'>" + nomeItem + "</div>
+                        <button type="button" id="receberEstoque" class="btn btn-primary buttonRecebeEstoque"><i
+                                class="fa fa-archive" style='padding-right: 10px;'></i>Receber para estoque</button>
+                        <div id='closeButtonProdutoDetails'
+                            style='color: red; font-size: 25px; display: flex; justify-content: end; align-items: center; width: 5%; height: 100%;'>
+                            <a class='closeButtonProdutoDetails'><i class='fa fa-times-circle'
+                                    aria-hidden='true'></i></a>
+                        </div>
+                    </div>
+                    <div class='modeloProdutoDetails'></div>
+                    <div style='font-weight: 600;'>Marca: <span style="font-weight: 400;"
+                            class='marcaProdutosDetails'></span></div>
+                    <div style='font-weight: 600;'>Código do produto: <span style="font-weight: 400;"
+                            class='produtoProdutosDetails'></span></div>
+                    <div style='font-weight: 600;'>Preço de lista: <span style="font-weight: 400;"
+                            class='codigosPrecosDetails'></span></div>
+                    <div style='font-weight: 600;'>Quantidade: <span style="font-weight: 400;"
+                            class='quantidadeRequisitadaRecebimento'></span></div>
+                    <div style='font-weight: 600;'>Quantidade recebida: <span style="font-weight: 400;"
+                            class='quantidadeRecebida'></span></div>
+                    <div style='font-weight: 600;'>Quantidade a receber: <span style="font-weight: 400;"
+                            class='quantidadeAReceber'></span></div>
+                    <div class='descricaoProdutosDetails'>
+                        <table class='table table-striped' style="font-size: 10px !important;">
+                            <thead style="font-size: 10px !important;">
+                                <tr style="font-size: 10px !important;">
+
+                                    <th scope='col' style="font-size: 10px !important;">PV</th>
+                                    <th scope='col' style="font-size: 10px !important;">Item PV</th>
+                                    <th scope='col' style="font-size: 10px !important;">Nome da conta</th>
+                                    <th scope='col' style="font-size: 10px !important;">Quantidade</th>
+                                    <th scope='col' style="font-size: 10px !important;">Quantidade Recebida</th>
+                                    <th scope='col' style="font-size: 10px !important;">Ação</th>
+
+
+                                </tr>
+
+
+                            </thead>
+                            <tbody id='corpoTabelaSecundariaRecebimento'>
+                                <tr>
+                                    <td id="">0</td>
+                                    <td id="">17/02/2022 </td>
+                                    <td id="">EBSERH HOSPITAL UNIVERCITARIO DO TRIANGULO MINEIRO </td>
+                                    <td id="">115.236.525-01 </td>
+
+                                    <td id=""> V80</td>
+                                    <td id="">Mindray</td>
+                                    <td id=""> 3,00 </td>
+                                    <td id="">3,00</td>
+                                    <td id="">OPR - ANALISE DE COMPRA</td>
+                                    <td> <button type="button" id="acao" class="btn btn-primary"><i
+                                                class="fa fa-paper-plane"></i></button>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTAINER POPUP DESTINACAO -->
+        <div class='containerDetalhes' id='containerDetalhes' style='display: none; flex-direction:column;'>
+
+            <div style="width: 88%; height: 6%; display: flex">
+                <div style="width: 100%; height: 100%; display: flex; padding-bottom: 4px">
+                    <div id="totalCotacao" class="labelOne colorTopoTitle">DESTINAÇÃO DE ITENS</div>
+                </div>
+            </div>
+            <div class='containerDetalhesInterno'>
+                <div style='width: 23%; height: 100%; display: flex; flex-direction: row;'>
+                    <div style='width: 100%; display: flex; justify-content: center; align-items: center;'>
+                        <img style='height: auto; border-bottom-left-radius: 10px; border-top-left-radius: 10px;'
+                            id='imagemPopup' class='imagemPopup' src='' />
+                    </div>
+                </div>
+                <div style='display: flex; height: 100%; width: 4%; align-items: center; justify-content: center;'>
+                    <hr
+                        style='border-left: 1px solid #dcdcdc; margin-top: 0px; height: 90%; margin-bottom: 0; opacity: 1; background-color: #ffffff' />
+                </div>
+                <div style='width: 72%; height: auto;'>
+                    <div style='width: 100%; height: auto; display: flex'>
+                        <div class='nomeProdutoDetails' style='width: 90%!important;'>" + nomeItem + "</div>
+                        <div id='closeButtonProdutoDetails'
+                            style='color: red; font-size: 25px; display: flex; justify-content: end; align-items: center; width: 10%; height: 100%;'>
+                            <a class='closeButtonProdutoDetails'><i class='fa fa-times-circle'
+                                    aria-hidden='true'></i></a>
+                        </div>
+                    </div>
+                    <div class='modeloProdutoDetails'>" + produto + "</div>
+                    <div style='font-weight: 600;'>Marca: <span style="font-weight: 400;"
+                            class='marcaProdutosDetails'></span></div>
+                    <div style='font-weight: 600;'>Codigo do item: <span style="font-weight: 400;"
+                            class='produtoProdutosDetails'></span></div>
+                    <div style='font-weight: 600;'>Quantidade disponível: <span style="font-weight: 400;"
+                            class='codigosPrecosDetails'></span></div>
+
+                    <div class='descricaoProdutosDetails'>
+                        <table class='table table-striped' style="font-size: 10px !important;">
+                            <thead style="font-size: 10px !important;">
+                                <tr style="font-size: 10px !important;">
+
+                                    <th scope='col' style="font-size: 10px !important;">Número do pedido</th>
+                                    <th scope='col' style="font-size: 10px !important;">Prazo de entrga</th>
+                                    <th scope='col' style="font-size: 10px !important;">Nome da conta</th>
+                                    <th scope='col' style="font-size: 10px !important;">Cód. fabricante</th>
+                                    <th scope='col' style="font-size: 10px !important;">Modelo</th>
+                                    <th scope='col' style="font-size: 10px !important;">Marca</th>
+                                    <th scope='col' style="font-size: 10px !important;">Quantidade</th>
+                                    <th scope='col' style="font-size: 10px !important;">Quantidade falta reguisitar</th>
+                                    <th scope='col' style="font-size: 10px !important;">Status</th>
+                                    <th scope='col' style="font-size: 10px !important;">Ação</th>
+
+
+                                </tr>
+
+
+                            </thead>
+                            <tbody id='corpoTabelaPedidosCompra'>
+                                <tr>
+                                    <td id="">0</td>
+                                    <td id="">17/02/2022 </td>
+                                    <td id="">EBSERH HOSPITAL UNIVERCITARIO DO TRIANGULO MINEIRO </td>
+                                    <td id="">115.236.525-01 </td>
+
+                                    <td id=""> V80</td>
+                                    <td id="">Mindray</td>
+                                    <td id=""> 3,00 </td>
+                                    <td id="">3,00</td>
+                                    <td id="">OPR - ANALISE DE COMPRA</td>
+                                    <td> <button type="button" id="acao" class="btn btn-primary"><i
+                                                class="fa fa-paper-plane"></i></button>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="border: 1px solid #00345c; min-height: 100vh; border-radius: 15px; margin-top: 10px;">
+
+
+            <!-- SEGUNDA COLUNA DO CONTAINER -->
+            <div class="col-md-12" style="padding: 0px">
+
+                <!-- PRIMEIRA LINHA COM A LABEL DA COLUNA -->
+                <div style="width: 100%; height: 6%; display: flex">
+
+
+                    <!-- DIV DA LABEL -->
+                    <div style="width: 55%; height: 100%; display: flex; padding: 4px">
+                        <div id="totalCotacao" class="labelOne secondaryBackgroundColor"><i class="fa fa-sliders"
+                                aria-hidden="true"></i>&nbsp;ASSISTENTE DE ITENS ({!v.apenasDestinados ? 'DESTINADOS' :
+                            'NÃO DESTINADOS'})</div>
+                    </div>
+
+                    <div style="width: 20%; height: 100%; display: flex; padding: 4px">
+                        <div class="btn btn-primary buttonAbrePopupStatus">
+                            <lightning:input type="checkbox" label="Apenas Destinados" name="apenasDestinados"
+                                aura:id="btnApenasDestinados" onchange="{!c.handleToggle}" />
+                        </div>
+                    </div>
+
+
+                    <!-- DIV DA LABEL -->
+                    <div style="width: 20%; height: 100%; display: flex; padding: 4px">
+                        <button type='button' id='acao' title='Receber Itens'
+                            class='btn btn-primary  buttonAlteraPrazoEntrega'><i
+                                class='fa fa-calendar-check-o'></i>&nbsp;Alterar previsão de entrega</button>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                    <!-- DIV DA LABEL -->
+                    <div style="width: 5%; height: 100%; display: flex; padding: 4px">
+                        <button type='button' style='font-size: 25px;' id='acao' title='Recarregar lista'
+                            class='btn btn-primary  buttonAtualiza'><i class='fa fa-refresh'></i></button>
+                    </div>
+
+
+                </div>
+
+
+                <div style="width: 100%; height: 94%; padding: 4px;" class="divListaProdutosCotacao">
+
+                    <div style="margin-bottom:5px;display:flex;gap:5px;margin-left: 24px;">
+                        <div style="width:15%" class="buttonAbrePopupStatus">
+                            <input class="custom-checkbox" type="checkbox" onchange="{!c.marcarTodosOsItens}"
+                                id="selecionarTodosCheckbox"> </input>
+                            <label>Selecionar Todos</label>
+                        </div>
+
+                        <aura:if isTrue="{!AND(v.produtosSelecionados != null, v.produtosSelecionados.length > 0)}">
+
+
+                            <div onclick="{!c.abrirModal}" class="buttonAbrePopupStatus"
+                                style="width:3%;color:white;cursor:pointer" title="Alterar Status"><i
+                                    class='fa fa-edit'></i></div>
+
+
+                        </aura:if>
+
+                    </div>
+
+                    <div id="listaCotacao" class="divCotacao">
+
+                        <!-- CONTAINER DA TABELA -->
+                        <div class="containerTabela" style="display: none">
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" width="10%">Código</th>
+                                                <th scope="col" width="7%">Produto</th>
+                                                <th scope="col" width="7%">Modelo</th>
+                                                <th scope="col" width="10%">Marca</th>
+                                                <th scope="col" width="10%">Qtd. Total</th>
+                                                <th scope="col" width="10%">Qtd. Disponível</th>
+                                                <th scope="col" width="50%">Destinações</th>
+                                                <th scope="col" width="25%">Ações do item</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="corpoDaTabela">
+                                            <tr>
+                                                <th scope="row"> <a>00008459</a> </th>
+                                                <td>DJ20-EV20-001-P</td>
+                                                <td> <a>VENTILADOR PULMONAR</a> </td>
+                                                <td>SV-300 (STD)</td>
+                                                <td>MINDRAY</td>
+                                                <td>80.00</td>
+                                                <td>
+
+                                                    <!-- TABELA INTERNA REQUISIÇÕES -->
+                                                    <table class="table table-striped  requisicao ">
+                                                        <thead>
+                                                            <tr class="">
+                                                                <th scope="col" width="20%">Destinação</th>
+                                                                <th scope="col" width="20%">Qtd. Requisitada</th>
+                                                                <th scope="col" width="20%">Qtd. Disponível</th>
+                                                                <th scope="col" width="20%">Pedido de Venda</th>
+                                                                <th scope="col" width="20%">Prod. do PV</th>
+                                                                <th scope="col" width="10%">Acão</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th> **Estoque </th>
+                                                                <td>80.00</td>
+                                                                <td>80,00</td>
+                                                                <td> — </td>
+                                                                <td> — </td>
+                                                                <td> <button type="button" id="acao"
+                                                                        class="btn btn-primary acaoPrincipal"><i
+                                                                            class="fa fa-paper-plane"></i></button>
+                                                                </td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class='about'>Versão: 1.1.0</div>
+    </div>
+
+</aura:component>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Data_do_proximo_contato_menor_5_dias</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    Data_do_pr_ximo_contato__c &gt; 
+        CASE(
+            WEEKDAY(TODAY()), 
+            1, TODAY() + 7,  
+            2, TODAY() + 7,  
+            3, TODAY() + 7,  
+            4, TODAY() + 7,  
+            5, TODAY() + 9,  
+            6, TODAY() + 9,  
+            TODAY() + 8      
+        )
+)</errorConditionFormula>
+    <errorDisplayField>Data_Prevista__c</errorDisplayField>
+    <errorMessage>A data do próximo contato deve ser de no máximo 5 dias úteis</errorMessage>
+</ValidationRule>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Controle_Participantes__c</fullName>
+    <externalId>false</externalId>
+    <label>Controle Participantes</label>
+    <summarizedField>Participante__c.Controle__c</summarizedField>
+    <summaryForeignKey>Participante__c.Ordem_de_trabalho_Relacionada__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

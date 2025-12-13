@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Resumo__c</fullName>
+    <externalId>false</externalId>
+    <label>_Resumo (del)</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Não Requisitado</fullName>
+                <default>false</default>
+                <label>Não Requisitado</label>
+            </value>
+            <value>
+                <fullName>Requisitado Parcial</fullName>
+                <default>false</default>
+                <label>Requisitado Parcial</label>
+            </value>
+            <value>
+                <fullName>Requisitado Total</fullName>
+                <default>false</default>
+                <label>Requisitado Total</label>
+            </value>
+            <value>
+                <fullName>Não Comprado</fullName>
+                <default>false</default>
+                <label>Não Comprado</label>
+            </value>
+            <value>
+                <fullName>Comprado Parcial</fullName>
+                <default>false</default>
+                <label>Comprado Parcial</label>
+            </value>
+            <value>
+                <fullName>Comprado Total</fullName>
+                <default>false</default>
+                <label>Comprado Total</label>
+            </value>
+            <value>
+                <fullName>Não Recebido</fullName>
+                <default>false</default>
+                <label>Não Recebido</label>
+            </value>
+            <value>
+                <fullName>Recebido Parcial</fullName>
+                <default>false</default>
+                <label>Recebido Parcial</label>
+            </value>
+            <value>
+                <fullName>Recebido Total</fullName>
+                <default>false</default>
+                <label>Recebido Total</label>
+            </value>
+            <value>
+                <fullName>Não Entregue</fullName>
+                <default>false</default>
+                <label>Não Entregue</label>
+            </value>
+            <value>
+                <fullName>Entregue Parcial</fullName>
+                <default>false</default>
+                <label>Entregue Parcial</label>
+            </value>
+            <value>
+                <fullName>Entregue Total</fullName>
+                <default>false</default>
+                <label>Entregue Total</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>5</visibleLines>
+</CustomField>

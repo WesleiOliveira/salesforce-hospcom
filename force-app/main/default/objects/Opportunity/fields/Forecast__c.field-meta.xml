@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Forecast__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Propriedade_da_conta__c == &apos;PRIVADO&apos; || Propriedade_da_conta__c == &apos;&apos;,
+IF(TEXT(StageName) = &apos;COMITED&apos;, Amount,
+IF(TEXT(StageName) = &apos;WIN&apos;, 0,
+IF(TEXT(StageName) = &apos;UPSIDE HIGH&apos;, Amount * 0.35,
+IF(TEXT(StageName) = &apos;UPSIDE&apos;, Amount * 0.2,
+IF(TEXT(StageName) = &apos;OPEN&apos;, Amount * 0.1, Amount* 0))))),
+
+IF(Propriedade_da_conta__c == &apos;PUBLICO&apos; || Propriedade_da_conta__c == &apos;FILANTROPIA&apos;,
+IF(TEXT(StageName) = &apos;WIN&apos;, 0,
+IF(TEXT(StageName) = &apos;COMITED&apos; &amp;&amp; TEXT(Sub_Fase__c) != &apos;GARANTIDO&apos;, Amount * 0.4,
+IF(TEXT(StageName) = &apos;COMITED&apos; &amp;&amp; TEXT(Sub_Fase__c) = &apos;GARANTIDO&apos;, Amount ,
+IF(TEXT(StageName) = &apos;UPSIDE HIGH&apos;, Amount * 0.2,
+IF(TEXT(StageName) = &apos;UPSIDE&apos;, Amount * 0.1,
+IF(TEXT(StageName) = &apos;OPEN&apos;, Amount * 0, Amount * 0)))))), null)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Forecast</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <type>Currency</type>
+</CustomField>

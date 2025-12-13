@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Participantes_do_treinamento</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+!$User.Ignorar_erros__c,
+RecordTypeId = &apos;01231000000taxX&apos;,
+TEXT(Status) = &apos;FECHADO CONCLUÍDO&apos;,
+Controle_Participantes__c = 0
+)</errorConditionFormula>
+    <errorMessage>Não é possível finalizar uma OT de treinamento sem preencher a lista de participantes.</errorMessage>
+</ValidationRule>

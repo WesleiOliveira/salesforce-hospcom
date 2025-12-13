@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(TEXT(Status) = &apos;Em aberto&apos;, &apos;1 - Em aberto&apos;,
+IF(TEXT(Status) = &apos;Contatado&apos;, &apos;2 - Contatado&apos;,
+IF(TEXT(Status) = &apos;Qualificado&apos;, &apos;3 - Qualificado&apos;,
+IF(TEXT(Status) = &apos;Não qualificado&apos;, &apos;4 - Não qualificado&apos;,
+IF(TEXT(Status) = &apos;Perdido&apos;, &apos;5 - Perdido&apos;,
+IF(TEXT(Status) = &apos;Convertido em Opp&apos;, &apos;6 - Convertido em Opp&apos;,
+&apos;&apos;
+))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Status*</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

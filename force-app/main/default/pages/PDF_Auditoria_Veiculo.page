@@ -1,0 +1,167 @@
+<apex:page standardController="Acao_corretiva__c" applyHtmlTag="false" showHeader="false" renderAs="pdf">
+  <head>
+   <style type="text/css" media="print">
+            @page {
+                size:21cm 29.7cm;
+                margin:100px 40px 60px 40px;
+                @top-center {
+                    content:element(header);
+                }
+                @bottom-center {
+                    content:element(footer);
+                }
+            }
+            @page{
+                size:A4;
+                background: url({!IF(Acao_corretiva__c.RNC__r.Auditoria__r.Empresa_Auditada__r.CNPJ__c  == '27.476.124/0001-02',$Resource.TimbradoHealth,IF(Acao_corretiva__c.RNC__r.Auditoria__r.Empresa_Auditada__r.CNPJ__c == '05.743.288/0001-08' || Acao_corretiva__c.RNC__r.Auditoria__r.Empresa_Auditada__r.CNPJ__c == '05.743.288/0003-70',$Resource.TimbradoHospcom,IF(Acao_corretiva__c.RNC__r.Auditoria__r.Empresa_Auditada__r.CNPJ__c == '23.813.386/0001-56',$Resource.TimbradoGDB,IF(Acao_corretiva__c.RNC__r.Auditoria__r.Empresa_Auditada__r.CNPJ__c == '40.014.621/0001-49',$Resource.TimbradoABC,$Resource.TimbradoGenerico))))});
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);}
+            }
+            .pagenumber:before {
+                content:counter(page);
+            }
+            .pagecount:before {
+                content:counter(pages);
+            }
+            div.header {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(header);
+                height:60px;
+            }
+            div.content {
+            }
+            div.footer {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(footer);
+                height:20px;
+                text-align:right;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                font-weight:normal;
+            }
+        </style>
+        <style type="text/css" media="print">
+        /*
+            @page:first{
+                size:A4;
+                background: url($Resource.SobreHealth);
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);
+                }
+            }
+            
+            @page{
+                size:A4;
+                background: url($Resource.TimbradoHealth);
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);}
+            }
+  */
+            td, tr{
+            padding: 0;
+            margin: 0;
+        }
+            
+            *{
+                font-family: Arial, Helvetica, sans-serif;
+                color: #0c3557;
+                
+                text-transform: uppercase;
+            }
+            .titulo{
+                font-family:arial, verdana, sans-serif;
+                font-size:15px;
+                text-align:left;
+                font-weight:bold; 
+                width:100%;
+            }
+            .tabela_geral{
+                border-collapse:collapse;
+                width:100%;
+            }
+            table.print-friendly tr td, table.print-friendly tr th {
+                page-break-inside: avoid;
+            }
+            .titulo{
+              
+                text-align: left;
+                padding: 5px 1px;
+                margin-top: 20px;
+                
+
+                
+            }
+            .maiuscula{
+                text-transform: uppercase;
+            }
+          
+            .questoes{
+             
+            
+            }
+            .questao{
+                display: flex;
+                flex-direction: row;
+                padding: 5px;
+            }
+
+            .valor{
+                margin-bottom: -100px;
+                border: #0c3557 1px solid;
+                
+            }
+
+            .sessao-questao{
+                font-size: 14px;
+                padding: 10px 0  0 5px;
+            }
+            
+            
+            .questao, p{
+                padding: 0px !important;
+                margin: 0;
+                padding-right: 15px !important;
+                font-size: 12px !important;
+            }
+
+            h1,h2{
+                padding: 10px 0;
+                margin: 0;
+                font-size: 14px !important;
+            }
+            .resposta{
+                font-weight: bold;
+                font-size: 14px;
+            }
+            .t{
+                text-align: center;
+                padding: 1px 1px;
+                font-size: 14px;
+            }
+            span{font-size: 12px !important;}
+            .ass{
+                position: fixed;
+                bottom: 0;
+            }
+            td{
+                width: 50%;
+            }
+        </style>
+  </head>
+  
+  <body>
+      <apex:pageBlock >
+                
+                <div class="footer" style="text-align:center !important"><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Página <span class="pagenumber"></span> de <span class="pagecount"></span> - Emissão em:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{! TODAY() }" /></apex:outputText>
+                </div>
+               
+      </apex:pageBlock>
+
+  </body>
+
+</apex:page>

@@ -1,0 +1,794 @@
+<apex:page controller="AssistentePedidoCompra" showHeader="false" showChat="false" standardStylesheets="false" docType="html-5.0">
+    <html>
+        <head>
+            <title>Criar Cotação</title>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+            <link   href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" rel="stylesheet"/>
+            <link   href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.min.css" rel="stylesheet"/>
+            <script src="{!URLFOR($Resource.bootstrap3iso, 'js/bootstrap.min.js')}"></script>
+            <link   href="{!URLFOR($Resource.bootstrap3iso, 'css/bootstrap.min.css')}" rel="stylesheet"/>
+            <link   rel="stylesheet" href="{!$Resource.breadcrumb}" />
+
+            <style>
+                .cabecalho-principal{
+                    background-color: #f2f7ff!important;
+                    padding:4px!important;
+                    text-align:center!important;
+                    font-size:22px!important;
+                    font-weight:bold!important;
+                }
+                .cabecalho-secundario-a{
+                    background-color: #fdfdfd!important;
+                    text-align:center!important;
+                    padding:5px!important;
+                    border-bottom: 1px solid #ddd!important;
+                }
+                .cabecalho-secundario-b{
+                    padding:7px!important;
+                    font-size:18px!important;
+                }
+                .barra-navegacao{
+                    padding:8px!important;
+                }
+
+                .tabela-cabecalho{
+                    border-top: 2px solid #ddd!important;
+                }
+                .item-cabecalho{
+                    font-weight:bold!important;
+                    font-size:12px!important;
+                }
+                .item-descricao{
+                    font-size:11.5px!important;
+                    border-top-width:1px!important;
+                }
+                .item-descricao:hover{
+                    background-color:#f5f5f5;
+                }
+                .item-pai{
+                    background-color:#f9f9f9;
+                }
+                .item-mover{
+                    cursor: move;
+                }
+                .item-placeholder{
+                    border: 1px gray dotted;
+                    height: 100px!important;
+                    margin-bottom:5px;
+                }
+                .collapsing {
+                  transition: none!important;
+                }
+                .datepicker{ 
+                    z-index:9999!important;
+                    position:relative;
+                }
+                .alert{
+                    font-weight:bold!important;
+                    padding-top:10px!important;
+                    padding-bottom:10px!important;
+                }
+            </style>
+            <script>
+                $(document).ready(function(){
+                    
+                    // inicializa checkboxes automáticos em massa
+                    $("#checkedAll").change(function(){
+                        if(this.checked){
+                            $(".checkSingle").each(function(){
+                                this.checked=true;
+                            })
+                        }else{
+                            $(".checkSingle").each(function(){
+                                this.checked=false;
+                            })
+                        }
+                    });
+                    $(".checkSingle").click(function (){
+                        if ($(this).is(":checked")){
+                            var isAllChecked = 0;
+                            $(".checkSingle").each(function(){
+                                if(!this.checked)
+                                    isAllChecked = 1;
+                            })
+                            if(isAllChecked == 0){ $("#checkedAll").prop("checked", true); }
+                        }else {
+                            $("#checkedAll").prop("checked", false);
+                        }
+                    });
+                     
+                    // reposiciona botões de campos de pesquisa
+                    $(".campo-pesquisa").each(function(){
+                        $(this).find("span").addClass("input-group");
+                        $(this).find("input[type*='text']").addClass("form-control input-sm");
+                        $(this).find("a").addClass("input-group-btn");
+                        $(this).find("a").html("<div class=\"btn btn-sm btn-default\"><i class=\"glyphicon glyphicon-search\"></i></div>");
+                    });
+                    
+                    // desbloqueia campos quantidade
+                    $(".campo-qtd input").each(function(){
+                        if($(this).val() != '' && $(this).val() != null)
+                            $(this).prop("disabled", false); 
+                    });
+                    
+                });
+                
+                // seleciona itens e subitens
+                function SelecaoFilho(elemento, id){
+                    if(elemento.checked){
+                        $("td[name*='"+id+"'] input.check-requisicao").each(function(){
+                            this.checked=true;
+                        })
+                    }else{
+                        $("td[name*='"+id+"'] input.check-requisicao").each(function(){
+                            this.checked=false;
+                        })
+                    }
+                }
+                function SelecaoPai(elemento, id){
+                    if(elemento.checked){
+                        var isAllChecked = 0;
+                        $("td[name*='"+id+"'] input.check-requisicao").each(function(){
+                            if(!this.checked)
+                                isAllChecked = 1;
+                        })
+                        if(isAllChecked == 0){ 
+                            $("td[name*='"+id+"'] input.check-produto").each(function(){
+                                this.checked=true;
+                            })
+                        }
+                    }else{
+                        $("td[name*='"+id+"'] input.check-produto").each(function(){
+                            this.checked=false;
+                        })
+                    }
+                }
+                
+                // remove obrigatoriedade de campos em botão "anterior"
+                function RemoveObrigatorio(){
+                    $("input[required*='required']").each(function(){
+                        $(this).removeAttr("required");
+                    })
+                }
+                
+                // troca item pai/filho, vice/versa
+                function IdentaItem(item){
+                    if($(item).hasClass("item-pai")){
+                        $(item).removeClass("item-pai");
+                    }
+                    else{
+                        $(item).addClass("item-pai");
+                    }
+                    NumerarItens();
+                }
+                
+                // inverte colapse
+                function InverteColapseTodos(elemento){
+                    // expande
+                    if($(elemento).hasClass("glyphicon-chevron-right")){
+                        $(".glyphicon-chevron-right").each(function(){
+                            $(this).removeClass("glyphicon-chevron-right");
+                            $(this).addClass("glyphicon-chevron-down");
+                        })
+                        $("tr.collapse").each(function(){
+                            $(this).collapse('show');
+                        })
+                    }
+                    // recolhe
+                    else{
+                        $(".glyphicon-chevron-down").each(function(){
+                            $(this).removeClass("glyphicon-chevron-down");
+                            $(this).addClass("glyphicon-chevron-right");
+                        })
+                        $("tr.collapse").each(function(){
+                            $(this).collapse('hide');
+                        })
+                    }
+                }
+                function InverteColapse(elemento, id){
+                    // expande
+                    if($(elemento).hasClass("glyphicon-chevron-right")){
+                        $(elemento).removeClass("glyphicon-chevron-right");
+                        $(elemento).addClass("glyphicon-chevron-down");
+                        $("tr[name*='"+id+"']").each(function(){
+                            $(this).collapse('show');
+                        })
+                    }
+                    // recolhe
+                    else{
+                        $(elemento).removeClass("glyphicon-chevron-down");
+                        $(elemento).addClass("glyphicon-chevron-right");
+                        $("tr[name*='"+id+"']").each(function(){
+                            $(this).collapse('hide');
+                        })
+                    }
+                }
+                
+                // controla quantdades de pesquisa
+                function CampoQtd(elemento, id){
+                    if(elemento.checked){
+                        $("td[name*='"+id+"'] input").each(function(){
+                            $(this).prop("disabled", false); 
+                            $(this).prop("required", true);
+                        })
+                    }else{
+                        $("td[name*='"+id+"'] input").each(function(){
+                            $(this).prop("disabled", true); 
+                            $(this).val("");
+                            $(this).removeAttr("required");
+                        })
+                    }
+                }
+            </script>
+        </head>
+
+        <body style="margin-top:7px;">
+            <div class="bootstrap-iso">
+                <div class="container-fluid">
+                    <apex:form >
+                        <!-- painel -->
+                        <div class="panel panel-default">
+
+                            <!-- painel: cabeçalho -->
+                            <div class="panel-heading cabecalho-principal">
+                                Criar Cotação
+                            </div>
+                            <div class="panel-body cabecalho-secundario-a">
+                                <div class="row barra-navegacao">
+                                    <div class="col-xs-12" style="text-align:center;">
+                                        <div class="btn-group btn-breadcrumb" style="text-align:center;">
+                                            <a class="btn btn-md btn-default btn-info">Você está em </a>
+                                            <apex:repeat value="{!etapas}" var="etapa_nav">
+                                                <apex:variable var="style" value="{!'btn-default'}"/>
+                                                <apex:outputText rendered="{!IF(etapa[0] == LOWER(etapa_nav), true, false)}" >
+                                                    <apex:variable var="style" value="{!'btn-info'}"/>
+                                                </apex:outputtext>
+                                                <a class="btn btn-md btn-default {!style}">{!etapa_nav}</a>
+                                            </apex:repeat>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cabecalho-secundario-b">{!etapa[1]}</div>
+                            </div>
+
+                            <!-- painel: corpo -->
+                            <div class="panel-body">
+                            
+                                <!-- erros -->
+                                <apex:outputText rendered="{!IF(tem_erros == true, true, false)}" >
+                                    <apex:variable var="cont_msg" value="{!0}"/>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="alert alert-danger alert-dismissible">
+                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                <apex:repeat value="{!erros}" var="erro">
+                                                    <apex:variable var="cont_msg" value="{!cont_msg+1}"/>
+                                                    <apex:outputText rendered="{!IF(cont_msg > 1, true, false)}" >
+                                                        <br/>
+                                                    </apex:outputText>
+                                                    {!erro}
+                                                </apex:repeat>
+                                            </div>                      
+                                        </div>
+                                    </div>
+                                    <br/>
+                                </apex:outputText>
+                            
+                                <!-- corpo: pedido -->
+                                <apex:outputText rendered="{!IF(etapa[0] == 'cotação', true, false)}" >
+                                    <!-- menu -->
+
+                                    <!-- formulário -->
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <label>Descrição:</label>
+                                            <apex:inputField value="{!pedido.Descricao__c}" StyleClass="form-control input-sm" required="true"/>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <label>Data de início:</label>
+                                            <apex:inputField value="{!pedido.Data_de_inicio__c}" styleClass="form-control input-sm datepicker" showDatePicker="true" required="true"/>
+                                        </div>
+                                        <div class="col-xs-6" style="margin-bottom:11px;">
+                                            <label>Origem:</label>
+                                            <apex:inputField value="{!pedido.Origem__c}" styleClass="form-control input-sm" required="true"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6 campo-pesquisa">
+                                            <apex:actionRegion >
+                                                <label>Empresa:</label>
+                                                <apex:inputField value="{!pedido.Comprador__c}" onchange="BuscaEndereco();" required="true"/>
+                                                <apex:actionFunction name="BuscaEndereco" action="{!BuscaEndereco}" rerender="entrega_pais,entrega_rua,entrega_cidade,entrega_estado,entrega_cep"/>
+                                            </apex:actionRegion>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <label>Endereço de Entrega:</label>
+                                            <apex:inputField value="{!pedido.Entrega_Pais__c}"   id="entrega_pais" html-placeholder="País de envio" styleClass="form-control input-sm" showDatePicker="true" required="true"/>
+                                            <apex:inputField value="{!pedido.Entrega_Rua__c}"    id="entrega_rua" html-placeholder="Rua de envio" styleClass="form-control input-sm" showDatePicker="true" required="true"/>
+                                            <apex:inputField value="{!pedido.Entrega_Cidade__c}" id="entrega_cidade" html-placeholder="Cidade de envio" styleClass="form-control input-sm" showDatePicker="true" required="true"/>
+                                            <apex:inputField value="{!pedido.Entrega_Estado__c}" id="entrega_estado" html-placeholder="Estado de envio" styleClass="form-control input-sm" showDatePicker="true" required="true"/>
+                                            <apex:inputField value="{!pedido.Entrega_CEP__c}"    id="entrega_cep" html-placeholder="CEP de envio" styleClass="form-control input-sm" showDatePicker="true" required="true"/>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                </apex:outputText>
+                            
+                                <!-- corpo: selecionar -->
+                                <apex:outputText rendered="{!IF(etapa[0] == 'selecionar', true, false)}" >
+                                
+                                    <!-- menu -->
+                                    <div class="row">
+                                        <div class="col-xs-4" style="text-align:center;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Pedido:</span>
+                                                <apex:inputText html-placeholder="Número do pedido..." styleClass="form-control input-md" value="{!filtro_pedido}"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4" style="text-align:center;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Marca:</span>
+                                                <apex:inputText html-placeholder="Marca do produto..." styleClass="form-control input-md" value="{!filtro_marca}"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4" style="text-align:center;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">P/N:</span>
+                                                <apex:inputText html-placeholder="P/N do produto..." styleClass="form-control input-md" value="{!filtro_codigo}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4" style="text-align:center;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Modelo:</span>
+                                                <apex:inputText html-placeholder="Modelo do produto..." styleClass="form-control input-md" value="{!filtro_modelo}"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4" style="text-align:center;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Nome:</span>
+                                                <apex:inputText html-placeholder="Nome do produto..." styleClass="form-control input-md" value="{!filtro_nome}"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-offset-1 col-xs-2" style="text-align:center;">
+                                            <apex:commandButton styleClass="btn btn-md btn-default" style="width:100%;margin-top:4px;" action="{!ObterItens}" value="Pesquisar"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-offset-2 col-xs-8" style="text-align:center;">
+                                            <br/>
+                                            <b>Encontrado</b> {!num_agrupamentos_full} produtos de {!num_requisicoes_full} itens.
+                                            <b>Mostrando</b> {!num_agrupamentos} produtos de {!num_requisicoes} itens.
+                                            <br/><b>Página</b> {!pagina} de {!num_pagina}
+                                        </div>
+                                    </div>
+                                    <br/>
+
+                                    <!-- listagem -->
+                                    <div class="row">
+                                        <div class="col-xs-12">
+
+                                            <table class="table table-condensed" style="width:100%;" id="lista-itens" >
+
+                                                <!-- cabeçalho -->
+                                                <thead class="tabela-cabecalho">
+                                                    <tr>
+                                                        <th>
+                                                            <span class="glyphicon glyphicon-chevron-right collapsed" onclick="InverteColapseTodos(this);"></span >
+                                                        </th>
+                                                        <th><input type="checkbox" id="checkedAll" name="checkedAll"/></th>
+                                                        <th>P/N</th>
+                                                        <th>Img</th>
+                                                        <th>Nome</th>
+                                                        <th>Modelo</th>
+                                                        <th>Marca</th>
+                                                        <th>Qtd.</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <!-- itens -->
+                                                <apex:repeat value="{!c_agrupamentos_gui}" var="c_agrupamento">
+                                                    <tbody class="item-descricao">
+                                                        <tr class="item-pai">
+                                                            <td class="item-fontes">
+                                                                <span class="glyphicon glyphicon-chevron-right" onclick="InverteColapse(this, '{!c_agrupamento.produto.Id}');"></span >
+                                                            </td>
+                                                            <td name="{!c_agrupamento.produto.Id}"><apex:inputCheckbox value="{!c_agrupamento.flag}" styleClass="checkSingle check-produto" onchange="SelecaoFilho(this,'{!c_agrupamento.produto.Id}');"/></td>
+                                                            <td><apex:outputField value="{!c_agrupamento.produto.productCode}"/></td>
+                                                            <td><img src="{!c_agrupamento.produto.URL_da_Imagem__c}" style="width:40px;height:40px;" /></td>
+                                                            <td><apex:outputField value="{!c_agrupamento.produto.Name}"/></td>
+                                                            <td><apex:outputField value="{!c_agrupamento.produto.Modelo__c}"/></td>
+                                                            <td><apex:outputField value="{!c_agrupamento.produto.Marca__c}"/></td>
+                                                            <td><apex:outputText value="{!c_agrupamento.quantidade}"/></td>
+                                                        </tr>
+                                                        <apex:repeat value="{!c_requisicoes_gui}" var="c_requisicao">
+                                                            <apex:outputText rendered="{!IF(c_agrupamento.produto.Id == c_requisicao.item_venda.Product2Id, true, false)}" >
+                                                                <tr name="{!c_agrupamento.produto.Id}" class="collapse">
+                                                                    <td>&#8627;</td>
+                                                                    <td name="{!c_agrupamento.produto.Id}"><apex:inputCheckbox styleClass="checkSingle check-requisicao" value="{!c_requisicao.flag}" onchange="SelecaoPai(this,'{!c_agrupamento.produto.Id}');"/></td>
+                                                                    <td colspan="5">
+                                                                        <b>Pedido: </b><apex:outputText value="{!c_requisicao.item_venda.OrderNumber}"/>
+                                                                        | <b>Item: </b><apex:outputText value="{!c_requisicao.item_venda.OrderItemNumber}"/>
+                                                                        <apex:outputText rendered="{!IF(c_requisicao.item_venda.Descricao_da_linha != '', true, false)}" >
+                                                                            | <b>Descrição: </b><apex:outputText value="{!c_requisicao.item_venda.Descricao_da_linha}"/>
+                                                                        </apex:outputText>
+                                                                        <br/><b>Nome da conta: </b><apex:outputText value="{!c_requisicao.item_venda.OrderItemConta}"/>
+                                                                        <br/><b>Faturamento feito: </b><apex:outputText value="{!c_requisicao.item_venda.OrderItemFaturamento}"/>
+                                                                    </td>
+                                                                    <td>
+                                                                        <apex:outputText value="{!c_requisicao.item_venda.Quantidade_falta_requisitar}"/>
+                                                                    </td>
+                                                                </tr>
+                                                            </apex:outputText>
+                                                        </apex:repeat>
+                                                    </tbody>
+                                                </apex:repeat>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- paginação -->
+                                    <div class="row">
+                                        <div class="col-xs-offset-2 col-xs-4" style="text-align:right;">
+                                            <apex:outputText rendered="{!IF(pagina > 1, true, false)}" >
+                                                <apex:commandButton styleClass="btn btn-default" onclick="RemoveObrigatorio();" action="{!PaginacaoAnterior}" value="Voltar"/>
+                                            </apex:outputText>
+                                        </div>
+                                        <div class="col-xs-4" style="text-align:left;">
+                                            <apex:outputText rendered="{!IF(pagina < num_pagina, true, false)}" >
+                                                <apex:commandButton styleClass="btn btn-default" onclick="RemoveObrigatorio();" action="{!PaginacaoSeguinte}" value="Próxima" />
+                                            </apex:outputText>
+                                        </div>
+                                    </div>
+                                    <br/>
+
+                                </apex:outputText>
+
+                                <!-- corpo: adicionar -->
+                                <apex:outputText rendered="{!IF(etapa[0] == 'adicionar', true, false)}" >
+                                
+                                    <!-- menu -->
+                                    <div class="row">
+                                        <div class="col-xs-offset-2 col-xs-6" style="text-align:center;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Pesquisar</span>
+                                                <apex:inputText html-placeholder="P/N, nome, modelo, etc..." styleClass="form-control input-md" value="{!filtro_generico}"/>
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-2" style="text-align:center;">
+                                            <apex:commandButton styleClass="btn btn-md btn-default" style="width:100%;" action="{!PesquisaProdutos}" value="Pesquisar"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-offset-2 col-xs-8" style="text-align:center;">
+                                            <br/>
+                                            <b>Encontrado</b> {!num_requisicoes_full} produtos
+                                        </div>
+                                    </div>
+                                    <br/>
+
+                                    <!-- listagem -->
+                                    <div class="row">
+                                        <div class="col-xs-12">
+
+                                            <table class="table table-condensed" style="width:100%;" id="lista-itens" >
+
+                                                <!-- cabeçalho -->
+                                                <thead class="tabela-cabecalho">
+                                                    <tr>
+                                                        <th>&nbsp;</th>
+                                                        <th>P/N</th>
+                                                        <th>Img</th>
+                                                        <th>Nome</th>
+                                                        <th>Modelo</th>
+                                                        <th>Marca</th>
+                                                        <th>Qtd.</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <!-- itens -->
+                                                <apex:repeat value="{!c_requisicoes_gui}" var="c_requisicao">
+                                                    <tbody class="item-descricao">
+                                                        <tr>
+                                                            <td><apex:inputCheckbox value="{!c_requisicao.flag}" onChange="CampoQtd(this, '{!c_requisicao.produto.Id}');"/></td>
+                                                            <td><apex:outputField value="{!c_requisicao.produto.productCode}"/></td>
+                                                            <td><img src="{!c_requisicao.produto.URL_da_Imagem__c}" style="width:40px;height:40px;" /></td>
+                                                            <td><apex:outputField value="{!c_requisicao.produto.Name}"/></td>
+                                                            <td><apex:outputField value="{!c_requisicao.produto.Modelo__c}"/></td>
+                                                            <td><apex:outputField value="{!c_requisicao.produto.Marca__c}"/></td>
+                                                            <td class="campo-qtd" name="{!c_requisicao.produto.Id}"><apex:inputField styleClass="form-control input-md" value="{!c_requisicao.requisicao.Quantidade_requisitada__c}" html-disabled="true" /></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </apex:repeat>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                    
+                                </apex:outputText>
+                                
+                                <!-- corpo: fornecedor -->
+                                <apex:outputText rendered="{!IF(etapa[0] == 'fornecedor', true, false)}" >
+                                
+                                    <!-- menu -->
+                                    <div class="row">
+                                        <div class="col-xs-offset-2 col-xs-6" style="text-align:center;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Fornecedor</span>
+                                                <apex:inputText html-placeholder="Nome fantasia, razão social, CNPJ..." styleClass="form-control input-md" value="{!filtro_generico}"/>
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-2" style="text-align:center;">
+                                            <apex:commandButton styleClass="btn btn-md btn-default" style="width:100%;" action="{!PesquisaFornecedor}" value="Pesquisar"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-offset-2 col-xs-8" style="text-align:center;">
+                                            <br/>
+                                            <b>Encontrado</b> {!num_fornecedores_full} fornecedores
+                                        </div>
+                                    </div>
+                                    <br/>
+
+                                    <!-- listagem -->
+                                    <div class="row">
+                                        <div class="col-xs-12">
+
+                                            <table class="table table-condensed" style="width:100%;" id="lista-itens" >
+
+                                                <!-- cabeçalho -->
+                                                <thead class="tabela-cabecalho">
+                                                    <tr>
+                                                        <th>&nbsp;</th>
+                                                        <th>CNPJ</th>
+                                                        <th>Razão Social</th>
+                                                        <th>Nome Fantasia</th>
+                                                        <th>Localização</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <!-- itens -->
+                                                <apex:repeat value="{!c_fornecedores_full}" var="c_fornecedor">
+                                                    <tbody class="item-descricao">
+                                                        <tr>
+                                                            <td><apex:inputCheckbox value="{!c_fornecedor.flag}"/></td>
+                                                            <td><apex:outputField value="{!c_fornecedor.conta.CNPJ__c}"/></td>
+                                                            <td><apex:outputField value="{!c_fornecedor.conta.Raz_o_Social__c}"/></td>
+                                                            <td><apex:outputField value="{!c_fornecedor.conta.Name}"/></td>
+                                                            <td><apex:outputField value="{!c_fornecedor.conta.BillingCity}"/>-<apex:outputField value="{!c_fornecedor.conta.BillingState}"/></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </apex:repeat>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                    
+                                </apex:outputText>
+                                
+                                <!-- corpo: confirmar -->
+                                <apex:outputText rendered="{!IF(etapa[0] == 'confirmar', true, false)}" >
+                                
+                                    <!-- formulário -->
+                                    <div class="row">
+                                        <div class="col-xs-offset-2 col-xs-8" style="text-align:center;">
+                                            <p><b>Cotação</b></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <label>Descrição:&nbsp;</label>
+                                            <apex:outputField value="{!pedido.Descricao__c}"/>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <label>Data de início:&nbsp;</label>
+                                            <apex:outputField value="{!pedido.Data_de_inicio__c}"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <label>Empresa:&nbsp;</label>
+                                            <apex:outputField value="{!pedido.Comprador__c}"/>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <label>Endereço de entrega:</label>&nbsp;
+                                            <apex:outputField value="{!pedido.Entrega_Rua__c}"/>,&nbsp;
+                                            <apex:outputField value="{!pedido.Entrega_Cidade__c}"/>&nbsp;-&nbsp;
+                                            <apex:outputField value="{!pedido.Entrega_Estado__c}"/>,&nbsp;
+                                  CEP:&nbsp;<apex:outputField value="{!pedido.Entrega_CEP__c}"/>,&nbsp;
+                                            <apex:outputField value="{!pedido.Entrega_Pais__c}"/>.
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                
+                                    <!-- listagem fornecedores-->
+                                    <div class="row">
+                                        <div class="col-xs-offset-2 col-xs-8" style="text-align:center;">
+                                            <p><b>Fornecedores</b></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+
+                                            <apex:outputText rendered="{!IF(num_fornecedores_full > 0, true, false)}" >
+                                                <table class="table table-condensed" style="width:100%;" id="lista-itens" >
+
+                                                    <!-- cabeçalho -->
+                                                    <thead class="tabela-cabecalho">
+                                                        <tr>
+                                                            <th>CNPJ</th>
+                                                            <th>Razão Social</th>
+                                                            <th>Nome Fantasia</th>
+                                                            <th>Localização</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <!-- itens -->
+                                                    <apex:repeat value="{!c_fornecedores_full}" var="c_fornecedor">
+                                                        <tbody class="item-descricao">
+                                                            <tr>
+                                                                <td><apex:outputField value="{!c_fornecedor.conta.CNPJ__c}"/></td>
+                                                                <td><apex:outputField value="{!c_fornecedor.conta.Raz_o_Social__c}"/></td>
+                                                                <td><apex:outputField value="{!c_fornecedor.conta.Name}"/></td>
+                                                                <td><apex:outputField value="{!c_fornecedor.conta.BillingCity}"/>-<apex:outputField value="{!c_fornecedor.conta.BillingState}"/></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </apex:repeat>
+                                                </table>
+                                            </apex:outputText>
+                                            <apex:outputText rendered="{!IF(num_fornecedores_full = 0, true, false)}" >
+                                                <div class="alert alert-danger">
+                                                    <strong>Selecione ao menos 1 fornecedor para efetivar a operação</strong>
+                                                </div>
+                                            </apex:outputText>
+                                            
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    
+                                    <!-- listagem Itens -->
+                                    <div class="row">
+                                        <div class="col-xs-offset-2 col-xs-8" style="text-align:center;">
+                                            <p><b>Produtos</b></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+
+                                            <apex:outputText rendered="{!IF(num_agrupamentos_full > 0, true, false)}" >
+                                                <table class="table table-condensed" style="width:100%;" id="lista-itens" >
+
+                                                    <!-- cabeçalho -->
+                                                    <thead class="tabela-cabecalho">
+                                                        <tr>
+                                                            <th>P/N</th>
+                                                            <th>Img</th>
+                                                            <th>Nome</th>
+                                                            <th>Modelo</th>
+                                                            <th>Marca</th>
+                                                            <th>Qtd.</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <!-- itens -->
+                                                    <apex:repeat value="{!c_agrupamentos_gui}" var="c_agrupamento">
+                                                        <tbody class="item-descricao">
+                                                            <tr>
+                                                                <td><apex:outputField value="{!c_agrupamento.produto.productCode}"/></td>
+                                                                <td><img src="{!c_agrupamento.produto.URL_da_Imagem__c}" style="width:40px;height:40px;" /></td>
+                                                                <td><apex:outputField value="{!c_agrupamento.produto.Name}"/></td>
+                                                                <td><apex:outputField value="{!c_agrupamento.produto.Modelo__c}"/></td>
+                                                                <td><apex:outputField value="{!c_agrupamento.produto.Marca__c}"/></td>
+                                                                <td><apex:outputText value="{!c_agrupamento.quantidade}"/></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </apex:repeat>
+                                                </table>
+                                            </apex:outputText>
+                                            <apex:outputText rendered="{!IF(num_agrupamentos_full = 0, true, false)}" >
+                                                <div class="alert alert-danger"> 
+                                                    <strong>Selecione ao menos 1 produto para efetivar a operação</strong>
+                                                </div>
+                                            </apex:outputText>
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </apex:outputText>
+                                
+                            </div>
+                        
+                            <!-- painel: rodapé -->
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <div class="col-xs-offset-4 col-xs-2">
+                                        <apex:outputText rendered="{!IF(etapa[0] != 'cotação', true, false)}" >
+                                            <apex:commandButton styleClass="btn btn-default" style="width:100%;" onclick="RemoveObrigatorio();" action="{!PaginaAnterior}" value="Anterior"/>
+                                        </apex:outputText>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <apex:outputText rendered="{!IF(etapa[0] != 'confirmar', true, false)}" >
+                                            <apex:commandButton styleClass="btn btn-default" style="width:100%;" action="{!PaginaSeguinte}" value="Seguinte"/>
+                                        </apex:outputText>
+                                        <apex:outputText rendered="{!IF(AND(etapa[0] == 'confirmar', num_fornecedores_full>0, num_agrupamentos_full>0), true, false)}" >
+                                            <apex:commandButton styleClass="btn btn-default" style="width:100%;" action="{!Efetiva}" value="Terminar"/>
+                                        </apex:outputText>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </apex:form>
+                </div>
+            </div>
+            <script>
+
+                // inicializa campos de filtro
+                $("#caixa-pesquisa").val("");
+                $("#caixa-pesquisa").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("#lista-itens tbody").filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+
+                $(document).ready(function(){
+                    
+                    // inicializa arrastar-soltar de itens
+                    $("#lista-itens").sortable({
+                        items: ".item-mover",
+                        placeholder: "item-placeholder"
+                    });
+                    $("#lista-itens").disableSelection();
+                    $("#lista-itens").on(
+                        "sortupdate", function(event, ui) {
+                            if(this === ui.item.parent()[0]) {
+                                NumerarItens();
+                            }
+                        }
+                    );
+                    
+                    // reordena itens ao carregar página
+                    if('{!etapa[0]}'=='ordenar')
+                        NumerarItens();
+                    
+                    // inicializa calendários em campos data
+                    $(".datepicker").datepicker({
+                        dateFormat: 'dd/mm/yy'
+                    });
+                })
+                
+                // numera ordenadamente itens pai e filho
+                function NumerarItens(){
+                    var item_pai = 1;
+                    var item_filho = $("tbody[name*='item-corpo'].item-pai").length+1;
+
+                    $("tbody[name*='item-corpo']").each(function(){
+                        if($(this).hasClass('item-pai')){
+                            $(this).find("[name*='item-item'] [name*='item-valor']").html(item_pai);
+                            $(this).find("[name*='item-item']").find("input").val(item_pai);
+
+                            $(this).find("[name*='item-item-pai'] [name*='item-valor']").html('');
+                            $(this).find("[name*='item-item-pai']").find("input").val('');
+                            item_pai += 1;
+                        }
+                        else{
+                            $(this).find("[name*='item-item'] [name*='item-valor']").html('');
+                            $(this).find("[name*='item-item']").find("input").val(item_filho);
+
+                            $(this).find("[name*='item-item-pai'] [name*='item-valor']").html('&#8627;');
+                            $(this).find("[name*='item-item-pai']").find("input").val(item_pai-1);
+                            item_filho += 1;
+                        }
+                    })
+                }
+            </script>
+        </body>
+    </html>
+</apex:page>

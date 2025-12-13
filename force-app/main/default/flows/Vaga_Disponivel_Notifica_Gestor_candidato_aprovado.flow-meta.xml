@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>email_para_gestor</name>
+        <label>email para gestor</label>
+        <locationX>176</locationX>
+        <locationY>539</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>email_gestor</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>title</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>body</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <apiVersion>63.0</apiVersion>
+    <assignments>
+        <name>atribui_id</name>
+        <label>atribui email</label>
+        <locationX>176</locationX>
+        <locationY>431</locationY>
+        <assignmentItems>
+            <assignToReference>email_gestor</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>$Record.Gestor_novo__r.Email</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>email_para_gestor</targetReference>
+        </connector>
+    </assignments>
+    <environments>Default</environments>
+    <formulas>
+        <name>primeiroNomeGestor</name>
+        <dataType>String</dataType>
+        <expression>LOWER(MID(LEFT({!nome_completo_gestor}, FIND(&quot; &quot;, {!nome_completo_gestor}) - 1), 2, LEN(LEFT({!nome_completo_gestor}, FIND(&quot; &quot;, {!nome_completo_gestor}) - 1)) - 2))</expression>
+    </formulas>
+    <interviewLabel>Vaga Disponivel — Notifica Gestor candidato aprovado {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Vaga Disponivel — Notifica Gestor candidato aprovado</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>pega_nome_do_candidato</name>
+        <label>pega nome do candidato</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>atribui_id</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Vaga_Dispon_vel__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Recrutamento__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>pega_nome_do_candidato</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Processo Admissional</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Empresa__c</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>IZU</stringValue>
+            </value>
+        </filters>
+        <object>Vagas_Dispon_veis__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>body</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Atenção gestor!
+O candidato selecionado {!pega_nome_do_candidato.Nome_Completo__c} foi aprovado e começa a trabalhar no dia:  {!pega_nome_do_candidato.Data_de_Admissao__c}.
+Programe-se a partir de agora para o treinamento na função do novo colaborador.
+Lembre-se: A integração do RH tem duração de 1 dia.</text>
+    </textTemplates>
+    <textTemplates>
+        <name>title</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>NOVO CANDIDATO APROVADO!</text>
+    </textTemplates>
+    <variables>
+        <name>email_gestor</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>id_gestor</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>nome_completo_gestor</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

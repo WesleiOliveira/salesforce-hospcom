@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MediaLideranca__c</fullName>
+    <externalId>false</externalId>
+    <formula>(
+(((G14__c * 7) + (C14__c * 3))/10)
++
+(((G15__c * 7) + (C15__c * 3))/10)
++
+(((G16__c * 7) + (C16__c * 3))/10)
+)/3</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Media Liderança</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

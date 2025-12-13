@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HOSPCOM</fullName>
+    <columns>NAME</columns>
+    <columns>Equipamento_de_Apoio__c</columns>
+    <columns>Empresa__c</columns>
+    <columns>Responsavel__c</columns>
+    <columns>DatadaExecucao__c</columns>
+    <columns>Data_de_Validade__c</columns>
+    <columns>Prazo_Restante__c</columns>
+    <columns>Status__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CNPJ__c</field>
+        <operation>equals</operation>
+        <value>05.743.288/0001-08</value>
+    </filters>
+    <filters>
+        <field>Categoria_Patrimonial__c</field>
+        <operation>notContain</operation>
+        <value>INSTRUMENTOS DE MEDIÇÃO E ENSAIO</value>
+    </filters>
+    <label>HOSPCOM GO</label>
+</ListView>

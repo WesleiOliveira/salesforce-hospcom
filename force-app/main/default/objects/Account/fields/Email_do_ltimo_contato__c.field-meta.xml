@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Email_do_ltimo_contato__c</fullName>
+    <externalId>false</externalId>
+    <formula>ultimo_contato_conta__r.Email</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Informação inserida automaticamente com os dados do ultimo contato da conta</inlineHelpText>
+    <label>Email do último contato</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

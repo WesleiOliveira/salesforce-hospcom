@@ -1,0 +1,87 @@
+<apex:page standardController="WorkOrder" docType="html-5.0"   >
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css"/>
+
+    <h3>
+    Editor de Cláusulas do Contrato (Assistência)
+    </h3>
+    
+    <br/>
+    <br/>
+    
+    <div >
+        <apex:form >
+                    
+                    <apex:outputLabel style="font-size:14px;" value="Qualificação Editada" />
+                    <apex:inputField value="{!WorkOrder.Qualificacao_Assistencia_Editada__c}" />
+                    <apex:inputTextarea richText="true" value="{!WorkOrder.Qualificacao_Assistencia__c}" />
+                    <br/>
+                    
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 2 Editada" />
+                    <apex:inputField value="{!WorkOrder.A_ClausulaEditada2__c}" />
+                    <apex:inputTextarea richText="true" id="Clausula_2__c" value="{!WorkOrder.A_Clausula2__c}" />
+                    <br/>
+
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 3 Editada" />
+                    <apex:inputField value="{!WorkOrder.A_ClausulaEditada3__c}" />
+                    <apex:inputTextarea richText="true" id="Clausula_3__c" value="{!WorkOrder.A_Clausula3__c}" />
+                    <br/>
+
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 4 Editada" />
+                    <apex:inputField value="{!WorkOrder.A_ClausulaEditada4__c}" />
+                    <apex:inputTextarea richText="true" id="Clausula_4__c" value="{!WorkOrder.A_Clausula4__c}" />
+                    <br/>
+
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 5 Editada" />
+                    <apex:inputField value="{!WorkOrder.A_ClausulaEditada5__c}" />
+                    <apex:inputTextarea richText="true" id="Clausula_5__c" value="{!WorkOrder.A_Clausula5__c}" />
+                    <br/>
+
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 6 Editada" />
+                    <apex:inputField value="{!WorkOrder.A_ClausulaEditada6__c}" />
+                    <apex:inputTextarea richText="true" id="Clausula_6__c" value="{!WorkOrder.A_Clausula6__c}" />
+                    <br/>
+
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 7 Editada" />
+                    <apex:inputField value="{!WorkOrder.A_ClausulaEditada7__c}" />
+                    <apex:inputTextarea richText="true" id="Clausula_7__c" value="{!WorkOrder.A_Clausula7__c}" />
+                    <br/>
+
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 8 Editada" />
+                    <apex:inputField value="{!WorkOrder.A_ClausulaEditada8__c}" />
+                    <apex:inputTextarea richText="true" id="Clausula_8__c" value="{!WorkOrder.A_Clausula8__c}" />
+                    <br/>
+
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 9 Editada" />
+                    <apex:inputField value="{!WorkOrder.A_ClausulaEditada9__c}" />
+                    <apex:inputTextarea richText="true" id="Clausula_9__c" value="{!WorkOrder.A_Clausula9__c}" />
+                    <br/>
+
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 10 Editada" />
+                    <apex:inputField value="{!WorkOrder.A_ClausulaEditada10__c}" />
+                    <apex:inputTextarea richText="true" id="Clausula_10__c" value="{!WorkOrder.A_Clausula10__c}" />
+                    <br/>
+                    
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 11 Editada" />
+                    <apex:inputField value="{!WorkOrder.A_ClausulaEditada11__c}" />
+                    <apex:inputTextarea richText="true" id="Clausula11__c" value="{!WorkOrder.A_Clausula11__c}" />
+                    <br/>
+                    
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 12 Editada" />
+                    <apex:inputField value="{!WorkOrder.A_ClausulaEditada12__c}" />
+                    <apex:inputTextarea richText="true" id="Clausula12__c" value="{!WorkOrder.A_Clausula12__c}" />
+                    <br/>
+                    
+                    <apex:outputLabel style="font-size:14px;" value="Clausula 13 Editada" />
+                    <apex:inputField value="{!WorkOrder.A_ClausulaEditada13__c}" />
+                    <apex:inputTextarea richText="true" id="Clausula13__c" value="{!WorkOrder.A_Clausula13__c}" />  
+                    <br/>
+                    
+                    
+                    <br/>
+                    <div style="text-align:center">
+                        <apex:commandButton action="{!save}" value="Salvar" />
+                    </div>
+                    <br/>
+</apex:form>
+</div>
+</apex:page>

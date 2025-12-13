@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Detalhes_do_pagamento__c</fullName>
+    <externalId>false</externalId>
+    <formula>TEXT(Forma_de_Pagamento__c) + &apos;,&apos; + IF(TEXT(Vencimento_dia__c) != &apos;&apos;, &apos; vencimento dia &apos; + TEXT(Vencimento_dia__c), &apos;&apos;) + IF(!ISNULL(Valor_de_entrada__c) &amp;&amp; Valor_de_entrada__c != 0, &apos;, valor de entrada: &apos; + TEXT(Valor_de_entrada__c) , &apos;&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Detalhes do pagamento</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

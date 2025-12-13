@@ -1,0 +1,377 @@
+<aura:component controller="AssistenteCompras" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css',
+                          $Resource.bootstrapSelect14 + '/docs/docs/dist/css/bootstrap-select.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.sortableJs + '/Sortable.js',
+                           $Resource.popper + '/popper.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js',
+                           $Resource.bootstrapSelect14 + '/docs/docs/dist/js/bootstrap-select.min.js')}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    <div class="container" style="position: relative; max-width: 1500px!important;" id="containerPrincipal">
+        
+        <!-- CONTAINER DE FORNECEDORES -->
+        <div class='containerDetalhes' id='containerFornecedores' style='display: none!important'>
+            <div class='containerDetalhesInterno'>
+                <div style='display: flex; height: 90%'>
+                    <div style='width: 40%; height: 100%; display: flex; flex-direction:column; justify-content: center; align-items: center'>
+                        
+                        <div style="display: flex; align-items: center; width: 60%; font-size: 17px; color: #00345c; font-weight: bold; justify-content: center; text-align: center;  padding-bottom: 10px">SELECIONE A EMPRESA COMPRADORA</div>
+                        
+                        <div style='width: 100%; display: flex; justify-content: center; align-items: center;'> 
+                            <div style='display: flex; width: 100%; height: 100px; justify-content: center; align-items: center'>
+                                
+                                
+                                <select class="selectpickerFornecedor custominput453453534" id='empresaCompradora' data-bs-toggle="dropdown" data-show-subtext="true" data-live-search="true">
+                                    <option selected='true' disabled='true'>CLIQUE PARA PROCURAR</option>
+                                    <option name='HOSPCOM EQUIPAMENTOS HOSPITALARES EIRELI' value='001i00000085QYb'>HOSPCOM EQUIPAMENTOS HOSPITALARES EIRELI</option>
+                                    <option name='HOSPCOM EQUIPAMENTOS HOSPITALARES EIRELI' value='001U400000Oi429'>HOSPCOM EQUIPOS HOSPITALARIOS SAS</option>
+                                    <option name='HOSPCOM EQUIPAMENTOS HOSPITALARES EIRELI' value='0016e00002y5N5b'>HOSPCOM - DF</option>
+                                    <option value='001U4000006sAHD'>HOSPCOM - SP</option>
+                                    <option value='001U4000006NOXh'>HOSPCOM - MT</option>
+                                    <option name='HOSPCOM EQUIPAMENTOS HOSPITALARES EIRELI' value='0015A00001tSrPa'>HEALTH SOLUTIONS COMERCIO E SERVICOS EIRELI</option>
+                                    <option name='HOSPCOM EQUIPAMENTOS HOSPITALARES EIRELI' value='0015A00001yGbVZ'>GDB COMERCIO E SERVICOS - EIRELI</option>
+                                    <option name='HOSPCOM EQUIPAMENTOS HOSPITALARES EIRELI' value='0016e000036biMZ'>ABC - MT</option>
+                                    <option name='HOSPCOM EQUIPAMENTOS HOSPITALARES EIRELI' value='0016e00002y3Eil'>ABC - GO</option>
+                                    <option name='HOSPCOM EQUIPAMENTOS HOSPITALARES EIRELI' value='0015A00002SZiBc'>ABC - TO</option>
+                                    <option name='IZU JAPANESE' value='0015A00002GC6r6'>IZU JAPANESE</option>
+                                </select>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style='display: flex; height: 100%; width: 2%; align-items: center; justify-content: center;'>
+                        <hr style='border-left: 1px solid #dcdcdc; margin-top: 0px; height: 90%; margin-bottom: 0; opacity: 1; background-color: #ffffff'/>
+                    </div>
+                    
+                    <div style='width: 58%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center'>
+                        
+                        <div style="display: flex; align-items: center; width: 100%; font-size: 17px; color: #00345c; font-weight: bold; justify-content: center;">SELECIONE OS FORNECEDORES</div>
+                        
+                        <div class="div343858Fornecedores" id="divSelectsFornecedores">
+                            
+                            
+                            
+                            
+                            
+                            <div class='div3232Fornecedor'>
+                                <div class='containerImageItem'>
+                                    <a href='javascript:void(0)' target='_blank' class='imageItemProd'>
+                                        <img class='imgItemPedido' style='height: 90%' src='https://hospcom.my.site.com/servlet/servlet.ImageServer?id=0156e00000Blc34&amp;oid=00Di0000000JVhH&amp;lastMod=1666381080000'/>
+                                    </a>
+                                </div>
+                                
+                                <div class='box3724832942'>
+                                    
+                                    <input class="inputFornecedor492305 custominput453453534" placeholder="Digite um nome ou cnpj de um fornecedor" type="text" id="fname" name="fname"/>
+                                    <div class='resultados4239584'>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class='div3232Fornecedor'>
+                                <div class='containerImageItem'>
+                                    <a href='javascript:void(0)' target='_blank' class='imageItemProd'>
+                                        <img class='imgItemPedido' style='height: 90%' src='https://hospcom.my.site.com/servlet/servlet.ImageServer?id=0156e00000Blc34&amp;oid=00Di0000000JVhH&amp;lastMod=1666381080000'/>
+                                    </a>
+                                </div>
+                                
+                                <div class='box3724832942'>
+                                    
+                                    <input class="inputFornecedor492305 custominput453453534" placeholder="Digite um nome ou cnpj de um fornecedor" type="text" id="fname" name="fname"/>
+                                    <div class='resultados4239584'>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class='div3232Fornecedor'>
+                                <div class='containerImageItem'>
+                                    <a href='javascript:void(0)' target='_blank' class='imageItemProd'>
+                                        <img class='imgItemPedido' style='height: 90%' src='https://hospcom.my.site.com/servlet/servlet.ImageServer?id=0156e00000Blc34&amp;oid=00Di0000000JVhH&amp;lastMod=1666381080000'/>
+                                    </a>
+                                </div>
+                                
+                                <div class='box3724832942'>
+                                    
+                                    <input class="inputFornecedor492305 custominput453453534" placeholder="Digite um nome ou cnpj de um fornecedor" type="text" id="fname" name="fname"/>
+                                    <div class='resultados4239584'>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                            
+                        </div>
+                        
+                        <a id='addFornecedor'>Adicionar fornecedor</a>
+                        
+                    </div>
+                    
+                    
+                </div>
+                
+                <div style='display: flex; height: 10%; justify-content: center'>
+                    <button type="button" class="btn btn-success" id="buttonContinuar" style='border-radius: 100px;'>Continuar&nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CONTAINER DE FORNECEDORES -->
+        <div class='containerDetalhes' id='containerAditionalFornecedor' style='display: none!important'>
+            <div class='containerDetalhesInterno' style=" width: 700px; height: 200px">
+                <div style="display: flex;height: 70%;justify-content: center;align-items: center;">
+                    <select class="selectpickerFornecedor"  id='fornecedor4' data-bs-toggle="dropdown" data-show-subtext="true" data-live-search="true">
+                        
+                    </select>
+                </div>
+                
+                <div style='display: flex; height: 30%; justify-content: center; column-gap: 10px'>
+                    <button type="button" class="btn btn-danger" id="buttonCancelarAditionalFornecedor" style='border-radius: 100px;'>Fechar</button>
+                    <button type="button" class="btn btn-success" id="buttonContinuarAditionalFornecedor" style='border-radius: 100px;'>Adicionar&nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+
+
+
+        
+
+        
+        <div class="row" style="border: 1px solid #00345c; min-height: 100vh; border-radius: 15px; margin-top: 10px;">
+            
+            <!-- PRIMEIRA COLUNA DO CONTAINER -->
+            <div class="col-md-6" style="display:flex; flex-direction: column; padding: 0px">
+                
+                <!-- SPINNER DE CARREGAMENTO -->
+                <div id='spinnerDiv' style="display: none">
+                    <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+                </div>
+                
+                <!-- DIV DO BOTÃO ADICIONAR FORNECEDOR -->
+                <div style="width: 100%; height: 5%; padding: 4px; display: none" id="addOptionalFornecedor">
+                    <a style="width: 100%;" class="customAUnderline">
+                        <div id="buttonAddfornecedor" class="buttonAddFornecedor secondaryBackgroundColor textContainer">ADICIONAR FORNECEDOR</div>
+                    </a>
+                </div>
+                
+                <!-- PRIMEIRA LINHA COM OS BOTÕES PESQUISE E MARKETING -->
+                <div style="width: 100%; height: 6%; display: flex">
+                    <!-- DIV DO BOTÃO PESQUISE PRODUTOS -->
+                    <div style="width: 100%; height: 100%; display: flex; padding: 4px">
+                        <a style="width: 100%;" class="customAUnderline"><div id="buttonPesquiseProdutos" class="buttonOne primaryBackgroundColor textContainer">PESQUISAR</div></a>
+                    </div>
+                    
+                    <!-- DIV DO BOTÃO PLATAFORMA DE MARKETING -->
+                    <div style="width: 100%; height: 100%; display: flex; padding: 4px">
+                        <a style="width: 100%;" class="customAUnderline"><div id="buttonPlataformaMarketing" style="opacity: 40%;" class="buttonOne secondaryBackgroundColor textContainer">ITENS DE PEDIDOS DE VENDA</div></a>
+                    </div>
+                    
+                    <!-- DIV DO BOTÃO PLATAFORMA DE MARKETING -->
+                    <div style="width: 100%; height: 100%; display: flex; padding: 4px">
+                        <a style="width: 100%;" class="customAUnderline"><div id="buttonItensOPP" style="opacity: 40%;" class="buttonOne secondaryBackgroundColor textContainer">ITENS DE OPORTUNIDADES</div></a>
+                    </div>
+                </div>
+                
+                <!-- O CONTEÚDO ABAIXO MUDA CONFORME A SELEÇÃO DOS BOTÕES ANTERIORES -->
+                
+                <div id="divPesquiseProdutos" style="display: flex; flex-direction: column; width: 100%; height: 94%;">
+                    
+                    <!-- LINHA COM O INPUT DE PESQUISA DE PRODUTOS -->
+                    <div style="width: 100%; height: 6%; display: flex; padding: 4px;">
+                        <div class="primaryBackgroundColor" style="color: white; font-size: 17px; display: flex; justify-content: center; align-items: center; width: 7%; height: 100%; border-bottom-left-radius: 10px; border-top-left-radius: 10px; ">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </div>
+                        <div style="width: 93%; height: 100%; border: 1px solid; border-color: #a0bb31!important; border-bottom-right-radius: 10px; border-top-right-radius: 10px;">
+                            <input id="inputPesquisa" type="text" class="form-control customInput" title="Clique aqui e digite um termo para pesquisar" placeholder="Pesquise aqui por nome do produto, modelo, código do fabricante ou marca" aria-label="Username" aria-describedby="basic-addon1"/>
+                        </div>
+                    </div>
+                    
+                    <!-- LINHA COM OS FILTROS DE PESQUISA -->
+                    <div style="width: 100%; height: 7%; display: flex; flex-direction: column;">
+                        
+                        <!-- FILTRO COM O TITULO FILTRE SUA PESQUISA -->
+                        <div class="primaryColor" style="font-weight: 400; width: 100%; display: flex; justify-content: center; align-items: center; height: 50%">
+                            Filtre sua pesquisa
+                        </div>
+                        
+                        <!-- LINHA COM OS FILTROS -->
+                        <div style="display: flex; height: 50%">
+                            
+                            <!-- FILTRO POR LINHA -->
+                            <div class="col-lg-3 col-md-6">
+                                
+                                <!-- CUSTOM SELECT -->
+                                <details style="width: 100%;" class="custom-select" id="selectLinhas">
+                                    <summary class="radios" id="listaItens1">
+                                        <input type='radio' name='item1' id='default' title='Linha' checked='true'/>
+                                    </summary>
+                                    
+                                    <ul class="list" id="listaItens2" style="padding-right: 0rem!important; padding-left: 0rem!important;">
+                                        <li id='' class='itemLinha' onclick=''><label class="labelLinha" for=''>item1</label></li>
+                                    </ul>
+                                </details>
+                                <!-- FIM CUSTOM SELECT -->
+                                
+                            </div>
+                            
+                            <!-- FILTRO POR FAMILIA -->
+                            <div class="col-lg-3 col-md-6">
+                                <!-- CUSTOM SELECT -->
+                                <details style="width: 100%; display: none" class="custom-select" id="selectFamilia">
+                                    <summary class="radios" id="listaFamilia1">
+                                        <input type='radio' name='item1familia' id='default' title='Familia' checked='true'/>
+                                    </summary>
+                                    
+                                    <ul class="list" id="listaFamilia2" style="padding-right: 0rem!important;  padding-left: 0rem!important;">
+                                        
+                                    </ul>
+                                </details>
+                                <!-- FIM CUSTOM SELECT -->
+                            </div>
+                            
+                            <!-- FILTRO POR TIPO -->
+                            <div class="col-lg-3 col-md-6">
+                                <!-- CUSTOM SELECT -->
+                                <details style="width: 100%; display: none" class="custom-select" id="selectTipo">
+                                    <summary class="radios" id="listaTipo1">
+                                        <input type='radio' name='item1Tipo' id='default' title='Tipo' checked='true'/>
+                                    </summary>
+                                    
+                                    <ul class="list" id="listaTipo2" style="padding-right: 0rem!important;  padding-left: 0rem!important;">
+                                        <li id='' class='itemLinha' onclick=''><label class="labelLinha" for=''>item1</label></li>
+                                    </ul>
+                                </details>
+                                <!-- FIM CUSTOM SELECT -->
+                            </div>
+                            
+                            <!-- FILTRO POR MARCA -->
+                            <div class="col-lg-3 col-md-6">
+                                <!-- CUSTOM SELECT -->
+                                <details style="width: 100%; display: none" class="custom-select" id="selectMarca">
+                                    <summary class="radios" id="listaMarca1">
+                                        <input type='radio' name='item1Marca' id='default' title='Marca' checked='true'/>
+                                    </summary>
+                                    
+                                    <ul class="list" id="listaMarca2" style="padding-right: 0rem!important;  padding-left: 0rem!important;">
+                                        
+                                    </ul>
+                                </details>
+                                <!-- FIM CUSTOM SELECT -->
+                            </div>
+                        </div>
+                        
+                    </div> 
+                    
+                    <!-- LINHA COM OS RESULTADOS DA PESQUISA -->
+                    <div style="width: 100%; height: 87%; padding: 4px;" class="divListaProdutosMaster">
+                        <div id="listaProdutos" class="colunaScroll" style="overflow: auto; padding-bottom: 100px!important; align-content: flex-start; flex-wrap: wrap; background-color: #f1f1f1; width: 100%; height: 550px; padding: 10px; border-radius: 15px; display: flex">
+                            
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <div id="divPlataformaMkt" style="display: none; flex-direction: column; width: 100%; height: 90%; padding: 5px">
+                    
+                    <div class='containerFiltros'>
+                        <select class='selectpicker' id='selectMarcaPv'>
+                            <option disabled='true' value='default' selected='selected'>Marca</option>
+                            <option  value='NENHUM' >NENHUM</option>
+                        </select>
+                        
+                        <select class='selectpicker' id='selectTipoPv'>
+                            <option disabled='true' value='default' selected='selected'>Tipo</option>
+                            <option  value='NENHUM' >NENHUM</option>
+                        </select>
+                        
+                        
+                        <select class='selectpicker' id='selectNumeroPedidoPv' data-live-search="true">
+                            <option disabled='true' value='default' selected='selected'>Nº do Pedido</option>
+                            <option  value='NENHUM' >NENHUM</option>
+                        </select>
+                    </div>
+                    
+                    <div style="width: 100%; height: 95%" id="divColunaScrollParent">
+                        <div id="colunaPlataformaMkt" class="colunaScroll">
+                            
+                            <!-- APPEND DOS ITENS ATRAVÉS DO JS NO HELPER-->
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <div id="divOpps" style="display: none; flex-direction: column; width: 100%; height: 94%; padding: 5px">
+                    
+                    <div class='containerFiltros'>
+                        <select class='selectpicker' id='selectMarcaPv'>
+                            <option disabled='true' value='default' selected='selected'>Marca</option>
+                            <option  value='NENHUM' >NENHUM</option>
+                        </select>
+                        
+                        <select class='selectpicker' id='selectTipoPv'>
+                            <option disabled='true' value='default' selected='selected'>Tipo</option>
+                            <option  value='NENHUM' >NENHUM</option>
+                        </select>
+                        
+                        
+                        <select class='selectpicker' id='selectNumeroPedidoPv' data-live-search="true">
+                            <option disabled='true' value='default' selected='selected'>Nº do Pedido</option>
+                            <option  value='NENHUM' >NENHUM</option>
+                        </select>
+                    </div>
+                    
+                    <div style="width: 100%; height: 95%" id="divColunaScrollParent">
+                        <div id="colunaDivOpps" class="colunaScroll">
+                            
+                            <!-- APPEND DOS ITENS ATRAVÉS DO JS NO HELPER-->
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+            
+            <!-- SEGUNDA COLUNA DO CONTAINER -->            
+            <div  class="col-md-6" style="padding: 0px">
+                
+                <!-- PRIMEIRA LINHA COM A LABEL DA COLUNA -->
+                <div style="width: 100%; height: 5%; display: flex">
+                    
+                    
+                    <!-- DIV DA LABEL -->
+                    <div style="width: 100%; height: 100%; display: flex; padding: 4px">
+                        <div id="totalCotacao"  class="labelOne secondaryBackgroundColor">ITENS NOS PEDIDOS DE COMPRA</div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <!-- BLOCO DE ITEMS DA COTAÇÃO -->
+                <div style="width: 100%; height: 94%; padding: 4px;" class="divListaProdutosCotacao">
+                    <!-- LINHA COM OS ITEMS -->
+                    <div id="listaCotacao" class="divCotacao">
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+        <div class='about'>Versão: 2.2.2</div>
+    </div>
+</aura:component>

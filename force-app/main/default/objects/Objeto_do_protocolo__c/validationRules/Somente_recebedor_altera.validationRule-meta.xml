@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Somente_recebedor_altera</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+$User.ProfileId != &apos;00ei0000000nKA9&apos;,
+ISCHANGED(Recebido__c),
+$User.ContactId != Protocolo__r.Recebido_por__c
+)</errorConditionFormula>
+    <errorDisplayField>Recebido__c</errorDisplayField>
+    <errorMessage>Somente o recebedor pode marcar como recebido.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Departamentos_que_possuem_c_pias__c</fullName>
+    <externalId>false</externalId>
+    <label>Departamentos que possuem cópias</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>DRH</fullName>
+                <default>false</default>
+                <label>DRH</label>
+            </value>
+            <value>
+                <fullName>CMP</fullName>
+                <default>false</default>
+                <label>CMP</label>
+            </value>
+            <value>
+                <fullName>EST</fullName>
+                <default>false</default>
+                <label>EST</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

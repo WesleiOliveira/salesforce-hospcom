@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>InternalIdeasIdeaRecordType</fullName>
+    <active>true</active>
+    <description>Record Type used to associate ideas with a specific community</description>
+    <label>Internal Ideas: Idea Record Type</label>
+    <picklistValues>
+        <picklist>Categories</picklist>
+        <values>
+            <fullName>Ambiente</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Formas de Pagamentos</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Melhoria de Processo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Melhoria de desempenho</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Outros</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Produtos</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sugestão</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Treinamentos</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status</picklist>
+        <values>
+            <fullName>Arquivado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fechado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Novo</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

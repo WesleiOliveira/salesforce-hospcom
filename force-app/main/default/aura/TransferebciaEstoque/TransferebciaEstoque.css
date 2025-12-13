@@ -1,0 +1,68 @@
+.THIS .modal-overlayer-IntegracaoPedidoVenda {
+    position: fixed;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    background-color: RGBA( 0, 0, 0, 0.4 );
+    display: none;
+}
+
+.THIS .modal-IntegracaoPedidoVenda {
+    width: 80vw;
+    margin: auto;
+    background-color: #f2dedf;
+    border: solid 4px #eed5d9;
+    border-radius: 7px;
+    padding: 5px;
+    position: relative;
+}
+
+.THIS .error-title-IntegracaoPedidoVenda {
+    color: #b3707d;
+}
+
+.THIS span.spacing-IntegracaoPedidoVenda {
+    margin-left: 20px;
+}
+
+.THIS .green-text-IntegracaoPedidoVenda {
+    color: #5cb761;
+}
+
+.THIS .address-IntegracaoPedidoVenda {
+    color: #ff0000;
+    margin-left: 20px;
+}
+
+.THIS .botao-usar {
+    height: 22px;
+    font-size: 12px;
+    padding: 1px 5px;
+}
+
+.THIS .close-modal {
+    padding: 7px 0;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+
+.THIS .close-modal-button {
+    background: transparent;
+    border: 0;
+    font-size: 20px;
+}
+
+.THIS .divButtonSAP{
+    padding-top: 10px;
+    padding-bottom: 10px;
+        margin-left: 5px;
+    margin-right: 5px;
+}
+
+.THIS #integracaoSAP{
+    width: 100%;
+}

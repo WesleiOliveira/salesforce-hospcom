@@ -1,0 +1,65 @@
+<aura:component controller="ProdutoCriacao" implements="forceCommunity:availableForAllPageTypes">
+	
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+	
+	<aura:attribute name="codigo" type="String" default=""/>
+	<aura:attribute name="nome" type="String" default=""/>
+	<aura:attribute name="marca" type="String" default=""/>
+	<aura:attribute name="marcas" type="List"/>
+	<aura:attribute name="modelo" type="String" default=""/>
+	<aura:attribute name="familia" type="String" default=""/>
+	<aura:attribute name="familias" type="List"/>
+	<aura:attribute name="tipo" type="String" default=""/>
+	<aura:attribute name="tipos" type="List"/>
+	<aura:attribute name="descricao" type="String" default=""/>
+	<aura:attribute name="valor" type="Decimal" default=""/>
+	
+    <aura:attribute name="activeSections" type="List" default="[]" />
+	<aura:attribute name="bloqueio" type="Boolean" default="true"/>
+	
+	<lightning:accordion aura:id="accordion" allowMultipleSectionsOpen="true" activeSectionName="{!v.activeSections}" >
+        <lightning:accordionSection name="A" label="Cadastro rápido">
+            <aura:set attribute="body">
+				<div class="slds-grid slds-wrap">
+					
+					<div class="slds-col slds-size_6-of-12" style="padding-right: 18px!important;">
+						<lightning:input name="codigo" label="Código (necessário p/ ativar pedidos)" value="{!v.codigo}" />
+						<lightning:input name="nome" label="Nome" value="{!v.nome}" required="true" onblur="{!c.Bloqueio}"/>
+						<lightning:select name="marca" label="Marca" value="{!v.marca}" required="true" onblur="{!c.Bloqueio}">
+							<aura:iteration items="{!v.marcas}" var="item">
+								<option text="{!item.label}" value="{!item.value}"/>
+							</aura:iteration>
+						</lightning:select>
+						<lightning:input name="modelo" label="Modelo" value="{!v.modelo}" />
+					</div>
+					
+					<div class="slds-col slds-size_6-of-12">
+						<lightning:select name="familia" label="Família" value="{!v.familia}" required="true" onblur="{!c.Bloqueio}">
+							<aura:iteration items="{!v.familias}" var="item">
+								<option text="{!item.label}" value="{!item.value}"/>
+							</aura:iteration>
+						</lightning:select>
+						<lightning:select name="tipo" label="Tipo" value="{!v.tipo}" required="true" onblur="{!c.Bloqueio}">
+							<aura:iteration items="{!v.tipos}" var="item">
+								<option text="{!item.label}" value="{!item.value}"/>
+							</aura:iteration>
+						</lightning:select>
+						<br/>
+						<lightning:input type="number" name="valor" label="Preço de venda (de lista)" value="{!v.valor}" formatter="currency" step="0.01" required="true" onblur="{!c.Bloqueio}"/>
+					</div>
+					
+					<div class="slds-col slds-size_12-of-12">
+						<lightning:textarea name="descricao" label="Descrição" value="{!v.descricao}"  class="descricao"/>
+					</div>
+					
+					<div class="slds-col slds-size_12-of-12" style="text-align: right;">
+						<lightning:button variant="brand" label="Salvar" title="Salvar" onclick="{!c.Salvar1}" disabled="{!v.bloqueio}"/>
+					</div>
+
+					
+				</div>
+            </aura:set>
+        </lightning:accordionSection>
+    </lightning:accordion>
+	
+</aura:component>

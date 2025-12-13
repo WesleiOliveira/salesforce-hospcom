@@ -1,0 +1,23 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global" >      
+    <aura:attribute name="fields" type="String[]" default="['C_d_Fabricante__c','Nome__c', 'Marca__c','Modelo__c','Linha__c','Fam_lia__c','Tipo__c','Valor_de_Venda__c','Descricao__c', 'Categoria_de_compra__c' ]" />
+    <aura:attribute name="bdisabled" type="Boolean" default="true" />
+    <h1 style="text-align:end">
+        <lightning:button label="Novo" title="Neutral action" onclick="{!c.refresh}" disabled="{!v.bdisabled}"/>
+    </h1><br/>
+    <h1 style="text-transform:upperCase">
+    <lightning:recordForm objectApiName="SolicitacaodeCadastro__c" fields="{!v.fields}" onsuccess="{!c.handleSuccess}">
+    </lightning:recordForm>
+    </h1>
+    <aura:attribute name="filetype" type="List" />
+    <aura:attribute name="multiple" type="Boolean" default="true" />
+    <aura:attribute name="disabled" type="Boolean" default="true" />
+    <aura:attribute name="recordId" type="String" />      
+    <lightning:fileUpload label="Enviar imagem do produto"
+        name="fileUploader"
+        multiple="true"
+        accept="{!v.filetype}"
+        recordId="{!v.recordId}"
+        disabled="{!v.disabled}"
+         />
+    
+</aura:component>

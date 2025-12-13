@@ -1,0 +1,29 @@
+<aura:component controller="AprovaJustificativaCompromisso" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	
+        <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css'
+                          )}"     
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery
+                           )}"                    
+                      afterScriptsLoaded="{!c.onRender}" />
+    
+    <div>
+        <!-- SPINNER DE CARREGAMENTO -->
+        <div id='spinnerDivAprovacao' style="display: none">
+            <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+        </div>
+        
+        <div class="divMestre">
+            
+            <lightning:button label="Aprovar"
+                              class="buttonAction"
+                              onclick="{! c.aprovaRegistro }"/>
+            
+            
+        </div>
+        
+    </div>
+</aura:component>

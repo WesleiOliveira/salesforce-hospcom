@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Solicita_es_de_Revenda_Novos</fullName>
+    <columns>NAME</columns>
+    <columns>C_d_Fabricante__c</columns>
+    <columns>Nome__c</columns>
+    <columns>Modelo__c</columns>
+    <columns>Marca__c</columns>
+    <columns>OWNER.ALIAS</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Status__c</columns>
+    <columns>Aprovado__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Tipo_de_Produto__c</field>
+        <operation>equals</operation>
+        <value>REVENDA</value>
+    </filters>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>CADASTRADO,CANCELADO</value>
+    </filters>
+    <label>Solicitações de Revenda Novos</label>
+</ListView>

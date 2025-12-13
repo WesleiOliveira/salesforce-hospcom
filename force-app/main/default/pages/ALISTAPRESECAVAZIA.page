@@ -1,0 +1,373 @@
+<apex:page renderas="pdf" standardController="WorkOrder">
+<head>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"/>
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+</head>
+
+<!-- Cabeçalho com logotipo da Hospcom -->
+
+    <apex:image style="position:relative; margin-left:-20px" id="theImage" value="https://hospcom--c.na25.content.force.com/servlet/servlet.ImageServer?id=01531000008useP&oid=00Di0000000JVhH&lastMod=1486514655000" width="670" height="100"/>
+
+ <!-- ------------------------------------------------------------------------------------------- -->
+ 
+ <!--  ------------------------------------INFORMAÇÕES DO CLIENTE-------------------------------- -->
+ <table>
+ <tr>
+ <td style="border:1px solid black;text-align:center; padding:2px; font-family:calibri,sans-serif; font-size:11px;" width="710px"><b>INFORMAÇÕES DO CLIENTE</b></td>
+ </tr>
+ <br/>
+ <tr>
+ <td style="font-family:calibri,sans-serif; font-size:11px;"><b>Cliente:</b></td>
+ <td style="font-family:calibri,sans-serif; font-size:11px;">{!WorkOrder.Account.Name}</td>
+ </tr>
+ 
+ <tr>
+ <td style="font-family:calibri,sans-serif; font-size:11px;"><b>Endereço:</b></td>
+ <td style="font-family:calibri,sans-serif; font-size:11px;"><apex:outputField value="{!WorkOrder.Endere_o__c}"/> </td>
+ </tr>
+ 
+  <tr>
+ <td style="font-family:calibri,sans-serif; font-size:11px;"><b>CNPJ:</b></td>
+ <td style="font-family:calibri,sans-serif; font-size:11px;"><apex:outputField value="{!WorkOrder.Account.CNPJ__c}"/> </td>
+ </tr>
+ 
+   <tr>
+ <td style="font-family:calibri,sans-serif; font-size:11px;"><b>Contato:</b></td>
+ <td style="font-family:calibri,sans-serif; font-size:11px;"><apex:outputField value="{!WorkOrder.Contact.Name}"/> </td>
+ </tr>
+ 
+    <tr>
+ <td style="font-family:calibri,sans-serif; font-size:11px;"><b>E-mail / Telefone:</b></td>
+ <td style="font-family:calibri,sans-serif; font-size:11px;"><apex:outputField value="{!WorkOrder.E_mail__c}"/> &nbsp; / &nbsp; <apex:outputField value="{!WorkOrder.Telefone__c}"/> </td>
+ </tr>
+ </table>
+ <br/>
+ 
+ <!-- -----------------------------------INFORMAÇÕES DA ORDEM DE TRABALHO------------------  -->
+ <table>
+ <tr>
+     <td style="border:1px solid black;text-align:center; padding:2px; font-family:calibri,sans-serif; font-size:11px;" width="710px"><b>INFORMAÇÕES DA ORDEM DE TRABALHO</b></td>
+ </tr>
+ <br/>
+ 
+ <tr>
+ <td style="font-family:calibri,sans-serif; font-size:10px;" width="120px"><b>Ordem de Trabalho:</b></td>
+ <td style="font-family:calibri,sans-serif; font-size:10px;" width="225px">{!WorkOrder.WorkOrderNumber}</td>
+ <td style="font-family:calibri,sans-serif; font-size:10px;"><b>Ministrante:</b></td>
+ <td style="font-family:calibri,sans-serif; font-size:10px;">{!WorkOrder.T_cnico_Respons_vel__c}</td>
+ </tr>
+ 
+ <tr>
+ <td style="font-family:calibri,sans-serif; font-size:10px;"><b>Data de Abertura:</b></td>
+ <td style="font-family:calibri,sans-serif; font-size:10px;"><apex:outputField value="{!WorkOrder.StartDate}"/> </td>
+  <td style="font-family:calibri,sans-serif; font-size:10px;"><b>Tipo de Serviço:</b></td>
+ <td style="font-family:calibri,sans-serif; font-size:10px;"><apex:outputField value="{!WorkOrder.Tipo_de_Servi_o__c}"/> </td>
+ </tr>
+ 
+  <tr>
+     <td style="font-family:calibri,sans-serif; font-size:10px;"><b>Data de Fechamento:</b></td>
+     <td style="font-family:calibri,sans-serif; font-size:10px;"><apex:outputField value="{!WorkOrder.EndDate}"/> </td>
+     <td style="font-family:calibri,sans-serif; font-size:10px;"><b>Status:</b></td>
+     <td style="font-family:calibri,sans-serif; font-size:10px;"><apex:outputField value="{!WorkOrder.Status}"/> </td>
+ </tr>
+ 
+ </table>
+ <br/>
+  <br/>
+ <!-- --------------------------------------------------------------------------------------------------------------  -->
+ 
+<!-- -------------------------------------TIPO DE SERVIÇO A SER REALIZADO ------------------------------------------ -->
+ 
+ <apex:outputPanel rendered="{!IF(WorkOrder.Tipo_de_Servi_o__c='DEMONSTRAÇÃO DE PRODUTOS',TRUE,FALSE)}">
+ 
+ <tr>
+ <td style="padding:4px; border-bottom:1px solid black; border-top:1px solid black; text-align:center; font-family:calibri,sans-serif; font-size:11px;" width="710px"> <b>PRODUTOS PARA DEMONSTRAÇÃO</b> </td>
+ </tr>
+ <br/>
+ 
+ <apex:repeat value="{!WorkOrder.Itens_para_Demonstra_o_Treinamento__r}" var="PD" >
+  <table >
+      <th style="font-family: calibri, sans-serif; font-size:11px; text-align:center; border:0.5px solid black"><b>Produto</b></th>
+      <th style="font-family: calibri, sans-serif; font-size:11px; text-align:center; border:0.5px solid black"><b>Marca</b></th>
+      <th style="font-family: calibri, sans-serif; font-size:11px; text-align:center; border:0.5px solid black"><b>Modelo</b></th>
+      <th style="font-family: calibri, sans-serif; font-size:11px; text-align:center; border:0.5px solid black"><b>Código de Fábrica</b></th>
+      <th style="font-family: calibri, sans-serif; font-size:11px; text-align:center; border:0.5px solid black"><b>Imagem</b></th>
+      <tr>
+          <td style="font-family: calibri, sans-serif; font-size:11px; text-align:center" width="250px"><apex:outputText >{!PD.Produto_para_Demonstra_o__r.Name}</apex:outputText></td>
+          <td style="font-family: calibri, sans-serif; font-size:11px; text-align:center" width="100px"><apex:outputText >{!PD.Produto_para_Demonstra_o__r.Marca__c}</apex:outputText></td>
+          <td style="font-family: calibri, sans-serif; font-size:11px; text-align:center" width="100px"><apex:outputText >{!PD.Produto_para_Demonstra_o__r.Modelo__c}</apex:outputText></td>
+          <td style="font-family: calibri, sans-serif; font-size:11px; text-align:center" width="100px"><apex:outputText >{!PD.Produto_para_Demonstra_o__r.ProductCode}</apex:outputText></td>
+          <td style="font-family: calibri, sans-serif; font-size:11px; text-align:center" width="150px"><apex:outputField value="{!PD.Produto_para_Demonstra_o__r.Imagem_do_Produto__c}"/></td>
+          
+      </tr>
+      
+      <th style="font-family: calibri, sans-serif; font-size:11px; text-align:center; border:1px solid black"><b>Ativo</b></th>
+      <th style="font-family: calibri, sans-serif; font-size:11px; text-align:center; border:1px solid black"><b>Marca</b></th>
+      <th style="font-family: calibri, sans-serif; font-size:11px; text-align:center; border:1px solid black"><b>Modelo</b></th>
+      <th style="font-family: calibri, sans-serif; font-size:11px; text-align:center; border:1px solid black"><b>N de Série</b></th>
+      <th style="font-family: calibri, sans-serif; font-size:11px; text-align:center; border:1px solid black"><b>ID/Tag</b></th>
+      
+       <tr>
+       
+          <td style="font-family: calibri, sans-serif; font-size:11px; text-align:center" width="250px"><apex:outputText >{!PD.Ativo_Relacionado__r.Name}</apex:outputText></td>
+          <td style="font-family: calibri, sans-serif; font-size:11px; text-align:center" width="100px"><apex:outputText >{!PD.Ativo_Relacionado__r.Marca__c}</apex:outputText></td>
+          <td style="font-family: calibri, sans-serif; font-size:11px; text-align:center" width="100px"><apex:outputText >{!PD.Ativo_Relacionado__r.Modelo__c}</apex:outputText></td>
+          <td style="font-family: calibri, sans-serif; font-size:11px; text-align:center" width="100px"><apex:outputText >{!PD.Ativo_Relacionado__r.SerialNumber}</apex:outputText></td>
+          <td style="font-family: calibri, sans-serif; font-size:11px; text-align:center" width="100px"><apex:outputText >{!PD.Ativo_Relacionado__r.ID_Tag__c}</apex:outputText></td>
+          
+      </tr>
+  </table>
+  <br/>
+ </apex:repeat>
+ </apex:outputPanel>
+ 
+
+ <apex:outputPanel rendered="{!IF(WorkOrder.Tipo_de_Servi_o__c = 'TREINAMENTO DE ATIVOS' ,true,false)}">
+ <tr>
+ <td style="padding:4px; border-bottom:1px solid black; border-top:1px solid black; text-align:center; font-family:calibri,sans-serif; font-size:11px;" width="710px"> <b>TREINAMENTO DE ATIVOS</b> </td>
+ </tr>
+ <br/>
+  
+   <table style="border: 1px solid black">
+       <th style="font-family: calibri, sans-serif; font-size:11px; text-align:center; border:1px solid black" width="250px"><b>Ativo</b></th>
+      <th style="font-family: calibri, sans-serif; font-size:11px; text-align:center; border:1px solid black" width="115px"><b>Marca</b></th>
+      <th style="font-family: calibri, sans-serif; font-size:11px; text-align:center; border:1px solid black" width="100px"><b>Modelo</b></th>
+      <th style="font-family: calibri, sans-serif; font-size:11px; text-align:center; border:1px solid black" width="115px"><b>N de Série</b></th>
+      <th style="font-family: calibri, sans-serif; font-size:11px; text-align:center; border:1px solid black" width="100px"><b>ID/Tag</b></th>
+  </table>
+<apex:repeat value="{!WorkOrder.Itens_para_Demonstra_o_Treinamento__r}" var="PD" >
+<table style="border:1px solid black">
+      
+       <tr>
+          <td style="font-family: calibri, sans-serif; font-size:11px; text-align:center;border: 1px solid black" width="250px"><apex:outputText >{!PD.Ativo_Relacionado__r.Name}</apex:outputText></td>
+          <td style="font-family: calibri, sans-serif; font-size:11px; text-align:center;border: 1px solid black" width="115px"><apex:outputText >{!PD.Ativo_Relacionado__r.Marca__c}</apex:outputText></td>
+          <td style="font-family: calibri, sans-serif; font-size:11px; text-align:center;border: 1px solid black" width="100px"><apex:outputText >{!PD.Ativo_Relacionado__r.Modelo__c}</apex:outputText></td>
+          <td style="font-family: calibri, sans-serif; font-size:11px; text-align:center;border: 1px solid black" width="115px"><apex:outputText >{!PD.Ativo_Relacionado__r.SerialNumber}</apex:outputText></td>
+          <td style="font-family: calibri, sans-serif; font-size:11px; text-align:center;border: 1px solid black" width="100px"><apex:outputText >{!PD.Ativo_Relacionado__r.ID_Tag__c}</apex:outputText></td>
+      </tr>
+  </table>
+
+ </apex:repeat>
+ 
+ </apex:outputPanel>
+ 
+ 
+ 
+<body style="font-family:calibri,sans-serif; font-size:10px;">
+ 
+ <apex:outputPanel rendered="{!IF(WorkOrder.Controle_Participantes__c = 0,TRUE,FALSE)}">
+<div style="page-break-after: always"></div>
+ <table>
+ <tr>
+ <td style="border:1px solid black;text-align:center; padding:2px" width="710px"><b>INFORMAÇÕES DOS PARTICIPANTES</b></td>
+ </tr>
+ </table>
+ <table>
+     <tr>
+         <th style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>Nº</b></th>
+         <th style="border:1px solid black;text-align:center; padding:2px" width="300px"><b>NOME COMPLETO</b></th>
+         <th style="border:1px solid black;text-align:center; padding:2px" width="120px"><b>CARGO</b></th>
+         <th style="border:1px solid black;text-align:center; padding:2px" width="120px"><b>E-MAIL</b></th>
+         <th style="border:1px solid black;text-align:center; padding:2px" width="100px"><b>TELEFONE</b></th>
+     </tr>
+ </table>
+  <tr>
+      <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>1</b></td>
+     <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+     <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+     <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+     <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+  <tr>
+      <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>2</b></td>
+     <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+     <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+     <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+     <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+  <tr>
+  <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>3</b></td>
+ <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+  <tr>
+  <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>4</b></td>
+ <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+  <tr>
+  <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>5</b></td>
+ <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+  <tr>
+  <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>6</b></td>
+ <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+  <tr>
+  <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>7</b></td>
+ <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+  <tr>
+  <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>8</b></td>
+ <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+  <tr>
+  <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>9</b></td>
+ <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+  <tr>
+  <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>10</b></td>
+ <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+  <tr>
+  <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>11</b></td>
+ <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+  <tr>
+  <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>12</b></td>
+ <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+  <tr>
+  <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>13</b></td>
+ <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+  <tr>
+  <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>14</b></td>
+ <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+  <tr>
+  <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>15</b></td>
+ <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+  <tr>
+  <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>16</b></td>
+ <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+  <tr>
+  <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>17</b></td>
+ <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+  <tr>
+  <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>18</b></td>
+ <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+  <tr>
+  <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>19</b></td>
+ <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+  <tr>
+  <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>20</b></td>
+ <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+   <tr>
+  <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>21</b></td>
+ <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+   <tr>
+  <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>22</b></td>
+ <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+   <tr>
+  <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>23</b></td>
+ <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+   <tr>
+  <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>24</b></td>
+ <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+   <tr>
+  <td style="border:1px solid black;text-align:center; padding:2px" width="15px"><b>25</b></td>
+ <td style="border:0.5px solid black;text-align:center; height:20px; padding:2px" width="300px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="120px"></td>
+ <td style="border:0.5px solid black;text-align:center; padding:2px" width="100px"></td>
+ </tr>
+
+ </apex:outputPanel>
+ <table>
+ </table>
+  <footer>
+<br/>
+ <br/>
+ <br/>
+ <br/>
+ <div>
+ <b>______________________________</b>
+<b style="position:absolute; right:13px;">
+ ______________________________</b>
+ 
+ <br/>
+ <b style="position:absolute; left:70px">Ministrante</b>
+ <b style="position:absolute; right:70px;">Responsável</b>
+ </div>
+ </footer>
+ </body>
+</apex:page>

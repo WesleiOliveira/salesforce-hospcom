@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Distribui_o</fullName>
+    <columns>NAME</columns>
+    <columns>Status__c</columns>
+    <columns>Perigos__c</columns>
+    <columns>Severidade_Atual__c</columns>
+    <columns>Probabilidade_Atual__c</columns>
+    <columns>Capacidade_de_Detec_o__c</columns>
+    <columns>Risco_Potencial__c</columns>
+    <columns>Risco_Residual__c</columns>
+    <columns>Fases_do_Processo__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Aprovado</value>
+    </filters>
+    <filters>
+        <field>Risco_Mitigado__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Gerenciamento_de_Riscos__c.Distribui_o</value>
+    </filters>
+    <label>Distribuição</label>
+</ListView>

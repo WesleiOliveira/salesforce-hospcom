@@ -1,0 +1,57 @@
+/* Definindo uma largura mínima para a tabela (por exemplo, 120%) */
+.slds-box {
+    overflow-x: auto;  /* Permite rolagem horizontal no contêiner */
+    max-width: 100%;    /* Garante que o contêiner não ultrapasse a largura disponível */
+}
+.slds-table {
+    width: 120%; /* Isso força a tabela a ser mais larga que o contêiner, ativando a rolagem */
+    table-layout: fixed; /* Mantém o layout fixo para as colunas */
+    overflow-x: auto; /* Isso precisa ser removido da tabela e mantido no contêiner */
+    display: block; /* Isso garante que a tabela se comporte como um bloco, permitindo rolagem */
+}
+
+.slds-table thead th, .slds-table tbody td {
+    white-space: pre-line; /* Evita que o texto nas células quebre a linha */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Adiciona "..." quando o texto excede a largura da célula */
+    word-wrap: break-word;
+}
+
+.slds-m-around_medium {
+    max-width: 100%; /* Garante que o container não ultrapasse a largura do componente */
+    overflow-x: auto; /* Permite rolagem horizontal */
+}
+
+/* Aumenta a largura da coluna do nome do insumo */
+.slds-table .insumo-col {
+    width: 20%; /* Ajuste conforme a necessidade */
+}
+
+.slds-table .active-group-0 {
+    background-color: #e0f7fa; /* Cor clara para agrupar */
+}
+
+.slds-table .active-group-1 {
+    background-color: #f1f8e9; /* Outra cor clara para agrupar */
+}
+
+.slds-text-color_success {
+    color: green;
+}
+
+.slds-text-color_error {
+    color: red;
+}
+
+.green-cell {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.red-cell {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+.no-data-cell {
+    background-color: #f2f2f2;
+}

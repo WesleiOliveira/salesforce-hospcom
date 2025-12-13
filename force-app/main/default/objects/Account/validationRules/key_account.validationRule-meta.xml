@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>key_account</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    OR(
+        ISNEW(),
+        ISCHANGED(Key_Account__c)
+    ),
+    Key_Account__c = TRUE,
+    AND(
+        $User.Id != &quot;005U400000Cqmkp&quot;,
+        $User.Id != &quot;005U4000005d2a9&quot;,
+        $User.ProfileId != &quot;00ei0000000nKA9&quot;
+    )
+)</errorConditionFormula>
+    <errorDisplayField>Key_Account__c</errorDisplayField>
+    <errorMessage>Somente usuários autorizados podem alterar o campo &apos;Key Account&apos;. Verifique suas permissões.</errorMessage>
+</ValidationRule>

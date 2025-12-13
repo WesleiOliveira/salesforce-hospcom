@@ -1,0 +1,547 @@
+<apex:page standardController="Order" extensions="listagem_pedido" renderAs="pdf" applyHtmlTag="false" showHeader="false">
+    <head>
+        <style type="text/css" media="print">
+            @page {
+                size:29.7cm 21cm;
+                margin:100px 40px 60px 25px;
+                @top-center {
+                    content:element(header);
+                }
+                @bottom-center {
+                    content:element(footer);
+                }
+            }
+            .pagenumber:before {
+                content:counter(page);
+            }
+            .pagecount:before {
+                content:counter(pages);
+            }
+            div.header {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(header);
+                height:60px;
+            }
+            div.content {
+            }
+            div.footer {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(footer);
+                height:20px;
+                text-align:right;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                font-weight:normal;
+            }
+        </style>
+        <style type="text/css">
+            .titulo{
+                width:100%;
+                font-family:arial, verdana, sans-serif;
+                font-size:15px;
+                font-weight:bold; 
+                text-align:center;
+                margin-bottom:15px;
+            }
+            .tabela_geral tr{
+                //-fs-table-paginate:paginate;
+                page-break-inside:avoid;
+            }
+            .tabela_item{
+                table-layout: fixed;
+                page-break-inside:avoid;
+                border-collapse: collapse;
+            }
+            .tabela_item tr{
+                table-layout: fixed;
+            }
+            .incolor{
+                //padding-right: 10px;
+                padding-top: 4px;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                vertical-align:top;
+                text-align:right;
+            }
+            .invisivel{
+                padding: 0;
+            }
+            .cabecalho{
+                padding: 3px;
+                font-family:arial, verdana, sans-serif;
+                font-size:11px;
+                font-weight:bold; 
+                vertical-align:top;
+                background-color: #c3c3c3;
+                border-right: 1px solid #c3c3c3;
+                border-bottom: 1px solid #c3c3c3;
+                border-top: 1px solid #c3c3c3;
+                border-left: 1px solid #c3c3c3
+
+            }
+            .cab_esq{
+                border-left: 1px solid #c3c3c3
+            }
+            .celula, .t{
+                padding: 3px;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                vertical-align:top;
+                border-top: 1px solid #c3c3c3;
+                border-right: 1px solid #c3c3c3;
+                border-bottom: 1px solid #c3c3c3;
+                line-height:120%;
+                //word-wrap: break-word;
+                overflow: hidden;
+                text-transform: uppercase;
+            }
+            .cel_esq{
+                border-left: 1px solid #c3c3c3;
+            }
+            .descricao{
+                //text-align: justify;
+                //white-space:pre-wrap;
+            }
+            .total{
+                border-left: 1px solid #c3c3c3;
+            }
+            .destaque{
+                font-weight: bold;
+            }
+            .clausula_texto{
+                font-family:arial, verdana, sans-serif;
+                font-size:11.5px;
+                text-align:justify;
+                text-justify:inter-word;
+                line-height:120%;
+                text-indent:50px;
+                vertical-align:top;
+            }
+            .maiuscula{
+                text-transform: uppercase;
+            }
+            .zebra{
+                background-color: #f3f3f3;
+            }
+        </style>
+    </head>
+
+    <!-- Todos: Verifica Oportunidade com "Faturamento Feito" != de "Hospcom", "GDB", "HEALTH" -->
+    <apex:variable var="empresa_logo" value="{!' '}"/>
+
+    <apex:outputText rendered="{!IF(Order.Faturamento_Feito__c == '0015A00001yGbVZQA0',true,false)}" >
+        <apex:variable var="empresa_nome" value="{!'GDB COMÉRCIO E SERVIÇOS - EIRELI - EPP'}"/>
+        <apex:variable var="empresa_logo" value="{!'https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009LNyN&oid=00Di0000000JVhH'}"/>
+    </apex:outputText>
+    
+    <apex:outputText rendered="{!IF(Order.Faturamento_Feito__c == '0015A00001tSrPaQAK',true,false)}" >
+        <apex:variable var="empresa_nome" value="{!'HEALTH SOLUTION COMERCIO E SERVIÇOS - EIRELI - ME'}"/>
+        <apex:variable var="empresa_logo" value="{!'https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=0155A000009LWSQ&oid=00Di0000000JVhH&lastMod=1520964013000'}"/>
+    </apex:outputText>
+    
+    <apex:outputText rendered="{!IF(AND(Order.Faturamento_Feito__c != '0015A00001yGbVZQA0',
+                                        Order.Faturamento_Feito__c != '0015A00001tSrPaQAK'),true,false)}" >
+        <apex:variable var="empresa_nome" value="{!'HOSPCOM EQUIPAMENTOS HOSPITALARES - EIRELI'}"/>
+        <apex:variable var="empresa_logo" value="{!'https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=015310000099Yg1&oid=00Di0000000JVhH'}"/>
+    </apex:outputText>
+    
+    <html>
+        <body style="font-family:Arial; padding:0px; margin:0px; border:0px solid #eef2f4; width:*;">
+
+            <!-- cabeçalho -->
+            <div class="header">
+                <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+                    <tr>
+                        <td style="width:42%; text-align:center;">
+                            <img src="https://hospcom--c.na49.content.force.com/servlet/servlet.ImageServer?id=015310000099Yfw&oid=00Di0000000JVhH&lastMod=1500637924000" width="234px" height="60px"/>
+                        </td>
+                        <td style="width:58%; text-align:center; vertical-align:middle;">                                
+                            <img src="{!empresa_logo}" width="324px" height="55px"/>
+                            
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- rodapé -->
+            <div class="footer">
+                Página <span class="pagenumber"/> de <span class="pagecount"/>
+            </div>
+
+
+            <!-- conteúdo -->
+            <div class="content">
+                <div style="page-break-before:always" />
+                
+                <div class="titulo"> Pedido de Venda </div>
+                
+                <!-- informações iniciais -->
+                <table style="page-break-inside:avoid;width:100%;padding-left:24px;">
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:110px;">
+                            Cliente:
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            {!Order.Account.Name}. CNPJ: {!Order.CPF_CNPJ__c}
+                        </td>                        
+                    </tr>
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:110px;">
+                            Forma Pgto:
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            {!Order.Forma_de_pagamento2__c}.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:110px;">
+                            Condição Pgto:
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            {!Order.Condicao_de_pagamento__c}.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:110px;">
+                            Tipo de envio:
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            {!Order.Frete__c}.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:110px;">
+                            Endereço Entrega:
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            <apex:outputText rendered="{!IF(Order.ShippingStreet != '',true,false)}" >{!Order.ShippingStreet}</apex:outputText>
+                            <apex:outputText rendered="{!IF(Order.ShippingCity != '',true,false)}" > - {!Order.ShippingCity}</apex:outputText>
+                            <apex:outputText rendered="{!IF(Order.ShippingState != '',true,false)}" > - {!Order.ShippingState}</apex:outputText>
+                            <apex:outputText rendered="{!IF(Order.ShippingCountry != '',true,false)}" > - {!Order.ShippingCountry}</apex:outputText>
+                            <apex:outputText rendered="{!IF(Order.ShippingPostalCode != '',true,false)}" > - {!Order.ShippingPostalCode}</apex:outputText>.
+                            FRETE: {!Order.Tipo_de_Frete__c}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="clausula_texto destaque" style="text-indent:0px; width:110px;">
+                            Observações:
+                        </td>
+                        <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                            {!Order.Observacoes_Gerais__c}
+                        </td>
+                    </tr>
+                </table>
+                
+                <table style="page-break-inside:avoid;width:100%;padding-left:24px;" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="clausula_texto" style="width:25%;">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td class="clausula_texto destaque" style="text-indent:0px; width:110px;">
+                                        Número do Pedido:
+                                    </td>
+                                    <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                                        {!Order.OrderNumber}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="clausula_texto" style="width:25%;">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td class="clausula_texto destaque" style="text-indent:0px; width:110px;text-align:right;">
+                                        Data Abertura:
+                                    </td>
+                                    <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                                        <apex:outputField value="{!Order.EffectiveDate}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="clausula_texto" style="width:25%;">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td class="clausula_texto destaque" style="text-indent:0px; width:110px;text-align:right;">
+                                        Prazo Prometido:
+                                    </td>
+                                    <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                                        <apex:outputField value="{!Order.Prazo_de_entrega__c}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="clausula_texto" style="width:25%;">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td class="clausula_texto destaque" style="text-indent:0px; width:110px;text-align:right;">
+                                        Valor Total:
+                                    </td>
+                                    <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                                        <apex:outputField value="{!Order.TotalAmount}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    
+                </table>
+                
+                <table style="page-break-inside:avoid;width:100%;padding-left:24px;" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="clausula_texto" style="width:25%;">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td class="clausula_texto destaque" style="text-indent:0px; width:110px;">
+                                        Vendedor:
+                                    </td>
+                                    <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                                        {!Order.Vendedor__r.Name}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="clausula_texto" style="width:25%;">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td class="clausula_texto destaque" style="text-indent:0px; width:110px;text-align:right;">
+                                        Departamento:
+                                    </td>
+                                    <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                                        <apex:outputField value="{!Order.Departamento3__c}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="clausula_texto" style="width:25%;">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td class="clausula_texto destaque" style="text-indent:0px; width:110px;text-align:right;">
+                                        Treinamento:
+                                    </td>
+                                    <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                                       <apex:outputField value="{!Order.Necess_rio_Treinamento__c}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="clausula_texto" style="width:25%;">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td class="clausula_texto destaque" style="text-indent:0px; width:110px;text-align:right;">
+                                        Entrega parcial:
+                                    </td>
+                                    <td class="clausula_texto maiuscula" style="text-indent:0px;">
+                                        <apex:outputField value="{!Order.Entrega_parcial__c}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    
+                </table>
+                
+                <br/>
+                
+                <!-- lista de item -->
+                <table class="tabela_geral" cellpadding="0px" cellspacing="0px" style="width:100%;">
+                
+                    <apex:variable var="ultimo_reg" value="{!''}"/>
+                    
+                    <apex:variable var="cont_reg" value="{!0}"/>
+                    <apex:variable var="classe" value="{!''}"/>
+                    
+                    <apex:variable var="span_desc" value="{!0}"/>
+                    <apex:variable var="span_equi" value="{!0}"/>
+                    <apex:variable var="span_fim" value="{!0}"/>
+                    <apex:variable var="cont_col_add" value="{!0}"/> 
+                    <apex:variable var="item_cont"   value="{!0}"/> 
+                    
+                    <apex:repeat value="{!itens_ok_ped}" var="item">
+                        <apex:variable var="item_cont"   value="{!item_cont+1}"/>
+                        
+                        <!-- item -->
+                        <tr>
+                            <td>
+                                <table class="tabela_item" cellpadding="0px" cellspacing="0px" style="width:100%;">
+                                    
+                                    <apex:outputText rendered="{!IF(item.Item__c != 0, true, false)}">
+                                        
+                                        <!-- linha: cabeçalho -->
+                                        <apex:outputText rendered="{!IF(OR(AND(ISBLANK(item.Item_Pai__c),OR(ultimo_reg=='filho',ultimo_reg=='')), item.Description='cab'),true,false)}">                                            
+                                            <tr>
+                                                <td class="invisivel" style="width:25px;"></td>
+                                                <td class="cabecalho cab_esq" style="width:77px;" colspan="2">Código</td>
+                                                <td class="cabecalho" style="width:*;">Produto</td>
+                                                <td class="cabecalho" style="width:120px;">Modelo</td>
+                                                <td class="cabecalho" style="width:100px;">Fabricante</td>
+                                                <td class="cabecalho" style="width:70px;">Val. Unitário</td>
+                                                <td class="cabecalho" style="width:30px;">Qtd.</td>
+                                                <td class="cabecalho" style="width:70px;">Val. Total</td>
+                                                <td class="cabecalho" style="width:120px;">Status</td>
+                                                <td class="cabecalho" style="width:85px;">Lote/Série</td>
+                                            </tr>
+                                            <apex:variable var="cont_reg" value="{!0}"/>
+                                        </apex:outputText>
+                                        <apex:variable var="cont_reg" value="{!cont_reg+1}"/>
+                                        
+                                        <!-- lista zebrada -->
+                                        <apex:outputText rendered="{!IF(MOD(cont_reg,2) == 0,true,false)}">
+                                            <apex:variable var="classe" value="{!''}"/>
+                                        </apex:outputText>
+                                        <apex:outputText rendered="{!IF(MOD(cont_reg,2) == 1,true,false)}">
+                                            <apex:variable var="classe" value="{!'zebra'}"/>
+                                        </apex:outputText>
+                                        
+                                        <!-- rowspan adicional da descrição -->
+                                        <apex:outputText rendered="{!IF(item.Descricao_da_linha__c != null,true,false)}">
+                                            <apex:variable var="span_desc" value="{!1}"/>
+                                        </apex:outputText>
+                                        <apex:outputText rendered="{!IF(item.Descricao_da_linha__c == null,true,false)}">
+                                            <apex:variable var="span_desc" value="{!0}"/>
+                                        </apex:outputText>
+                                        
+                                        <!-- rowspan adicional de items "equipamento" 
+                                        <apex:outputText rendered="{!IF(item.Product2.Tipo_do_Produto__c == 'EQUIPAMENTO',true,false)}">
+                                            <apex:variable var="span_equi" value="{!ROUND(item.Quantity, 0)-1}"/>
+                                        </apex:outputText>
+                                        <apex:outputText rendered="{!IF(item.Product2.Tipo_do_Produto__c != 'EQUIPAMENTO',true,false)}">
+                                            <apex:variable var="span_equi" value="{!0}"/>
+                                        </apex:outputText>
+                                        -->
+                                        
+                                        <tr>
+                                        
+                                            <!-- linha: item - pt1 - pai -->
+                                            <apex:outputText rendered="{!IF(ISBLANK(item.Item_Pai__c),true,false)}" >
+                                                <apex:variable var="ultimo_reg" value="{!'pai'}"/>
+                                                <td class="incolor"  style="width:25px;" rowspan="{!span_equi+span_desc+1}">
+                                                    <apex:outputText rendered="{!IF(item.Item__c == null,true,false)}" >
+                                                        -&nbsp;&nbsp;
+                                                    </apex:outputText>
+                                                    <apex:outputText rendered="{!IF(item.Item__c != null,true,false)}" >
+                                                        {!FLOOR(item.ordem__c)}&nbsp;&nbsp;
+                                                    </apex:outputText>
+                                                </td>
+                                                <td class="celula cel_esq {!classe}" style="width:55px; max-width:110px;" rowspan="{!span_equi+span_desc+1}" colspan="2">
+                                                    <apex:outputText rendered="{!IF(item.Product2.ProductCode != '',true,false)}" >
+                                                        {!item.Product2.ProductCode}&nbsp;&nbsp;
+                                                    </apex:outputText>
+                                                    <apex:outputText rendered="{!IF(item.Product2.ProductCode == '',true,false)}" >
+                                                        -&nbsp;&nbsp;
+                                                    </apex:outputText>
+                                                </td>
+                                            </apex:outputText>
+                                            
+                                            <!-- linha: item - pt1 - filho -->
+                                            <apex:outputText rendered="{!IF(NOT(ISBLANK(item.Item_Pai__c)),true,false)}" >
+                                                <apex:variable var="ultimo_reg" value="{!'filho'}"/>
+                                                <td class="invisivel"  style="width:39px;"  rowspan="{!span_equi+span_desc+1}"></td>
+                                                <td class="invisivel"  style="width:30px;"  rowspan="{!span_equi+span_desc+1}"></td>
+                                                <td class="celula cel_esq {!classe}" style="width:117px;" rowspan="{!span_equi+span_desc+1}">
+                                                    <apex:outputText rendered="{!IF(item.Product2.ProductCode != '',true,false)}" >
+                                                        {!item.Product2.ProductCode}&nbsp;
+                                                    </apex:outputText>
+                                                    <apex:outputText rendered="{!IF(item.Product2.ProductCode == '',true,false)}" >
+                                                        -&nbsp;
+                                                    </apex:outputText>
+                                                </td>                                
+                                            </apex:outputText>
+                                            
+                                            <!-- linha: item - pt2 - geral -->
+                                            
+                                            <td class="celula {!classe}"  style="width:*;" rowspan="{!span_equi+1}">
+                                                {!UPPER(item.Product2.Name)}
+                                            </td>
+                                            <td class="celula {!classe}"  style="width:120px;" rowspan="{!span_equi+1}">{!UPPER(item.Product2.Modelo__c)}</td>
+                                            <td class="celula {!classe}"  style="width:100px;" rowspan="{!span_equi+1}">{!UPPER(item.Product2.Marca__c)}</td>
+                                            <td class="celula {!classe}"  style="width:70px;"  rowspan="{!span_equi+1}"><apex:outputField value="{!item.UnitPrice}"/></td>
+                                            <td class="celula {!classe}"  style="width:30px;"  rowspan="{!span_equi+1}">{!ROUND(item.Quantity, 0)}</td>
+                                            <td class="celula {!classe}"  style="width:70px;"  rowspan="{!span_equi+1}"><apex:outputField value="{!item.TotalPrice}"/></td>
+                                            <td class="celula {!classe}"  style="width:120px;" rowspan="{!span_equi+1}"><apex:outputField value="{!item.Status__c}"/></td>
+                                            <td class="celula {!classe}"  style="width:85px;" rowspan="{!span_equi+1}">&nbsp;</td>
+                                        </tr>
+                                                 
+                                        <!--
+                                        <apex:variable var="cont_col_add" value="{!0}"/>
+                                        
+                                        <apex:outputText rendered="{!IF(AND(item.Product2.Tipo_do_Produto__c == 'EQUIPAMENTO', item.Quantity > 1),true,false)}" >
+                                            <apex:repeat value="{!qtd_lista}" var="qtd">
+                                                <apex:variable var="cont_col_add" value="{!cont_col_add+1}"/>
+                                                <apex:outputText rendered="{!IF(cont_col_add < ROUND(item.Quantity, 0),true,false)}" >
+                                                    <tr>
+                                                        <td class="celula {!classe}"  style="width:35px;">&nbsp;</td>
+                                                        <td class="celula {!classe}"  style="width:35px;">&nbsp;</td>
+                                                        <td class="celula {!classe}"  style="width:85px;">&nbsp;</td>
+                                                    </tr>
+                                                </apex:outputText>
+                                            </apex:repeat>
+                                        </apex:outputText>
+                                        -->
+                                        
+                                        
+                                        
+                                        <!-- linha: item - descrição - geral -->
+                                        <apex:outputText rendered="{!IF(AND(item.Descricao_da_linha__c != null),true,false)}">
+                                            <tr>
+                                                <td class="celula descricao {!classe}"  style="height:100%" colspan="8"> 
+                                                    <apex:outputText rendered="{!IF(item.Descricao_da_linha__c != '',true,false)}" >Descrição: {!item.Descricao_da_linha__c}</apex:outputText>
+                                                    <!-- <br/>
+                                                    <apex:outputText rendered="{!IF(item.Description != '',true,false)}" >Ns. Série {!item.Description}</apex:outputText> -->
+                                                </td>
+                                                
+                                            </tr>
+                                        </apex:outputText>
+                                        
+                                        
+                                        
+                                        
+                                                    <tr>
+                                                        <td class=""  colspan="11">
+                                                            <br/>
+                                                        </td>
+                                                   </tr>
+                                                </apex:outputText> 
+                                                
+                                                <!-- linha: subtotal -->
+                                                <apex:outputText rendered="{!IF(AND(item.Item__c == 0, item.PricebookEntryId == null),true,false)}">
+                                                    <tr>
+                                                        <td class="invisivel" style="width:69px;"></td>
+                                                        <td class="celula cel_esq destaque" style="width:*; border-right:none;text-transform:none;"> Subtotal</td>
+                                                        <td class="celula destaque" style="width:75px; border-left:none;"> <apex:outputField value="{!item.UnitPrice}"/></td>
+                                                    </tr>   
+                                                    
+                                                  
+                                                   
+                                                        
+                                                </apex:outputText>
+                                   
+                                    <apex:outputText rendered="{!IF(OR(AND(item.Item__c == 0, item.PricebookEntryId == null), item.Description='esp'),true,false)}">
+                                        <tr>
+                                            <td class="invisivel" style="height:5px;" colspan="1"> </td>
+                                        </tr>      
+                                        
+                                             
+                                    </apex:outputText>
+                                    
+                                    
+                                       
+                                    
+                                </table>
+                                
+                            </td>
+                        </tr>
+                        
+                        
+                         
+                       
+
+                    </apex:repeat>
+                         
+                </table>
+                
+            </div> <!-- fim de: conteúdo -->
+        </body>
+    </html>
+</apex:page>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Limita_valores</fullName>
+    <active>true</active>
+    <errorConditionFormula>Severidade_Atual__c &gt; 5 || Severidade_Atual__c &lt; 0 ||
+Severidade_Estimada__c &gt; 5 || Severidade_Estimada__c &lt; 0 ||
+Probabilidade_Atual__c &gt; 5 || Probabilidade_Atual__c &lt; 0 ||
+Probabilidade_Estimada__c &gt; 5 || Probabilidade_Estimada__c &lt; 0</errorConditionFormula>
+    <errorMessage>Os valores devem estar entre 0 e 5 para Severidade e Probabilidade (Atual ou Estimada).</errorMessage>
+</ValidationRule>

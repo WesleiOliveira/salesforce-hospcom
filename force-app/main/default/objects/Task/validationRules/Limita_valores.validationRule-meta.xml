@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Limita_valores</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+Owner:User.ProfileId = &apos;00e6e000002JQUa&apos;,
+Subject != &apos;Departamento Juridico&apos;
+
+)</errorConditionFormula>
+    <errorDisplayField>Subject</errorDisplayField>
+    <errorMessage>Esse assunto não pode ser atribuído ao jurídico.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Trajeto_de_origem__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Trajeto de origem</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Trajeto__c.Viagem__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.Viagem__c</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Trajeto__c</referenceTo>
+    <relationshipLabel>Trajetos</relationshipLabel>
+    <relationshipName>Trajetos</relationshipName>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

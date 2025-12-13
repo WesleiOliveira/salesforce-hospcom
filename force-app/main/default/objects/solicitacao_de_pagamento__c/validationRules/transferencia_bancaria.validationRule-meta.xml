@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>transferencia_bancaria</fullName>
+    <active>true</active>
+    <errorConditionFormula>TEXT(Forma_de_Pagamento__c) == &quot;TRANSFERENCIA BANCARIA&quot; &amp;&amp; 
+(TEXT(Banco__c) == null || 
+Agencia_sem_digito__c == &quot;&quot; ||
+CNPJ_ou_CPF_do_benefici_rio__c == &quot;&quot; ||
+conta_com_digito__c == &quot;&quot; ||
+digito_da_conta__c == &quot;&quot; ||
+Boleto__c &lt;&gt; &quot;&quot;||
+Chave_pix__c &lt;&gt;&quot;&quot;)</errorConditionFormula>
+    <errorDisplayField>Agencia_sem_digito__c</errorDisplayField>
+    <errorMessage>Forma de pagamento &quot;TRANSFERENCIA BANCARIA &quot; selecionado, certifique-se de que os dados bancarios estão preenchidos e que os dados do boleto e de boleto estão vazios</errorMessage>
+</ValidationRule>

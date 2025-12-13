@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Classificacao_Painel__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Tempo_em_Aberto__c &lt; 30, &apos;D1 - Menor que 30 dias&apos;,
+IF(Tempo_em_Aberto__c &gt;= 30 &amp;&amp; Tempo_em_Aberto__c &lt;= 45, &apos;D2 - Entre 31 e 45 dias&apos;,
+IF(Tempo_em_Aberto__c &gt;= 46 &amp;&amp; Tempo_em_Aberto__c &lt;= 60, &apos;D3 - Entre 46 e 60 dias&apos;,
+IF(Tempo_em_Aberto__c &gt;= 61 &amp;&amp; Tempo_em_Aberto__c &lt;= 90, &apos;D4 - Entre 61 e 90 dias&apos;,
+IF(Tempo_em_Aberto__c &gt; 90, &apos;D5 - Maior que 90 dias&apos;,
+&apos;Dado Inválido&apos;)))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Classificacao Painel</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

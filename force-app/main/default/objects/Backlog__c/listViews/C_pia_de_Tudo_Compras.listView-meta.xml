@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>C_pia_de_Tudo_Compras</fullName>
+    <columns>NAME</columns>
+    <columns>Atividade__c</columns>
+    <columns>Status__c</columns>
+    <columns>Tipo__c</columns>
+    <columns>Excedeu_Tempo_Estimado__c</columns>
+    <columns>FUP__c</columns>
+    <columns>OWNER.FIRST_NAME</columns>
+    <columns>Ticket_Criado_Em__c</columns>
+    <columns>Data_Estimada_de_T_rmino__c</columns>
+    <columns>Ticket_Finalizado_Em__c</columns>
+    <columns>OWNER.ALIAS</columns>
+    <columns>Atribuido__c</columns>
+    <columns>LAST_ACTIVITY</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Finalizado,Recusado</value>
+    </filters>
+    <filters>
+        <field>OWNER.ALIAS</field>
+        <operation>contains</operation>
+        <value>Kleber</value>
+    </filters>
+    <label>Todas Compras</label>
+</ListView>

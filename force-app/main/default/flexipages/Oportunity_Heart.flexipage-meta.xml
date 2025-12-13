@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>avg_deal_size</name>
+                    <value>150000</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>avg_opp_duration</name>
+                    <value>200</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>list_name</name>
+                    <value>My Opportunities</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>show_view_list</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentName>ttglt1:TASOpportunitiesStatus</componentName>
+                <identifier>ttglt1_TASOpportunitiesStatus</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>main</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <masterLabel>Oportunity Heart</masterLabel>
+    <template>
+        <name>flexipage:defaultAppHomeTemplate</name>
+    </template>
+    <type>AppPage</type>
+</FlexiPage>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>atualiza_status</fullName>
+        <field>Status__c</field>
+        <literalValue>Em aprovação</literalValue>
+        <name>atualiza status</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>status_aprovado</fullName>
+        <field>Status__c</field>
+        <literalValue>Aprovado</literalValue>
+        <name>status aprovado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>status_recusaddo</fullName>
+        <field>Status__c</field>
+        <literalValue>Rejeitado</literalValue>
+        <name>status recusaddo</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+</Workflow>

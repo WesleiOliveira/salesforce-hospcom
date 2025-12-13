@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Aviso_pr_vio__c</fullName>
+    <externalId>false</externalId>
+    <label>Aviso prévio</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>INDENIZADO</fullName>
+                <default>false</default>
+                <label>INDENIZADO</label>
+            </value>
+            <value>
+                <fullName>DESCONTADO</fullName>
+                <default>false</default>
+                <label>DESCONTADO</label>
+            </value>
+            <value>
+                <fullName>DISPENSA</fullName>
+                <default>false</default>
+                <label>DISPENSA</label>
+            </value>
+            <value>
+                <fullName>TRABALHADO</fullName>
+                <default>false</default>
+                <label>Trabalhado</label>
+            </value>
+            <value>
+                <fullName>Indenizado ou Descontado</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Indenizado ou Descontado</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

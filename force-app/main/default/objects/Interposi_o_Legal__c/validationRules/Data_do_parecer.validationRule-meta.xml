@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Data_do_parecer</fullName>
+    <active>true</active>
+    <errorConditionFormula>(TEXT(Status__c) = &apos;Parecer Favorável&apos;  || TEXT(Status__c) = &apos;Parecer Desfavorável&apos;)  &amp;&amp;  Data_do_parecer__c  = null</errorConditionFormula>
+    <errorMessage>Data do parecer obrigatória para esse status.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RESPOSTA_AO_RECLAMANTE</fullName>
+    <active>true</active>
+    <errorConditionFormula>(TEXT(Resposta_ao_reclamante__c) = &quot;não&quot; &amp;&amp; (TEXT(Resposta_ao_reclamante_por_meio__c) = &quot;carta&quot; || TEXT(Resposta_ao_reclamante_por_meio__c) = &quot;e-mail&quot; || TEXT(Origin) = &quot;fax&quot; || TEXT(Resposta_ao_reclamante_por_meio__c) = &quot;outros&quot;)) ||
+
+(TEXT(Resposta_ao_reclamante__c) = &quot;sim&quot; &amp;&amp; Motivo_resposta_ao_reclamante__c&lt;&gt; &quot;&quot;   )</errorConditionFormula>
+    <errorDisplayField>Resposta_ao_reclamante__c</errorDisplayField>
+    <errorMessage>CASO selecionado &quot;SIM&quot;. Você não deve preencher o campo &quot;Motivo&quot; e deve apagar o texto digitado
+
+CASO selecionado &quot;Não&quot;. Você não deve preencher o campo &quot;Resposta ao reclamante por meio de: &quot; e deve passar seu valor para &quot;Nenhum&quot;.</errorMessage>
+</ValidationRule>

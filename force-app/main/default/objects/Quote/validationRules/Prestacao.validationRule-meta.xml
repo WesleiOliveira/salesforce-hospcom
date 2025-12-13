@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prestacao</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+  ISCHANGED(Numero_de_prestacoes__c),
+  ISBLANK(Numero_de_prestacoes__c) = false,
+  TEXT(Condicao_de_pagamento__c) != &apos;Financiamento Bancário&apos;
+)</errorConditionFormula>
+    <errorDisplayField>Numero_de_prestacoes__c</errorDisplayField>
+    <errorMessage>O campo Nº de prestações deve ser preenchido apenas para Financiamento Bancário.</errorMessage>
+</ValidationRule>

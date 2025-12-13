@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contato__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <inlineHelpText>Preencher quando o Motivo da Contratação for substituição</inlineHelpText>
+    <label>Colaborador Substituído</label>
+    <lookupFilter>
+        <active>true</active>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <filterItems>
+            <field>Contact.AccountId</field>
+            <operation>equals</operation>
+            <value>001i00000085QYbAAM</value>
+        </filterItems>
+        <filterItems>
+            <field>Contact.AccountId</field>
+            <operation>equals</operation>
+            <value>0015A00002GC6r6QAD</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Contact</referenceTo>
+    <relationshipLabel>Vagas Disponíveis</relationshipLabel>
+    <relationshipName>Vagas_Dispon_veis</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

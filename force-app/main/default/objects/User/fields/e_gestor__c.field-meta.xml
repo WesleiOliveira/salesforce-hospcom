@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>e_gestor__c</fullName>
+    <externalId>false</externalId>
+    <formula>CONTAINS(Profile.Name, &apos;Gestor&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>é gestor</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

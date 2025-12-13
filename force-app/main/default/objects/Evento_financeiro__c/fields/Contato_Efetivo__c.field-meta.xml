@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contato_Efetivo__c</fullName>
+    <externalId>false</externalId>
+    <formula>OR(
+  ISPICKVAL(Tipo__c, &quot;Contato com Cliente&quot;),
+  ISPICKVAL(Tipo__c, &quot;Contato Receptivo&quot;),
+  ISPICKVAL(Tipo__c, &quot;Acordo&quot;),
+  ISPICKVAL(Tipo__c, &quot;Tratativa com Gestor&quot;)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Contato Efetivo</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

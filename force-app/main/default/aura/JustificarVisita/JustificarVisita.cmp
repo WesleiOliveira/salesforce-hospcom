@@ -1,0 +1,113 @@
+<aura:component controller="ItemCotacao" extends="c.ApexHelper"
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+    access="global">
+
+    <!-- Atributos -->
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="compromissoIgualAVisita" type="Boolean" />
+    <aura:attribute name="justificativa" type="String" />
+    <aura:attribute name="feedback" type="String" />
+    <aura:attribute name="options" type="List" default="[
+        {'label':'Sem conexão no momento do compromisso','value':'Sem conexao no momento do compromisso'},
+        {'label':'Endereço da conta errado','value':'Endereço da conta errado'},
+        {'label':'Localização atual errada','value':'Localizacao atual errada'}
+    ]" />
+    <aura:attribute name="anexoFile" type="Object" />
+    <aura:attribute name="showSuccess" type="Boolean" default="false" />
+    <aura:attribute name="desativarBotao" type="Boolean" default="false" />
+
+ <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+
+    <aura:if isTrue="{!v.compromissoIgualAVisita}">
+    <!-- Container Principal -->
+    <div class="slds-theme_default">
+
+        <!-- Mensagem de Sucesso -->
+        <aura:if isTrue="{!v.showSuccess}">
+            <div class="slds-m-bottom_medium">
+                <div class="slds-notify slds-notify_toast slds-theme_success" role="status" style="position: relative;">
+                    <span class="slds-icon_container slds-icon-utility-success slds-m-right_small">
+                        <lightning:icon iconName="utility:success" size="small" variant="inverse" />
+                    </span>
+                    <div class="slds-notify__content">
+                        <h2 class="slds-text-heading_small">
+                            <strong>Sucesso!</strong> Justificativa salva com sucesso.
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </aura:if>
+
+        <!-- Card Principal -->
+        <lightning:card>
+
+            <!-- Header Customizado -->
+            <aura:set attribute="title">
+                <div class="slds-grid slds-grid_vertical-align-center">
+                    <lightning:icon iconName="standard:event" size="small" class="slds-m-right_small" />
+                    <span class="slds-text-heading_medium">Justificar Visita</span>
+                </div>
+            </aura:set>
+
+            <!-- Corpo do Card -->
+            <div class="slds-p-horizontal_large slds-p-vertical_medium">
+
+                <!-- Campo de Justificativa -->
+                <div class="slds-form-element slds-m-bottom_medium">
+                    <lightning:combobox name="justificativaPicklist" label="Justificativa"
+                        placeholder="Selecione uma opção..." options="{!v.options}" value="{!v.justificativa}"
+                        onchange="{!c.handleJustificativaChange}" required="true" class="custom-combobox" />
+                </div>
+
+                <!-- Divisor Visual -->
+                <div class="slds-m-vertical_medium" style="border-top: 1px solid #dddbda;"></div>
+
+                <!-- Campo de Feedback -->
+                <div class="slds-form-element slds-m-bottom_medium">
+                    <lightning:textarea label="Feedback" value="{!v.feedback}"
+                        placeholder="Descreva detalhes sobre este compromisso e resultado da visita..." rows="6" />
+                </div>
+
+                <!-- Divisor Visual -->
+                <div class="slds-m-vertical_medium" style="border-top: 1px solid #dddbda;"></div>
+
+                <!-- Upload de Arquivo -->
+                <div class="slds-form-element">
+                    <div class="slds-grid slds-grid_vertical-align-center slds-m-bottom_x-small">
+                        <lightning:icon iconName="utility:image" size="x-small" class="slds-m-right_x-small" />
+                        <span class="slds-text-body_small slds-text-color_weak">Anexar evidência (opcional)</span>
+                    </div>
+                    <aura:if isTrue="{!empty(v.anexoFile)}">
+                        <lightning:fileUpload label="Imagem da Visita" name="uploadImage" accept=".jpg,.jpeg,.png,.gif"
+                            recordId="{!v.recordId}" onuploadfinished="{!c.handleUploadFinished}" multiple="false" />
+
+                        <aura:set attribute="else">
+                            <!-- Mostra mensagem de sucesso quando arquivo enviado -->
+                            <div class="slds-box slds-box_x-small slds-theme_success slds-text-align_center">
+                                <lightning:icon iconName="utility:check" size="small" variant="inverse"
+                                    class="slds-m-right_x-small" />
+                                <span class="slds-text-color_inverse"><strong>Imagem enviada com sucesso</strong></span>
+                            </div>
+                        </aura:set>
+                    </aura:if>
+                </div>
+
+            </div>
+
+            <!-- Footer com Botões -->
+            <aura:set attribute="footer">
+                <div class="slds-grid slds-grid_align-end slds-p-around_small">
+                    <lightning:button variant="neutral" label="Cancelar" onclick="{!c.handleCancel}"
+                        class="slds-m-right_x-small" disabled="{!v.desativarBotao}" />
+                    <lightning:button variant="brand" label="Salvar Justificativa" onclick="{!c.salvar}"
+                        iconName="utility:save" />
+                </div>
+            </aura:set>
+
+        </lightning:card>
+
+    </div>
+    </aura:if>
+
+</aura:component>

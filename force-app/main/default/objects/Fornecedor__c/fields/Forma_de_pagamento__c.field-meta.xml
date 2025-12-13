@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Forma_de_pagamento__c</fullName>
+    <externalId>false</externalId>
+    <label>Forma de pagamento</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Dinheiro</fullName>
+                <default>false</default>
+                <label>Dinheiro</label>
+            </value>
+            <value>
+                <fullName>Depósito Bancário</fullName>
+                <default>false</default>
+                <label>Depósito Bancário</label>
+            </value>
+            <value>
+                <fullName>Depósito Antecipado</fullName>
+                <default>false</default>
+                <label>Depósito Antecipado</label>
+            </value>
+            <value>
+                <fullName>Boleto</fullName>
+                <default>false</default>
+                <label>Boleto</label>
+            </value>
+            <value>
+                <fullName>Cheque</fullName>
+                <default>false</default>
+                <label>Cheque</label>
+            </value>
+            <value>
+                <fullName>Cartão de Crédito</fullName>
+                <default>false</default>
+                <label>Cartão de Crédito</label>
+            </value>
+            <value>
+                <fullName>Cartão de Débito</fullName>
+                <default>false</default>
+                <label>Cartão de Débito</label>
+            </value>
+            <value>
+                <fullName>Permuta</fullName>
+                <default>false</default>
+                <label>Permuta</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

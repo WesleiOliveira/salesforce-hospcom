@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Todos_Sensores_Ativos</fullName>
+    <columns>NAME</columns>
+    <columns>Empresa__c</columns>
+    <columns>Local_instalado__c</columns>
+    <columns>Temperatura_registrada__c</columns>
+    <columns>Ultima_Atualiza_o_de_temperatura__c</columns>
+    <columns>Endere_o_MAC__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Atividade__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Todos Sensores Ativos</label>
+</ListView>

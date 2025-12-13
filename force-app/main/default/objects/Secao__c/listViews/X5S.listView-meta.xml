@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X5S</fullName>
+    <columns>NAME</columns>
+    <columns>Status__c</columns>
+    <columns>Tipo_de_Auditoria__c</columns>
+    <columns>Tipo__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Tipo_de_Auditoria__c</field>
+        <operation>equals</operation>
+        <value>Auditoria de boas práticas</value>
+    </filters>
+    <label>5S</label>
+</ListView>

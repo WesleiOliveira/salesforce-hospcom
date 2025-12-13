@@ -1,0 +1,21 @@
+<aura:component controller="TaskController" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+
+    
+    <aura:attribute name="recordId" type="Id"/>
+    
+    <aura:attribute name="task" type="Task"/>
+    <aura:attribute name="canEdit" type="Boolean" default="false"/>
+    
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+     <aura:if isTrue="{!v.canEdit}">
+        <lightning:card title="PRAZO INTERNO">
+            <lightning:input type="date" name="dataInterna" label="Internal Date" value="{!v.task.Data_interna__c}" aura:id="internalDate"/>
+            
+            <lightning:button label="SALVAR" onclick="{!c.updateTask}" class="slds-m-top_medium"/>
+        </lightning:card>
+    </aura:if>
+
+    
+</aura:component>

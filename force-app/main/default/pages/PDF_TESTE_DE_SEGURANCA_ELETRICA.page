@@ -1,0 +1,731 @@
+<apex:page standardController="Procedimento__c" applyHtmlTag="false" showHeader="false" renderAs="pdf">
+  <head>
+  <style type="text/css" media="print">
+           
+           
+           
+            @page {
+                size:21cm 29.7cm;
+                margin:100px 40px 60px 40px;
+                @top-center {
+                    content:element(header);
+                }
+                @bottom-center {
+                    content:element(footer);
+                }
+            }
+            @page{
+                size:A4;
+                background:url({!$Resource.TimbradoHospcom});
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);}
+            }
+            .pagenumber:before {
+                content:counter(page);
+            }
+            .pagecount:before {
+                content:counter(pages);
+            }
+            div.header {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(header);
+                height:60px;
+            }
+            div.content {
+            }
+            div.footer {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(footer);
+                height:20px;
+                text-align:right;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                font-weight:normal;
+            }
+        </style>
+        <style type="text/css" media="print">
+        /*
+        
+        
+            @page:first{
+                size:A4;
+                background: url($Resource.SobreHealth);
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);
+                }
+            }
+            
+            @page{
+                size:A4;
+                background: url($Resource.TimbradoHealth);
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);}
+            }
+  */
+             *{
+                 font-family:arial, verdana, sans-serif;
+                /* border: none !important;  */ 
+                  text-transform: uppercase;
+            }
+            tr{
+                
+                
+            }
+            .titulo-secao{
+                font-family:arial, verdana, sans-serif;
+                font-size:15px;
+                text-align:left !important;
+                font-weight:bold; 
+                width:100%;
+                padding:10px 0;
+                background-color:#fff;
+                color:#0b3353;
+                margin-top:10px;
+            }
+            .titulo{
+                font-family:arial, verdana, sans-serif;
+                font-size:15px;
+                text-align:center;
+                font-weight:bold; 
+               
+                padding:10px;
+                background-color:;
+                color:#0b3353;
+            }
+            table{
+                border-collapse: collapse;
+                border:none !important ;
+                width: 100%;
+                margin-bottom:15px;
+            }
+            .cabecalho-tabela{
+                background:#fff;
+                border: 1px solid #000 ;
+                text-align:center;
+                font-weight: 900;
+            }
+            .corpo-tabela{
+                background:#fff;
+            }
+            
+            tr{
+                width:100%;      
+            }
+            h3{
+               color:#0b3353;
+                margin:0;
+                padding:0;   
+                text-align:center !important;   
+              }
+            h2{
+                color:#0b3353;
+                 font-family:arial, verdana, sans-serif;
+            }
+            td{
+               text-align:center;
+               padding: 5px;
+               font-family:arial, verdana, sans-serif;
+                font-size:11.5px;
+               }
+            tr,td{
+                border:1px  solid #000 ;
+                }
+            table tr.cabecalho-tabela td {           
+                border: 1px solid #000 ;
+                margin:0;
+            }
+            
+            
+            .tabela_geral{
+                border-collapse:collapse;
+                width:100%;
+            }
+            table.print-friendly tr td, table.print-friendly tr th {
+                page-break-inside: avoid;
+            }
+            .cabecalho{
+                font-family:arial, verdana, sans-serif;
+                font-size:11px;
+                font-weight:bold; 
+                vertical-align:top;
+                background-color: #c3c3c3;
+                padding: 3px;
+            }
+            .celula{
+                font-family:arial, verdana, sans-serif;
+                font-size:13px;
+                vertical-align:top;
+                line-height:120%;
+                padding: 3px;
+                border: 1px solid #c3c3c3;
+            }
+            .clausula_texto{
+                font-family:arial, verdana, sans-serif;
+                font-size:11.5px;
+                text-align:justify;
+                text-justify:inter-word;
+                line-height:120%;
+                text-indent:50px;
+                vertical-align:top;
+            }
+            .infos_texto{
+                font-family:arial, verdana, sans-serif;
+                font-size:11.5px;
+                text-align:justify;
+                text-justify:inter-word;
+                line-height:120%;
+                vertical-align:top;
+                border: none;
+            }
+            .pre_texto{
+                white-space: pre;
+            }
+            .maiuscula{
+                text-transform: uppercase;
+            }
+            .zebra{
+                background-color: #f3f3f3;
+            }
+            
+            .assinaturas{
+              display:flex;
+           
+              flex-direction:row;
+              padding:0;
+               margin:0;
+            }
+            .assinatura{
+               width:100%;
+               padding:0;
+               margin:0;
+            }
+            .underline{
+                padding:0;
+                margin:0 auto;
+                width:80%;
+                height:1px;
+                border-top:1px solid #000;
+            }
+            
+        </style>
+  </head>
+  <body>
+  <apex:pageBlock >
+            
+         
+            <div class="footer" style="text-align:center !important">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Página <span class="pagenumber"/> de <span class="pagecount"/> - Emissão em:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{! TODAY() }" /></apex:outputText>
+            </div>
+  
+              <div >
+                    <apex:outputText rendered="{!IF(Procedimento__c.RecordTypeId != '01I6e000002qLIH', true,false)}">
+                        <div class="titulo">
+                            CERTIFICADO DE TESTE DE SEGURANÇA ELÉTRICA
+                            <br/> <br/>
+                          <div style = "text-align: right;">
+                               N° DA ORDEM DE TRABALHO: <span style = " color:red;">{!Procedimento__c.ordemDeTrabalho__r.Numero_da_OT__c}</span><BR/>
+                            N° DO CERTIFICADO: <span  style = " color:red;">{!Procedimento__c.name}</span>   </div>
+ 
+                          </div>
+                        <div>
+                            
+                             <table style="page-break-inside:avoid;width:100%;">
+                             
+                                
+                                         <h3 class="titulo-secao"> Dados do Contratante</h3>
+                                     
+                                 <tr>
+                                    <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:30px;">Cliente:</td>
+                                    <td colspan="3" class="infos_texto" style="text-indent:0px;">{!Procedimento__c.ordemDeTrabalho__r.Account.Name}</td>
+                                
+                                </tr>
+                                
+                                <tr>
+                                    <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:30px;">Cliente:</td>
+                                    <td colspan="3" class="infos_texto" style="text-indent:0px;">{!Procedimento__c.ordemDeTrabalho__r.Account.raz_o_social__c}</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:30px;">Endereço: </td>
+                                    <td colspan="3" class="infos_texto" style="text-indent:0px;">{!Procedimento__c.ordemDeTrabalho__r.Account.BillingStreet}, {!Procedimento__c.ordemDeTrabalho__r.Account.Endere_o__c}</td>
+                                </tr>
+    
+                                <tr>
+                                    <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:30px;">contratante: </td>
+                                    <td colspan="3" class="infos_texto" style="text-indent:0px;">{!Procedimento__c.ordemDeTrabalho__r.Contact.Name}</td>
+                                </tr>
+    
+                            </table>
+                        
+                        </div>
+                        
+                        <div>
+                           
+                             <table style="page-break-inside:avoid;width:100%;">
+                                 <h3 class="titulo-secao"> Dados do Equipamento</h3>
+                                <tr>
+                                    <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:30px;">Equipamento:</td>
+                                    <td colspan="3" class="infos_texto" style="text-indent:0px;">{!Procedimento__c.ordemDeTrabalho__r.Asset.Name}</td>
+                                    
+                                </tr>
+                                   
+                                <tr>
+                                    <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:30px;">Número de série:</td>
+                                    <td colspan="3" class="infos_texto" style="text-indent:0px;">{!Procedimento__c.ordemDeTrabalho__r.Asset.SerialNumber}</td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:30px;">Fabricante/Marca:</td>
+                                    <td colspan="3" class="infos_texto" style="text-indent:0px;">{!Procedimento__c.ordemDeTrabalho__r.Asset.Marca__c}</td> 
+                                </tr>
+                                
+                               
+    
+                            </table>
+                        
+                        </div>
+                        
+                        
+                         <div>
+                           
+                             <table style="page-break-inside:avoid;width:100%;">
+                                <h3 class="titulo-secao">Dados preliminares do Ensaio</h3>
+                                <tr>
+                                    <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:30px;">Data de execução:</td>
+                                    <td colspan="3" class="infos_texto" style="text-indent:0px;"> <apex:outputField value="{!Procedimento__c.dataDoTse__c}"/> </td>
+                                
+                                </tr>
+                                
+                                <tr>
+                                    <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:30px;">Validade:</td>
+                                    <td colspan="3" class="infos_texto" style="text-indent:0px;"><apex:outputField value="{!Procedimento__c.Validade__c}"/></td> 
+                                </tr>
+                                
+                               
+                                 <tr>
+                                    <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:30px;">Técnico Executor:</td>
+                                    <td colspan="3" class="infos_texto" style="text-indent:0px;">{!Procedimento__c.tecnico_executorr__r.Name}</td>
+                          
+                                </tr>
+                                 <tr>
+                                    <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:150px;">Procedimento Ultilizado: </td>
+                                    <td colspan="3" class="infos_texto" style="text-indent:0px;">{!Procedimento__c.Procedimento_ultilizado__c   }</td>                                
+                                </tr>
+    
+                            </table>
+                        
+                        </div>
+                        
+                        
+                         <div>
+                            <h3 class="titulo-secao">Padrões Utilizados</h3>
+                            <br/><br/>
+                             <table>
+                   
+                                <tr class ="cabecalho-tabela">
+                                    <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:30px; text-align:center;">N° de Série</td>
+                                    <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:30px; text-align:center;">Descrição</td>
+                                    <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:30px; text-align:center;">N° de Certificação</td>
+                                    <td class="infos_texto" style="font-weight:bold;text-indent:0px; width:30px; text-align:center;">Validade</td>
+                                </tr>
+                                
+                                <script>
+                                    console.log("fsdf")
+                                </script>
+                                
+                                <tr>
+                                    <td class="" style="font-weight:bold;text-indent:0px; width:30px;"> {!Procedimento__c.PADR_ES_DE_TESTE__r.SerialNumber}</td>
+                                    <td class="" style="font-weight:bold;text-indent:0px; width:30px;">{!Procedimento__c.PADR_ES_DE_TESTE__r.name}</td>
+                                    <td class="" style="font-weight:bold;text-indent:0px; width:30px;">{!Procedimento__c.Numero_de_certifica_o__c}</td>
+                                    <td class="" style="font-weight:bold;text-indent:0px; width:30px;"> <apex:outputField value="{!Procedimento__c.PADR_ES_DE_TESTE__r.Validade__c}" /> </td>                             
+                                </tr>
+                               
+                               
+    
+                            </table>
+                        
+                        </div>
+                        
+                        
+                        
+                        
+                        <div class="assinaturas">
+                            <table>
+                                  <tr style="border:none;">
+                                      <td style="border:none;" >
+                                          <div style="padding:0; margin:0;">
+                                               <div  style="padding:0; margin: 0 0 -15px 0;" > 
+                                                    <apex:image style="padding:0; margin:0 auto;" value="https://hospcom.my.site.com/servlet/servlet.ImageServer?id=0156e00000BlYqH&oid=00Di0000000JVhH&lastMod=1667493853000" height="50px" width="200"/>
+                                               </div>     
+                                               
+                                               <div class="assinatura" style="padding:0; margin:0;">
+                                                    <p style="padding:0; margin:0 auto;">
+                                                        <div class="underline" style="padding:0; margin:0 auto;"></div><br/>
+                                                            Deny Reyner<br/> 
+                                                        <span>Gerente de Serviços - Hospcom</span>                                                      
+                                                    </p>
+                                               </div>
+                                           </div>                                      
+                                      </td>
+                                      
+                                      
+                                      <td style="border:none;" >
+                                          <div style="padding:0; margin:0;">
+                                               <div  style="padding:0; margin: 0 0 -15px 0;" > 
+                                                    <apex:image style="padding:0; margin:0 auto;" value="{!Procedimento__c.tecnico_executorr__r.assinatura__c}" width="200" height="50px"/>
+                                               </div>     
+                                               
+                                               <div class="assinatura" style="padding:0; margin:0;">
+                                                    <p style="padding:0; margin:0 auto;">
+                                                        <div class="underline" style="padding:0; margin:0 auto;"></div><br/>
+                                                         {!Procedimento__c.tecnico_executorr__r.Name}<br/>
+                                                          {!Procedimento__c.tecnico_executorr__r.Title}                                                     
+                                                    </p>
+                                               </div>
+                                           </div>                                      
+                                      </td>
+                                      
+                                      
+                                      
+                                  </tr>
+                               
+                                
+                               
+                             
+                            </table>  
+                            
+                            
+                            
+                        
+                        </div>
+                       
+                    </apex:outputtext>
+               </div>     
+                
+
+              
+        
+ </apex:pageblock>
+ 
+ 
+ 
+ <apex:pageBlock >
+ 
+          
+      
+       
+     <div>
+         <h2 class="titulo" >Execução do Procedimento</h2 >
+     
+ <!--seção 1-->
+
+           <table>
+             
+              <tr>
+                 <td class="titulo-secao" colspan = "2" style="border:none ; "> 1 - Classe de Proteção de Isolamento </td>
+             </tr>
+             
+             <tr class="cabecalho-tabela">
+                 <td>CLASSE</td>
+                 <td>Proteção</td>
+             </tr>
+             
+             <tr>
+                 <td style="width:15%;" >{!Procedimento__c.X1_Classe_de_Prote_o_de_Isolamento__c}</td>
+                 <td style="text-align: left;" >{!If(Procedimento__c.X1_Classe_de_Prote_o_de_Isolamento__c == 'CLASSE I', 'Isolação básica mais conexão para aterramento ',IF(Procedimento__c.X1_Classe_de_Prote_o_de_Isolamento__c == 'CLASSE II', 'Isolação dupla ou reforçada sem provisão de ponto para aterramento',""))}</td>
+             </tr>
+         </table>
+ <!--seção 2-->
+
+         <table>
+         
+         <!--VARIAVEIS SEÇÃO 2-->    
+            <APEX:variable var="TipoB"  value="Equipamento aterrado"/> 
+            <APEX:variable var="TipoBF"  value="Equipamento aterrado e parte aplicada isolada do terra"/>
+            <APEX:variable var="TipoCF"  value="Grau de proteção superior com parte aplicada isolada do terra"/> 
+            <APEX:variable var="VAZIO"  value="Não possui"/>
+            
+             <tr>
+                 <td class="titulo-secao" style="border:none;" colspan = "2">2 - Tipo da Parte Aplicada</td>
+             </tr>
+             
+             <tr class ="cabecalho-tabela" >
+                 <td>Tipo</td>
+                 <td>Proteção</td>
+             </tr>
+             <tr>
+                 <td style="width:15%;">{!Procedimento__c.X2_Tipo_da_Parte_Aplicada__c }</td>
+                 <td style="text-align: left;">{!If(Procedimento__c.X2_Tipo_da_Parte_Aplicada__c == 'Tipo B', TipoB,If(Procedimento__c.X2_Tipo_da_Parte_Aplicada__c == 'Tipo BF', TipoBF, If(Procedimento__c.X2_Tipo_da_Parte_Aplicada__c == 'Tipo CF', TipoCF, "")))}</td>
+             </tr>
+         </table>
+         
+ <!--seção 3-->
+        <table>
+         <!-- variaveis da seção 3-->
+              <APEX:variable var="PIE"  value="Equipamento permanentemente instalado"/>   
+              <APEX:variable var="NPS"  value="Cabo de alimentação não destacável, fixo no equipamento"/>   
+              <APEX:variable var="DPS"  value="Cabo de alimentação destacável, removível do equipamento"/>   
+              
+             <tr>
+                 <td class="titulo-secao"  style="border:none;" colspan = "2">3 - Conexão com a Rede Elétrica</td>
+                 
+             </tr>
+             <tr class ="cabecalho-tabela" >
+                 <td>Tipo</td>
+                 <td>Proteção</td>
+             </tr>
+             <tr>
+                 <td style="width:15%;">{!Procedimento__c.X3_Conex_o_com_a_Rede_El_trica__c}</td>
+                 <td style="text-align: left;">{!If(Procedimento__c.X3_Conex_o_com_a_Rede_El_trica__c== 'PIE', PIE,If(Procedimento__c.X3_Conex_o_com_a_Rede_El_trica__c== 'NPS', NPS, IF( Procedimento__c.X3_Conex_o_com_a_Rede_El_trica__c== 'DPS' ,DPS,"") ))}</td>
+             </tr>
+         </table>
+         
+<!--seção 4-->
+        <table style="">  
+             <tr style="">
+                 <td class="titulo-secao"  style="border:none;" >4 - Lista de Acessórios</td>
+             </tr>
+             <tr class ="cabecalho-tabela" >
+                 <td>Descrição</td>
+             </tr>
+             <tr style="">
+                 <td style=" max-height:50px;"> {!Procedimento__c.X4_Lista_de_Acess_rios__c} </td>
+             </tr>
+             
+         </table>
+         
+         
+<!--seção 5-->
+        <table>
+
+             <tr>
+                 <td class="titulo-secao" style="border:none;"  colspan = "2">5 - Inspeção Visual do Equipamento</td>
+                 
+             </tr>
+             <tr class ="cabecalho-tabela" >
+                 <td>Tipo</td>
+                 <td>Proteção</td>
+             </tr>
+             <tr>
+                 <td style="width:15%;" >{!Procedimento__c.X5_Inspe_o_Visual_do_Equipamento__c}</td>
+                 <td style="text-align: left;">Equipamento foi inspecionado e ele apresenta características adequadas para o seu funcionamento?</td>
+             </tr>
+         </table>
+        
+<!--seção 6--> 
+
+        <table>
+            
+             <tr>
+                 <td class="titulo-secao"  style="border:none;" colspan = "3">6 - Resistência de Aterramento</td>
+             </tr>
+       <!--variaveis da seção 6-->
+        
+            <APEX:variable var="n500"  value="EQUIPAMENTO NÃO DESCONECTÁVEL DA REDE MENOR ou IGUAL A 500mOhm"/>   
+            <APEX:variable var="n300"  value="EQUIPAMENTO DESCONECTÁVEL DA REDE MENOR ou IGUAL A 300 mOhm"/>   
+           
+             <tr class ="cabecalho-tabela" >
+                 <td>Ponto</td>
+                 <td>Referência</td>
+                 <td>Medida</td>
+             </tr>
+             <tr>
+                 <td style="text-align: left; text-transform: none !important;">{!IF(Procedimento__c.X6_Resistencia_de_Aterramento__c== "EQUIPAMENTO NÃO DESCONECTÁVEL DA REDE MENOR OU IGUAL A 500mOhm" , n500, n300)}</td>
+                 <td   style="width:15%;">     <apex:image width="8px" value="https://hospcom--c.na170.content.force.com/servlet/servlet.ImageServer?id=0156e00000BlZxJ&oid=00Di0000000JVhH&lastMod=1666278469000"/> {!IF(Procedimento__c.X6_Resistencia_de_Aterramento__c== "EQUIPAMENTO NÃO DESCONECTÁVEL DA REDE MENOR IGUAL A 500mOhm" , ' ≤ 500', '300')}</td>
+                 <td style="width:15%;">{!Procedimento__c.valor_da_secao_6__c}</td>
+             </tr>
+         </table>
+        
+             
+<!--seção 7-->
+        <table>
+        
+       <!--variaveis da seção 7-->
+        
+          <APEX:variable var="v1"  value="1-NBR IEC 62353 - FIGURA 3.1 (CLASSE I) ≤ 2 (MΩ)"/>  
+          <APEX:variable var="v2"  value="2-NBR IEC 62353 - FIGURA 3.2 (CLASSE I/CLASSE II) ≤ 7 (MΩ)"/>  
+          <APEX:variable var="v3"  value="3-NBR IEC 62353 - FIGURA 4 - TIPO B (CLASSE I) ≤ 2 (MΩ)"/>  
+          <APEX:variable var="v4"  value="4-NBR IEC 62353 - FIGURA 4 - TIPO B (CLASSE II) ≤ 7 (MΩ)"/>   
+          <APEX:variable var="v5"  value="5-NBR IEC 62353 - FIGURA 4 - TIPO F (CLASSE I/CLASSE II) ≤ 70 (MΩ)"/>   
+          <APEX:variable var="v6"  value="6-NBR IEC 62353 - FIGURA 5 - TIPO F (CLASSE I/CLASSE II) ≤ 70 (MΩ)"/>   
+         
+             <tr>
+                 <td  class="titulo-secao" colspan = "3" style="border:none;" >7 - Resistência de Isolamento</td>
+             </tr>
+             <tr class ="cabecalho-tabela" >
+                 <td>Ponto</td>
+                 <td>Referência</td>
+                 <td>Medida</td>
+                 
+                 
+             </tr>
+             <tr>
+                 <td style="text-align: left;">{!IF(Procedimento__c.X7_Resist_ncia_de_Isolamento__c== v1 , "1-NBR IEC 62353 - FIGURA 3.1 (CLASSE I) maior ou igual a 2 (MΩ)", IF(Procedimento__c.X7_Resist_ncia_de_Isolamento__c == v2 , "2-NBR IEC 62353 - FIGURA 3.2 (CLASSE I/CLASSE II) maior ou igual a 7 (MΩ)",IF(Procedimento__c.X7_Resist_ncia_de_Isolamento__c== v3 , "3-NBR IEC 62353 - FIGURA 4 - TIPO B (CLASSE I) maior ou igual 2 (MΩ)",IF(Procedimento__c.X7_Resist_ncia_de_Isolamento__c == v4 , "4-NBR IEC 62353 - FIGURA 4 - TIPO B (CLASSE II) maior ou igual 7 (MΩ)",IF(Procedimento__c.X7_Resist_ncia_de_Isolamento__c == v5 , "5-NBR IEC 62353 - FIGURA 4 - TIPO F (CLASSE I/CLASSE II) maior ou igual 70 (MΩ)", "6-NBR IEC 62353 - FIGURA 5 - TIPO F (CLASSE I/CLASSE II) maior ou igual a 70 (MΩ)")))))}</td>
+                 <td style="width:15%;"> <apex:image width="8px" value="https://hospcom--c.na170.content.force.com/servlet/servlet.ImageServer?id=0156e00000BlZvc&oid=00Di0000000JVhH&lastMod=1666277239000"/>  {!IF(Procedimento__c.X7_Resist_ncia_de_Isolamento__c== v1 ||  Procedimento__c.X7_Resist_ncia_de_Isolamento__c== v3 , '2',IF(Procedimento__c.X7_Resist_ncia_de_Isolamento__c== v2 ||  Procedimento__c.X7_Resist_ncia_de_Isolamento__c== v4 , '7',"70" ))}</td>
+                 <td style="width:15%;">{!Procedimento__c.Valor_da_se_o_7__c}</td>    
+             </tr>
+         </table>
+         
+        
+        <br/><br/>    <br/><br/>       
+<!--seção 8-->
+        <table>
+        
+      <!--variaveis da seção 8
+        -->
+          <APEX:variable var="v1_1"  value="1- MÉTODO DIRETO OU DIFERENCIAL FIG.7/8-CLASSE I(B/BF/CF) ≤ 500(µA)"/>  
+          <APEX:variable var="v1_2"  value="2- MÉTODO DIRETO OU DIFERENCIAL FIG. 7/8-CLASSE II(B/BF/CF) ≤ 100(µA)"/>  
+        
+             <tr>
+                 <td class="titulo-secao" colspan = "3" style="border:none;" >8 - Corrente de Fuga do Equipamento</td>
+             </tr>
+             <tr class ="cabecalho-tabela" >
+                 <td>Ponto</td>
+                 <td>Referência</td>
+                 <td>Medida</td>
+             </tr>
+             <tr>
+                 <td style="text-align: left;">  {!IF(Procedimento__c.X8_Corrente_de_Fuga_do_Equipamento__c== v1_1, "1- MÉTODO DIRETO OU DIFERENCIAL FIG.7/8-CLASSE I(B/BF/CF)  menor igual a 500(µA)", IF(Procedimento__c.X8_Corrente_de_Fuga_do_Equipamento__c== v1_2, "2- MÉTODO DIRETO OU DIFERENCIAL FIG. 7/8-CLASSE II(B/BF/CF) menor ou igual a 100(µA)","" ))}</td>
+                 <td style="width:15%;"> <apex:image width="8px" value="https://hospcom--c.na170.content.force.com/servlet/servlet.ImageServer?id=0156e00000BlZxJ&oid=00Di0000000JVhH&lastMod=1666278469000"/>{!IF(Procedimento__c.X8_Corrente_de_Fuga_do_Equipamento__c== v1_1 , '500',IF( Procedimento__c.X8_Corrente_de_Fuga_do_Equipamento__c== V1_2, '≤ 100',"" ))}</td>
+                 <td style="width:15%;">{!Procedimento__c.Valor_da_secao_8__c}</td>    
+             </tr>
+         </table>
+         
+                                  
+<!--seção 9-->
+        <table>
+        
+            <tr>
+                 <td class="titulo-secao" colspan = "3" style="border:none;" >9 - Corrente de Fuga da Parte Aplicada</td>
+             </tr>
+             <tr class ="cabecalho-tabela" >
+                 <td>Ponto</td>
+                 <td>Referência</td>
+                 <td>Medida</td>
+             </tr>
+        
+            <tr>
+                <td style="text-align: left;">{!Procedimento__c.X9_Corrente_de_Fuga_da_Parte_Aplicada__c}</td>
+                <td style="width:15%;" >  <apex:image width="8px" value="https://hospcom--c.na170.content.force.com/servlet/servlet.ImageServer?id=0156e00000BlZxJ&oid=00Di0000000JVhH&lastMod=1666278469000"/> {!IF(Procedimento__c.X9_Corrente_de_Fuga_da_Parte_Aplicada__c == "MÉTODO DIRETO FIGURA 10/11CLASSE I/CLASSE II (TIPO BF) MENOR IGUAL A 5000 uA", "5000",'50')}</td>
+                <td style="width:15%;" >{!Procedimento__c.Valor_da_se_o_9__c}</td>
+       
+            </tr>
+            
+
+        </table>
+          
+          
+           <table>
+
+             <tr>
+                 <td class="titulo-secao" colspan = "2" style="border:none;" >10 - Ensaio Funcional</td>
+                 
+             </tr>
+             <tr class ="cabecalho-tabela" >
+                 <td style="width:15%;" >Seleção</td>
+                 <td>Ação</td>
+             </tr>
+             
+             <tr>
+                 <td>{!Procedimento__c.Field1__c}</td>
+                 <td style="text-align: left;">Botão de ligar acionando e equipamento inicializando corretamente?</td>
+             </tr>
+             
+             <tr>
+                 <td>{!Procedimento__c.Tela_sens_vel_ao_toque_e_ou_bot_es_de__c}</td>
+                 <td style="text-align: left;">Tela sensível ao toque e/ou botões de comando estão acionando corretamente?</td>
+             </tr>
+             
+             <tr>
+                 <td>{!Procedimento__c.Os_acionamentos_luminosos_do_equipame__c}</td>
+                 <td style="text-align: left;">Os acionamentos luminosos do equipamento estão todos funcionando?</td>
+             </tr>
+             
+             <tr>
+                 <td>{!Procedimento__c.Equipamento_est_desempenhando_sua_fu__c}</td>
+                 <td style="text-align: left;">Equipamento está desempenhando sua função corretamente?</td>
+             </tr>
+         </table>
+         
+         
+         
+<!--seção 11-->
+           <table>
+
+             <tr>
+                 <td class="titulo-secao" colspan = "2" style="border:none;" >11 - Deficiência/Nota</td>
+                 
+             </tr>
+             <tr class ="cabecalho-tabela" >
+                 <td  style="width:15%;">Seleção</td>
+                 <td>Ação</td>
+             </tr>
+             
+             <tr>
+                 <td>{!if(Procedimento__c.Nenhuma_defici_ncia_funcional_ou_de_s__c == true,"x", "")}</td>
+                 <td style="text-align: left;">Nenhuma deficiência funcional ou de segurança foi detectada</td>
+             </tr>
+             
+             <tr>
+                 <td>{!if(Procedimento__c.Defici_ncia_detectada_mas_sem_risco__c == true,"x", "")}</td>
+                 <td style="text-align: left;">com Deficiência, sem risco direto para a utilização clínica. Correção é necessária</td>
+             </tr>
+             
+             <tr>
+                 <td>{!if(Procedimento__c.Equipamento_deve_ser_retirado_de_func__c == true,"x", "")}</td>
+                 <td style="text-align: left;">Deve ser retirado de funcionamento até que as deficiências sejam corrigida</td>
+             </tr>
+             
+             <tr>
+                 <td>{!if(Procedimento__c.Equipamento_n_o_conforme_modifica__c == true,"x", "")}</td>
+                 <td style="text-align: left;">não conforme - troca de componentes/sua retirada de serviço é recomendada</td>
+             </tr>
+         </table>
+         
+         
+         
+         
+         
+           <table>
+
+             <tr>
+                 <td class="titulo-secao" colspan = "2" style="border:none;" >12 - Aprovação</td>
+                 
+             </tr>
+             <tr class ="cabecalho-tabela" >
+                 <td  style="width:15%;">Seleção</td>
+                 <td>Ação</td>
+             </tr>
+             
+             <tr>
+                 <td>{!Procedimento__c.Resist_ncia_de_aterramento_Aprovado__c}</td>
+                 <td style="text-align: left;">Resistência de aterramento - Aprovado?</td>
+             </tr>
+             
+             <tr>
+                 <td>{!Procedimento__c.Resist_ncia_de_isola_o_Aprovado__c}</td>
+                 <td style="text-align: left;">Resistência de isolação - Aprovado?</td>
+             </tr>
+             <tr>
+                 <td>{!Procedimento__c.Corrente_de_fulga_do_equipamento_Ap__c}</td>
+                 <td style="text-align: left;">Corrente de fulga do equipamento - Aprovado?</td>
+             </tr>
+             
+             <tr>
+                 <td>{!Procedimento__c.Corrente_de_fulga_da_parte_aplicad__c}</td>
+                 <td style="text-align: left;" >Corrente de fulga da parte aplicada - Aprovado?</td>
+             </tr>
+         </table>
+         
+     </div>
+     
+ 
+ </apex:pageBlock>
+
+  </body>
+
+</apex:page>

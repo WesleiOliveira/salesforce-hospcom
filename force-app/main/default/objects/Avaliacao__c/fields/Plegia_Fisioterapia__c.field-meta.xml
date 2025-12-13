@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Plegia_Fisioterapia__c</fullName>
+    <externalId>false</externalId>
+    <label>Plegia</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Tetraplegia</fullName>
+                <default>false</default>
+                <label>Tetraplegia</label>
+            </value>
+            <value>
+                <fullName>Paraplegia</fullName>
+                <default>false</default>
+                <label>Paraplegia</label>
+            </value>
+            <value>
+                <fullName>Hemiplegia D</fullName>
+                <default>false</default>
+                <label>Hemiplegia D</label>
+            </value>
+            <value>
+                <fullName>Hemiplegia E</fullName>
+                <default>false</default>
+                <label>Hemiplegia E</label>
+            </value>
+            <value>
+                <fullName>Monoplegia</fullName>
+                <default>false</default>
+                <label>Monoplegia</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

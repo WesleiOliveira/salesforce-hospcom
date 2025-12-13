@@ -1,0 +1,239 @@
+/*selecionando a imagem*/
+.THIS *{
+    z-index:1;
+}
+.THIS #container-arrasteSolta{
+    
+    margin:20px auto;
+    
+
+    border-radius:10px;
+    display:flex;
+    Width:60%;
+    min-width:500px;
+    flex-direction:column;
+    color:#FFFFFF;
+    box-shadow: 0px 0px 5px 0px #000;
+}
+.THIS .arrastaSolta{
+    margin:auto;
+    position:relative;
+     width:95%;
+    height:350px;
+	padding:50;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+	align-items:center;    
+
+}
+
+.THIS .file{
+    width:100%;
+    height:100%;
+ 	
+    position:absolute;
+    border:1px solid #000;
+    background:#000;
+    opacity:0;
+    text-align:center;
+    
+    cursor:pointer;
+   
+}
+
+.THIS .inputPater{
+  
+     width:100%;
+    height:100%;
+    border-radius:10px;
+    position:absolute;
+    margin-bottom:20px;
+}
+
+.THIS .browse{
+    position:absolute;
+    border:2px dashed #55CD15;
+    width:100%;
+    height:90%;
+    
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+	align-items:center;  
+    color:#0C375A;
+}
+
+/*
+	filhos do .browse
+*/
+
+/*texto de orientação para seleção de arquivo*/
+.THIS .browse .orienta{
+    color:#0C375A;
+    font-size:1.5rem;
+    text-align:center;
+    padding:10px;
+    margin: 0 0 30px;
+}
+
+.THIS .link-nav-file{
+    cursor:pointer;
+     text-decoration: underline 1px #40B6F9;
+    color:#40B6F9;
+}
+.THIS .sup{
+    color:#aaa9a9;
+    font-size:1rem;
+    text-align:center;
+    padding:10px;
+    margin:20px 0 0 0 ;
+}
+.THIS .fa{
+    color:#0C375A;
+  
+    margin:0;
+}
+
+/*------------------------------*/
+
+.THIS  #salvar{
+    background:#f2f2f2;
+    color:white;
+}
+.THIS  #cancela-cropper{
+    background:#f2f2f2;
+    color:white;
+}
+
+/*
+*******************************************
+*/
+.THIS img {
+  max-width: 100%; /* This rule is very important, please do not ignore this! */
+  
+}
+.THIS .image{
+  
+    margin:10px;
+   
+    width:50%;
+    
+}
+.THIS .preview {
+  border:2px solid #55CD15 ;
+  overflow: hidden;
+  width: 100px; 
+  height: 100px;
+  margin:10px;
+}
+
+
+
+
+.THIS .container-cropp{
+    display: flex;
+    margin:20px auto;
+    border-radius:10px;
+    Width:60%;
+    min-width:500px;
+    flex-direction:column;
+    color:#FFFFFF;
+    box-shadow: 0px 0px 5px 0px #000;
+    opacity:0;
+}
+
+
+/*cropper-drag-box cropper-crop cropper-modal*/
+
+/**/
+.THIS .test{
+    opacity:1;
+}
+.THIS .none{
+    display:none;
+}
+.THIS .title{
+    width:100%;
+    color:#0C375A;
+    font-size:1.8rem;
+    font-weight:500;
+    text-align:center;
+    padding:10px 10px 0 10px;
+}
+
+.THIS .cropping{
+
+    width:100%;
+
+    display:flex;
+    flex-direction:column;
+    align-items:top;
+    justify-content:center;
+    background:#f2f2f2;
+    padding:50px;
+}
+
+.THIS .imageCropping{
+    display:flex;
+   
+    height:;
+    align-items:top;
+    justify-content:center;
+    
+}
+.THIS #zoom{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+}
+
+
+.THIS #rotateAnteHorario, .THIS #rotateHorario{
+    width:40px;
+    height:40px;
+    color: white;
+}
+
+/*BUTTOS */
+
+.THIS .buttons{
+    padding:20px;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+}
+
+.THIS .btn{
+    
+    width:100px;
+    margin:5px 5px;
+}
+
+
+.THIS #azul{
+    background-color:#0C375A;
+    color:#fff;
+    border:none;
+}
+
+
+.THIS .btn-secondary{
+     background-color:#55CD15;
+    color:#fff;
+    border:none;
+    
+     font-weight:500;
+}
+
+
+.THIS  .cancelar{
+    background:#bfbfbf;
+    color:#222222;
+     font-weight:500;
+}
+
+.THIS #spinnerDiv{
+    background:#fff;
+}

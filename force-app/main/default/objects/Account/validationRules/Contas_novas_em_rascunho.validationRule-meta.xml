@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contas_novas_em_rascunho</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISNEW(),
+    NOT(ISPICKVAL(Status__c, &quot;Rascunho&quot;))
+)</errorConditionFormula>
+    <errorMessage>Novas contas devem ser criadas com o status em Rascunho.</errorMessage>
+</ValidationRule>

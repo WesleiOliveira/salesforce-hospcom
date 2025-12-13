@@ -1,0 +1,45 @@
+<aura:component extends="c.ApexHelper" controller="AssistenteCompras" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <ltng:require
+                  styles="{!join(',',
+                           $Resource.fontAwesome + '/css/font-awesome.min.css')}" 
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery)}"                   
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    <div>
+        <div class="containerMestreResumoMetas">
+            <div class="tituloResumoMetas">Totalizador de metas mensal por colaborador</div>
+            
+            <div style="display: flex; column-gap: 10px">
+                <input type="month" id="mes" min="2018-03" value="2018-05" class="customResumoMetasInput"/>
+                
+                <select class="customResumoMetasInput" id="inputColaboradoresMetaResumo" placeholder="Escolha o colaborador">
+                    <option value="default" selected="true" disabled="true">Escolha o colaborador</option>
+                </select>
+            </div>
+            
+            <div style="display: flex; column-gap: 10px">
+                
+                <div class="blocoInfoMetas">
+                    <div>Total de metas do mês selecionado</div>
+                    <div class="valorInfoStyle">10</div>
+                </div>
+                
+                <div class="blocoInfoMetas">
+                    <div>Total de metas validadas pelo gestor</div>
+                    <div class="valorInfoStyle">5</div>
+                </div>
+                
+                <div class="blocoInfoMetas">
+                    <div>% Atingido do mês</div>
+                    <div class="valorInfoStyle">10%</div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+	
+</aura:component>

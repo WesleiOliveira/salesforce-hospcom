@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Faturado_2__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    NOT(ISBLANK(Pedido__c)) &amp;&amp; NOT(ISBLANK(Pedido__r.TotalAmount)) &amp;&amp; Pedido__r.TotalAmount &gt; 0,
+    Valor_real__c / Pedido__r.TotalAmount,
+    IF(
+        NOT(ISBLANK(Contrato_de_servico__c)) &amp;&amp; NOT(ISBLANK(Contrato_de_servico__r.Valor_Total_do_Contrato__c)) &amp;&amp; Contrato_de_servico__r.Valor_Total_do_Contrato__c &gt; 0,
+        Valor_real__c / Contrato_de_servico__r.Valor_Total_do_Contrato__c,
+        0
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>% Faturado</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

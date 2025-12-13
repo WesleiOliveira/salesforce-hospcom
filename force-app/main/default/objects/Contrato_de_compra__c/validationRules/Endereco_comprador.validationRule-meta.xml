@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Endereco_comprador</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+RecordType.Name == &apos;Padrão&apos;,
+OR(
+ISBLANK(Comprador__r.BillingStreet), ISBLANK(Comprador__r.BillingCity), ISBLANK(Comprador__r.BillingState), ISBLANK(Comprador__r.BillingPostalCode)
+)
+)</errorConditionFormula>
+    <errorDisplayField>Comprador__c</errorDisplayField>
+    <errorMessage>Preencha corretamente o endereço do comprador.</errorMessage>
+</ValidationRule>

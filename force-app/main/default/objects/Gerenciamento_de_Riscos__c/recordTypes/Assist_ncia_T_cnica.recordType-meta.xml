@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Assist_ncia_T_cnica</fullName>
+    <active>true</active>
+    <label>Assistência Técnica</label>
+    <picklistValues>
+        <picklist>Fases_do_Processo__c</picklist>
+        <values>
+            <fullName>Atendimento - Chamado Técnico</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Atendimento - instalação</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Aprovado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pendente</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Reprovado</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

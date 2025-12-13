@@ -1,0 +1,89 @@
+<aura:component controller="HomeBotoes" implements="forceCommunity:availableForAllPageTypes">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>    
+	<div class="slds-m-around_x-small">
+        <lightning:buttonGroup class="slds-button_stretch" >
+            <lightning:buttonMenu label="Diretoria" class="slds-button_stretch format">
+                <lightning:button class="slds-button_stretch" label="Geral" title="Geral" value="Geral" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Geral - São Paulo" title="São Paulo - Geral" value="São Paulo - Geral" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Comercial" title="Comercial" value="Comercial" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Governo" title="Governo" value="Governo" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Clientes" title="Clientes" value="Clientes" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Representação" title="Representação" value="Representação" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Vendedores" title="Vendedores" value="Vendedores" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Comitê Estratégico" title="Comitê Estratégico" value="Comitê Estratégico" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Meta Geral" title="Meta Geral" value="Meta Geral" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Desenvolvimento" title="Desenvolvimento" value="Desenvolvimento" onclick="{!c.Atualizar}" />
+            </lightning:buttonMenu>
+            
+            <lightning:buttonMenu label="Vendas" class="slds-button_stretch format">
+                <lightning:button class="slds-button_stretch" label="Vendas Geral" title="Vendas Geral" value="Vendas Geral" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Performance - Comercial" title="Comercial - Performance" value="Comercial - Performance" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Performance - Governo" title="Governo - Performance" value="Governo - Performance" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Qualidade - Comercial" title="Comercial - Qualidade" value="Comercial - Qualidade" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Qualidade - Governo" title="Governo - Qualidade" value="Governo - Qualidade" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Metas Vendas" title="Meta Vendedores" value="Meta Vendedores" onclick="{!c.Atualizar}" />                
+                <lightning:button class="slds-button_stretch" label="Metas Vendas U.S" title="Meta Vendedores U.S" value="Meta Vendedores U.S" onclick="{!c.Atualizar}" />                
+                <!-- <lightning:button class="slds-button_stretch" label="Qualidade - Governo" title="Governo - Qualidade" value="Governo - Qualidade" onclick="{!c.Atualizar}" /> -->
+                <!-- <lightning:button class="slds-button_stretch" label="Concorrentes" title="Concorrentes" value="Concorrentes" onclick="{!c.Atualizar}" /> -->
+                <lightning:button class="slds-button_stretch" label="Interposições Legais" title="Interposições Legais" value="Interposições Legais" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Vendedor" title="Vendedor" value="Vendedor" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Estoque - Linhas" title="Estoque - Linhas" value="Estoque - Linhas" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Viagens" title="Viagens" value="Viagens" onclick="{!c.Atualizar}" />
+
+            </lightning:buttonMenu>
+            
+             <lightning:buttonMenu label="Linhas" class="slds-button_stretch format">  
+                <lightning:button class="slds-button_stretch" label="PMLS" title="PMLS" value="PMLS" onclick="{!c.Atualizar}" />
+                <!--lightning:button class="slds-button_stretch" label="Infusão" title="Infusão" value="Infusão" onclick="{!c.Atualizar}" /-->
+                <lightning:button class="slds-button_stretch" label="Surgical" title="Surgical" value="Surgical" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Ultrassom" title="Ultrassom" value="Ultrassom" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="CMI (Imagem + Laparo)" title="CMI (Imagem + Laparo)" value="CMI (Imagem + Laparo)" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="CMI (Uro + Gineco)" title="CMI (Uro + Gineco)" value="CMI (Uro + Gineco)"  onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Eletrocirurgia" title="Eletrocirurgia" value="Eletrocirurgia" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Apoio a Mobilidade" title="Apoio a Mobilidade" value="Apoio a Mobilidade" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="OPME" title="OPME" value="OPME" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Oxigenoterapia" title="Oxigenoterapia" value="Oxigenoterapia" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Veterinária" title="Veterinária" value="Veterinária" onclick="{!c.Atualizar}" />
+            </lightning:buttonMenu>
+           
+            <lightning:buttonMenu label="Serviços" class="slds-button_stretch format">
+                <lightning:button class="slds-button_stretch" label="Performance Vendas" title="Serviços - Performance" value="Serviços - Performance Vendas" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Performance Pedidos" title="Serviços - Performance Pedidos" value="Serviços - Performance Pedidos" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Performance OTs" title="Serviços - Performance OT" value="Serviços - Performance OT" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Performance Operação" title="Serviços - Performance" value="Serviços - Performance Operação" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Qualidade" title="Serviços - Qualidade" value="Serviços - Qualidade" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Base Instalada" title="Base Instalada" value="Base Instalada" onclick="{!c.Atualizar}" />
+                
+            </lightning:buttonMenu>
+            
+            <lightning:buttonMenu label="Locação" class="slds-button_stretch format">
+                <lightning:button class="slds-button_stretch" label="Performance" title="Locação - Performance" value="Locação - Performance" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Qualidade" title="Locação - Qualidade" value="Locação - Qualidade" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Demo e Empréstimo" title="Demo e Empréstimo" value="Demo e Empréstimo" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Demo e Empréstimo (Novo)" title="Demo e Empréstimo (Novo)" value="Demo e Empréstimo (Novo)" onclick="{!c.Atualizar}" />
+                
+            </lightning:buttonMenu>
+            
+            <lightning:buttonMenu label="Logística" class="slds-button_stretch format">
+                <lightning:button class="slds-button_stretch" label="Performance Pedidos" title="Logística - Performance Pedidos" value="Logística - Performance" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Performance Itens" title="Logística - Performance Itens" value="Logística - Performance Itens" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Performance Representação" title="Representação" value="Representação" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Qualidade" title="Logística - Qualidade" value="Logística - Qualidade" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Rotas" title="Rotas" value="Logística - Rotas" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="LeadTime" title="LeadTime" value="LeadTime" onclick="{!c.Atualizar}" />
+                
+            </lightning:buttonMenu>
+            
+            <lightning:buttonMenu label="Compras" class="slds-button_stretch format">
+                <lightning:button class="slds-button_stretch" label="Revenda Geral" title="Compras - Performance" value="Compras - Performance" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Revenda OPME" title="Compras - OPME" value="Compras - OPME" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Consumo" title="Compras - Consumo" value="Compras - Consumo" onclick="{!c.Atualizar}" />
+                <lightning:button class="slds-button_stretch" label="Qualidade" title="Compras - Qualidade" value="Compras - Qualidade" onclick="{!c.Atualizar}" />
+            </lightning:buttonMenu>
+            
+           
+        </lightning:buttonGroup>
+        
+	</div>
+
+</aura:component>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Em_andamento</fullName>
+    <columns>NAME</columns>
+    <columns>Fornecedor__c</columns>
+    <columns>Data_da_Compra__c</columns>
+    <columns>Valor_total_comprado__c</columns>
+    <columns>Prazo_de_recebimento__c</columns>
+    <columns>Status_do_PC__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Valor_total_comprado__c</field>
+        <operation>greaterThan</operation>
+        <value>BRL 0</value>
+    </filters>
+    <filters>
+        <field>Status_do_PC__c</field>
+        <operation>equals</operation>
+        <value>Em andamento</value>
+    </filters>
+    <label>02 - Em andamento</label>
+</ListView>

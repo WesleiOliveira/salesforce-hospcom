@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Opp_sem_exclusivo_me_epp</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( 
+	!$User.Ignorar_erros__c,
+	RecordType.Name == &apos;Licitacao&apos;,
+	TEXT(Modalidade__c) != &apos;COTAÇÃO PREVIA&apos;,
+	Text(Exclusivo_ME_EPP__c) == &apos;&apos;
+)</errorConditionFormula>
+    <errorDisplayField>Exclusivo_ME_EPP__c</errorDisplayField>
+    <errorMessage>O campo Exclusivo ME/EPP deve ser preenchido.</errorMessage>
+</ValidationRule>

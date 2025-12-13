@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>endereco</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(ISNEW(), 
+!ENdere_o_check__c,  
+RecordType.Id == &apos;0125A000001dwebQAA&apos;)</errorConditionFormula>
+    <errorDisplayField>Endereco__PostalCode__s</errorDisplayField>
+    <errorMessage>Coloque um endereço</errorMessage>
+</ValidationRule>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bloqueia_edicao</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+
+OR(
+ISCHANGED(Pergunta__c),
+ISCHANGED(Tipo__c),
+ISCHANGED(Secao__c),
+ISCHANGED(Tipo_de_Auditoria__c ),
+ISCHANGED(Posicao__c)
+),
+
+ ISPICKVAL(Status__c, &quot;Ativo&quot;)
+)</errorConditionFormula>
+    <errorMessage>Uma pergunta ativa não pode ser editada.
+Clone a mesma para poder editar.</errorMessage>
+</ValidationRule>

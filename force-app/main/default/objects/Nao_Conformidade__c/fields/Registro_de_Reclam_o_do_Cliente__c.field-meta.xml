@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Registro_de_Reclam_o_do_Cliente__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <externalId>false</externalId>
+    <inlineHelpText>Adicione o numero do Registro de Reclamação de Cliente</inlineHelpText>
+    <label>Registro de Reclamção do Cliente</label>
+    <referenceTo>Case</referenceTo>
+    <relationshipLabel>Não Conformidade</relationshipLabel>
+    <relationshipName>N_o_Conformidade</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

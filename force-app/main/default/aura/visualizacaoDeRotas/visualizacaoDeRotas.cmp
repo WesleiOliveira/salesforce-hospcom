@@ -1,0 +1,20 @@
+<aura:component extends="c.ApexHelper" implements="forceCommunity:availableForAllPageTypes,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <!-- <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> -->
+    <!-- <aura:handler name="render" value="{!this}" action="{!c.onRead}"/> -->
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.sortableJs + '/Sortable.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.bundle.js',
+                           $Resource.maskPlugin + '/jquery.mask.min.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js')}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    <iframe width="800" height="600" style="border: 1px solid" src="https://www.w3schools.com" />
+    
+</aura:component>

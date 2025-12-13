@@ -1,0 +1,222 @@
+<apex:page standardController="Fornecedor__c" extensions="AssistentePedidoCompraPDF" showHeader="false" showChat="false" standardStylesheets="false" docType="html-5.0">
+    <html>
+        <head>
+            <title>Gerar PDF Pedido de Compra</title>
+            <meta   charset="utf-8" />
+            <meta   name="viewport" content="width=device-width, initial-scale=1" />
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+            <link   href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" rel="stylesheet"/>
+            <link   href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.min.css" rel="stylesheet"/>
+            <script src="{!URLFOR($Resource.bootstrap3iso, 'js/bootstrap.min.js')}"></script>
+            <link   href="{!URLFOR($Resource.bootstrap3iso, 'css/bootstrap.min.css')}" rel="stylesheet"/>
+            <link   rel="stylesheet" href="{!$Resource.breadcrumb}" />
+
+            <style>
+                .cabecalho-principal{
+                    background-color: #f2f7ff!important;
+                    padding:4px!important;
+                    text-align:center!important;
+                    font-size:22px!important;
+                    font-weight:bold!important;
+                }
+                .cabecalho-secundario-a{
+                    background-color: #fdfdfd!important;
+                    text-align:center!important;
+                    padding:5px!important;
+                    border-bottom: 1px solid #ddd!important;
+                }
+                .cabecalho-secundario-b{
+                    padding:7px!important;
+                    font-size:18px!important;
+                }
+
+                .tabela-cabecalho{
+                    border-top: 2px solid #ddd!important;
+                }
+                .item-cabecalho{
+                    font-weight:bold!important;
+                    font-size:12px!important;
+                }
+                .item-descricao{
+                    font-size:11.5px!important;
+                    border-top-width:1px!important;
+                }
+                .item-descricao:hover{
+                    background-color:#f5f5f5;
+                }
+                .alert{
+                    font-weight:bold!important;
+                    padding-top:10px!important;
+                    padding-bottom:10px!important;
+                }
+            </style>
+            <script>
+                $(document).ready(function(){
+                    
+                    // inicializa checkboxes automáticos
+                    $("#checkedAll").change(function(){
+                        if(this.checked){
+                            $(".checkSingle").each(function(){
+                                this.checked=true;
+                            })
+                        }else{
+                            $(".checkSingle").each(function(){
+                                this.checked=false;
+                            })
+                        }
+                    });
+                    $(".checkSingle").click(function (){
+                        if ($(this).is(":checked")){
+                            var isAllChecked = 0;
+                            $(".checkSingle").each(function(){
+                                if(!this.checked)
+                                    isAllChecked = 1;
+                            })
+                            if(isAllChecked == 0){ $("#checkedAll").prop("checked", true); }
+                        }else {
+                            $("#checkedAll").prop("checked", false);
+                        }
+                    });
+                });
+            </script>
+        </head>
+
+        <body style="margin-top:7px;">
+            <div class="bootstrap-iso">
+                <div class="container-fluid">
+                    <apex:form >
+
+                        <!-- painel -->
+                        <div class="panel panel-default">
+
+                            <!-- painel: cabeçalho -->
+                            <div class="panel-heading cabecalho-principal">
+                                Gerar PDF Pedido de Compra
+                            </div>
+                            <div class="panel-body cabecalho-secundario-a">
+                                <div class="cabecalho-secundario-b">
+                                    Insira informações adicionais, se necessário.
+                                </div>
+                            </div>
+
+                            <!-- painel: corpo -->
+                            <div class="panel-body">
+
+                                <!-- corpo: cotação -->
+                                <!-- formulário -->
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <label>Cotação {!fornecedor.Pedido_de_compra__r.Name}:  </label>&nbsp;
+                                        {!fornecedor.Pedido_de_compra__r.Descricao__c}
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <label>Fornecedor {!fornecedor.Name}:</label>&nbsp;
+                                        {!fornecedor.Fornecedor__r.Raz_o_Social__c}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 campo-pesquisa">
+                                        <label>Informações adicionais:</label>
+                                        <apex:inputField styleClass="form-control input-sm" value="{!fornecedor.Observacoes_Compra__c}"/>
+                                    </div>
+                                </div>
+                                <br/>
+                                
+                                <apex:outputText rendered="{!IF(tem_produtos == false, true, false)}" >
+                                    <div class="alert alert-info">
+                                        Ainda não foram selecionados itens para compra com este fornecedor.
+                                    </div>                      
+                                    <br/>
+                                </apex:outputText>
+                                
+                                <apex:outputText rendered="{!IF(AND(tem_produtos == true, esta_aprovado == false), true, false)}" >
+                                    <div class="alert alert-info">
+                                        Foram selecionados itens com este fornecedor, mas ainda não foi liberado para compra (aprovação).
+                                    </div>                      
+                                    <br/>
+                                </apex:outputText>
+                                
+                                <apex:outputText rendered="{!IF(tem_produtos == true, true, false)}" >
+                                    <!-- listagem -->
+                                    <div class="row">
+                                        <div class="col-xs-12">
+
+                                            <table class="table table-condensed" style="width:100%;" id="lista-itens" >
+
+                                                <!-- cabeçalho -->
+                                                <thead class="tabela-cabecalho">
+                                                    <tr>
+                                                        <th>P/N</th>
+                                                        <th>Img</th>
+                                                        <th>Nome</th>
+                                                        <th>Modelo</th>
+                                                        <th>Marca</th>
+                                                        <th>Qtd.</th>
+                                                        <th>Und.</th>
+                                                        <th>Valor Unitário</th>
+                                                        <th>Valor Total</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <!-- itens -->
+                                                <apex:repeat value="{!itens_fornecedor}" var="item_fornecedor">
+                                                    <tbody class="item-descricao">
+                                                        <apex:variable var="span" value="{!1}"/>
+                                                        <apex:outputText rendered="{!IF(item_fornecedor.Item_de_pedido_de_compra__r.Descri_o_da_linha__c != '', true, false)}" >
+                                                            <apex:variable var="span" value="{!2}"/>
+                                                        </apex:outputText>
+                                                        <tr>
+                                                            <td rowspan="{!span}"><apex:outputField value="{!item_fornecedor.Codigo_do_produto__c}"/></td>
+                                                            <td rowspan="{!span}"><img src="{!item_fornecedor.Item_de_pedido_de_compra__r.Produto__r.URL_da_Imagem__c}" style="width:40px;height:40px;" /></td>
+                                                            <td class="item-cabecalho"><apex:outputField value="{!item_fornecedor.Produto__c}"/></td>
+                                                            <td><apex:outputField value="{!item_fornecedor.Modelo__c}"/></td>
+                                                            <td><apex:outputField value="{!item_fornecedor.Marca__c}"/></td>
+                                                            <td><apex:outputField value="{!item_fornecedor.Quantidade__c}"/></td>
+                                                            <td><apex:outputField value="{!item_fornecedor.Unidade_de_medida__c}"/></td>
+                                                            <td><apex:outputField value="{!item_fornecedor.Valor_unitario__c}"/></td>
+                                                            <td><apex:outputField value="{!item_fornecedor.Valor_total__c}"/></td>
+                                                        </tr>
+                                                        <apex:outputText rendered="{!IF(item_fornecedor.Item_de_pedido_de_compra__r.Descri_o_da_linha__c != '', true, false)}" >
+                                                            <tr>
+                                                                <td colspan="4" style="border-top:none;padding-bottom:0px;"><apex:outputField value="{!item_fornecedor.Item_de_pedido_de_compra__r.Descri_o_da_linha__c}"/></td>
+                                                            </tr>
+                                                        </apex:outputText>
+                                                    </tbody>
+                                                </apex:repeat>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </apex:outputText>
+
+                            </div>
+
+                            <!-- painel: rodapé -->
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <div class="col-xs-offset-6 col-xs-2">
+                                        <apex:commandButton rendered="{!IF(Fornecedor__c.Data_da_Compra__c != null && Fornecedor__c.Prazo_de_recebimento__c != null && Fornecedor__c.Pagamento_antecipado__c != null, true, false)}" styleClass="btn btn-default" style="width:100%;" action="{!GeraPDF}" value="Gerar PDF"/>
+                                        <apex:outputText rendered="{!IF(Fornecedor__c.Data_da_Compra__c == null || Fornecedor__c.Prazo_de_recebimento__c == null || Fornecedor__c.Pagamento_antecipado__c == null, true, false)}" value="Preencha os seguintes campos do pedido de compra: Data da Compra, Previsão de entrega e Pagamento antecipado"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </apex:form>
+                </div>
+            </div>
+            <script>
+                // inicializa campos de filtro
+                $("#caixa-pesquisa").val("");
+                $("#caixa-pesquisa").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("#lista-itens tbody").filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            </script>
+        </body>
+    </html>
+</apex:page>

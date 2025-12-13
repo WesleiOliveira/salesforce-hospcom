@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Procedencia_v2__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+	OR(
+		TEXT(Procedencia__c) == &apos;Contrato de Serviço&apos;,
+		TEXT(Procedencia__c) == &apos;Contrato de Locação&apos;,
+		TEXT(Procedencia__c) == &apos;Serviço Avulso (Contrato de Serviço)&apos;,
+		TEXT(Procedencia__c) == &apos;Serviço Avulso (Contrato de Locação)&apos;,
+		TEXT(Procedencia__c) == &apos;Serviço Avulso&apos;
+	),
+	&apos;Serviço&apos;,
+	IF(
+		TEXT(Nome_da_Conta2__r.Type) == &apos;PRIVADO&apos;,
+		&apos;Comercial&apos;,
+		IF(
+			OR(
+				TEXT(Nome_da_Conta2__r.Type) == &apos;PUBLICO&apos;,
+				TEXT(Nome_da_Conta2__r.Type) == &apos;FILANTROPIA&apos;
+			),
+			&apos;Governo&apos;,
+			&apos;&apos;
+		)
+	)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Procedência</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

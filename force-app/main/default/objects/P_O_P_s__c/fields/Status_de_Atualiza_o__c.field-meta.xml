@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_de_Atualiza_o__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(  TODAY()  &lt;  Data_da_Proxima_Atualiza_o__c  - 60 , &quot;ATUALIZADO&quot; + &quot; &quot; + IMAGE(&quot;https://hospcom--c.na25.content.force.com/servlet/servlet.FileDownload?file=0153100000815oV&quot;, &quot;&quot; , 12, 12), IF(AND(  Data_da_Proxima_Atualiza_o__c  -60 &lt; TODAY(),TODAY() &lt;  Data_da_Proxima_Atualiza_o__c ) , &quot;ATENÇÃO, ATUALIZAR P.O.P&quot; + &quot; &quot; + IMAGE(&quot;https://hospcom--c.na25.content.force.com/servlet/servlet.FileDownload?file=0153100000815oa&quot;, &quot;&quot; , 12, 12) ,&quot;DESATUALIZADO&quot; + &quot; &quot; + IMAGE(&quot;https://hospcom--c.na25.content.force.com/servlet/servlet.FileDownload?file=0153100000815of&quot;, &quot;&quot; , 12, 12)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Status do P.O.P</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

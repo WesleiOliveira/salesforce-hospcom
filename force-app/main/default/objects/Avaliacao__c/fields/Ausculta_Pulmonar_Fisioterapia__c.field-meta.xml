@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ausculta_Pulmonar_Fisioterapia__c</fullName>
+    <externalId>false</externalId>
+    <label>Ausculta Pulmonar</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>MV+ diminuído</fullName>
+                <default>false</default>
+                <label>MV+ diminuído</label>
+            </value>
+            <value>
+                <fullName>Sem RA</fullName>
+                <default>false</default>
+                <label>Sem RA</label>
+            </value>
+            <value>
+                <fullName>Com Roncos</fullName>
+                <default>false</default>
+                <label>Com Roncos</label>
+            </value>
+            <value>
+                <fullName>Com Sibilos</fullName>
+                <default>false</default>
+                <label>Com Sibilos</label>
+            </value>
+            <value>
+                <fullName>Com Creptos</fullName>
+                <default>false</default>
+                <label>Com Creptos</label>
+            </value>
+            <value>
+                <fullName>Com Estertores</fullName>
+                <default>false</default>
+                <label>Com Estertores</label>
+            </value>
+            <value>
+                <fullName>MV+ Sem RA</fullName>
+                <default>false</default>
+                <label>MV+ Sem RA</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

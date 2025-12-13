@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valida_12</fullName>
+    <active>true</active>
+    <errorConditionFormula>(TEXT(X12_Como_soube_desta_vaga__c) == &apos;Indicação&apos;
+&amp;&amp;
+Quem_indicou__c  == null)
+
+||
+
+(TEXT(X12_Como_soube_desta_vaga__c) == &apos;&apos;
+&amp;&amp;
+Quem_indicou__c != null)</errorConditionFormula>
+    <errorDisplayField>Quem_indicou__c</errorDisplayField>
+    <errorMessage>Error</errorMessage>
+</ValidationRule>

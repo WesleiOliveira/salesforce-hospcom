@@ -1,0 +1,1722 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>57.0</apiVersion>
+    <assignments>
+        <name>atribui_GBD</name>
+        <label>atribui GBD</label>
+        <locationX>314</locationX>
+        <locationY>5339</locationY>
+        <assignmentItems>
+            <assignToReference>dadosBancarios</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>faturadoGbd</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>X3V</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>atribui_health</name>
+        <label>atribui health</label>
+        <locationX>50</locationX>
+        <locationY>5339</locationY>
+        <assignmentItems>
+            <assignToReference>dadosBancarios</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>FaturadoHealth</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>X3V</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>atribui_Hospcom</name>
+        <label>atribui Hospcom</label>
+        <locationX>578</locationX>
+        <locationY>5339</locationY>
+        <assignmentItems>
+            <assignToReference>dadosBancarios</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>FaturadoHOspcom</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>X3V</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>C_pia_1_de_Qualifica_o_Editada</name>
+        <label>Qualificação Editada - Venda</label>
+        <locationX>732</locationX>
+        <locationY>4223</locationY>
+        <defaultConnector>
+            <targetReference>X1_Editada_Venda</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>C_pia_1_de_N_o</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Qualificacao_Venda_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Qualifica_o_V</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Qualifica_o_Editada</name>
+        <label>Qualificação Editada</label>
+        <locationX>732</locationX>
+        <locationY>323</locationY>
+        <defaultConnector>
+            <targetReference>X2_Editada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>N_o</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Qualificacao_Assistencia_Editada__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Qualifica_o_A</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Verifica_faturamento</name>
+        <label>Verifica faturamento</label>
+        <locationX>446</locationX>
+        <locationY>5231</locationY>
+        <defaultConnector>
+            <targetReference>X3V</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Sem Faturamento</defaultConnectorLabel>
+        <rules>
+            <name>Health</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Faturamento_Feito2__r.CNPJ__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>27.476.124/0001-02</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>atribui_health</targetReference>
+            </connector>
+            <label>Health</label>
+        </rules>
+        <rules>
+            <name>GBD</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Faturamento_Feito2__r.CNPJ__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>23.813.386/0001-56</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>atribui_GBD</targetReference>
+            </connector>
+            <label>GBD</label>
+        </rules>
+        <rules>
+            <name>Hospcom</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Faturamento_Feito2__r.CNPJ__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>05.743.288/0001-08</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>atribui_Hospcom</targetReference>
+            </connector>
+            <label>Hospcom</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X10_Editada</name>
+        <label>10 Editada</label>
+        <locationX>732</locationX>
+        <locationY>3023</locationY>
+        <defaultConnector>
+            <targetReference>X11_Editada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Nao10</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.A_ClausulaEditada10__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X10</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X10_Editada_Venda</name>
+        <label>10 Editada - Venda</label>
+        <locationX>732</locationX>
+        <locationY>7523</locationY>
+        <defaultConnector>
+            <targetReference>X11_Editada_Venda</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Naov10</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.V_ClausulaEditada10__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>V10</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X11_Editada</name>
+        <label>11 Editada</label>
+        <locationX>732</locationX>
+        <locationY>3323</locationY>
+        <defaultConnector>
+            <targetReference>X12_Editada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Nao13</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.A_ClausulaEditada13__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X11</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X11_Editada_Venda</name>
+        <label>11 Editada - Venda</label>
+        <locationX>732</locationX>
+        <locationY>7823</locationY>
+        <defaultConnector>
+            <targetReference>X12_Editada_Venda</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Naov11</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.V_ClausulaEditada10__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>V11</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X12_Editada</name>
+        <label>12 Editada</label>
+        <locationX>732</locationX>
+        <locationY>3623</locationY>
+        <defaultConnector>
+            <targetReference>X13_Editada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Nao12</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.A_ClausulaEditada12__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X12</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X12_Editada_Venda</name>
+        <label>12 Editada - Venda</label>
+        <locationX>732</locationX>
+        <locationY>8123</locationY>
+        <defaultConnector>
+            <targetReference>X13_Editada_Venda</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Naov12</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.V_ClausulaEditada12__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>V12</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X13_Editada</name>
+        <label>13 Editada</label>
+        <locationX>732</locationX>
+        <locationY>3923</locationY>
+        <defaultConnector>
+            <targetReference>C_pia_1_de_Qualifica_o_Editada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Nao133</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.A_ClausulaEditada13__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X13</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X13_Editada_Venda</name>
+        <label>13 Editada - Venda</label>
+        <locationX>732</locationX>
+        <locationY>8423</locationY>
+        <defaultConnector>
+            <targetReference>X14_Editada_Venda</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>NaoV13</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.V_ClausulaEditada13__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>V13</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X14_Editada_Venda</name>
+        <label>14 Editada - Venda</label>
+        <locationX>732</locationX>
+        <locationY>8723</locationY>
+        <defaultConnector>
+            <targetReference>X15_Editada_Venda</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Naov14</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.V_ClausulaEditada14__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X14V</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X15_Editada_Venda</name>
+        <label>15 Editada - Venda</label>
+        <locationX>732</locationX>
+        <locationY>9023</locationY>
+        <defaultConnector>
+            <targetReference>X16_Editada_Venda</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>NaoV15</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.V_ClausulaEditada15__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X15V</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X16_Editada_Venda</name>
+        <label>16 Editada - Venda</label>
+        <locationX>732</locationX>
+        <locationY>9323</locationY>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Nao16</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.V_ClausulaEditada16__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X16V</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X1_Editada_Venda</name>
+        <label>1 Editada - Venda</label>
+        <locationX>732</locationX>
+        <locationY>4523</locationY>
+        <defaultConnector>
+            <targetReference>X2_Editada_Venda</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Nao1V</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.V_ClausulaEditada1__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X1V</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X2_Editada</name>
+        <label>2 Editada</label>
+        <locationX>732</locationX>
+        <locationY>623</locationY>
+        <defaultConnector>
+            <targetReference>X3_Editada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>nao2</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.A_ClausulaEditada2__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X2</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X2_Editada_Venda</name>
+        <label>2 Editada - Venda</label>
+        <locationX>732</locationX>
+        <locationY>4823</locationY>
+        <defaultConnector>
+            <targetReference>X3_Editada_Venda</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Naov2</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.V_ClausulaEditada2__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X2V</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X3_Editada</name>
+        <label>3 Editada</label>
+        <locationX>732</locationX>
+        <locationY>923</locationY>
+        <defaultConnector>
+            <targetReference>X4_Editada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Nao1</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.A_ClausulaEditada1__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X3</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X3_Editada_Venda</name>
+        <label>3 Editada - Venda</label>
+        <locationX>732</locationX>
+        <locationY>5123</locationY>
+        <defaultConnector>
+            <targetReference>X4_Editada_Venda</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Naov3</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.V_ClausulaEditada3__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Verifica_faturamento</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X4_Editada</name>
+        <label>4 Editada</label>
+        <locationX>732</locationX>
+        <locationY>1223</locationY>
+        <defaultConnector>
+            <targetReference>X5_Editada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Nao4</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.A_ClausulaEditada4__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X4</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X4_Editada_Venda</name>
+        <label>4 Editada - Venda</label>
+        <locationX>732</locationX>
+        <locationY>5723</locationY>
+        <defaultConnector>
+            <targetReference>X5_Editada_Venda</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Nao4v</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.V_ClausulaEditada4__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X4V</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X5_Editada</name>
+        <label>5 Editada</label>
+        <locationX>732</locationX>
+        <locationY>1523</locationY>
+        <defaultConnector>
+            <targetReference>X6_Editada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Nao5</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.A_ClausulaEditada5__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X5</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X5_Editada_Venda</name>
+        <label>5 Editada - Venda</label>
+        <locationX>732</locationX>
+        <locationY>6023</locationY>
+        <defaultConnector>
+            <targetReference>X6_Editada_Venda</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Naov5</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.V_ClausulaEditada5__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X5V</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X6_Editada</name>
+        <label>6 Editada</label>
+        <locationX>732</locationX>
+        <locationY>1823</locationY>
+        <defaultConnector>
+            <targetReference>X7_Editada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Nao6</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.A_ClausulaEditada6__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X6</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X6_Editada_Venda</name>
+        <label>6 Editada - Venda</label>
+        <locationX>732</locationX>
+        <locationY>6323</locationY>
+        <defaultConnector>
+            <targetReference>X7_Editada_Venda</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Naov6</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.V_ClausulaEditada6__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X6V</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X7_Editada</name>
+        <label>7 Editada</label>
+        <locationX>732</locationX>
+        <locationY>2123</locationY>
+        <defaultConnector>
+            <targetReference>X8_Editada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Nao7</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.A_ClausulaEditada7__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X7</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X7_Editada_Venda</name>
+        <label>7 Editada - Venda</label>
+        <locationX>732</locationX>
+        <locationY>6623</locationY>
+        <defaultConnector>
+            <targetReference>X8_Editada_Venda</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Naov7</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.V_ClausulaEditada7__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X7V</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X8_Editada</name>
+        <label>8 Editada</label>
+        <locationX>732</locationX>
+        <locationY>2423</locationY>
+        <defaultConnector>
+            <targetReference>X9_Editada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Nao8</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.A_ClausulaEditada8__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X8</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X8_Editada_Venda</name>
+        <label>8 Editada - Venda</label>
+        <locationX>732</locationX>
+        <locationY>6923</locationY>
+        <defaultConnector>
+            <targetReference>X9_Editada_Venda</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Naov8</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.V_ClausulaEditada8__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X8V</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X9_Editada</name>
+        <label>9 Editada</label>
+        <locationX>732</locationX>
+        <locationY>2723</locationY>
+        <defaultConnector>
+            <targetReference>X10_Editada</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>Nao9</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.A_ClausulaEditada9__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X9</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>X9_Editada_Venda</name>
+        <label>9 Editada - Venda</label>
+        <locationX>732</locationX>
+        <locationY>7223</locationY>
+        <defaultConnector>
+            <targetReference>X10_Editada_Venda</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>NaoV9</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.V_ClausulaEditada9__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>X9V</targetReference>
+            </connector>
+            <label>Não</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>dadosCliente</name>
+        <dataType>String</dataType>
+        <expression>IF({!$Record.Account.CNPJ__c} != null, &apos; pessoa jurídica de direito privado, inscrita no CPNJ sob Nº &apos; + {!$Record.Account.CNPJ__c} + &apos; sediada na &apos; + {!$Record.Account.BillingStreet} + &apos;, &apos; +  {!$Record.Faturamento_Feito2__r.BillingCity} + &apos; - &apos; +  {!$Record.Account.BillingState} + &apos;, &apos; + &apos; CEP: &apos; + {!$Record.Account.BillingPostalCode}, &apos; pessoa física, inscrita no CPF sob Nº &apos; + {!$Record.Account.CPF__pc} + &apos; residente e domiciliada à &apos; + {!$Record.Account.BillingStreet} + &apos;, &apos; +  {!$Record.Faturamento_Feito2__r.BillingCity} + &apos; - &apos; +  {!$Record.Account.BillingState} + &apos;, &apos; + &apos; CEP: &apos; + {!$Record.Account.BillingPostalCode})</expression>
+    </formulas>
+    <formulas>
+        <name>nomeCliente</name>
+        <dataType>String</dataType>
+        <expression>IF({!$Record.Account.CNPJ__c} != null,  {!$Record.Account.Raz_o_Social__c}, {!$Record.Account.FirstName} + &apos; &apos; + {!$Record.Account.LastName})</expression>
+    </formulas>
+    <formulas>
+        <name>parcelas</name>
+        <dataType>String</dataType>
+        <expression>IF(!ISBLANK({!$Record.Numero_de_parcelas__c}), &apos;&lt;b&gt;Número de parcelas: &lt;/b&gt; &apos; +  TEXT({!$Record.Numero_de_parcelas__c}) +&apos;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&apos;, &apos;&apos;)</expression>
+    </formulas>
+    <interviewLabel>OT — Cláusulas Editáveis {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>OT — Cláusulas Editáveis</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Qualifica_o_A</name>
+        <label>Qualificação_A</label>
+        <locationX>600</locationX>
+        <locationY>431</locationY>
+        <connector>
+            <targetReference>X2_Editada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Qualificacao_Assistencia__c</field>
+            <value>
+                <elementReference>A_qualificacao</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Qualifica_o_V</name>
+        <label>Qualificação V</label>
+        <locationX>600</locationX>
+        <locationY>4331</locationY>
+        <connector>
+            <targetReference>X1_Editada_Venda</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Qualificacao_Venda__c</field>
+            <value>
+                <elementReference>V_qualificacao</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>V10</name>
+        <label>V10</label>
+        <locationX>600</locationX>
+        <locationY>7631</locationY>
+        <connector>
+            <targetReference>X11_Editada_Venda</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>V_Clausula10__c</field>
+            <value>
+                <elementReference>V_clausula10</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>V11</name>
+        <label>V11</label>
+        <locationX>600</locationX>
+        <locationY>7931</locationY>
+        <connector>
+            <targetReference>X12_Editada_Venda</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>V_Clausula11__c</field>
+            <value>
+                <elementReference>V_clausula11</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>V12</name>
+        <label>V12</label>
+        <locationX>600</locationX>
+        <locationY>8231</locationY>
+        <connector>
+            <targetReference>X13_Editada_Venda</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>V_Clausula12__c</field>
+            <value>
+                <elementReference>V_clausula12</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>V13</name>
+        <label>V13</label>
+        <locationX>600</locationX>
+        <locationY>8531</locationY>
+        <connector>
+            <targetReference>X14_Editada_Venda</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>V_Clausula13__c</field>
+            <value>
+                <elementReference>V_clausula13</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X10</name>
+        <label>10</label>
+        <locationX>600</locationX>
+        <locationY>3131</locationY>
+        <connector>
+            <targetReference>X11_Editada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>A_Clausula10__c</field>
+            <value>
+                <elementReference>A_clausula10</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X11</name>
+        <label>11</label>
+        <locationX>600</locationX>
+        <locationY>3431</locationY>
+        <connector>
+            <targetReference>X12_Editada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>A_Clausula11__c</field>
+            <value>
+                <elementReference>A_clausula11</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X12</name>
+        <label>12</label>
+        <locationX>600</locationX>
+        <locationY>3731</locationY>
+        <connector>
+            <targetReference>X13_Editada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>A_Clausula12__c</field>
+            <value>
+                <elementReference>A_clausula12</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X13</name>
+        <label>13</label>
+        <locationX>600</locationX>
+        <locationY>4031</locationY>
+        <connector>
+            <targetReference>C_pia_1_de_Qualifica_o_Editada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>A_Clausula13__c</field>
+            <value>
+                <elementReference>A_clausula13</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X14V</name>
+        <label>14V</label>
+        <locationX>600</locationX>
+        <locationY>8831</locationY>
+        <connector>
+            <targetReference>X15_Editada_Venda</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>V_Clausula14__c</field>
+            <value>
+                <elementReference>V_clausula14</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X15V</name>
+        <label>15V</label>
+        <locationX>600</locationX>
+        <locationY>9131</locationY>
+        <connector>
+            <targetReference>X16_Editada_Venda</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>V_Clausula15__c</field>
+            <value>
+                <elementReference>V_clausula15</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X16V</name>
+        <label>16V</label>
+        <locationX>600</locationX>
+        <locationY>9431</locationY>
+        <inputAssignments>
+            <field>V_Clausula16__c</field>
+            <value>
+                <elementReference>V_clausula16</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X1V</name>
+        <label>1V</label>
+        <locationX>600</locationX>
+        <locationY>4631</locationY>
+        <connector>
+            <targetReference>X2_Editada_Venda</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>V_Clausula1__c</field>
+            <value>
+                <elementReference>V_clausula1</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X2</name>
+        <label>2</label>
+        <locationX>600</locationX>
+        <locationY>731</locationY>
+        <connector>
+            <targetReference>X3_Editada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>A_Clausula2__c</field>
+            <value>
+                <elementReference>A_clausula2</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X2V</name>
+        <label>2V</label>
+        <locationX>600</locationX>
+        <locationY>4931</locationY>
+        <connector>
+            <targetReference>X3_Editada_Venda</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>V_Clausula2__c</field>
+            <value>
+                <elementReference>V_clausula2</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X3</name>
+        <label>3</label>
+        <locationX>600</locationX>
+        <locationY>1031</locationY>
+        <connector>
+            <targetReference>X4_Editada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>A_Clausula3__c</field>
+            <value>
+                <elementReference>A_clausula3</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X3V</name>
+        <label>3V</label>
+        <locationX>446</locationX>
+        <locationY>5531</locationY>
+        <connector>
+            <targetReference>X4_Editada_Venda</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>V_Clausula3__c</field>
+            <value>
+                <elementReference>V_clausula3</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X4</name>
+        <label>4</label>
+        <locationX>600</locationX>
+        <locationY>1331</locationY>
+        <connector>
+            <targetReference>X5_Editada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>A_Clausula4__c</field>
+            <value>
+                <elementReference>A_clausula4</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X4V</name>
+        <label>4V</label>
+        <locationX>600</locationX>
+        <locationY>5831</locationY>
+        <connector>
+            <targetReference>X5_Editada_Venda</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>V_Clausula4__c</field>
+            <value>
+                <elementReference>V_clausula4</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X5</name>
+        <label>5</label>
+        <locationX>600</locationX>
+        <locationY>1631</locationY>
+        <connector>
+            <targetReference>X6_Editada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>A_Clausula5__c</field>
+            <value>
+                <elementReference>A_clausula5</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X5V</name>
+        <label>5V</label>
+        <locationX>600</locationX>
+        <locationY>6131</locationY>
+        <connector>
+            <targetReference>X6_Editada_Venda</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>V_Clausula5__c</field>
+            <value>
+                <elementReference>V_clausula5</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X6</name>
+        <label>6</label>
+        <locationX>600</locationX>
+        <locationY>1931</locationY>
+        <connector>
+            <targetReference>X7_Editada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>A_Clausula6__c</field>
+            <value>
+                <elementReference>A_clausula6</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X6V</name>
+        <label>6V</label>
+        <locationX>600</locationX>
+        <locationY>6431</locationY>
+        <connector>
+            <targetReference>X7_Editada_Venda</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>V_Clausula6__c</field>
+            <value>
+                <elementReference>V_clausula6</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X7</name>
+        <label>7</label>
+        <locationX>600</locationX>
+        <locationY>2231</locationY>
+        <connector>
+            <targetReference>X8_Editada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>A_Clausula7__c</field>
+            <value>
+                <elementReference>A_clausula7</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X7V</name>
+        <label>7V</label>
+        <locationX>600</locationX>
+        <locationY>6731</locationY>
+        <connector>
+            <targetReference>X8_Editada_Venda</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>V_Clausula7__c</field>
+            <value>
+                <elementReference>V_clausula7</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X8</name>
+        <label>8</label>
+        <locationX>600</locationX>
+        <locationY>2531</locationY>
+        <connector>
+            <targetReference>X9_Editada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>A_Clausula8__c</field>
+            <value>
+                <elementReference>A_clausula8</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X8V</name>
+        <label>8V</label>
+        <locationX>600</locationX>
+        <locationY>7031</locationY>
+        <connector>
+            <targetReference>X9_Editada_Venda</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>V_Clausula8__c</field>
+            <value>
+                <elementReference>V_clausula8</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X9</name>
+        <label>9</label>
+        <locationX>600</locationX>
+        <locationY>2831</locationY>
+        <connector>
+            <targetReference>X10_Editada</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>A_Clausula9__c</field>
+            <value>
+                <elementReference>A_clausula9</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>X9V</name>
+        <label>9V</label>
+        <locationX>600</locationX>
+        <locationY>7331</locationY>
+        <connector>
+            <targetReference>X10_Editada_Venda</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>V_Clausula9__c</field>
+            <value>
+                <elementReference>V_clausula9</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>606</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Qualifica_o_Editada</targetReference>
+        </connector>
+        <filterLogic>or</filterLogic>
+        <filters>
+            <field>Frete2__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Total_Estimado__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Prazo_de_entrega__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Forma_de_pagamento2__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Condicao_de_pagamento__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Frete__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>AccountId</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Data_de_validade__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>WorkOrder</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>A_clausula10</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;div class=&quot;titulo&quot;&gt;&lt;b&gt;10.  DA NECESSIDADE DE APROVAÇÃO EM ANÁLISE DE CRÉDITO&lt;/b&gt;&lt;/div&gt;&lt;br/&gt;
+            &lt;div class=&quot;paragrafo&quot;&gt;&lt;b&gt;10.1.&lt;/b&gt; Declara o(a) &lt;b&gt;CONTRATANTE&lt;/b&gt; a ciência de que estas tratativas comerciais somente perdurarão mediante aprovação da &lt;b&gt;CONTRATANTE&lt;/b&gt; em análise de crédito a ser realizada pela &lt;b&gt;CONTRATADA&lt;/b&gt; e, ainda, tão somente mediante assinatura do presente instrumento por parte de pessoa com poderes para assinar pela &lt;b&gt;CONTRATADA&lt;/b&gt;.&lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>A_clausula11</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div class=&quot;titulo&quot;&gt;&lt;b&gt;11.  DA ASSINATURA ELETRÔNICA &lt;/b&gt;&lt;/div&gt;&lt;br/&gt;
+            &lt;div class=&quot;paragrafo&quot;&gt;&lt;b&gt; 11.1.&lt;/b&gt; Caso o presente instrumento seja assinado de forma digital ou eletronicamente, cada parte declara e garante que sua assinatura digital ou eletrônica tem o mesmo efeito vinculativo que teria a assinatura manuscrita, possuindo caráter irrevogável e irretratável, sendo realizada através de plataforma de conhecida confiabilidade, estando as partes atentas ao disposto na Medida Provisória 2.200-2/2001 ou em outra legislação que venha a substituí-la.&lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>A_clausula12</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div class=&quot;titulo&quot;&gt;&lt;b&gt;12. DA PROTEÇÃO DE DADOS &lt;/b&gt;&lt;/div&gt;&lt;br/&gt;
+            &lt;div class=&quot;paragrafo&quot;&gt;&lt;b&gt;12.1.&lt;/b&gt; As partes, por si e por seus colaboradores, obrigam-se a atuar no presente Contrato em conformidade com a Legislação vigente sobre Proteção de Dados Pessoais e as determinações de órgãos reguladores/fiscalizadores sobre a matéria, tudo conforme o que rege a Lei 13.709/2018. No que tange à utilização dos dados as partes deverão:&lt;/div&gt;  &lt;br/&gt;
+            &lt;div class=&quot;bloco&quot;&gt;
+                &lt;div class=&quot;paragrafo&quot; style=&quot;margin-left:150px;&quot;&gt;i. &amp;nbsp;&amp;nbsp; Tratar os dados pessoais a que tiver acesso de acordo com o que a outra parte lhe direcionar sempre em conformidade com estas cláusulas. Para os casos em que for obrigada e não mais puder cumprir estas obrigações, por qualquer razão, concorda em informar de modo formal este fato à outra parte. &lt;/div&gt;&lt;br/&gt;
+                &lt;div class=&quot;paragrafo&quot; style=&quot;margin-left:150px;&quot;&gt;ii. &amp;nbsp;&amp;nbsp; Manter e utilizar medidas de segurança para que possa proteger a confidencialidade e integridade de todos os dados pessoais mantidos ou transmitidos eletronicamente, a fim de que possa garantir a proteção desses dados contra acesso não autorizado, destruição, uso, modificação, divulgação ou perda acidental ou indevida.&lt;/div&gt;&lt;br/&gt;
+                &lt;div class=&quot;paragrafo&quot; style=&quot;margin-left:150px;&quot;&gt;iii. &amp;nbsp;&amp;nbsp; Acessar os dados dentro de seu escopo e na medida abrangida pela autorização da outra parte, não podendo estes serem modificados sem expressa autorização da outra parte. &lt;/div&gt;&lt;br/&gt;
+                &lt;div class=&quot;paragrafo&quot; style=&quot;margin-left:150px;&quot;&gt;iv. &amp;nbsp;&amp;nbsp; Garantir, por si própria ou quaisquer de seus empregados, prepostos, sócios, diretores, representantes ou terceiros contratados, a confidencialidade dos dados processados, bem como a manter quaisquer Dados Pessoais estritamente confidenciais e de não os utilizar para outros fins, com exceção da prestação de serviços à outra parte.&lt;/div&gt;
+            &lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>A_clausula13</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div class=&quot;titulo&quot;&gt;&lt;b&gt;13. DO FORO DO CONTRATO &lt;/b&gt;&lt;/div&gt;&lt;br/&gt;
+            &lt;div class=&quot;paragrafo&quot;&gt;&lt;b&gt;13.1.&lt;/b&gt; Fica eleito como competente o foro da Comarca de Goiânia, Estado de Goiás, para solução de quaisquer dúvidas ou litígios decorrentes deste contrato, renunciando os contratantes a qualquer outro que tenham ou venham a ter, por mais privilegiado que seja.&lt;/div&gt;            &lt;br/&gt;
+            &lt;div style=&quot;font-size:14px; text-align: justify&quot;&gt;E assim, justo e contratado, firmam o presente instrumento em 02 (duas) vias de igual teor, e forma, na presença das 02 (duas) testemunhas abaixo assinadas.&lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>A_clausula2</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div class=&quot;paragrafo&quot;&gt;&lt;b&gt;2.2.&lt;/b&gt; As informações comerciais contidas neste instrumento serão válidas até a data de {!$Record.Data_de_validade__c} e em caso de assinatura do contrato pela &lt;b&gt;CONTRATADA&lt;/b&gt; serão ratificadas pelo tempo que perdurar o contrato.&lt;/div&gt;&lt;br/&gt;
+            &lt;div class=&quot;paragrafo&quot;&gt;&lt;b&gt;2.3.&lt;/b&gt; O preço acima descrito, constitui a venda em sua totalidade, ou seja, estão embutidos no preço todos os impostos de responsabilidade da &lt;b&gt;CONTRATADA&lt;/b&gt;. Quaisquer valores excedentes ao preço ora estipulado deverão ser arcados em sua totalidade pelo(a) &lt;b&gt;CONTRATANTE&lt;/b&gt;.&lt;/div&gt;&lt;br/&gt;
+            &lt;div class=&quot;paragrafo&quot;&gt;&lt;b&gt;Parágrafo Único&lt;/b&gt;. A menos que o(a) &lt;b&gt;CONTRATANTE&lt;/b&gt; forneça à &lt;b&gt;CONTRATADA&lt;/b&gt; o respectivo certificado de isenção, com antecedência razoável à data em que o(s) equipamento(s) for(em) disponibilizado(s) para entrega, a &lt;b&gt;CONTRATADA&lt;/b&gt; faturará o produto a ser entregue ao(a) &lt;b&gt;CONTRATANTE&lt;/b&gt; com a inclusão dos impostos relativos à venda e o(a) &lt;b&gt;CONTRATANTE&lt;/b&gt; pagará os impostos de acordo com os termos da fatura.&lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>A_clausula3</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div class=&quot;titulo&quot;&gt;&lt;b&gt;3. DOS ENCARGOS MORATÓRIOS&lt;/b&gt;&lt;/div&gt;
+            &lt;br/&gt;
+            &lt;div class=&quot;bloco&quot;&gt;
+                &lt;div class=&quot;paragrafo&quot;&gt;&lt;b&gt;3.1&lt;/b&gt; Fica certo e ajustado que caso o(a) &lt;b&gt;CONTRATANTE&lt;/b&gt; não efetue o pagamento até a data de vencimento serão aplicadas as seguintes sanções, calculadas sempre sobre o valor total da obrigação e até o seu efetivo pagamento: &lt;/div&gt;
+            &lt;br/&gt;
+            &lt;div class=&quot;paragrafo&quot; style=&quot;margin-left:150px;&quot;&gt;&lt;b&gt;3.1.1.&lt;/b&gt; Juros de mora a razão de 1% (um por cento) ao mês;&lt;/div&gt;&lt;br/&gt;
+            &lt;div class=&quot;paragrafo&quot; style=&quot;margin-left:150px;&quot;&gt;&lt;b&gt;3.1.2.&lt;/b&gt; Multa moratória de 2% (dois por cento) sobre o valor total da obrigação em atraso;&lt;/div&gt;&lt;br/&gt;  
+            &lt;div class=&quot;paragrafo&quot; style=&quot;margin-left:150px;&quot;&gt;&lt;b&gt;3.1.3.&lt;/b&gt; Correção monetária, &lt;i&gt;&quot;pró rata tempore&quot;&lt;/i&gt;,com base na variação do índice do INPC;&lt;/div&gt;&lt;br/&gt;    
+            &lt;div class=&quot;paragrafo&quot; style=&quot;margin-left:150px;&quot;&gt;&lt;b&gt;3.1.4.&lt;/b&gt; Todas as despesas de cobrança, custas judiciais, extrajudiciais e honorários advocatícios na monta de 10% sobre o valor total do débito;&lt;/div&gt;    
+            &lt;br/&gt;
+            &lt;div class=&quot;paragrafo&quot;&gt;&lt;b&gt;Parágrafo Único:&lt;/b&gt; em caso de pagamento de forma parcelada e inadimplemento de uma das parcelas aqui acordadas, ocorrerá o vencimento antecipado de todas as outras parcelas, com a consequente aplicação dos encargos contratuais mencionados acima. &lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>A_clausula4</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div class=&quot;titulo&quot;&gt;&lt;b&gt;4. DA FORMA DE PRESTAÇÃO DE SERVIÇOS E OBRIGAÇÕES DA CONTRATADA&lt;/b&gt;&lt;/div&gt;&lt;br/&gt;
+            &lt;div style=&quot;font-size:14px; text-align: justify&quot;&gt;&lt;b&gt;4.1.&lt;/b&gt; A prestação dos serviços de manutenção será realizada de segunda à sexta-feira, das 08h às 18h, salvo feriados, em local previamente estipulado entre as partes. Em caso de necessidade manifestada pela &lt;b&gt;CONTRATANTE&lt;/b&gt; de que sejam prestados os serviços em referência fora do horário comercial ou local ora estipulado, as despesas de atendimento extraordinário serão cobradas pela &lt;b&gt;CONTRATADA&lt;/b&gt;, em valores a serem estipulados entre &lt;b&gt;CONTRATADA&lt;/b&gt; e &lt;b&gt;CONTRATANTE&lt;/b&gt;.&lt;/div&gt; &lt;br/&gt;   
+            &lt;div class=&quot;paragrafo&quot;&gt;&lt;b&gt;Parágrafo Único:&lt;/b&gt; A &lt;b&gt;CONTRATANTE&lt;/b&gt; fica obrigada, após a prestação dos serviços, satisfazer às suas próprias custas, a todas e quaisquer intimações dos poderes competentes a que der causa, mesmo que expedidas em nome da &lt;b&gt;CONTRATADA.&lt;/b&gt; &lt;/div&gt;    &lt;br/&gt;
+            &lt;div class=&quot;paragrafo&quot;&gt;&lt;b&gt;4.2.&lt;/b&gt; Quando da liberação do(s) equipamento(s) pela &lt;b&gt;CONTRATADA&lt;/b&gt;, esta emitirá nota referente à ordem de trabalho, o que acompanhará o(s) equipamento(s) no momento de entrega ao(à) &lt;b&gt;CONTRATANTE&lt;/b&gt;, na qual, desde já, o(a) &lt;b&gt;CONTRATANTE&lt;/b&gt; dá seu aceite, ficando certo que em caso de ausência de assinatura da referida nota referente à ordem de trabalho no momento da entrega, o referido aceite substituirá a assinatura da nota mencionada. &lt;/div&gt;    &lt;br/&gt;
+            &lt;div class=&quot;paragrafo&quot;&gt;&lt;b&gt;4.3.&lt;/b&gt; A forma de pagamento estabelecida no item 2.1, não poderá ser alterada sem que para isso exista uma prévia e expressa aprovação da &lt;b&gt;CONTRATADA&lt;/b&gt;, ficando a &lt;b&gt;CONTRATANTE&lt;/b&gt;, desde já, fica ciente que qualquer pagamento realizado de forma divergente do acordado, poderá ocasionar na cobrança de encargos moratórios e da multa contratual pactuada no item 3.1.&lt;/div&gt;
+            &lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>A_clausula5</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div class=&quot;titulo&quot;&gt;&lt;b&gt;5. CONDIÇÕES DE ENTREGA&lt;/b&gt;&lt;/div&gt;&lt;br/&gt;
+            &lt;div class=&quot;paragrafo&quot;&gt;&lt;b&gt;5.1.&lt;/b&gt; Cabe ao(a) &lt;b&gt;CONTRATANTE&lt;/b&gt; preparar o local de entrega e instalação, sendo que as partes no ato de assinatura deste instrumento consideram que o local de instalação já esteja disponível e pronto para tanto&lt;/div&gt;&lt;br/&gt;
+            &lt;div class=&quot;paragrafo&quot;&gt;&lt;b&gt;5.2.&lt;/b&gt; Caso o(a) &lt;b&gt;CONTRATANTE&lt;/b&gt; tenha a necessidade de prorrogar a data de liberação do local de instalação do(s) equipamento(s) acima informado, deverá comunicar à CONTRATADA seu interesse por escrito, sendo que referida prorrogação deverá ser regulada por meio de aditamento a este documento, sendo que essa prorrogação poderá ser requerida uma única vez e o prazo de prorrogação não poderá ser superior a 30 (trinta) dias corridos.&lt;/div&gt;&lt;br/&gt;
+            &lt;div class=&quot;paragrafo&quot;&gt;&lt;b&gt;5.3.&lt;/b&gt; Caso no momento de entrega o(a) &lt;b&gt;CONTRATANTE&lt;/b&gt; tenha a necessidade de prorrogar a data de liberação do local de instalação do(s) equipamento(s) acima informado, deverá comunicar à &lt;b&gt;CONTRATADA&lt;/b&gt; seu interesse por escrito, sendo que referida prorrogação deverá ser regulada por meio de aditamento a este documento, sendo que essa prorrogação poderá ser requerida uma única vez e o prazo de prorrogação não poderá ser superior a 30 (trinta) dias corridos. &lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>A_clausula6</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div class=&quot;titulo&quot;&gt;&lt;b&gt;6. OBRIGAÇÕES DAS PARTES&lt;/b&gt;&lt;/div&gt;&lt;br/&gt;
+            &lt;div class=&quot;paragrafo&quot;&gt;&lt;b&gt;6.1. &lt;/b&gt; É obrigação da &lt;b&gt;CONTRATANTE&lt;/b&gt; executar os serviços objeto deste instrumento, por meio de técnicos devidamente qualificados e identificados com crachá e uniforme, usando equipamentos de proteção individual de segurança, fornecidos exclusivamente pela &lt;b&gt;CONTRATADA&lt;/b&gt;, executando os serviços de acordo com as necessidades de cada ambiente e as normativas em vigor&lt;/div&gt;&lt;br/&gt;
+            &lt;div class=&quot;paragrafo&quot;&gt;&lt;b&gt;6.2. &lt;/b&gt; É obrigação da &lt;b&gt;CONTRATADA&lt;/b&gt; oferecer atendimento habilitado para responder, por telefone, e-mail ou, quando estritamente necessário, responder pessoalmente aos questionamentos que envolvam o objeto deste contrato.&lt;/div&gt;  &lt;br/&gt;
+            &lt;div class=&quot;paragrafo&quot;&gt;&lt;b&gt;6.3. &lt;/b&gt; É obrigação da &lt;b&gt;CONTRATANTE&lt;/b&gt; efetivar o pagamento do serviço e/ou peças contratadas no prazo acordado e, em caso de pagamento à vista (paga e retira), fica autorizada a retenção do equipamento pela &lt;b&gt;CONTRATADA&lt;/b&gt;, até que seja efetuado o pagamento na forma acordada pela &lt;b&gt;CONTRATANTE&lt;/b&gt;.&lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>A_clausula7</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div class=&quot;titulo&quot;&gt;&lt;b&gt;7. GARANTIA&lt;/b&gt;&lt;/div&gt;&lt;br/&gt;
+            &lt;div class=&quot;paragrafo&quot;&gt;&lt;b&gt;7.1. &lt;/b&gt; O(s) serviço(s) e peças objeto deste instrumento é(são) garantido(s) por 90 (noventa) dias, salvo o mau uso comprovado pela &lt;b&gt;CONTRATANTE&lt;/b&gt;, prazo que será contado da data de assinatura do presente instrumento.&lt;/div&gt;&lt;br/&gt;
+            &lt;div class=&quot;paragrafo&quot;&gt;&lt;b&gt;Parágrafo Único: &lt;/b&gt; Qualquer acionamento de garantia do equipamento que se faça necessário durante o período de garantia acima informado deverá ser solicitado pelo(a) &lt;b&gt;CONTRATANTE&lt;/b&gt; ao time de serviços da &lt;b&gt;CONTRATADA&lt;/b&gt;. Solicitações de atendimento feitas através de qualquer outro canal não serão consideradas válidas, ficando o(a) &lt;b&gt;CONTRATADA&lt;/b&gt; isento de responsabilidade pelo não atendimento.&lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>A_clausula8</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div class=&quot;titulo&quot;&gt;&lt;b&gt;8. DA RESCISÃO ANTECIPADA&lt;/b&gt;&lt;/div&gt;&lt;br/&gt;
+            &lt;div class=&quot;paragrafo&quot;&gt;&lt;b&gt;8.1.&lt;/b&gt; Em razão dos custos despendidos pela &lt;b&gt;CONTRATADA&lt;/b&gt; para a conclusão e fechamento do negócio, fica resguardado seu direito a cobrança de multa penal que será calculada na monta de 10% do valor total do contrato, em caso de manifesta vontade de rescindir antecipadamente ou em razão de desistência do negócio por parte do &lt;b&gt;CONTRATANTE&lt;/b&gt; após assinatura do presente contrato de compra e venda.&lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>A_clausula9</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div class=&quot;titulo&quot;&gt;&lt;b&gt;9. DAS PRÁTICAS ANTICORRUPÇÃO&lt;/b&gt;&lt;/div&gt;&lt;br/&gt;
+            &lt;div class=&quot;paragrafo&quot;&gt;&lt;b&gt;9.1.&lt;/b&gt; As partes obrigam-se a observar, cumprir e/ou fazer cumprir, por si, suas afiliadas (entidades controladoras, controladas, coligadas ou sob controle comum) e representantes (diretores, membros do conselho de administração, quaisquer terceiros, incluindo assessores ou prestadores de serviços) toda e qualquer lei anticorrupção, em especial a Lei Federal nº 12.846/13, conforme aplicável.&lt;/div&gt;&lt;br/&gt;
+            &lt;div class=&quot;paragrafo&quot;&gt;&lt;b&gt;9.2.&lt;/b&gt; Na vigência deste contrato, o(a) &lt;b&gt;CONTRATANTE&lt;/b&gt; reconhece que nem ela, nem quaisquer de seus administradores, empregados, agentes, representantes, sócios ou acionistas deve dar, oferecer, pagar, prometer pagar, ou autorizar o pagamento, direta ou indiretamente, qualquer dinheiro ou coisa de valor a qualquer autoridade governamental, consultor, representante, parceiro, ou qualquer terceiro, com a finalidade de influenciar qualquer ato ou decisão de agentes ou entes governamentais (assim definidos nas Leis Anticorrupção Brasileiras), ou com objetivo de assegurar qualquer vantagem indevida ou direcionar negócios em violação às Leis Anticorrupção Brasileiras. &lt;/div&gt;&lt;br/&gt;
+            &lt;div class=&quot;paragrafo&quot;&gt;&lt;b&gt;9.3.&lt;/b&gt; O(A) &lt;b&gt;CONTRATANTE&lt;/b&gt;, se obriga a, em caso de eventual violação às Leis Anticorrupção Brasileiras, indenizar a &lt;b&gt;CONTRATADA&lt;/b&gt; por todos e quaisquer danos, incluindo multas, custos, obrigações de reparação de danos, taxas, juros, honorários advocatícios ou outras responsabilidades cíveis, criminais e/ou administrativas que sejam decorrentes de: (i) investigações sobre eventual quebra de integridade e/ou ato ilícito pela &lt;b&gt;CONTRATADA&lt;/b&gt; ou de seus funcionários e prestadores de serviços e, (ii) qualquer litígio ou outro procedimento judicial ou administrativo envolvendo violação das Leis Anticorrupção Brasileiras em face da(s) &lt;b&gt;CONTRATADA&lt;/b&gt; e que tenha sido originado a partir de qualquer ação ou omissão do(a) &lt;b&gt;CONTRATANTE&lt;/b&gt; seja diretamente ou por meio de seus administradores, empregados, agentes, representantes, terceiros e/ou sócios.&lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>A_qualificacao</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;strong style=&quot;color: rgb(0, 0, 0);&quot;&gt;CONTRATADA: {!$Record.Faturamento_Feito2__r.Raz_o_Social__c}&lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;, pessoa jurídica de direito privado, inscrita no CPNJ sob n.º: &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;{!$Record.Faturamento_Feito2__r.CNPJ__c}&lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt; sediada na &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;{!$Record.Faturamento_Feito2__r.BillingStreet}&lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;, &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;{!$Record.Faturamento_Feito2__r.BillingCity}&lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt; - &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;{!$Record.Faturamento_Feito2__r.BillingState}&lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;, CEP: &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;{!$Record.Faturamento_Feito2__r.BillingPostalCode}&lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt; e, de outro lado,&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;strong style=&quot;color: rgb(0, 0, 0);&quot;&gt;CONTRATANTE:&lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt; &lt;/span&gt;&lt;strong style=&quot;color: rgb(0, 0, 0);&quot;&gt;{!nomeCliente}&lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;, {!dadosCliente}.&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Têm entre si justo e acertado o presente contrato de prestação de serviços, que se regerá pelas cláusulas e condições a seguir delineadas.&lt;/span&gt;&lt;/p&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>V_clausula1</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div class=&quot;bloco&quot;&gt;
+                &lt;div&gt;&lt;b&gt;1. OBJETO&lt;/b&gt;&lt;/div&gt;&lt;br/&gt;
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;1.1. &lt;/b&gt; A &lt;b&gt;VENDEDORA&lt;/b&gt; pelo presente instrumento e na melhor forma de direito, vende ao(à) &lt;b&gt;COMPRADOR(A)&lt;/b&gt;, equipamentos e/ou acessórios para uso hospitalar, pelo preço total estabelecido na cláusula 2.1.&lt;/div&gt;&lt;br/&gt;
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;Parágrafo Único. &lt;/b&gt;Os serviços de instalação e assistência técnica em garantia se estiverem inclusos na venda serão prestados pela &lt;b&gt;VENDEDORA&lt;/b&gt; ou por outra empresa por ela designada, conforme condições explicitadas no presente instrumento e em seus anexos.&lt;/div&gt;
+            &lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>V_clausula10</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;10. DOS MATERIAIS DE CONSUMO&lt;/b&gt;&lt;/div&gt;       &lt;br/&gt;
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;10.1. &lt;/b&gt;Caso o(a) &lt;b&gt;COMPRADOR(A)&lt;/b&gt; manifeste a intenção de adquirir os componentes, consumíveis e os serviços de manutenção do equipamento de outras fontes, desde já declara a ciência de que eventual aquisição correrá por sua estrita e exclusiva responsabilidade, caso em que eventuais danos causados ao equipamento, os valores referentes aos custos para o reparo serão de sua responsabilidade.&lt;/div&gt;       &lt;br/&gt;
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;10.2. &lt;/b&gt;Toda e qualquer aquisição de componentes, consumíveis e, ainda, serviços de manutenção do equipamento que sejam realizadas pelo(a) &lt;b&gt;COMPRADOR(A)&lt;/b&gt; e adquiridos através de outras fontes, não serão reembolsadas pela &lt;b&gt;VENDEDORA&lt;/b&gt;, bem como, não haverá qualquer abatimento no valor da venda.&lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>V_clausula11</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;11. DA CIÊNCIA QUANTO AO USO DO(S) EQUIPAMENTO(S)&lt;/b&gt;&lt;/div&gt;&lt;br/&gt;       
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;11.1. &lt;/b&gt;Declara o(a) &lt;b&gt;COMPRADOR(A)&lt;/b&gt; ciência quanto ao dever de adequado uso dos equipamentos objeto do contrato de compra e venda, bem como quanto ao dever de observância ao treinamento dado pela &lt;b&gt;VENDEDORA&lt;/b&gt; quanto a não reutilização de acessórios considerados descartáveis, devendo zelar sempre pela boa higiene e segurança do paciente tratado.&lt;/div&gt;&lt;br/&gt;       
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;11.2. &lt;/b&gt;Diante dos treinamentos e orientações repassadas ao(à) &lt;b&gt;COMPRADOR(A)&lt;/b&gt;, declara esta ciência quanto a ausência de responsabilidade da &lt;b&gt;VENDEDORA&lt;/b&gt; quanto ao uso inadequado dos equipamentos, dando ainda seu aceite quanto a sua exclusiva responsabilidade por eventuais riscos, perdas e danos ou quaisquer questionamentos ou responsabilidades administrativas ou judiciais advindas de atos decorrentes de imprudência, imperícia ou negligência do(a) &lt;b&gt;COMPRADOR(A)&lt;/b&gt;.&lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>V_clausula12</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;12. DAS PRÁTICAS ANTICORRUPÇÃO&lt;/b&gt;&lt;/div&gt;&lt;br/&gt;       
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;12.1. &lt;/b&gt;As Partes obrigam-se a observar, cumprir e/ou fazer cumprir, por si, suas afiliadas (entidades controladoras, controladas, coligadas ou sob controle comum) e representantes (diretores, membros do conselho de administração, quaisquer terceiros, incluindo assessores ou prestadores de serviços) toda e qualquer lei anticorrupção, em especial a Lei Federal nº 12.846/13, conforme aplicável.&lt;/div&gt;&lt;br/&gt;&lt;br/&gt;
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;12.2. &lt;/b&gt;Na vigência deste contrato, o(a) &lt;b&gt;COMPRADOR(A)&lt;/b&gt; reconhece que nem ela, nem quaisquer de seus administradores, empregados, agentes, representantes, sócios ou acionistas deve dar, oferecer, pagar, prometer pagar, ou autorizar o pagamento, direta ou indiretamente, qualquer dinheiro ou coisa de valor a qualquer autoridade governamental, consultor, representante, parceiro, ou qualquer terceiro, com a finalidade de influenciar qualquer ato ou decisão de agentes ou entes governamentais (assim definidos nas Leis Anticorrupção Brasileiras), ou com objetivo de assegurar qualquer vantagem indevida ou direcionar negócios em violação às Leis Anticorrupção Brasileiras.&lt;/div&gt;&lt;br/&gt;&lt;br/&gt;
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;12.3. &lt;/b&gt;O(A) &lt;b&gt;COMPRADOR(A)&lt;/b&gt;, se obriga a, em caso de eventual violação às Leis Anticorrupção Brasileiras, indenizar a &lt;b&gt;VENDEDORA&lt;/b&gt; por todos e quaisquer danos, incluindo multas, custos, obrigações de reparação de danos, taxas, juros, honorários advocatícios ou outras responsabilidades cíveis, criminais e/ou administrativas que sejam decorrentes de: (i) investigações sobre eventual quebra de integridade e/ou ato ilícito pelo(a) &lt;b&gt;COMPRADOR(A)&lt;/b&gt; ou de seus funcionários e prestadores de serviços e, (ii) qualquer litígio ou outro procedimento judicial ou administrativo envolvendo violação das Leis Anticorrupção Brasileiras em face da &lt;b&gt;VENDEDORA&lt;/b&gt; e que tenha sido originado a partir de qualquer ação ou omissão do(a) &lt;b&gt;COMPRADOR(A)&lt;/b&gt; seja diretamente ou por meio de seus administradores, empregados, agentes, representantes, terceiros e/ou sócios.&lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>V_clausula13</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;13. DA NECESSIDADE DE APROVAÇÃO EM ANÁLISE DE CRÉDITO&lt;/b&gt;&lt;/div&gt;&lt;br/&gt;       
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;13.1. &lt;/b&gt;Declara o(a) &lt;b&gt;COMPRADOR(A)&lt;/b&gt; a ciência de que essas tratativas comerciais somente perdurarão mediante aprovação do(a) &lt;b&gt;COMPRADOR(A)&lt;/b&gt; em análise de crédito a ser realizada pela &lt;b&gt;VENDEDORA&lt;/b&gt; e, ainda, tão somente mediante assinatura do presente instrumento por parte de pessoa com poderes para assinar pela &lt;b&gt;VENDEDORA&lt;/b&gt;.&lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>V_clausula14</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;14. DA ASSINATURA ELETRÔNICA&lt;/b&gt;&lt;/div&gt;&lt;br/&gt;       
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;14.1. &lt;/b&gt;Caso o presente instrumento seja assinado de forma digital ou eletronicamente, cada parte declara e garante que sua assinatura digital ou eletrônica tem o mesmo efeito vinculativo que teria a assinatura manuscrita, possuindo caráter irrevogável e irretratável, sendo realizada através de plataforma de conhecida confiabilidade, estando as partes atentas ao disposto na Medida Provisória 2.200-2/2001 ou em outra legislação que venha a substituí-la.&lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>V_clausula15</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;15. DA PROTEÇÃO DE DADOS&lt;/b&gt;&lt;/div&gt;&lt;br/&gt;     
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;15.1. &lt;/b&gt;  As partes, por si e por seus colaboradores, obrigam-se a atuar no presente contrato em conformidade com a Legislação vigente sobre Proteção de Dados Pessoais e as determinações de órgãos reguladores/fiscalizadores sobre a matéria, tudo conforme o que rege a Lei 13.709/2018. No que tange à utilização dos dados as partes deverão:&lt;/div&gt;&lt;br/&gt;
+                &lt;div style=&quot;text-align: justify;margin-left: 80px;&quot;&gt;i. Tratar os dados pessoais a que tiver acesso de acordo com o que a outra parte lhe direcionar sempre em conformidade com estas cláusulas. Para os casos em que for obrigada e não mais puder cumprir estas obrigações, por qualquer razão, concorda em informar de modo formal este fato à outra parte. &lt;/div&gt;&lt;br/&gt;
+                &lt;div style=&quot;text-align: justify;margin-left: 80px;&quot;&gt;ii. Manter e utilizar medidas de segurança para que possa proteger a confidencialidade e integridade de todos os dados pessoais mantidos ou transmitidos eletronicamente, a fim de que possa garantir a proteção desses dados contra acesso não autorizado, destruição, uso, modificação, divulgação ou perda acidental ou indevida.&lt;/div&gt;&lt;br/&gt;
+                &lt;div style=&quot;text-align: justify;margin-left: 80px;&quot;&gt;iii. Acessar os dados dentro de seu escopo e na medida abrangida pela autorização da outra parte, não podendo estes serem modificados sem expressa autorização da outra parte.&lt;/div&gt;&lt;br/&gt;
+                &lt;div style=&quot;text-align: justify;margin-left: 80px;&quot;&gt;iv. Garantir, por si própria ou quaisquer de seus empregados, prepostos, sócios, diretores, representantes ou terceiros contratados, a confidencialidade dos dados processados, bem como a manter quaisquer Dados Pessoais estritamente confidenciais e de não os utilizar para outros fins, com exceção da prestação de serviços à outra parte.&lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>V_clausula16</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;16. DO FORO DO CONTRATO&lt;/b&gt;&lt;/div&gt;  &lt;br/&gt;     
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;16.1&lt;/b&gt; Fica eleito como competente o foro da Comarca de Goiânia, Estado de Goiás, para solução de quaisquer dúvidas ou litígios decorrentes deste contrato, renunciando os contratantes a qualquer outro que tenham ou venham a ter, por mais privilegiado que seja.&lt;/div&gt;       &lt;br/&gt;
+                &lt;div style=&quot;text-align: justify&quot;&gt;E assim, justo e contratado, firmam o presente instrumento em 02 (duas) vias de igual teor, e forma, na presença das 02 (duas) testemunhas abaixo assinadas.&lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>V_clausula2</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;br/&gt;
+&lt;div class=&quot;bloco&quot;&gt;
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;2.2. &lt;/b&gt;As informações comerciais contidas neste instrumento serão válidas até a data de {!$Record.Data_de_validade__c} e, em caso de assinatura do contrato pela &lt;b&gt;VENDEDORA&lt;/b&gt;, serão ratificadas pelo tempo que perdurar o contrato.&lt;/div&gt;&lt;br/&gt;                
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;2.3. &lt;/b&gt;O preço acima descrito, constitui a venda em sua totalidade, ou seja, estão embutidos no preço todos os impostos de responsabilidade da &lt;b&gt;VENDEDORA&lt;/b&gt;. Quaisquer valores excedentes ao preço ora estipulado deverão ser arcados em sua totalidade pelo(a) &lt;b&gt;COMPRADOR(A)&lt;/b&gt;.&lt;/div&gt;&lt;br/&gt;
+            &lt;/div&gt;
+            &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;Parágrafo Único. &lt;/b&gt;A menos que o(a) &lt;b&gt;COMPRADOR(A)&lt;/b&gt; forneça à &lt;b&gt;VENDEDORA&lt;/b&gt; o respectivo certificado de isenção, com antecedência razoável à data em que o(s) equipamento(s) for(em) disponibilizado(s) para entrega, a &lt;b&gt;VENDEDORA&lt;/b&gt; faturará o produto a ser entregue ao(à) &lt;b&gt;COMPRADOR(A)&lt;/b&gt; com a inclusão dos impostos relativos à venda, e o(a) &lt;b&gt;COMPRADOR(A)&lt;/b&gt; pagará os impostos de acordo com os termos da fatura.&lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>V_clausula3</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div&gt;&lt;b&gt;3. FORMA DE PAGAMENTO&lt;/b&gt;&lt;/div&gt;&lt;br/&gt;
+       
+            &lt;div &gt;&lt;b&gt;3.1. &lt;/b&gt;O pagamento referente à presente compra e venda será realizado da seguinte forma:&lt;/div&gt;&lt;br/&gt;
+            &lt;div style=&quot;margin-left: 80px;&quot;&gt;
+                &lt;b&gt;Forma de pagamento: &lt;/b&gt; {!$Record.Forma_de_pagamento2__c}&lt;br/&gt;&lt;br/&gt;
+{!parcelas}
+                &lt;b&gt;Condição de pagamento: &lt;/b&gt; {!$Record.Condicao_de_pagamento__c}&lt;br/&gt;&lt;br/&gt;
+                 &lt;b&gt;Dados Bancários:  &lt;/b&gt; {!dadosBancarios}
+            &lt;/div&gt;
+            &lt;br/&gt;
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;3.2. &lt;/b&gt;Fica certo e ajustado que caso o(a) &lt;b&gt;COMPRADOR(A)&lt;/b&gt; não efetue o pagamento até a data de vencimento, serão aplicadas as seguintes sanções, calculadas sempre sobre o valor total da obrigação e até o seu efetivo pagamento:&lt;/div&gt;&lt;br/&gt;
+                &lt;div style=&quot;margin-left: 80px;text-align: justify;&quot;&gt;&lt;b&gt;a. &lt;/b&gt;Juros de mora a razão de 1% (um por cento) ao mês;&lt;/div&gt;&lt;br/&gt;
+                &lt;div style=&quot;margin-left: 80px;text-align: justify;&quot;&gt;&lt;b&gt;b. &lt;/b&gt;Multa moratória de 2% (dois por cento) sobre o valor total da obrigação em atraso;&lt;/div&gt;&lt;br/&gt;
+                &lt;div style=&quot;margin-left: 80px;text-align: justify;&quot;&gt;&lt;b&gt;c. &lt;/b&gt;Correção monetária, &quot;&lt;i&gt;pró rata tempore&lt;/i&gt;&quot;, com base na variação do índice do INPC;&lt;/div&gt;&lt;br/&gt;
+                &lt;div style=&quot;margin-left: 80px;text-align: justify;&quot;&gt;&lt;b&gt;d. &lt;/b&gt;Todas as despesas de cobrança, custas judiciais extrajudiciais e honorários advocatícios na monta de 10% sobre o valor total do débito;&lt;/div&gt;&lt;br/&gt;
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;Parágrafo Único:&lt;/b&gt; em caso de venda parcelada e inadimplemento de uma das parcelas aqui acordadas, ocorrerá o vencimento antecipado de todas as outras parcelas, com a consequente aplicação dos encargos contratuais mencionados acima.&lt;/div&gt;&lt;br/&gt;
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;3.3. &lt;/b&gt;Quando da liberação do(s) equipamento(s) pela &lt;b&gt;VENDEDORA&lt;/b&gt;, esta emitirá Nota Fiscal de Faturamento, o que acompanhará o(s) equipamento(s) no momento de entrega ao(à) &lt;b&gt;COMPRADOR(A)&lt;/b&gt;, na qual, desde já, o(a) &lt;b&gt;COMPRADOR(A)&lt;/b&gt; dá seu aceite, ficando certo que em caso de ausência de assinatura da referida nota fiscal no momento da entrega, o referido aceite substituirá a assinatura da nota mencionada.&lt;/div&gt;&lt;br/&gt;       
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;3.4. &lt;/b&gt;A forma de pagamento estabelecida no item 3.1, não poderá ser alterada sem que para isso exista uma prévia e expressa aprovação da &lt;b&gt;VENDEDORA&lt;/b&gt;, ficando o(a) &lt;b&gt;COMPRADOR(A)&lt;/b&gt;, desde já, ciente que qualquer pagamento realizado de forma divergente do acordado, poderá ocasionar na cobrança de encargos moratórios e da multa contratual pactuada no item 7.1.&lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>V_clausula4</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;4. CONDIÇÕES DE ENTREGA&lt;/b&gt;&lt;/div&gt; &lt;br/&gt;      
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;4.1. &lt;/b&gt;Cabe ao &lt;b&gt;COMPRADOR(A)&lt;/b&gt; preparar o local de instalação, sendo que as partes no ato de assinatura deste instrumento consideram que o local de instalação já esteja disponível e pronto para tanto.&lt;/div&gt;&lt;br/&gt;       
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;4.2. &lt;/b&gt;Caso o(a) &lt;b&gt;COMPRADOR(A)&lt;/b&gt; tenha a necessidade de prorrogar a data de liberação do local de instalação do(s) equipamento(s) acima informado, deverá comunicar à &lt;b&gt;VENDEDORA&lt;/b&gt; seu interesse por escrito, sendo que referida prorrogação deverá ser regulada por meio de aditamento a este documento, sendo que essa prorrogação poderá ser requerida uma única vez e o prazo de prorrogação não poderá ser superior a 30 (trinta) dias corridos.&lt;/div&gt; &lt;br/&gt;      
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;4.3. &lt;/b&gt;Caso no momento da entrega o(a) &lt;b&gt;COMPRADOR(A)&lt;/b&gt; não esteja com o local de instalação pronto, as despesas de armazenagem passarão a correr por conta exclusiva do(a) &lt;b&gt;COMPRADOR(A)&lt;/b&gt;. Se o(a) &lt;b&gt;COMPRADOR(A)&lt;/b&gt; não assumir os custos de armazenagem, a &lt;b&gt;VENDEDORA&lt;/b&gt; poderá efetuar os pagamentos devidos, repassando as despesas ao(à) &lt;b&gt;COMPRADOR(A)&lt;/b&gt; para reembolso por esta no prazo de até 10 (dez) dias contados do recebimento de comunicado escrito da &lt;b&gt;VENDEDORA&lt;/b&gt; nesse sentido.&lt;/div&gt;&lt;br/&gt;       
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;4.4. &lt;/b&gt;É de responsabilidade exclusiva do(a) &lt;b&gt;COMPRADOR(A)&lt;/b&gt;, a devida preparação de suas instalações, em especial do local onde o(s) equipamento (s) será(ão) instalado(s), bem como assegurar a regularidade da documentação que venha a ser solicitada pela &lt;b&gt;VENDEDORA&lt;/b&gt;.&lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>V_clausula5</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;5. DOS CUSTOS DE LOCOMOÇÃO&lt;/b&gt;&lt;/div&gt; &lt;br/&gt;      
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;5.1. &lt;/b&gt; Os custos de locomoção do(s) equipamento(s) objeto do presente instrumento, correrão conforme os termos de referência e endereço de faturamento especificados abaixo:&lt;/div&gt;       &lt;br/&gt;
+                &lt;div style=&quot;text-align: justify; margin-left:80px;&quot;&gt;&lt;b&gt;TIPO DE ENVIO:&lt;/b&gt; {!$Record.Frete2__c}&lt;/div&gt;&lt;br/&gt;
+                &lt;div style=&quot;text-align: justify; margin-left:80px;&quot;&gt;&lt;b&gt;ENDEREÇO DE ENTREGA:&lt;/b&gt; Aos cuidados do setor no endereço:
+                     {!$Record.Account.BillingStreet}, {!$Record.Account.ShippingCity} - {!$Record.Account.ShippingStateCode}, CEP: {!$Record.Account.ShippingPostalCode}, {!$Record.Account.ShippingCountry}.&lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>V_clausula6</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;6. DA RESCISÃO ANTECIPADA&lt;/b&gt;&lt;/div&gt;&lt;br/&gt;       
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;6.1 &lt;/b&gt;Em razão dos custos despendidos pela &lt;b&gt;VENDEDORA&lt;/b&gt; para a conclusão e fechamento do negócio, fica resguardado seu direito a cobrança de multa penal que será calculada na monta de 10% do valor total do contrato, em caso de manifesta vontade de rescindir antecipadamente ou em razão de desistência do negócio por parte do(a) &lt;b&gt;COMPRADOR(A)&lt;/b&gt; após assinatura do presente contrato de compra e venda.&lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>V_clausula7</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;7. DA GARANTIA DOS EQUIPAMENTOS&lt;/b&gt;&lt;/div&gt;&lt;br/&gt;       
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;7.1. &lt;/b&gt;O(s) equipamento(s) objeto deste instrumento é(são) garantido(s) exclusivamente contra defeitos de fabricação durante {!$Record.Prazo_de_garantia__c}, contados da data de entrega.&lt;/div&gt;&lt;br/&gt;       
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;Parágrafo Único: &lt;/b&gt;Qualquer serviço relacionado à garantia do equipamento que se faça necessário durante o período de garantia acima informado deverá ser solicitado pelo(a) &lt;b&gt;COMPRADOR(A)&lt;/b&gt; ao time de serviços da &lt;b&gt;VENDEDORA&lt;/b&gt;. Solicitações de atendimento feitas através de qualquer outro canal não serão consideradas válidas, ficando a &lt;b&gt;VENDEDORA&lt;/b&gt; isento(a) de responsabilidade pelo não atendimento.&lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>V_clausula8</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;8. ASSISTÊNCIA TÉCNICA&lt;/b&gt;&lt;/div&gt;&lt;br/&gt;       
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;8.1 &lt;/b&gt;O(s) equipamento(s) objeto do presente instrumento não possuem assistência técnica inclusa na venda, o que poderá ser formalizado juntamente com a equipe de assistência técnica da &lt;b&gt;VENDEDORA&lt;/b&gt;.&lt;/div&gt; &lt;br/&gt;      
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;8.2. &lt;/b&gt;Com o objetivo de garantir a disponibilidade operacional e, consequentemente, manter a produtividade do(s) equipamento (s), desde já fica facultado à &lt;b&gt;COMPRADORA&lt;/b&gt; a opção de negociar e assinar com a &lt;b&gt;VENDEDORA&lt;/b&gt; contrato de manutenção para o(s) equipamento(s).&lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>V_clausula9</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;9. DA DESTINAÇÃO DO PRODUTO&lt;/b&gt;&lt;/div&gt;&lt;br/&gt;       
+                &lt;div style=&quot;text-align: justify&quot;&gt;&lt;b&gt;9.1. &lt;/b&gt;Sendo os produtos vendidos destinados ao uso de tratamento hospitalar, o(a) &lt;b&gt;COMPRADOR(A)&lt;/b&gt; declara ciência quanto a todos os riscos em caso de uso fora dos padrões e instruções estabelecidos pela &lt;b&gt;VENDEDORA&lt;/b&gt;, isentando-a de toda e qualquer responsabilidade decorrente de uso inadequado.&lt;/div&gt;</text>
+    </textTemplates>
+    <textTemplates>
+        <name>V_qualificacao</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;strong style=&quot;color: rgb(0, 0, 0);&quot;&gt;VENDEDORA: {!$Record.Faturamento_Feito2__r.Raz_o_Social__c}&lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;, pessoa jurídica de direito privado, inscrita no CPNJ sob n.º: &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;{!$Record.Faturamento_Feito2__r.CNPJ__c}&lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt; sediada na &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;{!$Record.Faturamento_Feito2__r.BillingStreet}&lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;, &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;{!$Record.Faturamento_Feito2__r.BillingCity}&lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt; - &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;{!$Record.Faturamento_Feito2__r.BillingState}&lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;, CEP: &lt;/span&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;{!$Record.Faturamento_Feito2__r.BillingPostalCode}&lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt; e, de outro lado,&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;&lt;strong style=&quot;color: rgb(0, 0, 0);&quot;&gt;COMPRADOR(A):&lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt; &lt;/span&gt;&lt;strong style=&quot;color: rgb(0, 0, 0);&quot;&gt;{!nomeCliente}&lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;, {!dadosCliente}.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Têm entre si justo e acertado o presente contrato de prestação de serviços, que se regerá pelas cláusulas e condições a seguir delineadas.&lt;/span&gt;&lt;/p&gt;</text>
+    </textTemplates>
+    <variables>
+        <name>dadosBancarios</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>Sem faturamento</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>faturadoGbd</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>Banco do Brasil - Agência 1242-4 - Conta Corrente 47391-X</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>FaturadoHealth</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>Banco do Brasil - Agência 1610-1 - Conta Corrente 128.057-0</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>FaturadoHOspcom</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>Banco do Brasil - Agência 1242-4 - Conta Corrente 69869-5</stringValue>
+        </value>
+    </variables>
+</Flow>

@@ -1,0 +1,15 @@
+<apex:page standardController="WorkOrder" showHeader="true" sidebar="true">
+    <apex:form id="formulario">
+    
+        
+        <script>
+            document.getElementById("Subject").onkeydown = function(){
+                if (document.getElementById("Subject").value = "TESTE2")
+                    alert("...");
+            }
+        </script>
+        
+        
+            
+    </apex:form>
+</apex:page>

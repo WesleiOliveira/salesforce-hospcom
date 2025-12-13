@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ordem_de_Trabalho_Relacinada__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Ordem de Trabalho Relacinada</label>
+    <referenceTo>WorkOrder</referenceTo>
+    <relationshipLabel>Certificados de Calibração</relationshipLabel>
+    <relationshipName>Certificados_de_Calibra_o</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

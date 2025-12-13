@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MktDataConnection xmlns="http://soap.sforce.com/2006/04/metadata">
+    <connectionMethod>Ingress</connectionMethod>
+    <connectionStatus>ACTIVE</connectionStatus>
+    <connectorName>SAPHana</connectorName>
+    <credentials>
+        <fullName>SAP_IRO_Password</fullName>
+        <credentialName>Password</credentialName>
+        <value>*</value>
+    </credentials>
+    <credentials>
+        <fullName>SAP_IRO_SSLServerCert</fullName>
+        <credentialName>SSLServerCert</credentialName>
+        <value>*</value>
+    </credentials>
+    <credentials>
+        <fullName>SAP_IRO_User</fullName>
+        <credentialName>User</credentialName>
+        <value>*</value>
+    </credentials>
+    <externalRecordIdentifier>57c2ba00-aed2-4b11-93ce-6079202ffdac</externalRecordIdentifier>
+    <masterLabel>SAP IRO</masterLabel>
+    <parameters>
+        <fullName>SAP_IRO_connection_url</fullName>
+        <paramName>connection_url</paramName>
+        <value>sap-xsengine-hospcomprd.skyinone.net</value>
+    </parameters>
+    <parameters>
+        <fullName>SAP_IRO_Database</fullName>
+        <paramName>Database</paramName>
+        <value>SK1</value>
+    </parameters>
+    <parameters>
+        <fullName>SAP_IRO_Port</fullName>
+        <paramName>Port</paramName>
+        <value>30015</value>
+    </parameters>
+</MktDataConnection>

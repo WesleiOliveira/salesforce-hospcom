@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>OWNER.FIRST_NAME</columns>
+    <columns>Prioridade__c</columns>
+    <columns>data_aprovacao_req__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Status_da_Requisi_o__c</columns>
+    <columns>Tipo_de_Requisi_o__c</columns>
+    <columns>Justificativa__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Tipo_de_Requisi_o__c</field>
+        <operation>equals</operation>
+        <value>Serviço(s),Produto(s),Locação,Compra para estoque revenda,Compra para estoque locação/assistência,Compra para estoque OPME</value>
+    </filters>
+    <label>Tudo</label>
+</ListView>

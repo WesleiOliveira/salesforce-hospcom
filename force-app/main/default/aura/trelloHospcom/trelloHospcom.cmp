@@ -1,0 +1,307 @@
+<aura:component controller="Trello" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.sortableJs + '/Sortable.js',
+                           $Resource.popper + '/popper.js')}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+        <aura:import library="lightning:alert" property="LightningAlert" />
+    
+    <aura:attribute name="valDescricao" type="String" />
+    <aura:attribute name="valInputShare" type="String" />
+    <aura:attribute name="valDataEntrega" type="Date" />
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    
+    
+    <div style="height: 800px!important;">
+        <!-- SPINNER DE CARREGAMENTO -->
+        <div id='spinnerDiv' class="divSpinner" style="display: none">
+            <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+        </div>
+        
+        <div class="screenCards" id="screenCardsPrincipal">
+            <div class="headerCard">
+                <div class="column1Header">
+                    <i class="fa fa-arrow-circle-o-left iconReturn" id="returnIcon" aria-hidden="true"></i>
+                    <input class="inputTituloCartao tituloQuadro" id="inputTituloQuadro" value=""></input>
+                </div>
+                
+                <div class="column2Header">
+                    <div class="buttonCompartilharQuadro" id="buttonApagarQuadro" style="width:max-content">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        <div>Apagar quadro</div>
+                    </div>
+                    
+                    <div class="buttonCompartilharQuadro" id="buttonCompartilharQuadro">
+                        <i class="fa fa-user-plus" aria-hidden="true"></i>
+                        <div>Compartilhar quadro</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bodyCard" id="screenCards">
+                
+            </div>
+            
+            <!-- POPUP TASK -->
+            <div class="popupTask" id="popupTask">
+                <div class="innerPopupTask">
+                    
+                    <div class="colunaEsquerdaInnerPopupTask">
+                        
+                        <!-- HEADER TASK -->
+                        <div class="header39282103">
+                            
+                            <div class="icon417805">
+                                <i class="fa fa-window-maximize" aria-hidden="true"></i>
+                            </div>
+                            
+                            <div>
+                                <input style="color: black" class="inputTituloCartao" id="inputTituloCartao" value="TITULO CARTAO"></input>
+                                <div class="window-header-inline-content quiet js-current-list"><p class="u-inline-block u-bottom">Atribuído a <a href="#" class="js-open-move-from-header" id="nomeListaPopup"></a> </p> 
+                                
+                                   
+                                </div>
+                                <div class="window-header-inline-content quiet js-current-list"><p class="u-inline-block u-bottom">Expandir <a href="#" target="_blank" class="js-open-move-from-header" id="nomeTarefa">Tarefa</a></p></div>
+                                <div id='container-users'></div>
+                                
+                                <input type="text" id="searchInput" placeholder="Pesquisar Membros..."/>
+                
+                                <form class="formSelect">
+                                    <div class="multiselect">
+                                        
+                                        <div class="selectBox" id="selectBox">
+                                           
+                                              
+                                            <select class="selectMulti">
+                                                <option>Membros da tarefa</option>
+                                            </select>
+                                           
+                                            <div class="overSelect">
+                                            
+                                            </div>
+                                        </div>
+                                        <div id="checkboxes">
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </form>
+                                
+                                <div class="aditionals3424">
+                                    <div class="entregaAditionals">
+                                        <div class="dataEntregaTextAditionals">Data da entrega</div>
+                                        <lightning:input type="date" name="input2" label="" value="{!v.valDataEntrega}"/>
+                                    </div>
+                                    
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- BODY TASK -->
+                        <div class="body39282103">
+                            <div class="icon417805">
+                                <i class="fa fa-align-left" aria-hidden="true"></i>
+                            </div>
+                            
+                            <div style="font-size: 1.2em; font-weight: 600; width: 100%">
+                                Descrição
+                                <div class="divDescAtividade">
+                                    <lightning:textarea aura:id="txtnotes" 
+                                                        variant="label-hidden"
+                                                        placeholder="Descreva a tarefa"
+                                                        value="{!v.valDescricao}"
+                                                        maxlength="5000"/> 
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="body39282103" id='blocoChecklist'>
+                            <div class="icon417805">
+                                <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                            </div>
+                            
+                            <div style="font-size: 1.2em; font-weight: 600; width: 100%" >
+                                Checklist
+                                <div class="divDescAtividade">
+                                    <div style="display: flex; align-items: center; display: flex; gap: 10px;">
+                                        <div id="porcentagemConcluida">0%</div>
+                                        <progress id="progressBarChecklist" value="3" max="4" style="width: 100%"> 32% </progress>
+                                    </div>
+                                </div>
+                                
+                                <div class="itensChecklist" id="itensChecklist">
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- FOOTER TASK -->
+                        <div class="footer39282103">
+                            <div class="icon417805">
+                                <i class="fa fa-list-ul" aria-hidden="true"></i>
+                            </div>
+                            
+                            <div style="font-size: 1.2em; font-weight: 600; width: 100%">
+                                Atividades
+                                
+                                <div class="divDescAtividade" id="divDescAtividade">
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="colunaDireitaInnerPopupTask">
+                        <i class="fa fa-times-circle closePopup" aria-hidden="true" id="closePopup"></i>
+                        
+                        <div class="buttonActionTask" id="buttonMarcaMeta" data-marcado="false">
+                            <i class="fa fa-square-o" aria-hidden="true"></i>
+                            <div>Marcar como meta</div>
+                        </div>
+                        
+                        <div class="buttonActionTask" id="buttonFinaliza" data-marcado="false">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            <div>Finalizar tarefa</div>
+                        </div>
+                        
+                        <div class="buttonActionTask" id="buttonNewChecklist" style="color: black">
+                            <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                            <div>Checklist</div>
+                        </div>
+                        
+                        
+                        
+                       
+                        
+                        <div class="buttonActionTask" id="buttonNovaAtividade" style="color: black">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                            <div>Nova Atividade</div>
+                        </div>
+                        
+                        <div class="buttonActionTask" id="buttonActionRemoveAtividade" style="background-color: red; color: white">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                            <div>Apagar Tarefa</div>
+                        </div>
+                        
+                        <div class="buttonActionTask" id="buttonActionSalvaEdicao" style="background-color: green; color: white">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            <div>Salvar edição</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- POPUP COMPARTILHA QUADRO -->
+            <div class="popupCompartilhaQuadro" id="popupCompartilhaQuadro">
+                <div class="innerPopupCompartilha">
+                    
+                    <div class="headerCompartilhaQuadro">
+                        <div class="compartilhaQuadroText" id="compartilhaQuadroText">Compartilhamento</div>
+                        <i class="fa fa-times-circle closePopup" aria-hidden="true" id="closeSharePopup"></i>
+                    </div>
+                    
+                    <div class="sectionUsersShared">
+                        <div style="width: 80%; position: relative;">
+                            
+                            <div onkeyup="{! c.handleKeyUp }">
+                                <lightning:input
+                                                 aura:id="enter-search"
+                                                 name="enter-search"
+                                                 value="{!v.valInputShare}"
+                                                 label="Digite o nome do usuário e tecle enter"
+                                                 type="search"
+                                                 />
+                            </div>
+                            
+                            <div class="divSearchResults" id="divSearchResults">
+                                
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="buttonCompartilhaUser" id ="buttonCompartilhaUser">
+                            Compartilhar
+                        </div>
+                    </div> 
+                    
+                    <div class="divUsersCompartilhados" id="divUsersCompartilhados">
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div id="divNewCartao" class="divNewCartao">+</div>
+        </div>
+        
+        <div class="screenFrames" id="screenFrames">
+            <div class="tituloQuadrosTrello">QUADROS DE TAREFAS</div>
+            <div class="linhasQuadros" id="linhasQuadros">
+                
+            </div>
+            <div id="divTarefasEquipe" class="divNewQuadro divTarefasEquipe" title="Criar Quadro">Metas da equipe</div>
+            <div id="divNewQuadro" class="divNewQuadro" title="Criar Quadro">+</div>
+        </div>
+        
+        <div class="screenTabelaEquipe" id="tabelaEquipe">
+            <div class="innerScreenTabelaEquipe">
+                
+                
+                <i class="fa fa-times-circle closePopup" aria-hidden="true" id="closePopupTarefasEquipe" style="text-align: end; margin-bottom: 10px"></i>
+                <div class="divFiltrosMetasEquipe">
+                    Metas da equipe
+                    <select id="anos" class="customSelectHosp">
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                    </select>
+                    
+                    <select id="mes" class="customSelectHosp">
+                        <option value="01">Janeiro</option>
+                        <option value="02">Fevereiro</option>
+                        <option value="03">Março</option>
+                        <option value="04">Abril</option>
+                        <option value="05">Maio</option>
+                        <option value="06">Junho</option>
+                        <option value="07">Julho</option>
+                        <option value="08">Agosto</option>
+                        <option value="09">Setembro</option>
+                        <option value="10">Outubro</option>
+                        <option value="11">Novembro</option>
+                        <option value="12">Dezembro</option>
+                    </select>
+                    
+                    <select id="colaborador" class="customSelectHosp">
+                        <option value="" selected="true">Todos colaboradores</option>
+                    </select>
+                </div>
+                
+                <lightning:datatable
+                                     keyField="id"
+                                     data="{!v.data}"
+                                     columns="{!v.columns}"
+                                     hideCheckboxColumn="true"
+                                     enableInfiniteLoading="true"
+                                     defaultSortDirection="{!v.defaultSortDirection}"
+                                     sortedDirection="{!v.sortDirection}"
+                                     sortedBy="{!v.sortedBy}"
+                                     onsort="{!c.handleSort}"
+                                     showRowNumberColumn="true"
+                                     
+                                     />
+            </div>
+            
+        </div>
+        
+    </div>
+
+	
+</aura:component>

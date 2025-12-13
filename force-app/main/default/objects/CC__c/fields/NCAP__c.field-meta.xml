@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NCAP__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>N° de Certificado do Padrão de Apoio</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>CP__c.Padr_o_Relacionado__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.PAP__c</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>CP__c</referenceTo>
+    <relationshipLabel>Certificados de Calibração (N° de Certificado do Padrão de Apoio)</relationshipLabel>
+    <relationshipName>Certificados_de_Calibra_o2</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

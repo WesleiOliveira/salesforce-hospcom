@@ -1,0 +1,80 @@
+<apex:page showHeader="false" sideBar="false" showChat="false">
+    <html>
+        <head>
+            <base target="_parent"/>    
+            <style>
+                .box{
+                    width:100%;
+                    text-align:center;
+                    font-size:20px;
+                    text-decoration:none;
+                    font-weight:bold;
+                }
+                .border{
+                    border-bottom: 1px solid #0099de;
+                }
+                .active{
+                    border-left: 1px solid #0099de;
+                    border-right: 1px solid #0099de;
+                    border-top: 3px solid #0099de;
+                    padding-top:3px;
+                    padding-bottom:6px;
+                    background-color:#f7f9fb;
+                }
+                .inactive{
+                    padding-top:6px;
+                    padding-bottom:5px;                
+                    border-bottom: 1px solid #0099de;
+                }
+                .inactive:hover{
+                    background-color:#f7f9fb;
+                    padding-top:6px;
+                    padding-bottom:6px;
+                    border:none;
+                }
+                a, a:hover, a:visited{
+                    text-decoration: none;
+                }
+            </style>
+        </head>
+        <body>  
+            <table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
+                <tr>
+                
+                    <td style="width:2%" class="border">
+                    </td>
+                    
+                    <!-- https://hospcomhospitalar.force.com/Sales/s/ -->
+                    <td style="width:32%">
+                        <div class="box active">
+                            Painel de Serviços
+                        </div>
+                    </td>
+                    
+                    <!-- https://hospcomhospitalar.force.com/Sales/s/painel-1 -->
+                    <td style="width:32%">
+                        <a href="https://hospcomhospitalar.force.com/Sales/s/painel-1">
+                            <div class="box inactive">
+                                Painel de Preenchimento
+                            </div>
+                        </a>
+                    </td>
+                    
+                    <!-- https://hospcomhospitalar.force.com/Sales/s/painel-2 -->
+                    <td style="width:32%">
+                        <a href="https://hospcomhospitalar.force.com/Sales/s/painel-2">
+                            <div class="box inactive">
+                                Painel Gerencial
+                            </div>
+                        </a>
+                    </td>
+                    
+                    <td style="width:2%" class="border">
+                    </td>
+
+                    
+                </tr>
+            </table>
+        </body>
+    </html>
+</apex:page>

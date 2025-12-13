@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Ag_Apr</fullName>
+        <field>Status</field>
+        <literalValue>Aguardando Aprovação</literalValue>
+        <name>Ag Apr</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Ag_Apr_Juridica</fullName>
+        <field>Status</field>
+        <literalValue>Aguardando Aprovação Jurídica</literalValue>
+        <name>Ag Apr Juridica</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Aprovado</fullName>
+        <field>Status</field>
+        <literalValue>Aprovada internamente</literalValue>
+        <name>Aprovado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Contrato_aceito</fullName>
+        <field>Status</field>
+        <literalValue>Contrato aceito</literalValue>
+        <name>Contrato aceito</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Cota_o_finalizada</fullName>
+        <field>Status</field>
+        <literalValue>Cotação finalizada</literalValue>
+        <name>Cotação finalizada</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Cota_o_finalizada23</fullName>
+        <field>Status</field>
+        <literalValue>Cotação finalizada</literalValue>
+        <name>Cotação finalizada</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Doc_Assinado</fullName>
+        <field>Documento_Assinado__c</field>
+        <formula>IF(PRIORVALUE(Documento_Assinado__c) == null, &apos;https://hospcomhospitalar.force.com/Sales/s/quote/&apos; + Id+&apos;/detail?tabset-d5f3d=2&apos;, PRIORVALUE(Documento_Assinado__c))</formula>
+        <name>Doc Assinado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Rascunho</fullName>
+        <field>Status</field>
+        <literalValue>Rascunho</literalValue>
+        <name>Rascunho</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Reprovado</fullName>
+        <field>Status</field>
+        <literalValue>Reprovado</literalValue>
+        <name>Reprovado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Reprovado1</fullName>
+        <field>Status</field>
+        <literalValue>Reprovado</literalValue>
+        <name>Reprovado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+</Workflow>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Faturamento__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <inlineHelpText>Exibe apenas os faturamentos do pedido relacionado</inlineHelpText>
+    <label>Faturamento</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Faturamento__c.Pedido__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.Pedido__c</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Faturamento__c</referenceTo>
+    <relationshipLabel>Solicitações de devolução</relationshipLabel>
+    <relationshipName>Solicita_es_de_devolu_o</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

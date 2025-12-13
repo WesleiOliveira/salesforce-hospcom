@@ -1,0 +1,1706 @@
+<apex:page standardController="Auditoria__c" extensions="ListagemIMEs_PMP" applyHtmlTag="false" showHeader="false" renderAs="pdf">
+  <head>
+  <style type="text/css" media="print">
+            @page {
+                size:21cm 29.7cm;
+                margin:100px 40px 60px 40px;
+                @top-center {
+                    content:element(header);
+                }
+                @bottom-center {
+                    content:element(footer);
+                }
+            }
+            @page{
+                size:A4;
+                background: url({!IF(Auditoria__c.Empresa_Auditada__r.CNPJ__c  == '27.476.124/0001-02',$Resource.TimbradoHealth,IF(Auditoria__c.Empresa_Auditada__r.CNPJ__c == '05.743.288/0001-08' || Auditoria__c.Empresa_Auditada__r.CNPJ__c == '05.743.288/0003-70',$Resource.TimbradoHospcom,IF(Auditoria__c.Empresa_Auditada__r.CNPJ__c == '23.813.386/0001-56',$Resource.TimbradoGDB,IF(Auditoria__c.Empresa_Auditada__r.CNPJ__c == '40.014.621/0001-49',$Resource.TimbradoABC,$Resource.TimbradoGenerico))))});
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);}
+            }
+            .pagenumber:before {
+                content:counter(page);
+            }
+            .pagecount:before {
+                content:counter(pages);
+            }
+            div.header {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(header);
+                height:60px;
+            }
+            div.content {
+            }
+            div.footer {
+                margin:0px 0px 0px 0px;
+                padding:20px 0px 20px 0px;
+                position:running(footer);
+                height:20px;
+                text-align:right;
+                font-family:arial, verdana, sans-serif;
+                font-size:10px;
+                font-weight:normal;
+            }
+        </style>
+        <style type="text/css" media="print">
+        /*
+            @page:first{
+                size:A4;
+                background: url($Resource.SobreHealth);
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);
+                }
+            }
+            
+            @page{
+                size:A4;
+                background: url($Resource.TimbradoHealth);
+                margin:150px 50px 120px 50px;
+                @bottom-center{content:element(footer);}
+            }
+  */
+            td, tr{
+            padding: 0;
+            margin: 0;
+        }
+            
+            *{
+                font-family: Arial, Helvetica, sans-serif;
+                color: #0c3557;
+                font-size: 12px;
+                text-transform: uppercase;
+            }
+            .titulo{
+                font-family:arial, verdana, sans-serif;
+                font-size:15px;
+                text-align:left;
+                font-weight:bold; 
+                width:100%;
+            }
+            .tabela_geral{
+                border-collapse:collapse;
+                width:100%;
+            }
+            table.print-friendly tr td, table.print-friendly tr th {
+                page-break-inside: avoid;
+            }
+            .titulo{
+              
+                text-align: left;
+                padding: 1px 1px;
+                font-size: 14px;
+
+                
+            }
+            .maiuscula{
+                text-transform: uppercase;
+            }
+          
+            .questoes{
+             
+            
+            }
+            .questao{
+                display: flex;
+                flex-direction: row;
+                padding: 5px;
+            }
+
+            .valor{
+                margin-bottom: -100px;
+                border: #0c3557 1px solid;
+                
+            }
+
+            .sessao-questao{
+                font-size: 14px;
+                padding: 10px 0  0 5px;
+            }
+            
+            
+            .questao{
+                padding: 10px !important;
+                padding-right: 15px !important;
+            }
+
+            h1,h2{
+                padding: 0;
+                margin: 0;
+            }
+            .resposta{
+                font-weight: bold;
+                font-size: 14px;
+            }
+            .t{
+                text-align: center;
+                padding: 1px 1px;
+                font-size: 14px;
+            }
+        </style>
+  </head>
+  <body>
+  <apex:pageBlock >
+            
+            <div class="footer" style="text-align:center !important"><br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Página <span class="pagenumber"></span> de <span class="pagecount"></span> - Emissão em:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{! TODAY() }" /></apex:outputText>
+            </div>
+  
+  
+  
+              
+              
+            <div class="corpo-do-doc">
+                <div class="questoes">
+                    <div class="questao">
+                        <table>
+                         
+                <apex:repeat value="{!documentos}" var="doc">
+                    <apex:outputText rendered="{!if(doc.Documento__c = 'Checklist de Auditoria', true, false)}" >
+                        <apex:outputText rendered="{!if(doc.Empresa_pesquisa__c = Auditoria__c.Empresa_Auditada__c , true, false)}" >
+                         
+                        <tr>
+                            <td class = "titulo">
+                               emissão: <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{! doc.Data_de_criacao__c }" /></apex:outputText>
+                            </td>
+                            
+                            <td class = "titulo" style="width:400px;">
+                               revisão do documento: <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!doc.Revisao__c}" /></apex:outputText>
+                            </td>
+                        </tr>
+                        
+                        </apex:outputText>
+                    </apex:outputText>
+             
+                </apex:repeat>
+                
+                <br/>
+                <br/>
+                        <tr>
+                            <td colspan="1">
+                               <h1 class = "titulo" >Unidade auditada: {!Auditoria__c.Empresa_Auditada__r.name}</h1>
+                            </td>
+                            
+                             <td>
+                               <h1 class = "titulo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="border: 1px solid #0c3557; padding:2px 5px; font-size:20px;">Nota: {! Auditoria__c.Percentual_Total__c}%</span> </h1>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <h1 class = "titulo" > Data da Auditoria:  &nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!Auditoria__c.Data_da_Auditoria__c    }" /></apex:outputText></h1>
+                             </td>
+                            
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <br/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp; <br/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4">
+                                <h1 class = "t" > Checklist de Auditoria</h1>
+                             </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                &nbsp; <br/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp; <br/>
+                            </td>
+                        </tr>
+                  
+                         
+                    <tr>
+                        <td colspan="2">
+                            <h2 class="sessao-questao" style="padding-top: 10px;">POLÍTICA DA QUALIDADE</h2>
+                        </td>
+                    </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">01 - Existe um manual da qualidade na empresa?:</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.x1__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">02 - Existe uma política da qualidade na empresa?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X2__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 03 - A política da qualidade está descrita no manual da Qualidade?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X3__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">04 - Os objetivos estabelecidos pela empresa são coerentes com a política da qualidade?</span></td>
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X4__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 05 - Os objetivos estabelecidos pela empresa são coerentes com a política da qualidade?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X5__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 06 - Os funcionários foram informados sobre a política da qualidade? Como?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X6__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 07 - Foi oferecido treinamento na política da qualidade para os funcionários?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X7__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 08 - Os treinamentos oferecidos tiveram sua eficácia avaliada?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X8__c == true,"c","nc")} </span></td>
+                            </tr>                          
+                            
+                    <tr>
+                        <td colspan="2">
+                            <h2 class="sessao-questao">Organização</h2>
+                        </td>
+                    </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 09 - A empresa possui um organograma estabelecido?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X9__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 10 - Há pessoal suficiente na organização?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X10__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 11 - Ficou evidenciado algum tipo de conflito de interesse entre as áreas técnicas/qualidade e outras áreas?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X11__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                    <tr>
+                        <td colspan="2">
+                            <h2 class="sessao-questao">Responsabilidade Autoridade</h2>
+                        </td>
+                    </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 12 - Como foram estabelecidas as autoridades e as responsabilidades dentro do Sistema de Gestão da Qualidade?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X12__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 13 - O método utilizado para estabelecer autoridade e responsabilidade é apropriado e contempla todos os itens da RDC 16/2013?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X13__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="2">
+                                    <h2 class="sessao-questao">Recursos e pessoal para verificação</h2>
+                                </td>
+                            </tr>
+
+                           
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 14 - Quais atividades de verificação existem na empresa? Por exemplo: de recebimento (distribuidores), de processo (fabricante) e finais (fabricantes)</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X14__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 15 - Foram designadas pessoas para as tarefas de verificação?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X15__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 16 - As pessoas designadas foram treinadas? Estão conscientes dos critérios utilizados para aceitação ou reprovação?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X16__c == true,"c","nc")} </span></td>
+                            </tr>
+                                
+                            <tr>
+                                <td colspan="2">
+                                    <h2 class="sessao-questao">Representante da gerência </h2>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 17 - Existe um representante da gerência (RG) na organização??</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X17__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 19 - Como o RG foi nomeado?<br/>Pode ter sido através de termo de nomeação, ata de reunião, no manual ou outras formas.</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X19__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">     20 - Quais atividades foram atribuídas ao RG? Constam as atividades abaixo? <br/>   &nbsp; a. Assegurar que os requisitos do sistema de qualidade sejam estabelecidos e mantidos em conformidade com este Regulamento Técnico;<br/> &nbsp; b. Relatar o desempenho do sistema de qualidade à gerência executiva para revisão e fornecer informações sobre a melhoria do sistema de qualidade.</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X20__c    == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">Recursos e pessoal para verificação</h2>
+                    </td>
+                </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 21 - Existe procedimento de análise crítica / revisão gerencial?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X21__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 22 - Foi estabelecida a periodicidade desta revisão?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X22__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 23 - Foi realizada alguma revisão gerencial?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X23__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 24 - Como foi documentada a revisão gerencial?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X24__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 25 - Quem participou da revisão?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X25__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">26 - No mínimo os tópicos a seguir constam no relatório / ata da reunião como pontos que foram analisados?<br/>
+                                    Resultados de auditorias, informações pós-comercialização, desempenho de processo e conformidade de produto, situação das ações corretivas e preventivas, mudanças que possam afetar o sistema da qualidade ou conformidade de produto, requisitos regulamentares, entre outros.</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X25__c    == true,"c","nc")} </span></td>
+                            </tr>
+                            
+
+                    
+                            
+                    
+                            <tr>
+                                <td colspan="2" style="height: 1px;">
+                                    &nbsp;&nbsp; 
+                                </td>
+                            </tr>
+                           
+                            
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">Pessoal</h2>
+                    </td>
+                </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">27 - Foi estabelecido a descrição para todas as funções/cargos constantes no organograma? <br/>
+                                    Nota: É comum se chamar descrição de função.</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X27__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 28 - A descrição estabelecida apresenta critérios de formação (escolaridade), experiência (tempo de exercício na função), habilidades (perfil) e treinamentos (formação específica, interna ou externa, na função)?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X28__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 29 - Existe comprovação que os empregados atendem a descrição?<br/>   Nota: podem ser cópias de certificados, listas de presença, atas e outros.:</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X29__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">Treinamento</h2>
+                    </td>
+                </tr>
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 30 - Existe procedimento de treinamento?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X30__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 31 - Existe evidência que o pessoal foi treinado para as atividades das quais são responsáveis?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X31__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">  32 - Existe comprovação da competência desse consultor?<br/> Nota: a documentação do consultor poderá estar no setor compras, de acordo com as regras da empresa. Se estiver no setor de compras, pule esta questão e audite juntamente com o processo 2.5.</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X32__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">33 - Os empregados foram advertidos de defeitos em produtos que poderão ocorrer como resultado do desempenho incorreto de suas funções específicas?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X33__c == true,"c","nc")} </span></td>
+                            </tr>
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">COnsultores</h2>
+                    </td>
+                </tr>
+                                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">34 - A empresa utilizou algum consultor em seu processo de produção e/ou na qualidade?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X34__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                        
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""><p>35 - Existe comprovação da competência desse consultor?</p> <p> Nota: a documentação do consultor poderá estar no setor compras, de acordo com as regras da empresa. Se estiver no setor de compras, pule esta questão e audite juntamente com o processo 2.5.</p></span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X35__c == true,"c","nc")} </span></td>
+                            </tr>
+                        
+
+                    
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">gerenciamento de risco</h2>
+                    </td>
+                </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">36 - Existe um plano de gerenciamento de riscos?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X36__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                        
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">37 - Os riscos foram identificados, avaliados e planos de ações foram estabelecidos?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X37__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                        
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">38 - O plano de gerenciamento de riscos contempla toda cadeia, desde o recebimento do material, passando pela fabricação até a distribuição?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X38__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                        
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">39 - Existe monitoramento do plano de gerenciamento de risco?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X39__c == true,"c","nc")} </span></td>
+                            </tr>
+                          
+                                   
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">gerenciamento de risco</h2>
+                    </td>
+                </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">40 - Foram designados responsáveis pelo gerenciamento dos riscos identificados?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X40__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                        
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">41 - Existe previsão de revisão do plano? Com que frequência?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X41__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                        
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">42 - Quem é o responsável pela revisão?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X42__c == true,"c","nc")} </span></td>
+                            </tr>
+                                              
+            
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">controle de compras</h2>
+                    </td>
+                </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">43 - Existe procedimento de aquisição ou equivalente?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X43__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                                                   
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">44 - Existe procedimento de avaliação de fornecedores e prestadores de serviços?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X44__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                        
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">45 - Quais critérios foram estabelecidos?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X45__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                        
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">46 - Todos os prestadores de serviços cujos resultados possam ter impacto sobre o produto são avaliados? Quais foram considerados pela empresa?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X46__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                        
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">47 - Existe documentação / registros que comprove que o fornecedor ou prestador atende aos requisitos especificados?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X47__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">48 - São mantidos registros das compras?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X48__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                        
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">49 - Esses registros apresentam a especificação dos itens a serem adquiridos?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X49__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                        
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">50 - A especificação enviada ao fornecedor deixa claro o produto e suas especificações? Pode haver ambiguidade?<br/>
+                                    Dica: aleatoriamente selecione alguns pedidos de compras para análise.</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X50__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                       
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">51 - Esses registros identificam os responsáveis pela aprovação e a data da mesma?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X51__c == true,"c","nc")} </span></td>
+                            </tr>
+                        
+                             
+                         
+                                   
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao"> Controle de documentos</h2>
+                    </td>
+                </tr>
+                                                       
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">52 - Existe procedimento para controle de documentos?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X52__c == true,"c","nc")} </span></td>
+                            </tr>
+
+       
+              
+                                                       
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">53 - Existe procedimento para aprovação de documentos?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X53__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                                                          
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">54 - Os documentos são aprovados por pessoas designadas?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X54__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                                                          
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">55 - Verifique se os documentos estão assinados.</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X55__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                              
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">56 - Verifique se a pessoa que assinou os documentos está autorizada a assinar. Como foi autorizado? Quem autorizou?<br/>Dica: Pode ser na descrição de função ou no próprio procedimento.</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X56__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                                                          
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">57 - Existe procedimento para emissão de documentos?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X57__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                                   
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">Distribuição de documentos</h2>
+                    </td>
+                </tr>        
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">58 - Existe procedimento para distribuição de documentos?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X58__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                                                          
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">59 - Escolha um setor aleatório e verifique se os documentos estão disponíveis para uso. Verifique se os documentos estão nas versões atuais.</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X59__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                                                          
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">60 - Escolha um setor aleatório e verifique se os documentos estão disponíveis para uso. Verifique se os documentos estão nas versões atuais.</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X60__c == true,"c","nc")} </span></td>
+                            </tr>
+                                               
+                            
+                                                              
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">Alteração de documentos</h2>
+                    </td>
+                </tr>        
+               
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">61 - Existe procedimento para alteração / revisão de documentos?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X61__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                          
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">62 - Os documentos estão atualizados de acordo com os procedimentos de revisão de documentos?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X62__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">63 - Existe procedimento para remoção de documentos obsoletos?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X63__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                          
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">64 - São mantidas cópias obsoletas?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X64__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                          
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">65 - Os obsoletos são identificados?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X65__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                          
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">66 - Onde são arquivadas?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X66__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                          
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">67 - Por quanto tempo é mantido?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X67__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                       
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">Registros de alterações de documentos</h2>
+                    </td>
+                </tr>        
+               
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">68 - A empresa mantém procedimentos para alteração e revisão de documentos?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X68__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                          
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">69 - Há procedimentos para distribuição e recolhimento de documentos identificados como documentos controlados?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X69__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                          
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">70 - Há previsão de treinamento antes dos documentos entrarem em vigor?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X70__c == true,"c","nc")} </span></td>
+                            </tr>
+                                  
+                                                       
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">Arquivos de documentos e registros</h2>
+                    </td>
+                </tr>        
+               
+                             
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">71 - Existem procedimentos para o arquivo dos registros dos documentos referentes ao sistema de qualidade?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X71__c == true,"c","nc")} </span></td>
+                            </tr>
+                                          
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">72 - Os registros são arquivados pelo prazo estabelecido pelas boas práticas de fabricação para produtos médicos?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X72__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""> 73 - Qual o prazo estabelecido para armazenamento dos registros referentes aos produtos? É igual a vida útil do produto?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X73__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                          
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">74 - Os demais registros são armazenados por quanto tempo? Onde são armazenados? Por quem? Como está organizado?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X74__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                          
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">75 - Existe controle dos registros eletrônicos (NFe, relatórios em sistemas por exemplo)?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X75__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                          
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">76 - Existe backup para esses registros? Qual a rotina? Quem são os responsáveis?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X76__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                          
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">77 - Existem registros confidenciais? Estão assim assinalados?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X77__c == true,"c","nc")} </span></td>
+                            </tr>
+                      
+                                                       
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">78 - As inspeções estão mantidas, ou seja, estão sendo executadas as inspeções?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X78__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                          
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">79 - São mantidos registros?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X79__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                          
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">80 - Os registros apresentam os critérios de aceitação, os resultados, o equipamento/instrumento usado e data e assinatura manual ou eletrônica do responsável?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X80__c == true,"c","nc")} </span></td>
+                            </tr>              
+                                        
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">instalação</h2>
+                    </td>
+                </tr>        
+                           
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">81 - As instalações da empresa são adequadas para o negócio fim da organização?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X81__c == true,"c","nc")} </span></td>
+                            </tr>
+                                   
+                            
+                           
+                            
+                                      
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">Controle ambiental</h2>
+                    </td>
+                </tr>        
+                
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">82 - A empresa estabeleceu os devidos controles ambientais para seu processo?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X82__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                          
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">83 - Existe procedimento para tal?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X83__c == true,"c","nc")} </span></td>
+                            </tr>
+                                                          
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">84 - O controle ambiental está em vigor? Existem registros?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X84__c == true,"c","nc")} </span></td>
+                            </tr>    
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">85 - Os responsáveis pela execução das atividades de controle ambiental estão cientes dos critérios para monitoramento?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X85__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">86 - São abertas ações corretivas para os desvios verificados o controle ambiental?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X86__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                                   
+                
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">87 - Existe procedimento, instrução ou equivalente de limpeza?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X87__c == true,"c","nc")} </span></td>
+                            </tr>                
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">88 - Existe uma programação de limpeza?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X88__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">89 - Existe evidência que a programação está em vigor?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X89__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">90 - Os produtos utilizados na limpeza são registrados o Ministério da Saúde?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X90__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">91 - Os ambientes apresentam-se limpos para os fins da organização?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X91__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">194 - Foram encontrados insetos, roedores ou qualquer praga nos ambientes da empresa?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X194__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">195 - Se sim: eles se encontravam vivos, no momento da auditoria?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X195__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">196 - Os laudos de dedetização estão em dia e de forma organizada? </span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X196__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">197 - O certificado de dedetização está na recepção da empresa e dentro do prazo de validade?!</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X197__c == true,"c","nc")} </span></td>
+                            </tr>
+        <tr>
+            <td colspan="2">
+                <h2 class="sessao-questao">Saúde e higiene do pessoal</h2>
+            </td>
+        </tr>        
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">92 - O pessoal utiliza uniformes e calçados adequados à tarefa realizada? (Principalmente EPI)</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X92__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">93 - O pessoal foi treinado sobre o uso dos EPIs?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X93__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">94 - Existem placas sinalizadoras?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X94__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">hábitos do pessoal</h2>
+                    </td>
+                </tr>
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">95 - Existem evidências de que os empregados não comem, não bebem e não fumam nas áreas onde podem afetar o produto?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X95__c == true,"c","nc")} </span></td>
+                            </tr>
+        
+                
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">96 - Os funcionários foram treinados?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X96__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">97 - Existem placas sinalizadoras?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X97__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">Controle de contaminação</h2>
+                    </td>
+                </tr>        
+                
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">98 - Quais cuidados foram estabelecidos para evitar a contaminação de equipamentos,  componentes, materiais de fabricação, produtos intermediários e acabados por  materiais de limpeza e desinfecção, incluindo substâncias perigosas ou contaminantes gerados pelo processo de fabricação?</span></td> 
+                                    <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X98__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">Remoção de lixo e esgoto químico</h2>
+                    </td>
+                </tr>  
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">99 - A empresa gera algum resíduo químico em seu processo?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X99__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">100 - Se sim para a questão anterior, quais os cuidados são tomados?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X100__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">101 - Se sim para a questão anterior, existe Programa de Gerenciamento de Resíduos em Serviço de Saúde(PGRSS)?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X101__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao"> Risco biológico</h2>
+                    </td>
+                </tr>  
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">102 - A empresa gera algum resíduo biológico ou seu processo apresenta algum risco biológico?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X102__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">103 - Se sim para a questão anterior, quais os cuidados são tomados?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X103__c == true,"c","nc")} </span></td>
+                            </tr>
+              
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">104 - Se sim para a questão anterior, existe Programa de Gerenciamento de Resíduos em Serviço de Saúde (PGRSS)?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X104__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao"> Saúde do trabalhador</h2>
+                    </td>
+                </tr>  
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">105 - Existe PPRA e PCMSO na empresa?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X105__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">106 - São disponibilizados os EPIs aos funcionários?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X106__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">107 - Foram ministrados os treinamentos previsto no PPRA?     </span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X107__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">203 - Técnicos/Auxiliares técnicos estão com a Ficha de EPI, Ordem de Serviço, Certificados Acadêmicos e Ficha de Vacina devidamente organizadas em uma pasta digital?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X203__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">204 - PCMSO e PGR estão disponíveis no CNPJ da empresa dentro do Salesforce?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X204__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">205 - ASO está sendo controlada? </span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X205__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">206 - Existem fios elétricos soltos, estrutura comprometida ou qualquer situação que ofereça risco a saúde e vida dos colaboradores?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X206__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">207 - O Kit de primeiros socorros está disponível na empresa?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X207__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">208 - Existe algum item vencido no kit de primeiros socorros?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X208__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">Equipamento</h2>
+                    </td>
+                </tr>  
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">108 - Há um programa documentado de limpeza e manutenção de máquinas e equipamentos?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X108__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">109 - O programa está em vigor? Existes os devidos registros?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X109__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">110 - Selecione aleatoriamente uma máquina e verifique todas as manutenções (preventivas e corretivas) pelas quais ela passou. Verifique quem realizou a três últimas manutenções e se tem competência comprovada.</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X110__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao"> Inspeção e testes</h2>
+                    </td>
+                </tr>  
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">111 - Há procedimentos para inspeção e, quando aplicável, testes de componentes e materiais de fabricação recebidos, para assegurar que os requisitos especificados foram atendidos?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X111__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">112 - Os produtos ficam em área específica aguardando a inspeção antes da entrada dos mesmos?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X112__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">113 - Existem relatórios de inspeção comprovando que os componentes e materiais de fabricação recebidos foram inspecionados antes de serem transferidos para a produção e estão conforme as especificações?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X113__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">114 - Como é feita a inspeção? Quem faz?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X114__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">115 - Quais os critérios para aprovação?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X115__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">116 - É utilizado plano de amostragem para inspeção de recebimento?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X116__c == true,"c","nc")} </span></td>
+                            </tr>
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao"> Inspeção, medição e equipamentos de teste</h2>
+                    </td>
+                </tr> 
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">117 - Existe em programa documentado para calibração e aferição de instrumentos?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X117__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">118 - Os instrumentos de inspeção, medição e testes estão identificados indicando se estão aferidos ou calibrados?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X118__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">119 - Há procedimentos para garantir que instrumentos não calibrados ou aferidos não sejam instalados e usados?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X119__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">120 - A empresa protege corretamente suas instalações para evitar que os instrumentos de medição não sejam danificados de forma intencional ou não intencional?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X120__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">121 - Os instrumentos de medição são corretamente mantidos?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X121__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">122 - Caso não existam padrões nacionais a aferição e calibração são referidas a padrões próprios, confiáveis e reproduzíveis?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X122__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">123 - Há registros que comprovem a confiabilidade desses padrões?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X123__c == true,"c","nc")} </span></td>
+                            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <h2 class="sessao-questao"> Controle de mudança</h2>
+                </td>
+            </tr> 
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">124 - A empresa estabeleceu procedimento para controle de mudança?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X124__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">125 - O procedimento prevê as atividades de solicitação, análise crítica, implementação e avaliação após a implementação da mudança?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X125__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">126 - As mudanças são registradas? </span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X126__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                          
+
+            <tr>
+                <td colspan="2">
+                    <h2 class="sessao-questao">Manuseio</h2>
+                </td>
+            </tr> 
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">127 - A empresa mantém procedimentos para o manuseio de produtos acabados?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X127__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">128 - O procedimento assegura que quando a qualidade ou a condição de adequado ao uso de um componente, material de fabricação, produto intermediário ou produto acabado se deteriorar ao longo do tempo, os mesmos não sejam utilizados ou distribuídos primeiro?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X128__c == true,"c","nc")} </span></td>
+                            </tr>
+            <tr>
+                <td colspan="2">
+                    <h2 class="sessao-questao">Armazenamento</h2>
+                </td>
+            </tr> 
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">129 - Os produtos acabados são armazenados conforme estabelecido nos procedimentos?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X129__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">130 - O armazenamento obedece ao empilhamento máximo constante nas embalagens?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X130__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">131 - O armazenamento obedece aos requisitos de temperatura e umidade constante nas embalagens e nas especificações dos fornecedores?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X131__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">132 - Os produtos são armazenados afastados de parede, teto e qualquer outra superfície que possa danificá-lo?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X132__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">133 - Os produtos são armazenados (temporária ou permanentemente) no chão?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X133__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">134 - A área de armazenamento apresenta condições adequadas de higiene e limpeza de modo a evitar danos e contaminações no produto acabado?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X134__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">135 - A sala apresenta mofo? Umidade? Sujeira?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X135__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">Distribuição</h2>
+                    </td>
+                </tr> 
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">136 - Os produtos distribuídos ao mercado são registrados de forma a identificar-se o nome e o endereço do consignatário, as quantidades distribuídas e o número de controle ou número do lote ou partida de fabricação que permita sua rastreabilidade (NF)?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X136__c == true,"c","nc")} </span></td>
+                            </tr>
+                                   
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">Identificação e rastreabilidade</h2>
+                    </td>
+                </tr> 
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">137 - Existe procedimento de identificação e rastreabilidade de materiais, componentes e/ou produtos acabados?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X137__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">138 - A rastreabilidade é baseada em número de lotes ou de série?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X138__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">139 - A rastreabilidade envolve todo o processo da empresa?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X139__c == true,"c","nc")} </span></td>
+                            </tr>
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">Produtos não conforme</h2>
+                    </td>
+                </tr> 
+            
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">140 - Existem procedimentos que assegurem que componentes, materiais de fabricação, produtos acabados ou devolvidos, não-conformes com as especificações não sejam utilizados?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X140__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">141 - Os materiais de fabricação, os componentes, os produtos acabados ou devolvidos não-conformes são claramente identificados e segregados?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X141__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">142 - Como são identificados? Área? Marcadores? Paletes? Containers?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X142__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">143 - Existem responsáveis designados para decidir pela segregação e liberação destes materiais, componentes, produtos acabados ou devolvidos?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X143__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">144 - Quem é o responsável? Onde está designado? O que é feito para liberar? Como é registrado a liberação?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X144__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""></span>145 - Existe rotina de reprocessamento de produtos?</td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X145__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style=""></span>146 - Se sim para a questão anterior, quem avalia a possibilidade de reprocessamento?</td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X146__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">147 - Como é registrada a avaliação?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X147__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">148 - Como são identificados os produtos em reprocessamento?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X148__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">149 - Os produtos em reprocessamento ficam sujeitos a total inspeção?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X149__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">ReclamaçãoAções corretivas e preventivas</h2>
+                    </td>
+                </tr> 
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">150 - Existe procedimento para investigar as causas de não conformidades ou não conformidade potencial do sistema de qualidade?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X150__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">151 - Como são investigados os problemas? É utilizado algum método (Ishikawa, 5 Porquês, 6M, Brainstorming, outros?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X151__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">152 - As ações corretivas resultantes das investigações de não conformidade ou não conformidade potencial são documentadas e implementadas?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X152__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">153 - É avaliada a eficácia das ações tomadas?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X153__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">154 - A responsabilidade e a autoridade para decidir sobre avaliação, implementação e monitoração das ações corretivas aprovadas estão claramente definidas?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X154__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">155 - Quem é o responsável? Onde está designado</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X156__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                             
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">Reclamação</h2>
+                    </td>
+                </tr> 
+            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">156 - Há procedimentos para gerenciamento das reclamações dos clientes?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X156__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">157 - As reclamações são registradas conforme os requisitos das boas práticas de fabricação para produtos médicos</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X157__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">158 - Quando aplicável as reclamações dos clientes são examinadas, investigadas e ações corretivas são tomadas para prevenir repetição da ocorrência?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X158__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">159 - Quem recebe a reclamação? Como é registrada a reclamação?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X159__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">160 - As investigações são documentadas</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X160__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">161 - Como são investigadas?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X161__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">162 - A autoridade sanitária é cientificada caso a reclamação seja referente a óbito, lesão ou doença grave envolvida?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X162__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                
+                              
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">163 - Existem registros de que as ações corretivas aprovadas, decorrentes de reclamações, foram implementadas?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X163__c == true,"c","nc")} </span></td>
+                            </tr>
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">Auditoria da qualidade</h2>
+                    </td>
+                </tr> 
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">164 - A empresa tem procedimentos de auditorias internas para verificar se o sistema de qualidade está conforme os requisitos estabelecidos nas boas práticas de fabricação de produtos médicos?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X164__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">165 - Existem registros de treinamento dos auditores internos do sistema de qualidade?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X165__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">166 - Quando foi o treinamento?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X166__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">167 - Quem ou que empresa ofereceu?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X167__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">168 - Os auditores têm consciência da importância de seu papel no processo de melhoria continua da organização?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X168__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">169 - Existem relatórios de auditoria interna da qualidade indicando as não-conformidades encontradas?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X169__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">170 - O relatório está assinado pelo responsável pela área auditada?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X170__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">171 - O pessoal que executa as auditorias internas da qualidade é independente das áreas auditadas?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X171__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">172 - Não pertencem a mesma área?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X172__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">173 - Não são parentes? Namorados ou algo parecido?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X173__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">174 - Existem registros da implementação das ações corretivas recomendadas nos relatórios de auditoria interna?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X174__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">175 - Foram abertas ações corretivas para todas as não conformidades identificadas na auditoria?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X175__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">176 - As ações corretivas foram tratadas corretamente conforme procedimento de ação corretiva? (7.1)</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X176__c == true,"c","nc")} </span></td>
+                            </tr>
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">Instalação</h2>
+                    </td>
+                </tr> 
+                        
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">177 - Quando aplicável, existe procedimento de instalação de produtos?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X177__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">178 - A instalação é documentada?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X178__c == true,"c","nc")} </span></td>
+                            </tr>
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">Assistência técnica</h2>
+                    </td>
+                </tr> 
+                        
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">179 - Quando aplicável, existe procedimento de assistência técnica de produtos?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X179__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">180 - A assistência técnica é registrada?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X180__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">181 - No registro da assistência técnica constam pelo menos os dados abaixo? <br/> &nbsp;&nbsp; a. Produto objeto do serviço;<br/> &nbsp;&nbsp; b. Número de controle utilizado; <br/> &nbsp;&nbsp; c. Data da realização do serviço; <br/> &nbsp;&nbsp; d. Identificação do prestador do serviço; <br/> &nbsp;&nbsp; e. Descrição do serviço realizado; </span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X181__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">182 - Existe comprovação da competência dos técnicos envolvidos com o processo de assistência técnica?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X182__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">183 - Os registros de assistência são analisados periodicamente para verificar a necessidade de ações corretivas, preventivas ou outras ações?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X183__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <h2 class="sessao-questao">Técnicas estatísticas</h2>
+                    </td>
+                </tr> 
+            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">184 - Os planos de amostragem adotados pelo fabricante estão formalizados por escrito?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X184__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">185 - Em que fases do processo são utilizados os planos de amostragem?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X185__c == true,"c","nc")} </span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">186 - Existem procedimentos para revisão periódica dos planos de amostragem visando verificar a adequação da técnica estatística ao resultado pretendido? Conforme procedimento de controle de documentos?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X187__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">187 - Existe pessoal designado qualificado para realizar esta revisão e propor técnicas estatísticas adequadas?                                </span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X187__c == true,"c","nc")} </span></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">188 - Como são controlados os indicadores e os objetivos da qualidade da empresa?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X188__c == true,"c","nc")} </span></td>
+                            </tr>
+            
+                    <tr>
+                        <td colspan="2">
+                            <h2 class="sessao-questao">TRANSPORTE </h2>
+                        </td>
+                    </tr>   
+
+
+
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">198 - Transportadora que presta serviço ao Grupo Hospcom está inserida no Sistema Salesforce na aba “Transporte” e com sua documentação exigida anexada?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X198__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            
+                            
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">199 - Toda a Transportadora que prestam serviço ao Grupo Hospcom estão devidamente aprovadas ou existe pendências?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X199__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">200 - Toda frota veicular do grupo Hospcom estão cadastrados em Sistema Salesforce? </span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X200__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">201 - Histórico de Revisão da manutenção está em dia ou existe carro com manutenção preventiva atrasada?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X201__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">202 - Veículos destinados a transporte de Equipamentos Hospitalares possuem o Certificado Veicular da Vigilância Sanitária Municipal? Se sim, está em vigência?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X202__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            
+                            
+                            
+                            
+                            
+                    <tr>
+                        <td colspan="2">
+                            <h2 class="sessao-questao">CS</h2>
+                        </td>
+                    </tr>   
+                    
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">209 - O tempo médio de resposta ao cliente é condizente com as políticas internas estabelecidas pela empresa?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X209__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">210 - A média de avaliação do cliente quanto ao atendimento é igual ou maior do que a média estabelecida pela empresa?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X210__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">211 -  A média de avaliação do cliente quanto a satisfação com o produto/serviço oferecido é igual ou maior do que a média estabelecida pela empresa?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X211__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">212 - Todas as reclamações de clientes estão sendo concluídas?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X212__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="2" class="questao"> <span style="">213 - Todos os casos possuem anexo ou alguma forma de comprovação de atendimento ao cliente?</span></td> 
+                                <td colspan="2"> <span class="resposta" style=""> {!if(Auditoria__c.X213__c == true,"c","nc")} </span></td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="2" style="height: 5px;">
+                                    &nbsp;&nbsp; 
+                                </td>
+                            </tr>
+                           
+                            <tr>
+                                <td colspan="2">
+                                    &nbsp;&nbsp; <br/><br/>
+                                </td>
+                            </tr>   
+                            <!--************************
+                                        ASSINATURAS
+                                ************************* -->
+                            <tr style="margin-top:10px;">
+                                <td style="border:none; text-align:center;" >
+                                    <div style="padding:0; margin:0; text-align:center;">
+                                        <div  style="padding:0; margin: 0 0 -3px 0; text-align:center;" > 
+                                            <apex:image style="padding:0; margin:0 auto -15px ; text-align:center;" value="{!if(Auditoria__c.Responsavel__r.assinatura__c !="", Auditoria__c.Responsavel__r.assinatura__c ,"https://hospcom.my.site.com/servlet.ImageServer?id=0156e00000Bf8Ui&oid=00Di0000000JVhH&lastMod=1667927109000" )}" width="250" height="60px"/>
+                                        </div>     
+                                        
+                                        <div style="padding:0; margin:0;">
+                                            <p style="padding:0; margin:0 auto;">
+                                                <div class="underline" style="padding:0; margin:0 auto; width: 70%;border-bottom: 1px solid #0c3557;"></div><br/>
+                                                {!Auditoria__c.Responsavel__r.Name}<br/>
+                                                    Resposável pela Auditoria
+                                            </p>
+                                        </div>
+                                    </div>                                      
+                                </td>
+
+                                <td style="border:none; text-align:center;" >
+                                    <div style="padding:0; margin:0; text-align:center;">
+                                        <div  style="padding:0; margin: 0 0 -3px 0; text-align:center;" > 
+                                            <apex:image style="padding:0; margin:0 auto -15px ; text-align:center;" value="{!if(Auditoria__c.Auditado__r.assinatura__c !="", Auditoria__c.Auditado__r.assinatura__c ,"https://hospcom.my.site.com/servlet.ImageServer?id=0156e00000Bf8Ui&oid=00Di0000000JVhH&lastMod=1667927109000" )}"  width="250" height="60px"/>
+                                        </div>     
+                                        
+                                        
+                                        <div style="padding:0; margin:0; ">
+                                            <p style="padding:0; margin:0 auto;">
+                                                <div class="underline" style="padding:0; margin: auto; width: 70%;border-bottom: 1px solid #0c3557;"></div><br/>
+                                                    {!Auditoria__c.Auditado__r.Name}<br/>
+                                                    Auditado
+                                            </p>
+                                        </div>
+                                    </div>                                      
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+           
+  </apex:pageBlock>
+
+  </body>
+
+</apex:page>

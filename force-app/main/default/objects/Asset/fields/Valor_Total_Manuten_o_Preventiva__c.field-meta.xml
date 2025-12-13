@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valor_Total_Manuten_o_Preventiva__c</fullName>
+    <externalId>false</externalId>
+    <label>Valor Total Manutenção Preventiva</label>
+    <summarizedField>Chamdo__c.Valor_de_Manuten_es_Preventivas__c</summarizedField>
+    <summaryForeignKey>Chamdo__c.Ativo__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

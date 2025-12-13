@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <description>Preenche a data de alteração do status da OT.</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>formula_1_myRule_1_A1_8248038659</name>
+        <dataType>DateTime</dataType>
+        <expression>NOW()</expression>
+    </formulas>
+    <formulas>
+        <name>formula_2_myRule_1_A1_3688303507</name>
+        <dataType>String</dataType>
+        <expression>TEXT(PRIORVALUE({!$Record.Status} ))</expression>
+    </formulas>
+    <formulas>
+        <name>formula_3_myRule_1_A1_1059918503</name>
+        <dataType>String</dataType>
+        <expression>{!$User.Id}</expression>
+    </formulas>
+    <interviewLabel>OT — Data de alteração do Status {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>OT — Data de alteração do Status</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>myRule_1_A1</name>
+        <label>ATRIBUI DADOS DA ALTERAÇÃO DE STATUS</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <inputAssignments>
+            <field>Data_da_Alteracao_de_Status__c</field>
+            <value>
+                <elementReference>formula_1_myRule_1_A1_8248038659</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status_Anterior__c</field>
+            <value>
+                <elementReference>formula_2_myRule_1_A1_3688303507</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Usuario_que_Alterou_Status__c</field>
+            <value>
+                <elementReference>formula_3_myRule_1_A1_1059918503</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>myRule_1_A1</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Status</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>WorkOrder</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Horas_Trabalhadas_Cobradas_Calculo__c</fullName>
+    <externalId>false</externalId>
+    <formula>(
+	IF(OR(ISBLANK(Data_e_Hora_da_Calibracao_T__c), ISBLANK(Data_e_Hora_da_Calibracao_I__c)), 0, (Data_e_Hora_da_Calibracao_T__c - Data_e_Hora_da_Calibracao_I__c))+
+	IF(OR(ISBLANK(Data_e_Hora_da_Qualifica_o_T__c), ISBLANK(Data_e_Hora_da_Qualifica_o_I__c	)), 0, (Data_e_Hora_da_Qualifica_o_T__c	 - Data_e_Hora_da_Qualifica_o_I__c	))+
+	IF(OR(ISBLANK(Data_Hora_da_Qualifica_o_Pt2_T__c), ISBLANK(Data_Hora_da_Qualifica_o_Pt2_I__c)), 0, (Data_Hora_da_Qualifica_o_Pt2_T__c - Data_Hora_da_Qualifica_o_Pt2_I__c))+
+	IF(OR(ISBLANK(Data_Hora_da_Qualifica_o_Pt3_T__c), ISBLANK(Data_Hora_da_Qualifica_o_Pt3_I__c)), 0, (Data_Hora_da_Qualifica_o_Pt3_T__c - Data_Hora_da_Qualifica_o_Pt3_I__c))+
+	IF(OR(ISBLANK(Data_Hora_da_Qualifica_o_Pt4_T__c), ISBLANK(Data_Hora_da_Qualifica_o_Pt4_I__c)), 0, (Data_Hora_da_Qualifica_o_Pt4_T__c - Data_Hora_da_Qualifica_o_Pt4_I__c))+
+	IF(OR(ISBLANK(Data_Hora_da_Qualifica_o_Pt5_T__c), ISBLANK(Data_Hora_da_Qualifica_o_Pt5_I__c)), 0, (Data_Hora_da_Qualifica_o_Pt5_T__c - Data_Hora_da_Qualifica_o_Pt5_I__c))+
+	IF(OR(ISBLANK(Data_e_Hora_do_E_S_E_T__c), ISBLANK(Data_e_Hora_do_E_S_E_I__c)), 0, (Data_e_Hora_do_E_S_E_T__c - Data_e_Hora_do_E_S_E_I__c))+
+	IF(OR(ISBLANK(Data_e_Hora_da_Avalia_o_T_cnica_T__c), ISBLANK(Data_e_Hora_da_Avalia_o_T_cnica_I__c)), 0, (Data_e_Hora_da_Avalia_o_T_cnica_T__c - Data_e_Hora_da_Avalia_o_T_cnica_I__c))+
+	IF(OR(ISBLANK(Data_Hora_da_Avalia_o_T_cnica_Pt2_T__c), ISBLANK(Data_Hora_da_Avalia_o_T_cnica_Pt2__c)), 0, (Data_Hora_da_Avalia_o_T_cnica_Pt2_T__c - Data_Hora_da_Avalia_o_T_cnica_Pt2__c))+
+	IF(OR(ISBLANK(Data_Hora_da_Avalia_o_T_cnica_Pt3_T__c), ISBLANK(Data_Hora_da_Avalia_o_T_cnica_Pt3__c)), 0, (Data_Hora_da_Avalia_o_T_cnica_Pt3_T__c - Data_Hora_da_Avalia_o_T_cnica_Pt3__c))+
+	IF(OR(ISBLANK(Data_e_Hora_da_Manutencao_T__c), ISBLANK(Data_e_Hora_da_Manutencao_I__c)), 0, (Data_e_Hora_da_Manutencao_T__c - Data_e_Hora_da_Manutencao_I__c))+
+	IF(OR(ISBLANK(Data_e_Hora_da_Manuten_o_Pt2_T__c), ISBLANK(Data_e_Hora_da_Manuten_o_Pt2_I__c)), 0, (Data_e_Hora_da_Manuten_o_Pt2_T__c - Data_e_Hora_da_Manuten_o_Pt2_I__c))+
+	IF(OR(ISBLANK(Data_Hora_da_Manuten_o_Pt3_T__c), ISBLANK(Data_Hora_da_Manuten_o_Pt3__c)), 0, (Data_Hora_da_Manuten_o_Pt3_T__c - Data_Hora_da_Manuten_o_Pt3__c))+
+	IF(OR(ISBLANK(Data_e_Hora_do_Runin_T__c), ISBLANK(Data_e_Hora_do_Runin_I__c)), 0, (Data_e_Hora_do_Runin_T__c - Data_e_Hora_do_Runin_I__c)/2)+
+	IF(OR(ISBLANK(Data_e_Hora_do_2_Runin_T__c), ISBLANK(Data_e_Hora_do_2_Runin_I__c)), 0, (Data_e_Hora_do_2_Runin_T__c - Data_e_Hora_do_2_Runin_I__c)/2)+
+	IF(OR(ISBLANK(Data_e_Hora_da_Inspe_o_T__c), ISBLANK(Data_e_Hora_da_Inspe_o_I__c)), 0, (Data_e_Hora_da_Inspe_o_T__c - Data_e_Hora_da_Inspe_o_I__c)/2)+
+	IF(OR(ISBLANK(Data_e_Hora_da_Instala_o_T__c), ISBLANK(Data_e_Hora_da_Instala_o_I__c)), 0, (Data_e_Hora_da_Instala_o_T__c - Data_e_Hora_da_Instala_o_I__c))+
+	IF(OR(ISBLANK(Data_Hora_da_Instala_o_Pt2_T__c	), ISBLANK(Data_Hora_da_Instala_o_Pt2_I__c)), 0, (Data_Hora_da_Instala_o_Pt2_T__c	 - Data_Hora_da_Instala_o_Pt2_I__c))+
+	IF(OR(ISBLANK(Data_Hora_da_Instala_o_Pt3_T__c), ISBLANK(Data_Hora_da_Instala_o_Pt3_I__c)), 0, (Data_Hora_da_Instala_o_Pt3_T__c - Data_Hora_da_Instala_o_Pt3_I__c))
+)*24</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Horas Trabalhadas Cobradas (Cálculo)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>8</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

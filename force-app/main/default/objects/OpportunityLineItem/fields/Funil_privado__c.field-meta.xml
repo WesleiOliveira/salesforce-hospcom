@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Funil_privado__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+AND(
+TEXT(Opportunity.StageName) != &apos;LOSS&apos;,
+OR(
+Opportunity.Propriedade_da_conta__c == &apos;PRIVADO&apos;,
+Opportunity.Propriedade_da_conta__c == &apos;&apos;
+)
+),  TotalPrice, 0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Funil privado</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <type>Currency</type>
+</CustomField>

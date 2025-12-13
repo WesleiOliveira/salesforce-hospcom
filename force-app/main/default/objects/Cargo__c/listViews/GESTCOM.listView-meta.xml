@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GESTCOM</fullName>
+    <columns>NAME</columns>
+    <columns>Departamento__c</columns>
+    <columns>Empresa__c</columns>
+    <columns>Status__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>Data_de_Aprovaco__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>APROVADO</value>
+    </filters>
+    <filters>
+        <field>Empresa__c</field>
+        <operation>contains</operation>
+        <value>gestcom</value>
+    </filters>
+    <label>GESTCOM</label>
+</ListView>

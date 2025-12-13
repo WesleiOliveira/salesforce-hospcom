@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fun_o__c</fullName>
+    <externalId>false</externalId>
+    <label>Função</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Comercial</fullName>
+                <default>false</default>
+                <label>Comercial</label>
+            </value>
+            <value>
+                <fullName>Logistica</fullName>
+                <default>false</default>
+                <label>Logistica</label>
+            </value>
+            <value>
+                <fullName>Marketing</fullName>
+                <default>false</default>
+                <label>Marketing</label>
+            </value>
+            <value>
+                <fullName>Produtos</fullName>
+                <default>false</default>
+                <label>Produtos</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

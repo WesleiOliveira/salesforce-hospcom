@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IRF</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISBLANK(TEXT(IRF__c)) &amp;&amp;  TEXT(Departamento__c)  == &apos;Governo&apos; &amp;&amp;  ISNEW()</errorConditionFormula>
+    <errorDisplayField>IRF__c</errorDisplayField>
+    <errorMessage>A licitação tem retenção de impostos?</errorMessage>
+</ValidationRule>

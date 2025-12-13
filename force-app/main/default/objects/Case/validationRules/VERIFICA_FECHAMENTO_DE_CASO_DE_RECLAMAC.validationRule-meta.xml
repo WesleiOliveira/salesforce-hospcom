@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VERIFICA_FECHAMENTO_DE_CASO_DE_RECLAMAC</fullName>
+    <active>false</active>
+    <description>Permite somente o departamento de Qualidade realizar o fechamento do Caso de origem de Reclamação.</description>
+    <errorConditionFormula>AND(
+	ISPICKVAL(Status, &quot;FINALIZADO&quot;),
+	OR(
+		ISPICKVAL(Type, &quot;RECLAMAÇÃO&quot;),
+		ISPICKVAL(Type, &quot;SUGESTÃO&quot;),
+		ISPICKVAL(Type, &quot;NOTIFICAÇÃO&quot;)
+	),
+	NOT(CONTAINS($User.Id, &quot;00531000007i4eW&quot;))
+)</errorConditionFormula>
+    <errorMessage>Casos pertinenes ao departamento de qualidade (tipo: Reclamação, Sugestão e Notificação) podem ser encerrados somente pelo respectivo departamento.</errorMessage>
+</ValidationRule>

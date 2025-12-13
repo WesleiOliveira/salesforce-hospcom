@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Data_limite_para_esclarescimento</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISNEW(),
+!$User.Ignorar_erros__c,
+(TEXT(Tipo__c) == &apos;Esclarescimento&apos;),
+(NOW() &gt; Oportunidade_relacionada__r.data_limite_esclarescimento__c)
+)</errorConditionFormula>
+    <errorMessage>O prazo limite para esclarescimento expirou.</errorMessage>
+</ValidationRule>

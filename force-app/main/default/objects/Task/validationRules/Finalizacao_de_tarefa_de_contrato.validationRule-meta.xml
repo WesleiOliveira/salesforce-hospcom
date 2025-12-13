@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Finalizacao_de_tarefa_de_contrato</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISCHANGED(Status),
+TEXT(Status) = &apos;Concluído&apos;,
+OR(
+Subject = &apos;Confecção de contrato&apos;,
+Subject = &apos;Revisão de contrato&apos;
+),
+Prefixo_do_Referente__c != &apos;a1Y&apos;, 
+Prefixo_do_Referente__c != &apos;0Q0&apos;, 
+Prefixo_do_Referente__c != &apos;a3A&apos;,
+Prefixo_do_Referente__c != &apos;006&apos;,
+Prefixo_do_Referente__c != &apos;a0K&apos;
+)</errorConditionFormula>
+    <errorDisplayField>WhatId</errorDisplayField>
+    <errorMessage>Para finalizar a tarefa, vincule-a a um contrato.</errorMessage>
+</ValidationRule>

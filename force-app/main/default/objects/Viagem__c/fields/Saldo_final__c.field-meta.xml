@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Saldo_final__c</fullName>
+    <externalId>false</externalId>
+    <formula>Total_validado__c - (Total_adiantado__c*-1)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Negativo = valor de viajante para Hospcom.
+Positivo = valor de Hospcom para viajante.</inlineHelpText>
+    <label>Saldo final</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

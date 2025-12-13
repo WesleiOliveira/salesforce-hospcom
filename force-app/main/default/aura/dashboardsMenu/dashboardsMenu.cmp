@@ -1,0 +1,45 @@
+<aura:component controller="HomeBotoes" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css',
+                          $Resource.bootstrapSelect14 + '/docs/docs/dist/css/bootstrap-select.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.popper + '/popper.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js',
+                           $Resource.bootstrapSelect14 + '/docs/docs/dist/js/bootstrap-select.min.js')}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    <div>
+        <!-- SPINNER DE CARREGAMENTO -->
+        <div id='spinnerDiv' style="display: none">
+            <lightning:spinner id="spinner" alternativeText="Carregando" size="medium" />
+        </div>
+        
+        <!-- DIV -->
+        <fieldset style="border-radius: 10px; margin: 0.7rem!important;" class="border p-2">
+            <legend class="float-none w-auto tituloComponente" >Menu de Dashboards</legend>
+            <div class='divSelects'>
+                <select class="selectpickerTipo" id='tiposRelatorio' data-bs-toggle="dropdown" data-show-subtext="true" data-live-search="true">
+                    <option selected='true' disabled='true'>SELECIONE O TIPO DO RELATÓRIO</option>
+                </select>
+                
+                <select class="subtipoRelatorio" style='display: none' id='subtipoRelatorio' data-bs-toggle="dropdown" data-show-subtext="true" data-live-search="true">
+                    <option selected='true' disabled='true'>SELECIONE O SUBTIPO</option>
+                </select>
+                
+                <select class="variacaoRelatorio" style='display: none' id='variacaoRelatorio' data-bs-toggle="dropdown" data-show-subtext="true" data-live-search="true">
+                   <option selected='true' disabled='true'>SELECIONE UMA DASHBOARD</option>
+                </select>
+    
+            </div>
+            
+            
+        </fieldset>
+        
+    </div>
+    
+</aura:component>

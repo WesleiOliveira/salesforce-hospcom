@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X5_Inspe_o_Visual_do_Equipamento__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>Equipamento foi inspecionado e ele apresenta características adequadas para o seu funcionamento?</inlineHelpText>
+    <label>5 - Inspeção Visual do Equipamento</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>NÃO</fullName>
+                <default>false</default>
+                <label>NÃO</label>
+            </value>
+            <value>
+                <fullName>SIM</fullName>
+                <default>false</default>
+                <label>SIM</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

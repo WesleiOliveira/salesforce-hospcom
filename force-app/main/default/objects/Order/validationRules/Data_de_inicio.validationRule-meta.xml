@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Data_de_inicio</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+!Ignora_validacao__c,
+ISNEW(),
+EffectiveDate &lt;  TODAY(),
+ RecordType.DeveloperName != &apos;Demonstra_o_R_pida&apos;
+)</errorConditionFormula>
+    <errorDisplayField>EffectiveDate</errorDisplayField>
+    <errorMessage>Não é possível criar um pedido com data de início anterior à data de criação.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>Compartilha_com_DP</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Compartilha com DP</label>
+        <sharedTo>
+            <group>Departamento_pessoal</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Compartilha_com_V_nia</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Vãnia - cuida da segurança do trabalho</description>
+        <label>Compartilha com Vânia</label>
+        <sharedTo>
+            <group>Seguran_a_do_Trabalho</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+    <sharingOwnerRules>
+        <fullName>Compartilhar_com_qualidade</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Compartilhar com qualidade</label>
+        <sharedTo>
+            <group>Qualidade</group>
+        </sharedTo>
+        <sharedFrom>
+            <group>Sistema_todos</group>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

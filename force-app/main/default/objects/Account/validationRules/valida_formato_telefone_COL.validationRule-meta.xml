@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>valida_formato_telefone_COL</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    BillingCountry = &quot;Colombia&quot;,
+    NOT(
+        REGEX(
+            Phone, 
+            &quot;\\(\\d{3}\\) \\d{3}-\\d{4}|\\d{3}-\\d{3}-\\d{4}|\\+57 \\d{3}-\\d{3}-\\d{4}&quot;
+        )
+    )
+)</errorConditionFormula>
+    <errorDisplayField>Phone</errorDisplayField>
+    <errorMessage>Para clientes na Colômbia, o número de telefone deve estar em um dos seguintes formatos: (XXX) XXX-XXXX, XXX-XXX-XXXX ou +57 XXX-XXX-XXXX.</errorMessage>
+</ValidationRule>

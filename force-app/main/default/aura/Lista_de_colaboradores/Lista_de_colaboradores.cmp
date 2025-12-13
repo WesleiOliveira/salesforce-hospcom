@@ -1,0 +1,46 @@
+<aura:component controller="CriaMembrosDoTreinamento" extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <ltng:require 
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css',
+                          $Resource.bootstrapSelect14 + '/docs/docs/dist/css/bootstrap-select.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.popper + '/popper.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js',
+                           $Resource.bootstrapSelect14 + '/docs/docs/dist/js/bootstrap-select.min.js')}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    <div id="body" style="display: flex;justify-content: center; align-items: flex-start;">
+        
+        <div class="list">
+            <h2>Colaboradores</h2>
+            
+            
+            <ul id="" style="margin:0;padding:0 40px 0 0;">
+                 <li><label><input type="checkbox" class="todos" name="" value="todos" id="todos" /><p>Todos</p><span></span></label></li>
+            </ul>
+            <ul id="corpo_list" style="  height: 57vh;">
+                
+            </ul>
+            
+        </div>
+        
+        <div class="list">
+            <h2> Selecionados</h2>
+            
+            
+            <ul id="corpo_list_selecionados">
+                
+            </ul>
+            
+            <button  id="continuar" >Continuar </button>
+            
+        </div>
+        
+        
+    </div>
+    
+</aura:component>

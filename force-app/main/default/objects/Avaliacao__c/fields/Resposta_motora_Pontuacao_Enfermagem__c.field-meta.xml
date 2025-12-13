@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Resposta_motora_Pontuacao_Enfermagem__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(TEXT(Resposta_motora_enfermagem__c) = &apos;Obedece a comandos&apos;, 6 , IF(TEXT(Resposta_motora_enfermagem__c) = &apos;Localiza a dor&apos;, 5, IF(TEXT(Resposta_motora_enfermagem__c) = &apos;Movimento de retirada&apos;, 4, IF(TEXT(Resposta_motora_enfermagem__c) = &apos;Flexão anormal&apos;, 3 , IF(TEXT(Resposta_motora_enfermagem__c) = &apos;Extensão anormal&apos;, 2, 1 )))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Resposta motora - Pontuação</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

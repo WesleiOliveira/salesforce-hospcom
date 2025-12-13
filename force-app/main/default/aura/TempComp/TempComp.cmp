@@ -1,0 +1,25 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes">
+        
+    <div class="slds-m-around_x-small">
+        <lightning:buttonGroup class="slds-button_stretch">
+            <lightning:button class="slds-button_stretch" label="minha label" title="meu titulo" value="meu valor" variant="brand" />
+            <lightning:button class="slds-button_stretch" label="minha label" title="meu titulo" value="meu valor" variant="brand" />
+        </lightning:buttonGroup>
+    </div>
+    
+    
+    <br/>
+    <br/>
+
+	<div class="slds-m-around_x-small">
+        <lightning:buttonGroup class="slds-button_stretch">
+            <lightning:buttonMenu label="Vendas" class="slds-button_stretch format">
+                <lightning:menuItem value="Geral" label="Geral" />
+            </lightning:buttonMenu>
+            <lightning:buttonMenu label="Vendas" class="slds-button_stretch format" >
+                <lightning:menuItem value="Geral" label="Geral" />
+            </lightning:buttonMenu>
+        </lightning:buttonGroup>
+	</div>
+
+</aura:component>

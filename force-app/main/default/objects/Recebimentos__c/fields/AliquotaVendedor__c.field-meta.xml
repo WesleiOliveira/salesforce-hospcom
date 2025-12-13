@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AliquotaVendedor__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    Pedido__r.aliquota_variavel_vendedor__c != 0, 
+    Pedido__r.aliquota_variavel_vendedor__c, 
+    IF(
+        TEXT(Pedido__r.Natureza_de_Opera_o__c) == &apos;LOCAÇÃO&apos;, 
+        Vendedor2__r.Al_quota_Loca_o__c, 
+        Vendedor2__r.aliquota__c
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Alíquota Vendedor (%)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

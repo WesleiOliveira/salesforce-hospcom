@@ -1,0 +1,303 @@
+<apex:page standardController="Gerenciamento_de_Riscos__c" renderAs="pdf">
+
+<head>
+  <style> 
+    
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    padding-top: 110px;
+  }
+  
+  .cabecalho {
+    height: 120px;
+    width: 100%;
+    display: table;
+    align-items: center;
+    padding: 16px 32px;
+    border-bottom: 2px solid #484848;
+    background-color: white;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+
+  }
+  
+  .logo {
+
+  }
+  
+  .titulo {
+    height: auto;
+    width: 1000px;
+    display: table;
+    align-items: center;
+    justify-content: center;
+    border-right: 2px solid #484848;
+    margin-bottom: 5px;
+  }
+  
+  .ano {
+    font-size: 20px;
+    width: 200px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: table;
+    align-items: end;
+    justify-content: center;
+  }
+  
+  .container {
+    overflow-x: auto;
+    background-color: #fff;
+    padding: 35px;
+    width: 100%;
+  }
+
+  
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 8px;
+    background-color: white;
+  }
+  
+  th, td {
+    -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+    border: none;
+    padding: 12px;
+    text-align: center;
+    font-size: 14px;
+    vertical-align: middle;
+    background-color: #eaeaea;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  }
+  
+  
+  th {
+    background-color: #b3b3b3;
+    font-weight: bold;
+  }
+  
+  .fase-cell {
+    background-color: #b3b3b3;
+    font-weight: bold;
+  }
+  
+  @media print {
+    /* CONFIGURAÇÕES GERAIS */
+    body {
+    width: 100vw !important;
+    height: auto !important;
+    overflow: visible !important;
+    }
+  
+    @page {
+            size: A5 portrait; /* ou A5 landscape se quiser deitado */
+            margin: 1cm;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 10pt;
+        }
+  
+    /* CABEÇALHO FIXO COMPLETO */
+    .cabecalho {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 80px !important;
+      background: white !important;
+      border-bottom: 2px solid #484848 !important;
+      box-shadow: none !important;
+      display: table !important;
+      padding: 10px 20px !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      /* Garante que não seja cortado */
+      margin: 0 !important;
+      z-index: 9999;
+    }
+  
+    /* CONTEÚDO PRINCIPAL */
+    .container {
+      padding: 0; /* Removido o padding */
+  width: 100vw; /* Garante 100% da largura da tela */
+      margin-top: 0 !important;
+      /* Começa após o cabeçalho */
+      position: relative;
+      top: 80px;
+      page-break-inside: avoid;
+    }
+  
+    /* ELEMENTOS DA TABELA */
+    table {
+      width: 100%;
+      page-break-inside: auto;
+      margin-top: 10px !important;
+    }
+    .container, table {
+      width: 100% !important;
+  }
+  
+    /* ELEMENTOS DO CABEÇALHO */
+    .logo {
+
+    }
+  
+    .titulo {
+      width: auto !important;
+      border-right: none !important;
+      padding: 0 15px !important;
+    }
+  
+    .ano {
+      width: auto !important;
+      font-size: 14pt !important;
+    }
+  
+    /* GARANTIR VISIBILIDADE */
+    * {
+      overflow: visible !important;
+      visibility: visible !important;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="cabecalho">
+    <apex:image value="{!URLFOR($Resource.Logo_Hospcom)}" styleClass="logo" />
+
+
+    <div class="titulo">
+      <h1>Plano de Gerenciamento de Risco – Assistência Técnica</h1>
+    </div>
+    <div class="ano">Ano: 2025</div>
+  </header>
+  <div class="container">
+    <table>
+      <thead>
+        <tr>
+          <th>Fases do Processo</th>
+          <th>Perigos</th>
+          <th>Efeito potencial da Falha (Dano)</th>
+          <th>Probabilidade (P)</th>
+          <th>Severidade (S)</th>
+          <th>Capacidade Detecção (CD)</th>
+          <th>Risco Potencial RP=P*S*CD</th>
+          <th>Ações Corretivas (Mitigar os Riscos)</th>
+          <th>Ações Corretivas (Imediata)</th>
+          <th>P</th>
+          <th>S</th>
+          <th>CD</th>
+          <th>RR Risco Residual RR=P*S*CD</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Atendimento – Chamado Técnico -->
+        <tr>
+          <td rowspan="8" class="fase-cell">Atendimento – Chamado Técnico</td>
+          <td>Não Abertura de Chamado Técnico</td>
+          <td>Falha no Registro de Atendimento/ Não atendimento na Demanda</td>
+          <td>1</td><td>5</td><td>2</td><td>10</td>
+          <td>Abertura de Chamados via WEB; Funil de Revisão Semanal</td>
+          <td>Abertura da OT no Sistema</td>
+          <td>1</td><td>3</td><td>1</td><td>3</td>
+        </tr>
+        <tr>
+          <td>Abertura de OT errada</td>
+          <td>Tempo de Atendimento, Falha de Planejamento</td>
+          <td>1</td><td>5</td><td>2</td><td>10</td>
+          <td>Revisão durante o Funil Técnico/ADM de Serviços</td>
+          <td>Correção das Informações</td>
+          <td>1</td><td>3</td><td>1</td><td>3</td>
+        </tr>
+        <tr>
+          <td>Abertura de OT duplicada</td>
+          <td>Retrabalho Interno</td>
+          <td>1</td><td>1</td><td>2</td><td>2</td>
+          <td>Revisão durante o Funil Técnico/ADM de Serviços</td>
+          <td>Cancelamento da OT</td>
+          <td>1</td><td>1</td><td>1</td><td>1</td>
+        </tr>
+        <tr>
+          <td>Não Agendamento com Cliente</td>
+          <td>Insatisfação do cliente e Prejuízo Financeiro</td>
+          <td>2</td><td>5</td><td>2</td><td>20</td>
+          <td>Treinamento Semestral do fluxo e rotina – ADM de Serviços</td>
+          <td>Efetuar comunicação imediata</td>
+          <td>1</td><td>4</td><td>1</td><td>4</td>
+        </tr>
+        <tr>
+          <td>Equipamento devolvido com Falha</td>
+          <td>Retrabalho e Insatisfação do Cliente</td>
+          <td>1</td><td>5</td><td>4</td><td>20</td>
+          <td>Teste funcional antes da devolução</td>
+          <td>Recolher e voltar para a bancada p/ análise técnica</td>
+          <td>1</td><td>3</td><td>2</td><td>6</td>
+        </tr>
+        <tr>
+          <td>Equipamento retirado sem higienização do Hospital</td>
+          <td>Risco Biológico</td>
+          <td>5</td><td>5</td><td>4</td><td>100</td>
+          <td>Providenciar documentação p/ Cliente assinar com orientação de obrigatoriedade de higienização</td>
+          <td>Solicitar p/ cliente no ato da retirada</td>
+          <td>3</td><td>3</td><td>3</td><td>27</td>
+        </tr>
+        <tr>
+          <td>Equipamento não higienizado na Entrada da empresa</td>
+          <td>Risco Biológico</td>
+          <td>5</td><td>5</td><td>2</td><td>50</td>
+          <td>Treinamento Semestral da equipe técnica</td>
+          <td>Efetuar higienização imediata</td>
+          <td>2</td><td>4</td><td>1</td><td>8</td>
+        </tr>
+        <tr>
+          <td>Equipamento não higienizado na devolução para o Cliente</td>
+          <td>Insatisfação do Cliente</td>
+          <td>3</td><td>5</td><td>2</td><td>30</td>
+          <td>Treinamento Semestral da equipe técnica</td>
+          <td>Efetuar higienização imediata</td>
+          <td>1</td><td>3</td><td>1</td><td>3</td>
+        </tr>
+
+        <!-- Atendimento – Instalação -->
+        <tr>
+          <td rowspan="3" class="fase-cell">Atendimento – Instalação</td>
+          <td>Não planejamento da atividade junto com o time técnico</td>
+          <td>Falha de Atendimento, Prejuízo Financeiro</td>
+          <td>3</td><td>4</td><td>2</td><td>24</td>
+          <td>Mapeamento macro de atividades semanais</td>
+          <td>Comunicar p/ técnico e enviar documentação necessária</td>
+          <td>2</td><td>3</td><td>3</td><td>18</td>
+        </tr>
+        <tr>
+          <td>Falta de comunicação com o cliente</td>
+          <td>Insatisfação do Cliente</td>
+          <td>1</td><td>5</td><td>3</td><td>15</td>
+          <td></td>
+          <td></td>
+          <td>Treinamento Semestral da equipe técnica</td>
+          <td>Comunicar imediatamente e efetuar agendamento</td>
+          <td>1</td><td>3</td><td>2</td><td>6</td>
+        </tr>
+        <tr>
+          <td></td><td></td><td></td><td>1</td>
+          <td></td>
+          <td></td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+
+
+</apex:page>

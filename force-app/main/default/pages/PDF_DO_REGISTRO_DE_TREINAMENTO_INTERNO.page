@@ -1,0 +1,384 @@
+<apex:page standardController="Registro_de_Servi_o_2__c" renderAs="pdf" showHeader="false" showChat="false" applyHtmlTag="false">
+
+    <head>
+        <style> 
+            thead { display: table-header-group; }  
+            tfoot { display: table-footer-group; } 
+           @page {  
+                     size: A4 portrait; /* ISO/JIS A4 (210mmx297mm) */  
+                     margin: 5mm; 
+                  } 
+            @page:first {  
+                     size: A4 portrait; /* ISO/JIS A4 (210mmx297mm) */ 
+                     margin: 5mm; 
+                     margin-top: 3mm; 
+
+                  } 
+                 .titulo_2{ /* td */
+                padding:2px;
+                margin:0px;
+                border-bottom:1px solid #cacecf;
+                font-family:arial, verdana, sans-serif;
+                font-size:12px;
+                font-weight:bold;
+                text-align:center;
+                background-color:#e2e3e3;
+            }
+            .tabela_conteudo{
+                width:100%;
+                border:1px #cacecf solid;
+            }
+            .label{ /* td */
+          
+                padding:2px;
+                margin:0px;
+                border-bottom:1px solid #eef2f4;
+                font-family:arial, verdana, sans-serif;
+                font-size:9pt;
+                font-weight:bold;
+                text-align:left;
+                vertical-align:top;
+            }
+             .valor{ /* td */
+                padding:2px;
+                margin:0px;
+                border-bottom:1px solid #eef2f4;
+                font-family:arial, verdana, sans-serif;
+                font-size:11px;
+                font-weight:normal;
+                text-align:left;
+                vertical-align:top;
+            }
+        </style>
+    </head>
+    
+    
+    
+    <Body style="font-family:verdana,sans-serif; font-size: 9pt">
+        <table cellpadding="0px" cellspacing="0px" style="width:100%;">
+            <thead>   
+                <tr>    
+                    <th style="border:1px solid #cacecf" align="center" width="190px"> <img src="https://hospcom--c.na25.content.force.com/servlet/servlet.FileDownload?file=01531000008Tjd8" width="175" height="75px"/> </th> 
+                    <th width="400px" align="center" style="border-top:1px solid #cacecf; font-family: verdana,sans-serif; font-size:15pt"><b>REGISTRO DE TREINAMENTO INTERNO</b></th> 
+                    <th width="120px" align="center" style="border:1px solid #cacecf; font-family: verdana,sans-serif; font-size:10pt"><b>RTI N°&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></th>
+                </tr>
+                <tr>    
+                    <th style="border-bottom:1px solid #cacecf;border-left:1px solid #cacecf;border-right:1px solid #cacecf;font-family: verdana,sans-serif; font-size:10pt" align="center" width="190px"> Emissão:&nbsp; <apex:outputfield value="{!Registro_de_Servi_o_2__c.Tipo_do_Documento__r.Data_de_Cria_o__c}"/></th> 
+                    <th width="400px" align="center" style="border-bottom:1px solid #cacecf; font-family: verdana,sans-serif; font-size:10pt"></th> 
+                    <th width="120px" align="center" style="border-bottom:1px solid #cacecf;border-left:1px solid #cacecf;border-right:1px solid #cacecf; font-family: verdana,sans-serif; font-size:10pt"><b>Página: 1 de 1</b></th>
+                </tr>
+            </thead> 
+        </table>
+        <br/>
+     <table cellpadding="0px" cellspacing="0px" style="width:100%; border: 1px solid #cacecf ;">
+                <tr>
+                    <td class="titulo_2" colspan="2">
+                        IDENTIFICAÇÃO {!Registro_de_Servi_o_2__c.RecordType}
+                    </td>
+                </tr>
+                         
+                 <tr>
+
+                    <td style="width:100%; vertical-align:top; padding:4px 2px 0px 4px;">
+                        <table cellpadding="0px" cellspacing="0px">
+                           
+                            <tr><td class="label" width="45px">Local:</td>        
+                            <td class="valor" width="665px"></td></tr>
+                                                        
+                        </table>
+                    </td>
+
+                </tr>
+                <tr>
+
+                    <td style="width:100%; vertical-align:top; padding:0px 2px 2px 4px;">
+                        <table cellpadding="0px" cellspacing="0px">
+                           
+                            <tr>
+                            <td class="label" width="45px">Data:</td>        
+                            <td class="valor" width="255px"></td>
+                            
+                            <td class="label" width="107px">Horário de Início:</td>        
+                            <td class="valor" width="183.66px"></td>
+                            
+                            <td class="label" width="90px">Carga Horária:</td>        
+                            <td class="valor" width="93px"></td>
+                            </tr>
+                                                        
+                                                        
+                        </table>
+                    </td>
+
+                </tr>
+
+                
+       </table>
+       
+       <br/>  
+                    
+            <table cellpadding="0px" cellspacing="0px" style="width:100%; border: 1px solid #cacecf ;">
+                    <tr>
+                        <td class="titulo_2" colspan="2">
+                            PARTICIPANTE(S)
+                        </td>
+                    </tr>
+                             
+                     <tr>
+    
+                        <td style="width:100%; vertical-align:top; padding:4px 2px 0px 4px;">
+                            <table cellpadding="0px" cellspacing="0px">
+                                <tr>
+                                   <th class="label" width="30px" style="text-align:center"><b>Nº</b></th>
+                                   <th class="label" width="275px" style="text-align:center"><b>NOME</b></th>
+                                   <th class="label" width="270px" style="text-align:center"><b>ASSINATURA</b></th>
+                                 </tr>
+                                 <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>1</b></td>
+
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>
+                                 <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>2</b></td>
+ 
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>
+                                  <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>3</b></td>
+                                  
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>
+                                  <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>4</b></td>
+                                  
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>
+                                  <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>5</b></td>
+                                   
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>
+                                  <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>6</b></td>
+                                 
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>                                
+                                 <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>7</b></td>
+                                   
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>
+                                  <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>8</b></td>
+                                  
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>
+                                  <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>9</b></td>
+                                  
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>
+                                  <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>10</b></td>
+                                  
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>
+                                  <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>11</b></td>
+                                   
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>
+                                  <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>12</b></td>
+                                  
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>
+                                  <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>13</b></td>
+                                   
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>
+                                  <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>14</b></td>
+                                   
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>
+                                  <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>15</b></td>
+                                   
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>
+                                  <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>16</b></td>
+                                  
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>
+                                  <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>17</b></td>
+                                   
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>
+                                  <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>18</b></td>
+                                   
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>
+                                  <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>19</b></td>
+                                   
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>
+                                  <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>20</b></td>
+                                   
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>
+                                  <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>21</b></td>
+                                  
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>
+                                  <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>22</b></td>
+                                  
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>
+                                  <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>23</b></td>
+                                 
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>
+                                  <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>24</b></td>
+                                   
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>
+                                 <tr>
+                                   <td class="label" width="30px" style="text-align:center;border-right:0.5px solid #cacecf"><b>25</b></td>
+                                   
+                                   <td class="label" width="410px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" style="text-align:center;"><b></b></td>
+                                 </tr>
+                            </table>
+                        </td>
+    
+                    </tr>
+           </table>
+       <br/>
+       
+       
+       
+       <table cellpadding="0px" cellspacing="0px" style="width:100%; border: 1px solid #cacecf ;">
+                    <tr>
+                        <td class="titulo_2" colspan="2">
+                            TÍTULO
+                        </td>
+                    </tr>
+                             
+                     <tr>
+    
+                        <td style="width:100%; vertical-align:top; padding:4px 2px 0px 4px;">
+                                <table cellpadding="0px" cellspacing="0px">
+                                    <tr><td class="label" width="710px" height="17px"></td></tr>
+                                    <tr><td class="label" width="710px" height="17px"></td></tr>
+                                    <tr><td class="label" width="710px" height="17px"></td></tr>
+                                </table>                                                                  
+                        </td>
+    
+                    </tr>
+           </table>
+           <br/>
+           <table cellpadding="0px" cellspacing="0px" style="width:100%; border: 1px solid #cacecf ;">
+                    <tr>
+                        <td class="titulo_2" colspan="2">
+                            CONTEÚDO DO TREINAMENTO
+                        </td>
+                    </tr>                       
+                     <tr>
+    
+                        <td style="width:100%; vertical-align:top; padding:4px 2px 0px 4px;">
+                                <table cellpadding="0px" cellspacing="0px">
+                                    <tr><td class="label" width="710px" height="17px"></td></tr>
+                                    <tr><td class="label" width="710px" height="17px"></td></tr>
+                                    <tr><td class="label" width="710px" height="17px"></td></tr>   
+                                </table>
+                        </td>
+                    </tr>
+           </table>
+           <br/>
+            <table cellpadding="0px" cellspacing="0px" style="width:100%; border: 1px solid #cacecf ;">
+                    <tr>
+                        <td class="titulo_2" colspan="2">
+                            MINISTRANTE(S)
+                        </td>
+                    </tr>
+                             
+                     <tr>
+    
+                        <td style="width:100%; vertical-align:top; padding:4px 2px 0px 4px;">
+                            <table cellpadding="0px" cellspacing="0px">
+                            <tr>
+                                   <th class="label" width="330px" style="text-align:center"><b>NOME</b></th>
+                                   <th class="label" width="250px" style="text-align:center"><b>ASSINATURA</b></th>
+                                     
+                            </tr>
+                            
+                            <tr>
+                                   <td class="label" width="440px" height="17px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" height="17px" style="text-align:center;"><b></b></td>
+                                   
+                                   
+                            </tr>
+                            <tr>
+                                   <td class="label" width="440px" height="17px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" height="17px" style="text-align:center;"><b></b></td>     
+                                   
+                            </tr>
+                            <tr>
+                                   <td class="label" width="440px" height="17px" style="text-align:center;border-right:0.5px solid #cacecf"><b></b></td>
+                                   <td class="label" width="270px" height="17px" style="text-align:center;"><b></b></td>
+                                   
+                            </tr>
+                            
+                            </table>
+                        </td>
+    
+                    </tr>
+           </table>
+</body>
+<foot>
+    <table style="font-family:Verdana, sans-serif; font-size:9pt; position:fixed; right:5px;bottom:0px">
+        <tr>
+            <td>
+                <b>Revisão:&nbsp;<apex:outputfield value="{!Registro_de_Servi_o_2__c.Tipo_do_Documento__r.N_da_Revis_o__c}"/></b>
+            &nbsp;-&nbsp;
+                <b>Data da Revisão:&nbsp;<apex:outputfield value="{!Registro_de_Servi_o_2__c.Tipo_do_Documento__r.Data_da_Ultima_Revis_o__c}"/></b>
+            </td>
+        </tr>
+    </table>
+</foot>
+
+</apex:page>

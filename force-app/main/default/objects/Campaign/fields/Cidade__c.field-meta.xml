@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cidade__c</fullName>
+    <externalId>false</externalId>
+    <label>Cidade</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Estado__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Aracaju</fullName>
+                <default>false</default>
+                <label>Aracaju</label>
+            </value>
+            <value>
+                <fullName>Belém</fullName>
+                <default>false</default>
+                <label>Belém</label>
+            </value>
+            <value>
+                <fullName>Belo Horizonte</fullName>
+                <default>false</default>
+                <label>Belo Horizonte</label>
+            </value>
+            <value>
+                <fullName>Boa Vista</fullName>
+                <default>false</default>
+                <label>Boa Vista</label>
+            </value>
+            <value>
+                <fullName>Brasília</fullName>
+                <default>false</default>
+                <label>Brasília</label>
+            </value>
+            <value>
+                <fullName>Campo Grande</fullName>
+                <default>false</default>
+                <label>Campo Grande</label>
+            </value>
+            <value>
+                <fullName>Cuiabá</fullName>
+                <default>false</default>
+                <label>Cuiabá</label>
+            </value>
+            <value>
+                <fullName>Curitiba</fullName>
+                <default>false</default>
+                <label>Curitiba</label>
+            </value>
+            <value>
+                <fullName>Dourados</fullName>
+                <default>false</default>
+                <label>Dourados</label>
+            </value>
+            <value>
+                <fullName>Florianópolis</fullName>
+                <default>false</default>
+                <label>Florianópolis</label>
+            </value>
+            <value>
+                <fullName>Fortaleza</fullName>
+                <default>false</default>
+                <label>Fortaleza</label>
+            </value>
+            <value>
+                <fullName>Foz do Iguaçu</fullName>
+                <default>false</default>
+                <label>Foz do Iguaçu</label>
+            </value>
+            <value>
+                <fullName>Goiânia</fullName>
+                <default>false</default>
+                <label>Goiânia</label>
+            </value>
+            <value>
+                <fullName>João Pessoa</fullName>
+                <default>false</default>
+                <label>João Pessoa</label>
+            </value>
+            <value>
+                <fullName>Macapá</fullName>
+                <default>false</default>
+                <label>Macapá</label>
+            </value>
+            <value>
+                <fullName>Maceió</fullName>
+                <default>false</default>
+                <label>Maceió</label>
+            </value>
+            <value>
+                <fullName>Manaus</fullName>
+                <default>false</default>
+                <label>Manaus</label>
+            </value>
+            <value>
+                <fullName>Natal</fullName>
+                <default>false</default>
+                <label>Natal</label>
+            </value>
+            <value>
+                <fullName>Outra</fullName>
+                <default>false</default>
+                <label>Outra</label>
+            </value>
+            <value>
+                <fullName>Palmas</fullName>
+                <default>false</default>
+                <label>Palmas</label>
+            </value>
+            <value>
+                <fullName>Porto Alegre</fullName>
+                <default>false</default>
+                <label>Porto Alegre</label>
+            </value>
+            <value>
+                <fullName>Porto Velho</fullName>
+                <default>false</default>
+                <label>Porto Velho</label>
+            </value>
+            <value>
+                <fullName>Recife</fullName>
+                <default>false</default>
+                <label>Recife</label>
+            </value>
+            <value>
+                <fullName>Rio Branco</fullName>
+                <default>false</default>
+                <label>Rio Branco</label>
+            </value>
+            <value>
+                <fullName>Rio de Janeiro</fullName>
+                <default>false</default>
+                <label>Rio de Janeiro</label>
+            </value>
+            <value>
+                <fullName>Salvador</fullName>
+                <default>false</default>
+                <label>Salvador</label>
+            </value>
+            <value>
+                <fullName>São Luís</fullName>
+                <default>false</default>
+                <label>São Luís</label>
+            </value>
+            <value>
+                <fullName>São Paulo</fullName>
+                <default>false</default>
+                <label>São Paulo</label>
+            </value>
+            <value>
+                <fullName>Teresina</fullName>
+                <default>false</default>
+                <label>Teresina</label>
+            </value>
+            <value>
+                <fullName>Vitória</fullName>
+                <default>false</default>
+                <label>Vitória</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Rondônia</controllingFieldValue>
+            <valueName>Porto Velho</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Roraima</controllingFieldValue>
+            <valueName>Boa Vista</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Santa Catarina</controllingFieldValue>
+            <valueName>Florianópolis</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>São Paulo</controllingFieldValue>
+            <valueName>São Paulo</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Sergipe</controllingFieldValue>
+            <valueName>Aracaju</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Tocantins</controllingFieldValue>
+            <valueName>Palmas</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Maranhão</controllingFieldValue>
+            <valueName>São Luís</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Mato Grosso</controllingFieldValue>
+            <valueName>Cuiabá</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Mato Grosso do Sul</controllingFieldValue>
+            <valueName>Campo Grande</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Mato Grosso do Sul</controllingFieldValue>
+            <valueName>Dourados</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Minas Gerais</controllingFieldValue>
+            <valueName>Belo Horizonte</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pará</controllingFieldValue>
+            <valueName>Belém</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Paraíba</controllingFieldValue>
+            <valueName>João Pessoa</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Paraná</controllingFieldValue>
+            <valueName>Curitiba</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Paraná</controllingFieldValue>
+            <valueName>Foz do Iguaçu</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pernambuco</controllingFieldValue>
+            <valueName>Recife</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Piauí</controllingFieldValue>
+            <valueName>Teresina</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Rio de Janeiro</controllingFieldValue>
+            <valueName>Rio de Janeiro</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Acre</controllingFieldValue>
+            <valueName>Rio Branco</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Alagoas</controllingFieldValue>
+            <valueName>Maceió</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Amapá</controllingFieldValue>
+            <valueName>Macapá</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Amazonas</controllingFieldValue>
+            <valueName>Manaus</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Bahia</controllingFieldValue>
+            <valueName>Salvador</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Ceará</controllingFieldValue>
+            <valueName>Fortaleza</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Distrito Federal</controllingFieldValue>
+            <valueName>Brasília</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Espírito Santo</controllingFieldValue>
+            <valueName>Vitória</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Goiás</controllingFieldValue>
+            <valueName>Goiânia</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Rio Grande do Norte</controllingFieldValue>
+            <valueName>Natal</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Rio Grande do Sul</controllingFieldValue>
+            <valueName>Porto Alegre</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

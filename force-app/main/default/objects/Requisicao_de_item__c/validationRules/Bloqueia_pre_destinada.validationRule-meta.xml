@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bloqueia_pre_destinada</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISCHANGED(Quantidade_predestinada__c) &amp;&amp;
+NOT($User.Ignorar_erros__c)</errorConditionFormula>
+    <errorMessage>Não é permitido a alteração da quantidade pré-destinada.</errorMessage>
+</ValidationRule>

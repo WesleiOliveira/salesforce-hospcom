@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Recebido_Parcial</fullName>
+    <active>false</active>
+    <errorConditionFormula>IF(Quantidade_Recebida__c == 0 &amp;&amp; TEXT(Status__c) = &apos;Recebido Parcial&apos;, true, false)</errorConditionFormula>
+    <errorDisplayField>Status__c</errorDisplayField>
+    <errorMessage>Nenhum item foi recebido.</errorMessage>
+</ValidationRule>

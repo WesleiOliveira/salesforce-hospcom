@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Documentacao_de_credenciamento__c</fullName>
+    <externalId>false</externalId>
+    <label>Documentação de credenciamento</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Contrato Social</fullName>
+                <default>false</default>
+                <label>Contrato Social</label>
+            </value>
+            <value>
+                <fullName>Documento dos sócios</fullName>
+                <default>false</default>
+                <label>Documento dos sócios</label>
+            </value>
+            <value>
+                <fullName>Documentos Procurador</fullName>
+                <default>false</default>
+                <label>Documentos Procurador</label>
+            </value>
+            <value>
+                <fullName>Declaração de Habilitação</fullName>
+                <default>false</default>
+                <label>Declaração de Habilitação</label>
+            </value>
+            <value>
+                <fullName>Termo de Credenciamento</fullName>
+                <default>false</default>
+                <label>Termo de Credenciamento</label>
+            </value>
+            <value>
+                <fullName>Procuração Especifica</fullName>
+                <default>false</default>
+                <label>Procuração Especifica</label>
+            </value>
+            <value>
+                <fullName>Declaração ME/EPP</fullName>
+                <default>false</default>
+                <label>Declaração ME/EPP</label>
+            </value>
+            <value>
+                <fullName>Certidão Simplificada</fullName>
+                <default>false</default>
+                <label>Certidão Simplificada</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>3</visibleLines>
+</CustomField>

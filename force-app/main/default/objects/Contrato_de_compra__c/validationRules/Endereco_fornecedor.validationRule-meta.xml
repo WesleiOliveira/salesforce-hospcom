@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Endereco_fornecedor</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+RecordType.Name == &apos;Padrão&apos;,
+Fornecedor__r.BillingCountry == &apos;Brasil&apos;,
+OR(
+ISBLANK(Fornecedor__r.BillingStreet), ISBLANK(Fornecedor__r.BillingCity), ISBLANK(Fornecedor__r.BillingState), ISBLANK(Fornecedor__r.BillingPostalCode)
+)
+)</errorConditionFormula>
+    <errorDisplayField>Fornecedor__c</errorDisplayField>
+    <errorMessage>Preencha corretamente o endereço do fornecedor.</errorMessage>
+</ValidationRule>

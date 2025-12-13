@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <environments>Default</environments>
+    <formulas>
+        <name>numerodocontrato</name>
+        <dataType>String</dataType>
+        <expression>IF(!ISNULL({!$Record.Cotacao__c}), &apos; de venda &apos; + {!$Record.Cotacao__r.QuoteNumber},
+IF(!ISNULL({!$Record.Contrato_de_Servico__c}), &apos; de serviço/locação &apos; + {!$Record.Contrato_de_Servico__r.N_mero_da_Proposta_Contrato__c},
+IF(!ISNULL({!$Record.Ordem_de_trabalho__c}), &apos; de serviço &apos; + {!$Record.Ordem_de_trabalho__r.WorkOrderNumber},
+IF(!ISNULL({!$Record.Comodato__c}), &apos; de comodato &apos; + {!$Record.Comodato__r.Name},
+IF(!ISNULL({!$Record.Demonstracao__c}), &apos; de demonstração &apos; + {!$Record.Demonstracao__r.OrderNumber}
+, &apos;&apos;)))))</expression>
+    </formulas>
+    <formulas>
+        <name>prazoTarefa</name>
+        <dataType>Date</dataType>
+        <expression>IF(WEEKDAY({!$Flow.CurrentDate}) = 5 , {!$Flow.CurrentDate} + 4,
+IF(WEEKDAY({!$Flow.CurrentDate}) = 6, {!$Flow.CurrentDate} + 4,
+{!$Flow.CurrentDate} + 2))</expression>
+    </formulas>
+    <interviewLabel>Alteração de contrato - Cria tarefa {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Alteração de contrato — Cria tarefa</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Cria_tarefa_para_jur_dico</name>
+        <label>Cria tarefa para jurídico</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>prazoTarefa</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>comentarios</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <stringValue>0055A00000BcBOn</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Não iniciado</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>Revisão de contrato</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subtitulo__c</field>
+            <value>
+                <stringValue>Alteração de contrato</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Cria_tarefa_para_jur_dico</targetReference>
+        </connector>
+        <object>Alteracao_de_contrato__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>comentarios</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>{!$Record.CreatedBy.FirstName} {!$Record.CreatedBy.LastName}  solicitou uma alteração no contrato {!numerodocontrato}.</text>
+    </textTemplates>
+</Flow>

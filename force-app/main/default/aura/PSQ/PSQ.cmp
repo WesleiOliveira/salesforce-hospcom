@@ -1,0 +1,361 @@
+<aura:component extends="c.ApexHelper" controller="PSQcriaAtualizacao" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+
+   
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+   
+
+    <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome6 + '/css/all.min.css',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css',
+                          $Resource.bootstrap5 + '/css/bootstrap.min.css',
+                          $Resource.bootstrapSelect14 + '/docs/docs/dist/css/bootstrap-select.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery,
+                           $Resource.sortableJs + '/Sortable.js',
+                           $Resource.popper + '/popper.js',
+                           $Resource.bootstrap5 + '/js/bootstrap.min.js',
+                           $Resource.bootstrapSelect14 + '/docs/docs/dist/js/bootstrap-select.min.js')}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    <body id="delite">
+        <div class="content">
+            <div class="visualiza-psq">
+                <div class="texto">
+                    Visualizar
+                </div>
+                
+                <div class="imagem">
+                    <i class="fa fa-file-text-o" aria-hidden="true" style=" font-size:8rem; color:#00345c;"></i>
+                </div>
+            </div>
+            
+            <div class="Edita-psq">
+                <div class="texto">
+                    Editar 
+                </div>
+                
+                <div class="imagem">
+                    <i class="fa fa-pencil" aria-hidden="true" style=" font-size:8rem; color:#00345c;"></i>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class = "body">
+            <div class= "container-geral">
+                <div class = "cabecalho">
+                    <div class= "cont-titulo">
+     			  			 <h1 class="titulo">Procedimentos do Sistema de Qualidade</h1>             
+                    </div>
+                    
+                    <div class = "cont-subTitulo">
+                        <h2 id = "subTitulo"> Selecione as empresas</h2>
+                    </div>
+                </div>
+                
+                
+                <div class="edicaoStatusGeral">
+                    
+             
+                    
+                    
+                    <div> 
+                        <label for="GDB">
+                            <div class="empresa fundo2label">
+                                <img class="img fundo2" src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000CI0PL&amp;oid=00Di0000000JVhH&amp;lastMod=1679916443000" />
+                            </div>
+                        </label>
+                        <input id="GDB" class="empresa i" type="checkbox" name="meuCheckbox" data-empresa="" value="a0g6e00000J4FLSAA3" />
+                    </div>
+                    
+                    
+                     <!-- <div> acb go
+                        <label for="ABC1-GO">
+                            <div class="empresa fundo2label">
+                                <img class="img fundo2" src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000CI0Pu&amp;oid=00Di0000000JVhH&amp;lastMod=1679916410000" />
+                            </div>
+                        </label>
+                        <input id="ABC1-GO" class="empresa i" type="checkbox" name="meuCheckbox" value="a0g6e00000JW5s6AAD" />
+                    </div>
+                    -->
+                    
+                    
+                    <div> <!-- acb-mt -->
+                        <label for="ABC2-MT">
+                            <div class="empresa fundo2label">
+                                <img class="img fundo2" src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000CI0QE&amp;oid=00Di0000000JVhH&amp;lastMod=1679916404000" />
+                            </div>
+                        </label>
+                        <input id="ABC2-MT" class="empresa i" type="checkbox" name="meuCheckbox" value="a0g6e00000JvcVyAAJ" />
+                    </div>
+                    
+                    <div> <!-- acb-to -->
+                        <label for="ABC-TO">
+                            <div class="empresa fundo2label">
+                                <img class="img fundo2" src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000CI0PQ&amp;oid=00Di0000000JVhH&amp;lastMod=1679916450000" />
+                            </div>
+                        </label>
+                        <input id="ABC-TO" class="empresa i" type="checkbox" name="meuCheckbox" value="a0g6e00000J4FLhAAN" />    
+                    </div>
+                    
+                    <div>
+                        <label for="HEALTH_SOLUTION">
+                            <div class="empresa fundo2label">
+                                <img class="img fundo2" src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000CI0QJ&amp;oid=00Di0000000JVhH&amp;lastMod=1679916400000" />
+                            </div>
+                        </label>
+                        <input id="HEALTH_SOLUTION" class="empresa i" type="checkbox" name="meuCheckbox" value="a0g3100000DeRswAAF" />
+                    </div>
+                    
+                    <div> <!-- hospcom -->
+                        <label for="HOSPCOM1">
+                            <div class="empresa">
+                                <img class="img fundo"
+                                     src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000CI0QY&amp;oid=00Di0000000JVhH&amp;lastMod=1679917033000" />
+                            </div>
+                        </label>
+                        <input id="HOSPCOM1" class="empresa i" type="checkbox" name="meuCheckbox" value="a0g3100000EOrZPAA1" />
+                    </div>
+                    
+                    
+                    <!-- hospcom-df -->
+                    
+                    <div>
+                        <label for="HOSPCOM2-DF">
+                            <div class="empresa">
+                                <img class="img fundo"
+                                     src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000CI0QT&amp;oid=00Di0000000JVhH&amp;lastMod=1679916465000" />
+                            </div>
+                        </label>
+                        <input id="HOSPCOM2-DF" class="empresa i" type="checkbox" name="meuCheckbox"  value="a0g6e00000KN836AAD" />
+                    </div> 
+                    
+                    <!-- hospcom-AM -->
+                    
+                    <div>
+                        <label for="HOSPCOM-AM">
+                            <div class="empresa">
+                                <img class="img fundo"
+                                     src="https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=015U400000JzE4m&amp;oid=00Di0000000JVhH&amp;lastMod=1748370786000" />
+                            </div>
+                        </label>
+                        <input id="HOSPCOM-AM" class="empresa i" type="checkbox" name="meuCheckbox"  value="001U400000N849MIAR" />
+                    </div> 
+                    
+                    
+                    <!-- hospcom-MT -->
+                    
+                    <div>
+                        <label for="HOSPCOM5MT">
+                            <div class="empresa">
+                                <img class="img fundo"
+                                     src="https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=015U400000JzMtW&amp;oid=00Di0000000JVhH&amp;lastMod=1748370765000" />
+                            </div>
+                        </label>
+                        <input id="HOSPCOM5MT" class="empresa i" type="checkbox" name="meuCheckbox"  value="001U4000006NOXhIAO" />
+                    </div> 
+                    
+                    <!-- hospcom-153 -->
+                    
+                    <div>
+                        <label for="HOSPCOM-153">
+                            <div class="empresa">
+                                <img class="img fundo"
+                                     src="https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=015U400000JzAFh&amp;oid=00Di0000000JVhH&amp;lastMod=1748370747000" />
+                            </div>
+                        </label>
+                        <input id="HOSPCOM-153" class="empresa i" type="checkbox" name="meuCheckbox"  value="001U4000006s18xIAA" />
+                    </div> 
+                    
+                    <!-- hospcom-MG -->
+                    
+                    <div>
+                        <label for="HOSPCOM MG">
+                            <div class="empresa">
+                                <img class="img fundo"
+                                     src="https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=015U400000JzOP3&amp;oid=00Di0000000JVhH&amp;lastMod=1748370715000" />
+                            </div>
+                        </label>
+                        <input id="HOSPCOM MG" class="empresa i" type="checkbox" name="meuCheckbox"  value="001U400000NafuRIAR" />
+                    </div> 
+                    
+                    <!-- hospcom Sorocaba -->
+                    
+                    <div>
+                        <label for="HOSPCOM-SOROCABA">
+                            <div class="empresa">
+                                <img class="img fundo"
+                                     src="https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=015U400000JzFyW&amp;oid=00Di0000000JVhH&amp;lastMod=1748370797000" />
+                            </div>
+                        </label>
+                        <input id="HOSPCOM-SOROCABA" class="empresa i" type="checkbox" name="meuCheckbox"  value="001U4000006sAHDIA2" />
+                    </div> 
+
+                      <!-- hospcom-SP CAPITAL -->
+                    
+                    <div>
+                        <label for="HOSPCOM-SP CAPITAL">
+                            <div class="empresa">
+                                <img class="img fundo"
+                                     src="https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=015U400000JzFyW&amp;oid=00Di0000000JVhH&amp;lastMod=1748370797000" />
+                            </div>
+                        </label>
+                        <input id="HOSPCOM-SP CAPITAL" class="empresa i" type="checkbox" name="meuCheckbox"  value="001U400000UOpmWIAT" />
+                    </div> 
+                    
+                    
+                     <!-- GDB-GO -->
+                    
+                    <div>
+                        <label for="GDB-GO">
+                            <div class="empresa fundo2label">
+                                <img class="img fundo2"
+                                     src="https://hospcom.my.salesforce.com/servlet/servlet.ImageServer?id=015U400000JzERM&amp;oid=00Di0000000JVhH&amp;lastMod=1748370776000" />
+                            </div>
+                        </label>
+                        <input id="GDB-GO" class="empresa i" type="checkbox" name="meuCheckbox"  value="001U400000LvWNnIAN" />
+                    </div> 
+                    
+                    
+                    
+                    <!-- gestcom -->
+                    
+                    <div>
+                        <label for="GESTCOM">
+                            <div class="empresa">
+                                <img class="img fundo"
+                                     src="https://hospcom.file.force.com/servlet/servlet.ImageServer?id=0156e00000CI0QO&amp;oid=00Di0000000JVhH&amp;lastMod=1679916456000" />
+                            </div>
+                        </label>
+                        
+                        <input id="GESTCOM" class="empresa i" type="checkbox" name="meuCheckbox" value="0016e000039RTPXAA4" />
+                        
+                    </div>
+                </div>
+                
+                <div>
+                    <hr/>
+                </div> 
+                <div class="container-campos">
+                         
+
+                    <div class="texto-content">
+                        <select class="revisor"  id='revisor' data-bs-toggle="dropdown" data-show-subtext="true" data-live-search="true">
+                            <option value="" disabled="disabled"  selected="selected" hidden="hidden">Revisor</option>
+                        </select>
+                        <div>
+                            <p data-campoS="revisor__c"></p> 
+                            <textarea class="texto" id="revisor__c" name="revisor__c" hidden="hidden" value = ""> </textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="texto-content">
+                        <select class="elaborador"  id='elaborador' data-bs-toggle="dropdown" data-show-subtext="true" data-live-search="true">
+                            <option value="" disabled="disabled"  selected="selected" hidden="hidden">Elaborador</option>
+                        </select>
+                        <div>
+                            <p data-campoS="elaborador__c"></p> 
+                            <textarea class="texto" id="elaborador__c" name="revisor__c" hidden="hidden" value = ""> </textarea>
+                        </div>
+                    </div>
+                  
+                    
+                    <div class="texto-content">
+                        <p data-campoS="T_tulo_do_Documento__c">Título do Documento</p> 
+                        <textarea class="texto" id="T_tulo_do_Documento__c" name="Name" rows="2" cols="130" maxlength="80"></textarea>
+                    </div>  
+                   
+                    
+                     <div class="texto-content">
+                        <p data-campoS="Natureza_da_Altera_o__c">Natureza da Alteração</p> 
+                        <textarea class="texto" id="Natureza_da_Altera_o__c" name="Name" rows="2" cols="130" maxlength="255"></textarea>
+                    </div> 	   
+                    
+                    <div class="texto-content">
+                        <p data-campoS="C_digo_do_Documento__c">Código do Documento</p> 
+                        <textarea class="texto" id="C_digo_do_Documento__c" name="C_digo_do_Documento__c" rows="2" cols="130" maxlength="50"></textarea>
+                    </div> 
+
+                    <div class="texto-content">
+                        <p data-campoS="N_da_Revis_o__c">N° da Revisão</p> 
+                        <textarea class="texto" id="N_da_Revis_o__c" name="N_da_Revis_o__c" rows="2" cols="130"  maxlength="50"></textarea>
+                    </div> 
+                    <div class="texto-content">
+                        <p data-campoS="Objetivo__c">1.Objetivo</p> 
+                        <textarea class="texto" id="Objetivo__c" name="Objetivo__c" rows="2" cols="130" maxlength="100000"></textarea>
+                    </div> 
+                        
+                    <div class="texto-content">
+                        <p data-campoS="Aplicao__c">2.Aplicação</p> 
+                        <textarea class="texto" id="Aplicao__c" name="Aplicao__c" rows="2" cols="130" maxlength="100000"></textarea>
+                    </div>
+                        
+                    <div class="texto-content">
+                        <p data-campoS="Defini_es__c">3.Definições</p> 
+                        <textarea class="texto" id="Defini_es__c" name="Defini_es__c" rows="2" cols="130" maxlength="100000"></textarea>
+                    </div> 
+                
+                    <div class="texto-content">
+                        <p data-campoS="Equipamentos_e_Softwares__c">4.Equipamentos e Softwares</p> 
+                        <textarea class="texto" id="Equipamentos_e_Softwares__c" name="Equipamentos_e_Softwares__c" rows="2" cols="130" maxlength="100000"></textarea>
+                    </div> 
+                
+                    <div class="texto-content">
+                        <p data-campoS="Condi_es_Gerais__c">5.Condições Gerais</p> 
+                        <textarea class="texto" id="Condi_es_Gerais__c" name="Condi_es_Gerais__c" rows="2" cols="130" maxlength="100000"></textarea>
+                    </div> 
+                
+                    <div class="texto-content">
+                        <p data-campoS="Responsabilidade_e_Autoridade__c">6.Responsabilidade e Autoridade</p> 
+                        <textarea class="texto" id="Responsabilidade_e_Autoridade__c" name="Responsabilidade_e_Autoridade__c" rows="2" cols="130" maxlength="100000"></textarea>
+                    </div>    
+                
+                    <div class="texto-content">
+                        <p data-campoS="Refer_ncia__c">7.Referências</p> 
+                        <textarea class="texto" id="Refer_ncia__c" name="Refer_ncia__c" rows="2" cols="130" maxlength="100000"></textarea>
+                    </div> 
+                
+                    <div class="texto-content">
+                        <p data-campoS="Formul_rios_Anexos_e_Documentos__c">8.Formulários, Anexos e Documentos</p> 
+                        <textarea class="texto" id="Formul_rios_Anexos_e_Documentos__c" name="Formul_rios_Anexos_e_Documentos__c" rows="2" cols="130" maxlength="100000"></textarea>
+                    </div> 
+                
+                    <div class="texto-content">
+                        <p data-campoS="Registros__c">9.Registros</p> 
+                        <textarea class="texto" id="Registros__c" name="Registros__c" rows="2" cols="130" maxlength="100000"></textarea>
+                    </div> 
+                
+                        
+                      
+                      <div class="texto-content">
+                        <label style="width:500px !important; text-align: center;">
+                         	<input type="file" id="documento" name="documento" multiple="multiple" />
+
+                        </label>
+                    </div>   
+                </div> 
+                
+                <div class = "cont-buttons">
+                    <!--div class = "button">
+                        <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+                            CANCELAR
+                        </button>
+                 </div-->
+                    <div class = "button">
+                        <button id="next" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">CONTINUAR</button>
+                    </div>
+                </div>        
+            </div>
+        </div>
+        
+        <div class="load"> 
+        	<div class="spinner-border" role="status">
+              <span class="sr-only"></span>
+            </div>
+        </div>
+    </body>
+    
+</aura:component>

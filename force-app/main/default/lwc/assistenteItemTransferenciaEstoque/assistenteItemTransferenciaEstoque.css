@@ -1,0 +1,24 @@
+.assTransfEstoque{
+    width: 100% !important;
+    background-color: white;
+    padding: 15px;
+    border-radius: 20px;
+    border: 1px solid #d4d4d4;
+    margin-bottom: 20px;
+}
+
+.divEstoques{
+    gap: 2px;
+    display: flex;
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+.slds-form-element__control{
+    padding-left: 0;
+    clear: inline-start;
+}
+
+.divEstoques > * {
+    flex: 0 0 33.3%; /* Cada elemento ocupa 33,3% da largura */
+}

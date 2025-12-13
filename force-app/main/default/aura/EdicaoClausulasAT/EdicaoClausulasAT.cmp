@@ -1,0 +1,67 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global" >      
+    <h1> Edição de cláusulas
+    </h1><br/>
+    <lightning:recordEditForm density="comfy" objectApiName="WorkOrder" recordId="{!v.recordId}" onsuccess="{!c.handleSuccess}">
+        
+        <div class="slds-form-element" style="position:relative">
+          	<div>
+                <lightning:inputField fieldName="Qualificacao_Assistencia_Editada__c" />                
+                <lightning:inputField fieldName="Qualificacao_Assistencia__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="A_ClausulaEditada2__c" />                
+                <lightning:inputField fieldName="A_Clausula2__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="A_ClausulaEditada3__c" />                
+                <lightning:inputField fieldName="A_Clausula3__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="A_ClausulaEditada4__c" />
+                <lightning:inputField fieldName="A_Clausula4__c" />                
+          	</div>
+            <div>
+                <lightning:inputField fieldName="A_ClausulaEditada5__c" />                
+                <lightning:inputField fieldName="A_Clausula5__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="A_ClausulaEditada6__c" />                
+                <lightning:inputField fieldName="A_Clausula6__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="A_ClausulaEditada7__c" />                
+                <lightning:inputField fieldName="A_Clausula7__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="A_ClausulaEditada8__c" />                
+                <lightning:inputField fieldName="A_Clausula8__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="A_ClausulaEditada9__c" />                
+                <lightning:inputField fieldName="A_Clausula9__c" />
+          	</div>
+            <div>
+                <lightning:inputField fieldName="A_ClausulaEditada10__c" />
+                <lightning:inputField fieldName="A_Clausula10__c" />                
+          	</div>
+            <div>
+                <lightning:inputField fieldName="A_ClausulaEditada11__c" />
+                <lightning:inputField fieldName="A_Clausula11__c" />                
+          	</div>
+            <div>
+                <lightning:inputField fieldName="A_ClausulaEditada12__c" />
+                <lightning:inputField fieldName="A_Clausula12__c" />                
+          	</div>
+            <div>
+                <lightning:inputField fieldName="A_ClausulaEditada13__c" />
+                <lightning:inputField fieldName="A_Clausula13__c" />                
+          	</div>             
+        	<div width="100%" style="position:fixed;bottom:10px;left:50%">
+                <lightning:button class="slds-button slds-button_brand"  type="submit" label="Salvar" />
+            </div>
+        </div>
+    </lightning:recordEditForm>
+    <aura:attribute name="recordId" type="String" />      
+
+    
+</aura:component>

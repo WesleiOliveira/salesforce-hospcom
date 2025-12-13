@@ -1,0 +1,117 @@
+<apex:page standardController="WorkOrder" renderAs="pdf">
+<html style="margin-top:-26px;">
+
+
+    <img style="position:absolute;" src="https://hospcom--c.na25.content.force.com/servlet/servlet.FileDownload?file=01531000008Tjd8" width="165" height="65px"/>
+    <h2> </h2>
+    <div id="center" style="font-size:18px; text-align:right;"><b>FECHAMENTO DE O.S E SAÍDA DE MÁQUINA</b></div>
+    <br/>
+    <br/>
+    <br/>
+    
+    <div style="font-size:11pt;"> <b>HOSPCOM EQUIPAMENTOS HOSPITALARES LTDA - EPP</b></div>
+
+    <br/>
+    <tr>
+    <td style="font-size:10pt;">Via do Cliente</td><td width="240px" style="text-align:right;font-size:10pt;"><b>N da O.S:</b></td><td width="70px" style="text-align:left;font-size:10pt;"><b>{!WorkOrder.WorkOrderNumber}</b></td><td width="200px" style="text-align:right;font-size:10pt;">Data de Fechamento: &nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"> <apex:param value="{!WorkOrder.EndDate}" /> </apex:outputText></td>
+    </tr>
+<body style="font-size:8pt;">
+_________________________________________________________________________________________________________________________________________
+<tr>
+<td style="font-size:10pt;padding:7px 0px 0px 0px;line-height:15px"><b>Cliente: &nbsp;</b></td><td style="font-size:10pt;padding:7px 0px 0px 0px;line-height:15px">{!WorkOrder.Account.Name}</td>
+</tr>
+_________________________________________________________________________________________________________________________________________
+
+<tr>
+<td style="font-size:9pt;"><b>Equipamento: &nbsp;</b></td> <td style="font-size:9pt;">{!WorkOrder.Asset.Name}</td>
+</tr>
+<tr>
+<td style="font-size:9pt;"><b>Marca: &nbsp;</b></td><td style="font-size:9pt;">{!WorkOrder.Marca__c}</td>
+</tr>
+<tr>
+<td style="font-size:9pt;"><b>Modelo: &nbsp;</b></td><td style="font-size:9pt;">{!WorkOrder.Modelo__c}</td>
+</tr>
+<tr>
+<td style="font-size:9pt;"><b>N de Série: &nbsp;</b></td><td style="font-size:9pt;">{!WorkOrder.Numero_de_Serie__c}</td>
+</tr>
+<tr>
+<td style="font-size:9pt;"><b>Tag/Patrimônio: &nbsp;</b></td><td style="font-size:9pt;">{!WorkOrder.ID_Tag__c}</td>
+</tr>
+<tr>
+<td style="font-size:9pt;"><b>Observações Técnicas: &nbsp;</b></td><td style="font-size:9pt;">{!WorkOrder.Observacoes_Tecnicas__c}</td>
+</tr>
+_________________________________________________________________________________________________________________________________________
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<tr>
+<td>
+____________________________________________
+</td>
+</tr>
+<tr>
+<td style="font-size:9pt;">Técnico &nbsp;</td><td style="font-size:9pt;"></td>
+</tr>
+<br/>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    <img style="position:absolute;" src="https://hospcom--c.na25.content.force.com/servlet/servlet.FileDownload?file=01531000008Tjd8" width="165" height="65px"/>
+    <h2> </h2>
+    <div id="center" style="font-size:18px; text-align:right;"><b>FECHAMENTO DE O.S E SAÍDA DE MÁQUINA</b></div>
+    <br/>
+    <br/>
+    <br/>
+    
+    <div style="font-size:11pt;"> <b>HOSPCOM EQUIPAMENTOS HOSPITALARES LTDA - EPP</b></div>
+
+    <br/>
+    <tr>
+    <td style="font-size:10pt;">Via da Empresa</td><td width="240px" style="text-align:right;font-size:10pt;"><b>N da O.S:</b></td><td width="70px" style="text-align:left;font-size:10pt;"><b>{!WorkOrder.WorkOrderNumber}</b></td><td width="200px" style="text-align:right;font-size:10pt;">Data de Fechamento: &nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"> <apex:param value="{!WorkOrder.EndDate}" /> </apex:outputText></td>
+    </tr>
+
+_________________________________________________________________________________________________________________________________________
+<tr>
+<td style="font-size:10pt;padding:7px 0px 0px 0px;line-height:15px"><b>Cliente: &nbsp;</b></td><td style="font-size:10pt;padding:7px 0px 0px 0px;line-height:15px">{!WorkOrder.Account.Name}</td>
+</tr>
+_________________________________________________________________________________________________________________________________________
+
+<tr>
+<td style="font-size:9pt;"><b>Equipamento: &nbsp;</b></td> <td style="font-size:9pt;">{!WorkOrder.Asset.Name}</td>
+</tr>
+<tr>
+<td style="font-size:9pt;"><b>Marca: &nbsp;</b></td><td style="font-size:9pt;">{!WorkOrder.Marca__c}</td>
+</tr>
+<tr>
+<td style="font-size:9pt;"><b>Modelo: &nbsp;</b></td><td style="font-size:9pt;">{!WorkOrder.Modelo__c}</td>
+</tr>
+<tr>
+<td style="font-size:9pt;"><b>N de Série: &nbsp;</b></td><td style="font-size:9pt;">{!WorkOrder.Numero_de_Serie__c}</td>
+</tr>
+<tr>
+<td style="font-size:9pt;"><b>Tag/Patrimônio: &nbsp;</b></td><td style="font-size:9pt;">{!WorkOrder.ID_Tag__c}</td>
+</tr>
+<tr>
+<td style="font-size:9pt;"><b>Observações Técnicas: &nbsp;</b></td><td style="font-size:9pt;">{!WorkOrder.Observacoes_Tecnicas__c}</td>
+</tr>
+_________________________________________________________________________________________________________________________________________
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<tr>
+<td>
+____________________________________________
+</td>
+</tr>
+<tr>
+<td style="font-size:9pt;">Assinatura do Cliente</td><td style="font-size:9pt;"></td>
+</tr>
+</body>
+
+</html>
+</apex:page>

@@ -1,0 +1,39 @@
+<aura:component extends="c.ApexHelper" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <aura:attribute name="searchTerm" type="String"/>
+    <aura:attribute name="workOrderLineItems" type="WorkOrderLineItem[]"/>
+    
+        <ltng:require
+                  styles="{!join(',',
+                          $Resource.fontAwesome + '/css/font-awesome.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery)}"                     
+                      afterScriptsLoaded="{!c.onRender}" />
+    
+    
+    
+    
+    <div style="padding: 10px">
+        
+        <button id='button234234234' class='button234234234'>
+            Clique para adicionar um item na Ordem de Trabalho
+        </button>
+        
+        <div id='principalDiv324234234' class='principalDiv324234234'>
+            <lightning:input name="search" style="width: 100%" label="Pesquise um item para adicionar" value="{!v.searchTerm}" onchange="{!c.buscaItems}"/>
+            
+            <div class='resultados4239584' id='resultados4239584'>
+                <aura:iteration items="{!v.workOrderLineItems}" var="item">
+                    <p class='item48359345' data-id='{!item.Id}'>
+                        <strong>Código do Fabricante:&nbsp;</strong> {!item.ProductCode} |&nbsp;
+                        <strong>Nome do Produto:&nbsp;</strong> {!item.Name} |&nbsp;
+                        <strong>Modelo:&nbsp;</strong> {!item.Modelo__c} |&nbsp;
+                        <strong>Preço de Lista:&nbsp;</strong> {!item.UnitPrice}
+                    </p>
+                </aura:iteration>
+            </div>
+        </div>
+    </div>
+
+
+</aura:component>

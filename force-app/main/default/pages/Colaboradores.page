@@ -1,0 +1,62 @@
+<apex:page showChat="False" title="Colaboradores" controller="ColaboradoresController" standardStylesheets="false" showHeader="false" sidebar="false" docType="HTML-5.0" showQuickActionVfHeader="False">
+    <html>
+      <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css"/>
+        <link href="metro-icons.css" rel="stylesheet"/> 
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rancho&effect=anaglyph"/>
+    </html>
+    <div data-role="appbar" data-expand-point="md">
+    <ul class="app-bar-menu">
+        <li id="1" style="background-color:#a1a1a1"><a href="#" onclick="aniv();">Aniversariantes do Mês</a></li>
+        <li id="2"><a href="#" onclick="info();">Informações de Emergência</a></li>
+        
+    </ul>
+    </div><br/><br/>
+    <div id="aniversariantes">
+                <h1 style="float:left;">
+                    Aniversariantes do Mês
+                </h1>
+                <h1>
+                  <i style="float:right; font-size:60px;" class="large material-icons">cake</i>
+                </h1>
+                <apex:dataTable styleClass="table table-border striped" var="colab" value="{!colaboradoresAniv}">
+                    <apex:column headerValue="Nome" value="{!colab.FirstName}" />
+                    <apex:column headerValue="Cargo" value="{!colab.Title}"/>                    
+                    <apex:column headerValue="Data de Nascimento" value="{!colab.BirthDate}"/>          
+                    <apex:column headerValue="Idade"><apex:repeat var="dt" value="{!colab.BirthDate}" ><apex:outputText value="{0, Number, 00}"><apex:param value="{!(today() - dt)/365}"/></apex:outputText> anos</apex:repeat> </apex:column>                   
+                </apex:dataTable>
+            </div>
+            
+            <div id="emergencia" style="display:none;">
+                <h1 style="float:left;">
+                    Contatos de Emergência
+                </h1>
+                <h1>
+                    <span style="float:right" class="mif-phone-in-talk mif-lg"></span>
+                </h1>
+                <apex:dataTable styleClass="table table-border striped" var="colab" value="{!colaboradores}">
+                    <apex:column headerValue="Nome" value="{!colab.FirstName} {!colab.LastName}" />
+                    <apex:column headerValue="Departamento" value="{!colab.Department}"/>                    
+                    <apex:column headerValue="Contato de Emergência" value="{!colab.MobilePhone}"/>
+                    <apex:column headerValue="Tipo Sanguíneo" value="{!colab.Tipo_Sanguineo__c}"/>                   
+                    <apex:column headerValue="Alergias" value="{!colab.Alergia__c}"/>                   
+                    
+                </apex:dataTable>
+            </div>
+    <script>
+        function aniv(){
+                        document.getElementById('aniversariantes').style = ('display:block;');            
+                        document.getElementById('emergencia').style = ('display:none;');            
+                        document.getElementById('1').style = ('background-color:#a1a1a1;');            
+                        document.getElementById('2').style = ('');            
+                    }
+        function info(){
+                        document.getElementById('emergencia').style = ('display:block;');            
+                        document.getElementById('aniversariantes').style = ('display:none;');            
+                        document.getElementById('2').style = ('background-color:#a1a1a1;');            
+                        document.getElementById('1').style = ('');            
+                    }
+    </script>
+            <script src="https://cdn.metroui.org.ua/v4.3.2/js/metro.min.js"></script>       
+
+</apex:page>

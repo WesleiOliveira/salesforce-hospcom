@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cliente_e_testemunha_iguais</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ContactId != null,
+ContactId = Testemunha__c
+)</errorConditionFormula>
+    <errorDisplayField>Testemunha__c</errorDisplayField>
+    <errorMessage>A testemunha deve ser diferente do cliente.</errorMessage>
+</ValidationRule>

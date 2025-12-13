@@ -1,0 +1,129 @@
+.THIS {
+    font-family: 'Salesforce Sans', Arial, sans-serif;
+}
+
+/* Estilização do Card */
+.THIS .slds-card {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #dddbda;
+}
+
+/* Mensagem de Sucesso */
+.THIS .slds-notify_toast {
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: slideInDown 0.3s ease-out;
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Combobox Customizado */
+.THIS .custom-combobox .slds-combobox {
+    transition: all 0.2s ease;
+}
+
+.THIS .custom-combobox .slds-combobox:hover {
+    border-color: #1589ee;
+}
+
+/* Labels com Destaque */
+.THIS .slds-form-element__label {
+    font-weight: 600;
+    color: #080707;
+    margin-bottom: 0.5rem;
+}
+
+/* Textarea Estilizado */
+.THIS lightning-textarea textarea {
+    transition: border-color 0.2s ease;
+    font-size: 14px;
+}
+
+.THIS lightning-textarea textarea:focus {
+    border-color: #1589ee;
+    box-shadow: 0 0 3px rgba(21, 137, 238, 0.3);
+}
+
+/* File Upload */
+.THIS lightning-file-upload {
+    background: #fafaf9;
+    border-radius: 6px;
+    padding: 1rem;
+    border: 2px dashed #dddbda;
+    width: 100%;
+    transition: all .2s ease;
+    display: flex;
+    justify-content: center;
+}
+
+.THIS lightning-file-upload:hover {
+    border-color: #1589ee;
+    background: #f3f9ff;
+}
+
+/* Botões */
+.THIS lightning-button button {
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    padding: 0.75rem 1.5rem;
+}
+
+.THIS lightning-button button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Footer do Card */
+.THIS .slds-card__footer {
+    background: #fafaf9;
+    border-top: 1px solid #dddbda;
+}
+
+/* Ícones */
+.THIS lightning-icon {
+    transition: transform 0.2s ease;
+}
+
+.THIS lightning-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .THIS .slds-p-horizontal_large {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .THIS .slds-grid_align-end {
+        justify-content: center;
+    }
+
+    .THIS lightning-button {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Texto de ajuda */
+.THIS .slds-text-color_weak {
+    font-style: italic;
+}
+
+/* Animação de foco nos campos */
+.THIS .slds-form-element:focus-within .slds-form-element__label {
+    color: #1589ee;
+    transition: color 0.2s ease;
+}

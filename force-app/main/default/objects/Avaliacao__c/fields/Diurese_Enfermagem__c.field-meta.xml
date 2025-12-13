@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Diurese_Enfermagem__c</fullName>
+    <externalId>false</externalId>
+    <label>Diurese</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Espontânea por fralda</fullName>
+                <default>false</default>
+                <label>Espontânea por fralda</label>
+            </value>
+            <value>
+                <fullName>Espontânea por Jontex</fullName>
+                <default>false</default>
+                <label>Espontânea por Jontex</label>
+            </value>
+            <value>
+                <fullName>Dispositivo masculino para coleta</fullName>
+                <default>false</default>
+                <label>Dispositivo masculino para coleta</label>
+            </value>
+            <value>
+                <fullName>SVD</fullName>
+                <default>false</default>
+                <label>SVD</label>
+            </value>
+            <value>
+                <fullName>Cistostomia</fullName>
+                <default>false</default>
+                <label>Cistostomia</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

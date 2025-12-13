@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_Viagem__c</fullName>
+    <externalId>false</externalId>
+    <label>Status Viagem</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>APROVACAO_FECHAMENTO</fullName>
+                <default>false</default>
+                <label>APROVACAO_FECHAMENTO</label>
+            </value>
+            <value>
+                <fullName>CANCELADA</fullName>
+                <default>false</default>
+                <label>CANCELADA</label>
+            </value>
+            <value>
+                <fullName>CONFERENCIA</fullName>
+                <default>false</default>
+                <label>CONFERENCIA</label>
+            </value>
+            <value>
+                <fullName>FECHAMENTO</fullName>
+                <default>false</default>
+                <label>FECHAMENTO</label>
+            </value>
+            <value>
+                <fullName>FINALIZADO</fullName>
+                <default>false</default>
+                <label>FINALIZADO</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

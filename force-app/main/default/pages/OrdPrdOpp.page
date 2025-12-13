@@ -1,0 +1,156 @@
+<apex:page standardController="Opportunity" extensions="OrdPrdClass" showHeader="false" sideBar="false" showChat="false" standardStylesheets="false">
+    <html>
+        <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="stylesheet" href="{!$Resource.bootstrap_iso}" />
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"> </script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> </script>
+            <script>
+                $(document).ready(function() {
+                    $('#btn-up').bind('click', function() {
+                        $('#select option:selected').each( function() {
+                            var newPos = $('#select option').index(this) - 1;
+                            if (newPos > -1) {
+                                $('#select option').eq(newPos).before("<option value='"+$(this).val()+"' class='"+$(this).attr('class')+"' selected='selected'>"+$(this).text()+"</option>");
+                                $(this).remove();
+                            }
+                        });
+                    });
+                    $('#btn-down').bind('click', function() {
+                        var countOptions = $('#select option').length;
+                        $('#select option:selected').each( function() {
+                            var newPos = $('#select option').index(this) + 1;
+                            if (newPos < countOptions) {
+                                $('#select option').eq(newPos).after("<option value='"+$(this).val()+"' class='"+$(this).attr('class')+"' selected='selected'>"+$(this).text()+"</option>");
+                                $(this).remove();
+                            }
+                        });
+                    });
+                
+                    $('#btn-right').bind('click', function() {
+                        $('#select option:selected').each( function() {
+                            if($(this).val().indexOf("_") == -1){
+                                $(this).val("_" + $(this).val());
+                                $(this).html("&nbsp;&nbsp;&nbsp;&nbsp;&#8627;&nbsp;" + $(this).text());
+                                $(this).removeClass();
+                                $(this).addClass("item_filho");
+                            }
+                        });
+                    });
+                
+                    $('#btn-left').bind('click', function() {
+                        $('#select option:selected').each( function() {
+                            if($(this).val().indexOf("_") != -1){
+                                $(this).val($(this).val().substring(1));
+                                $(this).text($(this).text().substring(6));
+                                $(this).removeClass();
+                                $(this).addClass("item_pai");
+                            }
+                        });
+                    });
+                
+                });
+                function copiaValores(){
+                    var itens_de_opp_vet = [];
+                    $("#select option").each(function(){
+                        itens_de_opp_vet.push($(this).val());
+                    });
+                    itens_de_opp_vet.toString();
+                    itens_de_opp_str.value = itens_de_opp_vet;
+                }
+            </script>
+            <style>
+                .item_pai{
+                    background-color:#dfedf3;
+                    padding:5px;
+                    font-weight:bold;
+                    font-size:16px;
+                }
+                .item_filho{
+                    background-color:#ffffff;
+                    padding:3px;
+                    font-weight:normal;
+                    font-size:13px;
+                }
+            </style>
+        </head>
+        
+        <body style="margin-top:20px; margin-bottom:0px;">
+            <div class="bootstrap-iso">
+                <div class="container-fluid">
+                    
+                    
+                    <apex:form style="background-color:white;">
+                        <apex:inputHidden value="{!itens_de_opp_str}" id="itens_de_opp_str" />
+                        <script>
+                            var itens_de_opp_str = document.getElementById('{!$Component.itens_de_opp_str}');
+                        </script>
+                        
+                        <div class="form-group">
+                            <div class="row">
+                                <!-- botões ordenação -->
+                                <div class="col-xs-2">
+                                    <table>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td><a href="JavaScript:void(0);" id="btn-up" class="btn btn-sm btn-primary" >&uarr;</a></td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="JavaScript:void(0);" id="btn-left" class="btn btn-sm btn-primary" >&larr;</a></td>
+                                            <td>&nbsp;</td>
+                                            <td><a href="JavaScript:void(0);" id="btn-right" class="btn btn-sm btn-primary" >&rarr;</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td><a href="JavaScript:void(0);" id="btn-down" class="btn btn-sm btn-primary" >&darr;</a></td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                
+                                <!-- produtos -->
+                                <div class="col-xs-8">
+                                    <select class="form-control" size="14" multiple="true" id="select">
+                                        <apex:repeat value="{!itens_de_opp}" var="item_de_opp">
+                                            <apex:variable var="prod_id" value="{!item_de_opp.Id}"/>
+                                            <apex:variable var="classe" value="item_pai"/>
+                                            
+                                            <apex:outputText rendered="{!IF(item_de_opp.Item_Pai__c != null, true, false)}" >
+                                                <apex:variable var="prod_id" value="_{!prod_id}"/>
+                                                <apex:variable var="classe" value="item_filho"/>
+                                            </apex:outputText>
+                                        
+                                            <option value="{!prod_id}" class="{!classe}">
+                                                <apex:outputText rendered="{!IF(item_de_opp.Item_Pai__c != null, true, false)}" >&nbsp;&nbsp;&nbsp;&nbsp;&#8627;&nbsp;</apex:outputText>
+                                                {!item_de_opp.Product2.Name}
+                                                <apex:outputText rendered="{!IF(item_de_opp.Nome_do_Fabricante__c != null, true, false)}" > | {!item_de_opp.Nome_do_Fabricante__c}</apex:outputText>
+                                                <apex:outputText rendered="{!IF(item_de_opp.Modelo_do_Produto__c != null, true, false)}" > | {!item_de_opp.Modelo_do_Produto__c}</apex:outputText>
+                                                <apex:outputText rendered="{!IF(item_de_opp.Nome_do_Fabricante__c != null, true, false)}" > | Qtd:{!ROUND(item_de_opp.Quantity, 0)}</apex:outputText>
+                                                <apex:outputText rendered="{!IF(item_de_opp.ProductCode != null, true, false)}" > | PN:{!item_de_opp.ProductCode}</apex:outputText>
+                                                <apex:outputText rendered="{!IF(AND(CONTAINS(oportunidade.RecordType.Name,'Governo'),item_de_opp.Item_Pai__c == null) == true, true, false)}" > | Item:{!item_de_opp.Item__c}</apex:outputText>
+                                            </option>
+                                        </apex:repeat>
+                                    </select>
+                                </div>
+                                
+                                <div class="col-xs-2">
+                                    <apex:commandLink value="Salvar" styleClass="btn btn-sm btn-success" onclick="copiaValores();" action="{!SalvaItensOpp}"/>
+                                    <apex:outputText rendered="{!IF(mensagem == 'sucesso', true, false)}" >
+                                        <div class="alert alert-success" style="margin:0px; padding-top:6px;padding-bottom:6px;padding-left:12px;padding-right:12px;display:inline-block!important;">
+                                          <strong>&#10004;</strong>
+                                        </div>
+                                    </apex:outputText>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                    </apex:form>
+                    
+                </div>        
+            </div>        
+        </body>
+    </html>
+</apex:page>

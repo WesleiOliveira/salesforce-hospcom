@@ -1,0 +1,111 @@
+.THIS #map {
+    display: none;
+}
+
+.THIS #map .state {
+    cursor: pointer;
+}
+
+.THIS #map .state .shape {
+    cursor: pointer;
+    -width: 0;
+}
+
+.THIS #map .state .label_icon_state {
+    fill: #fff;
+    font-family: Arial;
+    font-size: 11px;
+    line-height: 12px;
+    font-weight: normal;
+}
+
+.THIS #map .state .label_state {
+    display: none;
+    font-family: Arial;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: bold;
+}
+
+.THIS #map .state:hover .label_state,
+.THIS #map .state.hover .label_state {
+    display: block;
+}
+
+.THIS #map .model-green .state .shape {
+    fill: #6cb361;
+}
+
+.THIS #map .model-green .state .icon_state {
+    fill: #10592f;
+}
+
+.THIS #map .model-green .state .label_icon_state {
+    fill: #fff;
+}
+
+.THIS #map .model-green .state .label_state {
+    fill: #666;
+}
+
+.THIS #map .model-green .state:hover .shape,
+.THIS #map .model-green .state.hover .shape {
+    fill: #2d68b2;
+}
+
+.THIS #map .model-green .state:hover .icon_state,
+.THIS #map .model-green .state.hover .icon_state {
+    fill: #5a95ce;
+}
+
+.THIS #map .model-orange .state .shape {
+    fill: #fd7132;
+}
+
+.THIS #map .model-orange .state .icon_state {
+    fill: #6cb361;
+}
+
+.THIS #map .model-orange .state .label_icon_state {
+    fill: #fff;
+}
+
+.THIS #map .model-orange .state .label_state {
+    fill: #666;
+}
+
+.THIS #map .model-orange .state:hover .shape,
+.THIS #map .model-orange .state.hover .shape {
+    fill: #c93f04;
+}
+
+.THIS #map .model-orange .state:hover .icon_state,
+.THIS #map .model-orange .state.hover .icon_state {
+    fill: #10592f;
+}
+
+.THIS #map .model-darkgreen .state .shape {
+    fill: #366823;
+}
+
+.THIS #map .model-darkgreen .state .icon_state {
+    fill: #2779c6;
+}
+
+.THIS #map .model-darkgreen .state .label_icon_state {
+    fill: #fff;
+}
+
+.THIS #map .model-darkgreen .state .label_state {
+    fill: #666;
+}
+
+.THIS #map .model-darkgreen .state:hover .shape,
+.THIS #map .model-darkgreen .state.hover .shape {
+    fill: #4a8c31;
+}
+
+.THIS #map .model-darkgreen .state:hover .icon_state,
+.THIS #map .model-darkgreen .state.hover .icon_state {
+    fill: #5a95ce;
+}

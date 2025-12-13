@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dispositivos_Medica__c</fullName>
+    <externalId>false</externalId>
+    <label>Dispositivos</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Traqueostomia</fullName>
+                <default>false</default>
+                <label>Traqueostomia</label>
+            </value>
+            <value>
+                <fullName>Gastrostomia</fullName>
+                <default>false</default>
+                <label>Gastrostomia</label>
+            </value>
+            <value>
+                <fullName>Sonda Nasoentérica</fullName>
+                <default>false</default>
+                <label>Sonda Nasoentérica</label>
+            </value>
+            <value>
+                <fullName>Sonda Vesical</fullName>
+                <default>false</default>
+                <label>Sonda Vesical</label>
+            </value>
+            <value>
+                <fullName>Colostomia</fullName>
+                <default>false</default>
+                <label>Colostomia</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

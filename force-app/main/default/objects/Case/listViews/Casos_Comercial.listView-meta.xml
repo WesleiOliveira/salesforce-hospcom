@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Casos_Comercial</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>assunto__c</columns>
+    <columns>empresa__c</columns>
+    <columns>CASES.STATUS</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.CREATED_DATE</field>
+        <operation>greaterOrEqual</operation>
+        <value>9/1/2022 12:00 AM</value>
+    </filters>
+    <filters>
+        <field>departamento__c</field>
+        <operation>equals</operation>
+        <value>Comercial</value>
+    </filters>
+    <label>Casos Comercial</label>
+</ListView>

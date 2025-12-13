@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>verifica_finalizacao_tipos</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    OR(
+        ISPICKVAL(Tipo__c, &quot;Verificação Funcional&quot;),
+        ISPICKVAL(Tipo__c, &quot;Manutenção&quot;),
+        ISPICKVAL(Tipo__c, &quot;Calibração&quot;),
+        ISPICKVAL(Tipo__c, &quot;TSE&quot;)
+    ),
+    ISCHANGED(Prazo_de_Finalizacao__c),
+    Prazo_de_Finalizacao__c &lt; (TODAY() + 7)
+)</errorConditionFormula>
+    <errorMessage>O Prazo de finalização para o tipo selecionado deve ser superior a 7 dias</errorMessage>
+</ValidationRule>

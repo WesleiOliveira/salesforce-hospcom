@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GC_Last_touch__c</fullName>
+    <externalId>false</externalId>
+    <formula>image(&quot;http://chart.apis.google.com/chart?cht=gom&amp;chd=t:&quot;&amp;TEXT(100- GC_Days_since_last_update_or_activity__c  )&amp;&quot;&amp;chs=200x75&amp;chco=cccccc,236FBD&amp;chxt=x,y&amp;chxl=0:||1:|old|recent&quot;,&quot;Last touch&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Last touch</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

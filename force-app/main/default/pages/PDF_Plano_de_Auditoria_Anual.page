@@ -1,0 +1,358 @@
+<apex:page standardController="Planejamento_de_Auditoria_Anual__c" applyHtmlTag="false" showHeader="false" renderAs="pdf">
+    <head>
+    <style type="text/css" media="print">
+              @page {
+                  size:21cm 29.7cm;
+                  margin:100px 40px 60px 40px;
+                  @top-center {
+                      content:element(header);
+                  }
+                  @bottom-center {
+                      content:element(footer);
+                  }
+              }
+              @page{
+                  size:A4;
+                  background: url({!$Resource.TimbradoHospcom});
+                  margin:150px 50px 120px 50px;
+                  @bottom-center{content:element(footer);}
+              }
+              .pagenumber:before {
+                  content:counter(page);
+              }
+              .pagecount:before {
+                  content:counter(pages);
+              }
+              div.header {
+                  margin:0px 0px 0px 0px;
+                  padding:20px 0px 20px 0px;
+                  position:running(header);
+                  height:60px;
+              }
+              div.content {
+              }
+              div.footer {
+                  margin:0px 0px 0px 0px;
+                  padding:20px 0px 20px 0px;
+                  position:running(footer);
+                  height:20px;
+                  text-align:right;
+                  font-family:arial, verdana, sans-serif;
+                  font-size:10px;
+                  font-weight:normal;
+              }
+          </style>
+          <style type="text/css" media="print">
+          
+             *{
+                font-family:  'Open Sans', 'Helvetica Neue', sans-serif;
+                font-size: 12px;
+             }
+              .pre_texto{
+                  white-space: pre;
+              }
+              .maiuscula{
+                  text-transform: uppercase;
+              }
+              .zebra{
+                  background-color: #f3f3f3;
+              }
+             
+              
+              .mes{
+                font-size: 0.2rem !important;
+                width: 9% !important;
+                margin:  0 1px;
+                text-align: center;
+              }
+              .pam{
+                max-width: 1px !important;
+                padding: 0 15px;
+                text-align: center;
+              }
+              .mes, .pam,.legenda{
+                  color: #062d52;
+                  border:1px solid #a8a8a8;
+                  border-radius: 10px;
+                }
+                .auditoria{
+                    font-weight: 300;
+                    
+                }
+                .titulo-paa{
+                  background-color: #062d52;
+                  color: rgb(252, 252, 252) !important;
+                  border:1px solid #a8a8a8 !important;
+                  text-transform: uppercase;
+                  padding: 5px;
+                }
+                table{
+                    border-collapse: collapse; 
+                    border: #a8a8a8 1px solid !important;
+                    width: 100%;
+                    }
+                .underline{
+                    width: 70%;
+                    border-bottom: 1px solid #000;
+                }  
+                .contaner-ass{
+                    position: absolute;
+                    bottom: -300px;
+                }
+                .assinatura{
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    text-align: center;
+                }
+          </style>
+    </head>
+    <body>
+    <apex:pageBlock >
+              
+              <div class="footer" style="text-align:center !important">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  Página <span class="pagenumber"/> de <span class="pagecount"/> - Emissão em:&nbsp; <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{! TODAY() }" /></apex:outputText>
+              </div>
+    
+              <div>
+  
+
+
+                <h1 style="text-align:center; font-size:14px; color:#062d52;"> PLANEJAMENTO DE AUDITORIA {!(TEXT(YEAR(DATEVALUE(Planejamento_de_Auditoria_Anual__c.CreatedDate))))}</h1>
+
+                <h2 style="font-size: 14px; text-align:center !important; color:white;" class="titulo-paa">PLANO ANUAL DE AUDITORIA DA QUALIDADE</h2>
+                  <div class="tipo-de-auditoria">
+                      <table class="table-tipo-de-auditoria">
+                        
+                        <table>
+                            
+                      <apex:outputText rendered="true">    
+                        <tr>
+                            <td style=" color:#0a3054 ;">
+                               <strong>Empresa: </strong> {!Planejamento_de_Auditoria_Anual__c.Empresa_Auditada__r.name}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style=" color:#0a3054 ;">
+                               <strong>CNPJ: </strong> {!Planejamento_de_Auditoria_Anual__c.Empresa_Auditada__r.CNPJ__c}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style=" color:#0a3054 ;"><strong >  Tipo de auditoria:</strong> {!Planejamento_de_Auditoria_Anual__c.Outro__c}</td>
+                        </tr>
+                      </apex:outputText> 
+ 
+                        <tr>
+                            
+                            <apex:variable var="c" value="{!1}" />
+                            <td style=" color:#0a3054;">
+                            <apex:repeat var="pa" value="{!Planejamento_de_Auditoria_Anual__c.PA__r}">
+                                    <strong > <apex:outputText value="{!c}"/>°- Auditoria:</strong>  <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!pa.RA__c}"/> </apex:outputText>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <apex:variable var="c" value="{!c+1}"/>
+                            </apex:repeat>  
+                        </td>
+                        </tr>
+                      </table>
+                      <br/>
+                      <br/>
+
+                      </table>
+                  </div>
+  
+                  <table class="tabela-paa" style="border: #a8a8a8 1px solid;">
+                      <tr style="border: #a8a8a8 1px solid;">
+                          <th colspan="12" class="titulo-paa" style="border: #a8a8a8 1px solid; font-size:14px; text-align:center;" >planejamento de auditoria anual</th>
+                      </tr>
+                      <tr>
+                          <td class="mes">Jan</td>
+                          <td class="mes">Fev</td>
+                          <td class="mes">Mar </td>
+  
+                          <td class="mes">Abr</td>
+                          <td class="mes">Mai</td>
+                          <td class="mes">Jun</td>
+  
+                          <td class="mes">Jul</td>
+                          <td class="mes">Ago</td>
+                          <td class="mes">Set</td>
+  
+                          <td class="mes">Out</td>
+                          <td class="mes">Nov </td>
+                          <td class="mes">Dez</td>
+  
+                      </tr>
+                      <tr>
+                        <td  class="pam">
+                            <apex:repeat var="pa" value="{!Planejamento_de_Auditoria_Anual__c.PA__r}">
+                                
+                            {!if(MONTH(pa.RA__c) == 1, "RA" , null)}
+                            {!if(MONTH(pa.DP__c) == 1, "DP", null)}
+                            {!if(MONTH(pa.PA__c) == 1, "PA", null)}
+                            {!if(MONTH(pa.AC__c) == 1, "AC", null)}
+                            </apex:repeat>  
+                        </td>
+                        <td  class="pam">
+                            <apex:repeat var="pa" value="{!Planejamento_de_Auditoria_Anual__c.PA__r}">
+                                
+                            {!if(MONTH(pa.RA__c) == 2, "RA", null)}
+                            {!if(MONTH(pa.DP__c) == 2, "DP", null)}
+                            {!if(MONTH(pa.PA__c) == 2, "PA", null)}
+                            {!if(MONTH(pa.AC__c) == 2, "AC", null)}
+                            </apex:repeat>  
+                        </td>
+                        <td  class="pam">
+                            <apex:repeat var="pa" value="{!Planejamento_de_Auditoria_Anual__c.PA__r}">
+                                
+                            {!if(MONTH(pa.RA__c) == 3, "RA", null)}
+                            {!if(MONTH(pa.DP__c) == 3, "DP", null)}
+                            {!if(MONTH(pa.PA__c) == 3, "PA", null)}
+                            {!if(MONTH(pa.AC__c) == 3, "AC", null)}
+                            </apex:repeat>  
+                        </td>
+                        <td  class="pam">
+                            <apex:repeat var="pa" value="{!Planejamento_de_Auditoria_Anual__c.PA__r}">
+                                
+                            {!if(MONTH(pa.RA__c) == 4, "RA", null)}
+                            {!if(MONTH(pa.DP__c) == 4, "DP", null)}
+                            {!if(MONTH(pa.PA__c) == 4, "PA", null)}
+                            {!if(MONTH(pa.AC__c) == 4, "AC", null)}
+                            </apex:repeat>  
+                        </td>
+                        <td  class="pam">
+                            <apex:repeat var="pa" value="{!Planejamento_de_Auditoria_Anual__c.PA__r}">
+                                
+                            {!if(MONTH(pa.RA__c) == 5, "RA", null)}
+                            {!if(MONTH(pa.DP__c) == 5, "DP", null)}
+                            {!if(MONTH(pa.PA__c) == 5, "PA", null)}
+                            {!if(MONTH(pa.AC__c) == 5, "AC", null)}
+                            </apex:repeat>  
+                        </td>
+                        <td  class="pam">
+                            <apex:repeat var="pa" value="{!Planejamento_de_Auditoria_Anual__c.PA__r}">
+                                
+                            {!if(MONTH(pa.RA__c) == 6, "RA", null)}
+                            {!if(MONTH(pa.DP__c) == 6, "DP", null)}
+                            {!if(MONTH(pa.PA__c) == 6, "PA", null)}
+                            {!if(MONTH(pa.AC__c) == 6, "AC", null)}
+                            </apex:repeat>  
+                        </td>
+                        <td  class="pam">
+                            <apex:repeat var="pa" value="{!Planejamento_de_Auditoria_Anual__c.PA__r}">
+                                
+                            {!if(MONTH(pa.RA__c) == 7, "RA", null)}
+                            {!if(MONTH(pa.DP__c) == 7, "DP", null)}
+                            {!if(MONTH(pa.PA__c) == 7, "PA", null)}
+                            {!if(MONTH(pa.AC__c) == 7, "AC", null)}
+                            </apex:repeat>  
+                        </td>
+                        <td  class="pam">
+                            <apex:repeat var="pa" value="{!Planejamento_de_Auditoria_Anual__c.PA__r}">
+                                
+                            {!if(MONTH(pa.RA__c) == 8, "RA", null)}
+                            {!if(MONTH(pa.DP__c) == 8, "DP", null)}
+                            {!if(MONTH(pa.PA__c) == 8, "PA", null)}
+                            {!if(MONTH(pa.AC__c) == 8, "AC", null)}
+                            </apex:repeat>  
+                        </td>
+                        <td  class="pam">
+                            <apex:repeat var="pa" value="{!Planejamento_de_Auditoria_Anual__c.PA__r}">
+                                
+                            {!if(MONTH(pa.RA__c) == 9, "RA", null)}
+                            {!if(MONTH(pa.DP__c) == 9, "DP", null)}
+                            {!if(MONTH(pa.PA__c) == 9, "PA", null)}
+                            {!if(MONTH(pa.AC__c) == 9, "AC", null)}
+                            </apex:repeat>  
+                        </td>
+                        <td  class="pam">
+                            <apex:repeat var="pa" value="{!Planejamento_de_Auditoria_Anual__c.PA__r}">
+                                
+                            {!if(MONTH(pa.RA__c) == 10, "RA", null)}
+                            {!if(MONTH(pa.DP__c) == 10, "DP", null)}
+                            {!if(MONTH(pa.PA__c) == 10, "PA", null)}
+                            {!if(MONTH(pa.AC__c) == 10, "AC", null)}
+                            </apex:repeat>  
+                        </td>
+                        <td  class="pam">
+                            <apex:repeat var="pa" value="{!Planejamento_de_Auditoria_Anual__c.PA__r}">
+                                
+                            {!if(MONTH(pa.RA__c) == 11, "RA", null)}
+                            {!if(MONTH(pa.DP__c) == 11, "DP", null)}
+                            {!if(MONTH(pa.PA__c) == 11, "PA", null)}
+                            {!if(MONTH(pa.AC__c) == 11, "AC", null)}
+                            </apex:repeat>  
+                        </td>
+                        <td  class="pam">
+                            <apex:repeat var="pa" value="{!Planejamento_de_Auditoria_Anual__c.PA__r}">
+                                
+                            {!if(MONTH(pa.RA__c) == 12, "RA", null)}
+                            {!if(MONTH(pa.DP__c) == 12, "DP", null)}
+                            {!if(MONTH(pa.PA__c) == 12, "PA", null)}
+                            {!if(MONTH(pa.AC__c) == 12, "AC", null)}
+                            </apex:repeat>  
+                        </td>
+                      </tr>
+                     
+                  </table>
+
+                    <table style="margin-top: 2px;">
+                        <tr   class="pam" > 
+                            <td colspan="3" style=" padding: 10px 1px; padding:0 10px; font-size:12px;">PA - Planejamento de Auditoria Interterna</td>
+                            <td colspan="3" style=" padding: 10px 1px; padding:0 10px; font-size:12px;">DP - Definição do Programa de Auditoria</td>
+                            <td colspan="3" style=" padding:10px 1px; padding:0 10px; font-size:12px;">RA – Realização de Auditoria Interna  </td>
+                            <td colspan="3" style=" padding:10px 1px; padding:0 10px; font-size:12px;">AC - Análise de NC para Ações Corretivas</td>
+                        </tr>
+                    </table>
+                  <br/>
+                  <table style="width: 100%;">
+                    <tr>
+                        <th colspan="12" class="titulo-paa" style="border: #a8a8a8 1px solid; font-size:14px; text-align:center;" >Observações / Comentários</th>
+                    </tr>
+                    <tr>
+                        <td class="pam">
+                            O Auditor interno não pode auditar o setor no qual é responsável. 
+                        </td>
+                    </tr>
+                  </table>
+
+                  <br/>
+                  <table style="width: 100%;">
+                    <tr>
+                        
+                        <th colspan="" class="titulo-paa" style="border: #a8a8a8 1px solid; font-size:14px; text-align:center;" > Objetivo da Auditoria</th>
+
+                    </tr>
+                    <tr>
+                        <td class="pam">Verificar a Implementação, manutenção e melhora do Sistema de Gestão da Qualidade (SGQ) com respeito aos requisitos estabelecidos na norma RDC nº 665:2022. 
+                            Dar seguimento aos resultados de Auditorias anteriores.</td>
+                    </tr>
+                  </table>
+              </div>
+                
+              <table style="margin: 20px  0;" class="contaner-ass">   
+                <td style="border:none; text-align:center;" >
+                    <div style="padding:0; margin:0; text-align:center;">
+                        <div  style="padding:0; margin: 0 0 -20px 0; text-align:center;" > 
+                            <apex:image style="padding:0; margin:0 auto -15px ; text-align:center;" value="https://hospcom--c.na170.content.force.com/servlet/servlet.ImageServer?id=0156e00000BgFbi&oid=00Di0000000JVhH&lastMod=1672836269000" width="500" height="120px"/>
+                        </div>     
+                        
+                        <div class="assinatura" style="padding:0; margin:0;">
+                            <p style="padding:0; margin:0 auto;">
+                                <div class="underline" style="padding:0; margin:0 auto;"></div><br/>
+                                    Daniel Alencar<br/>
+                                    Administativo
+                            </p>
+                        </div>
+                    </div>                                      
+                </td>
+            </table>
+
+  
+  
+    </apex:pageBlock>
+  
+    </body>
+
+</apex:page>

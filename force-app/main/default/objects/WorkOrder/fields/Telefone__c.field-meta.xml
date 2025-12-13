@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Telefone__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    AND(NOT(ISBLANK(Contact.Phone)), NOT(ISBLANK(Contact.MobilePhone))),
+    Contact.Phone &amp; &quot;/&quot; &amp; Contact.MobilePhone,
+    IF(
+        NOT(ISBLANK(Contact.Phone)),
+        Contact.Phone,
+        IF(
+            NOT(ISBLANK(Contact.MobilePhone)),
+            Contact.MobilePhone,
+            &quot;&quot;
+        )
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Telefone/Celular do contato</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Produtos_de_locacao</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISNEW(),
+TEXT(Order.Natureza_de_Opera_o__c) == &apos;LOCAÇÃO&apos;,
+TEXT(Product2.Tipo_do_Produto__c) != &apos;SERVIÇO&apos;
+)</errorConditionFormula>
+    <errorMessage>Produto inserido é inválido para a natureza de operação LOCAÇÃO.</errorMessage>
+</ValidationRule>

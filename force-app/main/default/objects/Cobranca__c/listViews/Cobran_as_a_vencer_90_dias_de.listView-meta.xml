@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cobran_as_a_vencer_90_dias_de</fullName>
+    <columns>NAME</columns>
+    <columns>Conta__c</columns>
+    <columns>Pedido__c</columns>
+    <columns>Valor_pago__c</columns>
+    <columns>Valor_a_pagar__c</columns>
+    <columns>Juros__c</columns>
+    <columns>Atraso__c</columns>
+    <columns>Vencimento__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Atraso__c</field>
+        <operation>greaterThan</operation>
+        <value>61</value>
+    </filters>
+    <filters>
+        <field>Atraso__c</field>
+        <operation>lessThan</operation>
+        <value>91</value>
+    </filters>
+    <label>VENCIDA - Cobranças 61 a 90 dias</label>
+</ListView>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contato_de_Emergencia</fullName>
+    <active>true</active>
+    <errorConditionFormula>Telefone_do_Candidato__c == Telefone_emergencia__c</errorConditionFormula>
+    <errorMessage>Você não pode inserir o mesmo numero para contato e contato de emergenicia</errorMessage>
+</ValidationRule>

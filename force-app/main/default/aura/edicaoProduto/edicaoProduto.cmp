@@ -1,0 +1,23 @@
+<aura:component extends="c.ApexHelper" controller="HistoricoProduto" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    
+    <ltng:require
+                  styles="{!join(',', 
+                          $Resource.fontAwesome + '/css/font-awesome.min.css')}"  
+                  
+                  scripts="{!join(',',
+                           $Resource.JQuery)}"                     
+                  afterScriptsLoaded="{!c.onRender}" />
+    
+    
+    <div>
+    	<div class="mainDiv35423532">
+            <header>
+            	<h1 class="titulo">Edição do Produto</h1>
+            </header>
+        	
+        </div>
+    
+    </div>
+    
+</aura:component>

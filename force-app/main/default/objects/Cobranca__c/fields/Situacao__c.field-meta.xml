@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Situacao__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    AND(
+        ISPICKVAL(Tipo_do_titulo__c, &quot;Renegociado&quot;),
+        Valor_a_pagar__c = 0
+    ),
+    &quot;Renegociado&quot;,
+    IF(
+        Valor_a_pagar__c = 0,
+        &quot;Pago&quot;,
+        IF(
+            AND(
+                Vencimento__c = TODAY(),
+                Valor_a_pagar__c &gt; 0
+            ),
+            &quot;Vence hoje&quot;,
+            IF(
+                AND(
+                    Vencimento__c &lt; TODAY(),
+                    Valor_a_pagar__c &gt; 0
+                ),
+                &quot;Atrasado&quot;,
+                &quot;Em aberto&quot;
+            )
+        )
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Situação</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

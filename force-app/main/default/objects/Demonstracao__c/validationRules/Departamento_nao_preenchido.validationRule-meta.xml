@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Departamento_nao_preenchido</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    !$User.Ignorar_erros__c,
+RecordTypeId != &apos;012U4000002zg7d&apos;,
+
+    TEXT(Departamento__c)==&apos;&apos;,
+    Oportunidade__c = null
+)</errorConditionFormula>
+    <errorDisplayField>Departamento__c</errorDisplayField>
+    <errorMessage>O Departamento deve ser preenchido.</errorMessage>
+</ValidationRule>

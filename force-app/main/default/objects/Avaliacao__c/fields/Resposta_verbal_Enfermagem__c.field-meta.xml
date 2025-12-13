@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Resposta_verbal_Enfermagem__c</fullName>
+    <externalId>false</externalId>
+    <label>Resposta verbal</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Orientada</fullName>
+                <default>false</default>
+                <label>Orientada</label>
+            </value>
+            <value>
+                <fullName>Confusa</fullName>
+                <default>false</default>
+                <label>Confusa</label>
+            </value>
+            <value>
+                <fullName>Palavras inapropriadas</fullName>
+                <default>false</default>
+                <label>Palavras inapropriadas</label>
+            </value>
+            <value>
+                <fullName>Palavras incompreensíveis</fullName>
+                <default>false</default>
+                <label>Palavras incompreensíveis</label>
+            </value>
+            <value>
+                <fullName>Nenhuma</fullName>
+                <default>false</default>
+                <label>Nenhuma</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

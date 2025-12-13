@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Solicitacao</fullName>
+    <active>true</active>
+    <label>Solicitação</label>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Aguardando aprovação</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aguardando registro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cancelada</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rascunho</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Registrada</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rejeitada</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tipo_de_Contrato__c</picklist>
+        <values>
+            <fullName>CLT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PJ</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GC_Sales_history__c</fullName>
+    <externalId>false</externalId>
+    <formula>if(max(GC_Sold_2008__c,GC_Sold_2009__c, GC_Sold_2010__c,GC_Sold_2011__c)&gt;0, image(&quot;http://chart.apis.google.com/chart?cht=bvs&amp;chf=bg,s,ffffff&amp;chco=236FBD&amp;chd=t:&quot; 
+&amp;text(  GC_Sold_2008__c/max(GC_Sold_2008__c,GC_Sold_2009__c, GC_Sold_2010__c,GC_Sold_2011__c)*100 )&amp;&quot;,&quot; 
+&amp;text(  GC_Sold_2009__c/max(GC_Sold_2008__c,GC_Sold_2009__c, GC_Sold_2010__c,GC_Sold_2011__c)*100 )&amp;&quot;,&quot; 
+&amp;text(  GC_Sold_2010__c/max(GC_Sold_2008__c,GC_Sold_2009__c, GC_Sold_2010__c,GC_Sold_2011__c)*100 )&amp;&quot;,&quot; 
+&amp;text(  GC_Sold_2011__c/max(GC_Sold_2008__c,GC_Sold_2009__c, GC_Sold_2010__c,GC_Sold_2011__c)*100 )&amp;&quot;&amp;chs=200x80&amp;chl=2008|2009|2010|2011&quot;,&quot;history&quot;), image(&quot;http://chart.apis.google.com/chart?cht=bvs&amp;chf=bg,s,ffffff&amp;chco=236FBD&amp;chd=t:0,0,0,0&amp;chs=200x80&amp;chl=2008|2009|2010|2011&quot;,&quot;history&quot;))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Sales history</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

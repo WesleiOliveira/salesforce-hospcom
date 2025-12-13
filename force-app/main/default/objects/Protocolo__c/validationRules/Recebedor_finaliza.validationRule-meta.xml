@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Recebedor_finaliza</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+$User.ProfileId != &apos;00ei0000000nKA9&apos;,
+$User.ContactId != Recebido_por__r.Id,
+ISCHANGED(Status__c),
+TEXT(Status__c) = &apos;Finalizado&apos;
+)</errorConditionFormula>
+    <errorDisplayField>Status__c</errorDisplayField>
+    <errorMessage>Apenas o recebedor pode finalizar um protocolo.</errorMessage>
+</ValidationRule>

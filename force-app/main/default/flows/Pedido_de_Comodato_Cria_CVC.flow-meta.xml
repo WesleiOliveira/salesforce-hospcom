@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <decisions>
+        <name>Encontrado</name>
+        <label>Encontrado</label>
+        <locationX>182</locationX>
+        <locationY>431</locationY>
+        <defaultConnector>
+            <targetReference>Cria_CVC</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Resultado padrão</defaultConnectorLabel>
+        <rules>
+            <name>SIM</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Buscar_CVC.Id</leftValueReference>
+                <operator>WasSet</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Atualiza_CVC</targetReference>
+            </connector>
+            <label>SIM</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>mes</name>
+        <dataType>Number</dataType>
+        <expression>MONTH(DATEVALUE({!$Record.Inicio_Ativo__c}))</expression>
+        <scale>0</scale>
+    </formulas>
+    <interviewLabel>Pedido de Comodato — Cria CVC {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Pedido de Comodato — Cria CVC</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Cria_CVC</name>
+        <label>Cria CVC</label>
+        <locationX>314</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Comodato__c</field>
+            <value>
+                <elementReference>$Record.Demonstracao__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Data_da_compra__c</field>
+            <value>
+                <elementReference>$Record.Inicio_Ativo__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>M_s__c</field>
+            <value>
+                <stringValue>Atual</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Mes__c</field>
+            <value>
+                <elementReference>mes</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Pedido__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Compra_vinculada_ao_comodato__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordLookups>
+        <name>Buscar_CVC</name>
+        <label>Buscar CVC</label>
+        <locationX>182</locationX>
+        <locationY>323</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Encontrado</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Pedido__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Compra_vinculada_ao_comodato__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Atualiza_CVC</name>
+        <label>Atualiza CVC</label>
+        <locationX>50</locationX>
+        <locationY>539</locationY>
+        <inputReference>Buscar_CVC</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Buscar_CVC</targetReference>
+        </connector>
+        <filterFormula>AND(
+TEXT({!$Record.Natureza_de_Opera_o__c}) = &apos;VENDA&apos;,
+OR(
+TEXT({!$Record.Status}) = &apos;Ativo&apos;,
+TEXT({!$Record.Status}) = &apos;Em Andamento&apos;
+),
+{!$Record.Demonstracao__c} != null
+)</filterFormula>
+        <object>Order</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

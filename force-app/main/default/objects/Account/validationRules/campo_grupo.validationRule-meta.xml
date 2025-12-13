@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>campo_grupo</fullName>
+    <active>false</active>
+    <description>Grupo da conta precisa ser obrigatório a partr de 08/04/2025</description>
+    <errorConditionFormula>AND(
+  ISNEW(),
+  Tipo_de_registro__c = &apos;Conta comercial&apos;,
+  ISBLANK(TEXT(Grupo__c))
+)</errorConditionFormula>
+    <errorDisplayField>Grupo__c</errorDisplayField>
+    <errorMessage>Para as novas contas é necessário definir o grupo da conta</errorMessage>
+</ValidationRule>

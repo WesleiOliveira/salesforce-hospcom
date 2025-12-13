@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valida_saldo</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISNEW(),
+    NOT(
+        OR(
+            Contrato_de_compra__r.RecordType.DeveloperName = &apos;Representacao_Comercial&apos;,
+            TEXT(Contrato_de_compra__r.Tipo_de_dura_o__c) = &apos;Indeterminado&apos;
+        )
+    ),
+    Valor_da_nota_fiscal__c &gt; Contrato_de_compra__r.Saldo__c
+)</errorConditionFormula>
+    <errorMessage>O valor da nota fiscal supera o saldo do contrato.</errorMessage>
+</ValidationRule>
