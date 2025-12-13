@@ -1,0 +1,125 @@
+name: PR Main - Validação de Pull Request para Produção
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+
+jobs:
+  validate-pr:
+    name: Validação de PR para Main (Produção)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Validar padrão de nome da branch de merge
+        run: |
+          BRANCH_NAME="${{ github.head_ref }}"
+          if [[ ! "$BRANCH_NAME" =~ ^merge(-[a-zA-Z0-9-]+)?-[0-9]+-stepMaster$ ]]; then
+            echo "❌ Erro: Nome da branch não segue o padrão esperado!"
+            echo "Padrão esperado: merge-{area *opcional}-{numero do card}-stepMaster"
+            echo "Exemplos: merge-0001-stepMaster, merge-vendas-0001-stepMaster"
+            echo "Branch atual: $BRANCH_NAME"
+            exit 1
+          fi
+          echo "✅ Nome da branch válido: $BRANCH_NAME"
+
+      - name: Validar que branch foi criada a partir de StepMaster
+        run: |
+          BASE_REF="origin/StepMaster"
+          HEAD_REF="origin/${{ github.head_ref }}"
+          
+          # Verificar se StepMaster existe
+          if ! git show-ref --verify --quiet refs/remotes/$BASE_REF; then
+            echo "⚠️  Branch StepMaster não encontrada remotamente"
+            exit 1
+          fi
+          
+          # Verificar merge-base
+          MERGE_BASE=$(git merge-base $BASE_REF $HEAD_REF 2>/dev/null || echo "")
+          if [ -z "$MERGE_BASE" ]; then
+            echo "❌ Erro: A branch não foi criada a partir de StepMaster"
+            exit 1
+          fi
+          
+          STEP_MASTER_COMMIT=$(git rev-parse $BASE_REF)
+          if [ "$MERGE_BASE" = "$STEP_MASTER_COMMIT" ] || git merge-base --is-ancestor $STEP_MASTER_COMMIT $MERGE_BASE 2>/dev/null; then
+            echo "✅ Branch foi criada a partir de StepMaster"
+          else
+            echo "❌ Erro: A branch não foi criada a partir de StepMaster"
+            exit 1
+          fi
+
+      - name: Validar que commits vêm de outras branches
+        run: |
+          BASE_REF="origin/StepMaster"
+          HEAD_REF="origin/${{ github.head_ref }}"
+          
+          COMMITS=$(git log $BASE_REF..$HEAD_REF --format="%H" 2>/dev/null || echo "")
+          
+          if [ -z "$COMMITS" ]; then
+            echo "✅ Nenhum commit novo para validar"
+            exit 0
+          fi
+          
+          echo "🔍 Validando que commits vêm de outras branches..."
+          ALL_VALID=true
+          
+          for commit in $COMMITS; do
+            BRANCHES_WITH_COMMIT=$(git branch -a --contains $commit 2>/dev/null | grep -v "HEAD" | sed 's/^[* ] //' | sed 's/remotes\/origin\///' | sort -u)
+            
+            FOUND_IN_OTHER_BRANCH=false
+            for branch in $BRANCHES_WITH_COMMIT; do
+              if [ "$branch" != "${{ github.head_ref }}" ] && [ "$branch" != "StepMaster" ] && [ "$branch" != "origin/StepMaster" ]; then
+                if [[ "$branch" =~ ^(feat|merge)- ]] || [[ "$branch" =~ ^origin/(feat|merge)- ]]; then
+                  FOUND_IN_OTHER_BRANCH=true
+                  break
+                fi
+              fi
+            done
+            
+            if [ "$FOUND_IN_OTHER_BRANCH" = false ]; then
+              COMMIT_MSG=$(git log -1 --format="%s" $commit)
+              echo "❌ Commit $commit não foi encontrado em outra branch: $COMMIT_MSG"
+              ALL_VALID=false
+            fi
+          done
+          
+          if [ "$ALL_VALID" = true ]; then
+            echo "✅ Todos os commits foram validados e estão em outras branches"
+          else
+            echo "❌ Erro: Alguns commits não foram encontrados em outras branches"
+            echo "A branch de merge deve conter apenas commits que foram mergeados de outras branches"
+            exit 1
+          fi
+
+      - name: Verificar formatação (Prettier)
+        run: npm run prettier:verify
+        continue-on-error: false
+
+      - name: Executar ESLint
+        run: npm run lint
+        continue-on-error: false
+
+      - name: Resumo da validação
+        if: always()
+        run: |
+          echo "✅ Validações de PR para main (produção) concluídas"
+          echo "PR: ${{ github.event.pull_request.number }}"
+          echo "Branch: ${{ github.head_ref }} → main"

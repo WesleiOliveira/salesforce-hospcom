@@ -1,0 +1,134 @@
+name: CD - Deploy para Produção
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Versão do deploy (ex: 1.2.3)'
+        required: true
+        type: string
+      skip_tests:
+        description: 'Pular testes (NÃO RECOMENDADO)'
+        required: false
+        default: 'false'
+        type: boolean
+      notes:
+        description: 'Notas da release'
+        required: false
+        default: ''
+        type: string
+
+jobs:
+  deploy-to-production:
+    name: Deploy para Produção
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment:
+      name: production
+      url: ${{ secrets.SF_LOGIN_URL_PROD }}
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Configurar SFDX CLI
+        uses: salesforce/setup-sfdx@v1
+
+      - name: Autenticar no Salesforce Produção
+        env:
+          SF_USERNAME: ${{ secrets.SF_USERNAME_PROD }}
+          SF_PASSWORD: ${{ secrets.SF_PASSWORD_PROD }}
+          SF_SECURITY_TOKEN: ${{ secrets.SF_SECURITY_TOKEN_PROD }}
+          SF_LOGIN_URL: ${{ secrets.SF_LOGIN_URL_PROD }}
+        run: |
+          echo "y" | sf org login web --alias prod --instance-url $SF_LOGIN_URL --set-default
+
+      - name: Validar deploy (check-only)
+        run: |
+          sf project deploy start \
+            --dry-run \
+            --source-dir force-app \
+            --ignore-warnings \
+            --wait 10
+
+      - name: Executar todos os testes Apex
+        if: github.event.inputs.skip_tests != 'true'
+        run: |
+          echo "Executando todos os testes Apex..."
+          sf apex run test \
+            --test-level RunAllTestsInOrg \
+            --result-format human \
+            --code-coverage \
+            --wait 10
+
+      - name: Verificar cobertura mínima
+        if: github.event.inputs.skip_tests != 'true'
+        run: |
+          TEST_RESULT_ID=$(sf apex get test --result-format json | jq -r '.result.summary.id')
+          COVERAGE=$(sf apex get test --result-id $TEST_RESULT_ID --json | jq -r '.result.summary.codeCoveragePercentage // 0')
+          MIN_COVERAGE=75
+          COVERAGE_INT=${COVERAGE%.*}
+          if [ "$COVERAGE_INT" -lt "$MIN_COVERAGE" ]; then
+            echo "❌ Cobertura de código ($COVERAGE%) abaixo do mínimo ($MIN_COVERAGE%)"
+            exit 1
+          else
+            echo "✅ Cobertura de código: $COVERAGE%"
+          fi
+
+      - name: Deploy para Produção
+        if: github.event.inputs.skip_tests != 'true'
+        run: |
+          sf project deploy start \
+            --source-dir force-app \
+            --ignore-warnings \
+            --wait 10 \
+            --test-level RunAllTestsInOrg
+
+      - name: Deploy para Produção (sem testes)
+        if: github.event.inputs.skip_tests == 'true'
+        run: |
+          echo "⚠️  ATENÇÃO: Deploy sem testes!"
+          sf project deploy start \
+            --source-dir force-app \
+            --ignore-warnings \
+            --wait 10 \
+            --test-level NoTestRun
+
+      - name: Criar tag de release
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "v${{ github.event.inputs.version }}" -m "Release v${{ github.event.inputs.version }}: ${{ github.event.inputs.notes }}"
+          git push origin "v${{ github.event.inputs.version }}"
+
+      - name: Gerar changelog
+        if: success()
+        run: |
+          echo "## Release v${{ github.event.inputs.version }}" >> release-notes.md
+          echo "" >> release-notes.md
+          echo "**Data:** $(date +'%Y-%m-%d %H:%M:%S')" >> release-notes.md
+          echo "" >> release-notes.md
+          echo "**Notas:**" >> release-notes.md
+          echo "${{ github.event.inputs.notes }}" >> release-notes.md
+
+      - name: Upload release notes
+        if: success()
+        uses: actions/upload-artifact@v3
+        with:
+          name: release-notes-v${{ github.event.inputs.version }}
+          path: release-notes.md
+          retention-days: 365
+
+      - name: Notificar sucesso
+        if: success()
+        run: |
+          echo "✅ Deploy realizado com sucesso para Produção"
+          echo "Versão: v${{ github.event.inputs.version }}"
+
+      - name: Notificar falha
+        if: failure()
+        run: |
+          echo "❌ Falha no deploy para Produção"

@@ -1,0 +1,233 @@
+name: PR Validate Salesforce - Validação na Org de Homolog
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  validate-salesforce:
+    name: Validar no Salesforce (Homolog)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    # Só executa se for um comentário em um PR e o comentário for "validar"
+    if: |
+      github.event.issue.pull_request != null &&
+      github.event.comment.body == 'validar'
+
+    steps:
+      - name: Verificar se PR está aberto
+        id: check_pr
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: pr } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            });
+            
+            if (pr.state !== 'open') {
+              core.setFailed('PR não está aberto');
+              return;
+            }
+            
+            if (pr.base.ref !== 'integration') {
+              core.setFailed('PR deve ser para a branch integration');
+              return;
+            }
+            
+            core.setOutput('pr_number', pr.number);
+            core.setOutput('head_sha', pr.head.sha);
+
+      - name: Checkout do código
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.check_pr.outputs.head_sha }}
+          fetch-depth: 0
+
+      - name: Configurar SFDX CLI
+        uses: salesforce/setup-sfdx@v1
+
+      - name: Autenticar na org de homolog
+        env:
+          SF_USERNAME: ${{ secrets.SF_USERNAME_HOMOLOG }}
+          SF_PASSWORD: ${{ secrets.SF_PASSWORD_HOMOLOG }}
+          SF_SECURITY_TOKEN: ${{ secrets.SF_SECURITY_TOKEN_HOMOLOG }}
+          SF_LOGIN_URL: ${{ secrets.SF_LOGIN_URL_HOMOLOG }}
+        run: |
+          echo "y" | sf org login web --alias homolog-validation --instance-url $SF_LOGIN_URL --set-default
+
+      - name: Instalar jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Executar validação no Salesforce
+        id: validate
+        continue-on-error: true
+        run: |
+          echo "🔍 Executando validação na org de homolog..."
+          
+          # Executar validação e capturar output JSON
+          set +e
+          VALIDATION_OUTPUT=$(sf project deploy validate \
+            --source-dir force-app \
+            --target-org homolog-validation \
+            --ignore-warnings \
+            --wait 10 \
+            --json 2>&1)
+          VALIDATION_EXIT_CODE=$?
+          set -e
+          
+          # Salvar output em arquivo para debug
+          echo "$VALIDATION_OUTPUT" > validation-output.json
+          
+          # Tentar extrair JSON válido do output
+          JSON_OUTPUT=$(echo "$VALIDATION_OUTPUT" | grep -o '{.*}' | tail -1 || echo "")
+          
+          if [ -z "$JSON_OUTPUT" ]; then
+            # Se não encontrou JSON, pode ser erro de autenticação ou outro problema
+            echo "❌ Erro ao executar validação. Output:"
+            echo "$VALIDATION_OUTPUT"
+            echo "validation_success=false" >> $GITHUB_OUTPUT
+            echo "validation_errors<<EOF" >> $GITHUB_OUTPUT
+            echo "Erro ao executar validação. Verifique os logs do workflow." >> $GITHUB_OUTPUT
+            echo "$VALIDATION_OUTPUT" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+          
+          # Verificar status da validação
+          STATUS=$(echo "$JSON_OUTPUT" | jq -r '.status // .result.status // 1' 2>/dev/null || echo "1")
+          SUCCESS=$(echo "$JSON_OUTPUT" | jq -r '.result.success // false' 2>/dev/null || echo "false")
+          
+          # Verificar se há erros
+          HAS_ERRORS=$(echo "$JSON_OUTPUT" | jq -r '.result.details.componentFailures // [] | length' 2>/dev/null || echo "0")
+          
+          if [ "$STATUS" = "0" ] && [ "$SUCCESS" = "true" ] && [ "$HAS_ERRORS" = "0" ]; then
+            echo "✅ Validação concluída com sucesso!"
+            echo "validation_success=true" >> $GITHUB_OUTPUT
+          else
+            echo "❌ Validação falhou"
+            echo "validation_success=false" >> $GITHUB_OUTPUT
+            
+            # Extrair mensagens de erro
+            ERROR_MESSAGES=$(echo "$JSON_OUTPUT" | jq -r '.result.details.componentFailures[]? | "\(.fileName):\(.lineNumber) - \(.problem)"' 2>/dev/null || echo "")
+            
+            if [ -z "$ERROR_MESSAGES" ]; then
+              # Se não há erros específicos, pegar mensagem geral
+              ERROR_MESSAGES=$(echo "$JSON_OUTPUT" | jq -r '.message // .result.message // "Erro desconhecido na validação"' 2>/dev/null || echo "Erro desconhecido na validação")
+            fi
+            
+            echo "validation_errors<<EOF" >> $GITHUB_OUTPUT
+            echo "$ERROR_MESSAGES" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          fi
+          
+          # Salvar output completo para comentário
+          echo "validation_output<<EOF" >> $GITHUB_OUTPUT
+          echo "$JSON_OUTPUT" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Comentar resultado no PR
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const prNumber = context.issue.number;
+            
+            let comment = '## 🔍 Resultado da Validação no Salesforce (Homolog)\n\n';
+            
+            if ('${{ steps.validate.outputs.validation_success }}' === 'true') {
+              comment += '✅ **Validação concluída com sucesso!**\n\n';
+              comment += 'O PR está pronto para merge. O botão de merge foi habilitado.\n';
+            } else {
+              comment += '❌ **Validação falhou!**\n\n';
+              comment += '### Erros encontrados:\n\n';
+              comment += '```\n';
+              
+              const errors = `${{ steps.validate.outputs.validation_errors }}`;
+              if (errors && errors.trim()) {
+                comment += errors;
+              } else {
+                comment += 'Erro na validação. Verifique os logs do workflow para mais detalhes.';
+              }
+              
+              comment += '\n```\n\n';
+              comment += '⚠️ **Aprovação anterior foi revogada.** Por favor, corrija os erros e solicite nova validação.\n';
+            }
+            
+            // Adicionar link para o workflow run
+            comment += `\n[Ver detalhes do workflow](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})`;
+            
+            // Comentar no PR
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              body: comment
+            });
+
+      - name: Revogar aprovações se validação falhou
+        if: steps.validate.outputs.validation_success != 'true'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const prNumber = context.issue.number;
+            
+            // Obter reviews do PR
+            const { data: reviews } = await github.rest.pulls.listReviews({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber
+            });
+            
+            // Revogar aprovações (dismiss reviews)
+            for (const review of reviews) {
+              if (review.state === 'APPROVED') {
+                await github.rest.pulls.dismissReview({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: prNumber,
+                  review_id: review.id,
+                  message: 'Aprovação revogada devido a falha na validação do Salesforce'
+                });
+                console.log(`Aprovação de ${review.user.login} foi revogada`);
+              }
+            }
+
+      - name: Habilitar merge se validação passou
+        if: steps.validate.outputs.validation_success == 'true'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const prNumber = context.issue.number;
+            
+            // Verificar se o PR tem aprovações
+            const { data: reviews } = await github.rest.pulls.listReviews({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber
+            });
+            
+            const approvedReviews = reviews.filter(r => r.state === 'APPROVED');
+            
+            if (approvedReviews.length > 0) {
+              console.log(`PR tem ${approvedReviews.length} aprovação(ões). Merge pode ser realizado.`);
+              
+              // Adicionar label indicando que está pronto para merge
+              try {
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: prNumber,
+                  labels: ['validated', 'ready-to-merge']
+                });
+              } catch (error) {
+                console.log('Labels podem não existir, continuando...');
+              }
+            } else {
+              console.log('PR ainda precisa de aprovação antes do merge');
+            }

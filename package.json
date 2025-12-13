@@ -13,7 +13,18 @@
     "prettier": "prettier --write \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
     "prettier:verify": "prettier --check \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
     "postinstall": "husky install",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "validate": "./scripts/validate.sh dev",
+    "validate:staging": "./scripts/validate.sh staging",
+    "validate:prod": "./scripts/validate.sh prod",
+    "deploy:dev": "./scripts/deploy.sh dev",
+    "deploy:staging": "./scripts/deploy.sh staging",
+    "deploy:prod": "./scripts/deploy.sh prod",
+    "deploy:dev:dry": "./scripts/deploy.sh dev --dry-run",
+    "deploy:staging:dry": "./scripts/deploy.sh staging --dry-run",
+    "deploy:prod:dry": "./scripts/deploy.sh prod --dry-run",
+    "ci:validate": "npm run prettier:verify && npm run lint && npm run validate",
+    "ci:test": "npm run test:unit:coverage"
   },
   "devDependencies": {
     "@lwc/eslint-plugin-lwc": "^1.1.2",

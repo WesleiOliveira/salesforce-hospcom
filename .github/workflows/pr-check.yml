@@ -1,0 +1,65 @@
+name: PR Check - Validação de Pull Request
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  pr-validation:
+    name: Validação de Pull Request
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Verificar formatação (Prettier)
+        run: npm run prettier:verify
+        continue-on-error: false
+
+      - name: Executar ESLint
+        run: npm run lint
+        continue-on-error: false
+
+      - name: Verificar estrutura do commit
+        run: |
+          echo "Verificando mensagens de commit..."
+          git log origin/${{ github.base_ref }}..HEAD --format="%s" | while read commit_msg; do
+            if ! echo "$commit_msg" | grep -qE "^(feat|fix|docs|style|refactor|test|chore)(\(.+\))?:"; then
+              echo "❌ Commit não segue conventional commits: $commit_msg"
+              echo "Formato esperado: tipo(escopo): descrição"
+              echo "Tipos válidos: feat, fix, docs, style, refactor, test, chore"
+              exit 1
+            fi
+          done
+        continue-on-error: false
+
+      - name: Validar arquivos modificados
+        run: |
+          echo "📋 Arquivos modificados no PR:"
+          git diff --name-only origin/${{ github.base_ref }}...HEAD | head -20
+          
+          echo ""
+          echo "🔍 Verificando arquivos críticos..."
+          if git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -qE "(package\.json|sfdx-project\.json|\.forceignore)"; then
+            echo "⚠️  Arquivos de configuração modificados - atenção necessária"
+          fi
+
+      - name: Resumo da validação
+        if: always()
+        run: |
+          echo "✅ Validações de PR concluídas"
+          echo "PR: ${{ github.event.pull_request.number }}"
+          echo "Branch: ${{ github.head_ref }} → ${{ github.base_ref }}"

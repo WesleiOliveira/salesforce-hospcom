@@ -1,0 +1,303 @@
+name: Sync Homolog - Deploy Automático Agendado
+
+# Executa a cada 3 horas
+on:
+  schedule:
+    # Cron: a cada 3 horas (00:00, 03:00, 06:00, 09:00, 12:00, 15:00, 18:00, 21:00)
+    - cron: '0 */3 * * *'
+  workflow_dispatch: # Permite execução manual
+
+jobs:
+  sync-homolog:
+    name: Sincronizar Integration → Homolog
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configurar Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Verificar se branch homolog existe
+        id: check_branches
+        run: |
+          # Verificar se branch homolog existe remotamente
+          if git ls-remote --heads origin homolog | grep -q homolog; then
+            echo "homolog_exists=true" >> $GITHUB_OUTPUT
+            echo "✅ Branch homolog existe"
+          else
+            echo "homolog_exists=false" >> $GITHUB_OUTPUT
+            echo "⚠️  Branch homolog não existe, será criada"
+          fi
+          
+          # Verificar se branch integration existe
+          if git ls-remote --heads origin integration | grep -q integration; then
+            echo "integration_exists=true" >> $GITHUB_OUTPUT
+            echo "✅ Branch integration existe"
+          else
+            echo "integration_exists=false" >> $GITHUB_OUTPUT
+            echo "❌ Branch integration não existe!"
+            exit 1
+          fi
+
+      - name: Fazer checkout das branches
+        run: |
+          git fetch origin homolog integration
+          
+          # Criar branch homolog localmente se não existir
+          if [ "${{ steps.check_branches.outputs.homolog_exists }}" = "false" ]; then
+            git checkout -b homolog origin/integration || git checkout -b homolog
+            echo "Branch homolog criada a partir de integration"
+          else
+            git checkout homolog
+            git pull origin homolog
+          fi
+          
+          # Fazer checkout de integration para comparação
+          git fetch origin integration
+
+      - name: Calcular delta entre homolog e integration
+        id: calculate_delta
+        run: |
+          # Verificar se há diferenças entre homolog e integration
+          if git diff --quiet homolog origin/integration; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "✅ Não há diferenças entre homolog e integration"
+            echo "Nenhum deploy necessário"
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "📋 Há diferenças entre homolog e integration"
+            
+            # Listar arquivos modificados
+            CHANGED_FILES=$(git diff --name-only homolog origin/integration | head -20)
+            echo "Arquivos modificados:"
+            echo "$CHANGED_FILES"
+            
+            # Contar commits
+            COMMIT_COUNT=$(git rev-list --count homolog..origin/integration)
+            echo "Commits a serem deployados: $COMMIT_COUNT"
+            echo "commit_count=$COMMIT_COUNT" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Sair se não houver mudanças
+        if: steps.calculate_delta.outputs.has_changes != 'true'
+        run: |
+          echo "✅ Nenhuma mudança detectada. Sincronização não necessária."
+          exit 0
+
+      - name: Instalar jq
+        if: steps.calculate_delta.outputs.has_changes == 'true'
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Configurar SFDX CLI
+        if: steps.calculate_delta.outputs.has_changes == 'true'
+        uses: salesforce/setup-sfdx@v1
+
+      - name: Autenticar na org de Homolog
+        if: steps.calculate_delta.outputs.has_changes == 'true'
+        env:
+          SF_USERNAME: ${{ secrets.SF_USERNAME_HOMOLOG }}
+          SF_PASSWORD: ${{ secrets.SF_PASSWORD_HOMOLOG }}
+          SF_SECURITY_TOKEN: ${{ secrets.SF_SECURITY_TOKEN_HOMOLOG }}
+          SF_LOGIN_URL: ${{ secrets.SF_LOGIN_URL_HOMOLOG }}
+        run: |
+          echo "🔐 Autenticando na org de homolog..."
+          echo "y" | sf org login web --alias homolog-sync --instance-url $SF_LOGIN_URL --set-default
+
+      - name: Preparar arquivos para deploy (delta)
+        if: steps.calculate_delta.outputs.has_changes == 'true'
+        id: prepare_deploy
+        run: |
+          # Criar diretório temporário com apenas os arquivos modificados
+          DELTA_DIR=$(mktemp -d)
+          echo "delta_dir=$DELTA_DIR" >> $GITHUB_OUTPUT
+          
+          # Obter lista de arquivos modificados
+          CHANGED_FILES=$(git diff --name-only --diff-filter=ACMRT homolog origin/integration)
+          
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "⚠️  Nenhum arquivo modificado detectado"
+            exit 1
+          fi
+          
+          # Criar estrutura de diretórios e copiar arquivos
+          echo "$CHANGED_FILES" | while read -r file; do
+            if [ -f "$file" ] && [[ "$file" == force-app/* ]]; then
+              # Criar estrutura de diretórios
+              mkdir -p "$DELTA_DIR/$(dirname "$file")"
+              # Copiar arquivo
+              cp "$file" "$DELTA_DIR/$file"
+            fi
+          done
+          
+          # Fazer checkout dos arquivos da branch integration
+          git checkout origin/integration -- $CHANGED_FILES
+          
+          echo "📦 Arquivos preparados para deploy"
+          echo "Total de arquivos: $(echo "$CHANGED_FILES" | wc -l)"
+
+      - name: Executar deploy na org de Homolog
+        if: steps.calculate_delta.outputs.has_changes == 'true'
+        id: deploy
+        continue-on-error: true
+        run: |
+          echo "🚀 Iniciando deploy na org de homolog..."
+          
+          # Executar deploy e capturar output
+          set +e
+          DEPLOY_OUTPUT=$(sf project deploy start \
+            --source-dir force-app \
+            --target-org homolog-sync \
+            --ignore-warnings \
+            --wait 10 \
+            --json 2>&1)
+          DEPLOY_EXIT_CODE=$?
+          set -e
+          
+          # Salvar output em arquivo
+          echo "$DEPLOY_OUTPUT" > deploy-output.json
+          
+          # Tentar extrair JSON válido
+          JSON_OUTPUT=$(echo "$DEPLOY_OUTPUT" | grep -o '{.*}' | tail -1 || echo "")
+          
+          if [ -z "$JSON_OUTPUT" ]; then
+            echo "deploy_success=false" >> $GITHUB_OUTPUT
+            echo "deploy_error<<EOF" >> $GITHUB_OUTPUT
+            echo "Erro ao executar deploy. Output:" >> $GITHUB_OUTPUT
+            echo "$DEPLOY_OUTPUT" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+          
+          # Verificar status do deploy
+          STATUS=$(echo "$JSON_OUTPUT" | jq -r '.status // 1' 2>/dev/null || echo "1")
+          SUCCESS=$(echo "$JSON_OUTPUT" | jq -r '.result.success // false' 2>/dev/null || echo "false")
+          
+          if [ "$STATUS" = "0" ] && [ "$SUCCESS" = "true" ]; then
+            echo "✅ Deploy realizado com sucesso!"
+            echo "deploy_success=true" >> $GITHUB_OUTPUT
+          else
+            echo "❌ Deploy falhou"
+            echo "deploy_success=false" >> $GITHUB_OUTPUT
+            
+            # Extrair erros
+            ERROR_MESSAGES=$(echo "$JSON_OUTPUT" | jq -r '.result.details.componentFailures[]? | "\(.fileName):\(.lineNumber) - \(.problem)"' 2>/dev/null || echo "")
+            
+            if [ -z "$ERROR_MESSAGES" ]; then
+              ERROR_MESSAGES=$(echo "$JSON_OUTPUT" | jq -r '.message // .result.message // "Erro desconhecido no deploy"' 2>/dev/null || echo "Erro desconhecido no deploy")
+            fi
+            
+            echo "deploy_error<<EOF" >> $GITHUB_OUTPUT
+            echo "$ERROR_MESSAGES" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            
+            # Salvar output completo
+            echo "deploy_output<<EOF" >> $GITHUB_OUTPUT
+            echo "$JSON_OUTPUT" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Salvar log de erro do deploy
+        if: steps.deploy.outputs.deploy_success != 'true'
+        run: |
+          echo "💾 Salvando log de erro do deploy..."
+          
+          # Garantir que estamos na branch homolog
+          git checkout homolog
+          git pull origin homolog || true
+          
+          # Criar diretório de logs se não existir
+          mkdir -p logs/deploy-errors
+          
+          # Criar nome do arquivo com timestamp
+          TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+          LOG_FILE="logs/deploy-errors/deploy-error-${TIMESTAMP}.log"
+          
+          # Obter informações do commit
+          INTEGRATION_COMMIT=$(git rev-parse origin/integration 2>/dev/null || echo "N/A")
+          CHANGED_FILES=$(git diff --name-only homolog origin/integration 2>/dev/null || echo "N/A")
+          COMMITS=$(git log --oneline homolog..origin/integration 2>/dev/null || echo "N/A")
+          
+          # Criar conteúdo do log
+          cat > "$LOG_FILE" << EOF
+# Log de Erro de Deploy - Sincronização Automática Homolog
+# Data: $(date)
+# Branch: integration → homolog
+# Workflow Run: ${{ github.run_id }}
+# Commit Integration: $INTEGRATION_COMMIT
+
+## Erros do Deploy
+
+${{ steps.deploy.outputs.deploy_error }}
+
+## Output Completo
+
+${{ steps.deploy.outputs.deploy_output }}
+
+## Arquivos Modificados
+
+$CHANGED_FILES
+
+## Commits
+
+$COMMITS
+EOF
+          
+          # Adicionar e commitar o log
+          git add "$LOG_FILE"
+          
+          if git diff --staged --quiet; then
+            echo "⚠️  Nenhuma mudança para commitar"
+          else
+            git commit -m "chore: adicionar log de erro de deploy [skip ci]" || true
+            git push origin homolog || echo "⚠️  Não foi possível fazer push do log"
+            echo "✅ Log commitado e enviado para branch homolog"
+          fi
+          
+          echo "📄 Log salvo em: $LOG_FILE"
+
+      - name: Fazer merge para homolog (se deploy foi bem-sucedido)
+        if: steps.deploy.outputs.deploy_success == 'true'
+        run: |
+          echo "🔄 Fazendo merge de integration para homolog..."
+          
+          # Garantir que estamos na branch homolog
+          git checkout homolog
+          git pull origin homolog || true
+          
+          # Fazer merge de integration
+          git merge origin/integration --no-edit -m "chore: merge automático de integration para homolog [skip ci]"
+          
+          # Push para homolog
+          git push origin homolog
+          
+          echo "✅ Merge realizado com sucesso!"
+          echo "Branch homolog atualizada com as alterações de integration"
+
+      - name: Criar resumo da execução
+        if: always()
+        run: |
+          echo "## 📊 Resumo da Sincronização" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Data/Hora**: $(date)" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch Origem**: integration" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch Destino**: homolog" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ steps.calculate_delta.outputs.has_changes }}" = "true" ]; then
+            echo "- **Commits**: ${{ steps.calculate_delta.outputs.commit_count }}" >> $GITHUB_STEP_SUMMARY
+            
+            if [ "${{ steps.deploy.outputs.deploy_success }}" = "true" ]; then
+              echo "- **Status**: ✅ Deploy realizado com sucesso e merge concluído" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "- **Status**: ❌ Deploy falhou - log de erro salvo" >> $GITHUB_STEP_SUMMARY
+            fi
+          else
+            echo "- **Status**: ℹ️  Nenhuma mudança detectada" >> $GITHUB_STEP_SUMMARY
+          fi

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         name="Salesforce Apex Ruleset"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+    <description>
+        Regras PMD para análise de código Apex no projeto Salesforce Hospcom.
+        Este ruleset inclui melhores práticas, estilo de código e regras de design.
+    </description>
+    
+    <!-- Best Practices -->
+    <rule ref="category/apex/bestpractices.xml" />
+    
+    <!-- Code Style -->
+    <rule ref="category/apex/codestyle.xml" />
+    
+    <!-- Design Rules -->
+    <rule ref="category/apex/design.xml">
+        <!-- Excluir regras muito restritivas se necessário -->
+        <!-- <exclude name="TooManyFields" /> -->
+    </rule>
+    
+    <!-- Error Prone -->
+    <rule ref="category/apex/errorprone.xml" />
+    
+    <!-- Performance -->
+    <rule ref="category/apex/performance.xml" />
+    
+    <!-- Security -->
+    <rule ref="category/apex/security.xml" />
+</ruleset>

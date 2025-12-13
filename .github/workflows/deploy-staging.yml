@@ -1,0 +1,97 @@
+name: CD - Deploy para Staging
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      skip_tests:
+        description: 'Pular testes'
+        required: false
+        default: 'false'
+        type: boolean
+
+jobs:
+  deploy-to-staging:
+    name: Deploy para Ambiente de Staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment:
+      name: staging
+      url: ${{ secrets.SF_LOGIN_URL_STAGING }}
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar SFDX CLI
+        uses: salesforce/setup-sfdx@v1
+
+      - name: Autenticar no Salesforce Staging
+        env:
+          SF_USERNAME: ${{ secrets.SF_USERNAME_STAGING }}
+          SF_PASSWORD: ${{ secrets.SF_PASSWORD_STAGING }}
+          SF_SECURITY_TOKEN: ${{ secrets.SF_SECURITY_TOKEN_STAGING }}
+          SF_LOGIN_URL: ${{ secrets.SF_LOGIN_URL_STAGING }}
+        run: |
+          echo "y" | sf org login web --alias staging --instance-url $SF_LOGIN_URL --set-default
+
+      - name: Validar deploy
+        run: |
+          sf project deploy start \
+            --dry-run \
+            --source-dir force-app \
+            --ignore-warnings \
+            --wait 10
+
+      - name: Executar testes Apex antes do deploy
+        if: github.event.inputs.skip_tests != 'true'
+        run: |
+          sf apex run test \
+            --class-names "${{ secrets.APEX_TEST_CLASSES || '' }}" \
+            --result-format human \
+            --code-coverage \
+            --wait 10
+
+      - name: Deploy para Staging
+        if: github.event.inputs.skip_tests != 'true'
+        run: |
+          sf project deploy start \
+            --source-dir force-app \
+            --ignore-warnings \
+            --wait 10 \
+            --test-level RunLocalTests
+
+      - name: Deploy para Staging (sem testes)
+        if: github.event.inputs.skip_tests == 'true'
+        run: |
+          sf project deploy start \
+            --source-dir force-app \
+            --ignore-warnings \
+            --wait 10 \
+            --test-level NoTestRun
+
+      - name: Gerar package.xml das mudanças
+        if: always()
+        run: |
+          sf project generate manifest --source-dir force-app --name changed-components
+
+      - name: Upload artefatos
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: deployment-artifacts
+          path: |
+            changed-components.xml
+          retention-days: 30
+
+      - name: Notificar sucesso
+        if: success()
+        run: |
+          echo "✅ Deploy realizado com sucesso para o ambiente de Staging"
+
+      - name: Notificar falha
+        if: failure()
+        run: |
+          echo "❌ Falha no deploy para o ambiente de Staging"

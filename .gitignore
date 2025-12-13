@@ -21,6 +21,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Exceção: logs de erro de deploy devem ser commitados
+!logs/deploy-errors/
+!logs/deploy-errors/*.log
+
 # Dependency directories
 node_modules/
 
