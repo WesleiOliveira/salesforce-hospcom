@@ -9,7 +9,7 @@ on:
 
 jobs:
   sync-main:
-    name: Sincronizar StepMaster → Main (Produção)
+    name: Sincronizar stepMaster → Main (Produção)
     runs-on: ubuntu-latest
     timeout-minutes: 60
     
@@ -37,51 +37,51 @@ jobs:
             echo "⚠️  Branch main não existe, será criada"
           fi
           
-          # Verificar se branch StepMaster existe
-          if git ls-remote --heads origin StepMaster | grep -q StepMaster; then
+          # Verificar se branch stepMaster existe
+          if git ls-remote --heads origin stepMaster | grep -q stepMaster; then
             echo "stepmaster_exists=true" >> $GITHUB_OUTPUT
-            echo "✅ Branch StepMaster existe"
+            echo "✅ Branch stepMaster existe"
           else
             echo "stepmaster_exists=false" >> $GITHUB_OUTPUT
-            echo "❌ Branch StepMaster não existe!"
+            echo "❌ Branch stepMaster não existe!"
             exit 1
           fi
 
       - name: Fazer checkout das branches
         run: |
-          git fetch origin main StepMaster
+          git fetch origin main stepMaster
           
           # Criar branch main localmente se não existir
           if [ "${{ steps.check_branches.outputs.main_exists }}" = "false" ]; then
-            git checkout -b main origin/StepMaster || git checkout -b main
-            echo "Branch main criada a partir de StepMaster"
+            git checkout -b main origin/stepMaster || git checkout -b main
+            echo "Branch main criada a partir de stepMaster"
           else
             git checkout main
             git pull origin main
           fi
           
-          # Fazer checkout de StepMaster para comparação
-          git fetch origin StepMaster
+          # Fazer checkout de stepMaster para comparação
+          git fetch origin stepMaster
 
-      - name: Calcular delta entre main e StepMaster
+      - name: Calcular delta entre main e stepMaster
         id: calculate_delta
         run: |
-          # Verificar se há diferenças entre main e StepMaster
-          if git diff --quiet main origin/StepMaster; then
+          # Verificar se há diferenças entre main e stepMaster
+          if git diff --quiet main origin/stepMaster; then
             echo "has_changes=false" >> $GITHUB_OUTPUT
-            echo "✅ Não há diferenças entre main e StepMaster"
+            echo "✅ Não há diferenças entre main e stepMaster"
             echo "Nenhum deploy necessário"
           else
             echo "has_changes=true" >> $GITHUB_OUTPUT
-            echo "📋 Há diferenças entre main e StepMaster"
+            echo "📋 Há diferenças entre main e stepMaster"
             
             # Listar arquivos modificados
-            CHANGED_FILES=$(git diff --name-only main origin/StepMaster | head -20)
+            CHANGED_FILES=$(git diff --name-only main origin/stepMaster | head -20)
             echo "Arquivos modificados:"
             echo "$CHANGED_FILES"
             
             # Contar commits
-            COMMIT_COUNT=$(git rev-list --count main..origin/StepMaster)
+            COMMIT_COUNT=$(git rev-list --count main..origin/stepMaster)
             echo "Commits a serem deployados: $COMMIT_COUNT"
             echo "commit_count=$COMMIT_COUNT" >> $GITHUB_OUTPUT
           fi
@@ -120,7 +120,7 @@ jobs:
           echo "delta_dir=$DELTA_DIR" >> $GITHUB_OUTPUT
           
           # Obter lista de arquivos modificados
-          CHANGED_FILES=$(git diff --name-only --diff-filter=ACMRT main origin/StepMaster)
+          CHANGED_FILES=$(git diff --name-only --diff-filter=ACMRT main origin/stepMaster)
           
           if [ -z "$CHANGED_FILES" ]; then
             echo "⚠️  Nenhum arquivo modificado detectado"
@@ -137,8 +137,8 @@ jobs:
             fi
           done
           
-          # Fazer checkout dos arquivos da branch StepMaster
-          git checkout origin/StepMaster -- $CHANGED_FILES
+          # Fazer checkout dos arquivos da branch stepMaster
+          git checkout origin/stepMaster -- $CHANGED_FILES
           
           echo "📦 Arquivos preparados para deploy"
           echo "Total de arquivos: $(echo "$CHANGED_FILES" | wc -l)"
@@ -221,17 +221,17 @@ jobs:
           LOG_FILE="logs/deploy-errors/deploy-error-prod-${TIMESTAMP}.log"
           
           # Obter informações do commit
-          STEP_MASTER_COMMIT=$(git rev-parse origin/StepMaster 2>/dev/null || echo "N/A")
-          CHANGED_FILES=$(git diff --name-only main origin/StepMaster 2>/dev/null || echo "N/A")
-          COMMITS=$(git log --oneline main..origin/StepMaster 2>/dev/null || echo "N/A")
+          STEP_MASTER_COMMIT=$(git rev-parse origin/stepMaster 2>/dev/null || echo "N/A")
+          CHANGED_FILES=$(git diff --name-only main origin/stepMaster 2>/dev/null || echo "N/A")
+          COMMITS=$(git log --oneline main..origin/stepMaster 2>/dev/null || echo "N/A")
           
           # Criar conteúdo do log
           cat > "$LOG_FILE" << EOF
 # Log de Erro de Deploy - Sincronização Automática Produção
 # Data: $(date)
-# Branch: StepMaster → main
+# Branch: stepMaster → main
 # Workflow Run: ${{ github.run_id }}
-# Commit StepMaster: $STEP_MASTER_COMMIT
+# Commit stepMaster: $STEP_MASTER_COMMIT
 
 ## Erros do Deploy
 
@@ -266,20 +266,20 @@ EOF
       - name: Fazer merge para main (se deploy foi bem-sucedido)
         if: steps.deploy.outputs.deploy_success == 'true'
         run: |
-          echo "🔄 Fazendo merge de StepMaster para main..."
+          echo "🔄 Fazendo merge de stepMaster para main..."
           
           # Garantir que estamos na branch main
           git checkout main
           git pull origin main || true
           
-          # Fazer merge de StepMaster
-          git merge origin/StepMaster --no-edit -m "chore: merge automático de StepMaster para main [skip ci]"
+          # Fazer merge de stepMaster
+          git merge origin/stepMaster --no-edit -m "chore: merge automático de stepMaster para main [skip ci]"
           
           # Push para main
           git push origin main
           
           echo "✅ Merge realizado com sucesso!"
-          echo "Branch main atualizada com as alterações de StepMaster"
+          echo "Branch main atualizada com as alterações de stepMaster"
 
       - name: Criar resumo da execução
         if: always()
@@ -287,7 +287,7 @@ EOF
           echo "## 📊 Resumo da Sincronização (Produção)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "- **Data/Hora**: $(date)" >> $GITHUB_STEP_SUMMARY
-          echo "- **Branch Origem**: StepMaster" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch Origem**: stepMaster" >> $GITHUB_STEP_SUMMARY
           echo "- **Branch Destino**: main" >> $GITHUB_STEP_SUMMARY
           
           if [ "${{ steps.calculate_delta.outputs.has_changes }}" = "true" ]; then

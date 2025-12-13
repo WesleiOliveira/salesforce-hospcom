@@ -26,16 +26,16 @@ git push origin <sua-branch>
 
 Certifique-se de que as seguintes branches existem no repositório:
 
-- ✅ `StepMaster` - Branch base para desenvolvimento
+- ✅ `stepMaster` - Branch base para desenvolvimento
 - ✅ `integration` - Branch de integração
 - ✅ `homolog` - Branch de homologação (será criada automaticamente se não existir)
 - ✅ `main` - Branch de produção
 
 **Criar branches se necessário:**
 ```bash
-# Criar StepMaster se não existir
-git checkout -b StepMaster
-git push origin StepMaster
+# Criar stepMaster se não existir
+git checkout -b stepMaster
+git push origin stepMaster
 
 # Criar integration se não existir
 git checkout -b integration
@@ -109,7 +109,7 @@ Acesse: **Repository Settings** → **Branches** → **Add rule** (ou edite regr
 - ✅ **Require branches to be up to date before merging**
 - ✅ **Do not allow bypassing the above settings** (obrigatório para produção)
 
-#### Branch: `StepMaster`
+#### Branch: `stepMaster`
 
 **Configurações:**
 - ✅ **Require pull request reviews before merging** (opcional, mas recomendado)
@@ -170,7 +170,7 @@ Isso permite que os workflows:
 
 ```bash
 # Criar uma branch de teste
-git checkout StepMaster
+git checkout stepMaster
 git checkout -b feat-teste-0001
 
 # Fazer uma alteração e tentar commitar
@@ -212,7 +212,7 @@ git push origin merge-teste-0001-integration
 
 1. Criar branch de merge:
 ```bash
-git checkout StepMaster
+git checkout stepMaster
 git checkout -b merge-teste-0001-stepMaster
 git push origin merge-teste-0001-stepMaster
 ```
@@ -231,7 +231,7 @@ git push origin merge-teste-0001-stepMaster
 
 1. Acesse: **Actions** → **Sync Main - Deploy Automático Agendado (Produção)**
 2. Clique em **Run workflow**
-3. Selecione a branch `main` ou `StepMaster`
+3. Selecione a branch `main` ou `stepMaster`
 4. Clique em **Run workflow**
 5. Verificar se o workflow executa corretamente
 

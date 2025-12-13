@@ -40,35 +40,35 @@ jobs:
           fi
           echo "✅ Nome da branch válido: $BRANCH_NAME"
 
-      - name: Validar que branch foi criada a partir de StepMaster
+      - name: Validar que branch foi criada a partir de stepMaster
         run: |
-          BASE_REF="origin/StepMaster"
+          BASE_REF="origin/stepMaster"
           HEAD_REF="origin/${{ github.head_ref }}"
           
-          # Verificar se StepMaster existe
+          # Verificar se stepMaster existe
           if ! git show-ref --verify --quiet refs/remotes/$BASE_REF; then
-            echo "⚠️  Branch StepMaster não encontrada remotamente"
+            echo "⚠️  Branch stepMaster não encontrada remotamente"
             exit 1
           fi
           
           # Verificar merge-base
           MERGE_BASE=$(git merge-base $BASE_REF $HEAD_REF 2>/dev/null || echo "")
           if [ -z "$MERGE_BASE" ]; then
-            echo "❌ Erro: A branch não foi criada a partir de StepMaster"
+            echo "❌ Erro: A branch não foi criada a partir de stepMaster"
             exit 1
           fi
           
           STEP_MASTER_COMMIT=$(git rev-parse $BASE_REF)
           if [ "$MERGE_BASE" = "$STEP_MASTER_COMMIT" ] || git merge-base --is-ancestor $STEP_MASTER_COMMIT $MERGE_BASE 2>/dev/null; then
-            echo "✅ Branch foi criada a partir de StepMaster"
+            echo "✅ Branch foi criada a partir de stepMaster"
           else
-            echo "❌ Erro: A branch não foi criada a partir de StepMaster"
+            echo "❌ Erro: A branch não foi criada a partir de stepMaster"
             exit 1
           fi
 
       - name: Validar que commits vêm de outras branches
         run: |
-          BASE_REF="origin/StepMaster"
+          BASE_REF="origin/stepMaster"
           HEAD_REF="origin/${{ github.head_ref }}"
           
           COMMITS=$(git log $BASE_REF..$HEAD_REF --format="%H" 2>/dev/null || echo "")
@@ -86,7 +86,7 @@ jobs:
             
             FOUND_IN_OTHER_BRANCH=false
             for branch in $BRANCHES_WITH_COMMIT; do
-              if [ "$branch" != "${{ github.head_ref }}" ] && [ "$branch" != "StepMaster" ] && [ "$branch" != "origin/StepMaster" ]; then
+              if [ "$branch" != "${{ github.head_ref }}" ] && [ "$branch" != "stepMaster" ] && [ "$branch" != "origin/stepMaster" ]; then
                 if [[ "$branch" =~ ^(feat|merge)- ]] || [[ "$branch" =~ ^origin/(feat|merge)- ]]; then
                   FOUND_IN_OTHER_BRANCH=true
                   break

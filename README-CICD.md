@@ -14,7 +14,7 @@ Siga o guia em [.github/SECRETS_TEMPLATE.md](.github/SECRETS_TEMPLATE.md) para c
 
 ### 3. Estrutura de Branches
 
-- `StepMaster` → Branch base para desenvolvimento
+- `stepMaster` → Branch base para desenvolvimento
 - `feat-{area}-{numero}` → Branches de desenvolvimento
 - `integration` → Branch de integração
 - `homolog` → Branch de homologação (sincronização automática)
@@ -23,13 +23,13 @@ Siga o guia em [.github/SECRETS_TEMPLATE.md](.github/SECRETS_TEMPLATE.md) para c
 ### 4. Fluxo de Trabalho
 
 ```
-StepMaster → feat-{area}-{numero} → merge-{area}-{numero}-integration → integration
+stepMaster → feat-{area}-{numero} → merge-{area}-{numero}-integration → integration
                                                                                     ↓
                                                                         (automático a cada 3h)
                                                                                     ↓
                                                                               homolog
                                                                                     ↓
-StepMaster → merge-{area}-{numero}-stepMaster → main → (automático a cada 3h) → main (produção)
+stepMaster → merge-{area}-{numero}-stepMaster → main → (automático a cada 3h) → main (produção)
 ```
 
 ## 📦 Scripts Disponíveis
@@ -67,7 +67,7 @@ npm run deploy:prod:dry
 | `sync-homolog-scheduled.yml` | A cada 3h / Manual | Sincronização integration → homolog |
 | `pr-main-validation.yml` | PR para `main` | Valida PRs para produção |
 | `pr-validate-salesforce-prod.yml` | Comentário "validar" | Valida no Salesforce (produção) |
-| `sync-main-scheduled.yml` | A cada 3h / Manual | Sincronização StepMaster → main |
+| `sync-main-scheduled.yml` | A cada 3h / Manual | Sincronização stepMaster → main |
 
 ## 📚 Documentação Completa
 

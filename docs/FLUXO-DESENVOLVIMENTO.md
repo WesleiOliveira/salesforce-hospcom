@@ -22,20 +22,20 @@ feat-{area *opcional}-{numero do card da demanda}
 - `feat-vendas` - Falta o número do card
 - `vendas-0001` - Falta o prefixo `feat-`
 
-## Branch Base: StepMaster
+## Branch Base: stepMaster
 
-**IMPORTANTE**: Todas as branches de desenvolvimento **DEVEM** ser criadas a partir da branch `StepMaster`.
+**IMPORTANTE**: Todas as branches de desenvolvimento **DEVEM** ser criadas a partir da branch `stepMaster`.
 
 ### Como criar uma branch corretamente:
 
 ```bash
-# 1. Certifique-se de estar na branch StepMaster
-git checkout StepMaster
+# 1. Certifique-se de estar na branch stepMaster
+git checkout stepMaster
 
-# 2. Atualize a branch StepMaster com as últimas alterações
-git pull origin StepMaster
+# 2. Atualize a branch stepMaster com as últimas alterações
+git pull origin stepMaster
 
-# 3. Crie sua branch de desenvolvimento a partir de StepMaster
+# 3. Crie sua branch de desenvolvimento a partir de stepMaster
 git checkout -b feat-vendas-0001
 
 # 4. Agora você pode começar a desenvolver
@@ -48,8 +48,8 @@ git checkout -b feat-vendas-0001
 git checkout main
 git checkout -b feat-vendas-0001  # ❌ ERRADO!
 
-# NÃO crie branch sem atualizar StepMaster primeiro
-git checkout StepMaster
+# NÃO crie branch sem atualizar stepMaster primeiro
+git checkout stepMaster
 git checkout -b feat-vendas-0001  # ⚠️ Pode estar desatualizado
 ```
 
@@ -62,7 +62,7 @@ Quando você tentar fazer commit, o hook de pre-commit executará automaticament
 - Se não seguir, o commit será bloqueado
 
 ### 2. Validação da Origem da Branch
-- Verifica se a branch foi criada a partir de `StepMaster`
+- Verifica se a branch foi criada a partir de `stepMaster`
 - Se não foi, o commit será bloqueado
 
 ### 3. Prettier (Formatação de Código)
@@ -99,15 +99,15 @@ Baixe o PMD de: https://pmd.github.io/
 git branch -m feat-vendas-0001
 ```
 
-### Erro: "Branch não foi criada a partir de StepMaster"
-**Solução**: Recrie a branch a partir de StepMaster:
+### Erro: "Branch não foi criada a partir de stepMaster"
+**Solução**: Recrie a branch a partir de stepMaster:
 ```bash
 # Salve suas alterações
 git stash
 
-# Vá para StepMaster e atualize
-git checkout StepMaster
-git pull origin StepMaster
+# Vá para stepMaster e atualize
+git checkout stepMaster
+git pull origin stepMaster
 
 # Crie a branch novamente
 git checkout -b feat-vendas-0001
@@ -200,8 +200,8 @@ Após o PR ser aprovado pelos revisores designados:
 
 ```bash
 # 1. Desenvolvimento na branch feat
-git checkout StepMaster
-git pull origin StepMaster
+git checkout stepMaster
+git pull origin stepMaster
 git checkout -b feat-vendas-0001
 # ... desenvolve e faz commits ...
 
@@ -331,7 +331,7 @@ Para monitorar o processo:
 
 ## Fluxo de Merge para Produção (Main)
 
-Após o código estar na branch `StepMaster`, você pode criar uma branch de merge para a branch `main` (produção).
+Após o código estar na branch `stepMaster`, você pode criar uma branch de merge para a branch `main` (produção).
 
 ### Padrão de Nomenclatura da Branch de Merge para Produção
 
@@ -349,17 +349,17 @@ merge-{area *opcional}-{numero do card da demanda}-stepMaster
 ### Como criar a branch de merge para produção:
 
 ```bash
-# 1. Certifique-se de estar na branch StepMaster
-git checkout StepMaster
+# 1. Certifique-se de estar na branch stepMaster
+git checkout stepMaster
 
-# 2. Atualize a branch StepMaster com as últimas alterações
-git pull origin StepMaster
+# 2. Atualize a branch stepMaster com as últimas alterações
+git pull origin stepMaster
 
-# 3. Crie a branch de merge a partir de StepMaster
+# 3. Crie a branch de merge a partir de stepMaster
 git checkout -b merge-vendas-0001-stepMaster
 
 # 4. Faça merge das branches que você desenvolveu (se necessário)
-# Normalmente você já terá feito merge na StepMaster anteriormente
+# Normalmente você já terá feito merge na stepMaster anteriormente
 
 # 5. Faça push da branch de merge
 git push origin merge-vendas-0001-stepMaster
@@ -375,7 +375,7 @@ git push origin merge-vendas-0001-stepMaster
 A branch de merge será validada automaticamente quando você criar o Pull Request:
 
 1. **Validação do Nome**: Deve seguir o padrão `merge-{area}-{numero}-stepMaster`
-2. **Validação da Origem**: Deve ter sido criada a partir de `StepMaster`
+2. **Validação da Origem**: Deve ter sido criada a partir de `stepMaster`
 3. **Validação de Commits**: Todos os commits devem vir de outras branches, não podem ser commits diretos na branch de merge
 4. **Validação de Código**: Prettier e ESLint serão executados
 
@@ -401,11 +401,11 @@ Após o PR ser aprovado pelos revisores designados:
 ### Exemplo de Fluxo Completo para Produção
 
 ```bash
-# 1. Código já está na StepMaster (após passar por integration e homolog)
+# 1. Código já está na stepMaster (após passar por integration e homolog)
 
 # 2. Criar branch de merge para produção
-git checkout StepMaster
-git pull origin StepMaster
+git checkout stepMaster
+git pull origin stepMaster
 git checkout -b merge-vendas-0001-stepMaster
 
 # 3. Push e criar PR
@@ -416,16 +416,16 @@ git push origin merge-vendas-0001-stepMaster
 # 5. Após validação bem-sucedida, fazer merge do PR
 ```
 
-## Sincronização Automática: StepMaster → Main (Produção)
+## Sincronização Automática: stepMaster → Main (Produção)
 
-Existe um processo automático agendado que sincroniza a branch `StepMaster` com a branch `main` através de deploy automático na org de produção.
+Existe um processo automático agendado que sincroniza a branch `stepMaster` com a branch `main` através de deploy automático na org de produção.
 
 ### Como Funciona
 
 1. **Agendamento**: O workflow executa automaticamente a cada 3 horas (00:00, 03:00, 06:00, 09:00, 12:00, 15:00, 18:00, 21:00)
 
 2. **Detecção de Mudanças**: 
-   - Calcula o delta (diferenças) entre as branches `main` e `StepMaster`
+   - Calcula o delta (diferenças) entre as branches `main` e `stepMaster`
    - Se não houver mudanças, o processo é encerrado
 
 3. **Deploy Automático**:
@@ -433,7 +433,7 @@ Existe um processo automático agendado que sincroniza a branch `StepMaster` com
    - Apenas os arquivos modificados são deployados (deploy delta)
 
 4. **Em Caso de Sucesso**:
-   - ✅ Faz merge automático de `StepMaster` para `main`
+   - ✅ Faz merge automático de `stepMaster` para `main`
    - ✅ A branch `main` é atualizada automaticamente
 
 5. **Em Caso de Falha**:
@@ -448,7 +448,7 @@ O workflow também pode ser executado manualmente através do GitHub Actions:
 
 1. Acesse: **Actions** → **Sync Main - Deploy Automático Agendado (Produção)**
 2. Clique em **Run workflow**
-3. Selecione a branch (geralmente `main` ou `StepMaster`)
+3. Selecione a branch (geralmente `main` ou `stepMaster`)
 4. Clique em **Run workflow**
 
 ### Logs de Erro (Produção)

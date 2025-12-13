@@ -53,17 +53,17 @@ if ! git diff-index --quiet HEAD --; then
     exit 1
 fi
 
-# Ir para StepMaster
-echo -e "${YELLOW}📥 Atualizando branch StepMaster...${NC}"
-git checkout StepMaster 2>/dev/null || {
-    echo -e "${YELLOW}Branch StepMaster não existe localmente, criando...${NC}"
-    git checkout -b StepMaster origin/StepMaster 2>/dev/null || {
-        echo -e "${RED}❌ Erro: Não foi possível criar/checkout branch StepMaster${NC}"
+# Ir para stepMaster
+echo -e "${YELLOW}📥 Atualizando branch stepMaster...${NC}"
+git checkout stepMaster 2>/dev/null || {
+    echo -e "${YELLOW}Branch stepMaster não existe localmente, criando...${NC}"
+    git checkout -b stepMaster origin/stepMaster 2>/dev/null || {
+        echo -e "${RED}❌ Erro: Não foi possível criar/checkout branch stepMaster${NC}"
         exit 1
     }
 }
 
-git pull origin StepMaster
+git pull origin stepMaster
 
 # Criar branch de merge
 echo -e "${YELLOW}🌿 Criando branch de merge...${NC}"

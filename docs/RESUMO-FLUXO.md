@@ -5,9 +5,9 @@ Este documento fornece uma visão geral rápida do fluxo completo de desenvolvim
 ## 📋 Visão Geral
 
 ```
-StepMaster → feat-{area}-{numero} → merge-{area}-{numero}-integration → integration → (automático a cada 3h) → homolog
+stepMaster → feat-{area}-{numero} → merge-{area}-{numero}-integration → integration → (automático a cada 3h) → homolog
                                                                                                                       ↓
-StepMaster → merge-{area}-{numero}-stepMaster → main → (automático a cada 3h) → main (produção)
+stepMaster → merge-{area}-{numero}-stepMaster → main → (automático a cada 3h) → main (produção)
 ```
 
 ## 🔄 Fluxo Completo
@@ -15,15 +15,15 @@ StepMaster → merge-{area}-{numero}-stepMaster → main → (automático a cada
 ### 1. Desenvolvimento (Branch Feat)
 
 ```bash
-# Criar branch a partir de StepMaster
-git checkout StepMaster
-git pull origin StepMaster
+# Criar branch a partir de stepMaster
+git checkout stepMaster
+git pull origin stepMaster
 git checkout -b feat-vendas-0001
 
 # Desenvolver e fazer commits
 # Validações automáticas no pre-commit:
 # - Nome da branch
-# - Origem da branch (StepMaster)
+# - Origem da branch (stepMaster)
 # - Prettier
 # - ESLint
 # - PMD
@@ -82,9 +82,9 @@ git push origin merge-vendas-0001-integration
 ### 6. Merge para Produção (Main)
 
 ```bash
-# Criar branch de merge a partir de StepMaster
-git checkout StepMaster
-git pull origin StepMaster
+# Criar branch de merge a partir de stepMaster
+git checkout stepMaster
+git pull origin stepMaster
 git checkout -b merge-vendas-0001-stepMaster
 
 # Push e criar PR
@@ -101,7 +101,7 @@ git push origin merge-vendas-0001-stepMaster
 1. Criar PR: `merge-vendas-0001-stepMaster` → `main`
 2. Validações automáticas:
    - Nome da branch de merge
-   - Origem da branch (StepMaster)
+   - Origem da branch (stepMaster)
    - Commits vêm de outras branches
    - Prettier e ESLint
 3. Aguardar aprovação dos revisores
@@ -118,10 +118,10 @@ git push origin merge-vendas-0001-stepMaster
    - Aprovações revogadas automaticamente
    - Corrigir erros e solicitar nova aprovação
 
-### 9. Sincronização Automática StepMaster → Main (Produção)
+### 9. Sincronização Automática stepMaster → Main (Produção)
 
 1. **Agendamento**: Executa automaticamente a cada 3 horas
-2. **Delta**: Calcula diferenças entre `main` e `StepMaster`
+2. **Delta**: Calcula diferenças entre `main` e `stepMaster`
 3. **Deploy**: Se houver mudanças, faz deploy na org de produção
 4. **Sucesso**: Faz merge automático para `main`
 5. **Falha**: Salva log de erro em `logs/deploy-errors/deploy-error-prod-*.log`
@@ -131,11 +131,11 @@ git push origin merge-vendas-0001-stepMaster
 ### Scripts de Validação
 
 - `scripts/validate-branch-name.sh` - Valida padrão de branch feat
-- `scripts/validate-branch-origin.sh` - Valida origem da branch feat (StepMaster)
+- `scripts/validate-branch-origin.sh` - Valida origem da branch feat (stepMaster)
 - `scripts/validate-merge-branch-name.sh` - Valida padrão de branch de merge (integration)
 - `scripts/validate-merge-branch-origin.sh` - Valida origem da branch de merge (integration)
 - `scripts/validate-merge-branch-name-prod.sh` - Valida padrão de branch de merge (produção)
-- `scripts/validate-merge-branch-origin-prod.sh` - Valida origem da branch de merge (StepMaster)
+- `scripts/validate-merge-branch-origin-prod.sh` - Valida origem da branch de merge (stepMaster)
 - `scripts/validate-commits-from-branches.sh` - Valida que commits vêm de outras branches
 - `scripts/run-pmd.sh` - Executa análise PMD
 - `scripts/create-merge-branch.sh` - Helper para criar branch de merge (integration)
@@ -148,7 +148,7 @@ git push origin merge-vendas-0001-stepMaster
 - `.github/workflows/sync-homolog-scheduled.yml` - Sincronização automática integration → homolog (a cada 3h)
 - `.github/workflows/pr-main-validation.yml` - Valida PRs para main (produção)
 - `.github/workflows/pr-validate-salesforce-prod.yml` - Valida no Salesforce quando comentar "validar" (produção)
-- `.github/workflows/sync-main-scheduled.yml` - Sincronização automática StepMaster → main (a cada 3h)
+- `.github/workflows/sync-main-scheduled.yml` - Sincronização automática stepMaster → main (a cada 3h)
 
 ### Configurações
 

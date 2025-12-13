@@ -19,8 +19,8 @@ if ! ./scripts/validate-branch-name.sh; then
     exit 1
 fi
 
-# 2. Validar que branch foi criada a partir de StepMaster
-echo -e "${YELLOW}🌿 Validando origem da branch (StepMaster)...${NC}"
+# 2. Validar que branch foi criada a partir de stepMaster
+echo -e "${YELLOW}🌿 Validando origem da branch (stepMaster)...${NC}"
 if ! ./scripts/validate-branch-origin.sh; then
     echo -e "${RED}❌ Validação da origem da branch falhou${NC}"
     exit 1
