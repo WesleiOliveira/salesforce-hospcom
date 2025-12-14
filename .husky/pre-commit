@@ -12,32 +12,34 @@ NC='\033[0m'
 
 echo -e "${YELLOW}🔍 Executando validações de pre-commit...${NC}"
 
-# 1. Validar padrão de nome da branch
-echo -e "${YELLOW}📋 Validando padrão de nome da branch...${NC}"
-if ! ./scripts/validate-branch-name.sh; then
-    echo -e "${RED}❌ Validação do nome da branch falhou${NC}"
-    exit 1
+# 0. Validar se não é commit direto em branches protegidas
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+CURRENT_USER=$(git config user.name)
+PROTECTED_BRANCHES="integration|homolog|stepMaster|main"
+
+if echo "$CURRENT_BRANCH" | grep -qE "^($PROTECTED_BRANCHES)$"; then
+    if [ "$CURRENT_USER" != "Weslei Oliveira dos Santos" ]; then
+        echo -e "${RED}❌ Commits diretos na branch '$CURRENT_BRANCH' não são permitidos!${NC}"
+        echo -e "${RED}   Apenas o usuário 'Weslei Oliveira dos Santos' pode fazer commits diretos nesta branch.${NC}"
+        echo -e "${YELLOW}   Por favor, crie uma branch de feature/hotfix e faça um Pull Request.${NC}"
+        exit 1
+    else
+        echo -e "${YELLOW}⚠️  Usuário autorizado detectado. Commit direto em '$CURRENT_BRANCH' será permitido.${NC}"
+    fi
 fi
 
-# 2. Validar que branch foi criada a partir de stepMaster
+# 1. Validar que branch foi criada a partir de stepMaster
 echo -e "${YELLOW}🌿 Validando origem da branch (stepMaster)...${NC}"
 if ! ./scripts/validate-branch-origin.sh; then
     echo -e "${RED}❌ Validação da origem da branch falhou${NC}"
     exit 1
 fi
 
-# 3. Executar Prettier (formatação automática)
-echo -e "${YELLOW}💅 Executando Prettier...${NC}"
+# 2. Executar Prettier e ESLint (apenas em arquivos alterados)
+echo -e "${YELLOW}💅 Executando Prettier e ESLint...${NC}"
 npm run precommit
 
-# 4. Executar ESLint
-echo -e "${YELLOW}🔍 Executando ESLint...${NC}"
-if ! npm run lint; then
-    echo -e "${RED}❌ ESLint encontrou problemas${NC}"
-    exit 1
-fi
-
-# 5. Executar PMD (análise de código Apex)
+# 4. Executar PMD (análise de código Apex)
 echo -e "${YELLOW}🔎 Executando PMD...${NC}"
 if ! ./scripts/run-pmd.sh; then
     echo -e "${RED}❌ PMD encontrou problemas${NC}"

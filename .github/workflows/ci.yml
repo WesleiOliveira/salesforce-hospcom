@@ -23,11 +23,11 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
       - name: Instalar dependências
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: Executar Prettier (verificação)
         run: npm run prettier:verify
@@ -47,11 +47,11 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
       - name: Instalar dependências
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: Executar testes LWC
         run: npm run test:unit:coverage
@@ -63,4 +63,3 @@ jobs:
           files: ./coverage/coverage-final.json
           flags: lwc-tests
           name: lwc-coverage
-

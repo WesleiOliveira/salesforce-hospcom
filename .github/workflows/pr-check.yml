@@ -19,11 +19,11 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
       - name: Instalar dependências
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: Verificar formatação (Prettier)
         run: npm run prettier:verify
@@ -50,7 +50,7 @@ jobs:
         run: |
           echo "📋 Arquivos modificados no PR:"
           git diff --name-only origin/${{ github.base_ref }}...HEAD | head -20
-          
+
           echo ""
           echo "🔍 Verificando arquivos críticos..."
           if git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -qE "(package\.json|sfdx-project\.json|\.forceignore)"; then

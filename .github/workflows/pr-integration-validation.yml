@@ -22,11 +22,11 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
       - name: Instalar dependências
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: Validar padrão de nome da branch de merge
         run: |
@@ -44,20 +44,20 @@ jobs:
         run: |
           BASE_REF="origin/integration"
           HEAD_REF="origin/${{ github.head_ref }}"
-          
+
           # Verificar se integration existe
           if ! git show-ref --verify --quiet refs/remotes/$BASE_REF; then
             echo "⚠️  Branch integration não encontrada remotamente"
             exit 1
           fi
-          
+
           # Verificar merge-base
           MERGE_BASE=$(git merge-base $BASE_REF $HEAD_REF 2>/dev/null || echo "")
           if [ -z "$MERGE_BASE" ]; then
             echo "❌ Erro: A branch não foi criada a partir de integration"
             exit 1
           fi
-          
+
           INTEGRATION_COMMIT=$(git rev-parse $BASE_REF)
           if [ "$MERGE_BASE" = "$INTEGRATION_COMMIT" ] || git merge-base --is-ancestor $INTEGRATION_COMMIT $MERGE_BASE 2>/dev/null; then
             echo "✅ Branch foi criada a partir de integration"
@@ -70,17 +70,17 @@ jobs:
         run: |
           BASE_REF="origin/integration"
           HEAD_REF="origin/${{ github.head_ref }}"
-          
+
           COMMITS=$(git log $BASE_REF..$HEAD_REF --format="%H" 2>/dev/null || echo "")
-          
+
           if [ -z "$COMMITS" ]; then
             echo "✅ Nenhum commit novo para validar"
             exit 0
           fi
-          
+
           echo "🔍 Validando que commits vêm de outras branches..."
           ALL_VALID=true
-          
+
           for commit in $COMMITS; do
             BRANCHES_WITH_COMMIT=$(git branch -a --contains $commit 2>/dev/null | grep -v "HEAD" | sed 's/^[* ] //' | sed 's/remotes\/origin\///' | sort -u)
             
@@ -100,7 +100,7 @@ jobs:
               ALL_VALID=false
             fi
           done
-          
+
           if [ "$ALL_VALID" = true ]; then
             echo "✅ Todos os commits foram validados e estão em outras branches"
           else
