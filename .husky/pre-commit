@@ -26,19 +26,15 @@ if ! ./scripts/validate-branch-origin.sh; then
     exit 1
 fi
 
-# 3. Executar Prettier (formatação automática)
-echo -e "${YELLOW}💅 Executando Prettier...${NC}"
-npm run precommit
-
-# 4. Executar ESLint
-echo -e "${YELLOW}🔍 Executando ESLint...${NC}"
-if ! npm run lint; then
-    echo -e "${RED}❌ ESLint encontrou problemas${NC}"
+# 3. Executar lint-staged (Prettier + ESLint nos arquivos modificados)
+echo -e "${YELLOW}💅 Executando Prettier e ESLint nos arquivos modificados...${NC}"
+if ! npm run precommit; then
+    echo -e "${RED}❌ Lint-staged encontrou problemas${NC}"
     exit 1
 fi
 
-# 5. Executar PMD (análise de código Apex)
-echo -e "${YELLOW}🔎 Executando PMD...${NC}"
+# 4. Executar PMD (análise de código Apex) - já roda apenas em arquivos modificados
+echo -e "${YELLOW}🔎 Executando PMD nos arquivos Apex modificados...${NC}"
 if ! ./scripts/run-pmd.sh; then
     echo -e "${RED}❌ PMD encontrou problemas${NC}"
     exit 1
